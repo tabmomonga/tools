@@ -133,7 +133,7 @@ sub build_rpm {
   my $retval;
 
   # First, make sure it unpacks cleanely
-  system("rpm --rcfile $MainDir/rpmrc -bp $MainDir/$filename");
+  system("rpmbuild --rcfile $MainDir/rpmrc -bp $MainDir/$filename");
   $retval = $? >> 8;
   if ($retval != 0) {
     print "RPM test unpacking failed!\n";
@@ -144,7 +144,7 @@ sub build_rpm {
   system("mkdir -p $MainDir/spec/perl-$clm_name");
   system("cp $MainDir/$filename $MainDir/spec/perl-$clm_name");
   system("mv $MainDir/Antenna $MainDir/spec/perl-$clm_name");
-  system("rpm --rcfile $MainDir/rpmrc -bs --rmsource --rmspec --clean $MainDir/$filename");
+  system("rpmbuild --rcfile $MainDir/rpmrc -bs --rmsource --rmspec --clean $MainDir/$filename");
   $retval = $? >> 8;
   if ($retval != 0) {
     print "RPM building failed!\n";
