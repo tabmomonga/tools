@@ -1,4 +1,8 @@
-Sun March  6 13:40:00 2004  YAMAZAKI Makoto <zaki@zakky.org>
+Sun Mar 10 13:40:00 2004  YAMAZAKI Makoto <zaki@zakky.org>
+
+	* commit: fix listing files under version control
+
+Sun Mar  6 13:40:00 2004  YAMAZAKI Makoto <zaki@zakky.org>
 
 	* commit: fix getting a list of versioning files from svn information
 	

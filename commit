@@ -75,7 +75,7 @@ ARGV.each do |pkg|
     when "cvs"
       entries = `cat ./#{pkg}/CVS/Entries | grep -v '^D' | sed -e 's,^/,,' -e 's,/.*,,' | grep -v '^NOT\.' | grep -v '^REMOVEME' `.split(/\n/)
     when "svn"
-      entries = `(cd ./#{pkg}; svn ls 2>/dev/null )`.split(/\n/) + `(cd ./#{pkg}; svn status | sed -e 's, + ,   ,' | tr -s ' ' | cut -d' ' -f2 )`.split(/\n/)
+      entries = `(cd ./#{pkg}; svn ls 2>/dev/null )`.split(/\n/) + `(cd ./#{pkg}; svn status |grep -v '^\?'| sed -e 's, + ,   ,' | tr -s ' ' | cut -d' ' -f2 )`.split(/\n/)
           # ' + ' appears if new file was added by merging
     end
     missing = sources - entries
