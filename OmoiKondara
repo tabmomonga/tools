@@ -1232,7 +1232,9 @@ rpm -ivh する関係上、sudo が password 無しで実行可能
     if $GLOBAL_CACHECC1 then
       if File.exist?("#{pkg}/NO.CACHECC1") or
           File.exist?("#{pkg}/NO.CCACHE") then
-        ENV['LD_PRELOAD'] = ENV['LD_PRELOAD'].split(/ /).select{|a| a !~ %r!^/usr/lib/cachecc1\.so$!}.join(' ')
+	  unless ENV['LD_PRELOAD'].nil? then
+	    ENV['LD_PRELOAD'] = ENV['LD_PRELOAD'].split(/ /).select{|a| a !~ %r!^/usr/lib/cachecc1\.so$!}.join(' ')
+	  end
       else
         if ENV['LD_PRELOAD'] !~ /cachecc1\.so/ && `rpm -q cachecc1 2>/dev/null` =~ /^cachecc1/ then
           ENV['LD_PRELOAD'] = "/usr/lib/cachecc1.so #{ENV['LD_PRELOAD']}"
