@@ -479,7 +479,7 @@ Hash $hTAG を生成する。その際に、TAG名 はすべて大文字として格納する。
           stack[-1] = !stack[-1] if stack.size > 0
         else
           if stack.last then
-            line.gsub!(/(^|[^%])%\{\?(\w+):(\w+)\}/){ macros.has_key?($2) ? $3 : "" }
+            line.gsub!(/(^|[^%])%\{\?(\w+?):(\w+?)\}/){ macros.has_key?($2) ? $3 : "" }
             s += line if stack.last
           end
         end
@@ -491,7 +491,7 @@ Hash $hTAG を生成する。その際に、TAG名 はすべて大文字として格納する。
   def expand_macros(str, macros={})
     str = str.dup
     while str =~ /%/ do
-      str.gsub!(/%\{\?([_\w]+):(.+)\}/) { macros.has_key?($1) ? $2 : "" }
+      str.gsub!(/%\{\?([_\w]+?):(.+?)\}/) { macros.has_key?($1) ? $2 : "" }
       case str
       when /%(\w+)/ then
         m = $1
