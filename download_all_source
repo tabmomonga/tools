@@ -70,11 +70,13 @@ db.names.each do |name|
       next unless $NONFREE
       topdir += '-Nonfree'
     else
+      main = true
       Dir.glob('TO.*').sort.each do |to|
         topdir += "-#{File.basename(to)[3..-1]}"
+	main = false
         break
       end
-      next if $MAIN_ONLY
+      next if $MAIN_ONLY && !main
     end
     Dir.in_dir('/tmp/SOURCES') do
       nosources.each do |src|
