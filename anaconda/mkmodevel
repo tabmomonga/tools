@@ -4,6 +4,7 @@ WORK_DIR = "/dist/Current"
 MIRROR_DIR = File.expand_path "/dist/development/PKGS"
 
 PROG = $0
+ARCH = "i686"
 work_dir = File.expand_path WORK_DIR
 LOG = "#{work_dir}/#{PROG.split(/\//)[-1]}.log"
 MOMONGA = "http://dist.momonga-linux.org/pub/momonga/development"
@@ -12,15 +13,15 @@ GENHDLIST = "sudo /usr/lib/anaconda-runtime/genhdlist"
 PKGORDER = "/usr/lib/anaconda-runtime/pkgorder"
 GETFULLCOMPS = "sudo /home/tom/bin/getfullcomps.py"
 MAKESTAMP = "sudo /usr/lib/anaconda-runtime/makestamp.py"
-#BUILDINSTALL = "sudo /usr/lib/anaconda-runtime/buildinstall"
+# BUILDINSTALL = "sudo /usr/lib/anaconda-runtime/buildinstall"
 BUILDINSTALL = "sudo ./buildinstall"
 SPLITTREE = "sudo /usr/lib/anaconda-runtime/splittree.py"
 CHKCOMPS = "/home/tom/bin/chkcomps"
 DEV_DIR = work_dir + "/development"
-COMPS_XML = DEV_DIR + "/i586/os/Momonga/base/comps.xml"
-TREE_DIR = DEV_DIR + "/i586/os"
-ISO_DIR = DEV_DIR + "/i586/iso"
-JIGDO_DIR = DEV_DIR + "/i586/jigdo"
+COMPS_XML = DEV_DIR + "/#{ARCH}/os/Momonga/base/comps.xml"
+TREE_DIR = DEV_DIR + "/#{ARCH}/os"
+ISO_DIR = DEV_DIR + "/#{ARCH}/iso"
+JIGDO_DIR = DEV_DIR + "/#{ARCH}/jigdo"
 PKGS_DIR = DEV_DIR + "/PKGS"
 VER = Time.new.strftime("%Y%m%d")
 
@@ -30,11 +31,15 @@ def do_cmd cmd
     f.print "=====================================\n"
     f.print Time.now.strftime("%H:%M:%S "), cmd, "\n"
     log = `#{cmd} 2>&1`
+    status = $?
     f.print log
     f.print "\n"
+    raise if status != 0
     f.close
   rescue
-    "#{PROG}: Aborted - #{cmd}(#{$?})\n"
+    print "\n#{PROG}: Aborted - #{cmd}(#{$?})\n"
+    STDERR.flush
+    STDOUT.flush
     f.close
     exit $?
   end
@@ -42,63 +47,63 @@ end
 
 `rm -f #{LOG}`
 
-#  1. ¥Ñ¥Ã¥±¡¼¥¸¤òºÇ¿·¤Ë¹¹¿·
+#  1. $B%Q%C%1!<%8$r:G?7$K99?7(B
 # print "Syncing development packages - "
 # STDOUT.flush
 # cur_dir = Dir.pwd
 # Dir.chdir work_dir + "/development/PKGS"
-# do_cmd "lftp -c 'open #{MIRROR};mirror -e -n i586;mirror -e -n noarch'"
+# do_cmd "lftp -c 'open #{MIRROR};mirror -e -n #{ARCH};mirror -e -n noarch'"
 # Dir.chdir cur_dir
 # print "done\n"
 
-#  2. ¥Ä¥ê¡¼¤òÁÝ½ü
+#  2. $B%D%j!<$rA]=|(B
 print "Cleanup output trees - "
 STDOUT.flush
 do_cmd "sudo rm -rf #{DEV_DIR}"
-do_cmd "mkdir -p #{DEV_DIR}/{PKGS/{SRPMS,i586,noarch},i586/{iso,jigdo,os}}"
+do_cmd "mkdir -p #{DEV_DIR}/{PKGS/{SRPMS,#{ARCH},noarch},#{ARCH}/{iso,jigdo,os}}"
 print "done\n"
 
-#  3. ¸ÇÄê¥Õ¥¡¥¤¥ë¤òÅ¸³«
+#  3. $B8GDj%U%!%$%k$rE83+(B
 print "Extracting fixed files - "
 STDOUT.flush
 do_cmd "tar xzvf #{work_dir}/fixed.files.tar.gz -C #{TREE_DIR}"
 print "done\n"
 
-#  4. current ¤Î¥Ñ¥Ã¥±¡¼¥¸¤ò¥³¥Ô¡¼
+#  4. current $B$N%Q%C%1!<%8$r%3%T!<(B
 print "Copying current package files - "
 STDOUT.flush
 cur_dir = Dir.pwd
 Dir.chdir MIRROR_DIR
-do_cmd "ln -f i586/* #{PKGS_DIR}/i586"
+do_cmd "ln -f #{ARCH}/* #{PKGS_DIR}/#{ARCH}"
 do_cmd "ln -f noarch/* #{PKGS_DIR}/noarch"
 Dir.chdir PKGS_DIR
-do_cmd "ln -f i586/* #{TREE_DIR}/Momonga/RPMS"
+do_cmd "ln -f #{ARCH}/* #{TREE_DIR}/Momonga/RPMS"
 do_cmd "ln -f noarch/* #{TREE_DIR}/Momonga/RPMS"
 Dir.chdir cur_dir
 print "done\n"
 
-#  5. 1.0 ¤Î¥Ñ¥Ã¥±¡¼¥¸¤Ç¾å½ñ¤­
+#  5. 1.0 $B$N%Q%C%1!<%8$G>e=q$-(B
 # print "Overriding 1.0 packages - "
 # STDOUT.flush
 # cur_dir = Dir.pwd
-# Dir.chdir work_dir + "/1/i586/os/Momonga/RPMS"
+# Dir.chdir work_dir + "/1/#{ARCH}/os/Momonga/RPMS"
 # do_cmd "ln -f * #{TREE_DIR}/Momonga/RPMS"
 # Dir.chdir cur_dir
 # print "done\n"
 
-#  6. ½ÅÊ£¤·¤Æ¤¤¤ë¥Ñ¥Ã¥±¡¼¥¸¤Îºï½ü
+#  6. $B=EJ#$7$F$$$k%Q%C%1!<%8$N:o=|(B
 print "Removing duplication packages - "
 STDOUT.flush
 do_cmd "chkrpmdup #{TREE_DIR}/Momonga/RPMS | bash"
 print "done\n"
 
-#  comps.xml ¤Î¥Á¥§¥Ã¥¯
+#  comps.xml $B$N%A%'%C%/(B
 print "Checking comps.xml - "
 STDOUT.flush
 do_cmd "#{CHKCOMPS} -v #{TREE_DIR}/Momonga/base/comps.xml #{TREE_DIR}/Momonga/RPMS"
 print "done\n"
 
-#  7. comps ¥Ñ¥Ã¥±¡¼¥¸¤Îºï½ü
+#  7. comps $B%Q%C%1!<%8$N:o=|(B
 print "Removing old comps package - "
 STDOUT.flush
 do_cmd "rm -f #{TREE_DIR}/Momonga/RPMS/comps-[0-9]*"
@@ -107,28 +112,28 @@ do_cmd "rm -f #{TREE_DIR}/Momonga/RPMS/comps-[0-9]*"
 end
 print "done\n"
 
-#  8. ¤³¤³°Ê¹ß anaconda »ÈÍÑ¤Î¤¿¤á´Ä¶­ÊÑ¿ô¤òÀßÄê
+#  8. $B$3$30J9_(B anaconda $B;HMQ$N$?$a4D6-JQ?t$r@_Dj(B
 ENV["PYTHONPATH"] = "/usr/lib/anaconda:/usr/lib/anaconda-runtime"
 ENV["LD_LIBRARY_PATH"] = "/usr/lib:/usr/X11R6/lib"
 
-#  9. hdlist ¤ÎºîÀ®
+#  9. hdlist $B$N:n@.(B
 print "Generating hdlist - "
 STDOUT.flush
 do_cmd "#{GENHDLIST} --productpath Momonga #{TREE_DIR}"
 print "done\n"
 
-# 10. pkgorder ¤ÎºîÀ®
+# 10. pkgorder $B$N:n@.(B
 print "Generating pkgorder - "
 STDOUT.flush
 cmd  = PKGORDER + " "
 cmd += "--product Momonga "
 cmd += "--file #{work_dir}/pkgorder "
 cmd += TREE_DIR + " "
-cmd += "i586"
+cmd += "#{ARCH}"
 do_cmd cmd
 print "done\n"
 
-# 13. hdlist ¤Î¹¹¿·
+# 13. hdlist $B$N99?7(B
 print "Regenerating hdlist - "
 STDOUT.flush
 cmd  = GENHDLIST + " "
@@ -138,10 +143,10 @@ cmd += TREE_DIR
 do_cmd cmd
 print "done\n"
 
-# # 10. comps.xml ¤Ë¥Ñ¥Ã¥±¡¼¥¸¥ê¥¹¥È¤òÄÉµ­¤¹¤ë
+# # 10. comps.xml $B$K%Q%C%1!<%8%j%9%H$rDI5-$9$k(B
 # print "Revising comps.xml - "
 # STDOUT.flush
-# comps_pkg_list = `#{GETFULLCOMPS} comps.xml #{work_dir}/development i586/os 2> #{work_dir}/comps.error`
+# comps_pkg_list = `#{GETFULLCOMPS} comps.xml #{work_dir}/development #{ARCH}/os 2> #{work_dir}/comps.error`
 # if File.size?(work_dir + "/comps.error")
 #   print "mkmodevel: Aborted - package dependency error.\n"
 #   exit 1
@@ -160,12 +165,12 @@ print "done\n"
 # File.rename COMPS_XML + ".new", COMPS_XML
 # print "done\n"
 
-# 11. .discinfo ¤ÎºîÀ®
+# 11. .discinfo $B$N:n@.(B
 print "Generating .discinfo - "
 STDOUT.flush
 cmd  = MAKESTAMP + " "
 cmd += "--releasestr='Momonga Linux #{VER}' "
-cmd += "--arch=i586 "
+cmd += "--arch=#{ARCH} "
 cmd += "--discNum='1,2,3,4' "
 cmd += "--baseDir=Momonga/base "
 cmd += "--packagesDir=Momonga/RPMS "
@@ -174,7 +179,7 @@ cmd += "--outfile=#{TREE_DIR}/.discinfo"
 do_cmd cmd
 print "done\n"
 
-# 12. comps ¥Ñ¥Ã¥±¡¼¥¸¤ÎºîÀ®
+# 12. comps $B%Q%C%1!<%8$N:n@.(B
 print "Building new comps package - "
 STDOUT.flush
 macrofiles = "macrofiles: /usr/lib/rpm/macros:/usr/lib/rpm/%{_target}/macros:/usr/lib/rpm/macros.momonga:/usr/lib/rpm/%{_target}/macros.momonga:/etc/rpm/macros.specspo:/etc/rpm/macros.db1:/etc/rpm/macros.cdb:/etc/rpm/macros:/etc/rpm/%{_target}/macros:~/.rpmmacros:"
@@ -187,51 +192,52 @@ f.print macrofiles
 f.close
 f = open work_dir + "/rpmmacros", "w"
 f.print "%_topdir #{work_dir}\n"
-f.print "%_arch i586\n"
-f.print "%_host_cpu i586\n"
+f.print "%_arch #{ARCH}\n"
+f.print "%_host_cpu #{ARCH}\n"
 f.print "%_host_vender momonga\n"
 f.print "%_host_os linux\n"
 f.print "%_numjobs 1\n"
 f.close
 cur_dir = Dir.pwd
 Dir.chdir work_dir
-do_cmd "mkdir -p SPECS BUILD RPMS/i586 SRPMS"
+do_cmd "mkdir -p SPECS BUILD RPMS/#{ARCH} SRPMS"
 do_cmd "cp #{work_dir}/comps.spec #{work_dir}/SPECS"
-do_cmd "rpmbuild -ba --rcfile rpmrc --define='basedir #{TREE_DIR}/Momonga/base' --define='compsversion 1' SPECS/comps.spec"
-do_cmd "cp -a #{work_dir}/RPMS/i586/comps-* #{PKGS_DIR}/i586"
+do_cmd "rpmbuild -ba --target #{ARCH} --rcfile rpmrc --define='basedir #{TREE_DIR}/Momonga/base' --define='compsversion 1' SPECS/comps.spec"
+do_cmd "cp -a #{work_dir}/RPMS/#{ARCH}/comps-* #{PKGS_DIR}/#{ARCH}"
 do_cmd "cp -a #{work_dir}/SRPMS/comps-* #{PKGS_DIR}/SRPMS"
-do_cmd "cp -a #{work_dir}/RPMS/i586/comps-* #{TREE_DIR}/Momonga/RPMS"
+do_cmd "cp -a #{work_dir}/RPMS/#{ARCH}/comps-* #{TREE_DIR}/Momonga/RPMS"
 do_cmd "rm -rf #{work_dir}/BUILD #{work_dir}/RPMS #{work_dir}/SRPMS #{work_dir}/rpmrc #{work_dir}/rpmmacros"
 Dir.chdir cur_dir
 print "done\n"
 
-# 15. buildinstall ¤Î¼Â¹Ô
+# 15. buildinstall $B$N<B9T(B
 print "Doing buildinstall - "
 STDOUT.flush
 do_cmd "mkdir -p #{work_dir}/buildinstall"
 cmd  = BUILDINSTALL + " "
 cmd += "--buildinstdir " + work_dir + "/buildinstall "
+# cmd += "--pkgorder #{work_dir}/pkgorder "
 cmd += "--comp dist-7.0 "
 cmd += "--version #{VER} "
 cmd += "--release \'Momonga Linux #{VER}\' "
 cmd += "--product Momonga "
 cmd += "--prodpath Momonga "
 cmd += TREE_DIR
-cur_dir = Dir.pwd
+curdir = Dir.pwd
 Dir.chdir "/usr/lib/anaconda-runtime"
 do_cmd cmd
-Dir.chdir cur_dir
+Dir.chdir curdir
 unless File.exist? TREE_DIR + "/isolinux/isolinux.bin"
   print "\n#{PROG}: Aborted - Please check tree\n"
   exit 1
 end
 print "done\n"
 
-# 14. CDÍÑÊ¬³ä¥Ä¥ê¡¼¤ÎºîÀ®
+# 14. CD$BMQJ,3d%D%j!<$N:n@.(B
 print "Splitting tree for CD - "
 STDOUT.flush
 cmd  = SPLITTREE + " "
-cmd += "--arch=i586 "
+cmd += "--arch=#{ARCH} "
 cmd += "--total-discs=4 "
 cmd += "--bin-discs=4 "
 cmd += "--release-string='Momonga Linux #{VER}' "
@@ -241,7 +247,7 @@ cmd += "--productpath=Momonga"
 do_cmd cmd
 print "done\n"
 
-# 16. CDÍÑ hdlist ºîÀ®
+# 16. CD$BMQ(B hdlist $B:n@.(B
 print "Generating hdlist for CD - "
 STDOUT.flush
 cmd  = GENHDLIST + " "
@@ -250,9 +256,10 @@ cmd += "--withnumbers "
 cmd += "--fileorder #{work_dir}/pkgorder "
 cmd += "#{TREE_DIR}-disc[1-4]"
 do_cmd cmd
+# File.delete "#{work_dir}/pkgorder"
 print "done\n"
 
-# 17. DVD iso image ºîÀ®
+# 17. DVD iso image $B:n@.(B
 print "Generating DVD iso image - "
 STDOUT.flush
 cmd  = "sudo mkhybrid "
@@ -260,12 +267,12 @@ cmd += "-r -J -d -L "
 cmd += "-b isolinux/isolinux.bin -c isolinux/boot.cat "
 cmd += "-no-emul-boot -boot-load-size 4 -boot-info-table "
 cmd += "-V 'Momonga Linux DVD' "
-cmd += "-o #{ISO_DIR}/MomongaLinux#{VER}-i586-dvd.iso "
+cmd += "-o #{ISO_DIR}/MomongaLinux#{VER}-#{ARCH}-dvd.iso "
 cmd += TREE_DIR
 do_cmd cmd
 print "done\n"
 
-# 18. CD iso image ºîÀ®
+# 18. CD iso image $B:n@.(B
 for n in 1..4
   print "Generating CD#{n} iso image - "
   STDOUT.flush
@@ -276,15 +283,15 @@ for n in 1..4
     cmd += "-no-emul-boot -boot-load-size 4 -boot-info-table "
   end
   cmd += "-V 'Momonga Linux CD#{n}' "
-  cmd += "-o #{ISO_DIR}/MomongaLinux#{VER}-i586-cd#{n}.iso "
+  cmd += "-o #{ISO_DIR}/MomongaLinux#{VER}-#{ARCH}-cd#{n}.iso "
   cmd += "#{TREE_DIR}-disc#{n}"
   do_cmd cmd
   print "done\n"
 end
 
-exit 0
+exit
 
-# 19. MD5SUMS ºîÀ®
+# 19. MD5SUMS $B:n@.(B
 print "Generating MD5SUMS file - "
 STDOUT.flush
 cur_dir = Dir.pwd
@@ -293,48 +300,48 @@ do_cmd "md5sum *.iso > #{JIGDO_DIR}/MD5SUMS"
 Dir.chdir cur_dir
 print "done\n"
 
-# 20. ¥Ä¥ê¡¼¤ò¾Ã¤¹
+# 20. $B%D%j!<$r>C$9(B
 print "Removing version dependent files - "
 STDOUT.flush
 do_cmd "sudo rm -rf #{TREE_DIR}-disc[1-4]"
 do_cmd "sudo rm -rf #{TREE_DIR}/*"
 print "done\n"
 
-# 21. jigdo ¥Õ¥¡¥¤¥ë¤ÎÀ¸À®
-cur_dir = Dir.pwd
-Dir.chdir JIGDO_DIR
-["dvd", "cd1", "cd2", "cd3", "cd4"].each do |media|
-  print "Generating #{media}'s .jigdo and .template - "
-  STDOUT.flush
-  iso = "MomongaLinux#{VER}-i586-#{media}.iso"
-  cmd  = "jigdo-file make-template "
-  cmd += "--cache=#{work_dir}/jigdo-cache.db "
-  cmd += "--image=#{ISO_DIR}/#{iso} "
-  cmd += "--jigdo=#{iso}.jigdo "
-  cmd += "--template=#{iso}.template "
-  cmd += "#{DEV_DIR}// "
-  cmd += "--label Momonga=#{DEV_DIR} "
-  cmd += "--uri Momonga=#{MOMONGA}/"
-  do_cmd cmd
-  jigdo = "#{JIGDO_DIR}/#{iso}.jigdo"
-  newjigdo = "#{jigdo}.new"
-  f = open newjigdo, "w"
-  open(jigdo).each do |l|
-      f.print l
-    if l =~ /\[Servers\]/
-      f.print "[Include #{MOMONGA}/i586/jigdo/mirrors.jigdo]\n"
-    end
-  end
-  f.close
-  do_cmd "gzip -9c #{newjigdo} > #{jigdo}"
-  File.delete newjigdo
-  print "done\n"
-end
-File.delete work_dir + "/jigdo-cache.db"
-Dir.chdir cur_dir
+# # 21. jigdo $B%U%!%$%k$N@8@.(B
+# cur_dir = Dir.pwd
+# Dir.chdir JIGDO_DIR
+# ["dvd", "cd1", "cd2", "cd3", "cd4"].each do |media|
+#   print "Generating #{media}'s .jigdo and .template - "
+#   STDOUT.flush
+#   iso = "MomongaLinux#{VER}-#{ARCH}-#{media}.iso"
+#   cmd  = "jigdo-file make-template "
+#   cmd += "--cache=#{work_dir}/jigdo-cache.db "
+#   cmd += "--image=#{ISO_DIR}/#{iso} "
+#   cmd += "--jigdo=#{iso}.jigdo "
+#   cmd += "--template=#{iso}.template "
+#   cmd += "#{DEV_DIR}// "
+#   cmd += "--label Momonga=#{DEV_DIR} "
+#   cmd += "--uri Momonga=#{MOMONGA}/"
+#   do_cmd cmd
+#   jigdo = "#{JIGDO_DIR}/#{iso}.jigdo"
+#   newjigdo = "#{jigdo}.new"
+#   f = open newjigdo, "w"
+#   open(jigdo).each do |l|
+#       f.print l
+#     if l =~ /\[Servers\]/
+#       f.print "[Include #{MOMONGA}/development/#{ARCH}/jigdo/mirrors.jigdo]\n"
+#     end
+#   end
+#   f.close
+#   do_cmd "gzip -9c #{newjigdo} > #{jigdo}"
+#   File.delete newjigdo
+#   print "done\n"
+# end
+# File.delete work_dir + "/jigdo-cache.db"
+# Dir.chdir cur_dir
 
-# 22. iso ¥¤¥á¡¼¥¸¤Îºï½ü
-#print "Removing iso files - "
-#STDOUT.flush
-#do_cmd "sudo rm -f #{ISO_DIR}/*.iso"
-#print "done\n"
+# # 22. iso $B%$%a!<%8$N:o=|(B
+# print "Removing iso files - "
+# STDOUT.flush
+# do_cmd "sudo rm -f #{ISO_DIR}/*.iso"
+# print "done\n"
