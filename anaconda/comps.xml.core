@@ -355,6 +355,7 @@
       <packagereq type="default">postfix</packagereq>
       <packagereq type="default">setuptool</packagereq>
       <packagereq type="mandatory">slocate</packagereq>
+      <packagereq type="default">stunnel</packagereq>
       <packagereq type="default">sudo</packagereq>
       <packagereq type="default">system-config-network-tui</packagereq>
       <packagereq type="default">system-config-securitylevel-tui</packagereq>

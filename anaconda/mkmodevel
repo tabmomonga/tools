@@ -26,6 +26,36 @@ JIGDO_DIR = DEV_DIR + "/#{ARCH}/jigdo"
 PKGS_DIR = "/pub/HEAD/PKGS"
 VER = Time.new.strftime("%Y%m%d")
 
+def show_usage()
+  print <<END_OF_USAGE
+Usage: mkmodevel [options]
+  -c   core CD
+  -d   devel CD
+  -h   show this message
+END_OF_USAGE
+  exit
+end
+
+case ARGV[0]
+when "-c"
+  MK_CORE = true
+  MK_DEVEL = false
+  MK_FULL = false
+  PKGS_LIST = "pkgs.core"
+when "-d"
+  MK_CORE = false
+  MK_DEVEL = true
+  MK_FULL = false
+  PKGS_LIST = "pkgs.devel"
+when "-h"
+  show_usage
+  exit 1
+else
+  MK_FULL = true
+  MK_CORE = false
+  MK_DEVEL = false
+end
+
 def do_cmd cmd
   begin
     f = open LOG, "a"
@@ -57,6 +87,12 @@ end
 # Dir.chdir cur_dir
 # print "done\n"
 
+# 22. iso イメージの保存
+#print "Backup iso files - "
+#STDOUT.flush
+#do_cmd "cp -f #{ISO_DIR}/*.iso #{work_dir}"
+#print "done\n"
+
 #  2. ツリーを掃除
 print "Cleanup output trees - "
 STDOUT.flush
@@ -78,8 +114,27 @@ cur_dir = Dir.pwd
 #do_cmd "ln -f #{ARCH}/* #{PKGS_DIR}/#{ARCH}"
 #do_cmd "ln -f noarch/* #{PKGS_DIR}/noarch"
 Dir.chdir PKGS_DIR
-do_cmd "ln -f #{ARCH}/* #{TREE_DIR}/Momonga/RPMS"
-do_cmd "ln -f noarch/* #{TREE_DIR}/Momonga/RPMS"
+if MK_FULL
+  do_cmd "ln -f #{ARCH}/* #{TREE_DIR}/Momonga/RPMS"
+  do_cmd "ln -f noarch/* #{TREE_DIR}/Momonga/RPMS"
+else
+  repo = ["#{PKGS_DIR}/#{ARCH}", "#{PKGS_DIR}/noarch"]
+  repo.each do |d|
+    dir = Dir.open(d)
+    dir.each do |x|
+      file = File.join(d, x)
+      pkgname = `rpm -qp --qf '%{NAME}' #{file} 2>&1`
+      pkglist = open("#{WORK_DIR}/#{PKGS_LIST}")
+      pkglist.each do |f|
+        f.strip!
+        if f == pkgname
+          do_cmd "cp #{file} #{DEV_DIR}/#{ARCH}/os/Momonga/RPMS/"
+        end
+      end
+    end
+    dir.close
+  end
+end
 Dir.chdir cur_dir
 print "done\n"
 
@@ -116,6 +171,8 @@ do_cmd "rm -f #{TREE_DIR}/Momonga/RPMS/comps-[0-9]*"
 `find #{TREE_DIR}/ -name TRANS.TBL`.each do |f|
   do_cmd "sudo rm -f #{f}"
 end
+do_cmd "rm -f #{PKGS_DIR}/#{ARCH}/comps-[0-9]*"
+do_cmd "rm -f #{PKGS_DIR}/SRPMS/comps-[0-9]*"
 print "done\n"
 
 #  8. ここ以降 anaconda 使用のため環境変数を設定
@@ -240,75 +297,131 @@ unless File.exist? TREE_DIR + "/isolinux/isolinux.bin"
 end
 print "done\n"
 
-# 14. CD用分割ツリーの作成
-print "Splitting tree for CD - "
-STDOUT.flush
-cmd  = SPLITTREE + " "
-cmd += "--arch=#{ARCH} "
-cmd += "--total-discs=4 "
-cmd += "--bin-discs=4 "
-cmd += "--release-string='Momonga Linux #{VER}' "
-cmd += "--pkgorderfile=#{work_dir}/pkgorder "
-cmd += "--distdir=#{TREE_DIR} "
-cmd += "--productpath=Momonga"
-do_cmd cmd
-print "done\n"
+if MK_FULL
+  # 14. CD用分割ツリーの作成
+  print "Splitting tree for CD - "
+  STDOUT.flush
+  cmd  = SPLITTREE + " "
+  cmd += "--arch=#{ARCH} "
+  cmd += "--total-discs=4 "
+  cmd += "--bin-discs=4 "
+  cmd += "--release-string='Momonga Linux #{VER}' "
+  cmd += "--pkgorderfile=#{work_dir}/pkgorder "
+  cmd += "--distdir=#{TREE_DIR} "
+  cmd += "--productpath=Momonga"
+  do_cmd cmd
+  print "done\n"
 
-# 16. CD用 hdlist 作成
-print "Generating hdlist for CD - "
-STDOUT.flush
-cmd  = GENHDLIST + " "
-cmd += "--productpath Momonga "
-cmd += "--withnumbers "
-cmd += "--fileorder #{work_dir}/pkgorder "
-cmd += "#{TREE_DIR}-disc[1-4]"
-do_cmd cmd
-# File.delete "#{work_dir}/pkgorder"
-print "done\n"
+  # 16. CD用 hdlist 作成
+  print "Generating hdlist for CD - "
+  STDOUT.flush
+  cmd  = GENHDLIST + " "
+  cmd += "--productpath Momonga "
+  cmd += "--withnumbers "
+  cmd += "--fileorder #{work_dir}/pkgorder "
+  cmd += "#{TREE_DIR}-disc[1-4]"
+  do_cmd cmd
+  # File.delete "#{work_dir}/pkgorder"
+  print "done\n"
+end
 
-# 17. DVD iso image 作成
-print "Generating DVD iso image - "
-STDOUT.flush
-cmd  = "sudo mkhybrid "
-cmd += "-r -J -d -L "
-cmd += "-b isolinux/isolinux.bin -c isolinux/boot.cat "
-cmd += "-no-emul-boot -boot-load-size 4 -boot-info-table "
-cmd += "-V 'Momonga Linux DVD' "
-cmd += "-o #{ISO_DIR}/MomongaLinux#{VER}-#{ARCH}-dvd.iso "
-cmd += TREE_DIR
-do_cmd cmd
-cmd = "sudo /usr/lib/anaconda-runtime/implantisomd5 "
-cmd += "#{ISO_DIR}/MomongaLinux#{VER}-#{ARCH}-dvd.iso"
-do_cmd cmd
-print "done\n"
-
-# 18. CD iso image 作成
-for n in 1..4
-  print "Generating CD#{n} iso image - "
+if MK_FULL
+  # 17. DVD iso image 作成
+  print "Generating DVD iso image - "
   STDOUT.flush
   cmd  = "sudo mkhybrid "
   cmd += "-r -J -d -L "
-  if n == 1
-    cmd += "-b isolinux/isolinux.bin -c isolinux/boot.cat "
-    cmd += "-no-emul-boot -boot-load-size 4 -boot-info-table "
+  cmd += "-b isolinux/isolinux.bin -c isolinux/boot.cat "
+  cmd += "-no-emul-boot -boot-load-size 4 -boot-info-table "
+  cmd += "-V 'Momonga Linux DVD' "
+  cmd += "-o #{ISO_DIR}/MomongaLinux#{VER}-#{ARCH}-dvd.iso "
+  cmd += TREE_DIR
+  do_cmd cmd
+  cmd = "sudo /usr/lib/anaconda-runtime/implantisomd5 "
+  cmd += "#{ISO_DIR}/MomongaLinux#{VER}-#{ARCH}-dvd.iso"
+  do_cmd cmd
+  print "done\n"
+else
+  print "Generating CD iso image - "
+  STDOUT.flush
+  cmd  = "sudo mkisofs "
+  cmd += "-r "
+  cmd += "-b isolinux/isolinux.bin -c isolinux/boot.cat "
+  cmd += "-no-emul-boot -boot-load-size 4 -boot-info-table "
+  if MK_CORE
+    cmd += "-V 'Momonga Linux core CD' "
+    cmd += "-o #{ISO_DIR}/MomongaLinux#{VER}-#{ARCH}-core-cd.iso "
+  else
+    cmd += "-V 'Momonga Linux devel CD' "
+    cmd += "-o #{ISO_DIR}/MomongaLinux#{VER}-#{ARCH}-devel-cd.iso "
   end
-  cmd += "-V 'Momonga Linux CD#{n}' "
-  cmd += "-o #{ISO_DIR}/MomongaLinux#{VER}-#{ARCH}-cd#{n}.iso "
-  cmd += "#{TREE_DIR}-disc#{n}"
+  cmd += TREE_DIR
+  do_cmd cmd
+  cmd = "sudo /usr/lib/anaconda-runtime/implantisomd5 "
+  if MK_CORE
+    cmd += "#{ISO_DIR}/MomongaLinux#{VER}-#{ARCH}-core-cd.iso"
+  else
+    cmd += "#{ISO_DIR}/MomongaLinux#{VER}-#{ARCH}-devel-cd.iso"
+  end
   do_cmd cmd
   print "done\n"
 end
 
-exit
+if MK_FULL
+  # 18. CD iso image 作成
+  for n in 1..4
+    print "Generating CD#{n} iso image - "
+    STDOUT.flush
+    cmd  = "sudo mkisofs "
+    cmd += "-r "
+    if n == 1
+      cmd += "-b isolinux/isolinux.bin -c isolinux/boot.cat "
+      cmd += "-no-emul-boot -boot-load-size 4 -boot-info-table "
+    end
+    cmd += "-V 'Momonga Linux CD#{n}' "
+    cmd += "-o #{ISO_DIR}/MomongaLinux#{VER}-#{ARCH}-cd#{n}.iso "
+    cmd += "#{TREE_DIR}-disc#{n}"
+    do_cmd cmd
+    cmd = "sudo /usr/lib/anaconda-runtime/implantisomd5 "
+    cmd += "#{ISO_DIR}/MomongaLinux#{VER}-#{ARCH}-cd#{n}.iso"
+    do_cmd cmd
+    print "done\n"
+  end
+end
+
+if MK_FULL
+  # 18. Rescue iso image 作成
+  print "Generating Rescue iso image - "
+  STDOUT.flush
+  cmd  = "sudo /usr/lib/anaconda-runtime/mk-rescueimage.#{ARCH} "
+  cmd += "#{TREE_DIR} #{DEV_DIR} Momonga Momonga"
+  do_cmd cmd
+  cmd  = "sudo mkisofs "
+  cmd += "-r "
+  cmd += "-b isolinux/isolinux.bin -c isolinux/boot.cat "
+  cmd += "-no-emul-boot -boot-load-size 4 -boot-info-table "
+  cmd += "-V 'Momonga Linux rescue CD' "
+  cmd += "-o #{ISO_DIR}/MomongaLinux#{VER}-#{ARCH}-rescue-cd.iso "
+  cmd += "#{DEV_DIR}/#{ARCH}-rescueimage"
+  do_cmd cmd
+  cmd = "sudo cp -f #{ISO_DIR}/MomongaLinux#{VER}-#{ARCH}-rescuecd.iso #{TREE_DIR}/images/rescuecd.iso"
+  do_cmd cmd
+  cmd = "sudo /usr/lib/anaconda-runtime/implantisomd5 "
+  cmd += "#{ISO_DIR}/MomongaLinux#{VER}-#{ARCH}-rescuecd.iso"
+  do_cmd cmd
+  print "done\n"
+end
 
 # 19. MD5SUMS 作成
 print "Generating MD5SUMS file - "
 STDOUT.flush
 cur_dir = Dir.pwd
 Dir.chdir ISO_DIR
-do_cmd "md5sum *.iso > #{JIGDO_DIR}/MD5SUMS"
+do_cmd "md5sum *.iso > #{ISO_DIR}/MD5SUMS"
 Dir.chdir cur_dir
 print "done\n"
+
+exit
 
 # 20. ツリーを消す
 print "Removing version dependent files - "
