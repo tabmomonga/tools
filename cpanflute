@@ -95,6 +95,7 @@ rm -rf %{buildroot}
 %install
 rm -rf %{buildroot}
 make install PERL_INSTALL_ROOT=%{buildroot}
+find %{buildroot}%{perl_sitearch}/auto -name '.packlist' | xargs rm -f
 
 find %{buildroot}/usr -type f -print | \\
 	sed \"s\@^%{buildroot}\@\@g\" | \\
