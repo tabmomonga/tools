@@ -1,0 +1,10 @@
+Topic for #momonga: mkmodevel の使い方です。
+
+<tom> 説明書とかないんで簡単に説明しておくと
+<tom> work 用にディレクトリを一つ作って
+<tom> その中で tar xvf files.tar します
+<tom> で mkmodevel の WORK_DIR をそのディレクトリにして
+<tom> dist.momonga-linux.org:/pub/momonga/development/PKGS/ の中身をどこかに落としておいて
+<tom> MIRROR_DIR はそのディレクトリにして
+<tom> あとは CHKCOMPS を chkcomps をさすようにすれば
+<tom> 実行するだけです
