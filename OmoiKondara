@@ -732,6 +732,8 @@ Sourece/Patch/Icon タグで指定されているファイルをビルド
     exec_command "rpmbuild --rmsource --rcfile rpmrc #{pkg}.spec"
     File.delete "rpmrc"
     File.delete "rpmmacros"
+
+    # DEBUG_FLAG が non nilだとBUILDを消さないで残す
     if $DEBUG_FLAG then
       if File.exist?("SU.PLEASE") then
         exec_command "sudo rm -rf SOURCES RPMS SRPMS"
@@ -743,6 +745,17 @@ Sourece/Patch/Icon タグで指定されているファイルをビルド
         exec_command "sudo rm -rf SOURCES BUILD RPMS SRPMS"
       else
         exec_command "rm -rf SOURCES BUILD RPMS SRPMS"
+      end
+    end
+
+    if $WORKDIR then
+      workdir = $WORKDIR + "/" + $hTAG["NAME"] + "-" +
+                $hTAG["VERSION"] + "-" + $hTAG["RELEASE"]
+      exec_command "rm -rf ./BUILD"
+      exec_command "rm -rf #{workdir}"
+      if $DEBUG_FLAG then
+        $stderr.puts "MSG: exec_command rm -rf ./BUILD"
+        $stderr.puts "MSG: exec_command rm -rf #{workdir}"
       end
     end
   end
@@ -822,9 +835,17 @@ Sourece/Patch/Icon タグで指定されているファイルをビルド
       if $WORKDIR then
         workdir = $WORKDIR + "/" + $hTAG["NAME"] + "-" +
                   $hTAG["VERSION"] + "-" + $hTAG["RELEASE"]
-        File.unlink "BUILD"
-        
+        if $DEBUG_FLAG then
+          $stderr.puts "INFO: workdir is #{workdir}"
+        end
+#        File.unlink "BUILD"
+#        if $DEBUG_FLAG then
+#          $stderr.puts "MSG: File.unlink BUILD"
+#        end
         exec_command "mv #{workdir} BUILD"
+        if $DEBUG_FLAG then
+          $stderr.puts "MSG: mv #{workdir} BUILD"
+        end
       end
     end
     Dir.chdir ".."
@@ -1319,13 +1340,36 @@ rpm -ivh する関係上、sudo が password 無しで実行可能
           if $WORKDIR then
             if File.exist?($hTAG["NAME"] + "/BUILD") then
               exec_command "rm -rf #{$hTAG['NAME']}/BUILD"
+              if $DEBUG_FLAG then
+                $stderr.puts "\n"
+                $stderr.puts "MSG: exec_command rm -rf #{$hTAG['NAME']}/BUILD"
+              end
             end
-            workdir = $WORKDIR + "/" + $hTAG["NAME"] + "-" +
+
+            if FileTest.symlink?($hTAG["NAME"] + "/BUILD") then
+              File.unlink($hTAG["NAME"] + "/BUILD")
+              if $DEBUG_FLAG then
+                $stderr.puts "MSG: File.unlink #{$hTAG['NAME']}/BUILD"
+              end
+	    end
+
+	    workdir = $WORKDIR + "/" + $hTAG["NAME"] + "-" +
                       $hTAG["VERSION"] + "-" + $hTAG["RELEASE"]
+            if $DEBUG_FLAG then
+              $stderr.puts "INFO: workdir is #{workdir}"
+            end
+
             if not File.exist?(workdir) then
               Dir.mkdir(workdir)
+              if $DEBUG_FLAG then
+                $stderr.puts "MSG: mkdir #{workdir}"
+              end
             end
+
             File.symlink(workdir, $hTAG["NAME"] + "/BUILD")
+            if $DEBUG_FLAG then
+              $stderr.puts "MSG: symlink #{workdir} #{$hTAG["NAME"]}/BUILD"
+            end
           else
             prepare_dirs(["BUILD"])
           end
