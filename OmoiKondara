@@ -585,10 +585,7 @@ Sourece/Patch/Icon タグで指定されているファイルをビルド
         v = v.split(/\//)[-1] if v =~ /\//
         if !File.exist?("SOURCES/#{v}") then
           ret = exec_command "cp -pfv #{v} SOURCES"
-          if ret != 0
-	    STDERR.puts 'some files are missing?'
-	    exit(1)
-	  end
+          throw(:exit_buildme, 2) if ret != 0
         else
           if File.exist?(v) then
             md5SRC = `md5sum #{v}`.split[0]
@@ -973,10 +970,7 @@ Sourece/Patch/Icon タグで指定されているファイルをビルド
     if not pkgs.empty? then
       pkgs.uniq!
       ret = exec_command "rpm #{rpmflg} --force --test #{pkgs.join(' ')}"
-      if ret != 0
-        STDERR.puts "'rpm #{rpmflg} --force --test #{pkgs.join(' ')}' fails."
-        exit(1)
-      end
+      throw(:exit_buildme, 2) if ret != 0
       exec_command "sudo rpm #{rpmflg} --force #{pkgs.join(' ')}"
 
       if not $CANNOTSTRICT then
