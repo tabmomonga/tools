@@ -57,6 +57,7 @@ db4
 dbh
 dbus
 dbus-glib
+dbus-python
 device-mapper
 dhclient
 diffutils

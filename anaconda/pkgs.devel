@@ -68,6 +68,7 @@ db4
 dbh
 dbus
 dbus-glib
+dbus-python
 desktop-file-utils
 dev86
 device-mapper
