@@ -3796,14 +3796,20 @@
       <packagereq type="optional" requires="xorg-x11">skkinput</packagereq>
       <packagereq type="mandatory">truetype-fonts-ja</packagereq>
       <packagereq type="default">uim</packagereq>
+      <packagereq type="default">uim-fep</packagereq>
       <packagereq tyoe="default">uim-xim</packagereq>
-      <packagereq type="default">uim-qt</packagereq>
       <packagereq type="default">prime</packagereq>
       <packagereq type="default">anthy</packagereq>
       <packagereq type="default">prime-dict</packagereq>
       <packagereq type="default">ruby-sary</packagereq>
       <packagereq type="default">suikyo-ruby</packagereq>
       <packagereq type="default">ruby-progressbar</packagereq>
+      <packagereq type="default">scim</packagereq>
+      <packagereq type="default">scim-anthy</packagereq>
+      <packagereq type="default">scim-prime</packagereq>
+      <packagereq type="default">scim-canna</packagereq>
+      <packagereq type="default">scim-skk</packagereq>
+      <packagereq type="default">scim-uim</packagereq>
     </packagelist>
   </group>
 
