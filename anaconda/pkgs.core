@@ -251,6 +251,8 @@ pygtk-libglade
 pyorbit
 pyparted
 python
+python-sqlite
+python-urlgrabber
 pyxf86config
 qdbm
 quota
@@ -285,6 +287,7 @@ shared-mime-info
 slang
 slocate
 sox
+sqlite
 startup-notification
 stunnel
 sudo
