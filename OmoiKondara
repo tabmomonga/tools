@@ -721,7 +721,24 @@ Sourece/Patch/Icon タグで指定されているファイルをビルド
         end
       end
       if installs != ""
-        exec_command "sudo rpm -Uvh --nodeps --force #{installs}"
+        exec_command "sudo rpm -Uvh --force #{installs} || sudo rpm -Uvh --nodeps --force #{installs}"
+        until $SYSTEM_PROVIDES.empty?
+          $SYSTEM_PROVIDES.pop
+        end
+        print "reading RPM database to see what is installed ..."
+        STDOUT.flush
+        begin
+          rpmdb = RPM::DB.open
+          rpmdb.each do |pkg|
+            pkg.provides.each do |a|
+              next if (a.flags & RPM::SENSE_RPMLIB).nonzero?
+              $SYSTEM_PROVIDES.push(a.to_struct)
+            end
+          end # rpmdb.each do |pkg|
+        ensure
+          rpmdb = nil
+          GC.start
+        end
       end
     end
   end
@@ -896,6 +913,8 @@ Sourece/Patch/Icon タグで指定されているファイルをビルド
             $stderr.puts "WARNING: invalid workdir. use default"
             $WORKDIR = nil
           end
+        when "LOG_FILE_COMPRESS"
+          $LOG_FILE_COMPRESS = false if s.shift == 'false'
         end
       end
       return
@@ -1242,7 +1261,8 @@ rpm -ivh する関係上、sudo が password 無しで実行可能
         end
       end
     end
-    if Dir.glob("#{pkg}/SRPM.ONLY").length != 0 then
+#    if Dir.glob("#{pkg}/SRPM.ONLY").length != 0 then
+    if false
       $SRPM_ONLY = true
       $RPMOPT = "-bs"
     else

@@ -1,3 +1,11 @@
+Thu Feb 17 10:17:08 2005  Kazuhiko  <kazuhiko@fdiary.net>
+
+	* OmoiKondara: new option '$LOG_FILE_COMPRESS' whose default value
+	is true.
+	(buildme): ignore 'SRPM.ONLY'.
+	(backup_rpms): try 'rpm -Uvh' without '--nodeps' first.  update
+	$SYSTEM_PROVIDES after 'rpm -Uvh'.
+
 Tue Jan 25 11:39:24 2005  Kazuhiko  <kazuhiko@fdiary.net>
 
 	* environment.rb: default architecture of ix86 is now i686.
