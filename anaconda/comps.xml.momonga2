@@ -103,7 +103,7 @@
       <packagereq type="mandatory">passwd</packagereq>
       <packagereq type="mandatory">prelink</packagereq>
       <packagereq type="mandatory">procps</packagereq>
-      <packagereq type="mandatory">raidtools</packagereq>
+      <packagereq type="mandatory">mdadm</packagereq>
       <packagereq type="mandatory">readline</packagereq>
       <packagereq type="mandatory">rootfiles</packagereq>
       <packagereq type="mandatory">rpm</packagereq>
@@ -401,7 +401,6 @@
       <packagereq type="optional">xorg-x11-Xvfb</packagereq>
       <packagereq type="optional">xorg-x11-doc</packagereq>
       <packagereq type="mandatory">xinitrc</packagereq>
-      <packagereq type="default">xterm</packagereq>
       <packagereq type="optional">xorg-x11-xdm</packagereq>
 	<packagereq type="default">rhgb</packagereq>
     </packagelist>
@@ -994,6 +993,7 @@
       <packagereq type="optional">xpdf</packagereq>
       <packagereq type="default">gpdf</packagereq>
       <packagereq type="optional">magicpoint</packagereq>
+      <packagereq type="optional">abiword</packagereq>
       <packagereq type="default">ggv</packagereq>
       <packagereq type="optional">gnumeric</packagereq>
       <packagereq type="optional">kdepim</packagereq>
@@ -3922,7 +3922,7 @@
       <packagereq type="default">libpng-devel</packagereq>
       <packagereq type="default">libmng-devel</packagereq>
       <packagereq type="default">libungif-devel</packagereq>
-      <packagereq type="default">freetype-devel</packagereq>
+      <packagereq type="default">freetype2-devel</packagereq>
       <packagereq type="default">netpbm-devel</packagereq>
       <packagereq type="default">openmotif-devel</packagereq>
       <packagereq type="default">SDL-devel</packagereq>
