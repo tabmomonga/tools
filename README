@@ -22,6 +22,7 @@
  * get_no の後で cp_to_tree が呼び出されるが，cp_to_tree にバグがあり
    pkgs/hoge の直下に NoSource なファイルと同じ名前のファイルがあると，
    それが pkgs/hoge/SOURCES にコピーされてしまう [2003/12/09 muraken]．
+
 ==commit
 :開発者/メンテナ
 :機能概要
@@ -29,6 +30,7 @@
 :実行方法
   commit パッケージ名...
 :ライセンス
+
 ==environment.rb
 :開発者/メンテナ
  crouton
@@ -204,6 +206,17 @@
   cd pkgs; sh ../tools/addprops
 :ライセンス
   Modified BSD
+
+== mphdiff.rb
+:開発者/メンテナ
+  kazuhiko
+:機能概要
+  二つの mph ファイルの Depends および Provides を比較する
+:実行方法
+  mphdiff.rb old.mph new.mph
+  (*.mphrpm ではなく *.mph を渡すこと)
+:ライセンス
+  Ruby
 
 
 == 内容テンプレート
