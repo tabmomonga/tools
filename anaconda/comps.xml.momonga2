@@ -994,7 +994,6 @@
       <packagereq type="optional">xpdf</packagereq>
       <packagereq type="default">gpdf</packagereq>
       <packagereq type="optional">magicpoint</packagereq>
-      <packagereq type="optional">abiword</packagereq>
       <packagereq type="default">ggv</packagereq>
       <packagereq type="optional">gnumeric</packagereq>
       <packagereq type="optional">kdepim</packagereq>
@@ -3530,7 +3529,6 @@
     <langonly>ja_JP</langonly>
     <packagelist>
       <packagereq type="default">Canna</packagereq>
-      <packagereq type="default">jcode.pl</packagereq>
       <packagereq type="default">kakasi-dict</packagereq>
       <packagereq type="default">lv</packagereq>
       <packagereq type="default">perl-NKF</packagereq>
@@ -3539,7 +3537,6 @@
       <packagereq type="default">truetype-fonts-ja</packagereq>
       <packagereq type="optional" requires="kdelibs">kde-i18n-Japanese</packagereq>
       <packagereq type="optional" requires="xorg-x11">xorg-x11-base-fonts</packagereq>
-      <packagereq type="default">FreeWnn</packagereq>
       <packagereq type="optional" requires="xorg-x11">kinput2</packagereq>
       <packagereq type="optional" requires="xorg-x11">kterm</packagereq>
       <packagereq type="default">skk-jisyo</packagereq>
