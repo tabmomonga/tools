@@ -1467,6 +1467,7 @@ begin
 #      $MAIN_ONLY = true
     when "-n"
       $NONFREE = true
+      $MAIN_ONLY = false
     when "-N"
       $NOSTRICT = true unless $CANNOTSTRICT
     when "-r"
