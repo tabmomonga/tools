@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-# $Id: OmoiKondara,v 1.145 2004/01/15 13:36:56 zaki Exp $
+# $Id$
 
 require 'getoptlong'
 require 'timeout'
@@ -977,7 +977,7 @@ Sourece/Patch/Icon タグで指定されているファイルをビルド
         STDERR.puts "'rpm #{rpmflg} --force --test #{pkgs.join(' ')}' fails."
         exit(1)
       end
-      exec_command "sudo rpm #{rpmflg} --force --nodeps #{pkgs.join(' ')}"
+      exec_command "sudo rpm #{rpmflg} --force #{pkgs.join(' ')}"
 
       if not $CANNOTSTRICT then
         pkgs.each do |a|
