@@ -1,0 +1,108 @@
+#!/bin/bash -x
+
+##
+## Momonga Linux のISOイメージを作成する作業ディレクトリ
+##
+TOP_DIR=${HOME}/Momonga-ISO
+
+##
+## ISOを実際に保存するディレクトリ
+##
+#ISO_DIR=${TOPDIR}
+ISO_DIR=/mnt/nfs/builduser/Momonga-images/
+
+##
+## Momonga パッケージのあるディレクトリ
+##    ${HOME}/Momonga/PKGS/{i586,noarc} の場合は ${HOME}/Momonga/PKGS と書く
+##
+PKGS_DIR=${HOME}/PKGS
+
+##
+## アーキテェクチャ
+##
+ARCH=i586
+
+##
+## 元になる comps.xml ファイル名
+##
+BASE_COMPS=${TOP_DIR}/comps.xml.momonga
+
+##
+## バージョン
+##
+VERSION=1
+
+##
+## Release String
+##
+RELEASE_STRING="MomongaLinux1"
+
+##
+## レポジトリの位置
+##
+REPOSITORY_DIR=${HOME}/Momonga/STABLE_1
+
+cd ${TOP_DIR}
+rm -f RPMS/${ARCH}/comps-* > /dev/null 2>&1
+sudo rm -rf ISO ISO-disc* > /dev/null 2>&1
+tar zxvf ${TOP_DIR}/ISO.tar.bz2  > /dev/null 2>&1
+cp ${BASE_COMPS} ${TOP_DIR}/ISO/Momonga/base/comps.xml
+
+export PYTHONPATH=/usr/lib/anaconda:/usr/lib/anaconda-runtime
+export LD_LIBRARY_PATH=/usr/lib:/usr/X11R6/lib
+
+for i in ${PKGS_DIR}/${ARCH}/* ${PKGS_DIR}/noarch/*
+do
+    ln -v $i ${TOP_DIR}/ISO/Momonga/RPMS/ > /dev/null 2>&1
+done
+
+/usr/lib/anaconda-runtime/genhdlist ${TOP_DIR}/ISO
+
+/usr/share/comps-extras/getfullcomps.py comps.xml ${TOP_DIR} ISO > depends 2> error.log
+if [ -s error.log ]; then
+    echo "getfullcomps.py : Faile -- error.log"
+    exit 1
+fi
+perl -e 'open DEP,"depends"; @dep=<DEP>; close DEP; while(<>){ s/^<!--\@\@PACKAGES\@\@-->$/@dep/; print; }' ${BASE_COMPS} > ${TOP_DIR}/ISO/Momonga/base/comps.xml
+
+/usr/lib/anaconda-runtime/makestamp.py --releasestr="$RELEASE_STRING" \
+    --arch=${ARCH} --discNum="1,2,3,4" --baseDir=Momonga/base \
+    --packagesDir=Momonga/RPMS --pixmapsDir=Momonga/pixmaps \
+    --outfile=${TOP_DIR}/ISO/.discinfo
+
+mkdir -p {SPECS,BUILD,RPMS,SRPMS,SOURCES}
+cp ${REPOSITORY_DIR}/pkgs/comps/comps.spec ./SPECS/
+rpmbuild -ba --target=${ARCH} --define="basedir ${TOP_DIR}/ISO/Momonga/base" \
+    --define='compsversion 1' --define="_topdir ${TOP_DIR}" SPECS/comps.spec
+cp ${TOP_DIR}/RPMS/${ARCH}/comps-1-0.*.${ARCH}.rpm ${TOP_DIR}/ISO/Momonga/RPMS/
+
+/usr/lib/anaconda-runtime/genhdlist ${TOP_DIR}/ISO
+
+mkdir -p ${TOP_DIR}/scripts
+
+sudo /usr/lib/anaconda-runtime/buildinstall \
+    --buildinstdir ${TOP_DIR}/scripts \
+    --comp dist-MO1 \
+    --pkgorder ${TOP_DIR}/pkgorder \
+    --version ${VERSION} \
+    --product Momonga \
+    --release ${RELEASE_STRING} \
+    --prodpath Momonga ISO 2>&1 | tee anaerr.log
+
+sudo /usr/lib/anaconda-runtime/splittree.py \
+    --arch=${ARCH} --total-discs=4 \
+    --bin-discs=4 \
+    --release-string=${RELEASE_STRING} \
+    --pkgorderfile=${TOP_DIR}/pkgorder \
+    --distdir=${TOP_DIR}/ISO \
+    --productpath=Momonga 2>&1 | tee -a anaerr.log
+
+sudo /usr/lib/anaconda-runtime/genhdlist --withnumbers --fileorder ${TOP_DIR}/pkgorder ${TOP_DIR}/ISO-disc[1-4]
+
+sudo mkisofs -J -d -r -L -T -o ${ISO_DIR}/${RELEASE_STRING}-beta1-${ARCH}-dvd.iso -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -V 'MomongaDVD' ${TOP_DIR}/ISO
+sudo mkisofs -J -d -r -L -T -o ${ISO_DIR}/${RELEASE_STRING}-beta1-${ARCH}-disc1.iso -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -r -V 'MomongaCD1' ${TOP_DIR}/ISO-disc1
+sudo mkisofs -J -d -r -L -T -o ${ISO_DIR}/${RELEASE_STRING}-beta1-${ARCH}-disc2.iso -V 'MomongaCD2' ${TOP_DIR}/ISO-disc2
+sudo mkisofs -J -d -r -L -T -o ${ISO_DIR}/${RELEASE_STRING}-beta1-${ARCH}-disc3.iso -V 'MomongaCD3' ${TOP_DIR}/ISO-disc3
+sudo mkisofs -J -d -r -L -T -o ${ISO_DIR}/${RELEASE_STRING}-beta1-${ARCH}-disc4.iso -V 'MomongaCD4' ${TOP_DIR}/ISO-disc4
+cd ${ISO_DIR}
+md5sum ${RELEASE_STRING}-* > MD5SUMS

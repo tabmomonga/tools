@@ -1,0 +1,184 @@
+
+anacnda 9.2 で rpm 4.2.1 なバイナリから ISO イメージを作るメモ
+
+1. 準備
+
+rpm 4.2.1-5m な環境で build したバイナリを全部揃える。
+HEAD では SKIP になっているパッケージのうち、anaconda, anaconda-help, momonga-images, comps-extras を build してインストールしておく。
+SKIP を削除して OmoiKondara で通常の手順で build することができるが、anaconda は従来の momonga と conflict するので、インストールすると momonga を obsoletes して消すので注意。
+comps についても svn で落としておくが、build は後で行なう。
+
+ISO イメージを作るための作業ディレクトリをまず作る。安直に $HOME/ISO とする。 
+anaconda を svn up で落とすと、同時に ISO.tar.bz2 が落ちてくるので、それを展開する。
+
+cd
+rm -rf ISO
+tar zxvf ISO.tar.bz2 
+
+これで $HOME/ISO 以下に、ISOイメージに必要なディレクトリ構成その他が配置される。
+あと、環境変数も忘れずに export しておく。bash じゃない人は適当にニギッといて。
+
+export PYTHONPATH=/usr/lib/anaconda:/usr/lib/anaconda-runtime
+export LD_LIBRARY_PATH=/usr/lib:/usr/X11R6/lib
+
+上記の環境変数のうち、PYTHONPATH はうっかり .bashrc とかに書かぬこと。書くと hoge-python なパッケージを build するときに、あらゆる /usr/lib/anaconda 以下にインストールされるとか、様々な特典が満載だ(実際にやっちった人＞オレ)
+
+2. パッケージの配置
+
+build 済みのパッケージをハードリンクで配置する。シンボリックリンクでもよいが、du -hs でサイズがわからないのでハードリンクにした。
+.OmoiKondara の ROOT が /pub/HEAD/PKGS だとすると、
+
+for i in /pub/HEAD/PKGS/i586/* /pub/HEAD/PKGS/noarch/*; do ln -v $i ~/ISO/Momonga/RPMS/; done
+
+として、すべての i586 と noarch なパッケージをハードリンクで配置しておく。
+
+3. パッケージリストの生成
+
+/usr/lib/anaconda-runtime/genhdlist ~/ISO
+
+として、ISO/Momonga/base 以下に hdlist, hdlist2 が生成されたことを確認する。
+この時点ではまだ comps を作成していないので、不完全な hdlist なことに注意。
+どういうわけだか、不完全とはいえ hdlist を仮にでも作っておかないと、後の makestamp.py が失敗する。
+そのくせ、makestamp.py を実行しておかないと .disc-info が生成されず、comps の build ができないというニワタマの罠…
+
+4. comps.xml のチェック
+
+comps.xml を編集しない場合は(大抵の人はそうだろう)、この工程はスキップしてもよい。
+
+/usr/share/comps-extras/getfullcomps.py comps.xml ~ ISO > depends 2> error.log
+
+getfullcomps.py の引数が謎で、引数なしで実行した場合に表示される Usage と実際にやってることが微妙に違うという罠が…
+この引数の渡し方は、もう呪文だと思って実行する。考えるな！感じるのだ！と言った格闘家がかつていたのう…
+我々の場合は tree は ~/ISO なのだが、おそらく Fedora Project や Red Hat では、アーキテクチャごとにディレクトリを掘っているのだな。
+
+で、これを実行すると、ちょっとだけ考えて、depends にパッケージの依存関係が xml で出力される(これ ruby-rpm 1.2.0 の hack に役立たないかな)。また、error.log は正常終了なら空っぽになるはず。
+もしも何か依存関係の不備があれば error.log に出力されるので、御愁傷様としか…
+
+depend にパッケージ間の依存関係がXMLで出力されているが、これをcomps.xmlの際後の所に追加する。
+この作業を行ってくれるコマンドは存在しない。手作業でやるのが基本らしい。
+しかし、mkmoiso.i586 スクリプトではPerlで自動可している。
+
+5. .disc-info の生成
+
+.disc-info そのものは、後の工程で上書きされる運命なのだが、これをしておかないと comps.spec が build できないのよ。
+
+/usr/lib/anaconda-runtime/makestamp.py --releasestr=MomongaLinuxSnapshot --arch=i586 --discNum="1,2,3,4" --baseDir=Momonga/base --packagesDir=Momonga/RPMS --pixmapsDir=Momonga/pixmaps --outfile=/home/t/ISO/.discinfo
+
+実際には Momonga/pixmaps などというディレクトリはないのだが、参考文献を見ても、どれもこう書いてるので一応マネした。
+また、--releasestr= の引数に、"Momonga Linux Snapshot" などと、空白を含む文字列を""で渡したいのだが、こうすると後の buildinstall がどうも正しく解釈してくれぬ。
+なので、今回は MomongaLinuxSnapshot と連結して、"" もなしにしている。sh のエラい人、いつか直してください。
+
+6. comps パッケージの build と配置
+
+comps.spec は svn で取得済みのものを使う。以下の例では ~/SPECS に comps.spec を置いている。
+
+rpmbuild -ba --define='basedir /home/t/ISO/Momonga/base' --define='compsversion 1' SPECS/comps.spec
+
+build した comps のパッケージを、ISO/Momonga/RPMS 以下に配置する。その他のパッケージはみなハードリンクなのだが、面倒なのでコピーしちゃう。
+
+cp /home/t/RPMS/i586/comps-1-0.20040430m.i586.rpm ISO/Momonga/RPMS/
+
+7. hdlist の再作成
+
+comps パッケージを追加したので genhdlist を再度実行しておく。(不要なのかも知れぬ)
+
+/usr/lib/anaconda-runtime/genhdlist ~/ISO
+
+8. buildinstall の実行
+
+この工程がキモなのだが…
+
+本来は不要なのだが、ISO イメージ生成用の複数の sh script を調整するために、~/scripts に sh scripts を配置するようにしている。なので
+
+mkdir -p ~/scripts
+
+などとして掘っておこう。掘らなくても buildinstall が掘ってくれ、っつーハナシなんだが…
+
+sudo /usr/lib/anaconda-runtime/buildinstall --buildinstdir /home/t/scripts --pkgorder /home/t/pkgorder --comp dist-7.0 --version 20040310 --release MomongaLinuxSnapshot --product Momonga --prodpath Momonga ISO 2>&1 | tee anaerr.log
+
+として、なんか得体のしれないエラーとか出なければおめでとさん。ほとんど有為なメッセージは出ないので、心配な人は
+/usr/lib/anaconda-runtime の下の、buildinstall, upd-instroot, mk-images の1行目を #!/bin/bash -x にしてから実行しよう。そうすると anaerr.log はすげーニギヤカに。
+
+buildinstall 中に、pang だの gtk だのがちらっと動作するので、その辺のパッケージが入ってないとボロボロに失敗する。普段は地味な kernel-BOOT も、specopt で build しないようにしていると、あたりまえだが boot image がまったく作れなくてこれまたボロボロに。他にハマりそうなところはないと思う。
+
+9. ISO イメージの分割
+
+無駄にパッケージの多い(失礼！) Momonga なので、実に CD 4枚になってしまった。しかも1枚あたりの容量を 700MB として(実際には余裕を見て 680MB で)分割している。
+
+sudo /usr/lib/anaconda-runtime/splittree.py --arch=i586 --total-discs=4 --bin-discs=4 --release-string=MomongaLinuxSnapshot --pkgorderfile=/home/t/pkgorder --distdir=/home/t/ISO --productpath=Momonga 2>&1 | tee anaerr.log
+
+分割に成功すると、それなりのメッセージが出る。もちろん失敗してもそれなりのメッセージが。どっちがどうなんだっつーハナシなのだが、詳しく書くのめんどい。ていうかもうオレ様が調整済みなんだから、ドロ船に乗ったつもりで実行しとけっつーハナシだ。
+で、分割に成功したら、genhdlist で、それぞれのディスクに対応する hdlist を生成してやる必要がある。
+
+sudo /usr/lib/anaconda-runtime/genhdlist --withnumbers --fileorder /home/t/pkgorder /home/t/ISO-disc[1-4]
+
+10. bootable なISO イメージの準備
+
+DVD に焼く場合はこんな風(自信なし) DVD って udf とかじゃないの？このままだと、デカい CD って感じなんだが...
+
+sudo mkisofs -J -d -r -L -T -o momonga-dvd1.iso -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -V 'MomongaDVD' ~/ISO
+
+CD 4枚に焼く場合は以下のように、1枚目だけ bootable にする。isolinux が導入されているので、もはや El Torito じゃないので注意。
+
+sudo mkisofs -J -d -r -L -T -o momonga-disc1.iso -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -r -V 'MomongaCD1' ~/ISO-disc1
+sudo mkisofs -J -d -r -L -T -o momonga-disc2.iso -V 'MomongaCD2' ~/ISO-disc2
+sudo mkisofs -J -d -r -L -T -o momonga-disc3.iso -V 'MomongaCD3' ~/ISO-disc3
+sudo mkisofs -J -d -r -L -T -o momonga-disc4.iso -V 'MomongaCD4' ~/ISO-disc4
+
+11. initrd の内容の確認方法
+
+おまけとして書いておこう。10 までの手順に従って、~/ISO 以下にイメージが作れているとすると、~/ISO/isolinux 以下に initrd.img が作られているはずだ。
+その他にも、Fedora の CD などを mount する場合も同様の方法で内容を見ることができるので応用すべし。
+
+まず、initrd.img は圧縮されているので、そのままでは mount できないから、
+
+gunzip -dc ~/ISO/isolinux/initrd.img > initrd.img.nogz
+
+などとして解凍しておく。
+
+sudo mount -o loop initrd.img.nogz /mnt/floppy/
+
+floppy なんて使っとらんだろ？だから loopback の mount point にしちゃえ。こうして mount してしまえば /mnt/floppy/modules 以下に modules.dep や pcitable などいろいろなファイルがあって参考に。
+肝心の module は modules.cgz として固められているので、
+
+zcat /mnt/floppy/modules/modules.cgz | cpio -idu
+
+などとして展開してやる。現時点では kernel-BOOT-2.4.26-6m なので 2.4.26-6mBOOT/i586 以下に階層構造なしで module が展開されていることと思う。
+自分の使っているデバイスに対応する module が入っているか確認しよう。
+
+もしも含まれていなかったら？きっとそのデバイスは Momonga 的に出入り禁止の烙印を押されているのだ！御愁傷様。パーツ買いに走るしか…
+
+12. anaconda のパッチについて
+
+これを書いている時点での anaconda は 9.2-5m となっている。適用してあるパッチの概要を書いておこう。
+Momonga の anaconda の特徴として、newt と slang を飲んでいることがあげられる。Momonga では slang は UTF 対応その他の含まれた slang だったり、いろいろと違いがあるので、環境に左右されるのを嫌って
+anaconda 自体に含むことにしてしまった。
+
+なので、Source としては
+
+anaconda-9.2.tar.bz2
+slang-1.4.5.tar.bz2
+newt-0.51.6.tar.gz
+
+の3つから成り立っている。slang に対して適用されているパッチを除いて、anaconda本体に必要なパッチは
+
+anaconda-9.2-embed-newt-slang.patch
+
+名前の通りで slang と newt に内蔵するものをリンクするためのパッチ
+
+anaconda-9.2-momonga3.patch
+
+i386 を i586 に、RedHat, Red Hat, redhat などを Momonga や momonga に置換するためだけのパッチ。
+scripts のディレクトリを除いたすべてのファイルを対象としている。momonga3.patch とファイル名に 3 が入っているのは、このパッチが試行錯誤や調整の末の3世代目という意味。
+
+anaconda-9.2-momonga-script3.patch
+
+momonga.patch と同様に、i586 や Momonga といった置換の他に、buildinstall や upd-instroot など ISO イメージを作成するための
+script だけに対象をしぼったパッチ。momonga3.patch と同様にこのパッチも3世代目だが、現在までの状態で、一応は buildinstall は動作して、ISO イメージを形づくることはできているので、今後は Momonga と Fedora の違いを吸収するために、このパッチだけを 4 5 と更新していく予定。
+
+13. ISO イメージ作成スクリプト
+
+以上の手順で anaconda インストーラーの付属した Momonga linux のDVDとCDのISOイメージを作成することが出来るが、これらを手動で行うのは中々大変である。
+そこで、これら一連の作業を行う mkmoiso.i586 というスクリプトを用意している。
+この、mkmoiso.i586 がベースとしている comps.xml は comps.xml.momonga であるのでパッケージ構成を編集する際には注意すること。
+

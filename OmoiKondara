@@ -452,7 +452,6 @@ Hash $hTAG を生成する。その際に、TAG名 はすべて大文字として格納する。
   def expand_macros(str, macros={})
     str = str.dup
     while str =~ /%/ do
-      str.gsub!(/%\{\?([_\w]+?):(.+?)\}/) { macros.has_key?($1) ? $2 : "" }
       case str
       when /%(\w+)/ then
         m = $1
@@ -473,6 +472,23 @@ Hash $hTAG を生成する。その際に、TAG名 はすべて大文字として格納する。
         res = `#{shcmd}`.chomp
         shcmd = Regexp.quote(shcmd)
         str.gsub!(/%\(#{shcmd}\)/, res)
+      when /%\{(\!)?\?([_\w]+?)(:([\-\._\w]+?))?\}/ then
+      	flag = $1
+      	m = $2
+	negative = $4 || ''
+	if macros.has_key?( m ) then
+	  positive = macros[m]
+	else
+	  positive = ''
+	end
+	unless flag then
+	  res = positive
+	else
+	  res = negative
+	end
+        str.gsub!( /%\{\!?\?.+?\}/, res )
+      else
+      	raise "Can not expand macros in line: `#{str}'"
       end
     end
     str
@@ -486,6 +502,7 @@ Hash $hTAG を生成する。その際に、TAG名 はすべて大文字として格納する。
         macro[k] = v unless k =~ /__/ or v =~ /\\/
       end
     end
+    macro["nil"] = ""
     macro["_ipv6"]  = "1"
     macro["ix86"]   = "i386 i486 i586 i686 i786 i886 i986"
     macro["alpha"]  = "alpha alphaev5 alphaev56 alphapca56 alphaev6 alphaev67"

@@ -1,3 +1,7 @@
+Thu Jul  8 22:00:57 2004  zunda <zunda at freeshell.org>
+
+	* OmoiKondara: hopefully better handling of macro expansion.
+
 Fri Jul  2 00:26:21 2004  Kazuhiko  <kazuhiko@fdiary.net>
 
 	* commit: invoke 'cvs up' in each package's directory.
