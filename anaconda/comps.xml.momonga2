@@ -3780,7 +3780,7 @@
       <packagereq type="default">Canna</packagereq>
       <packagereq type="optional" requires="xorg-x11">japanese-fonts</packagereq>
       <packagereq type="default">iiimf-doc</packagereq>
-      <packagereq type="default">iiimf-canna</packagereq>
+      <packagereq type="default">iiimf-skk</packagereq>
       <packagereq type="default">iiimf</packagereq>
       <packagereq type="optional" requires="xorg-x11">iiimf-xiiimp</packagereq>
       <packagereq type="default">kakasi-dict</packagereq>
@@ -3795,6 +3795,15 @@
       <packagereq type="default">skk-jisyo</packagereq>
       <packagereq type="optional" requires="xorg-x11">skkinput</packagereq>
       <packagereq type="mandatory">truetype-fonts-ja</packagereq>
+      <packagereq type="default">uim</packagereq>
+      <packagereq tyoe="default">uim-xim</packagereq>
+      <packagereq type="default">uim-qt</packagereq>
+      <packagereq type="default">prime</packagereq>
+      <packagereq type="default">anthy</packagereq>
+      <packagereq type="default">prime-dict</packagereq>
+      <packagereq type="default">ruby-sary</packagereq>
+      <packagereq type="default">suikyo-ruby</packagereq>
+      <packagereq type="default">ruby-progressbar</packagereq>
     </packagelist>
   </group>
 
