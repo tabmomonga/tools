@@ -854,8 +854,9 @@ Sourece/Patch/Icon タグで指定されているファイルをビルド
       conf = File.expand_path conf
       next  unless File.exist?(conf)
       IO.foreach(conf) do |line|
+        line.strip!
         next  if line =~ /^#.*$/ or line =~ /^$/
-        s = line.split
+        s = line.split(/\s+/, 2)
         v = s.shift
         v.upcase!
         case v
