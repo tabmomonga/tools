@@ -35,7 +35,7 @@ $DB.specs.each_value do |spec|
       ($Sources[todir]||={})[source.filename] = true
     end
   end
-  p spec unless spec.packages[0]
+  STDERR.puts "warning: no package in #{spec.name}" unless spec.packages[0]
   next unless spec.packages[0]
   if !nosource
 #packages[0] はウソ。違う場合もある。
