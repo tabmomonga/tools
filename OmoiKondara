@@ -1416,6 +1416,8 @@ options = [
   ["-C", "--noccache",     GetoptLong::NO_ARGUMENT],
   ["-M", "--mirrorfirst",  GetoptLong::NO_ARGUMENT],
   ["-D", "--distcc",       GetoptLong::NO_ARGUMENT],
+  ["-O", "--orphan",       GetoptLong::NO_ARGUMENT],
+  ["-L", "--alter",        GetoptLong::NO_ARGUMENT],
   ["-z", "--zoo",          GetoptLong::NO_ARGUMENT],
   ["-h", "--help",         GetoptLong::NO_ARGUMENT]
 ]
@@ -1441,6 +1443,8 @@ Usage: ../tools/OmoiKondara [options] [names]
   -C, --noccache          no ccache
   -M, --mirrorfirst       download from mirror first
   -D, --distcc            enable to use distcc
+  -O, --orphan            build Orphan package, too
+  -L, --alter             build Alter(alternative) package, too
   -z, --zoo               build Zoo package, too
   -h  --help              show this message
 END_OF_USAGE
@@ -1490,6 +1494,10 @@ begin
       if File.executable?("/usr/bin/distcc") then
         $ENABLE_DISTCC = true
       end
+    when "-O"
+      $MAIN_ONLY = false      
+    when "-L"
+      $MAIN_ONLY = false      
     when "-z"
       $MAIN_ONLY = false
     when "-h"
