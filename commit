@@ -143,7 +143,9 @@ versioning_systems.each do |command|
       exec "/usr/bin/svn", 'commit', '-m', svnlog, *pkgnames
     end
     Process.waitpid2(pid)
-    system "/usr/bin/svn up #{pkgnames.join(" ")}"
+    pkgnames.each do |pkg|
+      system "(cd ./#{pkg}; /usr/bin/svn up )"
+    end
     puts svnlog
   end
 end

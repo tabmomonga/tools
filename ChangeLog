@@ -1,3 +1,7 @@
+Fri Jul  2 00:26:21 2004  Kazuhiko  <kazuhiko@fdiary.net>
+
+	* commit: invoke 'cvs up' in each package's directory.
+
 Sun May 30 16:11:48 2004  Kazuhiko  <kazuhiko@fdiary.net>
 
 	* updatespecdb: read './rpmrc' instead of '/usr/lib/rpmrc'.
