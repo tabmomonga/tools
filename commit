@@ -84,7 +84,8 @@ ARGV.each do |pkg|
       STDERR.print "#{command} add"
       missing.each{|i| STDERR.print " #{pkg}/#{i}"}
       STDERR.puts
-      exit 1
+      problem_found = true
+    #  exit 1
     end
   end
 end
