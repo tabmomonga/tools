@@ -1,3 +1,7 @@
+Sun Mar 28 15:45:00 2004  YAMAZAKI Makoto <zaki@zakky.org>
+
+	* OmoiKondara: always set --target $ARCHITECTURE
+
 Sun Mar 14 01:40:00 2004  YAMAZAKI Makoto <zaki@zakky.org>
 
 	* commit: Zoo packages are not built by default
