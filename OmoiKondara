@@ -202,7 +202,6 @@ end
     if todir != [] then
       topdir = topdir + "-" + todir[0].split(/\./)[-1]
     end
-STDERR.puts topdir
     return topdir
   end
 
