@@ -10,7 +10,52 @@
 # above copyright notice is included.
 #
 
-flag_files = %w( OBSOLETE .SKIP )
+require 'getoptlong'
+
+options = [
+  ["-L", "--alter",        GetoptLong::NO_ARGUMENT],
+  ["-n", "--nonfree",      GetoptLong::NO_ARGUMENT],
+  ["-O", "--orphan",       GetoptLong::NO_ARGUMENT],
+  ["-o", "--obsolete",     GetoptLong::NO_ARGUMENT],
+  ["-s", "--skip",         GetoptLong::NO_ARGUMENT],
+  ["-h", "--help",         GetoptLong::NO_ARGUMENT],
+]
+
+def show_usage()
+  print <<END_OF_USAGE
+Usage: ../tools/uninstall [options]
+  -L, --alter           delete alter packages.
+  -n, --nonfree         delete nonfree packages.
+  -O  --orphan          delete orphan packages.
+  -o  --obsolete        delete obsolete packages.
+  -s  --skip            delete skipped packages.
+  -h  --help            show this message
+END_OF_USAGE
+  exit
+end
+
+
+flag_files = Array.new
+begin
+  GetoptLong.new(*options).each do |on, ov|
+    case on
+    when "-L"
+      flag_files << 'TO.Alter'
+    when "-n"
+      flag_files << 'TO.Nonfree'
+    when "-O"
+      flag_files << 'TO.Orphan'
+    when "-o"
+      flag_files << 'OBSOLETE'
+    when "-s"
+      flag_files << 'SKIP'
+    when "-h"
+      show_usage
+    end
+  end
+rescue
+  exit 1
+end
 
 $:.unshift(File.dirname($0))
 require 'rpm'
@@ -48,8 +93,8 @@ end
 
 # show the result
 unless obso_pkgs.empty? then
-	puts 'OBSOLETEd packages are installed in your system, do the following if you want:'
+	puts "#{flag_files.join('')} packages are installed in your system, do the following if you want:"
 	puts "sudo rpm -e #{obso_pkgs.join(' ')}"
 else
-	puts 'There is no OBSOLETEd packages installed in your system.'
+	puts "There is no #{flag_files.join('')} packages installed in your system."
 end
