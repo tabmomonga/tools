@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE comps PUBLIC "-//Red Hat, Inc.//DTD Comps info//EN" "comps.dtd">
+<comps>
+
+
+  <group>
+    <id>base</id>
+    <name>Base</name>
+    <name xml:lang="ar">أساسيّة</name>
+    <name xml:lang="be">Падмурак</name>
+    <name xml:lang="bg">База</name>
+    <name xml:lang="bn">ভিত্তি (Base)</name>
+    <name xml:lang="ca">Bàsic</name>
+    <name xml:lang="cs">Základ</name>
+    <name xml:lang="cy">Sail</name>
+    <name xml:lang="da">Base</name>
+    <name xml:lang="de">Basis</name>
+    <name xml:lang="el">Βάση</name>
+    <name xml:lang="es">Base</name>
+    <name xml:lang="et">Baas</name>
+    <name xml:lang="fa">پایه</name>
+    <name xml:lang="fi">Perus</name>
+    <name xml:lang="fr">Base</name>
+    <name xml:lang="gu">આધાર</name>
+    <name xml:lang="hi">आधार </name>
+    <name xml:lang="hr">Baza</name>
+    <name xml:lang="hu">Alap</name>
+    <name xml:lang="id">Dasar</name>
+    <name xml:lang="is">Grunnur</name>
+    <name xml:lang="it">Base</name>
+    <name xml:lang="ja">ベース</name>
+    <name xml:lang="ko">기본</name>
+    <name xml:lang="mk">Основни</name>
+    <name xml:lang="ms">Asas</name>
+    <name xml:lang="nb">Grunnpakker</name>
+    <name xml:lang="nl">Basis</name>
+    <name xml:lang="no">Grunnpakker</name>
+    <name xml:lang="pa">ਮੂਲ</name>
+    <name xml:lang="pl">Część podstawowa</name>
+    <name xml:lang="pt">Base</name>
+    <name xml:lang="pt_BR">Base</name>
+    <name xml:lang="ru">Основа</name>
+    <name xml:lang="sk">Základ</name>
+    <name xml:lang="sl">Osnovno</name>
+    <name xml:lang="sv">Bas</name>
+    <name xml:lang="ta">அடிப்படை</name>
+    <name xml:lang="th">พื้นฐาน</name>
+    <name xml:lang="tr">Temel</name>
+    <name xml:lang="uk">Основа</name>
+    <name xml:lang="vi">Cở sở</name>
+    <name xml:lang="zh_CN">基本</name>
+    <name xml:lang="zh_TW">基礎</name>
+    <name xml:lang="zu">Isiqu</name>
+    <description>This group includes a minimal set of packages. Useful for creating small router/firewall boxes, for example.</description>
+    <description xml:lang="ar">تحتوي هذه المجموعة على حزم قليلة. مفيدة مثلا لإنشاء صناديق مسارات/جدارات نارية.</description>
+    <description xml:lang="bg">Групата включва минималния набор от пакети. Полезно е например за създаване на малки рутери/защитни стени.</description>
+    <description xml:lang="bn">এই সংকলনে সর্বনিম্ন সংখ্যক প্যাকেজ রয়েছে।  এর ব্যবহারের একটি প্রকৃষ্ট উদাহরণ হল - ছোটখাট রাউটার/ফায়ারওয়াল তৈরি।</description>
+    <description xml:lang="ca">Aquest grup inclou un conjunt mínim de paquets. Útil per crear ordinadors que actuin com a encaminador/tallafoc, per exemple.</description>
+    <description xml:lang="cs">Tato skupina obsahuje minimální množinu balíčků. Je užitečná například pro instalaci malých routerů/firewallů.</description>
+    <description xml:lang="cy">Mae'r grŵp yma'n cynnwys set lleiafol o becynnau. Yn ddefnyddiol ar gyfer creu blychau bach llwybro/muriau cadarn, er enghraifft.</description>
+    <description xml:lang="da">Denne gruppe indeholder en minimal samling af pakker. Fx nyttig til at lave små bokse med en ruter eller brandmur.</description>
+    <description xml:lang="de">Diese Gruppe enthält eine minimale Paketauswahl. Dies ist zum Beispiel nützlich zum Aufbau kleiner Router/Firewall-Rechner.</description>
+    <description xml:lang="es">Este grupo incluye un conjunto de paquetes mínimo. Muy útil para la creación de pequeñas cajas de enrutadores/cortafuegos, por ejemplo.</description>
+    <description xml:lang="et">See grupp sisaldab minimaalset hulka pakette. Kasutatav näiteks väikese ruuteri/tulemüüri loomiseks.</description>
+    <description xml:lang="fr">Ce groupe inclut un ensemble minimum de paquetages. Utile pour la création de petits routeurs/boîtes de pare-feu, par exemple.</description>
+    <description xml:lang="gu">આ જૂથ પેકેજોના ન્યુનતમ જૂથનો સમાવેશ કરે છે. નાના ઉપયોગી રાઉટર/ફાયરવોલ બોક્સ બનાવવા માટે ઉપયોગી છે, ઉદાહરણ તરીકે.</description>
+    <description xml:lang="hi">यह समूह संकुल के न्यूनतम समूह को शामिल करता है. छोटे router/firewall बाक्स के लिए उपयोगी, उदाहरण के लिए.</description>
+    <description xml:lang="hu">Ez a csoport a minimálisan szükséges csomagckat tartalmazza. Például egyszerű router vagy tűzfal kialakítása esetén ajánlott.</description>
+    <description xml:lang="id">Dalam group ini telah diset paket-paket minimal. Contohnya, program-program yang berguna untuk membuat router/firewall sederhana.</description>
+    <description xml:lang="is">Þessi hópur inniheldur lágmarksfjölda af pökkum og er gagnlegur til að búa til smáar uppsetningar fyrir til dæmis beina eða eldveggi.</description>
+    <description xml:lang="it">Questo gruppo include un set minimo di pacchetti, utili per la creazione di piccoli campi router/firewall, per esempio:</description>
+    <description xml:lang="ja">このグループは最低限のパッケージセットです。例えば、小さなルーターやファイヤーウォールの構築に便利です。</description>
+    <description xml:lang="ko">이 그룹은 최소 패키지 그룹을 포함합니다. 소형 라우터/방화벽과 같은 시스템을 생성하는데 유용합니다.</description>
+    <description xml:lang="mk">Оваа група вклучува минимален сет на пакети. Корисно за креирање на мали рутери/огнени ѕидови, на пример:</description>
+    <description xml:lang="ms">Kumpulan ini termasuk set minimum pakej. Berguna untuk menghasilkan kekotak kecil router/firewall, sebagai contoh.</description>
+    <description xml:lang="pa">ਇਸ ਪੈਕੇਜ ਵਿੱਚ ਨਿਊਨਤਮ ਪੈਕੇਜਾਂ ਦਾ ਸਮੂਹ ਹੈ, ਜੋ ਕਿ ਛੋਟੇ ਰਾਊਟਰ/ਫਾਇਰਵਾਲ ਬਕਸੇ ਆਦਿਲਈ ਲਾਭਦਾਇਕ ਹੈ।</description>
+    <description xml:lang="pl">Grupa zawiera minimalną liczbę pakietów. Przydatna w przypadku małych router'ów/firewall'i.</description>
+    <description xml:lang="pt">Este grupo incluí um conjunto mínimo de pacotes. Útil para criar pequenos 'routers'/'firewalls', por exemplo.</description>
+    <description xml:lang="pt_BR">Este grupo inclui um conjunto mínimo de pacotes. Útil, por exemplo, para a criação de pequenas caixas de roteador/firewall.</description>
+    <description xml:lang="ru">Эта группа содержит минимальный набор пакетов. Она подходит, например, для создания небольших маршрутизаторов/сетевых экранов.</description>
+    <description xml:lang="sk">Táto skupina zahŕňa najmenšiu množinu balíkov. Je to použiteľné napríklad pre vytvorenie malých smerovačov/firewallov.</description>
+    <description xml:lang="sv">Denna grupp inkluderar en minimal uppsättning paket. Användbart, till exempel, för skapande av små router-/brandväggsmaskiner.</description>
+    <description xml:lang="ta">இந்த குழுவில் நெருப்புசுவர்/ரௌட்டர் போன்றவைகளை உருவாக்க குறைவான பணித்தொகுப்புகள் உள்ளன. </description>
+    <description xml:lang="zh_CN">该软件包组包括软件包的最小集。对于安装小型路由器或防火墙机器较有用。</description>
+    <description xml:lang="zh_TW">這群組包括了最少的套件。這對建立小型路由器 / 防火牆電腦特別有用。</description>
+    <default>true</default>
+    <uservisible>false</uservisible>
+    <grouplist>
+      <groupreq>core</groupreq>
+    </grouplist>
+    <packagelist>
+      <packagereq type="default">NetworkManager</packagereq>
+      <packagereq type="mandatory">acl</packagereq>
+      <packagereq type="default" basearchonly="true">acpid</packagereq>
+      <packagereq type="default">anacron</packagereq>
+      <packagereq type="default" basearchonly="true">apmd</packagereq>
+      <packagereq type="default">aspell</packagereq>
+      <packagereq type="default">aspell-en</packagereq>
+      <packagereq type="mandatory">at</packagereq>
+      <packagereq type="mandatory">attr</packagereq>
+      <packagereq type="mandatory">authconfig</packagereq>
+      <packagereq type="default">autofs</packagereq>
+      <packagereq type="mandatory">bc</packagereq>
+      <packagereq type="mandatory">bind-utils</packagereq>
+      <packagereq type="optional">bridge-utils</packagereq>
+      <packagereq type="mandatory">bzip2</packagereq>
+      <packagereq type="mandatory">crontabs</packagereq>
+      <packagereq type="mandatory">cyrus-sasl</packagereq>
+      <packagereq type="default">dhclient</packagereq>
+      <packagereq type="default">diffutils</packagereq>
+      <packagereq type="default">dosfstools</packagereq>
+      <packagereq type="default">dump</packagereq>
+      <packagereq type="mandatory">eject</packagereq>
+      <packagereq type="default">ethtool</packagereq>
+      <packagereq type="default">fbset</packagereq>
+      <packagereq type="default">finger</packagereq>
+      <packagereq type="default">ftp</packagereq>
+      <packagereq type="default">gpm</packagereq>
+      <packagereq type="default">irda-utils</packagereq>
+      <packagereq type="default">jwhois</packagereq>
+      <packagereq type="default" basearchonly="true">kernel-utils</packagereq>
+      <packagereq type="default">krb5-workstation</packagereq>
+      <packagereq type="default">lftp</packagereq>
+      <packagereq type="default">lha</packagereq>
+      <packagereq type="mandatory">logrotate</packagereq>
+      <packagereq type="mandatory">lsof</packagereq>
+      <packagereq type="mandatory">mailcap</packagereq>
+      <packagereq type="mandatory">man</packagereq>
+      <packagereq type="default">man-pages</packagereq>
+      <packagereq type="mandatory">mdadm</packagereq>
+      <packagereq type="mandatory">mgetty</packagereq>
+      <packagereq type="mandatory" basearchonly="true">mkbootdisk</packagereq>
+      <packagereq type="mandatory">mt-st</packagereq>
+      <packagereq type="default">mtools</packagereq>
+      <packagereq type="default">mtr</packagereq>
+      <packagereq type="default">nc</packagereq>
+      <packagereq type="mandatory">netconfig</packagereq>
+      <packagereq type="default">nfs-utils</packagereq>
+      <packagereq type="default">nss_ldap</packagereq>
+      <packagereq type="mandatory">ntsysv</packagereq>
+      <packagereq type="default">openssh-clients</packagereq>
+      <packagereq type="default">openssh-server</packagereq>
+      <packagereq type="default">pam</packagereq>
+      <packagereq type="mandatory">parted</packagereq>
+      <packagereq type="mandatory">pciutils</packagereq>
+      <packagereq type="default" basearchonly="true">pcmcia-cs</packagereq>
+      <packagereq type="default">pdksh</packagereq>
+      <packagereq type="mandatory">prelink</packagereq>
+      <packagereq type="mandatory">psacct</packagereq>
+      <packagereq type="mandatory">quota</packagereq>
+      <packagereq type="default">rdate</packagereq>
+      <packagereq type="default">rdist</packagereq>
+      <packagereq type="mandatory">momonga-logos</packagereq>
+      <packagereq type="default">rp-pppoe</packagereq>
+      <packagereq type="default">rsh</packagereq>
+      <packagereq type="default">rsync</packagereq>
+      <packagereq type="default">postfix</packagereq>
+      <packagereq type="default">setuptool</packagereq>
+      <packagereq type="mandatory">slocate</packagereq>
+      <packagereq type="default">stunnel</packagereq>
+      <packagereq type="default">sudo</packagereq>
+      <packagereq type="default">system-config-network-tui</packagereq>
+      <packagereq type="default">system-config-securitylevel-tui</packagereq>
+      <packagereq type="default">talk</packagereq>
+      <packagereq type="default">tcp_wrappers</packagereq>
+      <packagereq type="default">tcpdump</packagereq>
+      <packagereq type="default">tcsh</packagereq>
+      <packagereq type="mandatory">telnet</packagereq>
+      <packagereq type="mandatory">time</packagereq>
+      <packagereq type="mandatory">tmpwatch</packagereq>
+      <packagereq type="mandatory">traceroute</packagereq>
+      <packagereq type="default">unzip</packagereq>
+      <packagereq type="default">mph</packagereq>
+      <packagereq type="mandatory">utempter</packagereq>
+      <packagereq type="mandatory">vixie-cron</packagereq>
+      <packagereq type="default">wget</packagereq>
+      <packagereq type="default">wireless-tools</packagereq>
+      <packagereq type="default">ypbind</packagereq>
+      <packagereq type="default">yum</packagereq>
+      <packagereq type="mandatory">zip</packagereq>
+    </packagelist>
+  </group>
+
+  <group>
+    <id>core</id>
+    <name>Core</name>
+    <name xml:lang="ar">اللبّ</name>
+    <name xml:lang="be">Падмурак</name>
+    <name xml:lang="bg">Базов</name>
+    <name xml:lang="bn">কোর (Core)</name>
+    <name xml:lang="ca">Nucli</name>
+    <name xml:lang="cs">Jádro</name>
+    <name xml:lang="cy">Craidd</name>
+    <name xml:lang="da">Grundlæggende</name>
+    <name xml:lang="de">Kern</name>
+    <name xml:lang="es">Núcleo</name>
+    <name xml:lang="et">Tuum</name>
+    <name xml:lang="fa">هسته</name>
+    <name xml:lang="fi">Keskeiset</name>
+    <name xml:lang="fr">Core</name>
+    <name xml:lang="gu">કોર</name>
+    <name xml:lang="hi">कोर</name>
+    <name xml:lang="hr">Jezgra</name>
+    <name xml:lang="hu">Mag</name>
+    <name xml:lang="id">Inti</name>
+    <name xml:lang="is">Lágmarkskerfi</name>
+    <name xml:lang="it">Principale</name>
+    <name xml:lang="ja">Core</name>
+    <name xml:lang="ko">핵심</name>
+    <name xml:lang="mk">Основни</name>
+    <name xml:lang="ms">Teras</name>
+    <name xml:lang="nb">Kjerne</name>
+    <name xml:lang="nl">Kern</name>
+    <name xml:lang="no">Kjerne</name>
+    <name xml:lang="pa">ਮੂਲ</name>
+    <name xml:lang="pl">Jądro</name>
+    <name xml:lang="pt">Núcleo</name>
+    <name xml:lang="pt_BR">Núcleo</name>
+    <name xml:lang="ru">Основа</name>
+    <name xml:lang="sk">Jadro</name>
+    <name xml:lang="sl">Jedro</name>
+    <name xml:lang="sv">Grund</name>
+    <name xml:lang="ta">மூலம்</name>
+    <name xml:lang="th">แกน</name>
+    <name xml:lang="tr">Çekirdek</name>
+    <name xml:lang="uk">Основа</name>
+    <name xml:lang="vi">Lõi</name>
+    <name xml:lang="zh_CN">核心</name>
+    <name xml:lang="zh_TW">主要</name>
+    <name xml:lang="zu">Okuyikhona</name>
+    <description>Smallest possible installation</description>
+    <description xml:lang="ar">أصغر تثبيت متاح</description>
+    <description xml:lang="be">Найменшая з магчымых усталёўка</description>
+    <description xml:lang="bg">Най-малката възможна инсталация</description>
+    <description xml:lang="bn">যথাসম্ভব সংক্ষিপ্ত ইনস্টলেশন</description>
+    <description xml:lang="ca">La instal·lació més petita possible</description>
+    <description xml:lang="cs">Nejmenší možná instalace</description>
+    <description xml:lang="cy">Arsefydliad lleiaf posib</description>
+    <description xml:lang="da">Mindst mulige installation</description>
+    <description xml:lang="de">Kleinstmögliche Installation</description>
+    <description xml:lang="el">Μικρότερη δυνατή εγκατάσταση</description>
+    <description xml:lang="es">Instalación lo más pequeña posible</description>
+    <description xml:lang="et">Väikseim võimalik installatsioon</description>
+    <description xml:lang="fa">کوچکترین نصب ممکن</description>
+    <description xml:lang="fi">Pienin mahdollinen asennus</description>
+    <description xml:lang="fr">Plus petite installation possible</description>
+    <description xml:lang="gu">નાનામાં નાના શક્ય સ્થાપનો</description>
+    <description xml:lang="hi">सबसे छोटा संभावित अधिष्ठापन</description>
+    <description xml:lang="hr">Najmanja moguća instalacija</description>
+    <description xml:lang="hu">Minimális telepítés</description>
+    <description xml:lang="id">Instalasi sekecil mungkin</description>
+    <description xml:lang="is">Lágmarks uppsetning</description>
+    <description xml:lang="it">Installazione minima</description>
+    <description xml:lang="ja">最低可能なインストール</description>
+    <description xml:lang="ko">가능한 최소 설치</description>
+    <description xml:lang="mk">Најмалата можна инсталација</description>
+    <description xml:lang="ms">Pemasangan sekecil mungkin</description>
+    <description xml:lang="nb">Minste mulige installering</description>
+    <description xml:lang="nl">Kleinst mogelijke installatie</description>
+    <description xml:lang="no">Minste mulige installering</description>
+    <description xml:lang="pa">ਨਿਊਨਤਮ ਸੰਭਵ ਇੰਸਟਾਲੇਸ਼ਨ</description>
+    <description xml:lang="pl">Najmniejsza możliwa instalacja</description>
+    <description xml:lang="pt">A mais pequena instalação possível</description>
+    <description xml:lang="pt_BR">A menor instalação possível</description>
+    <description xml:lang="ru">Минимально возможная установка</description>
+    <description xml:lang="sk">Najmenšia možná inštalácia</description>
+    <description xml:lang="sl">Najmanjša možna namestitev</description>
+    <description xml:lang="sv">Minsta möjliga installation</description>
+    <description xml:lang="ta">மிகச்சிறிய நிறுவல்</description>
+    <description xml:lang="th">ติดตั้งให้มีขนาดเล็กที่สุดที่เป็นไปได้</description>
+    <description xml:lang="tr">Olası en küçük kurulum</description>
+    <description xml:lang="uk">Мінімально можливе встановлення</description>
+    <description xml:lang="vi">Cài đặt nhỏ tối thiểu</description>
+    <description xml:lang="zh_CN">最小安装</description>
+    <description xml:lang="zh_TW">最小安裝</description>
+    <description xml:lang="zu">Ukufakwa okuncane</description>
+    <default>true</default>
+    <uservisible>false</uservisible>
+    <packagelist>
+      <packagereq type="mandatory">SysVinit</packagereq>
+      <packagereq type="default">ash</packagereq>
+      <packagereq type="mandatory">authconfig</packagereq>
+      <packagereq type="mandatory">basesystem</packagereq>
+      <packagereq type="mandatory">bash</packagereq>
+      <packagereq type="mandatory">coreutils</packagereq>
+      <packagereq type="mandatory">cpio</packagereq>
+      <packagereq type="mandatory">e2fsprogs</packagereq>
+      <packagereq type="mandatory">xfsprogs</packagereq>
+      <packagereq type="mandatory">jfsutils</packagereq>
+      <packagereq type="mandatory">reiserfsprogs</packagereq>
+      <packagereq type="mandatory">reiser4progs</packagereq>
+      <packagereq type="mandatory">ed</packagereq>
+      <packagereq type="mandatory">momonga-logos</packagereq>
+      <packagereq type="mandatory">momonga-release</packagereq>
+      <packagereq type="mandatory">file</packagereq>
+      <packagereq type="mandatory">filesystem</packagereq>
+      <packagereq type="mandatory">glibc</packagereq>
+      <packagereq type="mandatory" basearchonly="true">grub</packagereq>
+      <packagereq type="mandatory">hdparm</packagereq>
+      <packagereq type="mandatory">hotplug</packagereq>
+      <packagereq type="mandatory">indexhtml</packagereq>
+      <packagereq type="mandatory">initscripts</packagereq>
+      <packagereq type="mandatory">iproute</packagereq>
+      <packagereq type="mandatory">iputils</packagereq>
+      <packagereq type="mandatory">kbd</packagereq>
+      <packagereq type="mandatory">kernel</packagereq>
+      <packagereq type="mandatory">kudzu</packagereq>
+      <packagereq type="mandatory">libgcc</packagereq>
+      <packagereq type="mandatory">libtermcap</packagereq>
+      <packagereq type="mandatory">passwd</packagereq>
+      <packagereq type="mandatory">policycoreutils</packagereq>
+      <packagereq type="mandatory">prelink</packagereq>
+      <packagereq type="mandatory">procps</packagereq>
+      <packagereq type="mandatory">readline</packagereq>
+      <packagereq type="mandatory">momonga-logos</packagereq>
+      <packagereq type="mandatory">rootfiles</packagereq>
+      <packagereq type="mandatory">rpm</packagereq>
+      <packagereq type="mandatory">selinux-policy-targeted</packagereq>
+      <packagereq type="mandatory">setserial</packagereq>
+      <packagereq type="mandatory">setup</packagereq>
+      <packagereq type="mandatory">shadow-utils</packagereq>
+      <packagereq type="mandatory">sysklogd</packagereq>
+      <packagereq type="mandatory">system-config-mouse</packagereq>
+      <packagereq type="mandatory">termcap</packagereq>
+      <packagereq type="mandatory">util-linux</packagereq>
+      <packagereq type="mandatory">vim-minimal</packagereq>
+    </packagelist>
+  </group>
+
+
+
+</comps>
