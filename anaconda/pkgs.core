@@ -6,8 +6,6 @@ NetworkManager
 ORBit
 ORBit2
 SysVinit
-XFree86-KOI8-R
-XFree86-KOI8-R-75dpi-fonts
 acl
 acpid
 alsa-lib
@@ -35,6 +33,11 @@ bind-utils
 bogl
 bogl-bterm
 booty
+bluez-bluefw
+bluez-hcidump
+bluez-libs
+bluez-pin
+bluez-utils
 bridge-utils
 busybox-anaconda
 bzip2
@@ -47,6 +50,7 @@ cpio
 cpp
 cracklib
 cracklib-dicts
+createrepo
 crontabs
 cups-libs
 cyrus-sasl
@@ -168,6 +172,7 @@ libstdc++
 libtermcap
 libtiff
 libungif
+libusb
 libuser
 libvorbis
 libwvstreams
@@ -268,6 +273,7 @@ ruby
 ruby-rpm
 rxvt
 samba-common
+screen
 scrollkeeper
 sed
 selinux-policy-targeted
@@ -281,7 +287,6 @@ slang
 slocate
 sox
 startup-notification
-stunnel
 sudo
 sysklogd
 syslinux

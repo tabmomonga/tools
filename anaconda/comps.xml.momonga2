@@ -421,8 +421,13 @@
       <packagereq type="default">autofs</packagereq>
       <packagereq type="mandatory">bc</packagereq>
       <packagereq type="mandatory">bind-utils</packagereq>
+      <packagereq type="default">bluez-bluefw</packagereq>
+      <packagereq type="default">bluez-hcidump</packagereq>
+      <packagereq type="default">bluez-libs</packagereq>
+      <packagereq type="default">bluez-utils</packagereq>
       <packagereq type="optional">bridge-utils</packagereq>
       <packagereq type="mandatory">bzip2</packagereq>
+      <packagereq type="default">createrepo</packagereq>
       <packagereq type="mandatory">crontabs</packagereq>
       <packagereq type="default">dhclient</packagereq>
       <packagereq type="default">diffutils</packagereq>
@@ -474,7 +479,6 @@
       <packagereq type="default">postfix</packagereq>
       <packagereq type="default">setuptool</packagereq>
       <packagereq type="mandatory">slocate</packagereq>
-      <packagereq type="default">stunnel</packagereq>
       <packagereq type="default">sudo</packagereq>
       <packagereq type="default">system-config-network-tui</packagereq>
       <packagereq type="default">system-config-securitylevel-tui</packagereq>
@@ -1013,6 +1017,7 @@
       <packagereq type="default">audiofile</packagereq>
       <packagereq type="default">beecrypt</packagereq>
       <packagereq type="default">blas</packagereq>
+      <packagereq type="default">bluez-libs</packagereq>
       <packagereq type="default">bogl</packagereq>
       <packagereq type="default">boost</packagereq>
       <packagereq type="default">libstdc++3.2</packagereq>
@@ -1370,8 +1375,6 @@
     <default>false</default>
     <uservisible>false</uservisible>
     <packagelist>
-      <packagereq type="mandatory">XFree86-KOI8-R-75dpi-fonts</packagereq>
-      <packagereq type="mandatory">XFree86-KOI8-R-100dpi-fonts</packagereq>
       <packagereq type="optional" requires="xorg-x11">xorg-x11-cyrillic-fonts</packagereq>
     </packagelist>
   </group>
@@ -6289,6 +6292,7 @@
     <default>false</default>
     <uservisible>true</uservisible>
     <packagelist>
+      <packagereq type="default">bluez-pin</packagereq>
       <packagereq type="default">ckermit</packagereq>
       <packagereq type="default">ethereal</packagereq>
       <packagereq type="optional">gnome-nettool</packagereq>
@@ -6419,7 +6423,7 @@
     <packagelist>
       <packagereq type="default">cadaver</packagereq>
       <packagereq type="default">fetchmail</packagereq>
-      <packagereq type="optional">lynx</packagereq>
+      <packagereq type="optional">w3m</packagereq>
       <packagereq type="default">mutt</packagereq>
       <packagereq type="optional">ncftp</packagereq>
     </packagelist>

@@ -295,8 +295,13 @@
       <packagereq type="default">autofs</packagereq>
       <packagereq type="mandatory">bc</packagereq>
       <packagereq type="mandatory">bind-utils</packagereq>
+      <packagereq type="default">bluez-bluefw</packagereq>
+      <packagereq type="default">bluez-hcidump</packagereq>
+      <packagereq type="default">bluez-libs</packagereq>
+      <packagereq type="default">bluez-utils</packagereq>
       <packagereq type="optional">bridge-utils</packagereq>
       <packagereq type="mandatory">bzip2</packagereq>
+      <packagereq type="default">createrepo</packagereq>
       <packagereq type="mandatory">crontabs</packagereq>
       <packagereq type="mandatory">cyrus-sasl</packagereq>
       <packagereq type="default">dhclient</packagereq>
@@ -350,7 +355,6 @@
       <packagereq type="default">postfix</packagereq>
       <packagereq type="default">setuptool</packagereq>
       <packagereq type="mandatory">slocate</packagereq>
-      <packagereq type="default">stunnel</packagereq>
       <packagereq type="default">sudo</packagereq>
       <packagereq type="default">system-config-network-tui</packagereq>
       <packagereq type="default">system-config-securitylevel-tui</packagereq>
