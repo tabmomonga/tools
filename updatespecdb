@@ -99,6 +99,7 @@ class SpecDB
       end
     end
 
+    updated = false
     @names.each_with_index do |name, i|
       mtime = File.mtime("#{name}/#{name}.spec")
       if @specs.has_key?(name) and File.exist?(FILENAME) and
@@ -138,6 +139,7 @@ class SpecDB
                   else
                     nil
                   end
+      updated = true
       @specs[name] = SpecData.new(name, spec.sources, packages,
                                   spec.buildarchs, brs, mtime, lastbuild)
 
@@ -149,7 +151,7 @@ class SpecDB
     end # @names.each_with_index do |name, i|
     STDERR.puts "\rscanning specfile: 100%" if verbose
 
-    commit!
+    commit! if updated
 
     @packages = {}
     class << @packages
