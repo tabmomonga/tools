@@ -458,6 +458,7 @@
       <packagereq type="default">mtools</packagereq>
       <packagereq type="default">mtr</packagereq>
       <packagereq type="default">nc</packagereq>
+	<packagereq type="mandatory">net-tools</packagereq>
       <packagereq type="mandatory">netconfig</packagereq>
       <packagereq type="default">nfs-utils</packagereq>
       <packagereq type="default">nss_ldap</packagereq>
