@@ -114,6 +114,7 @@ gcc3.2-c++
 gdbm
 gdk-pixbuf
 gdm
+gettext
 ghostscript-resource
 glib
 glib1
@@ -186,6 +187,7 @@ libart_lgpl
 libbonobo
 libbonoboui
 libcap
+libcap-devel
 libcroco
 libf2c
 libgcc
@@ -281,6 +283,7 @@ openssh-clients
 openssh-server
 openssl
 pam
+pam-devel
 pango
 parted
 passwd
@@ -290,7 +293,10 @@ pcmcia-cs
 pcre
 pdksh
 perl
+perl-DBI
 perl-Filter
+perl-Net-Daemon
+perl-PlRPC
 perl-SGMLSpm
 perl-Tk
 php
@@ -309,6 +315,7 @@ pygtk-libglade
 pyorbit
 pyparted
 python
+python-devel
 pyxf86config
 qdbm
 quota
