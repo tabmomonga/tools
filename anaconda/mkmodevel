@@ -1,17 +1,17 @@
 #!/usr/bin/env ruby
 
-WORK_DIR = "/dist/Current"
-MIRROR_DIR = File.expand_path "/dist/development/PKGS"
+WORK_DIR = "/pub/dist/Current"
+#MIRROR_DIR = File.expand_path "/pub/HEAD/PKGS"
 
 PROG = $0
 ARCH = "i686"
 work_dir = File.expand_path WORK_DIR
 LOG = "#{work_dir}/#{PROG.split(/\//)[-1]}.log"
 MOMONGA = "http://dist.momonga-linux.org/pub/momonga/development"
-MIRROR = "#{MOMONGA}/development/PKGS"
+#MIRROR = "#{MOMONGA}/development/PKGS"
 GENHDLIST = "sudo /usr/lib/anaconda-runtime/genhdlist"
 PKGORDER = "/usr/lib/anaconda-runtime/pkgorder"
-#GETFULLCOMPS = "sudo ~/bin/getfullcomps.py"
+GETFULLCOMPS = "~/bin/getfullcomps.py"
 MAKESTAMP = "sudo /usr/lib/anaconda-runtime/makestamp.py"
 # BUILDINSTALL = "sudo /usr/lib/anaconda-runtime/buildinstall"
 BUILDINSTALL = "sudo ./buildinstall"
@@ -23,7 +23,7 @@ COMPS_XML = DEV_DIR + "/#{ARCH}/os/Momonga/base/comps.xml"
 TREE_DIR = DEV_DIR + "/#{ARCH}/os"
 ISO_DIR = DEV_DIR + "/#{ARCH}/iso"
 JIGDO_DIR = DEV_DIR + "/#{ARCH}/jigdo"
-PKGS_DIR = DEV_DIR + "/PKGS"
+PKGS_DIR = "/pub/HEAD/PKGS"
 VER = Time.new.strftime("%Y%m%d")
 
 def do_cmd cmd
@@ -74,9 +74,9 @@ print "done\n"
 print "Copying current package files - "
 STDOUT.flush
 cur_dir = Dir.pwd
-Dir.chdir MIRROR_DIR
-do_cmd "ln -f #{ARCH}/* #{PKGS_DIR}/#{ARCH}"
-do_cmd "ln -f noarch/* #{PKGS_DIR}/noarch"
+#Dir.chdir MIRROR_DIR
+#do_cmd "ln -f #{ARCH}/* #{PKGS_DIR}/#{ARCH}"
+#do_cmd "ln -f noarch/* #{PKGS_DIR}/noarch"
 Dir.chdir PKGS_DIR
 do_cmd "ln -f #{ARCH}/* #{TREE_DIR}/Momonga/RPMS"
 do_cmd "ln -f noarch/* #{TREE_DIR}/Momonga/RPMS"
@@ -149,14 +149,14 @@ cmd += TREE_DIR
 do_cmd cmd
 print "done\n"
 
-# # 10. comps.xml にパッケージリストを追記する
-# print "Revising comps.xml - "
-# STDOUT.flush
-# comps_pkg_list = `#{GETFULLCOMPS} comps.xml #{work_dir}/development #{ARCH}/os 2> #{work_dir}/comps.error`
-# if File.size?(work_dir + "/comps.error")
-#   print "mkmodevel: Aborted - package dependency error.\n"
-#   exit 1
-# end
+# 10. 依存のチェック
+print "Checking dependency - "
+STDOUT.flush
+comps_pkg_list = `#{GETFULLCOMPS} comps.xml #{work_dir}/development #{ARCH}/os 2> #{work_dir}/comps.error`
+if File.size?(work_dir + "/comps.error")
+  print "mkmodevel: Aborted - package dependency error.\n"
+  exit 1
+end
 # File.delete work_dir + "/comps.error"
 # f = open "#{COMPS_XML}.new", "w"
 # open(COMPS_XML).each do |l|
@@ -169,7 +169,7 @@ print "done\n"
 # f.close
 # File.delete COMPS_XML
 # File.rename COMPS_XML + ".new", COMPS_XML
-# print "done\n"
+print "done\n"
 
 # 11. .discinfo の作成
 print "Generating .discinfo - "
@@ -212,6 +212,7 @@ do_cmd "rpmbuild -ba --target #{ARCH} --rcfile rpmrc --define='basedir #{TREE_DI
 do_cmd "cp -a #{work_dir}/RPMS/#{ARCH}/comps-* #{PKGS_DIR}/#{ARCH}"
 do_cmd "cp -a #{work_dir}/SRPMS/comps-* #{PKGS_DIR}/SRPMS"
 do_cmd "cp -a #{work_dir}/RPMS/#{ARCH}/comps-* #{TREE_DIR}/Momonga/RPMS"
+do_cmd "cp -a #{work_dir}/RPMS/#{ARCH}/comps-* #{TREE_DIR}/Momonga/base/comps.rpm"
 do_cmd "rm -rf #{work_dir}/BUILD #{work_dir}/RPMS #{work_dir}/SRPMS #{work_dir}/rpmrc #{work_dir}/rpmmacros"
 Dir.chdir cur_dir
 print "done\n"

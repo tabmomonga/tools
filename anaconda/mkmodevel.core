@@ -11,7 +11,7 @@ MOMONGA = "http://dist.momonga-linux.org/pub/momonga/development"
 #MIRROR = "#{MOMONGA}/development/PKGS"
 GENHDLIST = "sudo /usr/lib/anaconda-runtime/genhdlist"
 PKGORDER = "/usr/lib/anaconda-runtime/pkgorder"
-#GETFULLCOMPS = "sudo ~/bin/getfullcomps.py"
+GETFULLCOMPS = "~/bin/getfullcomps.py"
 MAKESTAMP = "sudo /usr/lib/anaconda-runtime/makestamp.py"
 # BUILDINSTALL = "sudo /usr/lib/anaconda-runtime/buildinstall"
 BUILDINSTALL = "sudo ./buildinstall"
@@ -148,14 +148,14 @@ cmd += TREE_DIR
 do_cmd cmd
 print "done\n"
 
-# # 10. comps.xml にパッケージリストを追記する
-# print "Revising comps.xml - "
-# STDOUT.flush
-# comps_pkg_list = `#{GETFULLCOMPS} comps.xml #{work_dir}/development #{ARCH}/os 2> #{work_dir}/comps.error`
-# if File.size?(work_dir + "/comps.error")
-#   print "mkmodevel: Aborted - package dependency error.\n"
-#   exit 1
-# end
+# 10. 依存のチェック
+print "Checking dependency - "
+STDOUT.flush
+comps_pkg_list = `#{GETFULLCOMPS} comps.xml #{work_dir}/development #{ARCH}/os 2> #{work_dir}/comps.error`
+if File.size?(work_dir + "/comps.error")
+  print "mkmodevel: Aborted - package dependency error.\n"
+  exit 1
+end
 # File.delete work_dir + "/comps.error"
 # f = open "#{COMPS_XML}.new", "w"
 # open(COMPS_XML).each do |l|
@@ -168,7 +168,7 @@ print "done\n"
 # f.close
 # File.delete COMPS_XML
 # File.rename COMPS_XML + ".new", COMPS_XML
-# print "done\n"
+print "done\n"
 
 # 11. .discinfo の作成
 print "Generating .discinfo - "
@@ -254,45 +254,45 @@ print "done\n"
 #print "done\n"
 
 # 16. CD用 hdlist 作成
-print "Generating hdlist for CD - "
-STDOUT.flush
-cmd  = GENHDLIST + " "
-cmd += "--productpath Momonga "
-cmd += "--withnumbers "
-cmd += "--fileorder #{work_dir}/pkgorder "
-cmd += "#{TREE_DIR}"
-do_cmd cmd
+#print "Generating hdlist for CD - "
+#STDOUT.flush
+#cmd  = GENHDLIST + " "
+#cmd += "--productpath Momonga "
+#cmd += "--withnumbers "
+#cmd += "--fileorder #{work_dir}/pkgorder "
+#cmd += "#{TREE_DIR}-disc[1-4]"
+#do_cmd cmd
 # File.delete "#{work_dir}/pkgorder"
-print "done\n"
+#print "done\n"
 
 # 17. DVD iso image 作成
-#print "Generating DVD iso image - "
-#STDOUT.flush
-#cmd  = "sudo mkhybrid "
-#cmd += "-r -J -d -L "
-#cmd += "-b isolinux/isolinux.bin -c isolinux/boot.cat "
-#cmd += "-no-emul-boot -boot-load-size 4 -boot-info-table "
-#cmd += "-V 'Momonga Linux DVD' "
-#cmd += "-o #{ISO_DIR}/MomongaLinux#{VER}-#{ARCH}-dvd.iso "
-#cmd += TREE_DIR
-#do_cmd cmd
-#print "done\n"
+print "Generating CD iso image - "
+STDOUT.flush
+cmd  = "sudo mkhybrid "
+cmd += "-r -J -d -L "
+cmd += "-b isolinux/isolinux.bin -c isolinux/boot.cat "
+cmd += "-no-emul-boot -boot-load-size 4 -boot-info-table "
+cmd += "-V 'Momonga Linux DVD' "
+cmd += "-o #{ISO_DIR}/MomongaLinux#{VER}-#{ARCH}-cd.iso "
+cmd += TREE_DIR
+do_cmd cmd
+print "done\n"
 
 # 18. CD iso image 作成
 #for n in 1..4
-  print "Generating CD iso image - "
-  STDOUT.flush
-  cmd  = "sudo mkhybrid "
-  cmd += "-r -J -d -L "
+#  print "Generating CD#{n} iso image - "
+#  STDOUT.flush
+#  cmd  = "sudo mkhybrid "
+#  cmd += "-r -J -d -L "
 #  if n == 1
-    cmd += "-b isolinux/isolinux.bin -c isolinux/boot.cat "
-    cmd += "-no-emul-boot -boot-load-size 4 -boot-info-table "
+#    cmd += "-b isolinux/isolinux.bin -c isolinux/boot.cat "
+#    cmd += "-no-emul-boot -boot-load-size 4 -boot-info-table "
 #  end
-  cmd += "-V 'Momonga Linux CD' "
-  cmd += "-o #{ISO_DIR}/MomongaLinux#{VER}-#{ARCH}-cd.iso "
-  cmd += "#{TREE_DIR}"
-  do_cmd cmd
-  print "done\n"
+#  cmd += "-V 'Momonga Linux CD#{n}' "
+#  cmd += "-o #{ISO_DIR}/MomongaLinux#{VER}-#{ARCH}-cd#{n}.iso "
+#  cmd += "#{TREE_DIR}-disc#{n}"
+#  do_cmd cmd
+#  print "done\n"
 #end
 
 exit
