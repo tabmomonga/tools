@@ -419,29 +419,7 @@ Hash $hTAG を生成する。その際に、TAG名 はすべて大文字として格納する。
     spec.each_line do |line|
       if line =~ /(^|[^%])%if(\S*)\s+(.+)/ then
         cond, value = $2, $3
-        while value =~ /(^|[^%])%/ do
-          case value
-          when /(^|[^%])%(\w+)/ then
-            m = $2
-            if macros.has_key?(m) then
-              value.gsub!(/%#{m}/, macros[m])
-            else
-              macros[m] = ""
-            end
-          when /(^|[^%])%\{(\w+)\}/ then
-            m = $2
-            if macros.has_key?(m) then
-              value.gsub!(/%\{#{m}\}/, macros[m])
-            else
-              macros[m] = ""
-            end
-          when /(^|[^%])%\(([^)]+)\)/ then
-            shcmd = $2
-            res = `#{shcmd}`.chomp
-            shcmd = Regexp.quote(shcmd)
-            value.gsub!(/%\(#{shcmd}\)/, res)
-          end
-        end
+	value = expand_macros(value, macros)
         case cond
         when "arch"
           stack.push(value =~ /#{$ARCHITECTURE}/)
@@ -451,23 +429,6 @@ Hash $hTAG を生成する。その際に、TAG名 はすべて大文字として格納する。
           stack.push(value =~ /#{$OS}/)
         else
           if cond == "" then
-            while value =~ /(^|[^%])%/ do
-              if value =~ /(^|[^%])%(\w+)/ then
-                m = $2
-                if macros.has_key?(m) then
-                  value.gsub!(/%#{m}/, macros[m])
-                else
-                  macros[m] = ""
-                end
-              elsif value =~ /(^|[^%])%\{(\w+)\}/ then
-                m = $2
-                if macros.has_key?(m) then
-                  value.gsub!(/%\{#{m}\}/, macros[m])
-                else
-                  macros[m] = ""
-                end
-              end
-            end
             stack.push(value !~ /0/ && value =~ /\!\s*0/)
           end
         end
@@ -500,7 +461,7 @@ Hash $hTAG を生成する。その際に、TAG名 はすべて大文字として格納する。
         else
           macros[m] = ""
         end
-      when /%\{([_\w]+)\}/ then
+      when /%\{([_\w]+?)\}/ then
         m = $1
         if macros.has_key?(m) then
           str.gsub!(/%\{#{m}\}/, macros[m])
