@@ -472,3 +472,10 @@ print "done\n"
 # STDOUT.flush
 # do_cmd "sudo rm -f #{ISO_DIR}/*.iso"
 # print "done\n"
+
+# 23. comps パッケージの削除
+print "Removing comps package - "
+STDOUT.flush
+do_cmd "rm -f #{PKGS_DIR}/#{ARCH}/comps-[0-9]*"
+do_cmd "rm -f #{PKGS_DIR}/SRPMS/comps-[0-9]*"
+print "done\n"
