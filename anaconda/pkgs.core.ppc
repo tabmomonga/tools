@@ -294,7 +294,6 @@ sysklogd
 system-config-date
 system-config-display
 system-config-keyboard
-system-config-language
 system-config-mouse
 system-config-network
 system-config-network-tui

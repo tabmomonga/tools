@@ -101,7 +101,6 @@
       <packagereq type="default">authconfig-gtk</packagereq>
       <packagereq type="default">system-config-date</packagereq>
       <packagereq type="default">system-config-keyboard</packagereq>
-      <packagereq type="default">system-config-language</packagereq>
       <packagereq type="default">system-config-network</packagereq>
       <packagereq type="default">system-config-packages</packagereq>
       <packagereq type="default">system-config-rootpassword</packagereq>
