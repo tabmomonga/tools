@@ -276,6 +276,9 @@ cmd += "-V 'Momonga Linux DVD' "
 cmd += "-o #{ISO_DIR}/MomongaLinux#{VER}-#{ARCH}-cd.iso "
 cmd += TREE_DIR
 do_cmd cmd
+cmd = "sudo /usr/lib/anaconda-runtime/implantisomd5 "
+cmd += "#{ISO_DIR}/MomongaLinux#{VER}-#{ARCH}-cd.iso"
+do_cmd cmd
 print "done\n"
 
 # 18. CD iso image 作成

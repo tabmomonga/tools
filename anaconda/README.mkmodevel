@@ -21,30 +21,30 @@ trunk/tools/anaconda から mkmodevel, chkcomps, chkrpmdup, detfullcomps.py
 1CDなisoを作成したい場合は、さらに pkgs.copy を $HOME/bin にコピーし
 pkgs.core を $HOME に置いておく。
 
-sudo mkdir -p /dist/Current /dist/development などとしてディレクトリを掘る。
-/dist/Current と /dist/development は一般ユーザで書き込みできるよう
+sudo mkdir -p /pub/dist/Current /pub/dist/development などとしてディレクトリを
+掘る。/dist/Current と /dist/development は一般ユーザで書き込みできるよう
 permission を調整しておく。
 
-/dist/Current に trunk/tools/anaconda の files.tar を tar xvf などで
+/pub/dist/Current に trunk/tools/anaconda の files.tar を tar xvf などで
 展開しておく。files.tar を展開した際に coms.xml が含まれていた場合は
 その files.tar は古いので svn up で取り直す。comps.xml は消す。
 
 フルセットの iso を作りたい場合は、trunk/tools/anaconda から
-comps.xml.momonga2 を /dist/Current/comps.xml にコピーする。
+comps.xml.momonga2 を /pub/dist/Current/comps.xml にコピーする。
 mkmodevel を実行し、エラー等で途中で停止しなかった場合は
-/dist/development/i686/iso/ 以下に iso が作成される。
+/pub/dist/development/i686/iso/ 以下に iso が作成される。
 
 1CD の iso を作りたい場合は、trunk/tools/anaconda から
-comps.xml.core を /dist/Current/comps.xml にコピーする。
+comps.xml.core を /pub/dist/Current/comps.xml にコピーする。
 mkmodevel.core を実行し、エラー等で途中で停止しなかった場合は
-/dist/development/i686/iso/ 以下に iso が作成される。
+/pub/dist/development/i686/iso/ 以下に iso が作成される。
 
 - 備考 -
 
 ディレクトリを別の場所にしたい場合は mkmodevel の
 
-WORK_DIR = "/dist/Current"
-MIRROR_DIR = File.expand_path "/dist/development/PKGS"
+WORK_DIR = "/pub/dist/Current"
+PKGS_DIR = "/pub/HEAD/PKGS"
 
 を適宜変更する。
 
