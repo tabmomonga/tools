@@ -54,7 +54,7 @@ end
 
 $Massatu = []
 Dir.glob("#{$TOPDIR}*").each do |top|
-  Dir.glob("#{top}/*/*.rpm").each do |rpm|
+  Dir.glob("#{top}/#{ARCH}/*.rpm #{top}/noarch/*.rpm").each do |rpm|
     next if rpm.split('/')[-2] == 'SOURCES'
     if !$Packages[top] || !$Packages[top][File.basename(rpm)]
       $Massatu << rpm
