@@ -3,18 +3,16 @@
 # CVSのリビジョンが1.59以降のOmoiKondaraでは、上の行のように
 # 空白行があってもOmoiKondaraが動作するようになりました。
 
-# TOPDIR 自分のマシンのツリーのトップディレクトリを記述します。
-#        必ず1つでなければなりません。
-#
-#        各パッケージのディレクトリに、TO.Nonfree や TO.Zoo という
-#        ファイルを配置しておくと、それを検出して TOPDIR とは別の
-#        ディレクトリに配置を強制することができます。TO.Nonfree の
-#        場合は TOPDIR-Nonfree となります。例では ~/PKGS-Nonfree
-#        ~/PKGS-Zoo となります。
-#
+# TOPDIR バイナリ置場のトップディレクトリ名を記述します。
+#        必ず1つ指定します。
 TOPDIR ~/PKGS
 
-# PKGDIR Momongaパッケージモジュール(pkgs)のCVS作業コピーの場所を記述
+#        各パッケージのディレクトリに、TO.Nonfree や TO.Orphan などの
+#        ファイルが置かれていると、TOPDIR とは別のディレクトリに
+#        バイナリが配置されます。TO.XX の場合は TOPDIR-XX となります。
+#        上記設定例では ~/PKGS-Nonfree および ~/PKGS-Orphan に置かれます。
+
+# PKGDIR Momongaパッケージモジュール(pkgs)のSVN作業コピーの場所を記述します。
 PKGDIR ~/pkgs
 
 # MIRROR ローカルにソースが無い場合にネットワーク経由で取得に行く場所を
