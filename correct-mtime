@@ -1,0 +1,215 @@
+#! /usr/bin/env ruby
+#
+# sets mtime of files in svn working copy unless they have been edited
+#
+# Copyright 2004 Momonga Project <admin at momonga-linux.org>
+# First written by zunda <zunda at freeshell.org>
+#
+# Permission is granted for use, copying, modification, distribution,
+# and distribution of modified versions of this work as long as the
+# above copyright notice is included.
+#
+
+# a directory of a working copy
+require 'rexml/document'
+require 'time'
+
+class SvnEntries
+	def initialize( dir = '.' )
+		@dir = dir
+		@doc = File.open( File.join( dir, '.svn/entries' ) ) do |f|
+			REXML::Document.new( f )
+		end
+	end
+
+	def each_dir
+		each_entry_of_kind( 'dir' ) do |e|
+			yield( e.attribute( 'name' ).to_s ) unless e.attribute( 'name ').empty?
+		end
+	end
+
+	def each_file( recursive = true, &block )
+		if recursive then
+			_each_file_recursive( &block )
+		else
+			_each_file_local( &block )
+		end
+	end
+
+	def each_entry_of_kind( kind = nil )
+		@doc.each do |e|
+			if REXML::Element == e.class then
+				e.each do |f|
+					if REXML::Element == f.class then
+						if 'entry' == f.name then
+							if not kind or kind == f.attribute( 'kind' ).to_s then
+								yield( f )
+							end
+						end
+					end
+				end
+			end
+		end
+	end
+
+	private
+	def _each_file_local( &block )
+		each_entry_of_kind( 'file' ) do |e|
+			yield( e, @dir )
+		end
+	end
+
+	def _each_file_recursive( &block )
+		_each_file_local( &block )
+		each_entry_of_kind( 'dir' ) do |e|
+			unless e.attribute( 'name' ).to_s.empty? then
+				SvnEntries.new( File.join( @dir, e.attribute( 'name' ).to_s ) ).each_file( true, &block )
+			end
+		end
+	end
+
+end
+
+# an entry
+class SvnFile
+	def initialize( entry, dir = '.' )
+		@entry = entry
+		@dir = dir
+	end
+
+	def path
+		File.join( @dir, @entry.attribute( 'name' ).to_s )
+	end
+
+	def mtime
+		File.mtime( path )
+	end
+
+	def atime
+		File.atime( path )
+	end
+
+	def set_mtime( newtime )
+		File.utime( atime, newtime, path )
+	end
+
+	def prop_time
+		Time.iso8601( @entry.attribute( 'prop-time' ).to_s )
+	end
+
+	def committed_date
+		Time.iso8601( @entry.attribute( 'committed-date' ).to_s )
+	end
+
+	def edited?( fudge = 1 )
+		(prop_time - mtime).abs > fudge
+	end
+
+	def correct
+		set_mtime( committed_date )
+	end
+
+end
+
+# command line options
+require 'getoptlong'
+require 'singleton'
+class Config
+	include Singleton
+	Options = [
+		['-l', '--local',	GetoptLong::NO_ARGUMENT],
+		['-r', '--recursive', GetoptLong::NO_ARGUMENT],
+		['-f', '--fudge', GetoptLong::REQUIRED_ARGUMENT],
+		['-n', '--dry-run', GetoptLong::NO_ARGUMENT],
+		['-h', '--help', GetoptLong::NO_ARGUMENT],
+	]
+
+	FUDGE_DEFAULT = 1
+
+	def usage
+		<<"_END"
+usage: #{File.basename( $0 )} [options] [dirs/files]
+sets mtime of files in working copy.
+options:
+  -l, --local:     local directory only
+  -r, --recursive: follow directories in working copy [default]
+  -n, --dry-run:   do nothing
+  -f, --fudge=#{FUDGE_DEFAULT}:   tolerance in sec of mtime of workingcopy
+_END
+	end
+
+	attr_reader :paths, :fudge
+	def initialize
+		@follow_dir = true
+		@fudge = FUDGE_DEFAULT
+		@dry = false
+		begin
+			GetoptLong.new( *Options ).each do |on, ov|
+				case on
+				when '-l'
+					@follow_dir = false
+				when '-r'
+					@follow_dir = true
+				when '-f'
+					@fudge = ov.to_i
+				when '-n'
+					@dry = true
+				when '-h'
+					print usage
+					exit 0
+				end
+			end
+		rescue
+			$stderr.print usage
+			exit 1
+		end
+		@paths = ARGV
+		if @paths.empty? then
+			@paths = [ '.' ]
+		else
+			@follow_dir = false
+		end
+	end
+
+	def follow_dir?
+		@follow_dir
+	end
+
+	def dry_run?
+		@dry
+	end
+end
+
+def each_required( paths, recursive )
+	filepaths = Hash.new
+	while( path = paths.shift )
+		if File.directory?( path ) then
+			SvnEntries.new( path ).each_file( recursive ) do |entry, dir|
+				yield( entry, dir )
+			end
+		else
+			d = File.dirname( path )
+			f = File.basename( path )
+			filepaths[d] ||= Array.new
+			filepaths[d] << f
+		end
+	end
+	unless filepaths.empty? then
+		filepaths.each_key do |dir|
+			SvnEntries.new( dir ).each_file( false ) do |entry, dir|
+				yield( entry, dir ) if filepaths[dir].include?( entry.attribute( 'name' ).to_s )
+			end
+		end
+	end
+end
+
+# main
+each_required( Config.instance.paths, Config.instance.follow_dir? ) do |entry, dir|
+	e = SvnFile.new( entry, dir )
+	unless e.edited?( Config.instance.fudge ) then
+		puts "#{File.join( dir, entry.attribute( 'name' ).to_s )}: #{e.mtime} -> #{e.committed_date}"
+		e.correct unless Config.instance.dry_run?
+	end
+end
+
+# vim: ts=3 sw=3:

@@ -1,3 +1,7 @@
+Mon Aug  9 23:54:35 2004  zunda <zunda at freeshell.org>
+
+	* correct-mtime: added
+
 Thu Jul  8 22:00:57 2004  zunda <zunda at freeshell.org>
 
 	* OmoiKondara: hopefully better handling of macro expansion.
