@@ -11,12 +11,13 @@ MOMONGA = "http://dist.momonga-linux.org/pub/momonga/development"
 MIRROR = "#{MOMONGA}/development/PKGS"
 GENHDLIST = "sudo /usr/lib/anaconda-runtime/genhdlist"
 PKGORDER = "/usr/lib/anaconda-runtime/pkgorder"
-GETFULLCOMPS = "sudo /home/tom/bin/getfullcomps.py"
+#GETFULLCOMPS = "sudo ~/bin/getfullcomps.py"
 MAKESTAMP = "sudo /usr/lib/anaconda-runtime/makestamp.py"
 # BUILDINSTALL = "sudo /usr/lib/anaconda-runtime/buildinstall"
 BUILDINSTALL = "sudo ./buildinstall"
 SPLITTREE = "sudo /usr/lib/anaconda-runtime/splittree.py"
-CHKCOMPS = "/home/tom/bin/chkcomps"
+CHKRPMDUP = "~/bin/chkrpmdup"
+CHKCOMPS = "~/bin/chkcomps"
 DEV_DIR = work_dir + "/development"
 COMPS_XML = DEV_DIR + "/#{ARCH}/os/Momonga/base/comps.xml"
 TREE_DIR = DEV_DIR + "/#{ARCH}/os"
@@ -94,7 +95,12 @@ print "done\n"
 #  6. 重複しているパッケージの削除
 print "Removing duplication packages - "
 STDOUT.flush
-do_cmd "chkrpmdup #{TREE_DIR}/Momonga/RPMS | bash"
+do_cmd "#{CHKRPMDUP} #{TREE_DIR}/Momonga/RPMS | bash"
+print "done\n"
+
+#  comps.xml をコピー
+print "Copying comps.xml - "
+do_cmd "cp #{work_dir}/comps.xml #{COMPS_XML}"
 print "done\n"
 
 #  comps.xml のチェック

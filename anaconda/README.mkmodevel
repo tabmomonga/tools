@@ -1,10 +1,25 @@
-Topic for #momonga: mkmodevel の使い方です。
 
-<tom> 説明書とかないんで簡単に説明しておくと
-<tom> work 用にディレクトリを一つ作って
-<tom> その中で tar xvf files.tar します
-<tom> で mkmodevel の WORK_DIR をそのディレクトリにして
-<tom> dist.momonga-linux.org:/pub/momonga/development/PKGS/ の中身をどこかに落としておいて
-<tom> MIRROR_DIR はそのディレクトリにして
-<tom> あとは CHKCOMPS を chkcomps をさすようにすれば
-<tom> 実行するだけです
+anaconda-10.1.0.2-8m で rpm-4.3.2-9m なバイナリから ISO イメージを作るメモ
+
+rpm 4.3.2-9m な環境で i686 に build したバイナリを全部揃える。
+sudo が nopassword で使えるように visudo 等で設定しておく。
+$HOME/bin に PATH を通しておく。$HOME/bin がなければ掘る。
+trunk/tools/anaconda から mkmodevel, chkcomps, chkrpmdup を $HOME/bin にコピーしておく。
+sudo mkdir -p /dist/Current /dist/development でディレクトリを掘る
+/dist/Current に trunk/tools/anaconda の files.tar を tar xvf などで展開しておく。
+
+後は mkmodevel を単に実行すれば、/dist/development/i686/iso/ 以下に iso が生成される。
+
+ディレクトリを別の場所にしたい場合は mkmodevel の
+
+WORK_DIR = "/dist/Current"
+MIRROR_DIR = File.expand_path "/dist/development/PKGS"
+
+を適宜変更する。
+
+$HOME/bin を使いたくない場合は mkmodevel の
+
+CHKRPMDUP = "~/bin/chkrpmdup"
+CHKCOMPS = "~/bin/chkcomps"
+
+を適宜変更する。
