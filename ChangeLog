@@ -1,3 +1,7 @@
+Wed May  5 16:56:33 2004  Kazuhiko  <kazuhiko@fdiary.net>
+
+	* delobso.rb: add nil checks.
+
 Wed Apr 28 11:14:12 2004  Kazuhiko  <kazuhiko@fdiary.net>
 
 	* download_all_source: add '-z, --zoo' option that is disabled by

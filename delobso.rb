@@ -55,12 +55,12 @@ end
 $Massatu = []
 Dir.glob("#{$TOPDIR}*").each do |top|
   Dir.glob("#{top}/*/*.rpm").each do |rpm|
-    if !$Packages[top][File.basename(rpm)]
+    if !$Packages[top] || !$Packages[top][File.basename(rpm)]
       $Massatu << rpm
     end
   end
   Dir.glob("#{top}/SOURCES/*").each do |src|
-    if !$Sources[top][File.basename(src)]
+    if !$Sources[top] || !$Sources[top][File.basename(src)]
       $Massatu << src
     end
   end
