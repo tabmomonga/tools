@@ -1,3 +1,8 @@
+Wed Apr 28 11:14:12 2004  Kazuhiko  <kazuhiko@fdiary.net>
+
+	* download_all_source: add '-z, --zoo' option that is disabled by
+	default.
+
 Fri Apr 23 15:45:38 2004  Kazuhiko  <kazuhiko@fdiary.net>
 
 	* download_all_source: only recognize first 'TO.*' in alphabetical

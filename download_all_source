@@ -21,6 +21,7 @@ end # class Dir
 
 options = [
   ["-m", "--main",         GetoptLong::NO_ARGUMENT],
+  ["-z", "--zoo",          GetoptLong::NO_ARGUMENT],
   ["-n", "--nonfree",      GetoptLong::NO_ARGUMENT],
   ["-h", "--help",         GetoptLong::NO_ARGUMENT]
 ]
@@ -28,14 +29,15 @@ options = [
 def show_usage()
   print <<END_OF_USAGE
 Usage: ../tools/download_all_source [options]
-  -m, --main              main package only
+  -m, --main              main package only (default)
+  -z, --zoo               build Zoo package, too
   -n, --nonfree           build Nonfree package, too
   -h  --help              show this message
 END_OF_USAGE
   exit
 end
 
-$MAIN_ONLY          = false
+$MAIN_ONLY          = true
 $NONFREE            = false
 
 begin
@@ -43,6 +45,8 @@ begin
     case on
     when "-m"
       $MAIN_ONLY = true
+    when "-z"
+      $MAIN_ONLY = false
     when "-n"
       $NONFREE = true
     when "-h"
