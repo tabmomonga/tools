@@ -1,6 +1,5 @@
 Canna-library
 GConf
-Glide3
 MAKEDEV
 NetworkManager
 ORBit
@@ -254,7 +253,6 @@ python
 pyxf86config
 qdbm
 quota
-raidtools
 rdate
 rdist
 readline
