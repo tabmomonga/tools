@@ -1,3 +1,7 @@
+Fri Aug 20 22:38:19 2004  Kazuhiko  <kazuhiko@fdiary.net>
+	* OmoiKondara: exit if local source is missing. exit if 'rpm
+	--test' fails.
+
 Tue Aug 17 18:36:00 2004  tab <tab@momonga-linux.org>
 
 	* listunused: adapt TO.Orphan and TO.Alter

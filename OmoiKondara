@@ -584,7 +584,8 @@ Sourece/Patch/Icon タグで指定されているファイルをビルド
       if t =~ /^(SOURCE|PATCH|ICON)\d*/ then
         v = v.split(/\//)[-1] if v =~ /\//
         if !File.exist?("SOURCES/#{v}") then
-          exec_command "cp -pfv #{v} SOURCES"
+          ret = exec_command "cp -pfv #{v} SOURCES"
+          exit if ret != 0
         else
           if File.exist?(v) then
             md5SRC = `md5sum #{v}`.split[0]
@@ -968,7 +969,8 @@ Sourece/Patch/Icon タグで指定されているファイルをビルド
 
     if not pkgs.empty? then
       pkgs.uniq!
-      exec_command "rpm #{rpmflg} --force --test #{pkgs.join(' ')}"
+      ret = exec_command "rpm #{rpmflg} --force --test #{pkgs.join(' ')}"
+      exit if ret != 0
       exec_command "sudo rpm #{rpmflg} --force --nodeps #{pkgs.join(' ')}"
 
       if not $CANNOTSTRICT then
