@@ -733,6 +733,7 @@
     <langonly>ca</langonly>
     <packagelist>
       <packagereq type="optional" requires="kdelibs">kde-i18n-Catalan</packagereq>
+      <packagereq type="optional" requires="koffice">koffice-i18n-Catalan</packagereq>
     </packagelist>
   </group>
 
@@ -793,6 +794,8 @@
       <packagereq type="optional" requires="xorg-x11">iiimf-xiiimp</packagereq>
       <packagereq type="optional" requires="kdelibs">kde-i18n-Chinese</packagereq>
       <packagereq type="optional" requires="kdelibs">kde-i18n-Chinese-Big5</packagereq>
+      <packagereq type="optional" requires="koffice">koffice-i18n-Chinese-Simplified</packagereq>
+      <packagereq type="optional" requires="koffice">koffice-i18n-Chinese-Traditional</packagereq>
       <packagereq type="mandatory">truetype-fonts-zh_CN</packagereq>
       <packagereq type="mandatory">truetype-fonts-zh_TW</packagereq>
     </packagelist>
@@ -1436,6 +1439,7 @@
     </grouplist>
     <packagelist>
       <packagereq type="optional" requires="kdelibs">kde-i18n-Czech</packagereq>
+      <packagereq type="optional" requires="koffice">koffice-i18n-Czech</packagereq>
       <packagereq type="optional" requires="man-pages">man-pages-cs</packagereq>
     </packagelist>
   </group>
@@ -1594,6 +1598,7 @@
     <langonly>da</langonly>
     <packagelist>
       <packagereq type="optional" requires="kdelibs">kde-i18n-Danish</packagereq>
+      <packagereq type="optional" requires="koffice">koffice-i18n-Danish</packagereq>
       <packagereq type="optional" requires="man-pages">man-pages-da</packagereq>
     </packagelist>
   </group>
@@ -1996,6 +2001,7 @@
     <langonly>nl</langonly>
     <packagelist>
       <packagereq type="optional" requires="kdelibs">kde-i18n-Dutch</packagereq>
+      <packagereq type="optional" requires="koffice">koffice-i18n-Dutch</packagereq>
     </packagelist>
   </group>
 
@@ -2368,6 +2374,7 @@
     </grouplist>
     <packagelist>
       <packagereq type="optional" requires="kdelibs">kde-i18n-Estonian</packagereq>
+      <packagereq type="optional" requires="koffice">koffice-i18n-Estonian</packagereq>
     </packagelist>
   </group>
 
@@ -2527,6 +2534,7 @@
     <langonly>fi</langonly>
     <packagelist>
       <packagereq type="optional" requires="kdelibs">kde-i18n-Finnish</packagereq>
+      <packagereq type="optional" requires="koffice">koffice-i18n-Finnish</packagereq>
     </packagelist>
   </group>
 
@@ -2585,6 +2593,7 @@
     <packagelist>
       <packagereq type="optional" requires="aspell">aspell-fr</packagereq>
       <packagereq type="optional" requires="kdelibs">kde-i18n-French</packagereq>
+      <packagereq type="optional" requires="koffice">koffice-i18n-French</packagereq>
       <packagereq type="optional" requires="man-pages">man-pages-fr</packagereq>
     </packagelist>
   </group>
@@ -3076,6 +3085,7 @@
     <langonly>de</langonly>
     <packagelist>
       <packagereq type="optional" requires="kdelibs">kde-i18n-German</packagereq>
+      <packagereq type="optional" requires="koffice">koffice-i18n-German</packagereq>
       <packagereq type="optional" requires="man-pages">man-pages-de</packagereq>
     </packagelist>
   </group>
@@ -3356,6 +3366,7 @@
     <langonly>el</langonly>
     <packagelist>
       <packagereq type="optional" requires="kdelibs">kde-i18n-Greek</packagereq>
+      <packagereq type="optional" requires="koffice">koffice-i18n-Greek</packagereq>
     </packagelist>
   </group>
 
@@ -3423,6 +3434,7 @@
     <langonly>he</langonly>
     <packagelist>
       <packagereq type="optional" requires="kdelibs">kde-i18n-Hebrew</packagereq>
+      <packagereq type="optional" requires="koffice">koffice-i18n-Hebrew</packagereq>
     </packagelist>
   </group>
 
@@ -3493,6 +3505,7 @@
     </grouplist>
     <packagelist>
       <packagereq type="optional" requires="kdelibs">kde-i18n-Hungarian</packagereq>
+      <packagereq type="optional" requires="koffice">koffice-i18n-Hungarian</packagereq>
     </packagelist>
   </group>
 
@@ -3721,6 +3734,7 @@
     <langonly>it</langonly>
     <packagelist>
       <packagereq type="optional" requires="kdelibs">kde-i18n-Italian</packagereq>
+      <packagereq type="optional" requires="koffice">koffice-i18n-Italian</packagereq>
       <packagereq type="optional" requires="man-pages">man-pages-it</packagereq>
     </packagelist>
   </group>
@@ -3785,6 +3799,7 @@
       <packagereq type="optional" requires="xorg-x11">iiimf-xiiimp</packagereq>
       <packagereq type="default">kakasi-dict</packagereq>
       <packagereq type="optional" requires="kdelibs">kde-i18n-Japanese</packagereq>
+      <packagereq type="optional" requires="koffice">koffice-i18n-Japanese</packagereq>
       <packagereq type="optional" requires="xorg-x11">kinput2</packagereq>
       <packagereq type="mandatory" basearchonly="true">jfbterm</packagereq>
       <packagereq type="default">lv</packagereq>
@@ -3961,20 +3976,65 @@
     <default>false</default>
     <uservisible>true</uservisible>
     <grouplist>
+      <groupreq>admin-tools</groupreq>
+      <groupreq>base</groupreq>
       <groupreq>base-x</groupreq>
       <groupreq>dialup</groupreq>
+      <groupreq>editors</groupreq>
+      <groupreq>games</groupreq>
+      <groupreq>graphical-internet</groupreq>
+      <groupreq>graphics</groupreq>
+      <groupreq>office</groupreq>
+      <groupreq>printing</groupreq>
+      <groupreq>sound-and-video</groupreq>
+      <groupreq>text-internet</groupreq>
     </grouplist>
     <packagelist>
+      <packagereq type="default">amarok</packagereq>
+      <packagereq type="default">amarok-gstreamer</packagereq>
+      <packagereq type="default">amarok-libvisual</packagereq>
+      <packagereq type="default">amarok-xine</packagereq>
+      <packagereq type="default">amarok-xmms</packagereq>
       <packagereq type="mandatory">arts</packagereq>
+      <packagereq type="default">arts-artsc</packagereq>
+      <packagereq type="default">gwenview</packagereq>
+      <packagereq type="default">k3b</packagereq>
+      <packagereq type="default">kaffeine</packagereq>
+      <packagereq type="default">kannadic</packagereq>
+      <packagereq type="default">kcpuload</packagereq>
+      <packagereq type="default">kde-i18n</packagereq>
+      <packagereq type="default">kdeaccessibility</packagereq>
       <packagereq type="default">kdeaddons</packagereq>
-      <packagereq type="optional">kdeadmin</packagereq>
+      <packagereq type="default">kdeadmin</packagereq>
       <packagereq type="default">kdeartwork</packagereq>
       <packagereq type="mandatory">kdebase</packagereq>
+      <packagereq type="default">kdeedu</packagereq>
+      <packagereq type="default">kdegames</packagereq>
       <packagereq type="default">kdegraphics</packagereq>
       <packagereq type="default">kdemultimedia</packagereq>
       <packagereq type="default">kdenetwork</packagereq>
       <packagereq type="default">kdepim</packagereq>
+      <packagereq type="default">kdetoys</packagereq>
       <packagereq type="default">kdeutils</packagereq>
+      <packagereq type="default">kfish</packagereq>
+      <packagereq type="default">kita</packagereq>
+      <packagereq type="default">koffice</packagereq>
+      <packagereq type="default">kompose</packagereq>
+      <packagereq type="default">kreetingkard</packagereq>
+      <packagereq type="default">rosegarden</packagereq>
+      <packagereq type="default">scim-qtimm</packagereq>
+      <packagereq type="default">skim</packagereq>
+      <packagereq type="default">uim-kdehelper</packagereq>
+      <packagereq type="default">uim-qt</packagereq>
+      <packagereq type="default">xine-lib</packagereq>
+      <packagereq type="default">xine-lib-alsa</packagereq>
+      <packagereq type="default">xine-lib-arts</packagereq>
+      <packagereq type="default">xine-lib-esd</packagereq>
+      <packagereq type="default">xine-lib-flac</packagereq>
+      <packagereq type="default">xine-lib-oggvorbis</packagereq>
+      <packagereq type="default">xine-lib-oss</packagereq>
+      <packagereq type="default">xine-lib-xv</packagereq>
+      <packagereq type="default">xine-lib-w32dll</packagereq>
       <packagereq type="mandatory">xinetd</packagereq>
     </packagelist>
   </group>
@@ -4078,19 +4138,26 @@
       <groupreq>x-software-development</groupreq>
     </grouplist>
     <packagelist>
+      <packagereq type="default">PyQt</packagereq>
       <packagereq type="mandatory">arts-devel</packagereq>
+      <packagereq type="mandatory">arts-artsc-devel</packagereq>
       <packagereq type="mandatory">cdparanoia-devel</packagereq>
       <packagereq type="mandatory">cups-devel</packagereq>
       <packagereq type="mandatory">kdbg</packagereq>
+      <packagereq type="default">kdebindings</packagereq>
+      <packagereq type="default">kdebindings-devel</packagereq>
       <packagereq type="mandatory">kdelibs-devel</packagereq>
       <packagereq type="mandatory">kdesdk</packagereq>
       <packagereq type="mandatory">kdesdk-devel</packagereq>
       <packagereq type="default">kdevelop</packagereq>
+      <packagereq type="default">kdewebdev</packagereq>
       <packagereq type="mandatory">libxslt-devel</packagereq>
       <packagereq type="mandatory">pilot-link-devel</packagereq>
+      <packagereq type="default">qtruby</packagereq>
       <packagereq type="mandatory">qt-designer</packagereq>
       <packagereq type="mandatory">qt-devel</packagereq>
       <packagereq type="mandatory">sane-backends-devel</packagereq>
+      <packagereq type="default">sip</packagereq>
     </packagelist>
   </group>
 
@@ -4959,6 +5026,7 @@
     <langonly>nb</langonly>
     <packagelist>
       <packagereq type="optional" requires="kdelibs">kde-i18n-Norwegian-Nynorsk</packagereq>
+      <packagereq type="optional" requires="koffice">koffice-i18n-Norwegian-Nynorsk</packagereq>
     </packagelist>
   </group>
 
@@ -5128,6 +5196,7 @@
     </grouplist>
     <packagelist>
       <packagereq type="optional" requires="kdelibs">kde-i18n-Polish</packagereq>
+      <packagereq type="optional" requires="koffice">koffice-i18n-Polish</packagereq>
       <packagereq type="optional" requires="man-pages">man-pages-pl</packagereq>
     </packagelist>
   </group>
@@ -5185,6 +5254,7 @@
     <langonly>pt</langonly>
     <packagelist>
       <packagereq type="optional" requires="kdelibs">kde-i18n-Portuguese</packagereq>
+      <packagereq type="optional" requires="koffice">koffice-i18n-Portuguese</packagereq>
     </packagelist>
   </group>
 
@@ -5625,6 +5695,7 @@
     </grouplist>
     <packagelist>
       <packagereq type="optional" requires="kdelibs">kde-i18n-Russian</packagereq>
+      <packagereq type="optional" requires="koffice">koffice-i18n-Russian</packagereq>
       <packagereq type="optional" requires="man-pages">man-pages-ru</packagereq>
     </packagelist>
   </group>
@@ -5685,6 +5756,7 @@
     </grouplist>
     <packagelist>
       <packagereq type="optional" requires="kdelibs">kde-i18n-Serbian</packagereq>
+      <packagereq type="optional" requires="koffice">koffice-i18n-Serbian</packagereq>
     </packagelist>
   </group>
 
@@ -5914,6 +5986,7 @@
     </grouplist>
     <packagelist>
       <packagereq type="optional" requires="kdelibs">kde-i18n-Slovak</packagereq>
+      <packagereq type="optional" requires="koffice">koffice-i18n-Slovak</packagereq>
     </packagelist>
   </group>
 
@@ -5972,6 +6045,7 @@
     </grouplist>
     <packagelist>
       <packagereq type="optional" requires="kdelibs">kde-i18n-Slovenian</packagereq>
+      <packagereq type="optional" requires="koffice">koffice-i18n-Slovenian</packagereq>
     </packagelist>
   </group>
 
@@ -6152,6 +6226,7 @@
     <langonly>es</langonly>
     <packagelist>
       <packagereq type="optional" requires="kdelibs">kde-i18n-Spanish</packagereq>
+      <packagereq type="optional" requires="koffice">koffice-i18n-Spanish</packagereq>
       <packagereq type="optional" requires="man-pages">man-pages-es</packagereq>
     </packagelist>
   </group>
@@ -6209,6 +6284,7 @@
     <langonly>sv</langonly>
     <packagelist>
       <packagereq type="optional" requires="kdelibs">kde-i18n-Swedish</packagereq>
+      <packagereq type="optional" requires="koffice">koffice-i18n-Swedish</packagereq>
     </packagelist>
   </group>
 
@@ -6502,6 +6578,7 @@
     </grouplist>
     <packagelist>
       <packagereq type="optional" requires="kdelibs">kde-i18n-Turkish</packagereq>
+      <packagereq type="optional" requires="koffice">koffice-i18n-Turkish</packagereq>
     </packagelist>
   </group>
 
