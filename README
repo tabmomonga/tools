@@ -194,6 +194,18 @@
 :ライセンス
   see "correct-mtime"
 
+== addprops
+:開発者/メンテナ
+  tamo
+:機能概要
+  svn status で "?" と表示されるのがウザいので
+  log などを無視させるために propset する
+:実行方法
+  cd pkgs; sh ../tools/addprops
+:ライセンス
+  Modified BSD
+
+
 == 内容テンプレート
 :開発者/メンテナ
 :機能概要

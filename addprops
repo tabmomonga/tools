@@ -1,0 +1,13 @@
+#!/bin/sh
+
+[ -f ../tools/addprops.ignore ] || exit 1
+
+checkprops() {
+for i in * ; do
+  if [ -d $i ] ; then
+    [ -f $i/.svn/dir-props ] || echo $i
+  fi
+done
+}
+
+svn propset svn:ignore -F ../tools/addprops.ignore `checkprops`
