@@ -88,10 +88,12 @@ end
 # print "done\n"
 
 # 22. iso イメージの保存
-#print "Backup iso files - "
-#STDOUT.flush
-#do_cmd "cp -f #{ISO_DIR}/*.iso #{work_dir}"
-#print "done\n"
+print "Backup iso files - "
+STDOUT.flush
+if File.exist? "#{ISO_DIR}/*.iso"
+  do_cmd "cp -f #{ISO_DIR}/*.iso #{work_dir}"
+end
+print "done\n"
 
 #  2. ツリーを掃除
 print "Cleanup output trees - "
@@ -115,8 +117,8 @@ cur_dir = Dir.pwd
 #do_cmd "ln -f noarch/* #{PKGS_DIR}/noarch"
 Dir.chdir PKGS_DIR
 if MK_FULL
-  do_cmd "ln -f #{ARCH}/* #{TREE_DIR}/Momonga/RPMS"
-  do_cmd "ln -f noarch/* #{TREE_DIR}/Momonga/RPMS"
+  do_cmd "cp -f #{ARCH}/* #{TREE_DIR}/Momonga/RPMS"
+  do_cmd "cp -f noarch/* #{TREE_DIR}/Momonga/RPMS"
 else
   repo = ["#{PKGS_DIR}/#{ARCH}", "#{PKGS_DIR}/noarch"]
   repo.each do |d|
@@ -401,7 +403,7 @@ if MK_FULL
   cmd += "-b isolinux/isolinux.bin -c isolinux/boot.cat "
   cmd += "-no-emul-boot -boot-load-size 4 -boot-info-table "
   cmd += "-V 'Momonga Linux rescue CD' "
-  cmd += "-o #{ISO_DIR}/MomongaLinux#{VER}-#{ARCH}-rescue-cd.iso "
+  cmd += "-o #{ISO_DIR}/MomongaLinux#{VER}-#{ARCH}-rescuecd.iso "
   cmd += "#{DEV_DIR}/#{ARCH}-rescueimage"
   do_cmd cmd
   cmd = "sudo cp -f #{ISO_DIR}/MomongaLinux#{VER}-#{ARCH}-rescuecd.iso #{TREE_DIR}/images/rescuecd.iso"
@@ -420,8 +422,6 @@ Dir.chdir ISO_DIR
 do_cmd "md5sum *.iso > #{ISO_DIR}/MD5SUMS"
 Dir.chdir cur_dir
 print "done\n"
-
-exit
 
 # 20. ツリーを消す
 print "Removing version dependent files - "
