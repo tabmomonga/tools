@@ -1,0 +1,73 @@
+#!/usr/bin/env ruby
+
+if ARGV.size < 2
+  print "Usage: #{$0} [-v] comps.xml path/to/rpms\n"
+  exit -1
+end
+
+verbose = nil
+av = ARGV.dup
+
+if av[0] == "-v"
+  verbose = ! nil
+  av.shift
+end
+
+comps_name = av[0]
+rpms_path = av[1]
+
+f = open comps_name
+pkgs = Hash.new
+f.each_line do |line|
+  line.chop!
+  if line =~ /packagereq/
+    line =~ /type=\"(\w+)\".*\>(.+)\</
+    kind = $1
+    pkg = $2
+    if pkgs.has_key?(kind)
+      pkgs[kind] += [pkg]
+    else
+      pkgs[kind] = [pkg]
+    end
+  end
+end
+f.close
+
+pkgs.each_key do |k|
+  pkgs[k] = pkgs[k].sort.uniq
+end
+
+rpms = Array.new
+Dir.glob("#{rpms_path}/*.rpm").each do |rpm|
+  rpm = rpm.split(/\//)[-1]
+  name = rpm.split(/\-/)[0..-3].join("-")
+  rpms += [name]
+end
+rpms.sort!
+
+pkgs_a = Array.new
+pkgs.each_key do |k|
+#  print "======= #{k} =======\n"
+  pkgs[k].each do |pkg|
+#    print pkg, "\n"
+    pkgs_a += [pkg]
+  end
+end
+pkgs = pkgs_a.sort.uniq
+
+if (pkgs - rpms).size.zero?
+  exit 0
+else
+  if verbose
+    print "\n======= missing packages =======\n"
+    (pkgs - rpms).each do |name|
+      print "#{name}\n"
+    end
+  end
+  exit (pkgs - rpms).size
+end
+
+# print "\n======= not in comps =======\n"
+# (rpms - pkgs).each do |name|
+#   print "#{name}\n"
+# end
