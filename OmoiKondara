@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-# $Id: OmoiKondara,v 1.144 2004/01/08 15:38:47 zaki Exp $
+# $Id: OmoiKondara,v 1.145 2004/01/15 13:36:56 zaki Exp $
 
 require 'getoptlong'
 require 'timeout'
@@ -123,7 +123,7 @@ end
   $LOG_FILE           = "OmoiKondara.log"
   $LOG_FILE_COMPRESS  = true
   $DEPEND_PACKAGE     = ""
-  $MAIN_ONLY          = false
+  $MAIN_ONLY          = true
   $DEPGRAPH           = nil
   $NAME_STACK         = []
   $RPMVERCMP        = "rpmvercmp"
@@ -1418,6 +1418,7 @@ options = [
   ["-C", "--noccache",     GetoptLong::NO_ARGUMENT],
   ["-M", "--mirrorfirst",  GetoptLong::NO_ARGUMENT],
   ["-D", "--distcc",       GetoptLong::NO_ARGUMENT],
+  ["-z", "--zoo",          GetoptLong::NO_ARGUMENT],
   ["-h", "--help",         GetoptLong::NO_ARGUMENT]
 ]
 
@@ -1442,6 +1443,7 @@ Usage: ../tools/OmoiKondara [options] [names]
   -C, --noccache          no ccache
   -M, --mirrorfirst       download from mirror first
   -D, --distcc            enable to use distcc
+  -z, --zoo               build Zoo package, too
   -h  --help              show this message
 END_OF_USAGE
   exit
@@ -1464,7 +1466,7 @@ begin
     when "-g"
       $GROUPCHECK = true
     when "-m"
-      $MAIN_ONLY = true
+#      $MAIN_ONLY = true
     when "-n"
       $NONFREE = true
     when "-N"
@@ -1489,6 +1491,8 @@ begin
       if File.executable?("/usr/bin/distcc") then
         $ENABLE_DISTCC = true
       end
+    when "-z"
+      $MAIN_ONLY = false
     when "-h"
       show_usage
     end

@@ -1,3 +1,9 @@
+Sun Mar 14 01:40:00 2004  YAMAZAKI Makoto <zaki@zakky.org>
+
+	* commit: Zoo packages are not built by default
+	* commit: add -z option to build Zoo packages
+	* commit: obsolete -m option
+
 Sun Mar 10 13:40:00 2004  YAMAZAKI Makoto <zaki@zakky.org>
 
 	* commit: fix listing files under version control
