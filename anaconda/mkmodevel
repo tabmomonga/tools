@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-WORK_DIR = "/pub/dist/Current"
+WORK_DIR = "/dist/Current"
 #MIRROR_DIR = File.expand_path "/pub/HEAD/PKGS"
 
 PROG = $0

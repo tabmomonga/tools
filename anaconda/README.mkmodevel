@@ -19,32 +19,32 @@ trunk/tools/anaconda から mkmodevel, chkcomps, chkrpmdup, detfullcomps.py
 を $HOME/bin にコピーしておく。
 
 1CDなisoを作成したい場合は、さらに pkgs.core や pkgs.devel を
-/pub/dist/Current にコピーしておく。
+/dist/Current にコピーしておく。
 
-sudo mkdir -p /pub/dist/Current /pub/dist/development などとしてディレクトリを
-掘る。/pub/dist/Current と /pub/dist/development は一般ユーザで書き込み
+sudo mkdir -p /dist/Current /dist/development などとしてディレクトリを
+掘る。/dist/Current と /dist/development は一般ユーザで書き込み
 できるよう permission を調整しておく。
 
-/pub/dist/Current に trunk/tools/anaconda の files.tar を tar xvf などで
+/dist/Current に trunk/tools/anaconda の files.tar を tar xvf などで
 展開しておく。files.tar を展開した際に coms.xml が含まれていた場合は
 その files.tar は古いので svn up で取り直す。comps.xml は消す。
 
 フルセットの iso を作りたい場合は、trunk/tools/anaconda から
-comps.xml.momonga2 を /pub/dist/Current/comps.xml にコピーする。
+comps.xml.momonga2 を /dist/Current/comps.xml にコピーする。
 mkmodevel を実行し、エラー等で途中で停止しなかった場合は
-/pub/dist/development/i686/iso/ 以下に iso が作成される。
+/dist/development/i686/iso/ 以下に iso が作成される。
 
 1CD の iso を作りたい場合は、trunk/tools/anaconda から
-comps.xml.core を /pub/dist/Current/comps.xml にコピーする。
+comps.xml.core を /dist/Current/comps.xml にコピーする。
 mkmodevel -c で core CD の
 mkmodevel -d で gcc 等の開発環境一式を含む devel CD の
-iso が /pub/dist/development/i686/iso/ 以下に作成される
+iso が /dist/development/i686/iso/ 以下に作成される
 
 - 備考 -
 
 ディレクトリを別の場所にしたい場合は mkmodevel の
 
-WORK_DIR = "/pub/dist/Current"
+WORK_DIR = "/dist/Current"
 PKGS_DIR = "/pub/HEAD/PKGS"
 
 を適宜変更する。
