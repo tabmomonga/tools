@@ -28,6 +28,36 @@ JIGDO_DIR = DEV_DIR + "/#{ARCH}/jigdo"
 PKGS_DIR = "/pub/HEAD/PKGS"
 VER = Time.new.strftime("%Y%m%d")
 
+def show_usage()
+  print <<END_OF_USAGE
+Usage: mkmodevel [options]
+  -c   core CD
+  -d   devel CD
+  -h   show this message
+END_OF_USAGE
+  exit
+end
+
+case ARGV[0]
+when "-c"
+  MK_CORE = true
+  MK_DEVEL = false
+  MK_FULL = false
+  PKGS_LIST = "pkgs.core.ppc"
+when "-d"
+  MK_CORE = false
+  MK_DEVEL = true
+  MK_FULL = false
+  PKGS_LIST = "pkgs.devel.ppc"
+when "-h"
+  show_usage
+  exit 1
+else
+  MK_FULL = true
+  MK_CORE = false
+  MK_DEVEL = false
+end
+
 def do_cmd cmd
   begin
     f = open LOG, "a"
@@ -80,8 +110,27 @@ cur_dir = Dir.pwd
 #do_cmd "ln -f #{ARCH}/* #{PKGS_DIR}/#{ARCH}"
 #do_cmd "ln -f noarch/* #{PKGS_DIR}/noarch"
 Dir.chdir PKGS_DIR
-do_cmd "ln -f #{ARCH}/* #{TREE_DIR}/Momonga/RPMS"
-do_cmd "ln -f noarch/* #{TREE_DIR}/Momonga/RPMS"
+if MK_FULL
+  do_cmd "cp -f #{ARCH}/* #{TREE_DIR}/Momonga/RPMS"
+  do_cmd "cp -f noarch/* #{TREE_DIR}/Momonga/RPMS"
+else
+  repo = ["#{PKGS_DIR}/#{ARCH}", "#{PKGS_DIR}/noarch"]
+  repo.each do |d|
+    dir = Dir.open(d)
+    dir.each do |x|
+      file = File.join(d, x)
+      pkgname = `rpm -qp --qf '%{NAME}' #{file} 2>&1`
+      pkglist = open("#{WORK_DIR}/#{PKGS_LIST}")
+      pkglist.each do |f|
+        f.strip!
+        if f == pkgname
+          do_cmd "cp #{file} #{DEV_DIR}/#{ARCH}/os/Momonga/RPMS/"
+        end
+     end
+    end
+    dir.close
+  end
+end
 Dir.chdir cur_dir
 print "done\n"
 
@@ -118,6 +167,8 @@ do_cmd "rm -f #{TREE_DIR}/Momonga/RPMS/comps-[0-9]*"
 `find #{TREE_DIR}/ -name TRANS.TBL`.each do |f|
   do_cmd "sudo rm -f #{f}"
 end
+do_cmd "rm -f #{PKGS_DIR}/#{ARCH}/comps-[0-9]*"
+do_cmd "rm -f #{PKGS_DIR}/SRPMS/comps-[0-9]*"
 print "done\n"
 
 #  8. ここ以降 anaconda 使用のため環境変数を設定
@@ -234,7 +285,9 @@ cmd += "--prodpath Momonga "
 cmd += TREE_DIR
 curdir = Dir.pwd
 Dir.chdir "/usr/lib/anaconda-runtime"
-do_cmd "cp -R #{ppc} TREE_DIR"
+#do_cmd "cp -R #{ppc} TREE_DIR"
+do_cmd "mkdir -p #{TREE_DIR}/iso-ppc"
+do_cmd "tar xvf #{work_dir}/ppc.tar -C #{TREE_DIR}/iso-ppc"
 do_cmd cmd
 Dir.chdir curdir
 unless File.exist? TREE_DIR + "/iso-ppc/hfs.map"
@@ -245,32 +298,35 @@ unless File.exist? TREE_DIR + "/iso-ppc/hfs.map"
 end
 print "done\n"
 
-# 14. CD用分割ツリーの作成
-print "Splitting tree for CD - "
-STDOUT.flush
-cmd  = SPLITTREE + " "
-cmd += "--arch=#{ARCH} "
-cmd += "--total-discs=4 "
-cmd += "--bin-discs=4 "
-cmd += "--release-string='Momonga Linux #{VER}' "
-cmd += "--pkgorderfile=#{work_dir}/pkgorder "
-cmd += "--distdir=#{TREE_DIR} "
-cmd += "--productpath=Momonga"
-do_cmd cmd
-print "done\n"
+if MK_FULL
+  # 14. CD用分割ツリーの作成
+  print "Splitting tree for CD - "
+  STDOUT.flush
+  cmd  = SPLITTREE + " "
+  cmd += "--arch=#{ARCH} "
+  cmd += "--total-discs=4 "
+  cmd += "--bin-discs=4 "
+  cmd += "--release-string='Momonga Linux #{VER}' "
+  cmd += "--pkgorderfile=#{work_dir}/pkgorder "
+  cmd += "--distdir=#{TREE_DIR} "
+  cmd += "--productpath=Momonga"
+  do_cmd cmd
+  print "done\n"
 
-# 16. CD用 hdlist 作成
-print "Generating hdlist for CD - "
-STDOUT.flush
-cmd  = GENHDLIST + " "
-cmd += "--productpath Momonga "
-cmd += "--withnumbers "
-cmd += "--fileorder #{work_dir}/pkgorder "
-cmd += "#{TREE_DIR}-disc[1-4]"
-do_cmd cmd
-# File.delete "#{work_dir}/pkgorder"
-print "done\n"
+  # 16. CD用 hdlist 作成
+  print "Generating hdlist for CD - "
+  STDOUT.flush
+  cmd  = GENHDLIST + " "
+  cmd += "--productpath Momonga "
+  cmd += "--withnumbers "
+  cmd += "--fileorder #{work_dir}/pkgorder "
+  cmd += "#{TREE_DIR}-disc[1-4]"
+  do_cmd cmd
+  # File.delete "#{work_dir}/pkgorder"
+  print "done\n"
+end
 
+if MK_FULL
 # 17. DVD iso image 作成
 #print "Generating DVD iso image - "
 #STDOUT.flush
@@ -283,30 +339,61 @@ print "done\n"
 #cmd += TREE_DIR
 #do_cmd cmd
 #print "done\n"
-
-# 18. CD iso image 作成
-for n in 1..4
-  print "Generating CD#{n} iso image - "
+else
+  print "Generating CD iso image - "
   STDOUT.flush
   cmd  = "sudo mkhybrid "
-#  cmd += "-r -J -d -L "
+#  cmd += "-r "
+#  cmd += "-b isolinux/isolinux.bin -c isolinux/boot.cat "
+#  cmd += "-no-emul-boot -boot-load-size 4 -boot-info-table "
   cmd += "-part -hfs -T -r -l -J -sysid PPC"
-  if n == 1
-	cmd += " -hfs-bless #{TREE_DIR}-disc1/ppc/mac "
-	cmd += " -map #{TREE_DIR}-disc[1]/iso-ppc/mapping "
-	cmd += " -magic #{TREE_DIR}-disc1/iso-ppc/magic "
-	cmd += " -no-desktop -allow-multidot "
-#    cmd += "-b isolinux/isolinux.bin -c isolinux/boot.cat "
-#    cmd += "-no-emul-boot -boot-load-size 4 -boot-info-table "
+  cmd += " -hfs-bless #{TREE_DIR}/ppc/mac "
+  cmd += " -map #{TREE_DIR}/iso-ppc/mapping "
+  cmd += " -magic #{TREE_DIR}/iso-ppc/magic "
+  cmd += " -no-desktop -allow-multidot "
+  if MK_CORE
+    cmd += "-V 'Momonga Linux core CD' "
+    cmd += "-o #{ISO_DIR}/MomongaLinux#{VER}-#{ARCH}-core-cd.iso "
+  else
+    cmd += "-V 'Momonga Linux devel CD' "
+    cmd += "-o #{ISO_DIR}/MomongaLinux#{VER}-#{ARCH}-devel-cd.iso "
   end
-  cmd += " -V 'Momonga Linux CD#{n}' "
-  cmd += " -o #{ISO_DIR}/MomongaLinux#{VER}-#{ARCH}-cd#{n}.iso "
-  cmd += " #{TREE_DIR}-disc#{n}"
+  cmd += TREE_DIR
+  do_cmd cmd
+  cmd = "sudo /usr/lib/anaconda-runtime/implantisomd5 "
+  if MK_CORE
+    cmd += "#{ISO_DIR}/MomongaLinux#{VER}-#{ARCH}-core-cd.iso"
+  else
+    cmd += "#{ISO_DIR}/MomongaLinux#{VER}-#{ARCH}-devel-cd.iso"
+  end
   do_cmd cmd
   print "done\n"
 end
 
-exit
+if MK_FULL
+  # 18. CD iso image 作成
+  for n in 1..4
+    print "Generating CD#{n} iso image - "
+    STDOUT.flush
+    cmd  = "sudo mkhybrid "
+  #  cmd += "-r -J -d -L "
+    cmd += "-part -hfs -T -r -l -J -sysid PPC"
+    if n == 1
+  	cmd += " -hfs-bless #{TREE_DIR}-disc1/ppc/mac "
+  	cmd += " -map #{TREE_DIR}-disc[1]/iso-ppc/mapping "
+	cmd += " -magic #{TREE_DIR}-disc1/iso-ppc/magic "
+	cmd += " -no-desktop -allow-multidot "
+  #    cmd += "-b isolinux/isolinux.bin -c isolinux/boot.cat "
+  #    cmd += "-no-emul-boot -boot-load-size 4 -boot-info-table "
+    end
+    cmd += " -V 'Momonga Linux CD#{n}' "
+    cmd += " -o #{ISO_DIR}/MomongaLinux#{VER}-#{ARCH}-cd#{n}.iso "
+    cmd += " #{TREE_DIR}-disc#{n}"
+    do_cmd cmd
+    print "done\n"
+  end
+end
+
 
 # 19. MD5SUMS 作成
 print "Generating MD5SUMS file - "
