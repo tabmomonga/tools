@@ -1,3 +1,7 @@
+Sun May 30 16:11:48 2004  Kazuhiko  <kazuhiko@fdiary.net>
+
+	* updatespecdb: read './rpmrc' instead of '/usr/lib/rpmrc'.
+
 Wed May  5 16:56:33 2004  Kazuhiko  <kazuhiko@fdiary.net>
 
 	* delobso.rb: add nil checks.

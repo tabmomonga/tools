@@ -106,7 +106,7 @@ class SpecDB
         next
       end
 
-      RPM.readrc("/usr/lib/rpm/rpmrc")
+      RPM.readrc('rpmrc')
       spec = RPM::Spec.open("#{name}/#{name}.spec")
       if spec.nil? then
         STDERR.puts "\n#{name}/#{name}.spec: error occurred."
