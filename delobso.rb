@@ -24,8 +24,9 @@ $Packages = {}
 $DB.specs.each_value do |spec|
   nosource = false
   todir=$TOPDIR
-  Dir.glob("#{spec.name}/TO.*").each do |to|
+  Dir.glob("#{spec.name}/TO.*").sort.each do |to|
     todir += "-#{File.basename(to)[3..-1]}"
+    break
   end
   spec.sources.each do |source|
     if source.no?

@@ -1,3 +1,7 @@
+Fri Apr 23 11:13:07 2004  Kazuhiko  <kazuhiko@fdiary.net>
+
+	* delobso.rb: only recognize first 'TO.*' in alphabetical order
+
 Thu Apr 22 02:00:00 2004  Masayuki SANO <nosanosa@momonga-linux.org>
 
 	* OmoiKondara: add -O option to build Orphan packages
