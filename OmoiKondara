@@ -725,8 +725,6 @@ Sourece/Patch/Icon タグで指定されているファイルをビルド
         until $SYSTEM_PROVIDES.empty?
           $SYSTEM_PROVIDES.pop
         end
-        print "reading RPM database to see what is installed ..."
-        STDOUT.flush
         begin
           rpmdb = RPM::DB.open
           rpmdb.each do |pkg|
