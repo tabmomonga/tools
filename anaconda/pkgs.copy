@@ -1,0 +1,9 @@
+#!/bin/sh
+for i in /pub/HEAD/PKGS/i686/* /pub/HEAD/PKGS/noarch/* ; do
+  NAME=`rpm -qp --qf '%{NAME}' $i`
+  for j in `cat ~/pkgs.core` ; do
+    if [ x$NAME == x$j ] ; then
+      cp $i /pub/dist/Current/development/i686/os/Momonga/RPMS/
+    fi
+  done
+done
