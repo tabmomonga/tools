@@ -1,3 +1,10 @@
+Tue Jan 25 11:39:24 2005  Kazuhiko  <kazuhiko@fdiary.net>
+
+	* environment.rb: default architecture of ix86 is now i686.
+
+	* OmoiKondara: default architecture of ix86 is now i686. NOT file
+	for ix86 is now 'NOT.ix86'.
+
 Mon Nov 22 01:00:08 2004  TAKAHASHI Tamotsu <tamo momonga-linux org>
 	* speclint: check whether URL tag exists.
 	We have too many specfiles with no URL tags.

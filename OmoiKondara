@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
 # $Id$
 
-
 require 'getoptlong'
 require 'timeout'
 begin
@@ -78,7 +77,7 @@ end
 ############ Variables ############
   $RPM_VER    = `rpm --version`.split[2].split(/\./)[0].to_i
   if `uname -m`.chop =~ /i.86/ then
-    $DEFAULT_ARCH = "i586"
+    $DEFAULT_ARCH = "i686"
   else
     $DEFAULT_ARCH = `uname -m`.chop
   end
@@ -1261,7 +1260,7 @@ rpm -ivh する関係上、sudo が password 無しで実行可能
       if $ARCHITECTURE =~ /alpha/ then
         notfile = "#{pkg}/NOT.alpha"
       elsif $ARCHITECTURE =~ /i.86/ then
-        notfile = "#{pkg}/NOT.i586"
+        notfile = "#{pkg}/NOT.ix86"
       else
         notfile = "#{pkg}/NOT.#{$ARCHITECTURE}"
       end

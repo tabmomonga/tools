@@ -122,7 +122,7 @@ case $ARCH
 when 'x86_64'
   $ARCH = 'x86_64'
 when /^i\d86$/
-  $ARCH = 'i586'
+  $ARCH = 'i686'
 when 'alpha'
   open('/proc/cpuinfo').readlines.each do |line|
     if line =~ /^cpu model\s*:\s*EV([0-9]).*$/ && $1 == '5'
