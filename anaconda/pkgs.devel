@@ -38,14 +38,14 @@ beecrypt
 bind-utils
 binutils
 bison
-bogl
-bogl-bterm
-booty
 bluez-bluefw
 bluez-hcidump
 bluez-libs
 bluez-pin
 bluez-utils
+bogl
+bogl-bterm
+booty
 bridge-utils
 busybox-anaconda
 byacc
@@ -202,6 +202,7 @@ libgpg-error
 libgsf
 libjconv
 libjpeg
+libmad
 libobjc
 libogg
 libpng
@@ -348,6 +349,7 @@ stunnel
 subversion
 sudo
 swig
+sysfsutils
 sysklogd
 syslinux
 system-config-date
@@ -391,6 +393,7 @@ unzip
 urw-fonts
 usbutils
 usermode
+usolame
 utempter
 util-linux
 vim-common

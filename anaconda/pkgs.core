@@ -29,14 +29,14 @@ bash
 bc
 beecrypt
 bind-utils
-bogl
-bogl-bterm
-booty
 bluez-bluefw
 bluez-hcidump
 bluez-libs
 bluez-pin
 bluez-utils
+bogl
+bogl-bterm
+booty
 bridge-utils
 busybox-anaconda
 bzip2
@@ -162,6 +162,7 @@ libgpg-error
 libgsf
 libjconv
 libjpeg
+libmad
 libogg
 libpng
 librsvg
@@ -287,6 +288,7 @@ sox
 startup-notification
 stunnel
 sudo
+sysfsutils
 sysklogd
 syslinux
 system-config-date
@@ -323,6 +325,7 @@ unzip
 urw-fonts
 usbutils
 usermode
+usolame
 utempter
 util-linux
 vim-common
