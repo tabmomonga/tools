@@ -62,12 +62,15 @@ db.names.each do |name|
   topdir = $TOPDIR.dup
 
   Dir.in_dir(name) do
-    if File.exist?('TO.Zoo') then
-      next if $MAIN_ONLY
-      topdir += '-Zoo'
-    elsif File.exist?('TO.Nonfree') then
+    if File.exist?('TO.Nonfree') then
       next unless $NONFREE
       topdir += '-Nonfree'
+    else
+      Dir.glob('TO.*').sort.each do |to|
+        topdir += "-#{File.basename(to)[3..-1]}"
+        break
+      end
+      next if $MAIN_ONLY
     end
     Dir.in_dir('/tmp/SOURCES') do
       nosources.each do |src|
