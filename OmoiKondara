@@ -320,6 +320,7 @@ getsするが、sec秒以内に終了しない場合にはTimeoutErrorをraiseする。
       exec_command "cp -pfv #{topdir}/SOURCES/#{n} #{$hTAG['NAME']}/SOURCES"
       return true
     end
+    exec_command("echo #{topdir}/SOURCES/#{n} is missing")
     return false
   end
 
