@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
 # $Id$
 
+$:.unshift(File.dirname($0))
+require 'environment'
 require 'getoptlong'
 require 'timeout'
 begin
@@ -76,30 +78,8 @@ end
 
 ############ Variables ############
   $RPM_VER    = `rpm --version`.split[2].split(/\./)[0].to_i
-  if `uname -m`.chop =~ /i.86/ then
-    $DEFAULT_ARCH = "i686"
-  else
-    $DEFAULT_ARCH = `uname -m`.chop
-  end
-  if $DEFAULT_ARCH == "alpha" then
-    procinfo = `cat /proc/cpuinfo`
-    procinfo.each_line do |l|
-      if l =~ /^cpu model\s*:\s*EV([0-9]).*$/
-        if $1 == "5" then
-          $DEFAULT_ARCH = "alphaev5"
-        end
-        break
-      end
-    end
-  end
-  if $DEFAULT_ARCH == "mips" then
-    procinfo = `cat /proc/cpuinfo`
-    procinfo.each_line do |l|
-      if l =~ /^cpu model\s*:\s*R5900.*/ then
-          $DEFAULT_ARCH = "mipsel"
-      end
-    end
-  end
+  $DEFAULT_ARCH = $ARCH
+
   $ARCHITECTURE       = $DEFAULT_ARCH
   $OS                 = `uname -s`.chop.downcase
   $MIRROR             = []
@@ -1275,14 +1255,7 @@ rpm -ivh する関係上、sudo が password 無しで実行可能
       STDOUT.flush
     end
     ret = catch(:exit_buildme) do
-      if $ARCHITECTURE =~ /alpha/ then
-        notfile = "#{pkg}/NOT.alpha"
-      elsif $ARCHITECTURE =~ /i.86/ then
-        notfile = "#{pkg}/NOT.ix86"
-      else
-        notfile = "#{pkg}/NOT.#{$ARCHITECTURE}"
-      end
-      if Dir.glob(notfile).length != 0 then
+      if test(?e, "#{pkg}/#{$NOTFILE}")
         throw :exit_buildme, 1
       end
       if File.exist?("#{pkg}/SKIP") or

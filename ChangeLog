@@ -1,3 +1,7 @@
+Tue Feb 22 13:48:33 2005  Kazuhiko  <kazuhiko@fdiary.net>
+
+	* OmoiKondara: use environment.rb.
+
 Tue Feb 22 10:50:27 2005  Kazuhiko  <kazuhiko@fdiary.net>
 
 	* environment.rb: provide $NOTFILE.
