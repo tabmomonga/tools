@@ -1,3 +1,7 @@
+Wed Apr  7 22:43:56 2004  Kazuhiko  <kazuhiko@fdiary.net>
+
+	* listunused: revise for subversion
+
 Sun Mar 28 15:45:00 2004  YAMAZAKI Makoto <zaki@zakky.org>
 
 	* OmoiKondara: always set --target $ARCHITECTURE

@@ -26,11 +26,11 @@ $pkgs_list = ARGV
 
 $pkgs_list.each do |pkg|
   name = rpm_name(pkg)
-  entries = `cat ./#{name}/CVS/Entries | grep -v '^D' | sed -e 's,^/,,' -e 's,/.*,,' | grep -v '^NOT\.' | grep -v '^REMOVEME' `.split(/\n/)
+  entries = `cat ./#{name}/.svn/entries | grep 'name="..*"'|sed -e 's,.*name=",,' -e 's,"$,,' | grep -v '^NOT\.' | grep -v '^REMOVEME' `.split(/\n/)
   unused = (entries - source_list(pkg) - $KEEP_FILES)
   if (unused.length != 0)
     files = unused.join(" #{name}/")
-    print "cvs rm -f #{name}/#{files}\n"
-    print "cvs ci -m 'delete unused source(s)' #{name}/#{files}\n"
+    print "svn rm #{name}/#{files}\n"
+    print "svn ci -m 'delete unused source(s)' #{name}/#{files}\n"
   end
 end
