@@ -138,6 +138,7 @@ grub
 gtk+
 gtk+-common
 gtk+1
+guile
 gzip
 hal
 hdparm
@@ -389,6 +390,7 @@ truetype-fonts-zh_TW
 ttmkfdir
 tzdata
 udev
+umb-scheme
 unzip
 urw-fonts
 usbutils
