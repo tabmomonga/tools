@@ -1,3 +1,7 @@
+Tue Aug 17 18:36:00 2004  tab <tab@momonga-linux.org>
+
+	* listunused: adapt TO.Orphan and TO.Alter
+
 Mon Aug  9 23:54:35 2004  zunda <zunda at freeshell.org>
 
 	* correct-mtime: added
