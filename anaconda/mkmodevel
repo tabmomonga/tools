@@ -90,7 +90,7 @@ end
 # 22. iso イメージの保存
 print "Backup iso files - "
 STDOUT.flush
-if File.exist? "#{ISO_DIR}/*.iso"
+unless Dir.glob('#{ISO_DIR}/*.iso').empty?
   do_cmd "cp -f #{ISO_DIR}/*.iso #{work_dir}"
 end
 print "done\n"
