@@ -4,36 +4,52 @@ rpms_dir = ""
 if ARGV.length == 0
   rpms_dir = "."
 else
-  rpms_dir = ARGV[0]
+  rpms_dir = ARGV[0].dup
 end
 
 if rpms_dir =~ /\/$/
   rpms_dir.chop!
 end
 
-rpms = Dir.glob ("#{rpms_dir}/*.rpm").sort
-list = rpms.dup
+rpms = Dir.glob("#{rpms_dir}/*.rpm").sort
+prevr = rpms[0]
 rpms.each do |r|
   name = r.split(/\//)[-1].split(/\-/)[0..-3].join("-")
-  match = Array.new
-  list.each do |rr|
-    tmp = rr.split(/\//)[-1].split(/\-/)[0..-3].join("-")
-    if name == tmp
-      match += [rr]
+  if prevr.split(/\//)[-1].split(/\-/)[0..-3].join("-") != name
+    prevr = r
+  else
+    prevver = 0
+    prevr.split(/\//)[-1].split(/\-/)[-2].split(/\./).each do |n|
+      prevver *= 1000
+      prevver += n.to_i
     end
-  end
-  if match.length > 1
-    i = 0
-    match.each do |l|
-      printf "%d - %s\n", i, l
-      i += 1
+    prevrel = 0
+    prevr.split(/\//)[-1].split(/\-/)[-1].split(/\./)[0..-3].each do |n|
+      prevrel *= 1000
+      prevrel += n.to_i
     end
-    print "Which is erase ? "
-    a = STDIN.gets
-    if match[a.to_i] != nil
-      print "rm #{match[a.to_i]}\n\n"
-      `sudo rm #{match[a.to_i]}`
-      list.delete match[a.to_i]
+    ver = 0
+    r.split(/\//)[-1].split(/\-/)[-2].split(/\./).each do |n|
+      ver *= 1000
+      ver += n.to_i
+    end
+    rel = 0
+    r.split(/\//)[-1].split(/\-/)[-1].split(/\./)[0..-3].each do |n|
+      rel *= 1000
+      rel += n.to_i
+    end
+    if ver < prevver
+      print "rm #{r}\n"
+    elsif ver == prevver
+      if rel < prevrel
+	print "rm #{r}\n"
+      elsif rel == prevrel
+	next
+      else
+	print "rm #{prevr}\n"
+      end
+    else
+      print "rm #{prevr}\n"
     end
   end
 end
