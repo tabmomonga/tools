@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -I/usr/include/rpm -I/usr/include/db1
+CFLAGS = -I/usr/include/rpm
 RPM_VER = $(shell rpm --version | cut -d ' ' -f 3 | cut -d '.' -f 1)
 LIBS = -lrpm -lpopt -lrpmio -lrpmdb
 TARGET = rpmvercmp
