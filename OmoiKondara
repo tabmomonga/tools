@@ -794,7 +794,7 @@ Sourece/Patch/Icon タグで指定されているファイルをビルド
     else
       `echo %OmoiKondara_enable_debug 0 >> rpmmacros`
     end
-    if !$IGNORE_REMOVE && File.exist?("REMOVE.PLEASE") then
+    if !$IGNORE_REMOVE && File.exist?("REMOVE.PLEASE") && /\-ba|\-bb/ =~ $RPMOPT then
 # .spec をパースしてすべてのサブパッケージを消すべき。
 # すべての .spec の依存関係がただしければ、依存するものも
 # 全消去するべき。
@@ -810,7 +810,7 @@ Sourece/Patch/Icon タグで指定されているファイルをビルド
         `sudo rpm -e --nodeps #{rp}`
         install = true
       end
-    end if !$IGNORE_REMOVE
+    end if !$IGNORE_REMOVE && $RPMOPT =~ /\-ba|\-bb/
     if (File.exist? "DISPLAY.PLEASE") && !(ENV.has_key? "DISPLAY")
       ENV["DISPLAY"]=$DISPLAY
     end
