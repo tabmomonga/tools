@@ -1,0 +1,48 @@
+#!/usr/bin/env ruby
+
+def parse_rpm (n)
+  n =~ /^.+\/(.+)-([\w\.\+]+)-([\w\.\+]+)\.(.+)\.rpm$/
+  name = $1
+  ver = $2
+  rel = $3
+  kind = $4
+  qlp = `rpm -qlp #{n}`.split(/\n/)
+  cpio = `rpm2cpio #{n} | cpio --list 2> /dev/null`.split(/\n/)
+  i = 0
+  j = 0
+  if qlp.size != cpio.size
+    while i < qlp.size
+      if qlp[i] != cpio[j]
+	 while i < qlp.size
+	   if qlp[i] == cpio[j]
+	     break
+	   else
+             if ! test(?e, $source_root + "/../SOURCES/" + qlp[i])
+	       print "Not found [#{qlp[i]}] \e[50G -> #{name}-#{ver}-#{rel}.#{kind}\n"
+             end
+	   end
+	   i += 1
+	 end
+      end
+      i += 1
+      j += 1
+    end
+  end
+end
+
+# main
+
+if ARGV.length == 0
+  $source_root = "."
+else
+  $source_root = ARGV[0]
+end
+
+if $source_root =~ /.*\/$/
+  $source_root.chop!
+end
+
+cur_name = ""
+for i in `ls #{$source_root + "/*.rpm"}`
+  parse_rpm (i.chop)
+end

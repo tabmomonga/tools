@@ -1,0 +1,39 @@
+#!/bin/sh
+# $Id$
+
+PATH=`dirname $0`:$PATH
+eval `environment.rb`
+
+if [ -z "$TOPDIR" ]; then
+	exit 1
+fi
+
+# Run mph-scanpackages for each binary RPM locations.
+
+function scan_pkgdir() {
+	if [ -d $1 ]; then
+		echo Scanning $1 1>&2
+		/usr/sbin/mph-scanpackages -vd $1
+	else
+		echo $1 is not a directory. 1>&2
+	fi
+}
+
+function scan() {
+	scan_pkgdir $1/$ARCH
+	scan_pkgdir $1/noarch
+}
+
+if [ $# = 0 ]; then
+	set -- $TOPDIR*
+fi
+
+while [ $# -gt 0 ]; do
+	case $1 in
+	/*)
+		scan $1;;
+	*)
+		scan `pwd`/$1;;
+	esac
+	shift
+done

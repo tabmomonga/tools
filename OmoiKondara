@@ -1,0 +1,1569 @@
+#!/usr/bin/env ruby
+# $Id: OmoiKondara,v 1.144 2004/01/08 15:38:47 zaki Exp $
+
+require 'getoptlong'
+require 'timeout'
+begin
+  require 'rpmmodule'
+  $CANNOTSTRICT = false
+
+  module RPM
+    class Version
+      alias_method :cmp, '<=>'
+      def <=>(other)
+        rv = 0
+        if self.e then
+          if other.e.nil? then
+            rv = 1
+          else
+            rv = self.e <=> other.e
+            if rv == 0 then
+              rv = cmp(other)
+            end
+          end
+        else # self.e.nil?
+          if other.e then
+            rv = -1
+          else
+            rv = cmp(other)
+          end
+        end
+        rv
+      end # def <=>(other)
+    end # class Version
+  end # module RPM
+rescue LoadError
+  $CANNOTSTRICT = true
+end
+# require 'debug'
+
+begin
+  load '../tools/depgraph'
+rescue Exception
+  $CANNOTSTRICT = true
+end
+
+begin
+  io_methods = nil
+  begin
+    io_methods = IO.singleton_methods(false)
+  rescue ArgumentError
+    io_methods = IO.singleton_methods
+  end
+
+  if not io_methods.include?('read') then
+
+    class IO
+      def IO.read(path, length=nil, offset=nil)
+        port = open(path)
+        port.pos = offset if offset
+        rv = nil
+        begin
+          rv = port.read(length)
+        ensure
+          port.close
+        end
+        rv
+      end # def IO.read(path, length=nil, offset=nil)
+    end # class IO
+
+  end # if !IO.singleton_methods.include?('read') then
+end
+
+############ Variables ############
+  $RPM_VER    = `rpm --version`.split[2].split(/\./)[0].to_i
+  if `uname -m`.chop =~ /i.86/ then
+    $DEFAULT_ARCH = "i586"
+  else
+    $DEFAULT_ARCH = `uname -m`.chop
+  end
+  if $DEFAULT_ARCH == "alpha" then
+    procinfo = `cat /proc/cpuinfo`
+    procinfo.each_line do |l|
+      if l =~ /^cpu model\s*:\s*EV([0-9]).*$/
+        if $1 == "5" then
+          $DEFAULT_ARCH = "alphaev5"
+        end
+        break
+      end
+    end
+  end
+  if $DEFAULT_ARCH == "mips" then
+    procinfo = `cat /proc/cpuinfo`
+    procinfo.each_line do |l|
+      if l =~ /^cpu model\s*:\s*R5900.*/ then
+          $DEFAULT_ARCH = "mipsel"
+      end
+    end
+  end
+  $ARCHITECTURE       = $DEFAULT_ARCH
+  $OS                 = `uname -s`.chop.downcase
+  $MIRROR             = []
+  $CONF_FILES         = ["./.OmoiKondara","~/.OmoiKondara","/etc/OmoiKondara.conf"]
+  $TOPDIR             = ""
+  $DEF_RPMOPT         = "-ba"
+  $FORCE              = false
+  $CVS                = false
+  $SRPM_ONLY          = false
+  $VERBOSEOUT         = false
+  $DEBUG_FLAG         = false
+  $NONFREE            = false
+  $NOSTRICT           = $CANNOTSTRICT
+  $GROUPCHECK         = false
+  $SCRIPT             = false
+  $MIRROR_FIRST       = false
+  $SCANPACKAGES       = false
+  $GLOBAL_NOCCACHE    = false
+  $ARCH_DEP_PKGS_ONLY = false
+  $IGNORE_REMOVE      = false
+  $FTP_CMD            = ""
+  $DISPLAY            = ":0.0"
+  $hTAG               = Hash.new
+  $LOG_PATH           = ""
+  $LOG_FILE           = "OmoiKondara.log"
+  $LOG_FILE_COMPRESS  = true
+  $DEPEND_PACKAGE     = ""
+  $MAIN_ONLY          = false
+  $DEPGRAPH           = nil
+  $NAME_STACK         = []
+  $RPMVERCMP        = "rpmvercmp"
+  $SYSTEM_PROVIDES    = []
+  class << $SYSTEM_PROVIDES
+    def has_name?(name)
+      rv = false
+      each do |a|
+        if a.name == name then
+          rv = true
+          break
+        end
+      end
+      rv
+    end
+  end
+  $URL_ALIAS = {}
+  $ENABLE_DISTCC = false
+  $DISTCC_HOSTS = []#'localhost']
+  $DISTCC_VERBOSE = false
+  $NUMJOBS = 1
+  $WORKDIR = nil
+
+  GREEN           = "\e[1;32m"
+  RED             = "\e[1;31m"
+  YELLOW          = "\e[1;33m"
+  BLUE            = "\e[1;34m"
+  NOCOLOR         = "\e[m"
+  SUCCESS         = "Success"
+  FAILURE         = "Failure"
+  SKIP            = "Skip"
+  OBSOLETE        = "OBSOLETE"
+  RETRY_FTPSEARCH = 10
+  DOMAIN          = ".jp"
+
+  GROUPS = [
+    "Amusements/Games",
+    "Amusements/Graphics",
+    "Applications/Archiving",
+    "Applications/Communications",
+    "Applications/Databases",
+    "Applications/Editors",
+    "Applications/Emulators",
+    "Applications/Engineering",
+    "Applications/File",
+    "Applications/Internet",
+    "Applications/Multimedia",
+    "Applications/Productivity",
+    "Applications/Publishing",
+    "Applications/System",
+    "Applications/Text",
+    "Development/Debuggers",
+    "Development/Languages",
+    "Development/Libraries",
+    "Development/System",
+    "Development/Tools",
+    "Documentation",
+    "System Environment/Base",
+    "System Environment/Daemons",
+    "System Environment/Kernel",
+    "System Environment/Libraries",
+    "System Environment/Shells",
+    "User Interface/Desktops",
+    "User Interface/X",
+    "User Interface/X Hardware Support",
+  ]
+
+############ Sub functions ############
+  def get_topdir(cwd = "")
+    topdir = File.expand_path $TOPDIR
+    if cwd != "" then
+      todir = Dir.glob("#{cwd}/#{$hTAG['NAME']}/TO.*")
+    else
+      todir = Dir.glob("#{$hTAG['NAME']}/TO.*")
+    end
+    if todir != [] then
+      topdir = topdir + "-" + todir[0].split(/\./)[-1]
+    end
+    return topdir
+  end
+
+=begin
+--- IO::gets_with_timeout (sec)
+getsするが、sec秒以内に終了しない場合にはTimeoutErrorをraiseする。
+=end
+  class IO
+    def gets_with_timeout (sec)
+      r = ''
+      timeout (sec) do
+        r = gets
+      end
+      r
+    end
+  end
+
+=begin
+---  exec_command(command, timeout = false)
+引数で指定されたコマンドを実行し、出力をログに記録する。timeoutがtrue の
+場合には、タイムアウトするgets (gets_with_timeout) を使って、標準出力 を
+閉じずに終わってしまう子プロセスがdefunctになるのを防ぐ。
+=end
+  def exec_command(cmd, timeout = false)
+    status = nil
+    open("#{$LOG_PATH}/#{$LOG_FILE}", "a") do |fLOG|
+      fLOG.sync = true
+      if !$SCRIPT then
+        fLOG.print "\n--[#{GREEN}#{cmd}#{NOCOLOR}]--\n"
+        print "\n--[#{GREEN}#{cmd}#{NOCOLOR}]--\n" if $VERBOSEOUT
+      else
+        fLOG.print "\n--[#{cmd}]--\n"
+        print "\n--[#{cmd}]--\n" if $VERBOSEOUT
+      end
+      begin
+        times_start = Process.times
+        time_start = Time.now
+        pipe = IO.pipe
+        pid = Process.fork do
+          pipe[0].close
+          begin
+            STDOUT.reopen(pipe[1])
+            STDERR.reopen(pipe[1])
+            pipe[1].close
+            exec(cmd) rescue exit!(1)
+          end
+        end
+        pipe[1].close
+
+        begin
+          while s = (timeout ? pipe[0].gets_with_timeout(60) : pipe[0].gets) do
+            print s if $VERBOSEOUT
+            fLOG.print s
+          end
+          Process.waitpid(pid)
+        rescue TimeoutError
+          retry until Process.waitpid(pid, Process::WNOHANG)
+          fLOG.print "\nExecution timed out\n"
+          print "\nExecution timed out\n" if $VERBOSEOUT
+        end
+      ensure
+        status = $?
+        pipe[0].close
+        times_end = Process.times
+        time_end = Time.now
+        timestr = "\n--real:#{'%.2f' % (time_end - time_start)} utime:#{'%.2f' % (times_end.cutime - times_start.cutime)} stime:#{'%.2f' % (times_end.cstime - times_start.cstime)}"
+        fLOG.puts timestr
+        puts timestr if $VERBOSEOUT
+      end
+    end # open
+    status.to_i
+  end
+
+=begin
+--- get_from_mirror(filename)
+引数で指定されたファイルをミラーサイトから取得する。
+.OmoiKondara に MIRROR で記述されている URL に SOURCES/
+を加えた場所から取得する
+=end
+  def get_from_mirror(n)
+    $MIRROR.each do |m|
+      return 0 if exec_command("#{$FTP_CMD} #{m}/SOURCES/#{n}").zero?
+    end
+    return -1
+  end
+  
+  def ftpsearch(file)
+    searchstr = "http://ftpsearch.lycos.com/swadv/AdvResults.asp?form=advanced&query=#{file}&doit=Search&hits=20"
+    searchstr += "&limdom=#{DOMAIN}" if DOMAIN != ""
+    candidate = []
+    i = RETRY_FTPSEARCH
+    while candidate == [] && (i -= 1) > 0
+      result = `w3m -dump "#{searchstr}"`
+      strip_result = result.scan(/\d+\s+\S+\s+\S+\s+\S+\s+\S+\s+\S+\s+(\S+)\s+(\S+)/)
+      candidate = strip_result.delete_if do |site, path|
+        path !~ /#{file}/
+      end
+    end
+    candidate.each do |site, path|
+      url = "ftp://#{site}#{path}"
+      return 0 if exec_command("#{$FTP_CMD} #{url}").zero?
+    end
+    return -1
+  end
+
+  def cp_local(n)
+    topdir = get_topdir
+    if File.exist?("#{topdir}/SOURCES/#{n}") then
+      if File.exist?("#{$hTAG['NAME']}/SOURCES/#{n}") then
+        md5SRC = `md5sum #{topdir}/SOURCES/#{n}`.split[0]
+        md5DEST = `md5sum #{$hTAG['NAME']}/SOURCES/#{n}`.split[0]
+        return true if md5SRC == md5DEST
+      end
+      exec_command "cp -pfv #{topdir}/SOURCES/#{n} #{$hTAG['NAME']}/SOURCES"
+      return true
+    end
+    return false
+  end
+
+=begin
+--- get_no(source_or_patch)
+NoSource/NoPatch タグで指定されているソース/パッチを
+SOURCES ディレクトリに用意する。ローカルに既に存在す
+る場合はそれを使用し、無い場合のみ記述されている URL
+から取得する。どちらにも無い場合はミラーサイトから取
+得する。
+=end
+  def get_no(type)
+    unless $hTAG.key?("NO#{type}")
+      return true
+    end
+    nosrc = $hTAG["NO#{type}"].split(/[\s,]/)
+    nosrc.delete ""
+    status = 0
+    nosrc.each do |no|
+      file = $hTAG["#{type}#{no}"]
+      file = $hTAG["#{type}"] if no == "0" and file.nil?
+      if file =~ /^(ftp|https?):\/\// then
+        n = file.split(/\//)[-1]
+        if !cp_local(n) then
+          Dir.chdir "#{$hTAG['NAME']}/SOURCES"
+          status = -1
+          if $MIRROR_FIRST then
+            status = get_from_mirror n
+          end
+          if status.nonzero? then
+            status = 0
+            re = nil
+            $URL_ALIAS.each_key do |key|
+              if key.match(file) then
+                re = key
+                break
+              end
+            end
+            file.sub!(re, $URL_ALIAS[re]) if re
+            status = exec_command("#{$FTP_CMD} #{file}")
+            if status.nonzero? and !$MIRROR_FIRST
+              # file retrieve error
+              status = get_from_mirror(n)
+            end
+          end
+          Dir.chdir "../.."
+        end
+      else
+        if !cp_local(file) then
+          Dir.chdir "#{$hTAG['NAME']}/SOURCES"
+          status = get_from_mirror file
+          Dir.chdir "../.."
+        end
+      end
+      return false if status.nonzero?
+    end
+    return status.zero?
+  end
+
+  def make_hTAG(name)
+    $hTAG.clear
+    $hTAG['NAME'] = $DEPGRAPH.db.specs[name].name
+    $hTAG['VERSION'] = $DEPGRAPH.db.specs[name].packages[0].version.v
+    $hTAG['RELEASE'] = $DEPGRAPH.db.specs[name].packages[0].version.r
+    $hTAG['EPOCH'] = $DEPGRAPH.db.specs[name].packages[0].version.e
+    $hTAG['GROUP'] = $DEPGRAPH.db.specs[name].packages.
+      collect {|pkgdat| pkgdat.group}.join(', ')
+    nosource = []
+    nopatch = []
+    $DEPGRAPH.db.specs[name].sources.each do |src|
+      case src
+      when RPM::Patch
+        $hTAG["PATCH#{src.num}"] = src.fullname
+        nopatch << src.num if src.no?
+      when RPM::Icon
+        $hTAG["ICON#{src.num}"] = src.fullname
+        nopatch << src.num if src.no?
+      else
+        $hTAG["SOURCE#{src.num}"] = src.fullname
+        nosource << src.num if src.no?
+      end
+    end
+    $hTAG['NOSOURCE'] = nosource.join(', ')
+    $hTAG['NOPATCH'] = nopatch.join(', ')
+    $hTAG['BUILDARCH'] = $DEPGRAPH.db.specs[name].archs.join(', ')
+  end # def make_hTAG(name)
+  
+=begin
+--- strip_spec(spec_as_string, macro_hash)
+%define および %global 行を切り出し spec 中のマクロを置き換えるName
+TAG や Version TAG など他の TAG で使用される可能性のある物は置き換えて、
+Hash $hTAG を生成する。その際に、TAG名 はすべて大文字として格納する。
+=end
+  def pre_process_strip(spec, macros={})
+    s = ""
+    stack = [true]
+    spec.each_line do |line|
+      if line =~ /(^|[^%])%if(\S*)\s+(.+)/ then
+        cond, value = $2, $3
+        while value =~ /(^|[^%])%/ do
+          case value
+          when /(^|[^%])%(\w+)/ then
+            m = $2
+            if macros.has_key?(m) then
+              value.gsub!(/%#{m}/, macros[m])
+            else
+              macros[m] = ""
+            end
+          when /(^|[^%])%\{(\w+)\}/ then
+            m = $2
+            if macros.has_key?(m) then
+              value.gsub!(/%\{#{m}\}/, macros[m])
+            else
+              macros[m] = ""
+            end
+          when /(^|[^%])%\(([^)]+)\)/ then
+            shcmd = $2
+            res = `#{shcmd}`.chomp
+            shcmd = Regexp.quote(shcmd)
+            value.gsub!(/%\(#{shcmd}\)/, res)
+          end
+        end
+        case cond
+        when "arch"
+          stack.push(value =~ /#{$ARCHITECTURE}/)
+        when "narch"
+          stack.push(value !~ /#{$ARCHITECTURE}/)
+        when "os"
+          stack.push(value =~ /#{$OS}/)
+        else
+          if cond == "" then
+            while value =~ /(^|[^%])%/ do
+              if value =~ /(^|[^%])%(\w+)/ then
+                m = $2
+                if macros.has_key?(m) then
+                  value.gsub!(/%#{m}/, macros[m])
+                else
+                  macros[m] = ""
+                end
+              elsif value =~ /(^|[^%])%\{(\w+)\}/ then
+                m = $2
+                if macros.has_key?(m) then
+                  value.gsub!(/%\{#{m}\}/, macros[m])
+                else
+                  macros[m] = ""
+                end
+              end
+            end
+            stack.push(value !~ /0/ && value =~ /\!\s*0/)
+          end
+        end
+      else
+        case line
+        when /(^|[^%])%endif/
+          stack.pop
+        when /(^|[^%])%else/
+          stack[-1] = !stack[-1] if stack.size > 0
+        else
+          if stack.last then
+            line.gsub!(/(^|[^%])%\{\?(\w+):(\w+)\}/){ macros.has_key?($2) ? $3 : "" }
+            s += line if stack.last
+          end
+        end
+      end
+    end
+    return s
+  end
+
+  def expand_macros(str, macros={})
+    str = str.dup
+    while str =~ /%/ do
+      str.gsub!(/%\{\?([_\w]+):(.+)\}/) { macros.has_key?($1) ? $2 : "" }
+      case str
+      when /%(\w+)/ then
+        m = $1
+        if macros.has_key?(m) then
+          str.gsub!(/%#{m}/, macros[m])
+        else
+          macros[m] = ""
+        end
+      when /%\{([_\w]+)\}/ then
+        m = $1
+        if macros.has_key?(m) then
+          str.gsub!(/%\{#{m}\}/, macros[m])
+        else
+          macros[m] = ""
+        end
+      when /%\(([^)]+)\)/ then
+        shcmd = $1
+        res = `#{shcmd}`.chomp
+        shcmd = Regexp.quote(shcmd)
+        str.gsub!(/%\(#{shcmd}\)/, res)
+      end
+    end
+    str
+  end
+
+  def strip_spec(spec)
+    macro = {}
+    spec.scan(/^%(?:define|global)\s+(\S+)\s+(\S+)\s*$/) {|k, v| macro[k] = v }
+    open("/usr/lib/rpm/macros") do |io|
+      io.read.scan(/^%(\S+)\s+(.+)\s*$/) do |k, v|
+        macro[k] = v unless k =~ /__/ or v =~ /\\/
+      end
+    end
+    macro["_ipv6"]  = "1"
+    macro["ix86"]   = "i386 i486 i586 i686 i786 i886 i986"
+    macro["alpha"]  = "alpha alphaev5 alphaev56 alphapca56 alphaev6 alphaev67"
+    macro["mipsel"] = "mipsel mips"
+    spec = pre_process_strip(spec, macro)
+    name = expand_macros(spec.scan(/^name\s*:\s*(\S+)\s*$/i)[0][0], macro)
+    version = expand_macros(spec.scan(/^version\s*:\s*(\S+)\s*$/i)[0][0], macro)
+    release = expand_macros(spec.scan(/^release\s*:\s*(\S+)\s*$/i)[0][0], macro)
+    macro["name"] = macro["PACKAGE_NAME"] = name
+    macro["version"] = macro["PACKAGE_VERSION"] = version
+    macro["release"] = macro["PACKAGE_RELEASE"] = release
+
+    $hTAG.clear
+    tag = spec.scan(/^%((?:No)?(?:Source|Patch))\s+(\d+)\s+(\S+)\s+(\S+)/)
+    tag.each do |name, no, url, md5|
+      no = expand_macros(no, macro)
+      url = expand_macros(url, macro)
+      md5 = expand_macros(md5, macro)
+      case name
+      when /Source/
+        key = "SOURCE#{no}"
+      when /Patch/
+        key = "PATCH#{no}"
+      end
+      $hTAG[key] = url
+
+      if name =~ /No/ then
+        key = name.upcase
+        if $hTAG.key?(key) then
+          $hTAG[key] = "#{$hTAG[key]}, #{no}"
+        else
+          $hTAG[key] = no
+        end
+      end
+    end
+    spec.scan(/^(\w+?)(?:\([^\)]+\))?\s*:(.*)$/) do |key, value|
+      key.strip!
+      key.upcase!
+      value.strip!
+      value = expand_macros(value, macro)
+      if $hTAG.key?(key) then
+        $hTAG[key] = "#{$hTAG[key]}, #{value}"
+      else
+        $hTAG[key] = value
+      end
+    end
+  end
+
+=begin
+--- prepare_dirs(directories)
+引数で指定されたディレクトリを作成する
+=end
+  def prepare_dirs(directories)
+    Dir.chdir $hTAG["NAME"]
+    directories.each do |d|
+      i = 0
+      d.split("/").each do |cd|
+        Dir.mkdir cd, 0755 unless File.directory?(cd)
+        Dir.chdir cd
+        i += 1
+      end
+      while i != 0 do
+        Dir.chdir ".."
+        i -= 1
+      end
+    end
+    Dir.chdir ".."
+  end
+
+=begin
+--- cp_to_tree
+Sourece/Patch/Icon タグで指定されているファイルをビルド
+ツリーにコピーする。すでに存在する際には co されている
+物と比較し違う物の場合はコピーする
+=end
+  def cp_to_tree
+    Dir.chdir $hTAG['NAME']
+    $hTAG.each do |t, v|
+      if t =~ /^(SOURCE|PATCH|ICON)\d*/ then
+        v = v.split(/\//)[-1] if v =~ /\//
+        if !File.exist?("SOURCES/#{v}") then
+          exec_command "cp -pfv #{v} SOURCES"
+        else
+          if File.exist?(v) then
+            md5SRC = `md5sum #{v}`.split[0]
+            md5DEST = `md5sum SOURCES/#{v}`.split[0]
+            exec_command "cp -pfv #{v} SOURCES" if md5SRC != md5DEST
+          end
+        end
+      end
+    end
+    Dir.chdir ".."
+  end
+
+  def prepare_outputdirs
+    topdir = get_topdir ".."
+    ["SOURCES", "SRPMS", "#{$ARCHITECTURE}", "noarch"].each do |subdir|
+      if !File.directory?("#{topdir}/#{subdir}") then
+        exec_command "mkdir -p #{topdir}/#{subdir}"
+      end
+    end
+  end
+
+  def backup_nosources
+    topdir = get_topdir ".."
+    if ($hTAG["NOSOURCE"] != nil && !$SRPM_ONLY) then
+      $hTAG["NOSOURCE"].split(/[\s,]/).each do |n|
+        if n != "" then
+          if n == "0" && ! $hTAG.key?("SOURCE0")
+            s = $hTAG["SOURCE"]
+          else
+            s = $hTAG["SOURCE#{n}"]
+          end
+          s = s.split(/\//)[-1] if s =~ /^(ftp|https?):\/\//
+          exec_command "cp -pfv SOURCES/#{s} #{topdir}/SOURCES"
+          File.chmod 0644, "#{topdir}/SOURCES/#{s}"
+        end
+      end
+    end
+    if ($hTAG.key?("NOPATCH") && !$SRPM_ONLY) then
+      $hTAG["NOPATCH"].split(/[\s,]/).each do |n|
+        if n != "" then
+          if n == "0" && ! $hTAG.key?("PATCH0") then
+            s = $hTAG["PATCH"]
+          else
+            s = $hTAG["PATCH#{n}"]
+          end
+          s = s.split(/\//)[-1] if s =~ /^(ftp|https?):\/\//
+          exec_command "cp -pfv SOURCES/#{s} #{topdir}/SOURCES"
+          File.chmod 0644, "#{topdir}/SOURCES/#{s}"
+        end
+      end
+    end
+  end
+
+=begin
+--- backup_rpms(install, specname)
+ビルドされたRPMファイルの古いバージョンのものをtopdir以下の各ディレクト
+リから消去し、新しいものをtopdirの各ディレクトリにコピーする。引数で指定
+されている場合には、新しいパッケージのインストールもする。
+=end
+  def backup_rpms(install, specname=nil)
+    topdir = get_topdir ".."
+
+    if specname and $DEPGRAPH then
+      spec = $DEPGRAPH.db.specs[specname]
+      spec.lastbuild = Time.now
+    end # if specname and $DEPGRAPH then
+
+    if $RPMOPT =~ /\-ba|\-bs/ then
+      # refresh the SRPM file
+      Dir.glob("SRPMS/*.rpm").each do |srpm|
+        pkg = srpm.split("/")[-1].split("-")[0..-3].join("-")
+        Dir.glob("#{topdir}/SRPMS/#{pkg}-*src.rpm") do |s|
+          if pkg == s.split("/")[-1].split("-")[0..-3].join("-") then
+            File.delete s
+          end
+        end
+        exec_command "cp -pfv #{srpm} #{topdir}/SRPMS"
+        File.chmod 0644, "#{topdir}/SRPMS/#{srpm.split('/')[-1]}"
+      end
+    end
+    if $RPMOPT =~ /\-ba|\-bb/ then
+      installs = ""
+      rpms = Dir.glob("RPMS/{#{$ARCHITECTURE},noarch}/*.rpm")
+      rpms.each do |rpm|
+        if specname and $DEPGRAPH then
+          spec = $DEPGRAPH.db.specs[specname]
+          begin
+            rpmpkg = RPM::Package.open(File.expand_path(rpm))
+            spec.packages.each do |pkg|
+              next if pkg.name != rpmpkg.name
+              pkg.provides = rpmpkg.provides.collect{|rpmprov| rpmprov.to_struct}
+              pkg.provides.each do |prov|
+                names = if $DEPGRAPH.db.packages[prov.name] then
+                          $DEPGRAPH.db.packages[prov.name].collect{|a| a.name}
+                        else
+                          []
+                        end
+                if not names.include?(pkg.name) then
+                  $DEPGRAPH.db.packages[prov.name] = pkg
+                end
+              end # pkg.provides.each do |prov|
+              pkg.requires = rpmpkg.requires.collect{|rpmreq| rpmreq.to_struct}
+            end # spec.packages.each do |pkg|
+          ensure
+            rpmpkg = nil
+            GC.start
+          end # begin
+        end # if specname and $DEPGRAPH then
+        # refresh the packages in #{topdir} with the newly built ones
+        pkg = rpm.split("/")[-1].split("-")[0..-3].join("-")
+        Dir.glob("#{topdir}/{#{$ARCHITECTURE},noarch}/#{pkg}-*.{#{$ARCHITECTURE},noarch}.rpm") do |r|
+          if pkg == r.split("/")[-1].split("-")[0..-3].join("-") then
+            File.delete r
+          end
+        end
+        current_arch = rpm.split('/')[-2]
+        exec_command "cp -pfv #{rpm} #{topdir}/#{current_arch}"
+        File.chmod 0644, "#{topdir}/#{current_arch}/#{rpm.split('/')[-1]}"
+        if install then
+          installs += "#{rpm} "
+        elsif $DEPEND_PACKAGE != "" && pkg =~ /#{$DEPEND_PACKAGE}/
+          installs += "#{rpm} "
+        end
+        if $SCANPACKAGES && rpms.last == rpm then
+          exec_command "/usr/sbin/mph-scanpackages #{topdir}/#{$ARCHITECTURE} #{topdir}/noarch"
+        end
+      end
+      if installs != ""
+        exec_command "sudo rpm -Uvh --nodeps --force #{installs}"
+      end
+    end
+  end
+
+  def clean_up(pkg, install)
+    prepare_outputdirs
+    backup_rpms(install, pkg)
+    exec_command "rpmbuild --rmsource --rcfile rpmrc #{pkg}.spec"
+    File.delete "rpmrc"
+    File.delete "rpmmacros"
+    if $DEBUG_FLAG then
+      if File.exist?("SU.PLEASE") then
+        exec_command "sudo rm -rf SOURCES RPMS SRPMS"
+      else
+        exec_command "rm -rf SOURCES RPMS SRPMS"
+      end
+    else
+      if File.exist?("SU.PLEASE") then
+        exec_command "sudo rm -rf SOURCES BUILD RPMS SRPMS"
+      else
+        exec_command "rm -rf SOURCES BUILD RPMS SRPMS"
+      end
+    end
+  end
+
+  def do_rpm(pkg)
+    STDOUT.flush
+    Dir.chdir pkg
+    install = false
+    path = Dir.pwd
+    if $ENABLE_DISTCC then #and $DISTCC_HOSTS.length > 1 then
+      ENV["DISTCC_VERBOSE"] = "1" if $DISTCC_VERBOSE
+      ENV["DISTCC_HOSTS"] = $DISTCC_HOSTS.join(' ')
+    end
+    if $DEBUG_FLAG then
+      `grep -v macrofiles ../rpmrc.debug > rpmrc`
+    else
+      `grep -v macrofiles ../rpmrc > rpmrc`
+    end
+    macrofiles = `grep macrofiles ../rpmrc`.chop
+    `echo #{macrofiles}#{path}/rpmmacros >> rpmrc`
+    `echo %_topdir #{path} > rpmmacros`
+    `echo %_arch #{$ARCHITECTURE} >> rpmmacros`
+    `echo %_host_cpu #{$ARCHITECTURE} >> rpmmacros`
+    `echo %_host_vender momonga >> rpmmacros`
+    `echo %_host_os linux >> rpmmacros`
+    `echo %_numjobs #{$NUMJOBS} >> rpmmacros`
+    `echo %smp_mflags -j%{_numjobs} >> rpmmacros`
+    `echo %_smp_mflags -j%{_numjobs} >> rpmmacros`
+    if $ENABLE_DISTCC then #and $DISTCC_HOSTS.length > 1 then
+      `echo %OmoiKondara_enable_distcc 1 >> rpmmacros`
+    else
+      `echo %OmoiKondara_enable_distcc 0 >> rpmmacros`
+    end
+    if $DEBUG_FLAG then
+      `echo %OmoiKondara_enable_debug 1 >> rpmmacros`
+      `echo '%__os_install_post    \\' >> rpmmacros`
+      `echo '    /usr/lib/rpm/brp-compress \\' >> rpmmacros`
+      `echo '    /usr/lib/rpm/modify-init.d \\' >> rpmmacros`
+      `echo '%{nil}' >> rpmmacros`
+    else
+      `echo %OmoiKondara_enable_debug 0 >> rpmmacros`
+    end
+    if !$IGNORE_REMOVE && File.exist?("REMOVE.PLEASE") then
+# .spec をパースしてすべてのサブパッケージを消すべき。
+# すべての .spec の依存関係がただしければ、依存するものも
+# 全消去するべき。
+      RPM.readrc("./rpmrc")
+      RPM::Spec.open(pkg+".spec").packages.each do |subpkg|
+        exec_command "sudo rpm -e --nodeps #{subpkg.name}"
+      end
+      install = true
+    end
+    Dir.glob("REMOVEME.*").each do |r|
+      rp = r.split(/\./)[1]
+      if `rpm -q #{rp}` =~ /^#{rp}/ then
+        `sudo rpm -e --nodeps #{rp}`
+        install = true
+      end
+    end if !$IGNORE_REMOVE
+    if (File.exist? "DISPLAY.PLEASE") && !(ENV.has_key? "DISPLAY")
+      ENV["DISPLAY"]=$DISPLAY
+    end
+    rpmerr = nil
+    lang = Dir.glob("LANG*")
+    lang = lang.size.zero? ? "" : "env #{lang[0]} "
+    need_timeout = File.exist?("TIMEOUT.PLEASE")
+    if File.exist?("SU.PLEASE") then
+      rpmerr = exec_command "#{lang}sudo rpmbuild --rcfile rpmrc #{$RPMOPT} #{pkg}.spec", need_timeout
+    else
+      rpmerr = exec_command "#{lang}rpmbuild --rcfile rpmrc #{$RPMOPT} #{pkg}.spec", need_timeout
+    end
+    ENV.delete("DISPLAY") if File.exist?("DISPLAY.PLEASE")
+    if rpmerr == 0 then
+      clean_up(pkg,install) if $RPMOPT =~ /\-ba|\-bb|\-bs/
+    else
+      if $WORKDIR then
+        workdir = $WORKDIR + "/" + $hTAG["NAME"] + "-" +
+                  $hTAG["VERSION"] + "-" + $hTAG["RELEASE"]
+        File.unlink "BUILD"
+        
+        exec_command "mv #{workdir} BUILD"
+      end
+    end
+    Dir.chdir ".."
+    return rpmerr
+  end
+
+  def parse_conf
+    $CONF_FILES.each do |conf|
+      conf = File.expand_path conf
+      next  unless File.exist?(conf)
+      IO.foreach(conf) do |line|
+        next  if line =~ /^#.*$/ or line =~ /^$/
+        s = line.split
+        v = s.shift
+        v.upcase!
+        case v
+        when "TOPDIR"
+          $TOPDIR = s.shift
+        when "MIRROR"
+          while v = s.shift
+            $MIRROR += [v]
+          end
+        when "FTP_CMD"
+          $FTP_CMD = s.join " "
+        when "DISPLAY"
+          $DISPLAY = s.join " "
+        when "URL_ALIAS"
+          $URL_ALIAS[Regexp.compile(s.first)] = s.last
+        when "DISTCC_HOST"
+          $DISTCC_HOSTS.push s.last if not $DISTCC_HOSTS.include?(s.last)
+        when "DISTCC_VERBOSE"
+          $DISTCC_VERBOSE = true
+        when "NUMJOBS"
+          $NUMJOBS = s.shift
+        when "WORKDIR"
+          $WORKDIR = s.shift
+          if not File.directory?($WORKDIR) then
+            $stderr.puts "WARNING: invalid workdir. use default"
+            $WORKDIR = nil
+          end
+        end
+      end
+      return
+    end
+  end
+
+  def resolved?(req, prov)
+    # not specify provided version
+    if prov.version.nil?
+      return true
+    end
+    flag = false
+    case req.rel.to_s.strip
+    when '<=' then
+      flag = prov.version <= req.version
+    when '<' then
+      flag = prov.version < req.version
+    when '>=' then
+      flag = prov.version >= req.version
+    when '>' then
+      flag = prov.version > req.version
+    when '==' then
+      if req.version.r.nil? then
+        flag = prov.version.v == req.version.v
+      else
+        flag = prov.version == req.version
+      end
+    else
+      # not specify required version
+      flag = true
+    end
+    flag
+  end # def resolved?(req, prov)
+
+  def build_and_install(pkg, rpmflg, specname=nil)
+    return if pkg == "" or (pkg =~ /^kernel\-/ &&
+                            pkg !~ /^kernel-(common|pcmcia-cs|doc|utils)/ )
+    if specname then
+      if $SYSTEM_PROVIDES.has_name?(pkg) then
+        provs = $SYSTEM_PROVIDES.select{|a| a.name == pkg}
+        req = SpecDB::DependencyData.new(pkg,
+                                         $DEPGRAPH.db.specs[specname||pkg].packages[0].version,
+                                         '==')
+        flag = false
+        provs.each do |prov|
+          flag = resolved?(req, prov)
+          break if flag
+        end
+        return if flag
+      end
+    else # specname.nil?
+      `rpm -q --whatprovides --queryformat "%{name}\\n" #{pkg}`
+      return if $?.to_i == 0
+    end # specname.nil?
+    if !File.directory?(specname||pkg) then
+      `grep -i ^provides: */*.spec | grep #{specname||pkg}`.each_line do |l|
+        prov = l.split(/\//)[0]
+        if File.exist?("#{prov}/#{prov}.spec") and
+            Dir.glob("#{prov}/TO.*") == [] and
+            !File.exist?("#{prov}/OBSOLETE") and
+            !File.exist?("#{prov}/SKIP") and
+            !File.exist?("#{prov}/.SKIP") then
+          pkg = prov
+          break
+        end
+      end
+    end
+
+#    if `grep -i '^BuildArch:.*noarch' #{specname||pkg}/#{specname||pkg}.spec` != ""
+#      return
+#    end
+    if !$NONFREE && File.exist?("#{specname||pkg}/TO.Nonfree")
+      return
+    end
+    _t = $hTAG.dup
+    _l = $LOG_PATH
+
+    if buildme(specname||pkg) == 4 then
+      return 4
+    end
+    topdir = get_topdir
+    $LOG_PATH = _l
+    $hTAG = _t
+
+    pkgs = []
+    if specname and $DEPGRAPH then
+      spec = $DEPGRAPH.db.specs[specname]
+      pkg2 = spec.packages.select{|a| a.name == pkg}[0]
+      if pkg2 then
+        pkg2.requires.each do |req|
+          if not $SYSTEM_PROVIDES.has_name?(req.name) then
+            if $DEPGRAPH.db.packages[req.name] then
+              $DEPGRAPH.db.packages[req.name].each do |a|
+                build_and_install(a.spec, rpmflg)
+              end
+            end
+          end
+        end
+        pkg = pkg2.name
+      end
+    end
+    pkgs = Dir.glob("#{topdir}/#{$ARCHITECTURE}/#{pkg}-*.rpm")
+    pkgs += Dir.glob("#{topdir}/noarch/#{pkg}-*.rpm")
+
+    if /-devel/ =~ pkg then
+      mainpkg = pkg.sub( /-devel/, '' )
+      pkgs += Dir.glob("#{topdir}/#{$ARCHITECTURE}/#{mainpkg}-*.rpm")
+      pkgs += Dir.glob("#{topdir}/noarch/#{mainpkg}-*.rpm")
+    end
+
+    if not pkgs.empty? then
+      pkgs.uniq!
+      exec_command "rpm #{rpmflg} --force --test #{pkgs.join(' ')}"
+      exec_command "sudo rpm #{rpmflg} --force --nodeps #{pkgs.join(' ')}"
+
+      if not $CANNOTSTRICT then
+        pkgs.each do |a|
+          begin
+            rpmpkg = RPM::Package.open(a)
+            rpmpkg.provides.each do |prov|
+              if not $SYSTEM_PROVIDES.has_name?(prov.name) then
+                $SYSTEM_PROVIDES.push(prov)
+              end
+            end
+          ensure
+            rpmpkg = nil
+            GC.start
+          end
+        end
+      end
+    end
+
+    if !$VERBOSEOUT then
+      print "#{$hTAG['NAME']} "
+      print "-" * [29 - $hTAG['NAME'].length, 1].max, "> "
+    end
+  end
+
+=begin
+--- chk_requires_strict(pkg_name)
+TAG BuildPreReq, BuildRequires 行に記述されているパッ
+ケージがあればそのパッケージがインストールされている
+かどうか判断し、必要ならばインストールする。
+rpm -ivh する関係上、sudo が password 無しで実行可能
+である事。
+
+spec ファイルのデータベースを参照する。
+=end
+  def chk_requires_strict(name)
+    brs = $DEPGRAPH.db.specs[name].buildRequires
+    return  if brs.nil?
+    brs.each do |req|
+      puts "#{name} is build requires #{req}:" if $VERBOSEOUT
+
+      flag = false
+      if $SYSTEM_PROVIDES.has_name?(req.name) then
+        provs = $SYSTEM_PROVIDES.select{|a| a.name == req.name}
+
+        provs.each do |prov|
+          if $VERBOSEOUT then
+            print "    try check #{prov} ..."
+            STDOUT.flush
+          end
+          flag = resolved?(req, prov)
+          break if flag
+        end
+      end
+
+      if flag then
+        puts " YES" if $VERBOSEOUT
+        next
+      else
+        puts " NO" if $VERBOSEOUT
+        $DEPGRAPH.db.packages[req.name].each do |a|
+          spec = $DEPGRAPH.db.specs[a.spec]
+          if build_and_install(req.name, '-Uvh', spec.name) == 4 then
+            return 4
+          end
+        end
+      end
+    end # brs.each do |req|
+  end # def chk_requires_strict
+
+=begin
+--- chk_requires
+TAG BuildPreReq, BuildRequires 行に記述されているパッ
+ケージがあればそのパッケージがインストールされている
+かどうか判断し、必要ならばインストールする。
+rpm -ivh する関係上、sudo が password 無しで実行可能
+である事。
+=end
+  def chk_requires
+    req = Array.new
+    if $hTAG.key?("BUILDPREREQ") then
+      req = $hTAG["BUILDPREREQ"].split(/[\s,]/)
+    end
+    if $hTAG.key?("BUILDREQUIRES") then
+      $hTAG["BUILDREQUIRES"].split(/[\s,]/).each {|r| req.push r}
+    end
+
+    return  if req.empty?
+
+    req.delete ""
+    while r = req.shift do
+      # 直接ファイル名が指定されている
+      # パッケージ名を指定すべし
+      next  if r =~ /\//
+
+      # インストール済の場合 ir = <epoch>:<ver>-<rel>
+      ir = `rpm -q --queryformat '%{EPOCH}:%{VERSION}-%{RELEASE}' #{r} 2>/dev/null`.split(':')
+      r = r.split(/\-/)[0..-2].join("-") if r =~ /\-devel/
+
+      if ir.length != 2 then
+        if build_and_install(r, "-Uvh") == 4 then
+          return 4
+        end
+        # バージョン情報をスキップする
+        if req[0] =~ /[<>=]/ then
+          req.shift
+          req.shift
+        end
+        next
+      else
+        pkg = r
+        r = req.shift
+        if r =~ /[<>=]/ then
+          nr = req.shift.split(':')
+          if nr.length == 1 then
+            nr.unshift '(none)'
+          end
+          if nr[1] !~ /-/ then
+            ir[1] = ir[1].split('-')[0]
+          end
+          ver = nil
+          if ir[0] == '(none)' then
+            if nr[0] == '(none)' then
+              ver = `#{$RPMVERCMP} #{ir[1]} #{nr[1]}`.chop
+            else
+              ver = '<'
+            end
+          else
+            if nr[0] == '(none)' then
+              ver = '>'
+            else
+              case ir[0].to_i <=> nr[0].to_i
+              when -1
+                ver = '<'
+              when 0
+                ver = `#{$RPMVERCMP} #{ir[1]} #{nr[1]}`.chop
+              when 1
+                ver = '>'
+              end
+            end
+          end
+
+          case r
+          when ">"
+            case ver
+            when "<"
+              if build_and_install(pkg, "-Uvh") == 4 then
+                return 4
+              end
+            else
+              next
+            end
+          when "="
+            case ver
+            when "="
+                next
+            else
+              if build_and_install(pkg, "-Uvh") == 4 then
+                return 4
+              end
+            end
+          when ">="
+            case ver
+            when "<"
+              if build_and_install(pkg, "-Uvh") then
+                return 4
+              end
+            else
+              next
+            end
+          end
+        else
+          req.unshift r
+        end
+      end
+    end
+  end
+
+  def check_group
+    $hTAG['GROUP'].split(/,\s*/).each do |g|
+      if GROUPS.rindex(g) == nil then
+        if !$SCRIPT then
+          print "\n#{RED}!! No such group (#{g}) !!\n"
+          print "!! Please see /usr/share/doc/rpm-x.x.x/GROUPS !!#{NOCOLOR}\n"
+        else
+          print "\n!! No such group (#{g}) !!\n"
+          print "!! Please see /usr/share/doc/rpm-x.x.x/GROUPS !!\n"
+        end
+      end
+    end
+  end
+
+  def backup_logfile(pkg)
+    return  unless File.exist?("#{pkg}/#{$LOG_FILE}")
+    mtime = File.mtime("#{pkg}/#{$LOG_FILE}")
+    suffix = mtime.strftime('%Y%m%d%H%M%S')
+    File.rename("#{pkg}/#{$LOG_FILE}", "#{pkg}/#{$LOG_FILE}.#{suffix}")
+    `bzip2 -9 '#{pkg}/#{$LOG_FILE}.#{suffix}'` if $LOG_FILE_COMPRESS
+  end # def backup_logfile(pkg)
+
+  def buildme(pkg)
+    ret = nil
+    if $NAME_STACK.include?(pkg) then
+      ret = 4
+      return
+    end
+    $NAME_STACK.push(pkg)
+    if !$GLOBAL_NOCCACHE then
+      if Dir.glob("#{pkg}/NO.CCACHE").length == 0 then
+        if ENV['PATH'] !~ /ccache/ && `rpm -q ccache 2>/dev/null` =~ /^ccache/ then
+          ENV['PATH'] = "/usr/libexec/ccache:#{ENV['PATH']}"
+        end
+      else
+        ENV['PATH'] = ENV['PATH'].split(':').select{|a| a !~ %r!/usr/libexec/ccache!}.join(':')
+      end
+    end
+    if Dir.glob("#{pkg}/SRPM.ONLY").length != 0 then
+      $SRPM_ONLY = true
+      $RPMOPT = "-bs"
+    else
+      $SRPM_ONLY = false
+      $RPMOPT = $DEF_RPMOPT
+    end
+    if $RPMOPT =~ /\-ba|\-bb/ then
+      $RPMOPT += " --target #{$ARCHITECTURE}"
+    end
+
+    if !$VERBOSEOUT then
+      print "\r#{pkg} "
+      print "-" * [29 - pkg.length, 1].max, "> "
+      STDOUT.flush
+    end
+    ret = catch(:exit_buildme) do
+      if $ARCHITECTURE =~ /alpha/ then
+        notfile = "#{pkg}/NOT.alpha"
+      elsif $ARCHITECTURE =~ /i.86/ then
+        notfile = "#{pkg}/NOT.i586"
+      else
+        notfile = "#{pkg}/NOT.#{$ARCHITECTURE}"
+      end
+      if Dir.glob(notfile).length != 0 then
+        throw :exit_buildme, 1
+      end
+      if File.exist?("#{pkg}/SKIP") or
+          File.exist?("#{pkg}/.SKIP") then
+        throw :exit_buildme, 1
+      end
+      if File.exist?("#{pkg}/OBSOLETE") then
+        throw :exit_buildme, 3
+      end
+      if Dir.glob("#{pkg}/TO.*").length != 0 && $MAIN_ONLY then
+        throw :exit_buildme, 1
+      end
+      if !$NONFREE && File.exist?("#{pkg}/TO.Nonfree") then
+        throw :exit_buildme, 1
+      end
+      if File.directory?(pkg) then
+        if File.exist?("#{pkg}/#{pkg}.spec") then
+          backup_logfile(pkg)
+
+          if $NOSTRICT then
+            s = IO.read("#{pkg}/#{pkg}.spec")
+            strip_spec s
+          else
+            make_hTAG(pkg)
+          end
+          check_group
+          if $GROUPCHECK then
+            throw :exit_buildme, 1
+          end
+          if ($ARCH_DEP_PKGS_ONLY and
+              ($hTAG['BUILDARCHITECTURES'] == "noarch" or
+               $hTAG['BUILDARCH'] == "noarch")) then
+            throw :exit_buildme, 1
+          end
+          
+          $LOG_PATH = "#{Dir.pwd}/#{$hTAG['NAME']}"
+
+          if !$SRPM_ONLY then
+            rc = 0
+            if $NOSTRICT then
+              rc = chk_requires
+            else
+              rc = chk_requires_strict pkg
+            end
+            if rc == 4 then
+              throw :exit_buildme, 4
+            end
+          end
+
+          topdir = get_topdir
+          if Dir.glob("#{topdir}/SRPMS/#{pkg}-*.rpm").length != 0 then
+            match_srpm = ""
+            Dir.glob("#{topdir}/SRPMS/#{pkg}-*.rpm").each do |srpms|
+              pn = srpms.split("/")[-1].split("-")[0..-3].join("-")
+              if pn == pkg then
+                match_srpm = srpms
+                break
+              end
+            end
+            if !$FORCE && match_srpm != "" then
+              if File.mtime("#{pkg}/#{pkg}.spec") <= File.mtime(match_srpm)
+                throw :exit_buildme, 1
+              end
+            end
+          end
+
+          if $WORKDIR then
+            if File.exist?($hTAG["NAME"] + "/BUILD") then
+              exec_command "rm -rf #{$hTAG['NAME']}/BUILD"
+            end
+            workdir = $WORKDIR + "/" + $hTAG["NAME"] + "-" +
+                      $hTAG["VERSION"] + "-" + $hTAG["RELEASE"]
+            if not File.exist?(workdir) then
+              Dir.mkdir(workdir)
+            end
+            File.symlink(workdir, $hTAG["NAME"] + "/BUILD")
+          else
+            prepare_dirs(["BUILD"])
+          end
+          prepare_dirs(["SOURCES", "RPMS/#{$ARCHITECTURE}", "RPMS/noarch", "SRPMS"])
+          if !get_no("SOURCE") then
+            throw :exit_buildme, 2
+          end
+          if !get_no("PATCH") then
+            throw :exit_buildme, 2
+          end
+          cp_to_tree
+          Dir.chdir "#{$hTAG['NAME']}"
+          prepare_outputdirs
+          backup_nosources
+          Dir.chdir '..'
+          throw :exit_buildme, do_rpm(pkg)
+        else
+          throw :exit_buildme, 1
+        end
+      end
+    end
+  ensure
+    if !$VERBOSEOUT then
+      case ret
+      when nil
+      when 0
+        print GREEN unless $SCRIPT
+        print "#{SUCCESS}"
+        print NOCOLOR unless $SCRIPT
+        print "\n"
+      when 1
+        print YELLOW unless $SCRIPT
+        print "#{SKIP}"
+        print NOCOLOR unless $SCRIPT
+        print "\n"
+      when 3
+        print BLUE unless $SCRIPT
+        print "#{OBSOLETE}"
+        print NOCOLOR unless $SCRIPT
+        print "\n"
+      else
+        print RED unless $SCRIPT
+        print "#{FAILURE}"
+        print NOCOLOR unless $SCRIPT
+        print "\n"
+      end
+    end
+    case ret
+    when nil
+    when 0
+      open("#{$LOG_PATH}/#{$LOG_FILE}", "a") do |fLOG|
+        fLOG.puts "\n#{SUCCESS} : #{pkg}"
+      end
+    when 1
+    when 3
+    else
+      open("#{$LOG_PATH}/#{$LOG_FILE}", "a") do |fLOG|
+        fLOG.puts "\n#{FAILURE} : #{pkg}"
+      end
+    end
+    if ret == 4 then
+      STDERR.puts "BuildRequire and/or BuildPreReq is looped:"
+      $NAME_STACK.each{|a| STDERR.puts "  #{a}"}
+    end
+    $NAME_STACK.pop
+    ret
+  end
+
+  def recursive_build(path)
+    pwd = Dir.pwd
+    Dir.chdir path
+    for pn in `ls ./`
+      pn.chop!
+      if File.directory?(pn) && pn != "BUILD" then
+        if pn != "CVS" && pn != "." && pn != ".." &&
+            File.exist?("#{pn}/#{pn}.spec") then
+          recursive_build pn
+        end
+      else
+        if pn =~ /^.+\.spec$/ &&
+            File.exist?("CVS/Repository") then
+          pkg = Dir.pwd.split("/")[-1]
+          Dir.chdir ".."
+          buildme(pkg)
+          Dir.chdir pkg
+        end
+      end
+    end
+    Dir.chdir pwd
+  end
+
+############ Main ############
+ENV['PATH'] = "../tools:#{ENV['PATH']}"
+options = [
+  ["-a", "--archdep",      GetoptLong::NO_ARGUMENT],
+  ["-A", "--arch",         GetoptLong::REQUIRED_ARGUMENT],
+  ["-c", "--cvs",          GetoptLong::NO_ARGUMENT],
+  ["-d", "--depend",       GetoptLong::REQUIRED_ARGUMENT],
+  ["-f", "--force",        GetoptLong::NO_ARGUMENT],
+  ["-g", "--checkgroup",   GetoptLong::NO_ARGUMENT],
+  ["-m", "--main",         GetoptLong::NO_ARGUMENT],
+  ["-n", "--nonfree",      GetoptLong::NO_ARGUMENT],
+  ["-N", "--nostrict",     GetoptLong::NO_ARGUMENT],
+  ["-r", "--rpmopt",       GetoptLong::REQUIRED_ARGUMENT],
+  ["-R", "--ignore-remove",GetoptLong::NO_ARGUMENT],
+  ["-s", "--script",       GetoptLong::NO_ARGUMENT],
+  ["-S", "--scanpackages", GetoptLong::NO_ARGUMENT],
+  ["-v", "--verbose",      GetoptLong::NO_ARGUMENT],
+  ["-G", "--debug",        GetoptLong::NO_ARGUMENT],
+  ["-C", "--noccache",     GetoptLong::NO_ARGUMENT],
+  ["-M", "--mirrorfirst",  GetoptLong::NO_ARGUMENT],
+  ["-D", "--distcc",       GetoptLong::NO_ARGUMENT],
+  ["-h", "--help",         GetoptLong::NO_ARGUMENT]
+]
+
+def show_usage()
+  print <<END_OF_USAGE
+Usage: ../tools/OmoiKondara [options] [names]
+  -a, --archdep           ignore noarch packages
+  -A, --arch "ARCH"       specify architecture
+  -c, --cvs               (ignored. remained for compatibility)
+  -d, --depend "DEPENDS"  specify dependencies
+  -f, --force             force build
+  -g, --checkgroup        group check only
+  -m, --main              main package only
+  -n, --nonfree           build Nonfree package, too
+  -N, --nostrict          proceed by old behavior
+  -r, --rpmopt "RPMOPTS"  specify option through to rpm
+  -R, --ignore-remove     do not uninstall packege if REMOVE.* exists
+  -s, --script            script mode
+  -S, --scanpackages      execute mph-scanpackage
+  -v, --verbose           verbose mode
+  -G, --debug             enable debug flag
+  -C, --noccache          no ccache
+  -M, --mirrorfirst       download from mirror first
+  -D, --distcc            enable to use distcc
+  -h  --help              show this message
+END_OF_USAGE
+  exit
+end
+
+begin
+  GetoptLong.new(*options).each do |on, ov|
+    case on
+    when "-a"
+      $ARCH_DEP_PKGS_ONLY = true
+    when "-A"
+      $ARCHITECTURE = ov
+    when "-c"
+#      $CVS = true
+      $CVS = $CVS    #nop
+    when "-d"
+      $DEPEND_PACKAGE = ov
+    when "-f"
+      $FORCE = true
+    when "-g"
+      $GROUPCHECK = true
+    when "-m"
+      $MAIN_ONLY = true
+    when "-n"
+      $NONFREE = true
+    when "-N"
+      $NOSTRICT = true unless $CANNOTSTRICT
+    when "-r"
+      $DEF_RPMOPT = ov if ov
+    when "-R"
+      $IGNORE_REMOVE = true
+    when "-s"
+      $SCRIPT = true
+    when "-S"
+      $SCANPACKAGES = true
+    when "-v"
+      $VERBOSEOUT = true
+    when "-G"
+      $DEBUG_FLAG = true
+    when "-C"
+      $GLOBAL_NOCCACHE = true
+    when "-M"
+      $MIRROR_FIRST = true
+    when "-D"
+      if File.executable?("/usr/bin/distcc") then
+        $ENABLE_DISTCC = true
+      end
+    when "-h"
+      show_usage
+    end
+  end
+rescue
+  exit 1
+end
+
+ENV['PATH'] = ENV['PATH'].split(':').select{|a| a !~ %r!/usr/bin/ccache!}.join(':')
+
+parse_conf
+
+if `which #{$RPMVERCMP}` == "" then
+  print "Please install #{$RPMVERCMP}\n"
+  exit 0
+end
+
+if `which #{$FTP_CMD.split[0]}` == "" then
+  print "Please install #{$FTP_CMD}\n"
+  exit 0
+end
+
+begin
+  # be quiet if script mode
+  $DEPGRAPH = DepGraph.new(!$SCRIPT) unless $NOSTRICT
+rescue => e
+  STDERR.puts e.message
+  exit 1
+end
+
+if not $NOSTRICT then
+  print "checking system provides ..."
+  STDOUT.flush
+  begin
+    rpmdb = RPM::DB.open
+    rpmdb.each do |pkg|
+      pkg.provides.each do |a|
+        next if (a.flags & RPM::SENSE_RPMLIB).nonzero?
+        $SYSTEM_PROVIDES.push(a.to_struct)
+      end
+    end # rpmdb.each do |pkg|
+  ensure
+    rpmdb = nil
+    GC.start
+  end
+  puts " OK\n"
+end # if not $NOSTRICT then
+
+if ARGV.length == 0 then
+  if $DEPEND_PACKAGE == "" then
+    recursive_build "./"
+  else
+    $FORCE = true
+    dep = `env LANG=C sudo rpm -e --test #{$DEPEND_PACKAGE} 2>&1`
+    pkgs = dep.scan(/^.*needed by (.*)$/).flatten.sort.uniq.compact
+    sp = Array.new
+    pkgs.each do |pkg|
+      if pkg !~ /^$/ then
+        sp += [`rpm -q --queryformat "%{SOURCERPM}" #{pkg}`.split(/\-/)[0..-3].join('-')]
+      end
+    end
+    buildme $DEPEND_PACKAGE
+    spkgs = sp.sort.uniq
+    spkgs.each {|pkg| buildme pkg}
+  end
+else
+  ARGV.each do |av|
+    av = av.chop if av =~ /^.+\/$/
+    buildme(av)
+  end
+end
+
+$DEPGRAPH.db.commit! if $DEPGRAPH
+
+### Local Variables:
+### mode: ruby
+### indent-tabs-mode: nil
+### End:

@@ -1,0 +1,80 @@
+# OmoiKondara configuration file example
+
+# CVSのリビジョンが1.59以降のOmoiKondaraでは、上の行のように
+# 空白行があってもOmoiKondaraが動作するようになりました。
+
+# TOPDIR 自分のマシンのツリーのトップディレクトリを記述します。
+#        必ず1つでなければなりません。
+#
+#        各パッケージのディレクトリに、TO.Nonfree や TO.Zoo という
+#        ファイルを配置しておくと、それを検出して TOPDIR とは別の
+#        ディレクトリに配置を強制することができます。TO.Nonfree の
+#        場合は TOPDIR-Nonfree となります。例では ~/PKGS-Nonfree
+#        ~/PKGS-Zoo となります。
+#
+TOPDIR ~/PKGS
+
+# PKGDIR Momongaパッケージモジュール(pkgs)のCVS作業コピーの場所を記述
+PKGDIR ~/pkgs
+
+# MIRROR ローカルにソースが無い場合にネットワーク経由で取得に行く場所を
+#        記述します。一行に複数書く事もできますし、MIRROR が複数行あっ
+#        てもかまいません。
+#
+#MIRROR ftp://ftp.lab.kdd.co.jp/Linux/packages/Kondara/pub/Kondara-2.1/PKGS/SOURCES
+#MIRROR ftp://ftp.lab.kdd.co.jp/Linux/packages/Kondara/pub/Kondara-2.1/PKGS-Zoo/SOURCES
+#MIRROR ftp://ftp.lab.kdd.co.jp/Linux/packages/Kondara/pub/Kondara-2.1/PKGS-Nonfree/SOURCES
+
+# FTP_CMD ソース等をダウンロードする際に使用するコマンド (およびオプション)．
+#
+FTP_CMD lftpget -c
+#FTP_CMD ncftpget -A
+#FTP_CMD wget -c -o wget.log
+
+# DISPLAY ビルドする際に X サーバへのコネクションが必要なものに対して設
+#         定される DISPLAY 環境変数の値．
+#
+DISPLAY :0.0
+
+# DISTCC_HOST distcc で使用するホストの指定．localhost は必ず追加されるため
+#        指定しなくても良い．
+#
+# DISTCC_HOST <ホスト名>[:<ポート番号>] # ポート番号を省略したときは 3632
+#DISTCC_HOST hoge
+#DISTCC_HOST fuga:11111
+
+# DISTCC_VERBOSE distcc のデバッグメッセージを出力するかどうか．
+#                下の行のコメントを外すと，デバッグメッセージを出力する．
+#DISTCC_VERBOSE
+
+# NUMJOBS make 時に同時に実行するジョブの数の指定．基本的にはビルド時に
+#         使える CPU の数の合計が目安．つまり，SMP マシンなら 2，distcc
+#         を使用するなら distcc で使用する全マシンの CPU の合計．
+#NUMJOBS 1
+
+# URL_ALIAS ソース等の URL の置き換えを指定する (String#sub で置き換える)．
+#
+# URL_ALIAS <正規表現> <置き換える文字列>
+#
+# => ftp.t.ring.gr.jp
+#URL_ALIAS ^ftp://ftp\.gnu\.org/pub/gnu				ftp://ftp.t.ring.gr.jp/pub/GNU
+#URL_ALIAS ^ftp://ftp\.xemacs\.org/pub/xemacs			ftp://ftp.t.ring.gr.jp/pub/text/xemacs
+#URL_ALIAS ^(?:http://www|ftp://ftp)\.kernel\.org/pub/linux	ftp://ftp.t.ring.gr.jp/pub/linux/kernel.org
+#URL_ALIAS ^ftp://ftp\.gnome\.org/pub/GNOME			ftp://ftp.t.ring.gr.jp/pub/X/gnome
+#URL_ALIAS ^ftp://ftp\.sudo\.ws/pub/sudo			ftp://ftp.t.ring.gr.jp/pub/misc/sudo
+#URL_ALIAS ^ftp://ftp\.ruby-lang\.org/pub/ruby			ftp://ftp.t.ring.gr.jp/pub/lang/ruby
+#URL_ALIAS ^ftp://ftp\.cpan\.org/pub/CPAN			ftp://ftp.t.ring.gr.jp/pub/lang/perl/CPAN
+#URL_ALIAS ^ftp://ftp\.services\.openoffice\.org/pub/OpenOffice\.org	ftp://ftp.t.ring.gr.jp/pub/misc/openoffice
+#
+# => osdn.dl.sourceforge.net
+#URL_ALIAS ^http://dl\.sf\.net http://osdn.dl.sourceforge.net
+#URL_ALIAS ^http://[^\.]+?\.dl\.sourceforge\.net http://osdn.dl.sourceforge.net
+#
+# => any
+#URL_ALIAS ^ftp://ftp\.linux-ipv6\.org/pub/usagi http://ftp.kddlabs.co.jp/IPv6/usagi
+#URL_ALIAS ^ftp://sources\.redhat\.com/pub http://mirrors.kernel.org/sources.redhat.com
+#URL_ALIAS ^ftp://ftp\.alsa-project\.org/pub http://www.alsa-project.org/alsa/ftp
+
+# WORKDIR 作業用ディレクトリを指定する．
+#         コメントアウトしておけば，これまで通りの動きになる．
+#WORKDIR	/tmp/OmoiKondara

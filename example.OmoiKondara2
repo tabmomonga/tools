@@ -1,0 +1,43 @@
+### OmoiKondara2 configuration file example
+
+### ROOT   自分のマシンのツリーのトップディレクトリを記述します。
+###        必ず1つでなければなりません。
+###
+###        各パッケージのディレクトリに、TO.Nonfree や TO.Zoo という
+###        ファイルを配置しておくと、それを検出して TOPDIR とは別の
+###        ディレクトリに配置を強制することができます。TO.Nonfree の
+###        場合は TOPDIR-Nonfree となります。例では ~/PKGS-Nonfree
+###        ~/PKGS-Zoo となります。
+
+ROOT		~/PKGS
+
+### TOPDIR   OmoiKondara と設定ファイルを共用できるように TOPDIR も書いておけます。
+TOPDIR		~/PKGS
+
+### MIRROR   ローカルにソースが無い場合にネットワーク経由で取得に行く場所を
+###          記述します。一行に複数書く事もできますし、MIRROR が複数行あっ
+###          てもかまいません。
+###
+###          *現在未対応なので無視されます*
+###
+MIRROR		ftp://ftp.lab.kdd.co.jp/Linux/packages/Kondara/pub/Kondara-2.1/PKGS/SOURCES
+MIRROR		ftp://ftp.lab.kdd.co.jp/Linux/packages/Kondara/pub/Kondara-2.1/PKGS-Zoo/SOURCES
+MIRROR		ftp://ftp.lab.kdd.co.jp/Linux/packages/Kondara/pub/Kondara-2.1/PKGS-Nonfree/SOURCES
+
+### FTP_CMD   OmoiKondara2 は自前で HTTP, FTP を扱いますので、以下は単に無視されます。
+FTP_CMD		lftpget -c
+#FTP_CMD		ncftpget -A
+#FTP_CMD		wget -c -o wget.log
+
+### PROXY_HOST   HTTP Proxy のホスト名です。
+### PROXY_PORT   HTTP Proxy のポートです (初期値 80)。
+
+#PROXY_HOST		uketohe.example.com
+#PROXY_PORT		80
+
+### DISPLAY   DISPLAY.PLEASE な spec をビルドするときの DISPLAY
+###           環境変数の値です。これを指定しないと :0.0 になります。
+DISPLAY		:0.0
+
+### MAILADDR   anonymous FTP のパスワードに使用するメールアドレスを指定します。
+MAILADDR	ukekeke@example.com

@@ -1,0 +1,229 @@
+=begin
+
+= tools ディレクトリ内にある各スクリプトの説明
+
+== TODO
+最終的には
+*説明のないもの/いらないものは削除。
+*機能の類似したものは統合。
+*使い勝手の統一。
+の方向で?
+
+==OmoiKondara
+=== Summary
+:開発者/メンテナ
+:機能概要
+ パッケージをビルド
+:実行方法
+ OmoiKondara [オプション] [パッケージ名...]
+:ライセンス
+ Ruby
+=== Known Bugs
+ * get_no の後で cp_to_tree が呼び出されるが，cp_to_tree にバグがあり
+   pkgs/hoge の直下に NoSource なファイルと同じ名前のファイルがあると，
+   それが pkgs/hoge/SOURCES にコピーされてしまう [2003/12/09 muraken]．
+==commit
+:開発者/メンテナ
+:機能概要
+ 簡易コミットツール。%changelogの最初のエントリがログとなる。
+:実行方法
+  commit パッケージ名...
+:ライセンス
+==environment.rb
+:開発者/メンテナ
+ crouton
+:機能概要
+ ~/.OmoiKondara(など)を読んで各種変数を設定
+:実行方法
+ Rubyの場合
+  $:.unshfit(File.direname($0))
+  require 'environment'
+ Shellの場合
+  PATH=`dirname $0`:$PATH
+  eval `environment.rb`
+:ライセンス
+ Modified BSD
+
+==listskip
+:開発者/メンテナ
+ crouton
+:機能概要
+ .SKIPのあるディレクトリをリスト
+:実行方法
+  listskip (引数なし)
+:ライセンス
+ Modified BSD
+
+== speclint
+:開発者/メンテナ
+ crouton
+:機能概要
+ ガイドライン文書に従ったspecのチェック
+:実行方法
+  speclint [オプション] パッケージ名...
+:ライセンス
+ Modified BSD
+
+== update-mph
+:開発者/メンテナ
+ crouton
+:機能概要
+ 各ディレクトリにおいてmph-scanpackagesを実行
+:実行方法
+  update-mph [ディレクトリ...] (省略すると TOPDIR[-*]以下)
+:ライセンス
+ Modified BSD
+
+== OmoiKondara3.rb
+:開発者/メンテナ
+ muraken
+:機能概要
+ OmoiKondara で使用する予定のライブラリ．
+:実行方法
+ 実行してはいけません．
+:ライセンス
+ Ruby
+
+== tc_OmoiKondara.rb
+:開発者/メンテナ
+ muraken
+:機能概要
+ OmoiKondara3.rb のテストケース
+:実行方法
+ ruby tc_OmoiKondara.rb
+:ライセンス
+ Ruby
+
+== delobso.rb
+:開発者/メンテナ
+ dora, kazuhiko
+:機能概要
+ pkgs 以下をパースして、.OmoiKondara の TOPDIR 以下の不要なファイルを消す
+:実行方法
+ pkgs ディレクトリで実行する
+:ライセンス
+ ?
+
+== uninstallobso.rb
+:開発者/メンテナ
+ zunda
+:機能概要
+ pkgs 以下をパースして、OBSOLETEや.SKIPのあるパッケージのバイナリパッケ
+ ージ名を表示する。
+:実行方法
+ pkgs ディレクトリで実行する
+:ライセンス
+ see "uninstallobso.rb"
+
+== listunused
+:開発者/メンテナ
+ kazuhiko
+:機能概要
+ SRPM に含まれないパッチなどを消す
+:実行方法
+ pkgs ディレクトリで
+  listunused [SRPM ファイル...]
+:ライセンス
+ Ruby
+
+== download_all_source
+:開発者/メンテナ
+ ?, kazuhiko
+:機能概要
+ ダウンロードが必要なファイルを全て取って来る
+ .OmoiKondara の MIRROR には対応しているが URL_ALIAS には未対応
+ TO.Nonfree や TO.Zoo のものも取って来るかどうかは、OmoiKondara と同じ
+ ように -n や -m などで制御できる
+:実行方法
+ pkgs ディレクトリで
+  download_all_source
+:ライセンス
+ ?
+
+== cpanflute
+:開発者/メンテナ
+ kazuhiko (もとは rpm-build パッケージのもの)
+:機能概要
+ CPAN module の tarball から spec ファイルを作る。
+:実行方法
+  cpanflute [tarball]
+ とすると、/tmp/cpan/spec/ にディレクトリができるので、それを pkgs/ に持っ
+ て来る。
+:ライセンス
+ GPL
+
+== pick_up_licenses
+:開発者/メンテナ
+  zunda
+:機能概要
+  引数で指定したソースツリーのファイルを走査してライセンスらしき文言を見つける。
+:実行方法
+    pick_up_licenses <ソースツリー>
+  -vオプションを多くつけることによって、表示される情報が多くなる。
+:ライセンス
+  see "pick_up_licenses"
+
+== lib/*
+:開発者/メンテナ
+ muraken
+:機能概要
+ 様々なライブラリ
+:実行方法
+ 実行しないでください
+:ライセンス
+ Ruby と同じ
+
+== 内容テンプレート
+:開発者/メンテナ
+:機能概要
+:実行方法
+:ライセンス
+
+== 説明のないファイル 
+*FutoiMomonga
+*OmoiKondara.test
+*OmoiKondara2
+*ana-rpm-size.rb
+*checkspec.rb
+*chkreq.rb
+*chkrpm
+*chkrpmdep
+*chkrpmdep.db
+*chkrpmdup
+*chksource
+*chksrpm
+*cleanupsource
+*cleanupsource.php
+*delobso
+*depgraph
+*deprpme
+*gnu_md5sum_check.php
+*gonome_rebuildagainst
+*momodo-check.rb
+*mphvercmp.rb
+*myomokon.sh
+*omokon-modoki.rb
+*printrequires
+*repo_check
+*updatespecdb
+== 非スクリプトファイル
+*ChangeLog
+*example.OmoiKondara
+*example.OmoiKondara2
+*Makefile
+*README.OmoiKondara2
+*README.omokon-modoki
+*rpmvercmp.c
+= 削除したもの
+不要なものは積極的に消していこう。
+*buildtree
+*chgrel
+*chgrel.STABLE
+*chkcomps.rb
+*ftpsearch
+*getname.rb
+*mkkondaraiso
+
+必要であるならば、CVSから復活させた上で、
+README(このファイル)に説明を加えること。
+=end

@@ -1,0 +1,122 @@
+#!/usr/bin/ruby
+
+$CONF_FILES = ["./.OmoiKondara","~/.OmoiKondara","/etc/OmoiKondara.conf"]
+$MYDOMAIN = ""
+
+PKGS=Array.new
+PNS = `grep -i ^buildprereq GONOME/GONOME.spec | grep -v \\-devel | cut -d " " -f 2 | sort | uniq && echo GONOME`
+#PNS = `ls .`
+$relstr=""
+
+  def in_argv (pkg)
+    i=0
+    while i < ARGV.length
+      if ARGV[i] == pkg
+        return 1
+      end
+      i=i+2
+    end
+    return 0
+  end
+
+  def changerelease (pkg,ver,rel)
+   if (in_argv (pkg) == 1 || pkg == "GONOME")
+    open ("#{pkg}/#{pkg}.spec") {|i| $s = i.read}
+    $o = open ("#{pkg}/#{pkg}.spec", "w")
+    $s.each_line do |l|
+      if l =~ /^[Rr]elease\s*:\s*(\S+)\s*$/
+        $o.print "Release: #{rel}\n"
+      elsif l =~ /^[Vv]ersion\s*:\s*(\S+)\s*$/
+        $o.print "Version: #{ver}\n"
+      elsif l=~ /^BuildPrereq\s*:\s*(\S+)/
+if pkg == "GONOME"
+        i=0
+        rewrite=0
+        while PKGS[i]
+          if $1 == "#{PKGS[i][0]}-devel" || $1 == "#{PKGS[i][0]}"
+            $o.print "BuildPrereq: #{$1} >= #{PKGS[i][1]}-#{PKGS[i][2]}\n"
+            rewrite=1
+            break
+          end
+          i=i+1
+        end
+        if rewrite == 0
+          $o.print l
+        end
+else
+$o.print l
+end
+      elsif l =~ /%changelog/i
+        ts = Time.now.to_s.split
+        u = `whoami`.chop
+        u = `finger #{u}`.split(/\n/)
+        u[0] =~ /^Login:\s(\S+)\s+Name:\s(.*)$/
+        loginname = $1
+        fullname = $2
+        $o.print l
+        $o.print "* #{ts[0]} #{ts[1]} #{ts[2]} #{ts[5]} "
+        $o.print "#{fullname} <#{loginname}@#{$MYDOMAIN}>\n"
+        $o.print "- (#{ver}-#{rel})\n"
+        if in_argv (pkg) == 1
+          $o.print "- version #{ver}\n\n"
+        else
+          $o.print "#{$relstr}\n"
+        end
+      else
+        $o.print l
+      end
+    end
+    $o.close
+   end
+  end
+
+  def find_req (pkg)
+      if test (?e,"#{pkg}/#{pkg}.spec")
+          f=open("#{pkg}/#{pkg}.spec")
+          m=f.read
+          f.close
+            version=m.scan(/^version\s*:\s*(\S+)\s*$/i)[0][0]
+            release="#{m.scan(/^release\s*:\s*(\S+)[KkMm]\s*$/i)[0][0].to_i+1}m"
+            PKGS << ["#{pkg}","#{version}","#{release}"]
+      end
+  end
+
+if (ARGV.length & 1) == 1
+  print "rebuildagainst pkg ver ...\n"
+  exit 0
+end
+
+$CONF_FILES.each do |conf|
+  conf = File.expand_path conf
+  if test (?e, conf)
+    open (conf) do |f|
+      while f.gets
+        if /^#.*$/ or /^$/
+          next
+        end
+        s = split
+        v = s.shift
+        v.upcase!
+        case v
+        when "MYDOMAIN"
+          $MYDOMAIN = s.shift
+        end
+      end
+    end
+  end
+end
+
+i=0
+while i < ARGV.length
+  PKGS << ["#{ARGV[i]}" ,"#{ARGV[i+1]}" ,"1m"]
+  $relstr=$relstr+"- rebuild against for #{ARGV[i]}-#{ARGV[i+1]}\n"
+  i=i+2
+end
+
+find_req ("GONOME")
+
+i=0
+while PKGS[i]
+  changerelease (PKGS[i][0],PKGS[i][1],PKGS[i][2])
+  i=i+1
+end

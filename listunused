@@ -1,0 +1,36 @@
+#!/usr/bin/env ruby
+#
+# Usaage:
+#
+# $ cd pkgs
+# $ ../tools/listunused srpm srpm srpm ...
+
+$CONF_FILES = ["./.OmoiKondara","~/.OmoiKondara","/etc/OmoiKondara.conf"]
+$KEEP_FILES = ["TO.Nonfree","TO.Zoo","SRPM.ONLY","Antenna","SRPM.ONLY",
+  "REMOVE.PLEASE","SU.PLEASE","DISPLAY.PLEASE","YUKARI","NO.CCACHE",
+  "OBSOLETE","JAVA","IPv6"]
+# NOT.*, REMOVEME.*
+
+def source_list(pkg)
+  return `rpm2cpio #{pkg} | cpio --list 2> /dev/null`.split(/\n/)
+end
+
+def rpm_name(pkg)
+  pkg =~ /^.+\/(.+)-([\w\.\+]+)-([\w\.\+]+)\.(.+)\.rpm$/
+  return $1
+end
+
+# main
+
+$pkgs_list = ARGV
+
+$pkgs_list.each do |pkg|
+  name = rpm_name(pkg)
+  entries = `cat ./#{name}/CVS/Entries | grep -v '^D' | sed -e 's,^/,,' -e 's,/.*,,' | grep -v '^NOT\.' | grep -v '^REMOVEME' `.split(/\n/)
+  unused = (entries - source_list(pkg) - $KEEP_FILES)
+  if (unused.length != 0)
+    files = unused.join(" #{name}/")
+    print "cvs rm -f #{name}/#{files}\n"
+    print "cvs ci -m 'delete unused source(s)' #{name}/#{files}\n"
+  end
+end

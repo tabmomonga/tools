@@ -1,0 +1,66 @@
+# OmoiKondara configuration file example (YAML version)
+# Encoded in EUC-JP. YAML accepts only UTF-8, though.
+---
+# 生成されるファイルの出力先。
+#
+# このディレクトリの下にSOURCES,SRPMS,${ARCH},noarchが作られます。
+#
+# 各パッケージのディレクトリに、TO.Nonfree や TO.Zoo というファイルを
+# 配置しておくと、それを検出して output_directory とは別のディレクトリ
+# に配置を強制することができます。TO.Nonfree の場合は 
+# output_directory-Nonfree となります。例では ~/PKGS-Nonfree
+# になります。
+output_directory: ~/PKGS
+
+# CVSからチェックアウトしたpkgsモジュールの所在。
+package_directory: ~/pkgs
+
+# ローカルにソースが無い場合にネットワーク経由で取得に行く場所。
+#mirrors:
+#  - ftp://ftp.lab.kdd.co.jp/Linux/packages/Kondara/pub/Kondara-2.1/PKGS/SOURCES
+#  - ftp://ftp.lab.kdd.co.jp/Linux/packages/Kondara/pub/Kondara-2.1/PKGS-Zoo/SOURCES
+#  - ftp://ftp.lab.kdd.co.jp/Linux/packages/Kondara/pub/Kondara-2.1/PKGS-Nonfree/SOURCES
+
+# ソースをダウンロードする際に使用するコマンド(およびオプション)。
+ftp_command: lftpget -c
+#ftp_command: ncftpget -A
+#ftp_command: wget -c -o wget.log
+
+#ビルドする際に X サーバへのコネクションが必要なものに対して設定される 
+#DISPLAY 環境変数の値。
+display: :0.0
+
+# distcc で使用するホストの指定。
+#
+# localhost は必ず追加されるため指定しなくても良い。
+#
+# <ホスト名>[:<ポート番号>] # ポート番号を省略したときは 3632
+distcc_host:
+   - hoge
+   - fuga:11111
+
+#distcc のデバッグメッセージを出力するかどうか。
+distcc_verbose: false
+
+# make 時に同時に実行するジョブの数の指定。
+#
+# 基本的にはビルド時に使える CPU の数の合計が目安。つまり、SMP マシン
+# なら 2、distccを使用するなら distcc で使用する全マシンの CPU の合計。
+number_of_jobs: 1
+
+# ソースの URL の置き換えを指定(String#sub で置き換える)。
+#
+# <正規表現>: <置き換える文字列>
+url_alias:
+  ftp://ftp\.gnu\.org/gnu: ftp://ftp.ring.gr.jp/pub/GNU
+  ftp://ftp\.xemacs\.org/pub/xemacs: ftp://ftp.ring.gr.jp/pub/text/xemacs
+  (?:http://www|ftp://ftp)\.kernel\.org/pub/linux: ftp://ftp.ring.gr.jp/pub/linux/kernel.org
+  ftp://sources\.redhat\.com/pub: http://mirrors.kernel.org/sources.redhat.com
+  ftp://ftp\.linux-ipv6\\.org/pub/usagi: http://ftp.kddlabs.co.jp/IPv6/usagi
+  http://dl\.sf\.net: http://osdn.dl.sourceforge.net
+  http://[^\.]+?\.dl\.sourceforge\.net: http://osdn.dl.sourceforge.net
+  ftp://ftp\.gnome\.org/pub/GNOME: http://ftp.ring.gr.jp/pub/X/gnome
+  ftp://ftp\.alsa-project\.org/pub: http://www.alsa-project.org/alsa/ftp
+
+# 作業用ディレクトリを指定。
+# working_directory: /tmp/OmoiKondara

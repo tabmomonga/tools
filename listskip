@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# NAME
+# listskip
+#
+# SYNOPSIS
+# listskip
+#
+# DESCRIPTION
+# list build-skipped packages.
+ 
+PATH=`dirname $0`:$PATH
+eval `environment.rb`
+
+echo $PKGDIR/*/.SKIP | sed "s|$PKGDIR/||g;s|/.SKIP||g" | tr ' ' '\012'

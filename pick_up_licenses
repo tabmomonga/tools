@@ -1,0 +1,427 @@
+#!/usr/bin/env ruby
+# $Id: pick_up_licenses,v 1.15 2003/11/26 16:25:05 zunda Exp $
+#
+# picks up signatures for licenses from source trees
+#
+# Copyright 2003 Momonga Project <admin@momonga-linux.org>
+#
+# Permission is granted for use, copying, modification, distribution,
+# and distribution of modified versions of this work as long as the
+# above copyright notice is included.
+#
+
+require 'getoptlong'
+require 'tsort'
+
+# to sort the licenses
+class Symbol
+	def <=>(other)
+		self.to_s <=> other.to_s
+	end
+end
+
+# options
+class Options
+	attr_reader :verbose, :only, :list, :detail, :check_config, :follow_dir
+	attr_reader :no_copyright
+
+	# possible options
+	Options = [
+		['-v', '--verbose', GetoptLong::NO_ARGUMENT],
+		['-h', '--help', GetoptLong::NO_ARGUMENT],
+		['-o', '--only', GetoptLong::REQUIRED_ARGUMENT],
+		['-l', '--list', GetoptLong::NO_ARGUMENT],
+		['-d', '--detail', GetoptLong::REQUIRED_ARGUMENT],
+		['-c', '--include-config', GetoptLong::NO_ARGUMENT],
+		['-f', '--only-files', GetoptLong::NO_ARGUMENT],
+		['-n', '--no-copyright', GetoptLong::NO_ARGUMENT],
+	]
+
+	# usage
+	@@usage = <<"_END_OF_USAGE"
+usage: #{File.basename( __FILE__ )} [options] paths
+  Picks up copyright notices and licenses from files or directories.
+
+options:
+  -o, --only <license>[,<license>] : limit licenses to be shown
+  -v, --verbose : increase verbosity
+  -l, --list : shows list of detectable licenses
+  -d, --detail <license>[,<license>] : shows detail of detectable license
+  -c, --include-config : also check configure* files (doesn't check in default)
+  -f, --only-files : do not follow directories
+  -n, --no-copyright : do not include licensed files in copyrighted files list
+  -h, --help : shows this
+_END_OF_USAGE
+
+	def initialize
+		@verbose = 0
+		@only = nil
+		@list = false
+		@detail = nil
+		@check_config = false
+		@follow_dir = true
+		@no_copyright = false
+	end
+
+	CONFIG_FILE_REGEXPS = [
+		/\Aconfig(?:ure(?:\.ac)?|\.guess|\.sub|\.status|\.log)(?:.orig)?\z/,
+		/\A(?:ac|auto)\w+\.m4\z/,
+		/\Alibtool\z/,
+	]
+	def self::is_configure?( path )
+		dir = File.basename( File.dirname( path ) )
+		return true if /\Aautom4.*\.cache\z/ =~ dir
+		return true if 'acfiles' == dir
+		CONFIG_FILE_REGEXPS.each do |r|
+			return true if r =~ File.basename( path )
+		end
+		return false
+	end
+
+	def getopt
+		begin
+			GetoptLong.new( *Options ).each do |on, ov|
+				case on
+				when '-v'
+					@verbose += 1
+				when '-h'
+					$stdout.puts( @@usage )
+					exit 0
+				when '-l'
+					@list = true
+				when '-o'
+					@only = ov.split( /,/ ).collect {|i| i.intern}
+				when '-d'
+					@detail = ov.split( /,/ ).collect {|i| i.intern}
+				when '-c'
+					@check_config = true
+				when '-f'
+					@follow_dir = false
+				when '-n'
+					@no_copyright = true
+				else
+					$stderr.puts( @@usage )
+					exit 1
+				end
+			end
+		rescue
+			$stderr.puts( @@usage )
+			exit 1
+		end
+		self
+	end
+
+	def self::usage
+		@@usage
+	end
+
+	# short-cut
+	def self::getopt
+		self.new.getopt
+	end
+
+end
+
+# comment or space
+S = '(\s*(#|dnl|\*|XCOMM|\.\\\"|COMMENT))?\s+'
+
+# signatures of licenses
+# key: a Regexp to match
+# value[0]: license symbol
+# value[1]: an Array listing overridden licenses
+# value[2]: an Array of Regexp-s not to match, if any
+Signature_list = {
+	%r!\bCopyright\s*(\(C\))?\s*\d{2,4}\s*(by)?\s*(.+)!i => [
+		:copyright,
+		[]
+	],
+	%r!\bCopyright\s*(\(C\))?\s*(by)?\s*(.+)\s*\d{2,4}!i => [
+		:copyright,
+		[]
+	],
+	%r!\(C\).+\s+\d{2,4}! => [
+		:copyright,
+		[]
+	],
+	%r!(\blicense\b|\bpermission#{S}is#{S}|\bdistribute\b)!i => [
+		:generic,
+		[]
+	],
+	%r!\bPermission#{S}is#{S}granted#{S}for#{S}use,#{S}copying,#{S}modification,#{S}distribution,#{S}and#{S}distribution#{S}of#{S}modified#{S}versions#{S}of#{S}this#{S}work#{S}as#{S}long#{S}as#{S}the#{S}above#{S}copyright#{S}notice#{S}is#{S}included\.!m => [
+		:shortest,
+		[ :generic ]
+	],
+	%r!\bThe Apache Software License\b! => [
+		:apache,
+		[ :generic ]
+	],
+	%r!\bArtistic\s+license\b!i => [
+		:artistic,
+		[ :generic ]
+	],
+	%r!\bThe#{S}intent#{S}of#{S}this#{S}document#{S}is#{S}to#{S}state#{S}the#{S}conditions#{S}under#{S}which#{S}a#{S}Package#{S}may#{S}be#{S}copied,#{S}such#{S}that#{S}the#{S}Copyright#{S}Holder#{S}maintains#{S}some#{S}semblance#{S}of#{S}artistic#{S}control#{S}over#{S}the#{S}development#{S}of#{S}the#{S}package,#{S}while#{S}giving#{S}the#{S}users#{S}of#{S}the#{S}package#{S}the#{S}right#{S}to#{S}use#{S}and#{S}distribute#{S}the#{S}Package#{S}in#{S}a#{S}more-or-less#{S}customary#{S}fashion,#{S}plus#{S}the#{S}right#{S}to#{S}make#{S}reasonable#{S}modifications\.!m => [
+		:artistic,
+		[ :generic ]
+	],
+	%r!\bmay#{S}(not#{S})?be#{S}used#{S}to#{S}endorse#{S}or#{S}promote#{S}products#{S}derived#{S}from#{S}this#{S}software#{S}without#{S}specific#{S}prior#{S}written#{S}permission\.!m => [
+		:modified_bsd,
+		[ :generic ]
+	],
+	%r!\bAll#{S}advertising#{S}materials#{S}mentioning#{S}features#{S}or#{S}use#{S}of#{S}this#{S}software#{S}must#{S}display#{S}the#{S}following#{S}acknowledgement\b!m => [
+		:bsd,
+		[ :generic, :modified_bsd ]
+	],
+	%r!(GNU#{S}Free#{S}Documentation#{S}License|\bGFDL\b)!im => [
+		:gfdl,
+		[ :generic ]
+	],
+	%r!(GNU#{S}(General#{S})?Public#{S}License|\bGPL\b)!im => [
+		:gpl,
+		[ :generic, :lgpl ]
+	],
+	%r!(GNU#{S}(Library|Lesser)#{S}General#{S}Public#{S}License|\bLGPL\b)!im => [
+		:lgpl,
+		[ :generic ]
+	],
+	%r!\bExcept#{S}as#{S}contained#{S}in#{S}this#{S}notice,#{S}the#{S}name#{S}of.*shall#{S}not#{S}be#{S}used#{S}in#{S}advertising#{S}or#{S}otherwise#{S}to#{S}promote#{S}the#{S}sale,#{S}use#{S}or#{S}other#{S}dealings#{S}in#{S}this#{S}Software#{S}without#{S}prior#{S}written#{S}authorization#{S}!m => [
+		:mit_x,
+		[ :generic ]
+	],
+	%r!\bThe#{S}above#{S}copyright#{S}notice#{S}and#{S}this#{S}permission#{S}notice#{S}shall#{S}be#{S}included#{S}in#{S}all#{S}copies#{S}or#{S}substantial#{S}portions#{S}of#{S}the#{S}Software\.!m => [
+		:mit_x,
+		[ :generic ]
+	],
+	%r!\bMozilla#{S}Public#{S}License\b|\bMPL\b!m => [
+		:mpl,
+		[ :generic ]
+	],
+	%r!\bOpen#{S}Publication#{S}License\b|\bOPL\b!m => [
+		:opl,
+		[ :generic ]
+	],
+	%r!\bQ#{S}Public#{S}License|\bQPL\b!m => [
+		:qpl,
+		[ :generic ]
+	],
+	%r!\bpublic#{S}domain\b! => [
+		:public,
+		[ :generic ],
+		[ %r!\bnot#{S}in#{S}(the)?[\s#\*]*public#{S}domain\b! ]
+	],
+	%r!You#{S}may#{S}make#{S}and#{S}give#{S}away#{S}verbatim#{S}copies#{S}of#{S}the#{S}source#{S}form#{S}of#{S}the#{S}software#{S}without#{S}restriction,#{S}provided#{S}that#{S}you#{S}duplicate#{S}all#{S}of#{S}the#{S}original#{S}copyright#{S}notices#{S}and#{S}associated#{S}disclaimers\.!m => [
+		:ruby,
+		[ :generic ]
+	],
+	%r!\blicense.*ruby\b!i => [
+		:ruby,
+		[ :generic ]
+	],
+	%r!\bThis#{S}Makefile\.in#{S}is#{S}free#{S}software;#{S}the#{S}Free#{S}Software#{S}Foundation#{S}gives#{S}unlimited#{S}permission#{S}to#{S}copy#{S}and/or#{S}distribute#{S}it,#{S}with#{S}or#{S}without#{S}modifications,#{S}as#{S}long#{S}as#{S}this#{S}notice#{S}is#{S}preserved\.!im => [
+		:fsf_makefile,
+		[ :generic ]
+	],
+
+}
+
+Signature_description = {
+	:copyright => 'Copyright notice',
+	:generic => 'Possible license notice',
+	:shortest => 'Shortest freesoftware compatible license [ruby-talk:24759]',
+	:apache => 'Apache',
+	:artistic => 'Artistric',
+	:modified_bsd => 'Modified BSD',
+	:mit_x => 'MIT/X',
+	:ruby => 'Ruby',
+	:public => 'Public Domain',
+	:fsf_makefile => 'Free Makefile by FSF',
+	:error => 'Error in reading file'
+}
+
+# a Signatuers has a list of possible signatures
+class Signatures
+	attr_reader :siglist, :string
+
+	def initialize( siglist, stringlist )
+		@siglist = siglist
+		@stringlist = stringlist
+	end
+
+	# description
+	def describe( type )
+		@stringlist.has_key?( type ) ? @stringlist[ type ] : type.to_s.upcase
+	end
+
+	# details
+	def details( type )
+		match = false
+		r = "#{type.to_s} : #{describe( type )}\n"
+		detail_of( type ) do |regexp, array|
+			match = true
+			r << "  matches /#{regexp.source.gsub( Regexp.new( Regexp.escape( S ) ), ' ').gsub( /\\s(\*|\+)/, ' ' )}/"
+			[ [Regexp::EXTENDED, 'x'], [Regexp::IGNORECASE, 'i'], [Regexp::MULTILINE, 'm'] ].each do |o|
+				r << o[1] if (regexp.options & o[0]) != 0
+			end
+			if array[1].size > 0 then
+				r << " and overrides #{array[1].collect {|i| i.to_s}.join(', ')}"
+			end
+			r << "\n"
+		end
+		r << "  no match found\n" unless match
+		r
+	end
+
+	# detail_of: block will recieve a Regexp, [type, [ overrideens ] ]
+	def detail_of( type, &block )
+		@siglist.each_key do |regex|
+			yield( regex, @siglist[regex] ) if @siglist[regex][0] == type
+		end
+	end
+
+	# collect signatures of licenses from the text
+	def pickup_from( text, no_copyright )
+		signatures = Array.new
+		overridden = Array.new
+		siglist.each_key do |sig|
+			text.gsub( sig ) do
+				valid = true
+				if siglist[sig][2] then
+					siglist[sig][2].each do |r|
+						if r =~ text then
+							valid = false
+							break
+						end
+					end
+				end
+				break unless valid
+				signatures << siglist[sig][0]
+				overridden << siglist[sig][1]
+				overridden << :copyright if no_copyright and :copyright != sig
+				''
+			end
+		end
+		signatures.uniq!
+		overridden.flatten.uniq.each do |o|
+			signatures.delete( o )
+		end
+		signatures
+	end
+
+end
+
+# a SourceFile will have a list of Signature s
+class SourceFile
+	attr_reader :path, :signs
+
+	def initialize( path )
+		@path = path
+		@signs = Array.new
+	end
+
+	# collect signatures from the path
+	def collect( signatures, no_copyright )
+		begin
+			text = File.open( @path ){ |f| f.read }
+			@signs = signatures.pickup_from( text, no_copyright )
+			text.replace( '' )
+		rescue
+			@signs << :error
+		end
+		@signs
+	end
+
+	def self::collect( path, signatures, no_copyright )
+		self::new( path ).collect( signatures, no_copyright )
+	end
+end
+
+class Paths
+	def self::scan( paths, follow_dir = true, &block )
+		paths.each do |path|
+			Paths::scan_file_or_dir( path, follow_dir, &block )
+		end
+	end
+
+	private
+	def self::scan_file_or_dir( path, follow_dir = true, &block )
+		if File.file?( path ) then
+			yield( path )
+		elsif File.directory?( path ) then
+			if follow_dir then
+				Dir.open( path ) do |d|
+					d.entries.each do |cpath|
+						next if File.basename( cpath ) == '.'
+						next if File.basename( cpath ) == '..'
+						self::scan_file_or_dir( File.join( path, cpath ), &block )
+					end
+				end
+			end
+		else
+			$stderr.puts "Not a file or a directory: #{path}"
+		end
+	end
+
+end
+
+# options
+options = Options::getopt
+paths = ARGV.uniq
+
+# signatures
+signatures = Signatures.new( Signature_list, Signature_description )
+if options.list then
+	puts signatures.siglist.values.collect { |i| i[0] }.uniq.sort.join( ', ' )
+end
+if options.detail then
+	options.detail.each do |type|
+		puts signatures.details( type )
+	end
+end
+
+# paths
+if paths.empty? then
+	if not options.list and not options.detail then
+		$stderr.puts( Options::usage )
+		exit 1
+	else
+		exit 0
+	end
+end
+
+# scan
+files = Hash.new
+Paths::scan( paths, options.follow_dir ) do |path|
+	next if not options.check_config and Options::is_configure?( path )
+	sigs = SourceFile.collect( path, signatures, options.no_copyright )
+	unless sigs.empty? then
+		sigs.each do |s|
+			files[ s ] = Array.new unless files[ s ]
+			files[ s ] << path
+		end
+		if options.verbose > 2 then
+			$stderr.puts path
+			sigs.each do |s|
+				$stderr.puts "- #{signatures.describe( s )}"
+			end
+		end
+	end
+end
+$stderr.puts if options.verbose > 2
+
+# uniq
+files.each_value do |f|
+	f.uniq!
+end
+
+# results
+unless options.only then
+	files.keys.sort.each do |l|
+		puts "* #{signatures.describe( l )}"
+		files[l].sort.each do |p|
+			puts "    #{p}"
+		end
+		puts	# an empty line dividing licenses
+	end
+else
+	puts options.only.collect { |t| files[t] }.uniq.sort.join( "\n" )
+end
+

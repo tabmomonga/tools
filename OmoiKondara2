@@ -1,0 +1,480 @@
+#! /usr/bin/env ruby
+
+$LOAD_PATH << '../tools'
+
+require 'ftools'
+require 'net/ftp'
+require 'net/http'
+require 'optparse'
+require 'rpm'
+require 'omokon/common'
+require 'omokon/specdb'
+require 'omokon/spec'
+require 'omokon/package'
+require 'omokon/dependency'
+
+$0 = File.basename $0
+
+BUILD_LOCK_FILE = '.OmoiKondara.lock'
+CONF_FILES = [
+  '/etc/OmoiKondara.conf',
+  '~/.OmoiKondara',
+  './.OmoiKondara',
+]
+DEFAULT_RPM_OPTION = '-ba'
+LOGFILE = 'OmoiKondara.log'
+DATABASE = '.OmoiKondara.db'
+COLOR = {
+  :green   => "\e[1;32m",
+  :red     => "\e[1;31m",
+  :yellow  => "\e[1;33m",
+  :blue    => "\e[1;34m",
+  :default => "\e[m",
+}
+MESSAGE = {
+  :success  => "Success",
+  :failure  => "Failure",
+  :skip     => "Skip",
+  :obsolete => "OBSOLETE",
+}
+
+$ARCH           = OmoiKondara::ARCH
+$TARGET         = nil
+$JOBS           = 1
+$MAILADDR       = nil
+$MIRROR         = []
+$FORCE          = false
+$CVS            = false
+$VERBOSITY      = 0
+$ONLY_SCAN      = false
+$ONLY_MAIN      = false
+$NONFREE        = false
+$NOSCAN         = false
+$DEBUG_BUILD    = false
+$GROUP_CHECK    = false
+$SCRIPT         = false
+$ONLY_ARCH_DEPS = false
+$RPM_OPTION     = DEFAULT_RPM_OPTION
+$DISPLAY        = ':0.0'
+$PORXY_HOST     = nil
+$PROXY_PORT     = 80
+$ROOT           = nil
+$DB             = nil
+
+
+module OmoiKondara
+
+  class Status < StandardError
+    SUCCESS  = :success
+    SKIP     = :skip
+    FAILURE  = :failure
+    OBSOLETE = :obsolete
+
+    attr_reader :type
+    attr_reader :message
+
+    def initialize(type, message=nil)
+      @type = type
+      @message = message
+    end # def initialize(type)
+
+  end # class Status
+
+  class Spec
+
+    def build
+      root = if data[:nonfree] then
+               "#{$ROOT}-Nonfree"
+             elsif data[:zoo] then
+               "#{$ROOT}-Zoo"
+             else
+               $ROOT
+             end # if data[:nonfree] then
+      topdir = File.expand_path "./#{name}"
+
+      if File.exist? "#{topdir}/#{BUILD_LOCK_FILE}" then
+        sleep 1 while File.exist? "#{topdir}/#{BUILD_LOCK_FILE}"
+        return
+      end # if File.exist? "{topdir}/{BUILD_LOCK_FILE}" then
+
+      begin
+        OmoiKondara::Output.puts "Enterning #{name}"
+        ## build lock
+        open("#{topdir}/#{BUILD_LOCK_FILE}", 'w') {|io| io.puts "ukekeketohehehe"}
+
+        raise Status.new :obsolete if data[:obsolete]
+        raise Status.new :skip, 'this is Nonfree' if
+          data[:nonfree] and (!$NONFREE or $ONLY_MAIN)
+        raise Status.new :skip, 'this is Zoo' if
+          data[:zoo] and $ONLY_MAIN
+        unless buildarchs.include? 'noarch' then
+          if !buildarchs.include? $ARCH and !buildarchs.empty? then
+            raise Status.new :skip, 'unspported this architecture'
+          end
+        end # unless buildarchs.include? 'noarch' then
+
+        ## check built package
+	if $VERBOSITY > 1 then
+	  OmoiKondara::Output.puts ".... checking built package"
+	end
+        built = true
+        packages.each do |subpkg|
+	  if $VERBOSITY > 1 then
+	    OmoiKondara::Output.puts ".... checking sub package #{subpkg}"
+	  end
+	  if Dir.glob("#{root}/*/#{subpkg}.*.rpm").empty? then
+	    if $VERBOSITY > 1 then
+	      OmoiKondara::Output.puts ".... sub package #{subpkg} isn't built"
+	    end
+	    built = false
+	  end # if Dir.glob("{root}/*/{subpkg}.*.rpm").empty? then
+        end # packages.each do |subpkg|
+        raise Status.new :skip, 'already built'  if built
+
+        ## clean old srpm
+        srpm = Dir.glob("#{root}/SRPM/#{name}-#{packages[0].version}.*.rpm")[0]
+        File.rm_f srpm if srpm
+
+        ## check requires at build
+        buildrequires.each do |dep|
+          pkgs = $DB.what_provides dep.name
+          raise "capability not found: #{dep.name}" if pkgs.empty?
+          pkgs.each do |a|
+            pkg = nil
+            if dep.version then
+              resolve = false
+              if dep.le? and
+                  (a.version <= dep.version or
+                   a.version.older? dep.version) then
+                resolve = true
+              elsif dep.ge? and
+                  (a.version >= dep.version or
+                   a.version.newer? dep.version) then
+                resolve = true
+              elsif dep.eq? and
+                  a.version == dep.version then
+                resolve = true
+              elsif dep.lt? and
+                  a.version < dep.version and
+                  a.version.older? dep.version then
+                resolve = true
+              elsif dep.gt? and
+                  a.version > dep.version and
+                  a.version.newer? dep.version then
+                resolve = true
+              end
+              pkg = a  if resolve
+            else
+              pkg = a
+            end
+            if pkg and
+                !RPMDB.installed?("rpm -q #{pkg} > /dev/null 2>&1") then
+              RPMDB.install root, $DB, pkg.name
+            end # if pkg and !system("rpm -q {pkg} > /dev/null 2>&1") then
+          end # pkgs.each do |a|
+        end # buildrequires.each do |dep|
+
+        ## check conflicts at build
+        buildconflicts.each do |dep|
+          pkg = specdb.what_provides dep.name
+          RPMDB.uninstall root, $DB, pkg.name
+        end # buildconflicts.each do |dep|
+
+        ## build directories
+        %w(BUILD SOURCES RPMS SRPMS).each{|dir| File.mkpath "#{topdir}/#{dir}"}
+        ["#{$ARCH}", 'noarch'].each{|dir| File.mkpath "#{topdir}/RPMS/#{dir}"}
+
+        ## copy sources
+        sources.each do |src|
+          if src.no? then
+            if File.exist? "#{root}/SOURCES/#{src.filename}" then
+              File.rm_f "#{topdir}/SOURCES/#{src.filename}"
+              File.symlink("#{root}/SOURCES/#{src.filename}",
+                           "#{topdir}/SOURCES/#{src.filename}")
+            else
+              lastlen = 0
+              Downloader.download(src.fullname,
+                                  "#{topdir}/SOURCES/#{src.filename}") do |sig|
+                case sig.type
+                when OmoiKondara::DOWNLOAD_BEGIN
+                  OmoiKondara::Output.puts "start download #{sig.uri}"
+                when OmoiKondara::DOWNLOAD_FINISH
+                  OmoiKondara::Output.puts "download #{sig.uri} complete"
+                end # case sig.type
+              end
+            end # if File.exist? "#{root}/SOURCES/#{src.filename}" then
+          else # if src.no? then
+            File.rm_f "#{topdir}/SOURCES/#{src.filename}"
+            File.symlink("#{topdir}/#{src.filename}",
+                         "#{topdir}/SOURCES/#{src.filename}")
+          end # if src.no? then
+        end # sources.each do |src|
+
+        ## generate rpmrc
+        open("#{topdir}/rpmrc", 'w') do |io|
+          template = if $DEBUG_BUILD then 'rpmrc.debug' else 'rpmrc' end
+          macrofiles = nil
+          IO.foreach(template) do |line|
+            case line
+            when /macrofiles/
+              macrofiles = line.chomp
+            else
+              io.print line
+            end
+          end # open(template) do |line|
+          io.puts "#{macrofiles}:#{topdir}/rpmmacros"
+        end # open("{topdir}/rpmrc", 'w') do |io|
+
+        ## generate rpmmacros
+        open("#{topdir}/rpmmacros", 'w') do |io|
+          rpmmacros = "%_topdir #{topdir}
+%_arch #{$ARCH}
+%_host #{$ARCH}
+"
+          if $DEBUG_BUILD then
+            rpmmacros += "%omokon_debug 1
+%__os_install_post \\
+\t/usr/lib/rpm/brp-compress \\
+\t/usr/lib/rpm/modify-init.d \\
+\t%{nul}
+"
+          end # if debug then
+          io.write rpmmacros
+        end # open("{topdir}/rpmmacros", 'w') do |io|
+
+        ## REMOVE.PLEASE
+        if data[:remove] then
+          packages.each do |subpkg|
+            RPMDB.uninstall root, $DB, subpkg.name
+          end # packages.each do |subpkg|
+        end # if data[:remove] then
+
+        ## DISPLAY.PLEASE
+        olddisplay = ENV['DISPLAY']
+        ENV['DISPLAY'] = $DISPLAY if data[:display]
+
+        ## build
+        open("#{topdir}/#{LOGFILE}", 'w') do |log|
+	  begin
+	    Dir.chdir topdir
+	    cmdline = "rpm --rcfile rpmrc"
+	    cmdline = "sudo #{cmdline}" if data[:sudo]
+	    status = OmoiKondara.execute("#{cmdline} -bc #{name}.spec",
+                                         log, $VERBOSITY.nonzero?)
+            if status.nonzero? then
+              raise Status.new :failure,
+                "error occoured on build; see #{name}/OmoiKondara.log"
+            end
+	    RPMDB.wait
+	    status = OmoiKondara.execute("#{cmdline} -ba --short-circuit #{name}.spec",
+                                         log, $VERBOSITY.nonzero?)
+            if status.nonzero? then
+              raise Status.new :failure,
+                "error occoured on make package(s); see #{name}/OmoiKondara.log"
+            end
+	  ensure
+	    Dir.chdir '..'
+	  end # begin
+        end # open("{topdir}/{LOGFILE}", 'w') do |log|
+
+        ## backup *no* source files
+        sources.each do |src|
+          if src.no? and
+              !File.symlink?("#{topdir}/SOURCES/#{src.filename}") then
+            File.cp("#{topdir}/SOURCES/#{src.filename}",
+                    "#{root}/SOURCES/#{src.filename}")
+          end
+        end # sources.each do |src|
+
+        ## store packages
+        [ Dir.glob("#{topdir}/RPMS/*/*.rpm"),
+	  Dir.glob("#{topdir}/SRPMS/*.rpm") ].flatten.each do |path|
+	  filename = File.basename path
+	  repository = "#{root}/#{path.split('/')[-2]}"
+	  if $VERBOSITY > 1 then
+	    OmoiKondara::Output.puts ".... store #{filename} to #{repository}"
+	  end
+          File.cp path, "#{repository}/#{filename}"
+        end # Dir.glob("{topdir}/SRPMS/*.rpm") ].flatten.each do |path|
+
+        ## clean
+        if olddisplay then
+          ENV['DISPLAY'] = olddisplay
+        else
+          ENV.delete 'DISPLAY'
+        end
+
+        File.rm_f "#{topdir}/rpmmacros"
+        File.rm_f "#{topdir}/rpmrc"
+        if data[:sudo] then
+          OmoiKondara.execute "sudo rm -rf #{topdir}/BUILD"
+          OmoiKondara.execute "sudo rm -rf #{topdir}/RPMS"
+          OmoiKondara.execute "sudo rm -rf #{topdir}/SRPMS"
+          OmoiKondara.execute "sudo rm -rf #{topdir}/SOURCES"
+        else
+          OmoiKondara.execute "rm -rf #{topdir}/BUILD"
+          OmoiKondara.execute "rm -rf #{topdir}/RPMS"
+          OmoiKondara.execute "rm -rf #{topdir}/SRPMS"
+          OmoiKondara.execute "rm -rf #{topdir}/SOURCES"
+        end
+        raise Status.new :success
+      rescue Status => e
+	message = MESSAGE[e.type]
+	unless $SCRIPT then
+	  case e.type
+	  when Status::SUCCESS
+	    message = "#{COLOR[:green]}#{message}#{COLOR[:default]}"
+	  when Status::FAILURE
+	    message = "#{COLOR[:red]}#{message}#{COLOR[:default]}"
+	  when Status::SKIP
+	    message = "#{COLOR[:yellow]}#{message}#{COLOR[:default]}"
+	  when Status::OBSOLETE
+	    message = "#{COLOR[:blue]}#{message}#{COLOR[:default]}"
+	  end
+	end # unless $SCRIPT then
+	message = "#{message}: #{e.message}" if e.message
+	OmoiKondara::Output.puts "  ------> #{message}"
+      ensure
+        ## build unlock
+        File.rm_f "#{topdir}/#{BUILD_LOCK_FILE}"
+        OmoiKondara::Output.puts "Leaving #{name}"
+      end # begin
+    end # def build
+
+  end # class Spec
+
+end # module OmoiKondara
+
+
+def load_config(filename)
+  raise "file not found: #{filename}" unless File.file? filename
+  IO.foreach(filename) do |line|
+    line.chomp!
+    next  if line =~ /^(?:#|\s*$)/
+    ary = line.split
+    var = ary.shift.upcase
+    case var
+    when 'ROOT'
+      $ROOT = File.expand_path ary[0]
+    when 'DISPLAY'
+      $DISPLAY = ary[0]
+    when 'MAILADDR'
+      $MAILADDR = ary[0]
+    when 'MIRROR'
+      $MIRROR ||= []
+      $MIRROR += ary
+    when 'PROXY_HOST'
+      $PROXY_HOST = ary[0]
+    when 'PROXY_PORT'
+      $PROXY_PORT = ary[0]
+    end
+  end # IO.foreach(filename) do |line|
+end # def load_config(filename)
+
+
+ARGV.options do |q|
+
+  q.banner = "usage: #{$0} [options] [name ...]\n"
+
+  q.on('-a', '--archdep', 'architecture dependent package only') {|$ONLY_ARCH_DEPS|}
+  q.on('-c', '--cvs', 'try cvs update') {|$CVS|}
+  q.on('-d', '--debug', 'enable debug build') {|$DEBUG_BUILD|}
+  q.on('-f', '--force', 'force rebuild') {|$FORCE|}
+  q.on('-g', '--check-group', 'check Group tag value') {|$GROUP_CHECK|}
+  q.on('-j', '--jobs=NUM', Integer, 'maximum number of parallel jobs') {|$JOBS|}
+  q.on('-m', '--main', 'build only main packages') {|$ONLY_MAIN|}
+  q.on('-n', '--nonfree', 'nonfree packages also build') {|$NONFREE|}
+  q.on('-N', '--noscan', 'no scan spec files') {|$NOSCAN|}
+  q.on('-r', '--rpmopt=OPTION', String, 'use OPTION for rpm') {|$RPM_OPTION|}
+  q.on('-s', '--script', 'script mode') {|$SCRIPT|}
+  q.on('-S', '--scan', 'scan only') {|$ONLY_SCAN|}
+  q.on('-t', '--target=TARGET', String, 'target platform') {|$TARGET|}
+  q.on('-v', '--verbose', 'verbose mode') { $VERBOSITY += 1 }
+  q.on('--shinitai', 'shinitai mode') { $SHINITAI = true }
+  q.on('--help', 'show this message') { puts q; exit }
+
+  q.parse!
+end
+
+unless $SHINITAI then
+  STDERR.puts "shinitaku nainara OmoiKondara tsukainasai KIPA!"
+  exit 1111
+end
+
+ARGV.options = nil
+
+CONF_FILES.each do |filename|
+  filename = File.expand_path filename
+  if File.file? filename then
+    load_config filename
+  end
+end
+
+if $MAILADDR.nil? then
+  STDERR.puts 'MAILADDR is not specified'
+  exit 1
+end
+
+if $ROOT.nil? then
+  STDERR.puts 'ROOT is not specified'
+  exit 1
+end
+
+list = Dir.glob('./*').collect {|dir| File.basename dir}
+
+$DB = OmoiKondara::SpecDB.new DATABASE
+if $NOSCAN then
+  list = $DB.names
+else # if $NOSCAN then
+  ### scan spec files
+  $DB.names.each do |name|
+    $DB.delete_spec name unless list.include? name
+  end
+  list = list.select do |name|
+    specfile = "./#{name}/#{name}.spec"
+    rv = false
+    if File.file? specfile then
+      begin
+	spec = $DB.spec_by_name(name)
+	if spec.nil? or
+	    RPM::Spec.new(specfile).packages[0].version != spec.packages[0].version or
+	    File.stat(specfile).mtime > File.stat(DATABASE).mtime then
+	  spec = $DB.add_spec "./#{name}/#{name}.spec"
+	end
+	files = Dir.glob("./#{name}/*").collect{|a| File.basename a}
+	spec.data[:nonfree]  = files.include? 'TO.Nonfree'
+	spec.data[:zoo]      = files.include? 'TO.Zoo'
+	spec.data[:obsolete] = files.include? 'OBSOLETE'
+	spec.data[:display]  = files.include? 'DISPLAY.PLEASE'
+	spec.data[:sudo]     = files.include? 'SU.PLEASE'
+	spec.data[:remove]   = files.include? 'REMOVE.PLEASE'
+	rv = true
+      rescue => e
+	OmoiKondara::Error.puts "#{name}: #{e}"
+      end # begin
+    end # if File.file? specfile then
+    rv
+  end
+  $DB.commit!
+  exit if $ONLY_SCAN
+end # unless $NOSCAN then
+
+list.sort!
+
+unless ARGV.empty? then
+  list = ARGV.select {|a| list.include?(File.basename(a))}
+end # unless ARGV.empty? then
+
+list.each do |name|
+  begin
+    $DB.spec_by_name(name).build
+  rescue => e
+    OmoiKondara::Error.puts "#{name}: #{e}"
+    OmoiKondara::Error.puts e.backtrace
+  end # begin
+end # list.each do |name|
+
+### Local Variables:
+### mode: ruby
+### inden-tabs-mode: nil
+### End:

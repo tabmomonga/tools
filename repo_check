@@ -1,0 +1,110 @@
+#! /usr/bin/env ruby
+
+REJECT = [
+  'YUKARI',
+  'TO.Zoo',
+  'TO.NonFree',
+  'REMOVE.PLEASE',
+  'DISPLAY.PLEASE',
+  'NOT.alpha',
+  'NOT.ppc',
+  'NOT.i586',
+]
+
+class Source
+
+  attr_reader :name
+
+  def no?
+    @no
+  end
+
+  def set_no(no)
+    @no = !!no
+  end
+
+  def patch?
+    @patch
+  end
+
+  def set_patch(patch)
+    @patch = !!patch
+  end
+
+  def initialize(name, no=false, patch=false)
+    @name = name
+    @no = !!no
+    @patch = !!patch
+  end
+
+end # class Source
+
+def get_sources(specfile)
+  sources = []
+  IO.foreach(specfile) do |line|
+    case line
+    when /^Source(\d+)?:\s+(\S+)/
+      n = $1
+      name = $2
+      if n == "" then n = 0 else n = n.to_i end
+      sources[n] = [Source.new(name), 0]
+    when /^Patch(\d+)?:\s+(\S+)/
+      n = $1
+      name = $2
+      if n == "" then n = 0 else n = n.to_i end
+      sources[n] = [Source.new(name, false, true), 0]
+    when /^NoSource:\s+(\d+)/
+      n = $1.to_i
+      sources[n][0].set_no true
+    when /^NoPatch:\s+(\d+)/
+      n = $1.to_i
+      sources[n][0].set_no true
+    end # case line
+  end # IO.foreach(specfile) do |line|
+  sources.compact
+end # def get_sources(specfile)
+
+def check(pkg)
+  return unless File.exist?("#{pkg}/#{pkg}.spec")
+  sources = get_sources "#{pkg}/#{pkg}.spec"
+  IO.foreach("#{pkg}/CVS/Entries") do |line|
+    next if line =~ /^D/
+    filename = line.split('/')[1]
+    next if REJECT.include? filename
+    exist = false
+    sources.each do |src|
+      if src[0].name == filename then
+	if src[0].no? then
+	  puts "#{pkg}/#{filename} is No" + (src[0].patch? ? "Patch" : "Source")
+	end
+	src[1] = 1
+	exist = true
+	break
+      end
+    end
+    unless exist then
+      puts "#{pkg}/#{filename} is unused"
+    end
+  end # IO.foreach("#{pkg}/CVS/Entries") do |line|
+  sources.each do |src|
+    next if src[0].no? or src[1] == 1
+    if src[0].name =~ /:\/\// then
+      puts "#{src[0].name} is not No" + (src[0].patch? ? "Patch" : "Source") +
+	" but is not exist in repository"
+    else
+      puts "#{pkg}/#{src[0].name} is not No" + (src[0].patch? ? "Patch" : "Source") +
+	" but is not exist in repository"
+    end
+  end
+end # def check(pkg)
+
+if ARGV.length == 0 then
+  Dir.glob('*').each do |pkg|
+    check pkg
+  end
+else
+  ARGV.each do |pkg|
+    pkg = $1 if pkg =~ /([^\/]+)\//
+    check pkg
+  end
+end

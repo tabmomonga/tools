@@ -1,0 +1,48 @@
+macro		: line_macro
+		| brace_macro
+		;
+
+line_macro	: prefix opt_precond name opt_line_args term
+		;
+
+brace_macro	: prefix '{' opt_precond name opt_brace_args '}'
+		;
+
+opt_precond	: none
+		| precond opt_precond
+		;
+
+precond		| exist_p
+		| not
+		;
+
+opt_brace_args	: none
+		| sep args
+		;
+
+opt_line_args	: none
+		| args
+		;
+
+args		: arg
+		| args arg
+		;
+
+arg		: text
+		| macro
+		;
+
+exist_p		: '?'
+		;
+
+not		: '!'
+		;
+
+prefix		: '%'
+		;
+
+sep		: ':'
+		;
+
+term		: '\n'
+		;

@@ -1,0 +1,39 @@
+#!/usr/bin/env ruby
+
+rpms_dir = ""
+if ARGV.length == 0
+  rpms_dir = "."
+else
+  rpms_dir = ARGV[0]
+end
+
+if rpms_dir =~ /\/$/
+  rpms_dir.chop!
+end
+
+rpms = Dir.glob ("#{rpms_dir}/*.rpm").sort
+list = rpms.dup
+rpms.each do |r|
+  name = r.split(/\//)[-1].split(/\-/)[0..-3].join("-")
+  match = Array.new
+  list.each do |rr|
+    tmp = rr.split(/\//)[-1].split(/\-/)[0..-3].join("-")
+    if name == tmp
+      match += [rr]
+    end
+  end
+  if match.length > 1
+    i = 0
+    match.each do |l|
+      printf "%d - %s\n", i, l
+      i += 1
+    end
+    print "Which is erase ? "
+    a = STDIN.gets
+    if match[a.to_i] != nil
+      print "rm #{match[a.to_i]}\n\n"
+      `sudo rm #{match[a.to_i]}`
+      list.delete match[a.to_i]
+    end
+  end
+end

@@ -1,0 +1,86 @@
+#!/usr/bin/env ruby
+
+=begin
+  ARGV[0]   rpms path
+  ARGV[1]   rpm name
+=end
+
+class RPM_NAME
+  def initialize(filename)
+    @pkg = File.expand_path(filename).split(/\//)[-1]
+    @path = File.expand_path(filename).split(/\//)[0..-2].join("/")
+  end
+
+  def name
+    @pkg.split(/\-/)[0..-3].join("-")
+  end
+
+  def version
+    @pkg.split(/\-/)[-2]
+  end
+
+  def release
+    @pkg.split(/\-/)[-1].split(/\./)[0]
+  end
+
+  def arch
+    @pkg.split(/\-/)[-1].split(/\./)[1]
+  end
+
+  def srpmname
+    `rpm -qp --queryformat "%{SOURCERPM}" #{@path}/#{@pkg}`
+  end
+
+  def provides
+    prov = Hash.new
+    `rpm -qp --provides #{@path}/#{@pkg}`.split(/\n/).each do |str|
+      prov[str.strip] = name
+    end
+    `rpm -qlp #{@path}/#{@pkg} | grep bin/`.split(/\n/).each do |str|
+      prov[str.strip] = name
+    end
+    prov
+  end
+
+  def requires
+    req = Array.new
+    `rpm -qRp #{@path}/#{@pkg}`.split(/\n/).each do |str|
+      req += [str.strip]
+    end
+    req
+  end
+end
+
+if ARGV.length < 2
+  print "#{$0} RPM_name RPMS_path1 [RPMS_path2 ... ]\n"
+end
+
+fname = File.expand_path ARGV.shift
+
+provides_list = Hash.new
+requires_list = Array.new
+
+ARGV.each do |path|
+  Dir.glob("#{File.expand_path path}/*.rpm").each do |fn|
+    rpm = RPM_NAME.new fn
+    provides_list.update rpm.provides
+  end
+end
+
+depends_list = Array.new
+
+rpm = RPM_NAME.new "#{fname}"
+rpm.requires.each do |req|
+  if req =~ /(\/|\.so)/
+    if rpm.name != provides_list[req]
+      depends_list += [provides_list[req]]
+    end
+  else
+    depends_list += [req.split[0]]
+  end
+end
+
+depends_list.sort!.uniq!
+depends_list.each do |dep|
+  print "#{dep}\n"
+end

@@ -1,0 +1,362 @@
+Thu Jan 15 22:39:00 2004  YAMAZAKI Makoto <zaki@zakky.org>
+
+	* add '\' in rpmmacros for debug
+
+Fri Jan  9 00:36:00 2004  YAMAZAKI Makoto <zaki@zakky.org>
+
+	* OmoiKondara: add option to let OmoiKondara ignore REMOVE* file
+
+Sat Jan  3 18:32:00 2004  YAMAZAKI Makoto <zaki@zakky.org>
+
+	* commit: refactoring
+	* commit: commit all specs at once if svn
+
+Sat Jan  3 14:34:06 2004  Kenta MURATA  <muraken2@nifty.com>
+
+	* OmoiKondara: correct SKIP support.
+
+Sat Jan  3 14:21:11 2004  Kenta MURATA  <muraken2@nifty.com>
+
+	* OmoiKondara: support SKIP file.
+
+Fri Jan  2 16:01:05 2004  Kenta MURATA  <muraken2@nifty.com>
+
+	* lib/builtin-macros: new file describes rpm builtin macros.
+	* lib/macro-syntax.bnf: new file describes rpm macro syntax by
+	BNF.
+
+Wed Dec 24 18:32:00 2003  YAMAZAKI Makoto <zaki@zakky.org>
+
+	* commit: add svn support
+
+Fri Dec 19 06:54:39 2003  Kenta MURATA  <muraken2@nifty.com>
+
+	* lib/timeout.rb: stop default value for timeout.
+	append read-only accessor for timeout.
+	* lib/process.rb: ditto.
+	* test/tc_timeout.rb: ditto.
+
+Fri Dec 19 06:52:03 2003  Kenta MURATA  <muraken2@nifty.com>
+
+	* lib/arrayof.rb: modify documentation.
+
+	* lib/timeoutio.rb: separate from OmoiKondara3.rb, and rename
+	TimeoutedIO to TimeoutIO.
+	Supports writing methods.
+
+	* lib/process.rb: separate from OmoiKondara3.rb, and rename
+	TimeoutedProcess to TimeoutProcess.
+
+	* OmoiKondara3.rb: TimeoutedIO separate to lib/timeoutio.rb.
+	ChildProcess, PipedProcess and TimeoutedProcess separete to
+	lib/process.rb.
+
+	* test/tc_timeoutio.rb: separate from tc_OmoiKondara.rb.
+
+	* test/tc_process.rb: separate from tc_OmoiKondara.rb.
+
+	* tc_OmoiKondara.rb: test case of TimeoutedIO separate to
+	test/tc_timeoutio.rb.  test case of ChildProcess, PipedProcess,
+	TimeoutedProcess separate to test/tc_process.rb.
+
+Fri Dec 19 03:48:34 2003  Kenta MURATA  <muraken2@nifty.com>
+
+	* lib/arrayof.rb: separate from OmoiKondara3.rb.
+	* OmoiKondara3.rb: ArrayOf and ArrayOfFactory separete to lib/arrayof.rb.
+	* test/tc_arrayof.rb: separate from tc_OmoiKondara.rb.
+	* tc_OmoiKondara.rb: test case of ArrayOf separate to test/tc_arrayof.rb.
+
+Fri Dec 12 17:23:42 CET 2003 zunda <zunda at freeshell.org>
+
+	* OmoiKondara: pre_process_strip(): line.gsub!( /%%+/, '' ) not to process commented out macros: see Canna.spec,v 1.46 for an example
+	* recommit with better solution: ignore %%...: see eclipse.spec,v 1.4
+
+Wed Nov 26 17:27:51 CET 2003 zunda <zunda at freeshell.org>
+
+	* pick_up_licenses: ignore auto* files
+	* pick_up_licenses: treat XCOMM, COMMENT, and .\" as comments
+	* pick_up_licenses: broader definitions for Copyright notice and MIT/X
+	* pick_up_licenses: new signature for FSF made Makefiles
+	* pick_up_licenses: show an empty line between liceses
+
+Tue Nov 25 16:20:54 CET 2003 zunda <zunda at freeshell.org>
+
+	* pick_up_licenses: -n option not to show too many copyrighted files
+
+Mon Nov 24 12:37:10 CET 2003 zunda <zunda at freeshell.org>
+
+	* pick_up_licenses: treat 'dnl' in .m4 files as comments
+
+Fri Nov 21 17:58:35 CET 2003 zunda <zunda at freeshell.org>
+
+	* pick_up_licenses: skip config* files made by autoconf, use -c option to force checking them (Thanks to tab)
+	* pick_up_licenses: -f option not to follow directories
+
+Thu Nov 20 18:16:10 CET 2003 zunda <zunda at freeshell.org>
+
+	* pick_up_licenses: show each path only once
+
+Sun Nov  9 10:04:43 2003  Kazuhiko  <kazuhiko@fdiary.net>
+
+	* OmoiKondara: remove 'REMOVEME.*' packages only when building
+	package.
+
+Fri Nov  7 19:43:16 CET 2003 zunda <zunda at freeshell.org>
+
+	* pick_up_licenses: Gnu Lesser ... is also a LGPL
+
+Thu Nov  6 20:44:44 2003  Kenta MURATA  <muraken2@nifty.com>
+
+	* OmoiKondara: supports `Requires(...)' and `BuildRequires(...)'.
+
+Thu Nov  6 09:48:44 CET 2003 zunda <zunda at freeshell.org>
+
+	* pick_up_licenses: more signatures, options -o, -l, and -d
+
+Mon Oct 27 22:08:05 2003  Kazuhiko  <kazuhiko@fdiary.net>
+
+	* OmoiKondara: define '_smp_mflags' as '-j%{_numjobs}'.
+
+Fri Oct 24 21:10:52 2003  Kazuhiko  <kazuhiko@fdiary.net>
+
+	* download_all_source: use 'environment.rb'.
+
+Thu Oct 23 11:26:05 2003  Kenta MURATA  <muraken2@nifty.com>
+
+	* ChangeLog: add Local Variables section for add-log-time-format.
+
+Wed Oct 22 13:21:01 2003  Kenta MURATA  <muraken2@nifty.com>
+
+	* OmoiKondara: specify --target option to rpmbuild on every
+	architectures.
+
+Wed Oct 22 13:03:49 2003  Kenta MURATA  <muraken2@nifty.com>
+
+	* OmoiKondara: bugfix [devel.ja:02202].
+	append `-A arch' option for specifing build target architecture.
+	modify some macoro in the rpmmacros.
+	if WORKDIR is not specify, stop to execute `rm -rf TOPDIR/name/BUILD'.
+
+2003-10-17  Kazuhiko  <kazuhiko@fdiary.net>
+
+	* download_all_source: support '-m' (main only) and '-n' (nonfree)
+	like OmoiKondara. change temporary directory from [name]/SOURCES
+	to /tmp/SOURCES.
+
+Thu Oct 16 02:01:49 2003  Kenta MURATA  <muraken2@nifty.com>
+
+	* tc_OmoiKondara.rb: add test case for OmoiKondara::SpecParser.
+
+Wed Oct 15 17:44:13 CEST 2003 zunda <zunda at freeshell.org>
+
+	* speclint: allows 'see FILE' for license
+
+Wed Oct 15 21:08:46 2003    <crouton@ex-machina.jp>
+
+	* Makefile, OmoiKondara: always use rpmvercmp regardless of rpm
+	version.
+
+Wed Oct 15 17:39:20 2003  Kenta MURATA  <muraken2@nifty.com>
+
+	* tc_OmoiKondara.rb: add two classes:
+	TC_OmoiKondara_Getopt
+	TC_OmoiKondara_MacroContext
+
+	* OmoiKondara3.rb: add classes, OmoiKondara::Getopt and
+	OmoiKondara::MacroContext.
+
+Thu Sep 11 12:03:04 2003 YAMAZAKI Makoto <zaki@zakky.org>
+
+	* compress OmoiKondara.log by bzip2 on renaming
+
+Thu Sep 10 08:45:34 2003 zunda <zunda at freeshell.org>
+
+	* OmoiKondara: backs up the sources even if build process fails
+	* OmoiKondara: unnecessary grep avoided
+	* OmoiKondara: trys to install main package when -devel requested
+
+Sat Aug 23 09:18:30 2003  YAMAZAKI Makoto <zaki@zakky.org>
+
+	* OmoiKondara: read rpmrc before RPM::Spec.open
+
+Sat Aug 16 09:18:30 2003  Kenta MURATA  <muraken2@nifty.com>
+
+	* tc_OmoiKondara.rb: TC_OmoiKondara_ArrayOf#test_equality.
+	TC_OmoiKondara_Package tests OmoiKondara::Package class.
+
+	* OmoiKondara3.rb: OmoiKondara::ArrayOf.element_class using
+	instance variable instead of class variable.
+	OmoiKondara::ArrayOf#initialize misses processing argument.
+	OmoiKondara::Package and OmoiKondara::Spec miss using ArrayOf.
+
+Fri Aug  8 05:22:41 2003  Kenta MURATA  <muraken2@nifty.com>
+
+	* OmoiKondara3.rb: Package and Spec using ArrayOf.
+
+Fri Aug  8 04:46:03 2003  Kenta MURATA  <muraken2@nifty.com>
+
+	* OmoiKondara3.rb, tc_OmoiKondara.rb:
+	new module ArrayOfFactory.
+	collect behavior of ArrayOf for GC.
+
+Fri Aug  8 03:38:01 2003  Kenta MURATA  <muraken2@nifty.com>
+
+	* OmoiKondara3.rb, tc_OmoiKondara.rb: new class ArrayOf.
+
+Fri Aug  8 01:29:00 2003  Kenta MURATA  <muraken2@nifty.com>
+
+	* OmoiKondara3.rb, tc_OmoiKondara.rb: new classes Dependency,
+	Require, Conflict, Obsolete, and Provide.
+
+Thu Aug  7 13:39:28 2003  Kenta MURATA  <muraken2@nifty.com>
+
+	* OmoiKondara3.rb: add Version class.
+
+	* tc_OmoiKondara.rb: add test cases for Version class.
+
+Wed Aug  6 16:39:52 2003  Kenta MURATA  <muraken2@nifty.com>
+
+	* OmoiKondara3.rb: library to use future OmoiKondara.
+
+	* tc_OmoiKondara.rb: test cases for OmoiKondara3.rb.
+
+Mon Aug  4 07:00:27 2003  Kenta MURATA  <muraken2@nifty.com>
+
+	* OmoiKondara: modify around macro processing at -N.
+
+Fri Aug  1 12:55:50 2003  Kenta MURATA  <muraken2@nifty.com>
+
+	* OmoiKondara: revise ruby-1.8.0.
+
+2003-07-27 Kenta MURATA  <muraken2@nifty.com>
+
+	* OmoiKondara: revise %global.
+
+2003-07-21 Kenta MURATA  <muraken2@nifty.com>
+
+	* OmoiKondara: revise %NoSource, %NoPatch, %Source, %Patch on -N option.
+
+2003-06-19 YAMAZAKI Makoto <uomaster@nifty.com>
+
+	* allow https
+
+2003-05-13  Kazuhiko  <kazuhiko@fdiary.net>
+
+	* OmoiKondara: define %smp_mflags and %_smp_mflags as '-j#{$NUMJOBS}'
+
+2003-05-11 YAMAZAKI Makoto <uomaster@nifty.com>
+
+	* /usr/bin/ccache -> /usr/libexec/ccache
+
+2003-05-09 Kenta MURATA <muraken2@nifty.com>
+
+	* omokon/logger.rb(OmoiKondara::Logger::set_verbose):
+	  change threshold value.
+
+	* omokon/process.rb: correct bugs.
+	  add SimpleProcess and Executer class.
+
+2003-05-07 Kenta MURATA <muraken2@nifty.com>
+
+	* omokon/process.rb, omokon/logger.rb, omokon/omokon.rb,
+	  omokon/pkgpool.rb: new file.
+
+	* omokon/specdb.rb: add logging code and change mtime to md5.
+	  add #packages method for to lookup package and provides.
+
+	* omokon/config.rb: add -j option for the number of jobs in make.
+	  add OptionParser#argv method to get array of non-option command
+	  line arguments.
+
+	* omokon/specdb.rb: fix some bug.
+
+	* omokon/specdb.rb: cancel recursive structure.
+
+	* omokon/rpm.rb: change match tag to TAG_PROVIDENAME from DBI_LABEL.
+	  add DB.[] method to lookup package by name.
+
+	* omokon/omokon.rb: many change for build and install methods.
+
+	* omokon/pkgpool.rb: search_package changed for to return array.
+
+	* omokon/require.rb: collect bug to check version of ruby-rpm.
+
+2003-05-05 Kenta MURATA <muraken2@nifty.com>
+
+	* omokon/requires.rb, omokon/config.rb, omokon/rpm.rb: new file.
+
+	* omokon/config.rb: cancel comment out using RPM::DB.exist?.
+
+	* omokon/config.rb, omokon/requires.rb: correct bug.
+
+	* omokon/config.rb, omokon/requires.rb: cancel exception if failed
+	  to load "optparse".
+
+	* omokon/config.rb: add OmoiKondara::Config#build_architecture method.
+
+	* omokon/rpm.rb: new module OmoiKondara::RPM. new method
+	  OmoiKondara::RPM.setup_rpmrc.
+
+	* omokon/specdb.rb: many change for new OmoiKondara.
+
+2003-05-04 Kenta MURATA <muraken2@nifty.com>
+
+	* omokon/sysenv.rb: new file.
+
+2003-01-28 zunda <zunda@freeshell.org>
+	* OmoiKondara: IO::gets_with_timeout() raises TimeoutError after
+        a duration of silence as a claptrap remedy for gcc2.96 defunct
+        problem.
+        * OmoiKondara: adds a line showing the build result at the end
+        of OmoiKondara.log
+
+2002-12-01 Kenta MURATA <muraken2@nifty.com>
+	* handle Requires on build_and_install
+
+2002-10-14 OZAWA -Crouton- Sakuro <crouton@momonga-linux.org>
+	* OmoiKondara: rewrite comments in RD method index format.
+	FIXME: handles package names longer than 29 (workaround).
+	* commit: now this script uses no temporary files.
+	
+2002-09-21  Kazuhiko  <kazuhiko@fdiary.net>
+
+	* commit: Remove multiple trailing slashes. Output the result of
+	'cvs up #{pkg}' to find the omission of 'cvs add' easily.
+
+2002-08-14 OZAWA -Crouton- Sakuro <crouton@momonga-linux.org>
+	* speclint: new tool to check spec file validity.
+	
+2002-08-06 YAMAZAKI Makoto <uomaster@nifty.com>
+	* OmoiKondara: (get_no) return false on first failure of download
+
+2002-08-05 Puntium <puntium@momonga-linux.org>
+
+	* updatespecdb: skip spec file processing only if dbmtime > spec
+	file mtime AND SPECFILE DATA IS ALREADY IN @specs. Without this
+	condition, breaks for new spec files.
+
+	* updatespecdb: graceful exit when @spec[name] is nil
+	
+2002-08-05  Kazuhiko  <kazuhiko@fdiary.net>
+
+	* OmoiKondara (build_and_install): Never skip noarch packages.
+	Do 'rpm --test' before force upgrading.
+
+2002-07-20  Kazuhiko  <kazuhiko@fdiary.net>
+
+	* listunused: New file.
+
+	* cpanflute: New file. Revised version of /usr/lib/rpm/cpanflute
+	for Momonga Linux.
+
+Local variables:
+add-log-time-format: (lambda ()
+  (let* ((time (current-time))
+         (diff (+ (cadr time) 32400))
+         (lo (% diff 65536))
+         (hi  (+ (car time) (/ diff 65536)))
+	 (system-time-locale "C"))
+  (format-time-string "%a %b %e %H:%M:%S %Y" (list hi lo) t)))
+indent-tabs-mode: t
+tab-width: 8
+End:

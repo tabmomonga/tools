@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+
+if ARGV.length == 0
+  print "#{$0} hoge-x.z-zk.arch.rpm\n"
+  exit
+end
+
+prov = Array.new
+`rpm -qpR #{ARGV[0]}`.split(/\n/).each do |req|
+  req.strip!
+  if req =~ /.*\.so.*/ || req =~ /^\//
+    prov += [`rpm -q --whatprovides '#{req}'`.chop]
+  else
+    if req =~ /(<|>|=)/
+      prov += [`rpm -q --whatprovides '#{req.split[0]}'`.chop]
+    else
+      prov += [`rpm -q --whatprovides '#{req}'`.chop]
+    end
+  end
+end
+
+pkg = ARGV[0].split(/\./)[0..-3].join(".")
+prov.delete pkg
+prov.sort.uniq.compact.each do |p|
+  print "#{p}\n"
+end

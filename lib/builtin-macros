@@ -1,0 +1,26 @@
+%global           define the global macro.
+%define           define the local macro.
+%undefine         undefine the macro.
+
+%{echo:...}       print ... to stderr.
+%{warn:...}       print ... to stderr.
+%{error:...}      print ... to stderr and return BADSPEC.
+
+%trace            turn on trace flag.
+%dump             dump the macro table.
+
+%{basename:...}   like as basename(1).
+%{dirname:...}    like as dirname(1). (not yet 4.0.4).
+%{expand:...}	  expand ... to <body> and (re-)expand <body>
+%{suffix:...}     get the filename suffix in ... as filename.
+%verbose          toggle verbose flag.
+%{url2path:...}   get the path in ... as URL.
+%{u2p:...}        same as %url2path.
+%{uncompress:...} expand ... to <file> and test to see if <file> is compressed.
+                  The expansion is
+                    cat <file>       # if not compressed
+                    gzip -dc <file>  # if gzip'ed
+                    bzip2 -dc <file> # if bzip'ed
+%{S:...}          expand ... to <source> file name
+%{P:...}          expand ... to <patch> file name
+%{F:...}          expand ... to <file> file name

@@ -1,0 +1,93 @@
+#! /usr/bin/env ruby
+require 'getoptlong'
+
+$:.unshift(File.dirname($0))
+require 'environment'
+load 'updatespecdb'
+
+if File.expand_path($PKGDIR) != File.expand_path(Dir.getwd)
+  puts "Run in pkgs/ dir."
+  exit 1
+end
+
+class Dir
+  def Dir.in_dir(dir)
+    oldpwd = Dir.pwd
+    Dir.chdir(dir)
+    yield
+    Dir.chdir(oldpwd)
+  end
+end # class Dir
+
+options = [
+  ["-m", "--main",         GetoptLong::NO_ARGUMENT],
+  ["-n", "--nonfree",      GetoptLong::NO_ARGUMENT],
+  ["-h", "--help",         GetoptLong::NO_ARGUMENT]
+]
+
+def show_usage()
+  print <<END_OF_USAGE
+Usage: ../tools/download_all_source [options]
+  -m, --main              main package only
+  -n, --nonfree           build Nonfree package, too
+  -h  --help              show this message
+END_OF_USAGE
+  exit
+end
+
+$MAIN_ONLY          = false
+$NONFREE            = false
+
+begin
+  GetoptLong.new(*options).each do |on, ov|
+    case on
+    when "-m"
+      $MAIN_ONLY = true
+    when "-n"
+      $NONFREE = true
+    when "-h"
+      show_usage
+    end
+  end
+rescue
+  exit 1
+end
+
+Dir.mkdir '/tmp/SOURCES' if not File.directory?('/tmp/SOURCES')
+
+db = SpecDB.new(true)
+
+db.names.each do |name|
+  nosources = db.specs[name].sources.select{|s| s.no?}
+  topdir = $TOPDIR.dup
+
+  Dir.in_dir(name) do
+    if File.exist?('TO.Zoo') then
+      next if $MAIN_ONLY
+      topdir += '-Zoo'
+    elsif File.exist?('TO.Nonfree') then
+      next unless $NONFREE
+      topdir += '-Nonfree'
+    end
+    Dir.in_dir('/tmp/SOURCES') do
+      nosources.each do |src|
+	unless File.exist?(File.expand_path("#{topdir}/SOURCES/#{src.filename}")) then
+          re = nil
+          $URL_ALIAS.each_key do |key|
+            if key.match(src.fullname) then
+              re = key
+              break
+            end
+          end
+          src.fullname.sub!(re, $URL_ALIAS[re]) if re
+	  puts("#{$FTP_CMD} #{src.fullname}")
+	  system("#{$FTP_CMD} #{src.fullname}")
+	  puts("mv #{src.filename} #{topdir}/SOURCES")
+	  system("mv #{src.filename} #{topdir}/SOURCES")
+	end
+      end
+    end
+  end unless nosources.empty?
+end
+
+system("rm -rf /tmp/SOURCES")

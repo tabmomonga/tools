@@ -1,0 +1,43 @@
+#!/usr/bin/env ruby
+
+def parse_rpm (n)
+  n =~ /^.+\/(.+)-([\w\.\+]+)-([\w\.\+]+)\.(.+)\.rpm$/
+  name = $1
+  ver = $2
+  rel = $3
+  kind = $4
+  qlp = `rpm -qlp #{n}`.split(/\n/)
+  cpio = `rpm2cpio #{n} | cpio --list 2> /dev/null`.split(/\n/)
+  $source_list += qlp - cpio
+end
+
+# main
+
+if ARGV.length == 0
+  $source_root = "."
+else
+  $source_root = ARGV[0]
+end
+
+if $source_root =~ /.*\/$/
+  $source_root.chop!
+end
+
+$source_list = []
+for i in `ls #{$source_root + "/SRPMS/*.rpm"}`
+  parse_rpm (i.chop)
+end
+$source_list.sort!
+$source_list.uniq!
+f = open "/tmp/chksource.source_list", "w"
+$source_list.each {|i| f.print "#{i}\n"}
+f.close
+
+ls_list = `ls #{$source_root + "/SOURCES/*"}`.split(/\n/)
+ls_list.sort!
+f = open "/tmp/chksource.ls_list", "w"
+ls_list.each {|i| j = i.split(/\//); f.print "#{j.pop}\n"}
+f.close
+diff_list = `diff -uNr /tmp/chksource.source_list /tmp/chksource.ls_list`
+File.delete "/tmp/chksource.source_list","/tmp/chksource.ls_list"
+print diff_list

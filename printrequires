@@ -1,0 +1,58 @@
+#! /usr/bin/env ruby
+
+require 'rpm'
+$:.unshift(File.dirname($0))
+require 'environment.rb'
+
+$0 = File.basename($0)
+
+def usage
+  puts "usage: #{$0} SPECNAME"
+end
+
+if ARGV.length == 0 then
+  usage
+  exit 0
+end
+
+specpath = File.expand_path("#{$PKGDIR}/#{ARGV[0]}/#{ARGV[0]}.spec")
+unless File.exist?(specpath) then
+  STDERR.puts "file not found: #{$PKGDIR}/#{ARGV[0]}/#{ARGV[0]}.spec"
+  Exit 1
+end
+
+packages = nil
+arch = $ARCH
+begin
+  spec = RPM::Spec.open(specpath)
+  packages = spec.packages.collect{|a| a.name}
+  arch = spec.buildarchs[0] if spec.buildarchs[0]
+end
+
+db = RPM::DB.open
+provide_packages = []
+packages.each do |name|
+  path = Dir.glob("#{$TOPDIR}*/*/#{name}*.#{arch}.rpm")[0]
+  if path.nil? then
+    STDERR.puts("file not found.")
+    exit 1
+  end
+
+  pkg = RPM::Package.open(path)
+
+  pkg.requires.each do |r|
+    ppkg = nil
+    db.each_match(RPM::TAG_PROVIDENAME, r.name) {|ppkg|}
+    provide_packages << ppkg.name if ppkg
+  end
+end
+
+provide_packages -= packages
+provide_packages.sort!
+provide_packages.uniq!
+
+provide_packages.each do |pp|
+  puts pp
+end
+
+exit

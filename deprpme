@@ -1,0 +1,45 @@
+#!/usr/bin/env ruby
+
+$remove_list = Array.new
+
+def check_dependency
+  while 1
+    mes = `rpm -e --allmatches --test #{$remove_list.join(" ")} 2>&1`
+    if mes !~ /is needed by/
+      return
+    end
+    mes_split = mes.split(/\n/)
+    mes_split.each do |line|
+      if line =~ /^.+ is needed by (.+)$/
+        pkg = $1.strip
+	pkg = pkg.split(/-/)[0..-3].join("-")
+        $remove_list += [pkg]
+      end
+    end
+    $remove_list.uniq!
+  end
+end
+
+def dry_run pkg
+  pkg.gsub!(/\+/, '\\\+')
+  if `rpm -q #{pkg}` =~ /package #{pkg} is not installed/
+    return
+  end
+  $remove_list += [pkg]
+  check_dependency
+end
+
+if ARGV.empty?
+  print $0, " pkg1, pkg2, ...\n"
+  exit
+end
+
+ENV['LC_ALL'] = "C"
+
+ARGV.each do |pkg|
+  dry_run pkg
+end
+
+$remove_list.uniq!
+print "#{$remove_list.size} packages remove\n"
+print "rpm -e ", $remove_list.join(" "), "\n"

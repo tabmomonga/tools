@@ -1,0 +1,37 @@
+=begin
+
+= OmoiKondara を ruby-rpm を使用してパワーアップさせようプロジェクト
+
+== 概要
+
+上に同じ。
+
+== 使い方
+
+基本は OmoiKondara と同じ。ただし、Kondara/pkgs ディレクトリに spec ファ
+イルのデータベースを構築する。ファイル名は .OmoiKondara.db。
+
+コマンドラインオプションの説明は
+
+        ../tools/OmoiKondara2 --help
+
+で表示される。ほとんど未実装(滝汁
+
+設定ファイルは
+
+(1) /etc/OmoiKondara.conf
+(2) ~/.OmoiKondara
+(3) ./.OmoiKondara
+
+の順に読み込まれ、順に値が上書きされていくようになっている。
+example.OmoiKondara2 を見ること。
+
+== TODO
+
+動くようにする。
+
+== その他
+
+みんなで作ろう。
+
+=end

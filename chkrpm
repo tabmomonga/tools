@@ -1,0 +1,36 @@
+#!/usr/bin/env ruby
+
+def parse_rpm (n)
+  n =~ /^.+\/(.+)-([\w\.\+]+)-([\w\.\+]+)\.(.+)\.rpm$/
+  name = $1
+  ver = $2
+  rel = $3
+  kind = $4
+  qip = `rpm -qip #{n} | grep "Source RPM"`.split(/: /)
+  if ! FileTest.exist? "#{$srpms_root}/#{qip[2].chop}"
+    print "Not found [#{qip[2].chop}]\n"
+  end
+end
+
+# main
+
+if ARGV.length == 0
+  print "#{$0} binary_root source_root\n"
+  exit
+else
+  $rpms_root = ARGV[0]
+  $srpms_root = ARGV[1]
+end
+
+if $srpms_root =~ /.*\/$/
+  $srpms_root.chop!
+end
+
+if $rpms_root =~ /.*\/$/
+  $rpms_root.chop!
+end
+
+cur_name = ""
+for i in `ls #{$rpms_root + "/*.rpm"}`
+  parse_rpm (i.chop)
+end

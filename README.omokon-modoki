@@ -1,0 +1,13 @@
+omokon-modoki.rb は、Omokondaraが動かない赤帽や他のrpmを
+使うdistributionで、モのspecからビルドするときに使うための
+toolです。pkgs/hoge の下にソースやパッチがあるときは、それらを
+SOURCESにコピーし、NoSourceやNoPatchものはネットからSOURCESに
+落とします。
+
+使い方は 
+    omokon-modoki.rb specファイルのディレクトリ名
+です。specファイルを指定するのではない点に注意。
+
+なお、NoSourceやNoPatchで複雑な指定をしていると、
+理解できないので動かないこともあります。
+ま、たいていはだいじょぶですけどね。

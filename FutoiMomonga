@@ -1,0 +1,13 @@
+#! /usr/bin/env ruby
+### FutoiMomonga  -- Yet Another Package Building System
+###
+### Copyright (C) 2002 Kenta MURATA <muraken2@nifty.com>.
+
+### $Id$
+
+require 'optparse'
+
+### Local Variables:
+### mode: ruby
+### indent-tabs-mode: nil
+### End:
