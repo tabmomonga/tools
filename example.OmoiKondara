@@ -79,3 +79,11 @@ DISPLAY :0.0
 #         tmpfsファイルシステムのディレクトリを指定するのを推奨．
 #         コメントアウトしておけば，これまで通りの動きになる．
 #WORKDIR	/tmp/OmoiKondara
+
+# cachecc1 (default: off)
+#USE_CACHECC1
+
+# How to use distcc with cachecc1:
+#         mkdir CACHECC1_DISTCCDIR
+#         ln -s /usr/libexec/distccwrap CACHECC1_DISTCCDIR
+#CACHECC1_DISTCCDIR /tmp/cachecc1

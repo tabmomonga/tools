@@ -1,3 +1,9 @@
+Fri Nov 12 18:50:00 2004  TAKAHASHI Tamotsu <tamo momonga-linux org>
+	* OmoiKondara: support cachecc1
+	* OmoiKondara: modify English messages
+	* OmoiKondara: print "not installed" if a BuildPreReq is missing
+	* example.OmoiKondara: add USE_CACHECC1 and CACHECC1_DISTCCDIR
+
 Fri Aug 20 22:38:19 2004  Kazuhiko  <kazuhiko@fdiary.net>
 	* OmoiKondara: exit if local source is missing. exit if 'rpm
 	--test' fails.
