@@ -215,8 +215,8 @@ libstdc++3.2
 libstdc++3.2-devel
 libtermcap
 libtiff
-libtools
-libtools-libs
+libtool
+libtool-libs
 libungif
 libusb
 libuser
