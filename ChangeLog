@@ -1,3 +1,7 @@
+Sun Feb 29 13:40:00 2004  YAMAZAKI Makoto <zaki@zakky.org>
+
+	* OmoiKondara: fix for subversion
+
 Thu Jan 15 22:39:00 2004  YAMAZAKI Makoto <zaki@zakky.org>
 
 	* add '\' in rpmmacros for debug

@@ -1386,7 +1386,7 @@ rpm -ivh する関係上、sudo が password 無しで実行可能
         end
       else
         if pn =~ /^.+\.spec$/ &&
-            File.exist?("CVS/Repository") then
+            ( File.exist?("CVS/Repository") || File.exist?(".svn/entries") ) then
           pkg = Dir.pwd.split("/")[-1]
           Dir.chdir ".."
           buildme(pkg)
