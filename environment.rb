@@ -64,9 +64,11 @@ $URL_ALIAS = {}
 
 $CONF_FILES = %w(./.OmoiKondara ~/.OmoiKondara /etc/OmoiKondara.conf)
 
+found_conf = false
 $CONF_FILES.each do |conf|
   conf = File.expand_path(conf)
   next unless FileTest.exist?(conf)
+  found_conf = true
   open(conf) do |f|
     f.each_line do |line|
       next  if line =~ /^#.*$/ or line =~ /^$/
@@ -104,6 +106,15 @@ $CONF_FILES.each do |conf|
     end
   end
   break
+end
+
+if found_conf == false
+  $stderr.puts <<EOF
+FATAL: .OmoiKondara not found.
+F.Y.I: please copy tools/example.OmoiKondara to pkgs/.OmoiKondara
+       and modify that.
+EOF
+  exit 1
 end
 
 %w(TOPDIR PKGDIR).each do |name|
@@ -148,8 +159,31 @@ else
   $stderr.puts %Q(WARNING: unsupported architecture #{$ARCH})
 end
 
+found_rpmvercmp = false
+found_ftp_cmd = false
+ftp_cmd_name = $FTP_CMD.split[0]
+ENV['PATH'].split(/:/).each do |path|
+  if found_rpmvercmp == false && FileTest.exists?("#{path}/rpmvercmp")
+    found_rpmvercmp = true
+  end
+  if found_ftp_cmd == false && FileTest.exists?("#{path}/#{ftp_cmd_name}")
+    found_ftp_cmd = true
+  end
+end
+if found_rpmvercmp == false
+  $stderr.puts "FATAL: rpmvercmp not found."
+  $stderr.puts "F.Y.I: please execute make command in directory 'tools'"
+  exit 1
+end
+if found_ftp_cmd == false
+  $stderr.puts "FATAL: #{ftp_cmd_name} not found."
+  $stderr.puts "F.Y.I: please install #{ftp_cmd_name}."
+  exit 1
+end
+
 if $0 == __FILE__
   %w(TOPDIR PKGDIR FTP_CMD DISPLAY MAILADDR ARCH DISTCC_VERBOSE NUMJOBS WORKDIR).each do |name|
     puts %Q(#{name}='#{eval('$' + name)}'; export #{name})
   end
 end
+

@@ -1582,16 +1582,6 @@ ENV['PATH'] = ENV['PATH'].split(':').select{|a| a !~ %r!/usr/bin/ccache!}.join('
 
 parse_conf
 
-if `which #{$RPMVERCMP}` == "" then
-  print "Please install #{$RPMVERCMP}\n"
-  exit 0
-end
-
-if `which #{$FTP_CMD.split[0]}` == "" then
-  print "Please install #{$FTP_CMD}\n"
-  exit 0
-end
-
 begin
   # be quiet if script mode
   $DEPGRAPH = DepGraph.new(!$SCRIPT) unless $NOSTRICT
