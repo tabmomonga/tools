@@ -1567,8 +1567,7 @@ else
   end
 end
 
-# need to commit? $DEPGRAPH.db is freezed in depgraph.
-# $DEPGRAPH.db.commit! if $DEPGRAPH
+$DEPGRAPH.db.commit! if $DEPGRAPH
 
 ### Local Variables:
 ### mode: ruby
