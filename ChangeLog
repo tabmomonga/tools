@@ -1,3 +1,7 @@
+Fri Apr 23 14:11:17 2004  Kazuhiko  <kazuhiko@fdiary.net>
+
+	* OmoiKondara: only recognize first 'TO.*' in alphabetical order
+
 Fri Apr 23 11:13:07 2004  Kazuhiko  <kazuhiko@fdiary.net>
 
 	* delobso.rb: only recognize first 'TO.*' in alphabetical order

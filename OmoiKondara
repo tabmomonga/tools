@@ -195,13 +195,14 @@ end
   def get_topdir(cwd = "")
     topdir = File.expand_path $TOPDIR
     if cwd != "" then
-      todir = Dir.glob("#{cwd}/#{$hTAG['NAME']}/TO.*")
+      todir = Dir.glob("#{cwd}/#{$hTAG['NAME']}/TO.*").sort
     else
-      todir = Dir.glob("#{$hTAG['NAME']}/TO.*")
+      todir = Dir.glob("#{$hTAG['NAME']}/TO.*").sort
     end
     if todir != [] then
       topdir = topdir + "-" + todir[0].split(/\./)[-1]
     end
+STDERR.puts topdir
     return topdir
   end
 
