@@ -94,6 +94,7 @@ end
   $NONFREE            = false
   $NOSTRICT           = $CANNOTSTRICT
   $GROUPCHECK         = false
+  $INSTALL            = false
   $SCRIPT             = false
   $MIRROR_FIRST       = false
   $SCANPACKAGES       = false
@@ -811,6 +812,7 @@ Sourece/Patch/Icon タグで指定されているファイルをビルド
         install = true
       end
     end if !$IGNORE_REMOVE && $RPMOPT =~ /\-ba|\-bb/
+    install = true if $INSTALL && /^(kernel|usolame)/ !~ pkg
     if (File.exist? "DISPLAY.PLEASE") && !(ENV.has_key? "DISPLAY")
       ENV["DISPLAY"]=$DISPLAY
     end
@@ -1461,6 +1463,7 @@ options = [
   ["-d", "--depend",       GetoptLong::REQUIRED_ARGUMENT],
   ["-f", "--force",        GetoptLong::NO_ARGUMENT],
   ["-g", "--checkgroup",   GetoptLong::NO_ARGUMENT],
+  ["-i", "--install",      GetoptLong::NO_ARGUMENT],
   ["-m", "--main",         GetoptLong::NO_ARGUMENT],
   ["-n", "--nonfree",      GetoptLong::NO_ARGUMENT],
   ["-N", "--nostrict",     GetoptLong::NO_ARGUMENT],
@@ -1489,6 +1492,7 @@ Usage: ../tools/OmoiKondara [options] [names]
   -d, --depend "DEPENDS"  specify dependencies
   -f, --force             force build
   -g, --checkgroup        group check only
+  -i, --install           force install after build (except kernel and usolame)
   -m, --main              main package only
   -n, --nonfree           build Nonfree package, too
   -N, --nostrict          proceed by old behavior
@@ -1526,6 +1530,8 @@ begin
       $FORCE = true
     when "-g"
       $GROUPCHECK = true
+    when "-i"
+      $INSTALL = true
     when "-m"
 #      $MAIN_ONLY = true
     when "-n"

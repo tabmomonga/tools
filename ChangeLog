@@ -1,3 +1,12 @@
+Sat Feb 26 16:03:38 2005  Kazuhiko  <kazuhiko@fdiary.net>
+
+	* OmoiKondara: add a new option '-i (--install)' to force install
+	packages after build.
+
+Wed Feb 23 09:38:11 2005  Kazuhiko  <kazuhiko@fdiary.net>
+
+	* OmoiKondara: use REMOVE* file only if binary packages are built.
+
 Tue Feb 22 13:48:33 2005  Kazuhiko  <kazuhiko@fdiary.net>
 
 	* OmoiKondara: use environment.rb.
