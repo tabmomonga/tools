@@ -74,5 +74,8 @@ DISPLAY :0.0
 #URL_ALIAS ^ftp://ftp\.alsa-project\.org/pub http://www.alsa-project.org/alsa/ftp
 
 # WORKDIR 作業用ディレクトリを指定する．
+#         パッケージ名/BUILD ディレクトリが WORKDIR の下に作られる．
+#         誤って指定した際の危険を考慮し、clean_up時にも削除を行わない．
+#         tmpfsファイルシステムのディレクトリを指定するのを推奨．
 #         コメントアウトしておけば，これまで通りの動きになる．
 #WORKDIR	/tmp/OmoiKondara
