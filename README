@@ -172,7 +172,7 @@
   pkgs の中で ../tools/touch_spec.rb
   引き数はなし
 :ライセンス
-  ask to kazuhiko
+  Ruby
 
 == lib/*
 :開発者/メンテナ
