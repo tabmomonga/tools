@@ -175,6 +175,19 @@ module Speclint
       if RPM['packager']
         result.append_error %(Don't use 'Packager' tag.) #'
       end
+      if !RPM['url']
+        #result.append_error %(Specify 'URL' tag.) #'
+        result.append_warning %(Specify 'URL' tag.) #'
+      elsif /[^\/]\z/ =~ RPM['url']
+        result.append_warning %Q(Suspicious URL: #{RPM['url']})
+        if /index\.html?\z/ =~ RPM['url']
+          result.append_warning %Q(  Did you mean: #{RPM['url'].sub(/index\.html?\z/, '')})
+        elsif RPM['url']['#']
+          result.append_warning %Q(  Did you mean: #{RPM['url'].sub(/#.*\z/, '')})
+        elsif not /\.html?\z/ =~ RPM['url']
+          result.append_warning %Q(  Did you mean: #{RPM['url']}/)
+        end
+      end
     end
 
     def lint_source_locations(result)

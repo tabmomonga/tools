@@ -1,3 +1,8 @@
+Mon Nov 22 01:00:08 2004  TAKAHASHI Tamotsu <tamo momonga-linux org>
+	* speclint: check whether URL tag exists.
+	We have too many specfiles with no URL tags.
+	So speclint doesn't take them as errors.
+
 Fri Nov 12 18:50:00 2004  TAKAHASHI Tamotsu <tamo momonga-linux org>
 	* OmoiKondara: support cachecc1
 	* OmoiKondara: modify English messages
