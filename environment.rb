@@ -119,6 +119,8 @@ $PKGDIR = File.expand_path $PKGDIR
 $ARCH = `uname -m`.chomp
 
 case $ARCH
+when 'x86_64'
+  $ARCH = 'x86_64'
 when /^i\d86$/
   $ARCH = 'i586'
 when 'alpha'
