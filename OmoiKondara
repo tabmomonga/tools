@@ -124,6 +124,8 @@ end
   $LOG_FILE_COMPRESS  = true
   $DEPEND_PACKAGE     = ""
   $MAIN_ONLY          = true
+  $BUILD_ALTER        = false
+  $BUILD_ORPHAN       = false
   $DEPGRAPH           = nil
   $NAME_STACK         = []
   $RPMVERCMP        = "rpmvercmp"
@@ -1240,6 +1242,12 @@ rpm -ivh する関係上、sudo が password 無しで実行可能
       if Dir.glob("#{pkg}/TO.*").length != 0 && $MAIN_ONLY then
         throw :exit_buildme, 1
       end
+      if !$BUILD_ALTER && File.exist?("#{pkg}/TO.Alter") then
+        throw :exit_buildme, 1
+      end
+      if !$BUILD_ORPHAN && File.exist?("#{pkg}/TO.Orphan") then
+        throw :exit_buildme, 1
+      end
       if !$NONFREE && File.exist?("#{pkg}/TO.Nonfree") then
         throw :exit_buildme, 1
       end
@@ -1496,8 +1504,10 @@ begin
       end
     when "-O"
       $MAIN_ONLY = false      
+      $BUILD_ORPHAN = true
     when "-L"
       $MAIN_ONLY = false      
+      $BUILD_ALTER = true
     when "-z"
       $MAIN_ONLY = false
     when "-h"
