@@ -120,10 +120,13 @@ $ARCH = `uname -m`.chomp
 
 case $ARCH
 when 'x86_64'
+  $NOTFILE = 'NOT.x86_64'
   $ARCH = 'x86_64'
 when /^i\d86$/
+  $NOTFILE = 'NOT.ix86'
   $ARCH = 'i686'
-when 'alpha'
+when /^alpha/
+  $NOTFILE = 'NOT.alpha'
   open('/proc/cpuinfo').readlines.each do |line|
     if line =~ /^cpu model\s*:\s*EV([0-9]).*$/ && $1 == '5'
       $ARCH = 'alphaev5'
@@ -131,12 +134,16 @@ when 'alpha'
     end
   end
 when 'mips'
+  $NOTFILE = 'NOT.mips'
   open('/proc/cpuinfo').readlines.each do |line|
     if line =~ /^cpu model\s*:\s*R5900.*/
       $ARCH = 'mipsel'
       break
     end
   end
+when /^ppc/
+  $NOTFILE = 'NOT.ppc'
+  $ARCH = 'ppc'
 else
   $stderr.puts %Q(WARNING: unsupported architecture #{$ARCH})
 end

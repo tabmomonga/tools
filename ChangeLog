@@ -1,3 +1,8 @@
+Tue Feb 22 10:50:27 2005  Kazuhiko  <kazuhiko@fdiary.net>
+
+	* environment.rb: provide $NOTFILE.
+	* delobso.rb: use $NOTFILE. display missing files if $VERBOSE.
+
 Thu Feb 17 10:17:08 2005  Kazuhiko  <kazuhiko@fdiary.net>
 
 	* OmoiKondara: new option '$LOG_FILE_COMPRESS' whose default value

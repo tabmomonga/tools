@@ -24,6 +24,7 @@ $Packages = {}
 $DB.specs.each_value do |spec|
   nosource = false
   todir=$TOPDIR
+  next if test(?e, "#{spec.name}/#{$NOTFILE}")
   Dir.glob("#{spec.name}/TO.*").sort.each do |to|
     todir += "-#{File.basename(to)[3..-1]}"
     break
@@ -55,15 +56,21 @@ end
 $Massatu = []
 Dir.glob("#{$TOPDIR}*").each do |top|
   Dir.glob("#{top}/#{ARCH}/*.rpm\0#{top}/noarch/*.rpm\0#{top}/SRPMS/*.rpm").each do |rpm|
-    next if rpm.split('/')[-2] == 'SOURCES'
     if !$Packages[top] || !$Packages[top][File.basename(rpm)]
       $Massatu << rpm
+    else
+      $Packages[top].delete(File.basename(rpm))
     end
   end
   Dir.glob("#{top}/SOURCES/*").each do |src|
     if !$Sources[top] || !$Sources[top][File.basename(src)]
       $Massatu << src
     end
+  end
+  ($Packages[top]||[]).sort.each do |k,v|
+    dir = k.split(/\./)[-2]
+    dir = 'SRPMS' if /src/ =~ dir
+    STDERR.puts "#{top}/#{dir}/#{k} is missing" if $VERBOSE
   end
 end
 
