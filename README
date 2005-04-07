@@ -218,6 +218,16 @@
 :ライセンス
   Ruby
 
+== listduplicate.rb
+:開発者/メンテナ
+  kazuhiko
+:機能概要
+  全バイナリパッケージから重複したファイルを見つける
+:実行方法
+  listduplicate.rb
+:ライセンス
+  Ruby
+
 
 == 内容テンプレート
 :開発者/メンテナ
