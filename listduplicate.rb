@@ -4,10 +4,16 @@ require 'rpm'
 $:.unshift(File.dirname($0))
 require 'environment'
 
+if ARGV[0] == '-a'
+  glob_pattern = "#{$TOPDIR}*"
+else
+  glob_pattern = $TOPDIR
+end
+
 files = Hash.new{|i,k| i[k]=[]}
 
 ARCH=$ARCH
-Dir.glob("#{$TOPDIR}*").each do |top|
+Dir.glob(glob_pattern).each do |top|
   Dir.glob("#{top}/#{ARCH}/*.rpm\0#{top}/noarch/*.rpm").each do |rpm|
     begin
       pkg = RPM::Package.open(rpm)
