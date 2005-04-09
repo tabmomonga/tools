@@ -3812,7 +3812,7 @@
       <packagereq type="mandatory">truetype-fonts-ja</packagereq>
       <packagereq type="default">uim</packagereq>
       <packagereq type="default">uim-fep</packagereq>
-      <packagereq tyoe="default">uim-xim</packagereq>
+      <packagereq type="default">uim-xim</packagereq>
       <packagereq type="default">prime</packagereq>
       <packagereq type="default">anthy</packagereq>
       <packagereq type="default">prime-dict</packagereq>
