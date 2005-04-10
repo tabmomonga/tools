@@ -3990,18 +3990,8 @@
     <default>false</default>
     <uservisible>true</uservisible>
     <grouplist>
-      <groupreq>admin-tools</groupreq>
-      <groupreq>base</groupreq>
       <groupreq>base-x</groupreq>
       <groupreq>dialup</groupreq>
-      <groupreq>editors</groupreq>
-      <groupreq>games</groupreq>
-      <groupreq>graphical-internet</groupreq>
-      <groupreq>graphics</groupreq>
-      <groupreq>office</groupreq>
-      <groupreq>printing</groupreq>
-      <groupreq>sound-and-video</groupreq>
-      <groupreq>text-internet</groupreq>
     </grouplist>
     <packagelist>
       <packagereq type="default">amarok</packagereq>
