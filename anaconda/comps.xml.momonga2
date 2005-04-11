@@ -2803,10 +2803,12 @@
       <packagereq type="default">gtk-engines</packagereq>
       <packagereq type="default">hwbrowser</packagereq>
       <packagereq type="mandatory">metacity</packagereq>
+      <packagereq type="default">momonga-desktop</packagereq>
       <packagereq type="mandatory">nautilus</packagereq>
       <packagereq type="mandatory">nautilus-media</packagereq>
       <packagereq type="default">vino</packagereq>
       <packagereq type="mandatory">yelp</packagereq>
+      <packagereq type="default">xscreensaver</packagereq>
     </packagelist>
   </group>
 
