@@ -4015,6 +4015,7 @@
       <packagereq type="default">gwenview</packagereq>
       <packagereq type="default">k3b</packagereq>
       <packagereq type="default">kaffeine</packagereq>
+      <packagereq type="optional">kaffeine-mozilla-plugin</packagereq>
       <packagereq type="default">kannadic</packagereq>
       <packagereq type="default">kcpuload</packagereq>
       <packagereq type="default">kde-i18n</packagereq>
