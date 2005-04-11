@@ -801,6 +801,13 @@
       <packagereq type="optional" requires="openoffice.org">openoffice.org-i18n-Chinese-Big5</packagereq>
       <packagereq type="mandatory">truetype-fonts-zh_CN</packagereq>
       <packagereq type="mandatory">truetype-fonts-zh_TW</packagereq>
+      <packagereq type="default">uim</packagereq>
+      <packagereq type="default">uim-fep</packagereq>
+      <packagereq type="optional" requires="xorg-x11">uim-xim</packagereq>
+      <packagereq type="optional" requires="qt">uim-qt</packagereq>
+      <packagereq type="optional" requires="xorg-x11">scim</packagereq>
+      <packagereq type="optional" requires="qt">scim-qtimm</packagereq>
+      <packagereq type="optional" requires="xorg-x11">scim-uim</packagereq>
     </packagelist>
   </group>
 
@@ -3826,19 +3833,21 @@
       <packagereq type="mandatory">truetype-fonts-ja</packagereq>
       <packagereq type="default">uim</packagereq>
       <packagereq type="default">uim-fep</packagereq>
-      <packagereq type="default">uim-xim</packagereq>
+      <packagereq type="optional" requires="qt">uim-qt</packagereq>
+      <packagereq type="optional" requires="xorg-x11">uim-xim</packagereq>
       <packagereq type="default">prime</packagereq>
       <packagereq type="default">anthy</packagereq>
       <packagereq type="default">prime-dict</packagereq>
       <packagereq type="default">ruby-sary</packagereq>
       <packagereq type="default">suikyo-ruby</packagereq>
       <packagereq type="default">ruby-progressbar</packagereq>
-      <packagereq type="default">scim</packagereq>
-      <packagereq type="default">scim-anthy</packagereq>
-      <packagereq type="default">scim-prime</packagereq>
-      <packagereq type="default">scim-canna</packagereq>
-      <packagereq type="default">scim-skk</packagereq>
-      <packagereq type="default">scim-uim</packagereq>
+      <packagereq type="optional" requires="xorg-x11">scim</packagereq>
+      <packagereq type="optional" requires="xorg-x11">scim-anthy</packagereq>
+      <packagereq type="optional" requires="xorg-x11">scim-prime</packagereq>
+      <packagereq type="optional" requires="xorg-x11">scim-canna</packagereq>
+      <packagereq type="optional" requires="qt">scim-qtimm</packagereq>
+      <packagereq type="optional" requires="xorg-x11">scim-skk</packagereq>
+      <packagereq type="optional" requires="xorg-x11">scim-uim</packagereq>
     </packagelist>
   </group>
 
@@ -3990,18 +3999,8 @@
     <default>false</default>
     <uservisible>true</uservisible>
     <grouplist>
-      <groupreq>admin-tools</groupreq>
-      <groupreq>base</groupreq>
       <groupreq>base-x</groupreq>
       <groupreq>dialup</groupreq>
-      <groupreq>editors</groupreq>
-      <groupreq>games</groupreq>
-      <groupreq>graphical-internet</groupreq>
-      <groupreq>graphics</groupreq>
-      <groupreq>office</groupreq>
-      <groupreq>printing</groupreq>
-      <groupreq>sound-and-video</groupreq>
-      <groupreq>text-internet</groupreq>
     </grouplist>
     <packagelist>
       <packagereq type="default">amarok</packagereq>
@@ -4032,15 +4031,12 @@
       <packagereq type="default">kdeutils</packagereq>
       <packagereq type="default">kfish</packagereq>
       <packagereq type="default">kita</packagereq>
-      <packagereq type="default">koffice</packagereq>
+      <packagereq type="mandatory">koffice</packagereq>
       <packagereq type="default">kompose</packagereq>
       <packagereq type="default">kreetingkard</packagereq>
       <packagereq type="default">rosegarden</packagereq>
-      <packagereq type="default">scim-qtimm</packagereq>
       <packagereq type="default">skim</packagereq>
       <packagereq type="default">uim-kdehelper</packagereq>
-      <packagereq type="default">uim-qt</packagereq>
-      <packagereq type="default">xine-lib</packagereq>
       <packagereq type="default">xine-lib-alsa</packagereq>
       <packagereq type="default">xine-lib-arts</packagereq>
       <packagereq type="default">xine-lib-esd</packagereq>
@@ -4232,6 +4228,14 @@
       <packagereq type="optional" requires="xorg-x11">iiimf-xiiimp</packagereq>
       <packagereq type="optional" requires="openoffice.org">openoffice.org-i18n-Korean</packagereq>
       <packagereq type="mandatory">truetype-fonts-ko</packagereq>
+      <packagereq type="default">uim</packagereq>
+      <packagereq type="default">uim-fep</packagereq>
+      <packagereq type="optional" requires="xorg-x11">uim-xim</packagereq>
+      <packagereq type="optional" requires="qt">uim-qt</packagereq>
+      <packagereq type="optional" requires="xorg-x11">scim</packagereq>
+      <packagereq type="optional" requires="qt">scim-qtimm</packagereq>
+      <packagereq type="optional" requires="qt">scim-qtimm</packagereq>
+      <packagereq type="optional" requires="xorg-x11">scim-uim</packagereq>
     </packagelist>
   </group>
 
