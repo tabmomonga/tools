@@ -1,3 +1,7 @@
+Tue Apr 12 09:04:14 2005  Kazuhiko  <kazuhiko@fdiary.net>
+
+	* commit: check status of a spec file itself.
+
 Sat Feb 26 16:03:38 2005  Kazuhiko  <kazuhiko@fdiary.net>
 
 	* OmoiKondara: add a new option '-i (--install)' to force install

@@ -69,6 +69,7 @@ ARGV.each do |pkg|
     next
   end
   sources = spec.sources.collect{|s| File.basename( s.to_s ) unless s.no?}.compact
+  sources << "#{pkg}.spec"
   versioning_systems.each do |command|
     entries = []
     case command
