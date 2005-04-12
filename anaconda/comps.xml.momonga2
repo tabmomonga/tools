@@ -801,8 +801,8 @@
       <packagereq type="optional" requires="openoffice.org">openoffice.org-i18n-Chinese-Big5</packagereq>
       <packagereq type="mandatory">truetype-fonts-zh_CN</packagereq>
       <packagereq type="mandatory">truetype-fonts-zh_TW</packagereq>
-      <packagereq type="default">uim</packagereq>
-      <packagereq type="default">uim-fep</packagereq>
+      <packagereq type="optional" requires="xorg-x11-libs">uim</packagereq>
+      <packagereq type="optional" requires="xorg-x11-libs">uim-fep</packagereq>
       <packagereq type="optional" requires="xorg-x11">uim-xim</packagereq>
       <packagereq type="optional" requires="qt">uim-qt</packagereq>
       <packagereq type="optional" requires="xorg-x11">scim</packagereq>
@@ -3833,8 +3833,8 @@
       <packagereq type="default">skk-jisyo</packagereq>
       <packagereq type="optional" requires="xorg-x11">skkinput</packagereq>
       <packagereq type="mandatory">truetype-fonts-ja</packagereq>
-      <packagereq type="default">uim</packagereq>
-      <packagereq type="default">uim-fep</packagereq>
+      <packagereq type="optional" requires="xorg-x11-libs">uim</packagereq>
+      <packagereq type="optional" requires="xorg-x11-libs">uim-fep</packagereq>
       <packagereq type="optional" requires="qt">uim-qt</packagereq>
       <packagereq type="optional" requires="xorg-x11">uim-xim</packagereq>
       <packagereq type="default">prime</packagereq>
@@ -4231,8 +4231,8 @@
       <packagereq type="optional" requires="xorg-x11">iiimf-xiiimp</packagereq>
       <packagereq type="optional" requires="openoffice.org">openoffice.org-i18n-Korean</packagereq>
       <packagereq type="mandatory">truetype-fonts-ko</packagereq>
-      <packagereq type="default">uim</packagereq>
-      <packagereq type="default">uim-fep</packagereq>
+      <packagereq type="optional" requires="xorg-x11-libs">uim</packagereq>
+      <packagereq type="optional" requires="xorg-x11-libs">uim-fep</packagereq>
       <packagereq type="optional" requires="xorg-x11">uim-xim</packagereq>
       <packagereq type="optional" requires="qt">uim-qt</packagereq>
       <packagereq type="optional" requires="xorg-x11">scim</packagereq>
