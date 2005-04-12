@@ -4175,7 +4175,7 @@
   </group>
 
   <group>
-    <id>korean-support</id>
+    <id>-support</id>
     <name>Korean Support</name>
     <name xml:lang="ar">دعم الكوريّة</name>
     <name xml:lang="be">Падтрымка карэйскае мовы</name>
@@ -4237,7 +4237,6 @@
       <packagereq type="optional" requires="qt">uim-qt</packagereq>
       <packagereq type="optional" requires="xorg-x11">scim</packagereq>
       <packagereq type="optional" requires="qt">scim-qtimm</packagereq>
-      <packagereq type="optional" requires="qt">scim-qtimm</packagereq>
       <packagereq type="optional" requires="xorg-x11">scim-uim</packagereq>
     </packagelist>
   </group>
@@ -4262,7 +4261,7 @@
     <name xml:lang="hi">रिक्त जालक्रम परिसेवक</name>
     <name xml:lang="hr">Poslužitelj mrežnog nasljeđivanja</name>
     <name xml:lang="hu">Régi típusú hálózati kiszolgáló</name>
-    <name xml:lang="id">Server Network Legasi</name>
+    <name xml:lang=korean"id">Server Network Legasi</name>
     <name xml:lang="is">Gamlar netþjónustur</name>
     <name xml:lang="it">Server della rete Legacy</name>
     <name xml:lang="ja">レガシーなネットワークサーバー</name>
