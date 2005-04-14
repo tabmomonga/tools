@@ -734,7 +734,6 @@
     <packagelist>
       <packagereq type="optional" requires="kdebase">kde-i18n-Catalan</packagereq>
       <packagereq type="optional" requires="kdebase">koffice-i18n-Catalan</packagereq>
-      <packagereq type="optional" requires="openoffice.org">openoffice.org-i18n-Catalan</packagereq>
     </packagelist>
   </group>
 
@@ -797,8 +796,6 @@
       <packagereq type="optional" requires="kdebase">kde-i18n-Chinese-Big5</packagereq>
       <packagereq type="optional" requires="kdebase">koffice-i18n-Chinese-Simplified</packagereq>
       <packagereq type="optional" requires="kdebase">koffice-i18n-Chinese-Traditional</packagereq>
-      <packagereq type="optional" requires="openoffice.org">openoffice.org-i18n-Chinese</packagereq>
-      <packagereq type="optional" requires="openoffice.org">openoffice.org-i18n-Chinese-Big5</packagereq>
       <packagereq type="mandatory">truetype-fonts-zh_CN</packagereq>
       <packagereq type="mandatory">truetype-fonts-zh_TW</packagereq>
       <packagereq type="optional" requires="xorg-x11-libs">uim</packagereq>
@@ -1448,7 +1445,6 @@
     <packagelist>
       <packagereq type="optional" requires="kdebase">kde-i18n-Czech</packagereq>
       <packagereq type="optional" requires="kdebase">koffice-i18n-Czech</packagereq>
-      <packagereq type="optional" requires="openoffice.org">openoffice.org-i18n-Czech</packagereq>
       <packagereq type="optional" requires="man-pages">man-pages-cs</packagereq>
     </packagelist>
   </group>
@@ -1608,7 +1604,6 @@
     <packagelist>
       <packagereq type="optional" requires="kdebase">kde-i18n-Danish</packagereq>
       <packagereq type="optional" requires="kdebase">koffice-i18n-Danish</packagereq>
-      <packagereq type="optional" requires="openoffice.org">openoffice.org-i18n-Danish</packagereq>
       <packagereq type="optional" requires="man-pages">man-pages-da</packagereq>
     </packagelist>
   </group>
@@ -2012,7 +2007,6 @@
     <packagelist>
       <packagereq type="optional" requires="kdebase">kde-i18n-Dutch</packagereq>
       <packagereq type="optional" requires="kdebase">koffice-i18n-Dutch</packagereq>
-      <packagereq type="optional" requires="openoffice.org">openoffice.org-i18n-Dutch</packagereq>
     </packagelist>
   </group>
 
@@ -2386,7 +2380,6 @@
     <packagelist>
       <packagereq type="optional" requires="kdebase">kde-i18n-Estonian</packagereq>
       <packagereq type="optional" requires="kdebase">koffice-i18n-Estonian</packagereq>
-      <packagereq type="optional" requires="openoffice.org">openoffice.org-i18n-Estonian</packagereq>
     </packagelist>
   </group>
 
@@ -2547,7 +2540,6 @@
     <packagelist>
       <packagereq type="optional" requires="kdebase">kde-i18n-Finnish</packagereq>
       <packagereq type="optional" requires="kdebase">koffice-i18n-Finnish</packagereq>
-      <packagereq type="optional" requires="openoffice.org">openoffice.org-i18n-Finnish</packagereq>
     </packagelist>
   </group>
 
@@ -2607,7 +2599,6 @@
       <packagereq type="optional" requires="aspell">aspell-fr</packagereq>
       <packagereq type="optional" requires="kdebase">kde-i18n-French</packagereq>
       <packagereq type="optional" requires="kdebase">koffice-i18n-French</packagereq>
-      <packagereq type="optional" requires="openoffice.org">openoffice.org-i18n-French</packagereq>
       <packagereq type="optional" requires="man-pages">man-pages-fr</packagereq>
     </packagelist>
   </group>
@@ -3102,7 +3093,6 @@
     <packagelist>
       <packagereq type="optional" requires="kdebase">kde-i18n-German</packagereq>
       <packagereq type="optional" requires="kdebase">koffice-i18n-German</packagereq>
-      <packagereq type="optional" requires="openoffice.org">openoffice.org-i18n-German</packagereq>
       <packagereq type="optional" requires="man-pages">man-pages-de</packagereq>
     </packagelist>
   </group>
@@ -3384,7 +3374,6 @@
     <packagelist>
       <packagereq type="optional" requires="kdebase">kde-i18n-Greek</packagereq>
       <packagereq type="optional" requires="kdebase">koffice-i18n-Greek</packagereq>
-      <packagereq type="optional" requires="openoffice.org">openoffice.org-i18n-Greek</packagereq>
     </packagelist>
   </group>
 
@@ -3524,7 +3513,6 @@
     <packagelist>
       <packagereq type="optional" requires="kdebase">kde-i18n-Hungarian</packagereq>
       <packagereq type="optional" requires="kdebase">koffice-i18n-Hungarian</packagereq>
-      <packagereq type="optional" requires="openoffice.org">openoffice.org-i18n-Hungarian</packagereq>
     </packagelist>
   </group>
 
@@ -3754,7 +3742,6 @@
     <packagelist>
       <packagereq type="optional" requires="kdebase">kde-i18n-Italian</packagereq>
       <packagereq type="optional" requires="kdebase">koffice-i18n-Italian</packagereq>
-      <packagereq type="optional" requires="openoffice.org">openoffice.org-i18n-Italian</packagereq>
       <packagereq type="optional" requires="man-pages">man-pages-it</packagereq>
     </packagelist>
   </group>
@@ -3820,7 +3807,6 @@
       <packagereq type="default">kakasi-dict</packagereq>
       <packagereq type="optional" requires="kdebase">kde-i18n-Japanese</packagereq>
       <packagereq type="optional" requires="kdebase">koffice-i18n-Japanese</packagereq>
-      <packagereq type="optional" requires="openoffice.org">openoffice.org-i18n-Japanese</packagereq>
       <packagereq type="optional" requires="xorg-x11">kinput2</packagereq>
       <packagereq type="mandatory" basearchonly="true">jfbterm</packagereq>
       <packagereq type="default">lv</packagereq>
@@ -4227,7 +4213,6 @@
       <packagereq type="default">iiimf-doc</packagereq>
       <packagereq type="default">iiimf</packagereq>
       <packagereq type="optional" requires="xorg-x11">iiimf-xiiimp</packagereq>
-      <packagereq type="optional" requires="openoffice.org">openoffice.org-i18n-Korean</packagereq>
       <packagereq type="mandatory">truetype-fonts-ko</packagereq>
       <packagereq type="optional" requires="xorg-x11-libs">uim</packagereq>
       <packagereq type="optional" requires="xorg-x11-libs">uim-fep</packagereq>
@@ -5153,6 +5138,30 @@
       <packagereq type="optional">kdepim</packagereq>
       <packagereq type="optional">koffice</packagereq>
       <packagereq type="default">openoffice.org</packagereq>
+      <packagereq type="optional">openoffice.org-i18n-Arabic</packagereq>
+      <packagereq type="optional">openoffice.org-i18n-Catalan</packagereq>
+      <packagereq type="optional">openoffice.org-i18n-Chinese</packagereq>
+      <packagereq type="optional">openoffice.org-i18n-Chinese-Big5</packagereq>
+      <packagereq type="optional">openoffice.org-i18n-Czech</packagereq>
+      <packagereq type="optional">openoffice.org-i18n-Danish</packagereq>
+      <packagereq type="optional">openoffice.org-i18n-Dutch</packagereq>
+      <packagereq type="optional">openoffice.org-i18n-Estonian</packagereq>
+      <packagereq type="optional">openoffice.org-i18n-Finnish</packagereq>
+      <packagereq type="optional">openoffice.org-i18n-French</packagereq>
+      <packagereq type="optional">openoffice.org-i18n-German</packagereq>
+      <packagereq type="optional">openoffice.org-i18n-Greek</packagereq>
+      <packagereq type="optional">openoffice.org-i18n-Hungarian</packagereq>
+      <packagereq type="optional">openoffice.org-i18n-Italian</packagereq>
+      <packagereq type="default">openoffice.org-i18n-Japanese</packagereq>
+      <packagereq type="optional">openoffice.org-i18n-Korean</packagereq>
+      <packagereq type="optional">openoffice.org-i18n-Polish</packagereq>
+      <packagereq type="optional">openoffice.org-i18n-Portuguese</packagereq>
+      <packagereq type="optional">openoffice.org-i18n-Russian</packagereq>
+      <packagereq type="optional">openoffice.org-i18n-Slovak</packagereq>
+      <packagereq type="optional">openoffice.org-i18n-Slovenian</packagereq>
+      <packagereq type="optional">openoffice.org-i18n-Spanish</packagereq>
+      <packagereq type="optional">openoffice.org-i18n-Swedish</packagereq>
+      <packagereq type="optional">openoffice.org-i18n-Turkish</packagereq>
       <packagereq type="optional">xpdf</packagereq>
     </packagelist>
   </group>
@@ -5214,7 +5223,6 @@
     <packagelist>
       <packagereq type="optional" requires="kdebase">kde-i18n-Polish</packagereq>
       <packagereq type="optional" requires="kdebase">koffice-i18n-Polish</packagereq>
-      <packagereq type="optional" requires="openoffice.org">openoffice.org-i18n-Polish</packagereq>
       <packagereq type="optional" requires="man-pages">man-pages-pl</packagereq>
     </packagelist>
   </group>
@@ -5273,7 +5281,6 @@
     <packagelist>
       <packagereq type="optional" requires="kdebase">kde-i18n-Portuguese</packagereq>
       <packagereq type="optional" requires="kdebase">koffice-i18n-Portuguese</packagereq>
-      <packagereq type="optional" requires="openoffice.org">openoffice.org-i18n-Portuguese</packagereq>
     </packagelist>
   </group>
 
@@ -5715,7 +5722,6 @@
     <packagelist>
       <packagereq type="optional" requires="kdebase">kde-i18n-Russian</packagereq>
       <packagereq type="optional" requires="kdebase">koffice-i18n-Russian</packagereq>
-      <packagereq type="optional" requires="openoffice.org">openoffice.org-i18n-Russian</packagereq>
       <packagereq type="optional" requires="man-pages">man-pages-ru</packagereq>
     </packagelist>
   </group>
@@ -6007,7 +6013,6 @@
     <packagelist>
       <packagereq type="optional" requires="kdebase">kde-i18n-Slovak</packagereq>
       <packagereq type="optional" requires="kdebase">koffice-i18n-Slovak</packagereq>
-      <packagereq type="optional" requires="openoffice.org">openoffice.org-i18n-Slovak</packagereq>
     </packagelist>
   </group>
 
@@ -6067,7 +6072,6 @@
     <packagelist>
       <packagereq type="optional" requires="kdebase">kde-i18n-Slovenian</packagereq>
       <packagereq type="optional" requires="kdebase">koffice-i18n-Slovenian</packagereq>
-      <packagereq type="optional" requires="openoffice.org">openoffice.org-i18n-Slovenian</packagereq>
     </packagelist>
   </group>
 
@@ -6249,7 +6253,6 @@
     <packagelist>
       <packagereq type="optional" requires="kdebase">kde-i18n-Spanish</packagereq>
       <packagereq type="optional" requires="kdebase">koffice-i18n-Spanish</packagereq>
-      <packagereq type="optional" requires="openoffice.org">openoffice.org-i18n-Spanish</packagereq>
       <packagereq type="optional" requires="man-pages">man-pages-es</packagereq>
     </packagelist>
   </group>
@@ -6308,7 +6311,6 @@
     <packagelist>
       <packagereq type="optional" requires="kdebase">kde-i18n-Swedish</packagereq>
       <packagereq type="optional" requires="kdebase">koffice-i18n-Swedish</packagereq>
-      <packagereq type="optional" requires="openoffice.org">openoffice.org-i18n-Swedish</packagereq>
     </packagelist>
   </group>
 
@@ -6603,7 +6605,6 @@
     <packagelist>
       <packagereq type="optional" requires="kdebase">kde-i18n-Turkish</packagereq>
       <packagereq type="optional" requires="kdebase">koffice-i18n-Turkish</packagereq>
-      <packagereq type="optional" requires="openoffice.org">openoffice.org-i18n-Turkish</packagereq>
     </packagelist>
   </group>
 
