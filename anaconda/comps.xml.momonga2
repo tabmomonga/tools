@@ -1331,6 +1331,7 @@
       <packagereq type="mandatory">termcap</packagereq>
       <packagereq type="mandatory">util-linux</packagereq>
       <packagereq type="mandatory">vim-minimal</packagereq>
+      <packagereq type="mandatory">vim-common</packagereq>
     </packagelist>
   </group>
 
@@ -2110,8 +2111,12 @@
       <metapkg type="optional">xemacs</metapkg>
     </grouplist>
     <packagelist>
-      <packagereq type="optional">vim-X11</packagereq>
+      <packagereq type="default">vim-X11</packagereq>
       <packagereq type="default">vim-enhanced</packagereq>
+      <packagereq type="default">vim-macros</packagereq>
+      <packagereq type="optional">xjed</packagereq>
+      <packagereq type="optional">jed</packagereq>
+      <packagereq type="optional">jed-common</packagereq>
     </packagelist>
   </group>
 
@@ -2850,6 +2855,11 @@
       <packagereq type="default">libgnomecups</packagereq>
       <packagereq type="default">libgnomeprint</packagereq>
       <packagereq type="default">libgnomeprintui</packagereq>
+      <packagereq type="default">gimageview</packagereq>
+      <packagereq type="default">gtkam</packagereq>
+      <packagereq type="optional">gtkam-gimp</packagereq>
+      <packagereq type="default">sodipodi</packagereq>
+      <packagereq type="default">battfink</packagereq>
     </packagelist>
   </group>
 
@@ -3265,8 +3275,16 @@
       <packagereq type="default">openh323</packagereq>
       <packagereq type="default">openh323gk</packagereq>
       <packagereq type="optional">kdewebdev</packagereq>
-      <packagereq type="optional">thunderbird</packagereq>
+      <packagereq type="default">thunderbird</packagereq>
       <packagereq type="default">xchat</packagereq>
+      <packagereq type="optional">galeon</packagereq>
+      <packagereq type="optional">mozilla</packagereq>
+      <packagereq type="optional">mozilla-chat</packagereq>
+      <packagereq type="optional">mozilla-mail</packagereq>
+      <packagereq type="optional">kazehakase</packagereq>
+      <packagereq type="optional">kita</packagereq>
+      <packagereq type="optional">ochusha</packagereq>
+      <packagereq type="optional">loqui</packagereq>
     </packagelist>
   </group>
 
@@ -3376,12 +3394,17 @@
       <packagereq type="default">gimp</packagereq>
       <packagereq type="default">gimp-gap</packagereq>
       <packagereq type="default">gimp-help</packagereq>
+      <packagereq type="default">gimp-pygimp</packagereq>
+      <packagereq type="default">gimp-print</packagereq>
+      <packagereq type="default">gimp-print-cups</packagereq>
+      <packagereq type="default">gimp-print-utils</packagereq>
       <packagereq type="optional">kdegraphics</packagereq>
       <packagereq type="default">netpbm-progs</packagereq>
       <packagereq type="default">sane-frontends</packagereq>
       <packagereq type="optional">xfig</packagereq>
       <packagereq type="default">xsane</packagereq>
       <packagereq type="default">xsane-gimp</packagereq>
+      <packagereq type="optional">blender</packagereq>
     </packagelist>
   </group>
 
@@ -4937,6 +4960,7 @@
       <packagereq type="optional">krb5-server</packagereq>
       <packagereq type="optional">openldap-servers</packagereq>
       <packagereq type="optional">vnc-server</packagereq>
+      <packagereq type="optional">metavnc-server</packagereq>
       <packagereq type="optional">ypserv</packagereq>
     </packagelist>
   </group>
@@ -5230,6 +5254,7 @@
       <packagereq type="optional">openoffice.org-i18n-Swedish</packagereq>
       <packagereq type="optional">openoffice.org-i18n-Turkish</packagereq>
       <packagereq type="optional">xpdf</packagereq>
+      <packagereq type="optional">ebview</packagereq>
     </packagelist>
   </group>
 
@@ -5556,6 +5581,8 @@
       <packagereq type="default">samba-client</packagereq>
       <packagereq type="mandatory">system-config-printer</packagereq>
       <packagereq type="mandatory">xorg-x11-font-utils</packagereq>
+      <packagereq type="default">foomatic</packagereq>
+      <packagereq type="default">foomatic-db</packagereq>
     </packagelist>
   </group>
 
@@ -6249,19 +6276,45 @@
       <packagereq type="default">cdp</packagereq>
       <packagereq type="default">cdparanoia</packagereq>
       <packagereq type="default">dvd+rw-tools</packagereq>
-      <packagereq type="optional">grip</packagereq>
+      <packagereq type="default">grip</packagereq>
       <packagereq type="optional">k3b</packagereq>
       <packagereq type="optional">kdemultimedia</packagereq>
+      <packagereq type="default">kino</packagereq>
       <packagereq type="optional">mikmod</packagereq>
       <packagereq type="default">mkisofs</packagereq>
+      <packagereq type="optional">mplayer</packagereq>
+      <packagereq type="optional">mplayer-skins</packagereq>
+      <packagereq type="optional">mythtv</packagereq>
+      <packagereq type="optional">mythtv-frontend</packagereq>
+      <packagereq type="optional">mythtv-backend</packagereq>
+      <packagereq type="optional">rosegarden</packagereq>
       <packagereq type="mandatory">sox</packagereq>
-      <packagereq type="optional">totem</packagereq>
-      <packagereq type="optional">tvtime</packagereq>
+      <packagereq type="default">totem</packagereq>
+      <packagereq type="default">tvtime</packagereq>
       <packagereq type="mandatory">vorbis-tools</packagereq>
+      <packagereq type="optional">xawtv</packagereq>
       <packagereq type="optional">xcdroast</packagereq>
-      <packagereq type="optional">xmms</packagereq>
-      <packagereq type="optional">xmms-skins</packagereq>
+      <packagereq type="default">xmms</packagereq>
+      <packagereq type="default">xmms-skins</packagereq>
+      <packagereq type="default">xmms-alsa</packagereq>
+      <packagereq type="default">xmms-esd</packagereq>
+      <packagereq type="optional">xmms-mesa</packagereq>
+      <packagereq type="optional">xmms-mikmod</packagereq>
+      <packagereq type="default">xmms-vorbis</packagereq>
       <packagereq type="mandatory">zisofs-tools</packagereq>
+      <packagereq type="mandatory">xine-ui</packagereq>
+      <packagereq type="mandatory">xine-skins</packagereq>
+      <packagereq type="mandatory">xine-lib</packagereq>
+      <packagereq type="default">xine-lib-alsa</packagereq>
+      <packagereq type="default">xine-lib-arts</packagereq>
+      <packagereq type="optional">xine-lib-docs</packagereq>
+      <packagereq type="default">xine-lib-esd</packagereq>
+      <packagereq type="default">xine-lib-flac</packagereq>
+      <packagereq type="default">xine-lib-oggvorbis</packagereq>
+      <packagereq type="default">xine-lib-oss</packagereq>
+      <packagereq type="optional">xine-lib-sdl</packagereq>
+      <packagereq type="default">xine-lib-w32dll</packagereq>
+      <packagereq type="default">xine-lib-xv</packagereq>
     </packagelist>
   </group>
 
@@ -6846,6 +6899,10 @@
       <packagereq type="optional">php-pgsql</packagereq>
       <packagereq type="default">squid</packagereq>
       <packagereq type="default">webalizer</packagereq>
+      <packagereq type="default">hiki</packagereq>
+      <packagereq type="default">kagemai</packagereq>
+      <packagereq type="optional">pukiwiki</packagereq>
+      <packagereq type="optional">tdiary</packagereq>
     </packagelist>
   </group>
 
@@ -7268,6 +7325,7 @@
       <packagereq type="default">system-config-users</packagereq>
       <packagereq type="default">usermode-gtk</packagereq>
       <packagereq type="default">vnc-server</packagereq>
+      <packagereq type="optional">metavnc-server</packagereq>
       <packagereq type="mandatory">xinitrc</packagereq>
       <packagereq type="mandatory">xorg-x11</packagereq>
       <packagereq type="optional">xorg-x11-Xnest</packagereq>
