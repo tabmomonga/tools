@@ -4096,6 +4096,7 @@
       <packagereq type="default">xine-lib-flac</packagereq>
       <packagereq type="default">xine-lib-oggvorbis</packagereq>
       <packagereq type="default">xine-lib-oss</packagereq>
+      <packagereq type="default">xine-lib-sdl</packagereq>
       <packagereq type="default">xine-lib-xv</packagereq>
       <packagereq type="default">xine-lib-w32dll</packagereq>
       <packagereq type="mandatory">xinetd</packagereq>
