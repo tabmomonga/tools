@@ -4123,6 +4123,7 @@
       <packagereq type="default">xine-lib-xv</packagereq>
       <packagereq type="default">xine-lib-w32dll</packagereq>
       <packagereq type="mandatory">xinetd</packagereq>
+      <packagereq type="default">xscreensaver</packagereq>
     </packagelist>
   </group>
 
