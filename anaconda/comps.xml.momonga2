@@ -7336,6 +7336,7 @@
       <packagereq type="mandatory">xorg-x11-tools</packagereq>
       <packagereq type="default">xorg-x11-twm</packagereq>
       <packagereq type="mandatory">xorg-x11-xauth</packagereq>
+      <packagereq type="mandatory">momonga-backgrounds</packagereq>
     </packagelist>
   </group>
 
