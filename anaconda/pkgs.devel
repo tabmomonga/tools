@@ -317,6 +317,7 @@ pyorbit
 pyparted
 python
 python-devel
+python-elementtree
 python-sqlite
 python-urlgrabber
 pyxf86config

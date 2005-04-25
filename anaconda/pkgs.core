@@ -252,6 +252,7 @@ pygtk-libglade
 pyorbit
 pyparted
 python
+python-elementtree
 python-sqlite
 python-urlgrabber
 pyxf86config
