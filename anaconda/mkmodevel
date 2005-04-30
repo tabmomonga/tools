@@ -4,7 +4,8 @@ WORK_DIR = "/dist/Current"
 #MIRROR_DIR = File.expand_path "/pub/HEAD/PKGS"
 
 PROG = $0
-ARCH = "i686"
+ARCH = "x86_64"
+SUBARCH = "i686"
 work_dir = File.expand_path WORK_DIR
 LOG = "#{work_dir}/#{PROG.split(/\//)[-1]}.log"
 MOMONGA = "http://dist.momonga-linux.org/pub/momonga/development"
@@ -54,6 +55,7 @@ else
   MK_FULL = true
   MK_CORE = false
   MK_DEVEL = false
+  SUBPKGS_LIST = "pkgs.sub"
 end
 
 def do_cmd cmd
@@ -119,6 +121,18 @@ Dir.chdir PKGS_DIR
 if MK_FULL
   do_cmd "cp -f #{ARCH}/* #{TREE_DIR}/Momonga/RPMS"
   do_cmd "cp -f noarch/* #{TREE_DIR}/Momonga/RPMS"
+  if ARCH == "x86_64"
+    pkglist = open("#{WORK_DIR}/#{SUBPKGS_LIST}")
+    pkglist.each do |pkg|
+      pkg.strip!
+      Dir.glob("#{PKGS_DIR}/*/#{pkg}*.#{SUBARCH}.rpm").each do |file|
+        pkgname = `rpm -qp --qf '%{NAME}' #{file} 2>&1`
+        if pkg == pkgname
+          do_cmd "cp #{file} #{DEV_DIR}/#{ARCH}/os/Momonga/RPMS/"
+        end
+      end
+    end
+  end
 else
   pkglist = open("#{WORK_DIR}/#{PKGS_LIST}")
   pkglist.each do |pkg|
@@ -395,7 +409,7 @@ if MK_FULL
   end
 end
 
-if MK_FULL
+if MK_FULL && ARCH != "x86_64"
   # 18. Rescue iso image ∫Ó¿Æ
   print "Generating Rescue iso image - "
   STDOUT.flush
