@@ -1,3 +1,7 @@
+Fri May  6 20:53:57 2005  Kazuhiko  <kazuhiko@fdiary.net>
+
+	* delobso.rb: keep source files for other architectures.
+
 Tue Apr 12 09:04:14 2005  Kazuhiko  <kazuhiko@fdiary.net>
 
 	* commit: check status of a spec file itself.

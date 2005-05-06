@@ -24,7 +24,6 @@ $Packages = {}
 $DB.specs.each_value do |spec|
   nosource = false
   todir=$TOPDIR
-  next if test(?e, "#{spec.name}/#{$NOTFILE}")
   Dir.glob("#{spec.name}/TO.*").sort.each do |to|
     todir += "-#{File.basename(to)[3..-1]}"
     break
@@ -37,6 +36,7 @@ $DB.specs.each_value do |spec|
   end
   STDERR.puts "warning: no package in #{spec.name}" unless spec.packages[0]
   next unless spec.packages[0]
+  next if test(?e, "#{spec.name}/#{$NOTFILE}")
   if !nosource
 #packages[0] はウソ。違う場合もある。
 #specdb が弱い。
