@@ -1,0 +1,222 @@
+#!/usr/bin/perl -w
+
+# find-zlib - scan for zlib tables in compiled code
+# Copyright (C) 2002 RUS-CERT, University of Stuttgart.
+# Written by Florian Weimer <Weimer@CERT.Uni-Stuttgart.DE>.
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# $Id: find-zlib,v 1.10 2002/04/04 15:07:52 rusfw Exp $
+# <http://CERT.Uni-Stuttgart.DE/files/fw/find-zlib>
+
+use strict;
+
+if (@ARGV == 0 or $ARGV[0] eq '-h') {
+    print <<EOF;
+find-zlib - scan for zlib tables in compiled code
+Copyright (C) 2002 RUS-CERT, University of Stuttgart.
+
+Usage: find-zlib [-v] filename...
+
+In non-verbose mode (without the "-v" flag), find-zlib scans only for
+three signatures:
+
+  - The "cplens table".  It is not specific to zlib, but used
+    by any inflate decoder.
+  - The "cplext table".  This table is specific to zlib and
+    also gives some version information.
+  - The "inflate" copyright string.
+
+Even if the copyright string has been removed, the other two signatures
+permit the identification of zlib inflate code.
+
+In verbose mode, additional signatures are tested:
+
+  - The "configuration table".  It is specific to zlib, but not
+    required by the inflate code.
+  - Some common messages found in zlib.
+  - The "deflate" copyright string. Note that the deflate code is
+    independent of the inflate code.
+
+Thanks to Mark Adler for helpful suggestions.
+
+Send comments to fw-tracker\@CERT.Uni-Stuttgart.DE.
+
+EOF
+    exit 1;
+}
+
+my $verbose = 0;
+
+if ($ARGV[0] eq "-v") {
+  $verbose = 1;
+  shift @ARGV;
+}
+
+$/ = undef;
+
+my @cplens_table = (3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 15, 17, 19, 23, 27, 31,
+		     35, 43, 51, 59, 67, 83, 99, 115, 131, 163, 195, 227,
+		     258, 0, 0);
+my @cplext_table_092 = (0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2,
+			3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 0, 128, 128);
+my @cplext_table_104 = (0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2,
+			3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 0, 192, 192);
+my @cplext_table_114 = (0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2,
+			3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 0, 112, 112);
+my @cplext_table_115 = (0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2,
+			3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 0, 241, 125);
+
+sub table_to_re (@) {
+    my $be = "";
+    my $le = "";
+    my $e;
+    foreach $e (@_) {
+	$be .= pack "N", $e;
+	$le .= pack "V", $e;
+    }
+    return (quotemeta($be), quotemeta($le));
+}
+
+sub table_to_re_config (@) {
+    my $be = "";
+    my $le = "";
+    my $e;
+    foreach $e (@_) {
+	$be .= pack "n", $e;
+	$le .= pack "v", $e;
+    }
+    return (quotemeta($be), quotemeta($le));
+}
+
+sub table_to_re_combined (@) {
+  my ($be, $le) = table_to_re(@_);
+  return "($be|$le)";
+}
+
+my ($cplens_table_be, $cplens_table_le) = table_to_re (@cplens_table);
+my ($cplext_table_092, $cplext_table_104, $cplext_table_114,
+    $cplext_table_115) =
+  (table_to_re_combined(@cplext_table_092),
+   table_to_re_combined(@cplext_table_104),
+   table_to_re_combined(@cplext_table_114),
+   table_to_re_combined(@cplext_table_115));
+
+my $line;
+my (@config_table_le, @config_table_be) = ();
+foreach $line ([8,   32, 128, 256],
+	       [32, 128, 258, 1024],
+	       [32, 258, 258, 4096]) {
+    my ($be, $le) = table_to_re_config(@$line);
+    push @config_table_be, $be;
+    push @config_table_le, $le;
+}
+my ($config_table_be_32,
+    $config_table_be_64,
+    $config_table_le_32,
+    $config_table_le_64)
+    = (join("....", @config_table_be),
+       join("........", @config_table_be),
+       join("....", @config_table_le),
+       join("........", @config_table_le));
+
+my $file;
+my $found = 1;
+for $file (@ARGV) {
+  warn "$file: non-regular file ignored\n" unless -f $file;
+  unless (open(FILE, "<$file")) {
+    warn("$file: cannot read file\n"); 
+    next;
+  }
+  binmode(FILE);
+  my $data = <FILE>;
+  close FILE;
+
+  if ($data =~/inflate ([0-9][ 0-9a-zA-Z.\-]{1,100}[0-9a-zA-Z.\-])/) {
+    print "$file: inflate version: \"$1\"\n";
+    $found = 0;
+  }
+  if ($verbose
+      and $data =~/deflate ([0-9][ 0-9a-zA-Z.\-]{1,100}[0-9a-zA-Z.\-])/) {
+    print "$file: deflate version: \"$1\"\n";
+    $found = 0;
+  }
+
+  if ($data =~ /$cplens_table_le/o) {
+    print "$file: zlib cplens table, little endian\n";
+    $found = 0;
+  }
+  if ($data =~ /$cplens_table_be/o) {
+    print "$file: zlib cplens table, big endian\n";
+    $found = 0;
+  }
+  if ($data =~ /$cplext_table_092/o) {
+    print "$file: zlib cplext table (version 0.1 to 0.92)\n";
+    $found = 0;
+  }
+  if ($data =~ /$cplext_table_104/o) {
+    print "$file: zlib cplext table (version 0.93 to 1.0.4)\n";
+    $found = 0;
+  }
+  if ($data =~ /$cplext_table_114/o) {
+    print "$file: zlib cplext table (version 1.0.5 to 1.1.4)\n";
+    $found = 0;
+  }
+  if ($data =~ /$cplext_table_115/o) {
+    print "$file: zlib cplext table (version 1.1.5beta)\n";
+    $found = 0;
+  }
+  next if not $verbose;
+
+  if ($data =~ /$config_table_le_32/o) {
+    print "$file: zlib configuration table, little endian, 32 bit\n";
+    $found = 0;
+  }
+
+  if ($data =~ /$config_table_be_32/o) {
+    print "$file: zlib configuration table, big endian, 32 bit\n";
+    $found = 0;
+  }
+  if ($data =~ /$config_table_le_64/o) {
+    print "$file: zlib configuration table, little endian, 64 bit\n";
+    $found = 0;
+  }
+  if ($data =~ /$config_table_be_64/o) {
+    print "$file: zlib configuration table, big endian, 64bit\n";
+    $found = 0;
+  }
+
+  my $msg = 0;
+  my $total = 0;
+  $msg++ if $data =~ /empty distance tree with lengths/; $total++;
+  $msg++ if $data =~ /incomplete distance tree/; $total++;
+  $msg++ if $data =~ /incomplete dynamic bit lengths tree/; $total++;
+  $msg++ if $data =~ /incomplete literal\/length tree/; $total++;
+  $msg++ if $data =~ /incorrect data check/; $total++;
+  $msg++ if $data =~ /incorrect header check/; $total++;
+  $msg++ if $data =~ /invalid bit length repeat/; $total++;
+  $msg++ if $data =~ /invalid block type/; $total++;
+  $msg++ if $data =~ /invalid stored block lengths/; $total++;
+  $msg++ if $data =~ /invalid stored block lengths/; $total++;
+  $msg++ if $data =~ /invalid window size/; $total++;
+  $msg++ if $data =~ /need dictionary/; $total++;
+  $msg++ if $data =~ /oversubscribed distance tree/; $total++;
+  $msg++ if $data =~ /oversubscribed dynamic bit lengths tree/; $total++;
+  $msg++ if $data =~ /oversubscribed literal\/length tree/; $total++;
+  $msg++ if $data =~ /too many length or distance symbols/; $total++;
+  $msg++ if $data =~ /too many length or distance symbols/; $total++;
+  $msg++ if $data =~ /unknown compression method/; $total++;
+  if ($msg > 0) {
+    print "$file: $msg out of $total messages\n";
+    $found = 0;
+  }
+}
+exit $found;
