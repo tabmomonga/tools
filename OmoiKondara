@@ -1210,7 +1210,7 @@ rpm -ivh する関係上、sudo が password 無しで実行可能
     mtime = File.mtime("#{pkg}/#{$LOG_FILE}")
     suffix = mtime.strftime('%Y%m%d%H%M%S')
     File.rename("#{pkg}/#{$LOG_FILE}", "#{pkg}/#{$LOG_FILE}.#{suffix}")
-    `bzip2 -9 '#{pkg}/#{$LOG_FILE}.#{suffix}'` if $LOG_FILE_COMPRESS
+    `bzip2 -f -9 '#{pkg}/#{$LOG_FILE}.#{suffix}'` if $LOG_FILE_COMPRESS
   end # def backup_logfile(pkg)
 
   def buildme(pkg)
