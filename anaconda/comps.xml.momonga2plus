@@ -2542,6 +2542,7 @@
     <langonly>fi</langonly>
     <packagelist>
       <packagereq type="optional" requires="kdebase">kde-i18n-Finnish</packagereq>
+      <packagereq type="optional" requires="kdebase">koffice-l10n-Finnish</packagereq>
     </packagelist>
   </group>
 
