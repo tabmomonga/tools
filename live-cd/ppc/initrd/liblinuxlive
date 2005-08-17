@@ -1,0 +1,421 @@
+#!/bin/ash
+
+# Functions library :: for Linux Live scripts 5.x.y
+# Author: Tomas M. <http://www.linux-live.org>
+#
+
+# ===========================================================
+# user interface functions
+# ===========================================================
+
+# echolog
+# $1 = text to show and to write to /var/log/messages
+#
+echolog()
+{
+   busybox echo "LIVECD:" "$@" >>/var/log/livedbg
+   busybox echo "$@"
+}
+
+# debug
+# commands executed when debug boot parameter is present
+#
+debug()
+{
+   busybox echo
+   busybox echo "====="
+   busybox echo ": Debugging started. Here is the root shell for you."
+   busybox echo ": Type your desired command or hit Ctrl+D to continue booting."
+   busybox echo
+   busybox ash
+}
+
+# header
+# $1 = text to show
+#
+header()
+{
+   echolog "[0;1m$1[0;0m"
+}
+
+fatal()
+{
+   header "Fatal error occured - $1"
+   echolog "Something went wrong and we can't continue booting :("
+   echolog "You may explore the system by using simple commands like ls, lsmod, mount, etc."
+   echolog "You may also try to hit Ctrl+D. Booting will continue. Use at your own risk."
+   echolog "To be safe, hit Ctrl+Alt+Delete to reboot."
+   echolog
+   busybox ash
+}
+
+# ===========================================================
+# text processing functions
+# ===========================================================
+
+# egrep_o is a replacement for "egrep -o". It prints only the last
+# matching text
+# $1 = regular expression
+#
+egrep_o()
+{
+   busybox cat | busybox egrep "$1" | busybox sed -r "s/.*($1).*/\\1/"
+}
+
+# look into cmdline and echo $1 back if $1 is set
+# $1 = value name, case sensitive, for example livecd_subdir
+# $2 = file to use instead /proc/cmdline, optional
+#
+cmdline_parameter()
+{
+   CMDLINE=/proc/cmdline
+   if [ "$2" != "" ]; then CMDLINE="$2"; fi
+   busybox cat "$CMDLINE" | egrep_o "(^|[[:space:]]+)$1(\$|=|[[:space:]]+)" | egrep_o "$1"
+}
+
+# look into cmdline and echo value of $1 option
+# $1 = value name, case sensitive, for example livecd_subdir
+# $2 = file to use instead /proc/cmdline, optional
+#
+cmdline_value()
+{
+   CMDLINE=/proc/cmdline
+   if [ "$2" != "" ]; then CMDLINE="$2"; fi
+   busybox cat "$CMDLINE" | egrep_o "(^|[[:space:]]+)$1=([^[:space:]]+)" | egrep_o "=.*" | busybox cut -b 2- | busybox tail -n 1
+}
+
+# ===========================================================
+# system functions
+# ===========================================================
+
+# modprobe module $1, including all dependencies, suppress all messages
+# (own function because modprobe in busybox doesn't work with gzipped modules)
+# $1 = module name, eg. ehci-hcd
+# $2 = optional argument
+#
+modprobe_module()
+{
+  if [ "$1" = "" ]; then return 1; fi
+  PRINTK=`busybox cat /proc/sys/kernel/printk`
+  busybox echo "0" >/proc/sys/kernel/printk
+
+  KERNEL="`busybox uname -r`"; LSMOD=/tmp/lsmod
+  MODULEDEPS="`busybox cat /lib/modules/$KERNEL/modules.dep | busybox egrep \"$1\\.ko(\\.gz)?:\"`"
+
+  for MODULE in `busybox echo $MODULEDEPS | busybox cut -d ":" -f 2-` `busybox echo $MODULEDEPS | busybox cut -d ":" -f 1`; do
+     TMPMOD="/memory/`busybox basename $MODULE .gz`";
+     # if the module is not loaded already
+     if [ "`busybox cat $LSMOD 2>/dev/null | busybox egrep \"^$TMPMOD\\\$\"`" = "" ]; then
+        busybox gunzip -c $MODULE 2>/dev/null >$TMPMOD
+        if [ "$?" -ne 0 ]; then busybox cp $MODULE $TMPMOD; fi # can't gunzip? copy
+        busybox insmod $TMPMOD $2 >/dev/null 2>/dev/null; err=$?
+        if [ "$err" -eq 0 ]; then busybox echo $TMPMOD >>$LSMOD; fi # module log
+        busybox rm $TMPMOD
+     fi
+  done
+
+  busybox echo "$PRINTK" >/proc/sys/kernel/printk
+  if [ "$err" -ne 0 ]; then echolog "error inserting module $1 ($err)"; fi
+  return $err
+}
+
+# Mount device $1 to $2
+# $1 = /dev device to mount, eg. /dev/hda1
+# $2 = mountpoint, eg. /mnt/hda1
+# $3 = mount options, for example "loop", "ro", or "remount,rw"
+#
+mount_device()
+{
+  busybox mkdir -p $2
+  if [ "$3" != "" ]; then OPTIONS="-o $3"; else OPTIONS=""; fi
+
+  PRINTK=`busybox cat /proc/sys/kernel/printk`
+  busybox echo "0" >/proc/sys/kernel/printk
+
+  busybox mount -t auto $1 $2 $OPTIONS >/dev/null 2>/dev/null
+  err=$?
+
+  if [ "$err" -ne 0 ]; then busybox rmdir $2 2>/dev/null; fi
+  busybox echo "$PRINTK" >/proc/sys/kernel/printk
+  return $err
+}
+
+# ===========================================================
+# live module functions
+# ===========================================================
+
+# Create module
+# call mksquashfs with apropriate arguments
+# $1 = directory which will be compressed to squashfs module
+# $2 = output .mo file
+# $3 = optional -keep-as-directory argument
+#
+create_module()
+{
+	#mksquashfs $1 $2 $3 >/dev/null
+   /sbin/mksquashfs $1 $2 $3 >/dev/null
+   if [ $? -ne 0 ]; then return 1; fi
+   busybox chmod oga-x $2 # remove execute attrib
+}
+
+# Mount .mo module to destination directory
+# $1 = path to .mo livecd compressed module
+# $2 = destination folder
+#
+mount_module()
+{
+   busybox mount -t squashfs -o loop,ro $1 $2
+}
+
+# Insert a directory tree $2 to an union specified by $1
+# Top-level read-write branch is specified by it's index 0
+# $1 = union absolute path (starting with /)
+# $2 = path to data directory
+#
+union_insert_dir()
+{
+   /bin/unionctl $1 --add --after 0 --mode ro $2
+}
+
+# List all modules in all directories (base, modules, optional)
+# and filter out unneeded optional modules (not specified by load= kernel parameter)
+# $1 = root directory of mounted DATAdir
+#
+list_modules()
+{
+   LOAD="`cmdline_value load`"
+   busybox ls -A1d $1/*.mo $1/*/*.mo 2>/dev/null | while read LINE; do
+      MODNAME="`busybox basename $LINE .mo`"
+      if [ "$LOAD" != "*" -a "`busybox echo $LINE | busybox grep optional`" != "" -a "`busybox echo $LOAD | busybox egrep \"(^|,)$MODNAME(\\\$|,)\"`" = "" ]; then continue
+        else busybox echo $LINE; fi
+   done
+}
+
+# Insert one single .mo module to the union
+# $1 = union absolute path (starting with /)
+# $2 = module.mo full path
+# $3 = destination folder, where images will be mounted to
+#
+union_insert_module()
+{
+   TARGET="$3/`busybox basename $2`"
+   while [ -e $TARGET ]; do TARGET=$TARGET.X; done
+   busybox mkdir -p $TARGET
+   mount_module $2 $TARGET
+   if [ $? -ne 0 ]; then busybox echo "can't read module data"; return 1; fi
+   union_insert_dir $1 $TARGET; 
+}
+
+# Insert all .mo modules, in $2 directory and subdirectories, to the union
+# $1 = union absolute path (starting with /)
+# $2 = LiveCD data dir (with directories /base, /modules, etc.)
+# $3 = destination folder, where images will be mounted to
+#
+union_insert_modules()
+{
+   list_modules $2 | while read MODULE; do
+      busybox echo " -> `busybox basename $MODULE`"
+      union_insert_module $1 $MODULE $3
+   done
+}
+
+# Copy modules to RAM directory
+# $1 = data directory
+# $2 = target directory in RAM
+#
+copy_to_ram()
+{
+   busybox cp -R $1/* $2
+   if [ "$?" -ne 0 ]; then fatal "can't copy to RAM, not enough memory?"; fi
+}
+
+# Copy content of "rootcopy" directory on the CD to $2 (union, usually)
+# $1 = source
+# $2 = destination
+#
+copy_rootchanges()
+{
+   busybox cp -a $1/rootcopy/* $2 2>/dev/null # could be empty
+}
+
+# ===========================================================
+# discovery functions
+# ===========================================================
+
+# List all CD-ROMs
+# by using /proc entries
+#
+list_cdrom_devices()
+{
+   if [ "`cmdline_parameter nocd`" != "" ]; then return 1; fi
+   for CDDEVICE in `busybox cat /proc/sys/dev/cdrom/info | busybox head -n 3 | busybox tail -n 1 | busybox cut -d ":" -f 2`; do
+      busybox echo "/dev/$CDDEVICE"
+   done
+}
+
+# List all partition devices
+# take list of all partitions and output unique disks.
+# Return empty result when nohd parameter was given.
+#
+list_partition_devices()
+{
+   if [ "`cmdline_parameter nohd`" != "" ]; then return 1; fi
+   busybox cat /proc/partitions | busybox grep -v loop | busybox sed -r "s/^[0-9[:space:]]+/\/dev\//" | busybox grep /dev/
+}
+
+# List all disk devices
+#
+list_disk_devices()
+{
+   list_partition_devices | busybox egrep -v "[0-9]"
+}
+
+# List all block devices
+#
+list_block_devices()
+{
+   list_cdrom_devices
+   list_partition_devices
+}
+
+# Try to mount all disks, partitions and cdroms and Find where the LiveCD is.
+# If LiveCD found in the device, echo dirname of it's directory,
+# and leave the device mounted. Mounting is not ro, but without any argument.
+# $1 = directory where devices will be mounted
+#
+find_live_data_dir()
+{
+   list_block_devices | while read DEVICE; do
+      DIR="/$1/`busybox basename $DEVICE`"
+      mount_device $DEVICE $DIR
+      if [ $? -ne 0 ]; then continue; fi
+      FOUND=`busybox ls -A1d $DIR/livecd.sgn $DIR/*/livecd.sgn 2>/dev/null | busybox head -n 1`
+      if [ "$FOUND" = "" ]; then busybox umount $DIR 2>/dev/null; busybox rmdir $DIR 2>/dev/null
+      else busybox dirname "$FOUND"; return 1; fi
+   done
+}
+
+# ===========================================================
+# hardware preparation functions
+# ===========================================================
+
+# Create block devices to /dev described by /sys entries
+#
+create_block_devices()
+{
+   echolog "creating /dev entries for block devices"
+   busybox ls -A1d /sys/block/*/dev /sys/block/*/*/dev 2>/dev/null | busybox grep -v loop | while read BLOCK; do
+      DEVICE="/dev/`busybox basename \`busybox dirname $BLOCK\``"
+      if [ ! -b $DEVICE ]; then
+         MINORMAJOR="`busybox head -n 1 $BLOCK | busybox tr ':' ' '`"
+         busybox mknod $DEVICE b $MINORMAJOR
+      fi
+   done
+}
+
+# modprobe kernel modules needed for the LiveCD
+#
+modprobe_essential_modules()
+{
+busybox mount -t tmpfs /memory /memory
+   echolog "starting loop device support"
+   modprobe_module loop max_loop=255
+   echolog "starting cdrom filesystem support"
+   modprobe_module isofs
+   echolog "starting squashfs support"
+   modprobe_module squashfs
+   echolog "starting unionfs support"
+   modprobe_module unionfs
+   echolog "starting vfat support"
+   modprobe_module nls_cp437
+   modprobe_module nls_iso8859-1
+   modprobe_module nls_iso8859-2
+   modprobe_module vfat
+   echolog "starting ntfs support"
+   modprobe_module ntfs
+   echolog "starting cdrom support"
+   modprobe_module cdrom
+   modprobe_module ide-cd
+   create_block_devices
+busybox umount /memory
+}
+
+# modprobe kernel modules needed for USB masstorage devices
+#
+modprobe_usb_modules()
+{
+   echolog "starting USB support"
+   modprobe_module ehci-hcd
+   modprobe_module ohci-hcd
+   modprobe_module uhci-hcd
+   modprobe_module scsi_mod
+   modprobe_module usb-storage
+   echolog "waiting for USB devices, max 9 seconds"
+   busybox sleep 9
+   create_block_devices
+}
+
+# enable/disable CD autoejecting when unmounted
+# $1 = 1|0 ... enable|disable
+#
+cd_autoeject()
+{
+   busybox echo $1 >/proc/sys/dev/cdrom/autoeject
+}
+
+# Disable DMA if nodma boot parameter is present
+#
+setup_dma()
+{
+   if [ ! "`cmdline_parameter nodma`" = "" ]; then
+      for DEVICE in `list_cdrom_devices` `list_disk_devices`; do
+         echolog "setting DMA support off for $DEVICE"
+         busybox hdparm -d 0 $DEVICE
+      done
+   fi
+}
+
+# create correct fstab file in $1/etc/fstab and create apropriate
+# mount directories in $1
+# $1 = root directory (union)
+#
+activate_fstab()
+{
+   busybox mkdir -p $1/etc
+   FSTAB="$1/etc/fstab"
+   busybox echo "tmpfs            /                tmpfs       defaults         0   0" >$FSTAB
+   busybox echo "devpts           /dev/pts         devpts      gid=5,mode=620   0   0" >>$FSTAB
+   busybox echo "proc             /proc            proc        defaults         0   0" >>$FSTAB
+
+   list_cdrom_devices | while read DEVICE; do
+      MOUNTDIR="/mnt/`busybox basename $DEVICE`_cdrom"
+      busybox mkdir -p $1/$MOUNTDIR
+      busybox echo "$DEVICE $MOUNTDIR iso9660 noauto,users,exec 0 0" >>$FSTAB
+   done
+
+   list_partition_devices | while read DEVICE; do
+      unset REMOVABLE; DEV="`busybox basename $DEVICE`"; DEV0="`busybox echo $DEV | busybox cut -b 1-3`"
+      if [ "`busybox cat /sys/block/$DEV0/removable`" != "0" ]; then
+         REMOVABLE="_removable"
+      fi
+
+      # skip this device if mountpoint exists
+      MOUNTDIR="/mnt/$DEV$REMOVABLE"
+      if [ -d "$1/$MOUNTDIR" ]; then continue; fi
+
+      # try to mount the device and unmount it. If OK, we can add it to fstab
+      mount_device "$DEVICE" "$1/$MOUNTDIR"
+      busybox umount "$1/$MOUNTDIR" 2>/dev/null
+      if [ $? -eq 0 ]; then
+         busybox echo "$DEVICE $MOUNTDIR auto auto,users,suid,dev,exec 0 0" >>$FSTAB
+      else # remove empty directory
+         busybox rmdir "$1/$MOUNTDIR" 2>/dev/null
+      fi
+   done
+
+   busybox fdisk -l 2>/dev/null | busybox grep -i "Linux swap" | busybox egrep "^/dev/" \
+     | busybox cut -f 1 -d " " | busybox sed -r "s/(.+)/\\1 swap swap defaults 0 0/" >>$FSTAB
+
+   busybox echo "/dev/fd0 /mnt/floppy auto noauto,users,suid,dev,exec 0 0" >>$FSTAB
+   busybox mkdir -p $1/mnt/floppy
+}

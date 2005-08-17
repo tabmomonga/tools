@@ -1,0 +1,333 @@
+ 5.0.16
+
+ * mnt entries are marked as _cdrom and _removable
+ * uselivemod updated to workaround unionfs bug, wasn't able to mount -o loop
+ * updated kernel modules for 2.6.11.8, updated unionctl and mksquashfs
+ * cd directory tree is changed to be more simple
+ * create_bootdisk renamed to make_iso.sh and make_iso.bat
+ 
+
+ 5.0.15
+
+ * added unionfs from 27th of April 2005
+ * fixed uselivemod bug
+ * new unionfs allows us to mount .mo modules from unioned dir too!
+ * added precompiled modules (squashfs, unionfs) for Linux 2.6.11.8
+
+
+ 5.0.14
+
+ * I don't like 5.0.13
+ * Autoeject is set to 0 in /proc/.... at the end of copy2ram feature
+ * added changes=/dev/device boot parameter. This device will be mounted
+   to /memory/changes instead of tmpfs so changes can be stored on the disk!
+   (or, for example, on removable USB media)
+ * fixed USB mass storage driver? Remove ub driver from kernel, it's slow! :(
+ * removed scsi modules from initrd
+ * added mkisofs.exe and written create_bootiso.cmd script for Windows!
+ * rootcopy content is now copied with cp -a instead of cp -R
+
+
+ 5.0.12
+ 
+ * added NLS (native language support) kernel modules to initrd, allowing 
+   us to autodetect and automount FAT filesystems too
+ * usb modules are probed too, so USB storage devices are added to fstab
+ * added /sbin/modprobe script to initrd so Kernel can modprobe automatically
+   (I found it's useless because actually kernel doesn't use it. But I will leave it there) 
+
+
+ 5.0.11
+
+ * added rootcopy directory to Live CD, it's content is copied directly to /
+ * added missing vfat support
+ * copy2ram copies the whole CD to RAM now
+ * added new isolinux.bin
+
+
+ 5.0.10
+ 
+ * added unionfs version which has many important bugs fixed
+ * patched unionctl to skip stat() function
+ * added support for Linux 2.6.11.6
+ * added sample kernel configuration to kernel-modules/*/config.gz
+ * added a lot of text to requirements file
+ * fixed uselivemod script
+
+
+ 5.0.9
+
+ * added precompiled version of mksquashfs to ./tools
+ * added new unionfs (CVS snapshot unionfs-022205-1641)
+ * liblinuxlive: added error message to modprobe_module function,
+     so errors are displayed in the case if insmod didn't work.
+     Some modprobe fixes added
+ * busybox: added some more plugins (commands)
+ * busybox: patched to support more than 8 loop devices
+ * each directory of root filesystem is now packed separately
+
+
+ 5.0.8
+
+ * fix chroot again
+ * added Linux 2.6.10 support (precompiled modules)
+ * removed Linux 2.6.9 modules
+ * all kernel modules in initrd are compressed by gzip
+
+
+ 5.0.7
+
+ * linuxrc: umount /sys before chroot, because Slackware won't moot /sys
+   if it's mounted somewhere and it's a good idea to umount it anyway.
+ * linuxrc: chroot is called from /usr/bin/chroot at first, if there is 
+   no such executable then linux-live scripts try /usr/sbin/chroot
+
+
+ 5.0.6
+
+ * added img2mo tool to convert old format module to new one
+ * initrd size changed to 4444KB
+
+ 
+ 5.0.5
+ 
+ * updated unionfs.ko kernel module and unionctl binary
+
+
+ 5.0.4
+
+ * added toram boot parameter (copy2ram is an alias for toram and can be used too)
+ 
+
+ 5.0.3
+ 
+ * small bugfixes in shell scripts
+
+
+ 5.0.2
+ 
+ * linuxrc and liblinuxlive rewritten from the scratch
+ * busybox recompiled, it contains vi editor now.
+ * added nohd boot option to disable mounting harddiscs at all
+
+ * moduse renamed to uselivemod and rewritten
+ * dir2img renamed to dir2mo and rewritten
+ * img2dir renamed to mo2dir and rewritten
+ * tgz2img renamed to tgz2mo and rewritten
+
+ * when no live data found, try to modprobe USB storage modules
+ * when no live data found, modprobe ALL scsi modules, I hope it won't hang
+
+ * not implemented yet: tohd and fromhd boot options
+ * not implemented yet: toram (and copy2ram) boot option
+ 
+
+ 5.0.0
+ 
+ * added Linux 2.6 support !!!!
+ * added unionfs support
+ * added squashfs support
+ * added BusyBox binary, which reduces the size of initrd and makes
+   linux-live scripts more flexible; removed bash, added ash
+ * modinsert renamed to editiso and rewritten
+ * added nodma boot option, to disable DMA support upon request for all cdroms and disks
+ * create_bootdisk.sh fixed incorrect error message about LILO not installed
+ * removed nolock boot parameter
+ not yet:* fixed tohd boot option (--test?)
+ 
+
+ 4.2.4
+ 
+ * added installimg script to /tools/
+ * added toram boot option, a synonym for copy2ram
+ * /home directory is compressed like /root now...
+ * fixed list_libs() function in liblinuxlive which could return uncomplete
+   list of library dependencies (important bug!)
+
+
+ 4.2.3
+
+ * mount_img() function - use return instead of exit
+
+
+ 4.2.2
+ 
+ * added isolinux 2.11 to bootfiles
+
+
+ 4.2.1
+
+ * mount_img() function produces more usefull error messages now
+ * initrd_create: don't fail while copying nonexistent kernel modules (except ovl)
+
+
+ 4.2
+
+ * modified dir2img to properly handle third parameter.
+   It defaults to /data for tree without /data
+   and it defaults to / for tree with /data
+ * initrd size changed to 9999 KB
+ * fixed echolog calling from /mnt/tmp/init
+ * don't copy ext3, ntfs or reiserfs kernel modules to initrd if they doesn't exist
+   (this caused fatal errors during initrd_create)
+
+
+ 4.1.4
+
+ * added some more requirements to be accurate
+ * don't export variables to profile.d if it doesn't exist
+ * added 2.6 kernels todo
+ * added isolinux 2.10
+ * modified create_bootiso.sh to allow creating ISO from ro CD
+ * added devfsd package to /packages directory
+
+
+ 4.1.3
+
+ * this version number was skipped, I don't like it, it seems unstable
+
+
+ 4.1.2
+
+ * fixed create_bootdisk.sh (adding | head -n 1)
+ * added mv command to initrd
+ * added cut command to initrd
+ * implemented tohd and fromhd boot options
+
+
+ 4.1.1
+
+ * added documentation DOC_MODULES
+
+
+ 4.0.7
+ 
+ * fixed moduse script, added calling of "manual" module script if exists
+ * liblinuxlive: added -n to mount calls
+ * third argument for dir2img is optional now, it defaults to "/"
+
+
+ 4.0.5
+ 
+ * tar.gz packs are extracted before inserting modules, to allow modules
+   to contain /etc and /root settings too.
+ * fixed "eject" boot parameter:
+   /boot is mounted only if eject is not specified
+ * create_bootdisk.sh: fixed lilo (forced to trash old boot record)
+ * added memtest v 1.11 (it's finaly working now)
+ * fixed ide-scsi - added the missing kernel module
+
+
+ 4.0.4
+
+ * modified F1 boot help text
+ * removed lang= functionality
+ * removed lang directory from the CD and replaced it by "optional" directory
+ * added "load=" boot parameter to insert specified images from "optional" directory
+   (for example load=wine,vmware.img,lang_cs will insert optional/wine* optional/vmware.img* and optional/lang_cs*)
+ * ./tools/moduse script sets $MANUAL variable to non-null value. This way it's possible
+   to know (inside preinsert and postinsert script) if it's inserted manually by
+   modinsert ($MANUAL!=""), or automatically during the LiveCD startup (before
+   chrooting /mnt as a root filesystem).
+ * devfs for /mnt/dev (real /dev) is mounted very soon to allow modules to
+   contain device files
+ * added memtest boot parameter starting memtest 3.1
+ * liveCD path is mounted by --rbind option to /boot
+ * mkciso removes the RAW img file imediately after compressing it
+   to free some important part of disk space
+ * added livecd-check to ./moduse script to disable using modules from hd-installed slax
+
+
+ 4.0.3
+
+  * linuxrc creates /etc/profile.d/slax.(csh,sh) to export $LIVECD_SUBDIR and $LIVECD_MOUNT
+    environment variables
+  * added Smart Boot Manager floppy image to FLOPPY/ directory (in bootfiles/)
+  * initrd doesn't include SCSI kernel modules any more, seems like it didn't work
+
+
+ 4.0.2
+ 
+  * scripts from /tools look for liblinuxlive functions in two directories now, ./ and /usr/lib
+
+
+ 4.0.1
+ 
+  * fixed copying symlinks to initrd (copy link's target too w/ absolute pathname)
+  * created own tempfile function
+  * updated error message for mkzftree
+  * removed nocopy2ram boot parameter. copy2ram parameter now implifies copy2ram=all
+    so it's not possible (it didn't make any sense) to copy/not-copy individual modules
+  * All SCSI modules are copied to initrd. This shoudl allow SLAX to boot
+    from a cdrom drive connected to SCSI interface! I don't know if the kernel
+    can insert apropriate module automatically (without hotplug for example)
+    but I believe that it should. If there is someone who could test it,
+    let me know please.
+
+
+ 3.0.28
+
+  * Floppy automounting disabled (it caused alot of problems on some hw)
+  * Floppy is automounted only with "floppy" boot parameter
+  * USB modules for linuxrc are loaded only with "usbdisk" boot parameter
+  * Fixed -a (AND) in linuxrc (there was && instead of -a which caused to
+    fail loading USB modules at all)
+  * Added script to copy&install SLAX to USB Mastorage device (flashdisk)!
+    (./bootfiles/create_bootflashdisk.sh, untested but should work)
+
+ 3.0.27
+
+  * USB support added back, it's possible to start slax from USB mastorage device
+    (only if you know how to boot from it, or by using floppy)
+  * added nousb kernel boot parameter again
+  * added tools/modinsert.sh script (to insert downloaded modules to LiveCD ISO)
+
+
+ 3.0.26
+
+   mkciso: mkzftree seems unable to compress files >2GB, added a check
+   runme.sh: added a check for directories existence (eg. /opt doesn't need to be there)
+   accidentaly removed ide-scsi modloading, cd burning doesn't work
+   
+
+ 3.0.25
+ 
+   fixed mouse autoconfig, it should finaly work now!
+   filesystem modules for ext3 and reiserfs added to initrd
+   partitions are mounted "ro" in linuxrc, but "default" entry is writed to fstab
+   added "lang=" kernel parameter to insert all modules from language cpecific directory cd/lang/$1/*
+   fixed loadlin (dos) parameters
+   added floppy automounting
+   removed usb kernel modules from initrd
+   isolinux timeout changed to 2 seconds
+
+
+ 3.0.24
+
+   fixed nohotplug kernel parameter to disable usb modules probing
+   fixed img modules with filenames with a dot at the begining in some name
+   added passwd=ask kernel parameter to change root password during the boot
+   added eject kernel parameter to eject the CD if possible (when copy2ram=all)
+   added nolock kernel parameter to disable CD locking
+   added devfs and ovlfs checking, print useful error messages if error
+   added touch /{etc,root,tmp,var/run}/something to avoid overmounting by ovlfs
+   /var is packed by tar+gz like root or etc.
+   mouse autodetecting (create /dev/mouse)
+   changed module format. It's ISO->COMPRESS->ISO2 now, needs 2 loops to mount
+   the final ISO is _not_ compressed. Allows to copy files from CD to RAM / FAT
+   debug parameter without =bash will cat /proc/mounts and /proc/self/environ
+
+
+ 3.0.23
+
+   the whole phylosophy completely changed, the LiveCD is modularized now
+   cramfs replaced by transparent iso decompression
+   autoexec script removed
+   added tgz2img.sh script to convert .tgz files into .img
+   added dir2img.sh script to convert directory tree into .img
+   added img2dir.sh script to convert all back
+
+
+ 2.9.0.22
+
+   changelog for all older versions is lost
