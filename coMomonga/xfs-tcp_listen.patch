@@ -1,0 +1,8 @@
+--- ./config.tcp_listen	2005-08-05 16:49:58.000000000 +0900
++++ ./config	2005-08-05 16:51:25.000000000 +0900
+@@ -45,4 +45,4 @@
+ use-syslog = on
+ 
+ # don't listen to TCP ports by default for security reasons
+-no-listen = tcp
++#no-listen = tcp

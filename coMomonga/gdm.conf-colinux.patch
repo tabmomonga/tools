@@ -1,0 +1,20 @@
+--- gdm/gdm.conf.colinux	2005-07-14 11:21:58.000000000 +0900
++++ gdm/gdm.conf	2005-07-14 11:16:16.000000000 +0900
+@@ -129,7 +129,7 @@
+ # Distributions: Ship with this off.  It is never a safe thing to leave
+ # out on the net.  Alternatively you can set up /etc/hosts.allow and
+ # /etc/hosts.deny to only allow say local access.
+-Enable=false
++Enable=true
+ # Honour indirect queries, we run a chooser for these, and then redirect
+ # the user to the chosen host.  Otherwise we just log the user in locally.
+ HonorIndirect=true
+@@ -272,7 +272,7 @@
+ # and they will always be started.  Each line must start with a unique
+ # number and that will be the display number of that server.  Usually just
+ # the 0 server is used.
+-0=Standard
++#0=Standard
+ #1=Standard
+ # Note the VTAllocation and FirstVT keys on linux.  Don't add any vt<number>
+ # arguments if VTAllocation is on, and set FirstVT to be the first vt

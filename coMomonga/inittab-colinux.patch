@@ -1,0 +1,11 @@
+--- ./inittab.colinux	2005-07-13 19:09:32.000000000 +0900
++++ ./inittab	2005-07-13 19:09:43.000000000 +0900
+@@ -15,7 +15,7 @@
+ #   5 - X11
+ #   6 - reboot (Do NOT set initdefault to this)
+ # 
+-id:3:initdefault:
++id:5:initdefault:
+ 
+ # System initialization.
+ si::sysinit:/etc/rc.sysinit

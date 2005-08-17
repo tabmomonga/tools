@@ -1,0 +1,11 @@
+--- ./XScreenSaver.no_stderr	2005-08-05 16:09:01.000000000 +0900
++++ ./XScreenSaver	2005-08-05 16:09:16.000000000 +0900
+@@ -53,7 +53,7 @@
+ *splash:		True
+ *splashDuration:	0:00:05
+ *visualID:		default
+-*captureStderr: 	True
++*captureStderr: 	False
+ *ignoreUninstalledPrograms: True
+ 
+ *overlayTextForeground:	#FFFF00
