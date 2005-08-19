@@ -1,0 +1,195 @@
+#!/usr/bin/env ruby
+
+if ARGV.size != 4
+  print "Usage: #{$0} root_img 5 reiserfs kernel-co-2.6.10-24m.i686.rpm\n"
+  exit
+end
+
+ROOTNAME = ARGV[0]
+ROOTSIZE = ARGV[1]
+ROOTFS   = ARGV[2]
+KERNELRPM= ARGV[3]
+
+PKGS = [
+  "authconfig",
+  "net-tools",
+  "nscd",
+  "openssh-clients",
+  "openssh-server",
+  "passwd",
+  "ruby",
+  "samba-swat",
+  "selinux-policy-targeted",
+  "tcsh",
+  "truetype-fonts-ja",
+  "vim-minimal",
+  "metavnc-server",
+  "xorg-x11-Xvfb",
+  "yum"
+]
+
+FLUXBOX_PKGS = [
+  "fluxbox"
+]
+
+GNOME_PKGS = [
+  "at-spi",
+  "control-center",
+  "desktop-file-utils",
+  "eog",
+  "file-roller",
+  "gconf-editor",
+  "gedit",
+  "gftp",
+  "gimp-print-utils",
+  "gnome-applets",
+  "gnome-audio",
+  "gnome-icon-theme",
+  "gnome-mag",
+  "gnome-media",
+  "gnome-panel",
+  "gnome-session",
+  "gnome-system-monitor",
+  "gnome-terminal",
+  "gnome-themes",
+  "gnome-user-docs",
+  "gnome-utils",
+  "gok",
+  "gpdf",
+  "gqview",
+  "gtk-engines",
+  "ggv",
+  "gthumb",
+  "mtr-gtk",
+  "hwbrowser",
+  "metacity",
+  "nautilus",
+  "nautilus-media",
+  "yelp"
+]
+
+KDE_PKGS = [
+  "kdeutils",
+  "arts",
+  "fam",
+  "kdegraphics",
+  "kdepim",
+  "kdeaddons",
+  "kdeadmin",
+  "kdeartwork",
+  "kdemultimedia",
+  "kdebase",
+  "kdenetwork"
+]
+
+XFCE_PKGS = [
+  "hicolor-icon-theme",
+  "libxfce4mcs",
+  "libxfce4util",
+  "libxfcegui4",
+  "xfce-mcs-manager",
+  "xfce-mcs-plugins",
+  "xfce-utils",
+  "xfce4-iconbox",
+  "xfce4-panel",
+  "xfce4-systray",
+  "xfdesktop",
+  "xffm",
+  "xfprint",
+  "xfwm4",
+  "xfwm4-themes"
+]
+
+fsopts = {
+  "ext2"     => "-F -q",
+  "ext3"     => "-F -q",
+  "xfs"      => "-f -q",
+  "jfs"      => "-f -q",
+  "reiserfs" => "-f -q",
+  "reiser4"  => "-f -y"
+}
+
+def do_cmd cmd, mes
+  print mes, "..."
+  STDOUT.flush
+  log = `#{cmd} 2>1`
+  print "DONE\n"
+  STDOUT.flush
+end
+
+def make_file name, str
+  print "Making #{name}..."
+  STDOUT.flush
+  f = open("/mnt" + name, "w")
+  f.print str
+  f.close
+  print "DONE\n"
+  STDOUT.flush
+end
+
+do_cmd("dd if=/dev/zero of=#{ROOTNAME} bs=1G count=#{ROOTSIZE}",
+       "Making root image file")
+do_cmd("mkfs.#{ROOTFS} #{fsopts[ROOTFS]} #{ROOTNAME}",
+       "Making root file system")
+do_cmd("mount -t #{ROOTFS} -o loop #{ROOTNAME} /mnt", "Mounting root image")
+do_cmd("mkdir /mnt/dev /mnt/etc", "Making directories")
+do_cmd("mknod /mnt/dev/null c 1 3", "Making /dev/null")
+do_cmd("mknod /mnt/dev/cobd0 b 117 0", "Making /dev/cobd0")
+do_cmd("mknod /mnt/dev/cobd1 b 117 1", "Making /dev/cobd1")
+do_cmd("mknod /mnt/dev/cobd2 b 117 2", "Making /dev/cobd2")
+do_cmd("mknod /mnt/dev/cobd3 b 117 3", "Making /dev/cobd3")
+do_cmd("cp -a /etc/yum.repos.d /mnt/etc", "Copying yum setting")
+
+make_file("/etc/fstab", <<EOF)
+/dev/cobd1	/		#{ROOTFS}	defaults	0 0
+none		/dev/pts	devpts		gid=5,mode=620	0 0
+none		/proc		proc		defaults	0 0
+/dev/cobd2	swap		swap		defaults	0 0
+EOF
+
+do_cmd("yum -y --installroot=/mnt install hwdata quota",
+       "Installing core packages")
+do_cmd("rpm --root /mnt -i #{KERNELRPM}", "Installing coLinux kernel package")
+do_cmd("rpm --root /mnt -i #{KERNELRPM.gsub(/\-co\-/,"-headers-")}", "Installing kernel-headers package")
+do_cmd("yum -y --installroot=/mnt install #{PKGS.join(' ')}",
+       "Installing additional packages")
+addpkgs = XFCE_PKGS + FLUXBOX_PKGS + ["gdm", "gcc", "gcc-c++", "make"]
+do_cmd("yum -y --installroot=/mnt install #{addpkgs.join(' ')}",
+       "Installing additional packages")
+
+make_file("/etc/hosts", <<EOF)
+127.0.0.1	localhost.localdomain	localhost
+192.168.0.1	hostpc.mocolin.org	hostpc
+192.168.0.2	mocolin.mocolin.org	mocolin
+EOF
+
+make_file("/etc/sysconfig/network", <<EOF)
+NETWORKING=yes
+HOSTNAME=mocolin.mocolin.org
+EOF
+
+make_file("/etc/sysconfig/network-scripts/ifcfg-eth0", <<EOF)
+DEVICE=eth0
+BOOTPROTO=none
+BROADCAST=192.168.0.255
+IPADDR=192.168.0.2
+NETMASK=255.255.255.0
+NETWORK=192.168.0.0
+ONBOOT=yes
+TYPE=Ethernet
+USERCTL=no
+PEERDNS=no
+GATEWAY=192.168.0.1
+EOF
+
+do_cmd("mv /mnt/etc/X11/gdm/gdm.conf /mnt/etc/X11/gdm/gdm.conf.orig","")
+do_cmd("mv /mnt/etc/X11/fs/config /mnt/etc/X11/fs/config.orig", "")
+fo = open("/mnt/etc/X11/fs/config", "w")
+open("/mnt/etc/X11/fs/config.orig").each do |l|
+  fo.print l.gsub(/^no\-listen/, "# no-listen")
+end
+fo.close
+
+do_cmd("cp /mnt/boot/vmlinuz-* /mnt/boot/initrd-*.img .",
+       "Copy kernel and initrd")
+do_cmd("umount /mnt", "Unmount root image")
