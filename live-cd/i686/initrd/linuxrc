@@ -101,6 +101,7 @@ activate_fstab $UNION
 mkdir -p $UNION/proc
 mkdir -p $UNION/sys
 mkdir -p $UNION/tmp
+chmod 1777 $UNION/tmp
 mkdir -p $UNION/dev
 
 $DEBUGCMD
