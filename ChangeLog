@@ -1,3 +1,9 @@
+Mon Aug 29 11:01:46 2005  Kazuhiko  <kazuhiko@fdiary.net>
+
+	* delobso.rb: display missing files. add '-n', '-O' and '-L'
+	options to display missing files in Nonfree, Orphan and Alter
+	directories.
+
 Fri May  6 20:53:57 2005  Kazuhiko  <kazuhiko@fdiary.net>
 
 	* delobso.rb: keep source files for other architectures.

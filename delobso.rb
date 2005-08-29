@@ -1,4 +1,5 @@
 #! /usr/bin/env ruby
+require 'optparse'
 
 $:.unshift(File.dirname($0))
 require 'environment'
@@ -11,6 +12,14 @@ if File.expand_path($PKGDIR) != File.expand_path(Dir.getwd)
   puts "Run in pkgs/ dir."
   exit 1
 end
+
+opt = {}
+ARGV.options {|o|
+  o.on('-n', 'display Nonfree missing files, too') {|v| opt[:n] = true}
+  o.on('-O', 'display Ohphan missing files, too') {|v| opt[:O] = true}
+  o.on('-L', 'display Alter missing files, too') {|v| opt[:L] = true}
+  o.parse!
+}
 
 #specdb から arch とれるように。
 RPM.readrc("./rpmrc")
@@ -70,7 +79,16 @@ Dir.glob("#{$TOPDIR}*").each do |top|
   ($Packages[top]||[]).sort.each do |k,v|
     dir = k.split(/\./)[-2]
     dir = 'SRPMS' if /src/ =~ dir
-    STDERR.puts "#{top}/#{dir}/#{k} is missing" if $VERBOSE
+    case top
+    when "#{$TOPDIR}-Nonfree"
+      puts "#{top}/#{dir}/#{k} is missing" if opt[:n]
+    when "#{$TOPDIR}-Orphan"
+      puts "#{top}/#{dir}/#{k} is missing" if opt[:O]
+    when "#{$TOPDIR}-Alter"
+      puts "#{top}/#{dir}/#{k} is missing" if opt[:L]
+    else $TOPDIR
+      puts "#{top}/#{dir}/#{k} is missing"
+    end
   end
 end
 
