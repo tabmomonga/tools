@@ -152,9 +152,15 @@ when 'mips'
       break
     end
   end
+when /^ppc64/
+  $NOTFILE = 'NOT.ppc64'
+  $ARCH = 'ppc64'
 when /^ppc/
   $NOTFILE = 'NOT.ppc'
   $ARCH = 'ppc'
+when /^ia64/
+  $NOTFILE = 'NOT.ia64'
+  $ARCH = 'ia64'
 else
   $stderr.puts %Q(WARNING: unsupported architecture #{$ARCH})
 end
