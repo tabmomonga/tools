@@ -747,8 +747,13 @@ Sourece/Patch/Icon タグで指定されているファイルをビルド
     if $WORKDIR then
       workdir = $WORKDIR + "/" + $hTAG["NAME"] + "-" +
                 $hTAG["VERSION"] + "-" + $hTAG["RELEASE"]
-      exec_command "rm -rf ./BUILD"
-      exec_command "rm -rf #{workdir}"
+      if File.exist?("SU.PLEASE") then
+        exec_command "sudo rm -rf ./BUILD"
+      	exec_command "sudo rm -rf #{workdir}"
+      else
+      	exec_command "rm -rf ./BUILD"
+      	exec_command "rm -rf #{workdir}"
+      end
       if $DEBUG_FLAG then
         $stderr.puts "MSG: exec_command rm -rf ./BUILD"
         $stderr.puts "MSG: exec_command rm -rf #{workdir}"
