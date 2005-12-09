@@ -69,7 +69,7 @@ end
 module Speclint
   class Spec < RPM::Spec
     VALID_LICENSES = %w(Apache Artistic BSD CPL GFDL GPL LGPL LPPL Modified\ BSD
-                        MIT/X MPL OPL Public\ Domain QPL Ruby)
+                        MIT/X MPL OPL PHP Public\ Domain QPL Ruby)
 
     VALID_GROUPS = <<-EOT.strip.split(/\n\s+/)
       Amusements/Games
