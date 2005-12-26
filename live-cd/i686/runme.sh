@@ -4,6 +4,18 @@
 # Your kernel image has to be in $ROOT/boot/vmlinuz or $ROOT/vmlinuz
 # 
 
+if [ ! $# = 3 ]; then
+	echo "$0: [live env root dir] [kernel version] [output iso image]"
+	exit 1
+fi
+
+ROOT=$1
+KERNEL=$2
+ISOFILE=$3
+
+echo "cleanup yum cache"
+rm -rf $ROOT/var/cache/yum/*
+
 export PATH=.:./tools:../tools:/usr/sbin:/usr/bin:/sbin:/bin:/
 
 CHANGEDIR="`dirname \`readlink -f $0\``"
@@ -15,8 +27,7 @@ cd $CHANGEDIR
 
 ./install $ROOT
 
-VMLINUZ=$ROOT/boot/vmlinuz
-#VMLINUZ=$ROOT/boot/vmlinuz-2.6.10-41m
+VMLINUZ=$ROOT/boot/vmlinuz-$KERNEL
 if [ -L "$VMLINUZ" ]; then VMLINUZ=`readlink -f $VMLINUZ`; fi
 if [ "`ls $VMLINUZ 2>/dev/null`" = "" ]; then echo "cannot find $VMLINUZ"; exit 1; fi
 
@@ -33,7 +44,6 @@ cp -R cd-root/* $CDDATA
 cp -R tools $CDDATA
 cp -R info/* $CDDATA
 cp $VMLINUZ $CDDATA/boot/vmlinuz
-#cp $VMLINUZ $CDDATA/boot/vmlinuz-2.6.10-41m
 
 echo "creating initrd image..."
 cd initrd
@@ -56,7 +66,8 @@ done
 
 echo "creating LiveCD ISO image..."
 cd $CDDATA
-./make_iso.sh /tmp/livecd.iso
+./make_iso.sh $ISOFILE
 
 cd /tmp
-header "Your ISO is created in /tmp/livecd.iso"
+header "Your ISO is created in $ISOFILE"
+

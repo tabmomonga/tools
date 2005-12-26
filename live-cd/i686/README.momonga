@@ -1,0 +1,31 @@
+livecd 作成方法
+
+1. livecdの環境のrootを作成する
+
+  (例)
+  # ./create_repo /live-env
+  上記で /live-env 以下に livecd 環境のrootが作成されます。
+
+  pkglists/* のパッケージをインストールされます。
+  環境が新しくなったら、上記 pkglists/* をメンテナンスする必要があります。
+
+  livecd環境でのshutdownのため、/etc/init.d/halt /etc/init.d/netfs に
+  手を入れる必要があります。shutdown.patch が変更用のパッチです。
+  initscripts が大きく変わったら、これもメンテナンスが必要です。
+
+  create_repo内の
+  XORG_LANG=ja_JP.EUC-JP
+  XORG_SESSION=xfce4
+  XORG_XIM=scim
+  を編集する事で、デフォルト環境を変更することができます。
+
+
+2. iso image の作成
+
+  (例)
+  # ./runme.sh /live-env 2.6.12-10msmp /tmp/livecd-`date +%Y%m%d`.iso
+  上記で kernel-2.6.12-10msmp を使用する /live-env 以下の環境の livecd が 
+  /tmp/livecd-`date +%Y%m%d`.iso に作成されます。
+
+
+

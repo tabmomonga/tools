@@ -81,8 +81,8 @@ done
 
 debug "copying files to the rootdisk"
 touch $INITRD_TREE/etc/{m,fs}tab
-cp {linuxrc,liblinuxlive} $INITRD_TREE # symlink will be copied as original file
-chmod a+x $INITRD_TREE/linuxrc
+cp {linuxrc*,liblinuxlive} $INITRD_TREE # symlink will be copied as original file
+chmod a+x $INITRD_TREE/linuxrc*
 
 cp static-binaries/modprobe $INITRD_TREE/sbin
 cp static-binaries/busybox $INITRD_TREE/bin
@@ -97,12 +97,12 @@ LMK="lib/modules/$KERNEL"
 mkdir -p $INITRD_TREE/$LMK/kernel/fs
 #cp kernel-modules/2.6.11.8/unionfs.ko.gz $INITRD_TREE/$LMK/kernel/fs
 #cp kernel-modules/$KERNEL/unionfs.ko.gz $INITRD_TREE/$LMK/kernel/fs
-cp /lib/modules/$KERNEL/kernel/fs/unionfs/unionfs.ko $INITRD_TREE/$LMK/kernel/fs
 #cp kernel-modules/2.6.11.8/squashfs.ko.gz $INITRD_TREE/$LMK/kernel/fs
 #cp kernel-modules/$KERNEL/squashfs.ko.gz $INITRD_TREE/$LMK/kernel/fs
-cp /lib/modules/$KERNEL/kernel/fs/squashfs/squashfs.ko $INITRD_TREE/$LMK/kernel/fs
 
 #copy filesystem modules, if not directly copied into kernel
+rcopy_ex /$LMK/kernel/fs/unionfs $INITRD_TREE 2>/dev/null
+rcopy_ex /$LMK/kernel/fs/squashfs $INITRD_TREE 2>/dev/null
 rcopy_ex /$LMK/kernel/lib/zlib_inflate $INITRD_TREE 2>/dev/null
 rcopy_ex /$LMK/kernel/drivers/block/loop* $INITRD_TREE 2>/dev/null
 
@@ -126,6 +126,7 @@ rcopy_ex /$LMK/kernel/drivers/usb/storage $INITRD_TREE 2>/dev/null
 rcopy_ex /$LMK/kernel/drivers/usb/host/ehci-hcd* $INITRD_TREE 2>/dev/null
 rcopy_ex /$LMK/kernel/drivers/usb/host/ohci-hcd* $INITRD_TREE 2>/dev/null
 rcopy_ex /$LMK/kernel/drivers/usb/host/uhci-hcd* $INITRD_TREE 2>/dev/null
+rcopy_ex /$LMK/kernel/drivers/usb/host/sl811-hcd* $INITRD_TREE 2>/dev/null
 #rcopy_ex /$LMK/kernel/drivers/usb/storage $INITRD_TREE 2>/dev/null
 
 #disk (scsi, ide, raid, pcmcia) modules

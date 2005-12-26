@@ -5,7 +5,7 @@
 # author: Tomas M. <http://www.linux-live.org>
 # ---------------------------------------------------
 
-CDLABEL="SLAX"
+CDLABEL="MOMONGA-LIVECD"
 
 if [ "$1" = "" -o "$1" = "--help" -o "$1" = "-h" ]; then
   echo "This script will create bootable ISO from files in curent directory."
