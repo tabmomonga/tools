@@ -347,8 +347,8 @@ modprobe_usb_modules()
    modprobe_module uhci-hcd
    modprobe_module sl811-hcd
    modprobe_module scsi_mod
-   modprobe_module sg
    modprobe_module usb-storage
+   modprobe_module sr_mod
    modprobe_module cdrom
    echolog "waiting for USB devices, max 9 seconds"
    sleep 9
