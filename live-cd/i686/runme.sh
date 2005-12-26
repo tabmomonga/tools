@@ -9,8 +9,8 @@ if [ ! $# = 3 ]; then
 	exit 1
 fi
 
-ROOT=$1
-KERNEL=$2
+export ROOT=$1
+export KERNEL=$2
 ISOFILE=$3
 
 echo "cleanup yum cache"
