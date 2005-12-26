@@ -99,7 +99,7 @@ modprobe_module()
   PRINTK=`cat /proc/sys/kernel/printk`
   echo "0" >/proc/sys/kernel/printk
 
-  # KERNEL="`uname -r`"
+  KERNEL="`uname -r`"
   LSMOD=/tmp/lsmod
   MODULEDEPS="`cat /lib/modules/$KERNEL/modules.dep | egrep \"$1\\.ko(\\.gz)?:\"`"
 
