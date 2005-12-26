@@ -1,6 +1,6 @@
---- /etc/init.d.orig/halt	2005-06-03 07:31:10.000000000 +0900
-+++ /etc/init.d/halt	2005-12-26 12:37:21.000000000 +0900
-@@ -126,53 +126,6 @@
+--- etc/init.d.orig/halt	2005-06-03 07:31:10.000000000 +0900
++++ etc/init.d/halt	2005-12-26 14:47:03.000000000 +0900
+@@ -126,74 +126,6 @@
  [ -x /sbin/quotaoff ] && runcmd $"Turning off quotas: " /sbin/quotaoff -aug
  
  # Unmount file systems, killing processes if we have to.
@@ -51,11 +51,32 @@
 -	retry=$(($retry-1))
 -	sig=-9
 -done
+-
+-sig=
+-retry=3
+-remaining=`halt_get_remaining | sort -r`
+-
+-while [ -n "$remaining" -a "$retry" -gt 0 ]
+-do
+-	if [ "$retry" -lt 3 ]; then
+-		LANG=C runcmd $"Unmounting file systems (retry): "  umount -f $remaining
+-	else
+-		LANG=C runcmd $"Unmounting file systems: "  umount -f $remaining
+-	fi
+-	sleep 2
+-	remaining=`halt_get_remaining | sort -r`
+-	[ -z "$remaining" ] && break
+-	/sbin/fuser -k -m $sig $remaining >/dev/null
+-	sleep 5
+-	retry=$(($retry-1))
+-	sig=-9
+-done
+-[ -f /proc/bus/usb/devices ] && umount /proc/bus/usb
  
- sig=
- retry=3
---- /etc/init.d.orig/netfs	2005-06-03 07:31:10.000000000 +0900
-+++ /etc/init.d/netfs	2005-12-26 12:37:37.000000000 +0900
+ # remove the crash indicator flag
+ rm -f /.autofsck
+--- etc/init.d.orig/netfs	2005-06-03 07:31:10.000000000 +0900
++++ etc/init.d/netfs	2005-12-26 14:47:18.000000000 +0900
 @@ -44,32 +44,6 @@
  	action $"Mounting other filesystems: " mount -a -t nonfs,nfs4,smbfs,cifs,ncpfs,gfs
  	;;
