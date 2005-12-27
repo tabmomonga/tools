@@ -6,16 +6,17 @@ PKGLISTS_XFCE4=pkglists/pkglist.xfce4
 PKGLISTS_GNOME=pkglists/pkglist.gnome
 PKGLISTS_KDE=pkglists/pkglist.kde
 PKGLISTS_OOO=pkglists/pkglist.ooo
+PKGLISTS_ADD=pkglists/pkglist.add
 REPOBASE=$1
 
 INSTALL_XORG=yes
-INSTALL_XFCE4=yes
-INSTALL_GNOME=no
+INSTALL_XFCE4=no
+INSTALL_GNOME=yes
 INSTALL_KDE=no
 INSTALL_OOO=yes
 
 XORG_LANG=ja_JP.EUC-JP
-XORG_SESSION=xfce4
+XORG_SESSION=gnome
 XORG_XIM=SCIM
 
 
@@ -55,16 +56,6 @@ echo "Copying yum setting"
 cp -a /etc/yum.repos.d $REPOBASE/etc
 perl -npe 's/exclude.*\n//' /etc/yum.conf > $REPOBASE/etc/yum.conf.tmp
 
-#echo "Installing core packages"
-#yum -c $REPOBASE/etc/yum.conf.tmp -y --installroot=$REPOBASE install \
-#	hwdata quota
-#
-#echo "Installing kernel package"
-#yum -c $REPOBASE/etc/yum.conf.tmp -y --installroot=$REPOBASE install \
-#	kernel selinux-policy-targeted
-#yum -c $REPOBASE/etc/yum.conf.tmp -y --installroot=$REPOBASE install \
-#	kernel-headers
-
 echo "Installing base package"
 yum -c $REPOBASE/etc/yum.conf.tmp -y --installroot=$REPOBASE install \
 	`cat $PKGLISTS_BASE`
@@ -98,6 +89,13 @@ if [ x$INSTALL_OOO = "xyes" -a -f $PKGLISTS_OOO ]; then
 	yum -c $REPOBASE/etc/yum.conf.tmp -y --installroot=$REPOBASE install \
 	`cat $PKGLISTS_OOO`
 fi
+
+if [ -f $PKGLISTS_ADD ]; then
+	echo "Installing additional packages"
+	yum -c $REPOBASE/etc/yum.conf.tmp -y --installroot=$REPOBASE install \
+	`cat $PKGLISTS_ADD`
+fi
+
 
 echo "Creating Network settings"
 cat << EOF > $REPOBASE/etc/sysconfig/network

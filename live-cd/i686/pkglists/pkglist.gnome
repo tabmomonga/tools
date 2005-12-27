@@ -4,6 +4,8 @@ automake
 control-center
 eel
 evolution-data-server
+gftp
+ghex
 gnome-applets
 gnome-audio
 gnome-backgrounds
@@ -26,6 +28,7 @@ gnome-terminal
 gnome-themes
 gnome-volume-manager
 gnomeicu
+gphoto2
 gst-plugins
 gstreamer
 gthumb
@@ -40,7 +43,7 @@ lockdev
 mozilla
 nautilus
 nautilus-cd-burner
-nspr
+ntfsprogs-gnomevfs
 pilot-link
 umb-scheme
 vte
