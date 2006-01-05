@@ -15,35 +15,31 @@ file1, file2 = ARGV
 
 name = depends = provides = nil
 
-mph1 = Hash.new{|h,k| h[k] = []}
-File.read(file1).each do |line|
-  line.chomp!
-  if /Package: (.+)/ =~ line
-    name = $1
-  elsif /Depends: (.+)/ =~ line
-    depends = $1.split
-    depends.delete("ld-linux.so.2")
-    depends.delete("libdl.so.2")
-  elsif /Provides: (.+)/ =~ line
-    provides = $1.split
-    mph1[name] = [depends, provides]
+def get_depends_and_provides(file)
+  ret = {}
+  name = depends = provides = nil
+  File.read(file).each do |line|
+    line.chomp!
+    if /Package: (.+)/ =~ line
+      name = $1
+    elsif /Depends: (.+)/ =~ line
+      depends = $1.split
+      depends.delete("ld-linux.so.2")
+      depends.delete("libgcc_s.so.1(GCC_3.0)")
+      depends.delete_if{|i| /\Alibdl.so.\d+/ =~ i}
+      depends.delete_if{|i| /\Alibc.so.\d+/ =~ i}
+      depends.delete_if{|i| /\Alibm.so.\d+/ =~ i}
+      depends.delete_if{|i| /\Alibpthread.so.\d+/ =~ i}
+    elsif /Provides: (.+)/ =~ line
+      provides = $1.split
+      ret[name] = [depends, provides]
+    end
   end
+  ret
 end
 
-mph2 = Hash.new{|h,k| h[k] = []}
-File.read(file2).each do |line|
-  line.chomp!
-  if /^Package: (.+)/ =~ line
-    name = $1
-  elsif /^Depends: (.+)/ =~ line
-    depends = $1.split
-    depends.delete("ld-linux.so.2")
-    depends.delete("libdl.so.2")
-  elsif /^Provides: (.+)/ =~ line
-    provides = $1.split
-    mph2[name] = [depends, provides]
-  end
-end
+mph1 = get_depends_and_provides(file1)
+mph2 = get_depends_and_provides(file2)
 
 mph1.sort.each do |k,v|
   next if mph2[k].empty?
