@@ -129,7 +129,6 @@ end
       rv
     end
   end
-  $URL_ALIAS = {}
   $ENABLE_DISTCC = false
   $DISTCC_HOSTS = []#'localhost']
   $DISTCC_VERBOSE = false
