@@ -1,0 +1,11 @@
+You can affect the system by passing special parameters to the kernel now.
+Type "linux" followed by one or more parameters as shown below, or just press
+Enter to skip this boot prompt.
+
+linux ................ to start Momonga Linux
+text ................. to start Momonga Linux without X11
+single ............... to start Momonga Linux single user mode
+
+memtest .............. to start memtest instead of LinuxLiveCD
+
+

@@ -1,0 +1,13 @@
+Important directories:
+
+boot ....... contains files to boot Live CD
+
+base ....... contains base (essential) modules for filesystem. All .mo files from this directory will be used.
+modules .... contains additional modules for filesystem. All .mo files from this directory will be used.
+optional ... contains optional modules, which are loaded only with "load=modulename.mo" boot option.
+rootcopy ... contains files which are directly copied to root directory / while booting, overwriting originals.
+
+Important files:
+
+create_bootiso.sh .... script to build new iso in Linux
+create_bootiso.cmd ... script to build new iso in Windows
