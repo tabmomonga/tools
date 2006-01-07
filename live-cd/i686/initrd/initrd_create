@@ -51,9 +51,8 @@ debug()
 MOUNTDIR=/tmp/initrd_mountdir_$$
 INITRD_TREE=/tmp/initrd_tree_$$
 
-if [ ! -d "/lib/modules/$KERNEL" ]; then
-#if [ ! -d "kernel-modules/$KERNEL" ]; then
-   echo "The directory kernel-modules/$KERNEL doesn't exist. Please create it and copy"
+if [ ! -d "$ROOT/lib/modules/$KERNEL" ]; then
+   echo "The directory $ROOT/lib/modules/$KERNEL doesn't exist. Please create it and copy"
    echo "squashFS and unionFS modules for your kernel version to it."
    exit 1
 fi
@@ -95,44 +94,47 @@ LMK="lib/modules/$KERNEL"
 
 #necessary modules and dependency files
 mkdir -p $INITRD_TREE/$LMK/kernel/fs
+( cd $ROOT
 #cp kernel-modules/2.6.11.8/unionfs.ko.gz $INITRD_TREE/$LMK/kernel/fs
 #cp kernel-modules/$KERNEL/unionfs.ko.gz $INITRD_TREE/$LMK/kernel/fs
 #cp kernel-modules/2.6.11.8/squashfs.ko.gz $INITRD_TREE/$LMK/kernel/fs
 #cp kernel-modules/$KERNEL/squashfs.ko.gz $INITRD_TREE/$LMK/kernel/fs
 
 #copy filesystem modules, if not directly copied into kernel
-rcopy_ex /$LMK/kernel/fs/unionfs $INITRD_TREE 2>/dev/null
-rcopy_ex /$LMK/kernel/fs/squashfs $INITRD_TREE 2>/dev/null
-rcopy_ex /$LMK/kernel/lib/zlib_inflate $INITRD_TREE 2>/dev/null
-rcopy_ex /$LMK/kernel/drivers/block/loop* $INITRD_TREE 2>/dev/null
+rcopy_ex $LMK/kernel/fs/unionfs $INITRD_TREE 2>/dev/null
+rcopy_ex $LMK/kernel/fs/squashfs $INITRD_TREE 2>/dev/null
+rcopy_ex $LMK/kernel/lib/zlib_inflate $INITRD_TREE 2>/dev/null
+rcopy_ex $LMK/kernel/drivers/block/loop* $INITRD_TREE 2>/dev/null
 
 #tuika
-rcopy_ex /$LMK/kernel/drivers/cdrom $INITRD_TREE 2>/dev/null
-rcopy_ex /$LMK/kernel/drivers/ide $INITRD_TREE 2>/dev/null
-rcopy_ex /$LMK/kernel/drivers/scsi $INITRD_TREE 2>/dev/null
+rcopy_ex $LMK/kernel/drivers/cdrom $INITRD_TREE 2>/dev/null
+rcopy_ex $LMK/kernel/drivers/ide $INITRD_TREE 2>/dev/null
+rcopy_ex $LMK/kernel/drivers/scsi $INITRD_TREE 2>/dev/null
 
-rcopy_ex /$LMK/kernel/fs/isofs $INITRD_TREE 2>/dev/null
-rcopy_ex /$LMK/kernel/fs/fat $INITRD_TREE 2>/dev/null
-rcopy_ex /$LMK/kernel/fs/vfat $INITRD_TREE 2>/dev/null
-rcopy_ex /$LMK/kernel/fs/ntfs $INITRD_TREE 2>/dev/null
-rcopy_ex /$LMK/kernel/fs/ext3 $INITRD_TREE 2>/dev/null
-rcopy_ex /$LMK/kernel/fs/reiserfs $INITRD_TREE 2>/dev/null
+rcopy_ex $LMK/kernel/fs/isofs $INITRD_TREE 2>/dev/null
+rcopy_ex $LMK/kernel/fs/fat $INITRD_TREE 2>/dev/null
+rcopy_ex $LMK/kernel/fs/vfat $INITRD_TREE 2>/dev/null
+rcopy_ex $LMK/kernel/fs/ntfs $INITRD_TREE 2>/dev/null
+rcopy_ex $LMK/kernel/fs/ext3 $INITRD_TREE 2>/dev/null
+rcopy_ex $LMK/kernel/fs/reiserfs $INITRD_TREE 2>/dev/null
 
 # add language support for filesystems
-rcopy_ex /$LMK/kernel/fs/nls/ $INITRD_TREE 2>/dev/null
+rcopy_ex $LMK/kernel/fs/nls/ $INITRD_TREE 2>/dev/null
 
 #usb modules
-rcopy_ex /$LMK/kernel/drivers/usb/storage $INITRD_TREE 2>/dev/null
-rcopy_ex /$LMK/kernel/drivers/usb/host/ehci-hcd* $INITRD_TREE 2>/dev/null
-rcopy_ex /$LMK/kernel/drivers/usb/host/ohci-hcd* $INITRD_TREE 2>/dev/null
-rcopy_ex /$LMK/kernel/drivers/usb/host/uhci-hcd* $INITRD_TREE 2>/dev/null
-rcopy_ex /$LMK/kernel/drivers/usb/host/sl811-hcd* $INITRD_TREE 2>/dev/null
+rcopy_ex $LMK/kernel/drivers/usb/storage $INITRD_TREE 2>/dev/null
+rcopy_ex $LMK/kernel/drivers/usb/host/ehci-hcd* $INITRD_TREE 2>/dev/null
+rcopy_ex $LMK/kernel/drivers/usb/host/ohci-hcd* $INITRD_TREE 2>/dev/null
+rcopy_ex $LMK/kernel/drivers/usb/host/uhci-hcd* $INITRD_TREE 2>/dev/null
+rcopy_ex $LMK/kernel/drivers/usb/host/sl811-hcd* $INITRD_TREE 2>/dev/null
 #rcopy_ex /$LMK/kernel/drivers/usb/storage $INITRD_TREE 2>/dev/null
 
 #disk (scsi, ide, raid, pcmcia) modules
-#rcopy_ex /$LMK/kernel/drivers/scsi $INITRD_TREE
-#rcopy_ex /$LMK/kernel/drivers/ide $INITRD_TREE
-#rcopy_ex /$LMK/kernel/drivers/pcmcia $INITRD_TREE
+#rcopy_ex $LMK/kernel/drivers/scsi $INITRD_TREE
+#rcopy_ex $LMK/kernel/drivers/ide $INITRD_TREE
+#rcopy_ex $LMK/kernel/drivers/pcmcia $INITRD_TREE
+
+)
 
 debug "gzipping kernel modules"
 find $INITRD_TREE -name "*.ko" | xargs -r gzip --best
