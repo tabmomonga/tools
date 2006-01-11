@@ -42,7 +42,7 @@ mph1 = get_depends_and_provides(file1)
 mph2 = get_depends_and_provides(file2)
 
 mph1.sort.each do |k,v|
-  next if mph2[k].empty?
+  next if mph2[k].nil? || mph2[k].empty?
   del_dep = (v[0] || []) - (mph2[k][0]||[])
   add_dep = (mph2[k][0]||[]) - (v[0] || [])
   del_pro = (v[1] || []) - (mph2[k][1]||[])
