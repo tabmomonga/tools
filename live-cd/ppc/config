@@ -4,7 +4,8 @@
 
 # compressed directories (img) will be stored here
 # (the whole folder will be erased now!)
-CDDATA=/tmp/live_data_$$
+CDDATA=/tmp/live_data_4591
+#CDDATA=/tmp/live_data_$$
 
 # name of initrd image
 INITRDIMG=initrd
@@ -20,4 +21,7 @@ KERNEL="`uname -r`"
 
 # change this variable if you installed your distro to some directory.
 # for example ROOT=/tmp/newdir. You may leave it empty, then it defaults to /
-ROOT=
+ROOT=/home/momonga/live_root
+
+# iso name.
+ISONAME=liveppc.iso
