@@ -41,7 +41,6 @@ e2fsprogs
 elfutils
 elfutils-libelf
 eject
-emacs
 ethtool
 expat
 fbset
@@ -79,7 +78,6 @@ initscripts
 iproute
 iputils
 ipv6calc
-irda-utils
 japanese-fonts
 jed
 jed-common
@@ -163,8 +161,6 @@ patch
 pciutils
 pcre
 perl
-perl-Filter
-perl-String-CRC32
 policycoreutils
 popt
 portmap
@@ -228,6 +224,8 @@ utempter
 util-linux
 vim-common
 vim-minimal
+vim-enhanced
+vim-macros
 vixie-cron
 w3m
 wget
