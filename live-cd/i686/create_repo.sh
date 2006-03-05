@@ -177,9 +177,6 @@ cp -a inst_dir $REPOBASE/inst_dir
 find $REPOBASE/inst_dir -name ".svn" -exec rm -rf {} \; 2> /dev/null
 
 
-# tmp
-/usr/sbin/chroot $REPOBASE rpm -e --nodeps mozilla
-
 echo "Cleaning up"
 umount $REPOBASE/proc
 rm -fv $REPOBASE/etc/yum.conf.tmp
