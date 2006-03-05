@@ -52,9 +52,6 @@ cat << EOF > $REPOBASE/etc/hosts
 127.0.0.1       localhost.localdomain   livecd
 EOF
 
-echo "Creating /etc/localtime"
-cp $REPOBASE/usr/share/zoneinfo/Japan $REPOBASE/etc/localtime
-
 touch $REPOBASE/etc/resolv.conf
 
 echo "Copying yum setting"
@@ -131,6 +128,9 @@ fi
 
 echo "Creating System Font setting"
 echo 'SYSFONT="latarcyrheb-sun16"' >> $REPOBASE/etc/sysconfig/i18n
+
+echo "Creating /etc/localtime"
+cp $REPOBASE/usr/share/zoneinfo/Japan $REPOBASE/etc/localtime
 
 
 echo "Modifying /etc/init.d/kudzu"
