@@ -64,6 +64,18 @@ for dir in bin etc home lib opt root usr sbin var; do
     fi
 done
 
+# for install
+if [ -d $ROOT/boot ]; then
+    echo "base/boot_kern.mo"
+    mv $ROOT/boot $ROOT/boot_kern
+    create_module $ROOT/boot_kern $CDDATA/base/boot_kern.mo -keep-as-directory
+    if [ $? -ne 0 ]; then mv $ROOT/boot_kern $ROOT/boot ; exit; fi
+    mv $ROOT/boot_kern $ROOT/boot
+fi
+echo "base/inst_dir.mo"
+create_module $ROOT/inst_dir $CDDATA/base/inst_dir.mo -keep-as-directory
+if [ $? -ne 0 ]; then exit; fi
+
 echo "creating LiveCD ISO image..."
 cd $CDDATA
 ./make_iso.sh $ISOFILE

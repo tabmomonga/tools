@@ -1,12 +1,13 @@
---- /etc/init.d.orig/halt	2005-06-03 07:31:10.000000000 +0900
-+++ /etc/init.d/halt	2005-12-26 14:47:03.000000000 +0900
-@@ -126,74 +126,6 @@
+--- /etc/init.d/halt.orig	2006-01-29 08:47:20.000000000 +0900
++++ /etc/init.d/halt	2006-02-19 02:28:53.000000000 +0900
+@@ -125,34 +125,6 @@
+ 
  [ -x /sbin/quotaoff ] && runcmd $"Turning off quotas: " /sbin/quotaoff -aug
  
- # Unmount file systems, killing processes if we have to.
+-# Unmount file systems, killing processes if we have to.
 -# Unmount loopback stuff first
--remaining=`awk '!/^#/ && $1 ~ /^\/dev\/loop/ && $2 != "/" {print $2}' /proc/mounts`
--devremaining=`awk '!/^#/ && $1 ~ /^\/dev\/loop/ && $2 != "/" {print $1}' /proc/mounts`
+-remaining=`awk '$1 ~ /^\/dev\/loop/ && $2 != "/" {print $2}' /proc/mounts`
+-devremaining=`awk '$1 ~ /^\/dev\/loop/ && $2 != "/" {print $1}' /proc/mounts`
 -[ -n "$remaining" ] && {
 -	sig=
 -	retry=3
@@ -21,8 +22,8 @@
 -			losetup $dev > /dev/null 2>&1 && \
 -				runcmd $"Detaching loopback device $dev: " losetup -d $dev
 -		done
--		remaining=`awk '!/^#/ && $1 ~ /^\/dev\/loop/ && $2 != "/" {print $2}' /proc/mounts`
--		devremaining=`awk '!/^#/ && $1 ~ /^\/dev\/loop/ && $2 != "/" {print $1}' /proc/mounts`
+-		remaining=`awk '$1 ~ /^\/dev\/loop/ && $2 != "/" {print $2}' /proc/mounts`
+-		devremaining=`awk '$1 ~ /^\/dev\/loop/ && $2 != "/" {print $1}' /proc/mounts`
 -		[ -z "$remaining" ] && break
 -		/sbin/fuser -k -m $sig $remaining >/dev/null
 -		sleep 5
@@ -31,59 +32,27 @@
 -	done
 -}
 -
--# Unmount RPC pipe file systems
--sig=
--retry=3
--remaining=`awk '!/^#/ && $3 ~ /^rpc_pipefs$/ || $3 ~ /^rpc_svc_gss_pipefs$/ {print $2}' /proc/mounts`
--
--while [ -n "$remaining" -a "$retry" -gt 0 ]
--do
--	if [ "$retry" -lt 3 ]; then
--		runcmd $"Unmounting pipe file systems (retry): "  umount -f $remaining
--	else
--		runcmd $"Unmounting pipe file systems: "  umount -f $remaining
--	fi
--	sleep 2
--	remaining=`awk '!/^#/ && $3 ~ /^rpc_pipefs$/ || $3 ~ /^rpc_svc_gss_pipefs$/ {print $2}' /proc/mounts`
--	[ -z "$remaining" ] && break
--	/sbin/fuser -k -m $sig $remaining >/dev/null
--	sleep 5
--	retry=$(($retry-1))
--	sig=-9
--done
--
--sig=
--retry=3
--remaining=`halt_get_remaining | sort -r`
--
--while [ -n "$remaining" -a "$retry" -gt 0 ]
--do
--	if [ "$retry" -lt 3 ]; then
--		LANG=C runcmd $"Unmounting file systems (retry): "  umount -f $remaining
--	else
--		LANG=C runcmd $"Unmounting file systems: "  umount -f $remaining
--	fi
--	sleep 2
--	remaining=`halt_get_remaining | sort -r`
--	[ -z "$remaining" ] && break
--	/sbin/fuser -k -m $sig $remaining >/dev/null
--	sleep 5
--	retry=$(($retry-1))
--	sig=-9
--done
--[ -f /proc/bus/usb/devices ] && umount /proc/bus/usb
+ # Unmount RPC pipe file systems
+ sig=
+ retry=3
+@@ -176,7 +148,7 @@
  
- # remove the crash indicator flag
- rm -f /.autofsck
---- /etc/init.d.orig/netfs	2005-06-03 07:31:10.000000000 +0900
-+++ /etc/init.d/netfs	2005-12-26 14:47:18.000000000 +0900
-@@ -44,32 +44,6 @@
+ sig=
+ retry=3
+-remaining=`halt_get_remaining | sort -r`
++remaining=`halt_get_remaining | sort -r|grep -v '/dev/loop'`
+ 
+ while [ -n "$remaining" -a "$retry" -gt 0 ]
+ do
+--- /etc/init.d/netfs.orig	2006-01-29 08:47:20.000000000 +0900
++++ /etc/init.d/netfs	2006-02-19 02:28:43.000000000 +0900
+@@ -88,32 +88,6 @@
  	action $"Mounting other filesystems: " mount -a -t nonfs,nfs4,smbfs,cifs,ncpfs,gfs
  	;;
    stop)
 -        # Unmount loopback stuff first
--	remaining=`LC_ALL=C awk '!/^#/ && $1 ~ /^\/dev\/loop/ && $2 != "/" {print $2}' /proc/mounts`
--	devremaining=`LC_ALL=C awk '!/^#/ && $1 ~ /^\/dev\/loop/ && $2 != "/" {print $1}' /proc/mounts`
+-	remaining=`LC_ALL=C awk '$1 ~ /^\/dev\/loop/ && $2 != "/" {print $2}' /proc/mounts`
+-	devremaining=`LC_ALL=C awk '$1 ~ /^\/dev\/loop/ && $2 != "/" {print $1}' /proc/mounts`
 -	[ -n "$remaining" ] && {
 -	        sig=
 -		retry=3
@@ -98,8 +67,8 @@
 -				losetup $dev >/dev/null 2>&1 && \
 -				action $"Detaching loopback device $dev: " losetup -d $dev
 -			done	
--			remaining=`LC_ALL=C awk '!/^#/ && $1 ~ /^\/dev\/loop/ && $2 != "/" {print $2}' /proc/mounts`
--			devremaining=`LC_ALL=C awk '!/^#/ && $1 ~ /^\/dev\/loop/ && $2 != "/" {print $1}' /proc/mounts`
+-			remaining=`LC_ALL=C awk '$1 ~ /^\/dev\/loop/ && $2 != "/" {print $2}' /proc/mounts`
+-			devremaining=`LC_ALL=C awk '$1 ~ /^\/dev\/loop/ && $2 != "/" {print $1}' /proc/mounts`
 -			[ -z "$remaining" ] && break
 -			/sbin/fuser -k -m $sig $remaining >/dev/null
 -			sleep 5

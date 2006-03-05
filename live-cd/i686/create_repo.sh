@@ -52,9 +52,12 @@ cat << EOF > $REPOBASE/etc/hosts
 127.0.0.1       localhost.localdomain   livecd
 EOF
 
+touch $REPOBASE/etc/resolv.conf
+
 echo "Copying yum setting"
-cp -a /etc/yum.repos.d $REPOBASE/etc
+cp -a /etc/yum.repos.d $REPOBASE/etc/yum.repos.d.tmp
 perl -npe 's/exclude.*\n//' /etc/yum.conf > $REPOBASE/etc/yum.conf.tmp
+echo 'reposdir=/etc/yum.repos.d.tmp' >> $REPOBASE/etc/yum.conf.tmp
 
 echo "Installing base package"
 yum -c $REPOBASE/etc/yum.conf.tmp -y --installroot=$REPOBASE install \
@@ -166,9 +169,18 @@ echo momonga | chroot $REPOBASE passwd --stdin momonga
 echo 'momonga ALL=(ALL) NOPASSWD: ALL' >> $REPOBASE/etc/sudoers
 
 
+echo "Copying installer staff"
+cp -a inst_dir $REPOBASE/inst_dir
+find $REPOBASE/inst_dir -name ".svn" -exec rm -rf {} \; 2> /dev/null
+
+
+# tmp
+/usr/sbin/chroot $REPOBASE rpm -e --nodeps mozilla
+
 echo "Cleaning up"
 umount $REPOBASE/proc
 rm -fv $REPOBASE/etc/yum.conf.tmp
+rm -rf $REPOBASE/etc/yum.repos.d.tmp
 find $REPOBASE -name "*.rpmorig" -exec rm -fv {} \;
 
 
