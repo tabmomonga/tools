@@ -52,6 +52,9 @@ cat << EOF > $REPOBASE/etc/hosts
 127.0.0.1       localhost.localdomain   livecd
 EOF
 
+echo "Creating /etc/localtime"
+cp $REPOBASE/usr/share/zoneinfo/Japan $REPOBASE/etc/localtime
+
 touch $REPOBASE/etc/resolv.conf
 
 echo "Copying yum setting"
@@ -155,10 +158,10 @@ fi
 
 echo "Adding to /etc/rc.local"
 cat << EOF >> $REPOBASE/etc/rc.local
-/usr/bin/system-config-keyboard --text
 if [ \`/sbin/runlevel | awk '{ print \$2 }'\` == "5" ]; then
         LANG=ja_JP.EUC-JP /usr/bin/system-config-display
 fi
+/usr/bin/system-config-keyboard --text
 EOF
 
 
