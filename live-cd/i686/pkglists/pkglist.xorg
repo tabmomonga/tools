@@ -3,8 +3,10 @@ anthy
 authconfig-gtk
 audiofile
 cdparanoia
+chkfontpath-momonga
 cmpskit
 cups
+cups-libs
 dbskkd-cdb
 dbus-x11
 desktop-file-utils
@@ -19,6 +21,7 @@ fribidi
 gdm
 gettext
 gimp
+japanese-fonts
 kterm
 linc
 lirc
@@ -36,6 +39,7 @@ openslp
 ochusha
 pnm2ppa
 prime
+pyxf86config
 rdesktop
 rhpxl
 rxvt-unicode
