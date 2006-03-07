@@ -30,6 +30,7 @@ dbus
 dbus-glib
 device-mapper
 dhclient
+dialog
 diffutils
 dmapi
 dosfstools
@@ -133,6 +134,7 @@ pam
 passwd
 patch
 pciutils
+pcmciautils
 pcre
 perl
 policycoreutils

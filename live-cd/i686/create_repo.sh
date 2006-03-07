@@ -49,7 +49,7 @@ EOF
 
 echo "Creating /etc/hosts"
 cat << EOF > $REPOBASE/etc/hosts
-127.0.0.1       localhost.localdomain   livecd
+127.0.0.1       localhost.localdomain   localhost livecd
 EOF
 
 touch $REPOBASE/etc/resolv.conf
@@ -131,13 +131,6 @@ echo 'SYSFONT="latarcyrheb-sun16"' >> $REPOBASE/etc/sysconfig/i18n
 
 echo "Creating /etc/localtime"
 cp $REPOBASE/usr/share/zoneinfo/Japan $REPOBASE/etc/localtime
-
-
-echo "Modifying /etc/init.d/kudzu"
-mv $REPOBASE/etc/init.d/kudzu $REPOBASE/etc/init.d/kudzu.rpmorig
-perl -npe 's/-t\ 30/-q/' $REPOBASE/etc/init.d/kudzu.rpmorig \
-	> $REPOBASE/etc/init.d/kudzu
-chmod 755 $REPOBASE/etc/init.d/kudzu
 
 
 echo "Modifying /etc/init.d/halt, /etc/init.d/netfs"
