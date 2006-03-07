@@ -1,5 +1,14 @@
---- /etc/init.d/halt.orig	2006-01-29 08:47:20.000000000 +0900
-+++ /etc/init.d/halt	2006-02-19 02:28:53.000000000 +0900
+--- etc/init.d/halt.orig	2006-03-07 17:13:21.000000000 +0900
++++ etc/init.d/halt	2006-03-07 17:14:05.000000000 +0900
+@@ -25,7 +25,7 @@
+ halt_get_remaining() {
+ 	awk '$2 ~ /^\/$|^\/proc|^\/sys|^\/dev/{next}
+ 	     $3 == "tmpfs" || $3 == "proc" {print $2 ; next}
+-	     /(^#|loopfs|autofs|^none|^\/dev\/ram|^\/dev\/root)/ {next}
++	     /(^#|autofs|^none|^\/dev\/ram|^\/dev\/root)/ {next}
+ 	     {print $2}' /proc/mounts
+ }
+ 
 @@ -125,34 +125,6 @@
  
  [ -x /sbin/quotaoff ] && runcmd $"Turning off quotas: " /sbin/quotaoff -aug
@@ -35,17 +44,45 @@
  # Unmount RPC pipe file systems
  sig=
  retry=3
-@@ -176,7 +148,7 @@
+@@ -174,36 +146,11 @@
+ 	sig=-9
+ done
  
- sig=
- retry=3
+-sig=
+-retry=3
 -remaining=`halt_get_remaining | sort -r`
-+remaining=`halt_get_remaining | sort -r|grep -v '/dev/loop'`
+-
+-while [ -n "$remaining" -a "$retry" -gt 0 ]
+-do
+-	if [ "$retry" -lt 3 ]; then
+-		LANG=C runcmd $"Unmounting file systems (retry): "  umount -f $remaining
+-	else
+-		LANG=C runcmd $"Unmounting file systems: "  umount -f $remaining
+-	fi
+-	sleep 2
+-	remaining=`halt_get_remaining | sort -r`
+-	[ -z "$remaining" ] && break
+-	/sbin/fuser -k -m $sig $remaining >/dev/null
+-	sleep 5
+-	retry=$(($retry-1))
+-	sig=-9
+-done
+ [ -f /proc/bus/usb/devices ] && umount /proc/bus/usb
  
- while [ -n "$remaining" -a "$retry" -gt 0 ]
- do
---- /etc/init.d/netfs.orig	2006-01-29 08:47:20.000000000 +0900
-+++ /etc/init.d/netfs	2006-02-19 02:28:43.000000000 +0900
+ # remove the crash indicator flag
+ rm -f /.autofsck
+ 
+-# Try all file systems other than root and RAM disks, one last time.
+-mount |  awk '!/( \/ |^\/dev\/root|^\/dev\/ram| \/proc| \/dev\/pts )/ { print $3 }' | sort -r | \
+-  while read line; do
+-    umount -f $line
+-done
+-
+ # Remount read only anything that's left mounted.
+ # echo $"Remounting remaining filesystems readonly"
+ mount | awk '{ print $3 }' | while read line; do
+--- etc/init.d/netfs.orig	2006-03-07 17:13:33.000000000 +0900
++++ etc/init.d/netfs	2006-03-06 02:13:20.000000000 +0900
 @@ -88,32 +88,6 @@
  	action $"Mounting other filesystems: " mount -a -t nonfs,nfs4,smbfs,cifs,ncpfs,gfs
  	;;
