@@ -15,7 +15,8 @@ cd $CHANGEDIR
 
 ./install $ROOT
 
-VMLINUZ=$ROOT/boot/vmlinuz-2.6.15-0.7.7m
+VMLINUZ=$ROOT/boot/vmlinuz-2.6.15-5m
+#VMLINUZ=$ROOT/boot/vmlinuz-2.6.15-0.7.7m
 if [ -L "$VMLINUZ" ]; then VMLINUZ=`readlink -f $VMLINUZ`; fi
 if [ "`ls $VMLINUZ 2>/dev/null`" = "" ]; then echo "cannot find $VMLINUZ"; exit 1; fi
 
