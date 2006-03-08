@@ -137,7 +137,8 @@ echo "Modifying /etc/init.d/halt, /etc/init.d/netfs"
 cp shutdown.patch $REPOBASE/tmp
 (
 	cd $REPOBASE
-	patch -p1 < $REPOBASE/tmp/shutdown.patch
+	patch -p0 < $REPOBASE/tmp/shutdown.patch
+	rm -f $REPOBASE/tmp/shutdown.patch
 )
 
 
@@ -166,8 +167,13 @@ echo 'momonga ALL=(ALL) NOPASSWD: ALL' >> $REPOBASE/etc/sudoers
 
 
 echo "Copying installer staff"
-cp -a inst_dir $REPOBASE/inst_dir
-find $REPOBASE/inst_dir -name ".svn" -exec rm -rf {} \; 2> /dev/null
+if [ -d "inst_dir" ]; then
+    cp -a inst_dir $REPOBASE/inst_dir
+    find $REPOBASE/inst_dir -name ".svn" -exec rm -rf {} \; 2> /dev/null
+else
+    mkdir $REPOBASE/inst_dir
+fi
+mkdir $REPOBASE/install
 
 
 echo "Cleaning up"

@@ -72,9 +72,17 @@ if [ -d $ROOT/boot ]; then
     if [ $? -ne 0 ]; then mv $ROOT/boot_kern $ROOT/boot ; exit; fi
     mv $ROOT/boot_kern $ROOT/boot
 fi
-echo "base/inst_dir.mo"
-create_module $ROOT/inst_dir $CDDATA/base/inst_dir.mo -keep-as-directory
-if [ $? -ne 0 ]; then exit; fi
+if [ -d $ROOT/inst_dir ]; then
+    echo "base/inst_dir.mo"
+    create_module $ROOT/inst_dir $CDDATA/base/inst_dir.mo -keep-as-directory
+    if [ $? -ne 0 ]; then exit; fi
+fi
+if [ -d $ROOT/install ]; then
+    echo "base/install.mo"
+    create_module $ROOT/install $CDDATA/base/install.mo -keep-as-directory
+    if [ $? -ne 0 ]; then exit; fi
+fi
+
 
 echo "creating LiveCD ISO image..."
 cd $CDDATA

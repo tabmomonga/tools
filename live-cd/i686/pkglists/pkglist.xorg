@@ -89,3 +89,4 @@ xorg-x11-base-fonts
 xorg-x11-font-utils
 xorg-x11-tools
 xorg-x11-xauth
+vim-X11
