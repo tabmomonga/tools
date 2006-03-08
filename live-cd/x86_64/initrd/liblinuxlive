@@ -408,7 +408,7 @@ activate_fstab()
       mount_device "$DEVICE" "$1/$MOUNTDIR"
       umount "$1/$MOUNTDIR" 2>/dev/null
       if [ $? -eq 0 ]; then
-         echo "$DEVICE $MOUNTDIR auto auto,users,suid,dev,exec 0 0" >>$FSTAB
+         echo "$DEVICE $MOUNTDIR auto noauto,users,suid,dev,exec 0 0" >>$FSTAB
       else # remove empty directory
          rmdir "$1/$MOUNTDIR" 2>/dev/null
       fi

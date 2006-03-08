@@ -1,0 +1,37 @@
+# message lists for momonga livecd installer
+#
+
+WELCOME="This script helps installing Momonga Linux on your Hard disk.\n\
+This script is still under development.\n\
+Momonga Project take no responsibility for data loss or hardware damage.\n\n\
+Before running this script, Installation target Partition must be mounted to $INST_ROOT.\n\n\
+!!DO NOT PRESS 'Control+C' AT INSTALL PROCESS!!"
+
+NOT_MOUNTED="$INST_ROOT is not mounted.\n\
+Before running this script, Installation target Partition must be mounted to $INST_ROOT."
+
+SELECT_SWAP="Choose a swap partition for new system."
+
+SWAP_NOT_FOUNT="Warning: swap partition not detected.\n\
+If you add swap partition, add Partition and edit /etc/fstab after reboot\n
+or Cancel installation and create swap partition."
+
+FSTAB_CONFIRM="It's OK [Yes]\n\
+or Cancel installation [No]"
+
+SWAP_CONFIRM="Installer will formating swap partition.\n\
+It's OK [Yes]\n\
+or Cancel installation [No]\n"
+
+COPY_CONFIRM="Installer will Copying system files to your Harddisk.\n\
+It's OK [Yes]\n\
+or Cancel installation [No]\n"
+
+GRUB_HDD="Please select Harddisk to install grub.\n\
+(You may select 1st boot disk for your BIOS setting.)\n\
+or [Cancel] (Do not install grub).\n\n\
+If you using Multiple OS, add to /boot/grub/grub.conf Other OS's setting MANUALY."
+
+BOOTLOADER_NOT_INSTALLED="bootloader is not installed.\n\
+Please install bootloader manualy."
+

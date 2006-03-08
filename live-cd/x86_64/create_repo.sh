@@ -49,12 +49,15 @@ EOF
 
 echo "Creating /etc/hosts"
 cat << EOF > $REPOBASE/etc/hosts
-127.0.0.1       localhost.localdomain   livecd
+127.0.0.1       localhost.localdomain   localhost livecd
 EOF
 
+touch $REPOBASE/etc/resolv.conf
+
 echo "Copying yum setting"
-cp -a /etc/yum.repos.d $REPOBASE/etc
+cp -a /etc/yum.repos.d $REPOBASE/etc/yum.repos.d.tmp
 perl -npe 's/exclude.*\n//' /etc/yum.conf > $REPOBASE/etc/yum.conf.tmp
+echo 'reposdir=/etc/yum.repos.d.tmp' >> $REPOBASE/etc/yum.conf.tmp
 
 echo "Installing base package"
 yum -c $REPOBASE/etc/yum.conf.tmp -y --installroot=$REPOBASE install \
@@ -126,19 +129,16 @@ fi
 echo "Creating System Font setting"
 echo 'SYSFONT="latarcyrheb-sun16"' >> $REPOBASE/etc/sysconfig/i18n
 
-
-echo "Modifying /etc/init.d/kudzu"
-mv $REPOBASE/etc/init.d/kudzu $REPOBASE/etc/init.d/kudzu.rpmorig
-perl -npe 's/-t\ 30/-q/' $REPOBASE/etc/init.d/kudzu.rpmorig \
-	> $REPOBASE/etc/init.d/kudzu
-chmod 755 $REPOBASE/etc/init.d/kudzu
+echo "Creating /etc/localtime"
+cp $REPOBASE/usr/share/zoneinfo/Japan $REPOBASE/etc/localtime
 
 
 echo "Modifying /etc/init.d/halt, /etc/init.d/netfs"
 cp shutdown.patch $REPOBASE/tmp
 (
 	cd $REPOBASE
-	patch -p1 < $REPOBASE/tmp/shutdown.patch
+	patch -p0 < $REPOBASE/tmp/shutdown.patch
+	rm -f $REPOBASE/tmp/shutdown.patch
 )
 
 
@@ -152,10 +152,10 @@ fi
 
 echo "Adding to /etc/rc.local"
 cat << EOF >> $REPOBASE/etc/rc.local
-/usr/bin/system-config-keyboard --text
 if [ \`/sbin/runlevel | awk '{ print \$2 }'\` == "5" ]; then
         LANG=ja_JP.EUC-JP /usr/bin/system-config-display
 fi
+/usr/bin/system-config-keyboard --text
 EOF
 
 
@@ -166,10 +166,24 @@ echo momonga | chroot $REPOBASE passwd --stdin momonga
 echo 'momonga ALL=(ALL) NOPASSWD: ALL' >> $REPOBASE/etc/sudoers
 
 
+echo "Copying installer staff"
+if [ -d "inst_dir" ]; then
+    cp -a inst_dir $REPOBASE/inst_dir
+    find $REPOBASE/inst_dir -name ".svn" -exec rm -rf {} \; 2> /dev/null
+else
+    mkdir $REPOBASE/inst_dir
+fi
+mkdir $REPOBASE/install
+
+
 echo "Cleaning up"
 umount $REPOBASE/proc
 rm -fv $REPOBASE/etc/yum.conf.tmp
+rm -rf $REPOBASE/etc/yum.repos.d.tmp
 find $REPOBASE -name "*.rpmorig" -exec rm -fv {} \;
+
+# bug??
+cp -f /dev/null $REPOBASE/var/log/lastlog
 
 
 echo "Done!"

@@ -121,7 +121,7 @@ if [ -x $UNION/usr/sbin/chroot ];
   else CHROOT=/usr/bin/chroot
 fi
 
-header "linux live end"
+echo "linux live script finished"
 pivot_root . $INITRAMDISK
 exec $CHROOT . sbin/init 3 <dev/console >dev/console 2>&1; fi
 

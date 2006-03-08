@@ -1,0 +1,179 @@
+# library for momonga livecd installer
+#
+
+detect_hdd() {
+if [ -f /proc/partitions ]; then
+    while read x x x p x ; do
+        case "$p" in
+            hd?)
+                if [ "`cat /proc/ide/$p/media`" = "disk" ] ; then
+                    echo "$p `fdisk -l /dev/$p |grep ^Disk |sed 's/.*://; s/,.*//; s/\ //g;'`" \
+                    >> /tmp/$0.hdd_list.$PID
+                    NUMHD=`expr $NUMHD + 1`
+                fi
+                ;;
+            sd?)
+                echo "$p `fdisk -l /dev/$p |grep ^Disk |sed 's/.*://; s/,.*//; s/\ //g;'`" \
+                >> /tmp/$0.hdd_list.$PID
+                NUMHD=`expr $NUMHD + 1`
+                ;;
+            *) ;;
+        esac
+    done < /proc/partitions
+fi
+}
+
+
+select_swap() {
+cp /dev/null /tmp/$0.swap_list.$PID
+cat /tmp/$0.hdd_list.$PID|while read p x ; do
+    fdisk -l /dev/$p | grep 'Linux swap' | while read p x x s x x x x x; do
+	s=`echo $s|sed 's/+//g'` ; s=`expr $s / 1024`
+        echo "$p ${s}MB" >> /tmp/$0.swap_list.$PID
+    done
+done
+if [ -s /tmp/$0.swap_list.$PID ]; then
+    NUMSW=`cat /tmp/$0.swap_list.$PID | wc -l`
+    $DIA "Select your swap partition" \
+      --menu "$SELECT_SWAP" 16 60 $NUMSW \
+      `cat /tmp/$0.swap_list.$PID |while read p s ; do echo -n "$p $s ";done` 2> /tmp/$0.swap_selected.$PID
+    if [ $? = 1 ]; then echo "$0: aborded" ; exit 1 ; fi
+else
+    $DIA "Swap Partition not found" \
+      --msgbox "$SWAP_NOT_FOUNT" 16 60
+    if [ $? = 1 ]; then echo "$0: aborded" ; exit 1 ; fi
+fi
+}
+
+
+create_fstab() {
+ROOT=`cat /proc/mounts | grep "${INST_ROOT} " | awk '{ print $1 }'`
+if [ -f /tmp/$0.swap_selected.$PID ]; then
+    SWAP=`cat /tmp/$0.swap_selected.$PID`
+fi
+f=`cat /proc/mounts | grep "${INST_ROOT} " | awk '{ print $3 }'`
+echo "$f" > /tmp/$0.fstypes.$PID
+echo "$ROOT	/	$f	defaults	1 1" > /tmp/$0.fstab.$PID
+echo "none	/dev/pts	devpts	gid=5,mode=620	0 0" >> /tmp/$0.fstab.$PID
+echo "none	/proc	proc	defaults	0 0" >> /tmp/$0.fstab.$PID
+echo "none	/sys	sysfs	defaults	0 0" >> /tmp/$0.fstab.$PID
+if [ -s /tmp/$0.swap_selected.$PID ]; then
+    echo "$SWAP	swap	swap	defaults	0 0" >> /tmp/$0.fstab.$PID
+fi
+OTHER_PART=`cat /proc/mounts | grep "${INST_ROOT}/" | awk '{ print $1 }'`
+if [ ! -z "$OTHER_PART" ]; then
+    for p in $OTHER_PART; do
+	f=`cat /proc/mounts | grep "^$p " | awk '{ print $3 }'`
+	echo "$f" >> /tmp/$0.fstypes.$PID
+	m=`cat /proc/mounts | grep "^$p " | awk '{ print $2 }'|sed "s,${INST_ROOT},,"`
+	echo "$p	$m	$f	defaults	1 2" >> /tmp/$0.fstab.$PID
+	if [ "$m" == "/boot" ]; then
+	    echo "$m $p" > /tmp/$0.bootpart.$PID
+	fi
+    done
+fi
+if [ ! -f /tmp/$0.bootpart.$PID ]; then
+    echo "/ $ROOT" > /tmp/$0.bootpart.$PID
+fi
+}
+
+install_grub() {
+KERN=`uname -r`
+GRUB_INSTALLED=0
+chroot $INST_ROOT mount /proc
+chroot $INST_ROOT mount /sys
+if [ -f /tmp/$0.bootpart.$PID ]; then
+    if [ `uname -m` == "i686" ]; then
+	cp $INST_ROOT/usr/lib/grub/*/*stage* $INST_ROOT/boot/grub
+    fi
+    if [ `uname -m` == "x86_64" ]; then
+	cp $INST_ROOT/usr/lib64/grub/*/*stage* $INST_ROOT/boot/grub
+    fi
+    # create device.map first
+    echo quit | chroot $INST_ROOT /sbin/grub --batch \
+      --device-map=/boot/grub/device.map > /dev/null
+    DEV_MAP="$INST_ROOT/boot/grub/device.map"
+    # $BOOT is boot partition ( ex. /dev/sda1 )
+    BOOT=`cat /tmp/$0.bootpart.$PID | awk '{ print $2 }'`
+    # $ROOT is / partition's device name
+    ROOT=`cat /proc/mounts | grep "$INST_ROOT " | awk '{ print $1 }'`
+
+    # only supported /dev/hd* or /dev/sd*
+    if [ `echo $BOOT |grep "^/dev/hd"` ] || [ `echo $BOOT |grep "^/dev/sd"` ]; then
+    if [ `echo $ROOT | grep "^/dev/hd"` ] || [ `echo $ROOT |grep "^/dev/sd"` ]; then
+
+	# $BOOT_PART is partition number of /boot or / (ex. if /dev/hda1 then "0")
+	BOOT_PART=`echo $BOOT|cut -c 9`; BOOT_PART=`expr $BOOT_PART - 1`
+	# $ROOT_PART is partition number of / (ex. if /dev/hda1 then "0")
+	ROOT_PART=`echo $ROOT|cut -c 9`; ROOT_PART=`expr $ROOT_PART - 1`
+        # $m is mountpoint of boot partition 
+	m=`cat /tmp/$0.bootpart.$PID | awk '{ print $1 }'`
+	# /boot is exists?
+	if [ ! "$m" == "/boot" ]; then 
+	    r="/boot/"
+	else
+	    r="/"
+	fi
+
+	# MBR disk user selection
+	NUMHD=`cat /tmp/$0.hdd_list.$PID|wc -l`
+	$DIA "Select harddisk to grub install" --menu "$GRUB_HDD" 16 60 $NUMHD \
+	`cat /tmp/$0.hdd_list.$PID|while read p s ; do echo -n "$p $s "; done` \
+	2> /tmp/$0.selected_hdd.$PID 
+	if [ $? = 0 ]; then 
+	# $GRUB_INST is target Harddisk for grub
+	GRUB_INST=`cat /tmp/$0.selected_hdd.$PID`
+
+        # $ROOT_DEV is /'s Whole HDD device name
+	ROOT_DEV=`echo $ROOT|cut -c 6,7,8`
+	# $BOOT_DEV is /boot's Whole HDD device name
+	BOOT_DEV=`echo $BOOT|cut -c 6,7,8`
+
+	# read from device.map
+	ROOT_DISK=`grep "/dev/$ROOT_DEV" $DEV_MAP|sed 's/(//g;s/)//g;'|awk '{ print $1 }'`
+	BOOT_DISK=`grep "/dev/$BOOT_DEV" $DEV_MAP|sed 's/(//g;s/)//g;'|awk '{ print $1 }'`
+
+	# create grub.conf
+	cat << EOF > $INST_ROOT/boot/grub/grub.conf
+default=0
+timeout=5
+splashimage=($BOOT_DISK,$BOOT_PART)${r}grub/splash.xpm.gz
+#hiddenmenu
+title Momonga Linux ($KERN)
+	root ($BOOT_DISK,$BOOT_PART)
+	kernel ${r}vmlinuz-$KERN ro root=$ROOT
+	initrd ${r}initrd-${KERN}.img
+EOF
+	# create grub command
+	cat << EOF > /tmp/$0.grub_command.$PID
+device (hd0) /dev/$GRUB_INST
+device ($ROOT_DISK) /dev/$ROOT_DEV
+device ($BOOT_DISK) /dev/$BOOT_DEV
+root ($BOOT_DISK,$BOOT_PART)
+setup (hd0)
+quit
+EOF
+	# running grub
+	cat /tmp/$0.grub_command.$PID | grub 
+	GRUB_INSTALLED=1
+	fi
+    fi
+    fi
+fi
+if [ $GRUB_INSTALLED = 0 ]; then
+    $DIA "Bootloader not installed" --msgbox \
+    "$BOOTLOADER_NOT_INSTALLED" 16 60
+    if [ $? = 1 ]; then echo "$0: aborded" ; exit 1 ; fi
+fi
+chroot $INST_ROOT umount /proc
+chroot $INST_ROOT umount /sys
+}
+
+install_yaboot() {
+# currently not supported...
+$DIA "Bootloader not installed" --msgbox \
+"$BOOTLOADER_NOT_INSTALLED" 16 60
+if [ $? = 1 ]; then echo "$0: aborded" ; exit 1 ; fi
+}
+
+
