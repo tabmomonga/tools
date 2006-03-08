@@ -59,9 +59,11 @@ for d in proc sys selinux media mnt srv home tmp; do
     mkdir -p $INST_ROOT/$d
 done
 chmod 1777 $INST_ROOT/tmp
-for d in bin dev etc lib opt root sbin usr var ; do
-    echo "Copying $d"
-    cp -a /$d $INST_ROOT/
+for d in bin dev etc lib lib64 opt root sbin usr var ; do
+    if [ -d /$d ]; then
+	echo "Copying $d"
+	cp -a /$d $INST_ROOT/
+    fi
 done
 chmod 700 $INST_ROOT/root
 

@@ -83,7 +83,12 @@ GRUB_INSTALLED=0
 chroot $INST_ROOT mount /proc
 chroot $INST_ROOT mount /sys
 if [ -f /tmp/$0.bootpart.$PID ]; then
-    cp $INST_ROOT/usr/lib/grub/*/*stage* $INST_ROOT/boot/grub
+    if [ `uname -m` == "i686" ]; then
+	cp $INST_ROOT/usr/lib/grub/*/*stage* $INST_ROOT/boot/grub
+    fi
+    if [ `uname -m` == "x86_64" ]; then
+	cp $INST_ROOT/usr/lib64/grub/*/*stage* $INST_ROOT/boot/grub
+    fi
     # create device.map first
     echo quit | chroot $INST_ROOT /sbin/grub --batch \
       --device-map=/boot/grub/device.map > /dev/null
