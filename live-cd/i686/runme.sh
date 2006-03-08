@@ -39,7 +39,7 @@ mkdir -p $CDDATA/optional
 mkdir -p $CDDATA/rootcopy
 
 echo "copying cd-root to $CDDATA, using kernel from $VMLINUZ"
-echo "Using kernel modules from /lib/modules/$KERNEL"
+echo "Using kernel modules from $ROOT/lib/modules/$KERNEL"
 cp -R cd-root/* $CDDATA
 cp -R tools $CDDATA
 cp -R info/* $CDDATA
@@ -82,7 +82,6 @@ if [ -d $ROOT/install ]; then
     create_module $ROOT/install $CDDATA/base/install.mo -keep-as-directory
     if [ $? -ne 0 ]; then exit; fi
 fi
-
 
 echo "creating LiveCD ISO image..."
 cd $CDDATA
