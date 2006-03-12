@@ -80,7 +80,7 @@ chroot $INST_ROOT mount /sys
 chroot $INST_ROOT mount /proc
 chroot $INST_ROOT bash /tmp/mkinitrd.tmp /boot/initrd-`uname -r`.img `uname -r` $with_fs \
  > /dev/null 2>&1
-rm -f /tmp/mkinitrd.tmp
+##debug rm -f $INST_ROOT/tmp/mkinitrd.tmp
 chroot $INST_ROOT umount /sys
 chroot $INST_ROOT umount /proc
 
