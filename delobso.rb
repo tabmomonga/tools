@@ -64,6 +64,14 @@ end
 
 $Massatu = []
 Dir.glob("#{$TOPDIR}*").each do |top|
+  case top
+  when "#{$TOPDIR}-Nonfree"
+    next unless opt[:n]
+  when "#{$TOPDIR}-Orphan"
+    next unless opt[:O]
+  when "#{$TOPDIR}-Alter"
+    next unless opt[:L]
+  end
   Dir.glob("#{top}/#{ARCH}/*.rpm\0#{top}/noarch/*.rpm\0#{top}/SRPMS/*.rpm").each do |rpm|
     if !$Packages[top] || !$Packages[top][File.basename(rpm)]
       $Massatu << rpm
@@ -79,16 +87,7 @@ Dir.glob("#{$TOPDIR}*").each do |top|
   ($Packages[top]||[]).sort.each do |k,v|
     dir = k.split(/\./)[-2]
     dir = 'SRPMS' if /src/ =~ dir
-    case top
-    when "#{$TOPDIR}-Nonfree"
-      puts "#{top}/#{dir}/#{k} is missing" if opt[:n]
-    when "#{$TOPDIR}-Orphan"
-      puts "#{top}/#{dir}/#{k} is missing" if opt[:O]
-    when "#{$TOPDIR}-Alter"
-      puts "#{top}/#{dir}/#{k} is missing" if opt[:L]
-    else $TOPDIR
-      puts "#{top}/#{dir}/#{k} is missing"
-    end
+    puts "#{top}/#{dir}/#{k} is missing"
   end
 end
 
