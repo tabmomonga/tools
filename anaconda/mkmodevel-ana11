@@ -1,0 +1,549 @@
+#!/usr/bin/env ruby
+
+WORK_DIR = "/dist/Current"
+#MIRROR_DIR = File.expand_path "/pub/HEAD/PKGS"
+
+PROG = $0
+ARCH = "i686"
+SUBARCH = "i686"
+work_dir = File.expand_path WORK_DIR
+LOG = "#{work_dir}/#{PROG.split(/\//)[-1]}.log"
+MOMONGA = "http://dist.momonga-linux.org/pub/momonga/development"
+#MIRROR = "#{MOMONGA}/development/PKGS"
+GENHDLIST = "sudo /usr/lib/anaconda-runtime/genhdlist"
+PKGORDER = "/usr/lib/anaconda-runtime/pkgorder"
+GETFULLCOMPS = "~/bin/getfullcomps.py"
+MAKESTAMP = "sudo /usr/lib/anaconda-runtime/makestamp.py"
+# BUILDINSTALL = "sudo /usr/lib/anaconda-runtime/buildinstall"
+BUILDINSTALL = "sudo ./buildinstall"
+SPLITTREE = "sudo /usr/lib/anaconda-runtime/splittree.py"
+CHKRPMDUP = "~/bin/chkrpmdup"
+CHKCOMPS = "~/bin/chkcomps"
+DEV_DIR = work_dir + "/development"
+COMPS_XML = DEV_DIR + "/#{ARCH}/os/Momonga/base/comps.xml"
+TREE_DIR = DEV_DIR + "/#{ARCH}/os"
+ISO_DIR = DEV_DIR + "/#{ARCH}/iso"
+JIGDO_DIR = DEV_DIR + "/#{ARCH}/jigdo"
+PKGS_DIR = "/pub/HEAD/PKGS"
+VER = Time.new.strftime("%Y%m%d")
+
+def show_usage()
+  print <<END_OF_USAGE
+Usage: mkmodevel [options]
+  -c   core CD
+  -d   devel CD
+  -h   show this message
+END_OF_USAGE
+  exit
+end
+
+case ARGV[0]
+when "-c"
+  MK_CORE = true
+  MK_DEVEL = false
+  MK_FULL = false
+  PKGS_LIST = "pkgs.core"
+when "-d"
+  MK_CORE = false
+  MK_DEVEL = true
+  MK_FULL = false
+  PKGS_LIST = "pkgs.devel"
+when "-h"
+  show_usage
+  exit 1
+else
+  MK_FULL = true
+  MK_CORE = false
+  MK_DEVEL = false
+  SUBPKGS_LIST = "pkgs.sub"
+end
+
+def do_cmd cmd
+  begin
+    f = open LOG, "a"
+    f.print "=====================================\n"
+    f.print Time.now.strftime("%H:%M:%S "), cmd, "\n"
+    log = `#{cmd} 2>&1`
+    status = $?
+    f.print log
+    f.print "\n"
+    raise if status != 0
+    f.close
+  rescue
+    print "\n#{PROG}: Aborted - #{cmd}(#{$?})\n"
+    STDERR.flush
+    STDOUT.flush
+    f.close
+    exit $?
+  end
+end
+
+`rm -f #{LOG}`
+
+#  1. パッケージを最新に更新
+# print "Syncing development packages - "
+# STDOUT.flush
+# cur_dir = Dir.pwd
+# Dir.chdir work_dir + "/development/PKGS"
+# do_cmd "lftp -c 'open #{MIRROR};mirror -e -n #{ARCH};mirror -e -n noarch'"
+# Dir.chdir cur_dir
+# print "done\n"
+
+# 22. iso イメージの保存
+print "Backup iso files - "
+STDOUT.flush
+unless Dir.glob("#{ISO_DIR}/*.iso").empty?
+  do_cmd "cp -f #{ISO_DIR}/*.iso #{work_dir}"
+end
+print "done\n"
+
+#  2. ツリーを掃除
+print "Cleanup output trees - "
+STDOUT.flush
+do_cmd "sudo rm -rf #{DEV_DIR}"
+do_cmd "mkdir -p #{DEV_DIR}/{PKGS/{SRPMS,#{ARCH},noarch},#{ARCH}/{iso,jigdo,os}}"
+print "done\n"
+
+#  3. 固定ファイルを展開
+print "Extracting fixed files - "
+STDOUT.flush
+do_cmd "tar xzvf #{work_dir}/fixed.files.tar.gz -C #{TREE_DIR}"
+print "done\n"
+
+#  4. current のパッケージをコピー
+print "Copying current package files - "
+STDOUT.flush
+cur_dir = Dir.pwd
+#Dir.chdir MIRROR_DIR
+#do_cmd "ln -f #{ARCH}/* #{PKGS_DIR}/#{ARCH}"
+#do_cmd "ln -f noarch/* #{PKGS_DIR}/noarch"
+Dir.chdir PKGS_DIR
+if MK_FULL
+  do_cmd "cp -f #{ARCH}/* #{TREE_DIR}/Momonga/RPMS"
+  do_cmd "cp -f noarch/* #{TREE_DIR}/Momonga/RPMS"
+  if ARCH == "x86_64"
+    pkglist = open("#{WORK_DIR}/#{SUBPKGS_LIST}")
+    pkglist.each do |pkg|
+      pkg.strip!
+      Dir.glob("#{PKGS_DIR}/*/#{pkg}*.#{SUBARCH}.rpm").each do |file|
+        pkgname = `rpm -qp --qf '%{NAME}' #{file} 2>&1`
+        if pkg == pkgname
+          do_cmd "cp #{file} #{DEV_DIR}/#{ARCH}/os/Momonga/RPMS/"
+        end
+      end
+    end
+  end
+else
+  pkglist = open("#{WORK_DIR}/#{PKGS_LIST}")
+  pkglist.each do |pkg|
+    pkg.strip!
+    Dir.glob("#{PKGS_DIR}/*/#{pkg}*.#{ARCH}.rpm").each do |file|
+      pkgname = `rpm -qp --qf '%{NAME}' #{file} 2>&1`
+      if pkg == pkgname
+        do_cmd "cp #{file} #{DEV_DIR}/#{ARCH}/os/Momonga/RPMS/"
+      end
+    end
+    Dir.glob("#{PKGS_DIR}/*/#{pkg}*.noarch.rpm").each do |file|
+      pkgname = `rpm -qp --qf '%{NAME}' #{file} 2>&1`
+      if pkg == pkgname
+        do_cmd "cp #{file} #{DEV_DIR}/#{ARCH}/os/Momonga/RPMS/"
+      end
+    end
+  end
+end
+Dir.chdir cur_dir
+print "done\n"
+
+#  5. 1.0 のパッケージで上書き
+# print "Overriding 1.0 packages - "
+# STDOUT.flush
+# cur_dir = Dir.pwd
+# Dir.chdir work_dir + "/1/#{ARCH}/os/Momonga/RPMS"
+# do_cmd "ln -f * #{TREE_DIR}/Momonga/RPMS"
+# Dir.chdir cur_dir
+# print "done\n"
+
+#  6. 重複しているパッケージの削除
+print "Removing duplication packages - "
+STDOUT.flush
+do_cmd "#{CHKRPMDUP} #{TREE_DIR}/Momonga/RPMS | bash"
+print "done\n"
+
+#  comps.xml をコピー
+print "Copying comps.xml - "
+if MK_FULL
+  do_cmd "cp #{work_dir}/comps.xml.momonga3 #{COMPS_XML}"
+else
+  do_cmd "cp #{work_dir}/comps.xml.core #{COMPS_XML}"
+end
+print "done\n"
+
+#  comps.xml のチェック
+print "Checking comps.xml - "
+STDOUT.flush
+do_cmd "#{CHKCOMPS} -v #{TREE_DIR}/Momonga/base/comps.xml #{TREE_DIR}/Momonga/RPMS"
+print "done\n"
+
+# #  7. comps パッケージの削除
+# print "Removing old comps package - "
+# STDOUT.flush
+# do_cmd "rm -f #{TREE_DIR}/Momonga/RPMS/comps-[0-9]*"
+# `find #{TREE_DIR}/ -name TRANS.TBL`.each do |f|
+#   do_cmd "sudo rm -f #{f}"
+# end
+# do_cmd "rm -f #{PKGS_DIR}/#{ARCH}/comps-[0-9]*"
+# do_cmd "rm -f #{PKGS_DIR}/SRPMS/comps-[0-9]*"
+# print "done\n"
+
+#  8. ここ以降 anaconda 使用のため環境変数を設定
+ENV["PYTHONPATH"] = "/usr/lib/anaconda:/usr/lib/anaconda-runtime"
+ENV["LD_LIBRARY_PATH"] = "/usr/lib:/usr/X11R6/lib"
+
+
+# 9. repodata の作成
+print "Generating repodata - "
+STDOUT.flush
+do_cmd "createrepo -g #{COMPS_XML} #{TREE_DIR}" 
+print "done\n"
+
+#  9. hdlist の作成
+# print "Generating hdlist - "
+# STDOUT.flush
+# do_cmd "#{GENHDLIST} --productpath Momonga #{TREE_DIR}"
+# print "done\n"
+
+# 15. buildinstall の実行
+print "Doing buildinstall - "
+STDOUT.flush
+do_cmd "mkdir -p #{work_dir}/buildinstall"
+cmd  = BUILDINSTALL + " "
+cmd += "--buildinstdir " + work_dir + "/buildinstall "
+# cmd += "--pkgorder #{work_dir}/pkgorder "
+cmd += "--comp dist-7.0 "
+cmd += "--version #{VER} "
+cmd += "--release \'Momonga Linux #{VER}\' "
+cmd += "--product Momonga "
+cmd += "--prodpath Momonga "
+cmd += TREE_DIR
+curdir = Dir.pwd
+Dir.chdir "/usr/lib/anaconda-runtime"
+do_cmd cmd
+Dir.chdir curdir
+unless File.exist? TREE_DIR + "/isolinux/isolinux.bin"
+  print "\n#{PROG}: Aborted - Please check tree\n"
+  exit 1
+end
+print "done\n"
+
+# 10. pkgorder の作成
+print "Generating pkgorder - "
+STDOUT.flush
+cmd  = PKGORDER + " "
+cmd += TREE_DIR + " "
+cmd += "#{ARCH} "
+cmd += "Momonga"
+do_cmd cmd
+print "done\n"
+
+=begin
+if MK_FULL
+  # 14. CD用分割ツリーの作成
+  print "Splitting tree for CD - "
+  STDOUT.flush
+  cmd  = SPLITTREE + " "
+  cmd += "--arch=#{ARCH} "
+  cmd += "--total-discs=4 "
+  cmd += "--bin-discs=4 "
+  cmd += "--release-string='Momonga Linux #{VER}' "
+  cmd += "--pkgorderfile=/tmp/pkgorder-Momonga "
+  cmd += "--distdir=#{TREE_DIR} "
+  cmd += "--productpath=Momonga"
+  do_cmd cmd
+  print "done\n"
+end
+
+## 13. hdlist の更新
+#print "Regenerating hdlist - "
+#STDOUT.flush
+#cmd  = GENHDLIST + " "
+#cmd += "--productpath Momonga "
+#cmd += "--fileorder #{work_dir}/pkgorder "
+#cmd += TREE_DIR
+#do_cmd cmd
+#print "done\n"
+
+# # 10. 依存のチェック
+# print "Checking dependency - "
+# STDOUT.flush
+# comps_pkg_list = `#{GETFULLCOMPS} comps.xml #{work_dir}/development #{ARCH}/os 2> #{work_dir}/comps.error`
+# if File.size?(work_dir + "/comps.error")
+#   print "mkmodevel: Aborted - package dependency error.\n"
+#   exit 1
+# end
+
+# File.delete work_dir + "/comps.error"
+# f = open "#{COMPS_XML}.new", "w"
+# open(COMPS_XML).each do |l|
+#   if l =~ /<\!--@@PACKAGES@@-->/
+#     f.write comps_pkg_list
+#   else
+#     f.write l
+#   end
+# end
+# f.close
+# File.delete COMPS_XML
+# File.rename COMPS_XML + ".new", COMPS_XML
+print "done\n"
+
+# 11. .discinfo の作成
+print "Generating .discinfo - "
+STDOUT.flush
+cmd  = MAKESTAMP + " "
+cmd += "--releasestr='Momonga Linux #{VER}' "
+cmd += "--arch=#{ARCH} "
+cmd += "--discNum='1,2,3,4' "
+cmd += "--baseDir=Momonga/base "
+cmd += "--packagesDir=Momonga/RPMS "
+cmd += "--pixmapsDir=Momonga/pixmaps "
+cmd += "--outfile=#{TREE_DIR}/.discinfo"
+do_cmd cmd
+print "done\n"
+
+# 12. comps パッケージの作成
+print "Building new comps package - "
+STDOUT.flush
+macrofiles = "macrofiles: /usr/lib/rpm/macros:/usr/lib/rpm/%{_target}/macros:/usr/lib/rpm/macros.momonga:/usr/lib/rpm/%{_target}/macros.momonga:/etc/rpm/macros.specspo:/etc/rpm/macros.db1:/etc/rpm/macros.cdb:/etc/rpm/macros:/etc/rpm/%{_target}/macros:~/.rpmmacros:"
+macrofiles += work_dir + "/rpmmacros\n"
+f = open work_dir + "/rpmrc", "w"
+open(work_dir + "/rpmrc.default").each do |l|
+  f.print l
+end
+f.print macrofiles
+f.close
+f = open work_dir + "/rpmmacros", "w"
+f.print "%_topdir #{work_dir}\n"
+f.print "%_arch #{ARCH}\n"
+f.print "%_host_cpu #{ARCH}\n"
+f.print "%_host_vender momonga\n"
+f.print "%_host_os linux\n"
+f.print "%_numjobs 1\n"
+f.close
+cur_dir = Dir.pwd
+Dir.chdir work_dir
+do_cmd "mkdir -p SPECS BUILD RPMS/#{ARCH} SRPMS"
+do_cmd "cp #{work_dir}/comps.spec #{work_dir}/SPECS"
+do_cmd "rpmbuild -ba --target #{ARCH} --rcfile rpmrc --define='basedir #{TREE_DIR}/Momonga/base' --define='compsversion 1' SPECS/comps.spec"
+do_cmd "cp -a #{work_dir}/RPMS/#{ARCH}/comps-* #{PKGS_DIR}/#{ARCH}"
+do_cmd "cp -a #{work_dir}/SRPMS/comps-* #{PKGS_DIR}/SRPMS"
+do_cmd "cp -a #{work_dir}/RPMS/#{ARCH}/comps-* #{TREE_DIR}/Momonga/RPMS"
+do_cmd "cp -a #{work_dir}/RPMS/#{ARCH}/comps-* #{TREE_DIR}/Momonga/base/comps.rpm"
+do_cmd "rm -rf #{work_dir}/BUILD #{work_dir}/RPMS #{work_dir}/SRPMS #{work_dir}/rpmrc #{work_dir}/rpmmacros"
+Dir.chdir cur_dir
+print "done\n"
+
+=end
+=begin
+# 15. buildinstall の実行
+print "Doing buildinstall - "
+STDOUT.flush
+do_cmd "mkdir -p #{work_dir}/buildinstall"
+cmd  = BUILDINSTALL + " "
+cmd += "--buildinstdir " + work_dir + "/buildinstall "
+# cmd += "--pkgorder #{work_dir}/pkgorder "
+cmd += "--comp dist-7.0 "
+cmd += "--version #{VER} "
+cmd += "--release \'Momonga Linux #{VER}\' "
+cmd += "--product Momonga "
+cmd += "--prodpath Momonga "
+cmd += TREE_DIR
+curdir = Dir.pwd
+Dir.chdir "/usr/lib/anaconda-runtime"
+do_cmd cmd
+Dir.chdir curdir
+unless File.exist? TREE_DIR + "/isolinux/isolinux.bin"
+  print "\n#{PROG}: Aborted - Please check tree\n"
+  exit 1
+end
+print "done\n"
+=end
+
+=begin
+if MK_FULL
+  # 14. CD用分割ツリーの作成
+  print "Splitting tree for CD - "
+  STDOUT.flush
+  cmd  = SPLITTREE + " "
+  cmd += "--arch=#{ARCH} "
+  cmd += "--total-discs=4 "
+  cmd += "--bin-discs=4 "
+  cmd += "--release-string='Momonga Linux #{VER}' "
+  cmd += "--pkgorderfile=/tmp/pkgorder-Momonga "
+  cmd += "--distdir=#{TREE_DIR} "
+  cmd += "--productpath=Momonga"
+  do_cmd cmd
+  print "done\n"
+
+#   # 16. CD用 hdlist 作成
+#   print "Generating hdlist for CD - "
+#   STDOUT.flush
+#   cmd  = GENHDLIST + " "
+#   cmd += "--productpath Momonga "
+#   cmd += "--withnumbers "
+#   cmd += "--fileorder #{work_dir}/pkgorder "
+#   cmd += "#{TREE_DIR}-disc[1-4]"
+#   do_cmd cmd
+#   # File.delete "#{work_dir}/pkgorder"
+#   print "done\n"
+end
+=end
+
+if MK_FULL
+  # 17. DVD iso image 作成
+  print "Generating DVD iso image - "
+  STDOUT.flush
+  cmd  = "sudo mkhybrid "
+  cmd += "-r -J -d -L "
+  cmd += "-b isolinux/isolinux.bin -c isolinux/boot.cat "
+  cmd += "-no-emul-boot -boot-load-size 4 -boot-info-table "
+  cmd += "-V 'Momonga Linux DVD' "
+  cmd += "-o #{ISO_DIR}/MomongaLinux#{VER}-#{ARCH}-dvd.iso "
+  cmd += TREE_DIR
+  do_cmd cmd
+  cmd = "sudo /usr/lib/anaconda-runtime/implantisomd5 "
+  cmd += "#{ISO_DIR}/MomongaLinux#{VER}-#{ARCH}-dvd.iso"
+  do_cmd cmd
+  print "done\n"
+else
+  print "Generating CD iso image - "
+  STDOUT.flush
+  cmd  = "sudo mkisofs "
+  cmd += "-r "
+  cmd += "-b isolinux/isolinux.bin -c isolinux/boot.cat "
+  cmd += "-no-emul-boot -boot-load-size 4 -boot-info-table "
+  if MK_CORE
+    cmd += "-V 'Momonga Linux core CD' "
+    cmd += "-o #{ISO_DIR}/MomongaLinux#{VER}-#{ARCH}-core-cd.iso "
+  else
+    cmd += "-V 'Momonga Linux devel CD' "
+    cmd += "-o #{ISO_DIR}/MomongaLinux#{VER}-#{ARCH}-devel-cd.iso "
+  end
+  cmd += TREE_DIR
+  do_cmd cmd
+  cmd = "sudo /usr/lib/anaconda-runtime/implantisomd5 "
+  if MK_CORE
+    cmd += "#{ISO_DIR}/MomongaLinux#{VER}-#{ARCH}-core-cd.iso"
+  else
+    cmd += "#{ISO_DIR}/MomongaLinux#{VER}-#{ARCH}-devel-cd.iso"
+  end
+  do_cmd cmd
+  print "done\n"
+end
+
+=begin
+if MK_FULL
+  # 18. CD iso image 作成
+  for n in 1..4
+    print "Generating CD#{n} iso image - "
+    STDOUT.flush
+    cmd  = "sudo mkisofs "
+    cmd += "-r "
+    if n == 1
+      cmd += "-b isolinux/isolinux.bin -c isolinux/boot.cat "
+      cmd += "-no-emul-boot -boot-load-size 4 -boot-info-table "
+    end
+    cmd += "-V 'Momonga Linux CD#{n}' "
+    cmd += "-o #{ISO_DIR}/MomongaLinux#{VER}-#{ARCH}-cd#{n}.iso "
+    cmd += "#{TREE_DIR}-disc#{n}"
+    do_cmd cmd
+    cmd = "sudo /usr/lib/anaconda-runtime/implantisomd5 "
+    cmd += "#{ISO_DIR}/MomongaLinux#{VER}-#{ARCH}-cd#{n}.iso"
+    do_cmd cmd
+    print "done\n"
+  end
+end
+
+=end
+if MK_FULL && ARCH != "x86_64"
+  # 18. Rescue iso image 作成
+  print "Generating Rescue iso image - "
+  STDOUT.flush
+  cmd  = "sudo /usr/lib/anaconda-runtime/mk-rescueimage.#{ARCH} "
+  cmd += "#{TREE_DIR} #{DEV_DIR} Momonga Momonga"
+  do_cmd cmd
+  cmd  = "sudo mkisofs "
+  cmd += "-r "
+  cmd += "-b isolinux/isolinux.bin -c isolinux/boot.cat "
+  cmd += "-no-emul-boot -boot-load-size 4 -boot-info-table "
+  cmd += "-V 'Momonga Linux rescue CD' "
+  cmd += "-o #{ISO_DIR}/MomongaLinux#{VER}-#{ARCH}-rescuecd.iso "
+  cmd += "#{DEV_DIR}/#{ARCH}-rescueimage"
+  do_cmd cmd
+  cmd = "sudo cp -f #{ISO_DIR}/MomongaLinux#{VER}-#{ARCH}-rescuecd.iso #{TREE_DIR}/images/rescuecd.iso"
+  do_cmd cmd
+  cmd = "sudo /usr/lib/anaconda-runtime/implantisomd5 "
+  cmd += "#{ISO_DIR}/MomongaLinux#{VER}-#{ARCH}-rescuecd.iso"
+  do_cmd cmd
+  print "done\n"
+end
+
+# 19. MD5SUMS 作成
+print "Generating MD5SUMS file - "
+STDOUT.flush
+cur_dir = Dir.pwd
+Dir.chdir ISO_DIR
+do_cmd "md5sum *.iso > #{ISO_DIR}/MD5SUMS"
+Dir.chdir cur_dir
+print "done\n"
+
+# 20. ツリーを消す
+#print "Removing version dependent files - "
+#STDOUT.flush
+#do_cmd "sudo rm -rf #{TREE_DIR}-disc[1-4]"
+#do_cmd "sudo rm -rf #{TREE_DIR}/*"
+#print "done\n"
+
+# # 21. jigdo ファイルの生成
+# cur_dir = Dir.pwd
+# Dir.chdir JIGDO_DIR
+# ["dvd", "cd1", "cd2", "cd3", "cd4"].each do |media|
+#   print "Generating #{media}'s .jigdo and .template - "
+#   STDOUT.flush
+#   iso = "MomongaLinux#{VER}-#{ARCH}-#{media}.iso"
+#   cmd  = "jigdo-file make-template "
+#   cmd += "--cache=#{work_dir}/jigdo-cache.db "
+#   cmd += "--image=#{ISO_DIR}/#{iso} "
+#   cmd += "--jigdo=#{iso}.jigdo "
+#   cmd += "--template=#{iso}.template "
+#   cmd += "#{DEV_DIR}// "
+#   cmd += "--label Momonga=#{DEV_DIR} "
+#   cmd += "--uri Momonga=#{MOMONGA}/"
+#   do_cmd cmd
+#   jigdo = "#{JIGDO_DIR}/#{iso}.jigdo"
+#   newjigdo = "#{jigdo}.new"
+#   f = open newjigdo, "w"
+#   open(jigdo).each do |l|
+#       f.print l
+#     if l =~ /\[Servers\]/
+#       f.print "[Include #{MOMONGA}/development/#{ARCH}/jigdo/mirrors.jigdo]\n"
+#     end
+#   end
+#   f.close
+#   do_cmd "gzip -9c #{newjigdo} > #{jigdo}"
+#   File.delete newjigdo
+#   print "done\n"
+# end
+# File.delete work_dir + "/jigdo-cache.db"
+# Dir.chdir cur_dir
+
+# # 22. iso イメージの削除
+# print "Removing iso files - "
+# STDOUT.flush
+# do_cmd "sudo rm -f #{ISO_DIR}/*.iso"
+# print "done\n"
+
+# 23. comps パッケージの削除
+print "Removing comps package - "
+STDOUT.flush
+do_cmd "rm -f #{PKGS_DIR}/#{ARCH}/comps-[0-9]*"
+do_cmd "rm -f #{PKGS_DIR}/SRPMS/comps-[0-9]*"
+print "done\n"
