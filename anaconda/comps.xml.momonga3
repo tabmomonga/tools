@@ -249,9 +249,10 @@
     <uservisible>false</uservisible>
     <langonly>ar</langonly>
     <packagelist>
-      <packagereq type="mandatory">truetype-fonts-arabic</packagereq>
+      <packagereq type="conditional" requires="kdebase">kde-i18n-Arabic</packagereq>
+      <packagereq type="conditional" requires="koffice-core">koffice-l10n-Arabic</packagereq>
       <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-ar</packagereq>
-      <packagereq type="conditional" requires="kdelibs">kde-i18n-Arabic</packagereq>
+      <packagereq type="mandatory">truetype-fonts-arabic</packagereq>
     </packagelist>
   </group>
 
@@ -755,10 +756,11 @@
     <uservisible>false</uservisible>
     <langonly>bn</langonly>
     <packagelist>
-      <packagereq type="conditional" requires="kdelibs">kde-i18n-Bengali</packagereq>
+      <packagereq type="conditional" requires="kdebase">kde-i18n-Bengali</packagereq>
       <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-bn_IN</packagereq>
       <packagereq type="default">truetype-fonts-bengali</packagereq>
       <packagereq type="conditional" requires="kdelibs">scim-qtimm</packagereq>
+      <packagereq type="conditional" requires="kdelibs">uim-qtimmodule</packagereq>
     </packagelist>
   </group>
 
@@ -809,7 +811,8 @@
     <uservisible>false</uservisible>
     <langonly>pt_BR</langonly>
     <packagelist>
-      <packagereq type="conditional" requires="kdelibs">kde-i18n-Brazilian-Portuguese</packagereq>
+      <packagereq type="conditional" requires="kdebase">kde-i18n-Brazilian-Portuguese</packagereq>
+      <packagereq type="conditional" requires="koffice-core">koffice-l10n-Brazilian-Portuguese</packagereq>
       <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-pt_BR</packagereq>
     </packagelist>
   </group>
@@ -886,7 +889,8 @@
     <uservisible>false</uservisible>
     <langonly>en_GB</langonly>
     <packagelist>
-      <packagereq type="conditional" requires="kdelibs">kde-i18n-British-English</packagereq>
+      <packagereq type="conditional" requires="kdebase">kde-i18n-British-English</packagereq>
+      <packagereq type="conditional" requires="koffice-core">koffice-l10n-British-English</packagereq>
     </packagelist>
   </group>
 
@@ -898,7 +902,8 @@
     <uservisible>false</uservisible>
     <langonly>bg</langonly>
     <packagelist>
-      <packagereq type="conditional" requires="kdelibs">kde-i18n-Bulgarian</packagereq>
+      <packagereq type="conditional" requires="kdebase">kde-i18n-Bulgarian</packagereq>
+      <packagereq type="conditional" requires="koffice-core">koffice-l10n-Bulgarian</packagereq>
       <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-bg_BG</packagereq>
     </packagelist>
   </group>
@@ -963,7 +968,8 @@
     <uservisible>false</uservisible>
     <langonly>ca</langonly>
     <packagelist>
-      <packagereq type="conditional" requires="kdelibs">kde-i18n-Catalan</packagereq>
+      <packagereq type="conditional" requires="kdebase">kde-i18n-Catalan</packagereq>
+      <packagereq type="conditional" requires="koffice-core">koffice-l10n-Catalan</packagereq>
       <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-ca_ES</packagereq>
     </packagelist>
   </group>
@@ -1029,13 +1035,15 @@
     <uservisible>false</uservisible>
     <langonly>zh</langonly>
     <packagelist>
-      <packagereq type="conditional" requires="kdelibs">scim-qtimm</packagereq>
-      <packagereq type="conditional" requires="kdelibs">kde-i18n-Chinese</packagereq>
-      <packagereq type="conditional" requires="kdelibs">kde-i18n-Chinese-Big5</packagereq>
-      <packagereq type="mandatory">truetype-fonts-zh_CN</packagereq>
-      <packagereq type="mandatory">truetype-fonts-zh_TW</packagereq>
+      <packagereq type="conditional" requires="kdebase">kde-i18n-Chinese</packagereq>
+      <packagereq type="conditional" requires="kdebase">kde-i18n-Chinese-Big5</packagereq>
+      <packagereq type="conditional" requires="koffice-core">koffice-l10n-Chinese-Simplified</packagereq>
       <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-zh_CN</packagereq>
       <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-zh_TW</packagereq>
+      <packagereq type="mandatory">truetype-fonts-zh_CN</packagereq>
+      <packagereq type="mandatory">truetype-fonts-zh_TW</packagereq>
+      <packagereq type="conditional" requires="kdelibs">scim-qtimm</packagereq>
+      <packagereq type="conditional" requires="kdelibs">uim-qtimmodule</packagereq>
     </packagelist>
   </group>
 
@@ -1317,9 +1325,10 @@
     <uservisible>false</uservisible>
     <langonly>cs</langonly>
     <packagelist>
-      <packagereq type="conditional" requires="kdelibs">kde-i18n-Czech</packagereq>
-      <packagereq type="conditional" requires="man-pages">man-pages-cs</packagereq>
+      <packagereq type="conditional" requires="kdebase">kde-i18n-Czech</packagereq>
+      <packagereq type="conditional" requires="koffice-core">koffice-l10n-Czech</packagereq>
       <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-cs_CZ</packagereq>
+      <packagereq type="conditional" requires="man-pages">man-pages-cs</packagereq>
     </packagelist>
   </group>
 
@@ -1499,9 +1508,10 @@
     <uservisible>false</uservisible>
     <langonly>da</langonly>
     <packagelist>
-      <packagereq type="conditional" requires="kdelibs">kde-i18n-Danish</packagereq>
-      <packagereq type="conditional" requires="man-pages">man-pages-da</packagereq>
+      <packagereq type="conditional" requires="kdebase">kde-i18n-Danish</packagereq>
+      <packagereq type="conditional" requires="koffice-core">koffice-l10n-Danish</packagereq>
       <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-da_DK</packagereq>
+      <packagereq type="conditional" requires="man-pages">man-pages-da</packagereq>
     </packagelist>
   </group>
 
@@ -1947,7 +1957,8 @@
     <uservisible>false</uservisible>
     <langonly>nl</langonly>
     <packagelist>
-      <packagereq type="conditional" requires="kdelibs">kde-i18n-Dutch</packagereq>
+      <packagereq type="conditional" requires="kdebase">kde-i18n-Dutch</packagereq>
+      <packagereq type="conditional" requires="koffice-core">koffice-l10n-Dutch</packagereq>
       <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-nl</packagereq>
     </packagelist>
   </group>
@@ -2158,6 +2169,13 @@
       <packagereq type="optional">emacs</packagereq>
       <packagereq type="optional">xemacs</packagereq>
       <packagereq type="optional">xemacs-sumo</packagereq>
+      <packagereq type="optional">anthy-emacs</packagereq>
+      <packagereq type="optional">anthy-xemacs</packagereq>
+      <packagereq type="optional">prime-emacs</packagereq>
+      <packagereq type="optional">prime-xemacs</packagereq>
+      <packagereq type="optional">skk-emacs</packagereq>
+      <packagereq type="optional">skk-xemacs</packagereq>
+      <packagereq type="optional">uim-emacs</packagereq>
     </packagelist>
   </group>
 
@@ -2276,6 +2294,10 @@
       <packagereq type="mandatory">emacs</packagereq>
       <packagereq type="optional">gnuplot</packagereq>
       <packagereq type="default">psgml-emacs</packagereq>
+      <packagereq type="optional">anthy-emacs</packagereq>
+      <packagereq type="optional">prime-emacs</packagereq>
+      <packagereq type="optional">skk-emacs</packagereq>
+      <packagereq type="optional">uim-emacs</packagereq>
     </packagelist>
   </group>
 
@@ -2459,7 +2481,8 @@
     <uservisible>false</uservisible>
     <langonly>et</langonly>
     <packagelist>
-      <packagereq type="conditional" requires="kdelibs">kde-i18n-Estonian</packagereq>
+      <packagereq type="conditional" requires="kdebase">kde-i18n-Estonian</packagereq>
+      <packagereq type="conditional" requires="koffice-core">koffice-l10n-Estonian</packagereq>
       <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-et_EE</packagereq>
     </packagelist>
   </group>
@@ -2653,7 +2676,8 @@
     <uservisible>false</uservisible>
     <langonly>fi</langonly>
     <packagelist>
-      <packagereq type="conditional" requires="kdelibs">kde-i18n-Finnish</packagereq>
+      <packagereq type="conditional" requires="kdebase">kde-i18n-Finnish</packagereq>
+      <packagereq type="conditional" requires="koffice-core">koffice-l10n-Finnish</packagereq>
       <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-fi_FI</packagereq>
     </packagelist>
   </group>
@@ -2730,10 +2754,11 @@
     <uservisible>false</uservisible>
     <langonly>fr</langonly>
     <packagelist>
-      <packagereq type="conditional" requires="aspell">aspell-fr</packagereq>
-      <packagereq type="conditional" requires="kdelibs">kde-i18n-French</packagereq>
-      <packagereq type="conditional" requires="man-pages">man-pages-fr</packagereq>
+      <packagereq type="conditional" requires="kdebase">kde-i18n-French</packagereq>
+      <packagereq type="conditional" requires="koffice-core">koffice-l10n-French</packagereq>
       <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-fr</packagereq>
+      <packagereq type="conditional" requires="man-pages">man-pages-fr</packagereq>
+      <packagereq type="conditional" requires="aspell">aspell-fr</packagereq>
     </packagelist>
   </group>
 
@@ -2945,6 +2970,8 @@
       <packagereq type="default">sodipodi</packagereq>
       <packagereq type="mandatory">startup-notification</packagereq>
       <packagereq type="optional">system-tools-backends</packagereq>
+      <packagereq type="default">uim-applet</packagereq>
+      <packagereq type="default">uim-gtk</packagereq>
       <packagereq type="default">vino</packagereq>
       <packagereq type="mandatory">vte</packagereq>
       <packagereq type="default">xscreensaver-base</packagereq>
@@ -3357,9 +3384,10 @@
     <uservisible>false</uservisible>
     <langonly>de</langonly>
     <packagelist>
-      <packagereq type="conditional" requires="kdelibs">kde-i18n-German</packagereq>
-      <packagereq type="conditional" requires="man-pages">man-pages-de</packagereq>
+      <packagereq type="conditional" requires="kdebase">kde-i18n-German</packagereq>
+      <packagereq type="conditional" requires="koffice-core">koffice-l10n-German</packagereq>
       <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-de</packagereq>
+      <packagereq type="conditional" requires="man-pages">man-pages-de</packagereq>
     </packagelist>
   </group>
 
@@ -3699,7 +3727,8 @@
     <uservisible>false</uservisible>
     <langonly>el</langonly>
     <packagelist>
-      <packagereq type="conditional" requires="kdelibs">kde-i18n-Greek</packagereq>
+      <packagereq type="conditional" requires="kdebase">kde-i18n-Greek</packagereq>
+      <packagereq type="conditional" requires="koffice-core">koffice-l10n-Greek</packagereq>
       <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-el_GR</packagereq>
     </packagelist>
   </group>
@@ -3714,6 +3743,7 @@
     <packagelist>
       <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-gu_IN</packagereq>
       <packagereq type="conditional" requires="kdelibs">scim-qtimm</packagereq>
+      <packagereq type="conditional" requires="kdelibs">uim-qtimmodule</packagereq>
     </packagelist>
   </group>
 
@@ -3778,7 +3808,8 @@
     <uservisible>false</uservisible>
     <langonly>he</langonly>
     <packagelist>
-      <packagereq type="conditional" requires="kdelibs">kde-i18n-Hebrew</packagereq>
+      <packagereq type="conditional" requires="kdebase">kde-i18n-Hebrew</packagereq>
+      <packagereq type="conditional" requires="koffice-core">koffice-l10n-Hebrew</packagereq>
       <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-he_IL</packagereq>
     </packagelist>
   </group>
@@ -3791,9 +3822,11 @@
     <uservisible>false</uservisible>
     <langonly>hi</langonly>
     <packagelist>
-      <packagereq type="conditional" requires="kdelibs">kde-i18n-Hindi</packagereq>
+      <packagereq type="conditional" requires="kdebase">kde-i18n-Hindi</packagereq>
+      <packagereq type="conditional" requires="koffice-core">koffice-l10n-Hindi</packagereq>
       <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-hi_IN</packagereq>
       <packagereq type="conditional" requires="kdelibs">scim-qtimm</packagereq>
+      <packagereq type="conditional" requires="kdelibs">uim-qtimmodule</packagereq>
     </packagelist>
   </group>
 
@@ -3858,7 +3891,8 @@
     <uservisible>false</uservisible>
     <langonly>hu</langonly>
     <packagelist>
-      <packagereq type="conditional" requires="kdelibs">kde-i18n-Hungarian</packagereq>
+      <packagereq type="conditional" requires="kdebase">kde-i18n-Hungarian</packagereq>
+      <packagereq type="conditional" requires="koffice-core">koffice-l10n-Hungarian</packagereq>
       <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-hu_HU</packagereq>
     </packagelist>
   </group>
@@ -3924,7 +3958,8 @@
     <uservisible>false</uservisible>
     <langonly>is</langonly>
     <packagelist>
-      <packagereq type="conditional" requires="kdelibs">kde-i18n-Icelandic</packagereq>
+      <packagereq type="conditional" requires="kdebase">kde-i18n-Icelandic</packagereq>
+      <packagereq type="conditional" requires="koffice-core">koffice-l10n-Icelandic</packagereq>
     </packagelist>
   </group>
 
@@ -4049,9 +4084,10 @@
     <uservisible>false</uservisible>
     <langonly>it</langonly>
     <packagelist>
-      <packagereq type="conditional" requires="kdelibs">kde-i18n-Italian</packagereq>
-      <packagereq type="conditional" requires="man-pages">man-pages-it</packagereq>
+      <packagereq type="conditional" requires="kdebase">kde-i18n-Italian</packagereq>
+      <packagereq type="conditional" requires="koffice-core">koffice-l10n-Italian</packagereq>
       <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-it</packagereq>
+      <packagereq type="conditional" requires="man-pages">man-pages-it</packagereq>
     </packagelist>
   </group>
 
@@ -4116,17 +4152,51 @@
     <uservisible>false</uservisible>
     <langonly>ja</langonly>
     <packagelist>
-      <packagereq type="default">anthy</packagereq>
-      <packagereq type="conditional" requires="xorg-x11-server-Xorg">scim-anthy</packagereq>
+      <packagereq type="conditional" requires="kdebase">kde-i18n-Japanese</packagereq>
+      <packagereq type="conditional" requires="koffice-core">koffice-l10n-Japanese</packagereq>
+      <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-ja_JP</packagereq>
+      <packagereq type="mandatory">truetype-fonts-ja</packagereq>
+      <packagereq type="mandatory">mplus</packagereq>
       <packagereq type="conditional" requires="kdelibs">scim-qtimm</packagereq>
-      <packagereq type="conditional" requires="kdelibs">kde-i18n-Japanese</packagereq>
+      <packagereq type="conditional" requires="kdelibs">uim-qtimmodule</packagereq>
+      <packagereq type="default">Canna</packagereq>
+      <packagereq type="default">anthy</packagereq>
+      <packagereq type="conditional" requires="xorg-x11-server-Xorg">honoka</packagereq>
+      <packagereq type="default">iiimf-doc</packagereq>
+      <packagereq type="default">iiimf-skk</packagereq>
+      <packagereq type="default">iiimf</packagereq>
+      <packagereq type="conditional" requires="xorg-x11-server-Xorg">iiimf-xiiimp</packagereq>
+      <packagereq type="conditional" requires="xorg-x11-server-Xorg">kinput2</packagereq>
+      <packagereq type="conditional" requires="xorg-x11-server-Xorg">scim</packagereq>
+      <packagereq type="conditional" requires="xorg-x11-server-Xorg">scim-anthy</packagereq>
+      <packagereq type="conditional" requires="xorg-x11-server-Xorg">scim-bridge</packagereq>
+      <packagereq type="conditional" requires="xorg-x11-server-Xorg">scim-canna</packagereq>
+      <packagereq type="conditional" requires="xorg-x11-server-Xorg">scim-prime</packagereq>
+      <packagereq type="conditional" requires="xorg-x11-server-Xorg">scim-skk</packagereq>
+      <packagereq type="conditional" requires="xorg-x11-server-Xorg">scim-tomoe</packagereq>
+      <packagereq type="conditional" requires="xorg-x11-server-Xorg">scim-uim</packagereq>
+      <packagereq type="default">skk-jisyo</packagereq>
+      <packagereq type="conditional" requires="xorg-x11-server-Xorg">skkinput</packagereq>
+      <packagereq type="conditional" requires="xorg-x11-server-Xorg">uim</packagereq>
+      <packagereq type="conditional" requires="xorg-x11-server-Xorg">uim-anthy</packagereq>
+      <packagereq type="conditional" requires="xorg-x11-server-Xorg">uim-canna</packagereq>
+      <packagereq type="conditional" requires="xorg-x11-server-Xorg">uim-fep</packagereq>
+      <packagereq type="conditional" requires="xorg-x11-server-Xorg">uim-prime</packagereq>
+      <packagereq type="conditional" requires="xorg-x11-server-Xorg">uim-skk</packagereq>
+      <packagereq type="conditional" requires="xorg-x11-server-Xorg">uim-tomoe-gtk</packagereq>
+      <packagereq type="conditional" requires="xorg-x11-server-Xorg">uim-xim</packagereq>
+      <packagereq type="default">prime</packagereq>
+      <packagereq type="default">prime-dict</packagereq>
+      <packagereq type="mandatory" basearchonly="true">jfbterm</packagereq>
+      <packagereq type="default">kakasi-dict</packagereq>
       <packagereq type="default">lv</packagereq>
       <packagereq type="conditional" requires="man-pages">man-pages-ja</packagereq>
       <packagereq type="default">nkf</packagereq>
       <packagereq type="default">perl-NKF</packagereq>
-      <packagereq type="mandatory">truetype-fonts-ja</packagereq>
-      <packagereq type="mandatory">mplus</packagereq>
-      <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-ja_JP</packagereq>
+      <packagereq type="default">perl-Text-Kakasi</packagereq>
+      <packagereq type="default">ruby-progressbar</packagereq>
+      <packagereq type="default">ruby-sary</packagereq>
+      <packagereq type="default">suikyo-ruby</packagereq>
     </packagelist>
   </group>
 
@@ -4498,7 +4568,7 @@
       <packagereq type="default">kfish</packagereq>
       <packagereq type="default">kita</packagereq>
       <packagereq type="default">kipi-plugins</packagereq>
-      <packagereq type="mandatory">koffice-core</packagereq>
+      <packagereq type="default">koffice-core</packagereq>
       <packagereq type="default">koffice-filters</packagereq>
       <packagereq type="default">koffice-karbon</packagereq>
       <packagereq type="default">koffice-kchart</packagereq>
@@ -4519,7 +4589,7 @@
       <packagereq type="default">openoffice.org-kde</packagereq>
       <packagereq type="default">qtparted</packagereq>
       <packagereq type="default">rosegarden</packagereq>
-      <packagereq type="mandatory">scim-qtimm</packagereq>
+      <packagereq type="default">scim-qtimm</packagereq>
       <packagereq type="default">scribus</packagereq>
       <packagereq type="default">skim</packagereq>
       <packagereq type="default">skim-honoka</packagereq>
@@ -4528,8 +4598,8 @@
       <packagereq type="default">skim-scim-prime</packagereq>
       <packagereq type="default">skim-scim-skk</packagereq>
       <packagereq type="default">sylpheed</packagereq>
-      <packagereq type="default">uim-qt</packagereq>
-      <packagereq type="mandatory">uim-qtimmodule</packagereq>
+      <packagereq type="optional">uim-qt</packagereq>
+      <packagereq type="optional">uim-qtimmodule</packagereq>
       <packagereq type="default">xine-lib-alsa</packagereq>
       <packagereq type="default">xine-lib-arts</packagereq>
       <packagereq type="default">xine-lib-esd</packagereq>
@@ -4744,9 +4814,11 @@
     <uservisible>false</uservisible>
     <langonly>ko</langonly>
     <packagelist>
-      <packagereq type="conditional" requires="kdelibs">scim-qtimm</packagereq>
-      <packagereq type="mandatory">truetype-fonts-ko</packagereq>
+      <packagereq type="conditional" requires="kdebase">kde-i18n-Korean</packagereq>
       <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-ko_KR</packagereq>
+      <packagereq type="mandatory">truetype-fonts-ko</packagereq>
+      <packagereq type="conditional" requires="kdelibs">scim-qtimm</packagereq>
+      <packagereq type="conditional" requires="kdelibs">uim-qtimmodule</packagereq>
     </packagelist>
   </group>
 
@@ -5006,6 +5078,8 @@
     <uservisible>false</uservisible>
     <langonly>lt</langonly>
     <packagelist>
+      <packagereq type="conditional" requires="kdebase">kde-i18n-Lithuanian</packagereq>
+      <packagereq type="conditional" requires="koffice-core">koffice-l10n-Lithuanian</packagereq>
       <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-lt_LT</packagereq>
     </packagelist>
   </group>
@@ -5590,8 +5664,10 @@
     <uservisible>false</uservisible>
     <langonly>nb</langonly>
     <packagelist>
-      <packagereq type="conditional" requires="kdelibs">kde-i18n-Norwegian-Bookmal</packagereq>
-      <packagereq type="conditional" requires="kdelibs">kde-i18n-Norwegian-Nynorsk</packagereq>
+      <packagereq type="conditional" requires="kdebase">kde-i18n-Norwegian-Bookmal</packagereq>
+      <packagereq type="conditional" requires="kdebase">kde-i18n-Norwegian-Nynorsk</packagereq>
+      <packagereq type="conditional" requires="koffice-core">koffice-l10n-Norwegian-Bookmal</packagereq>
+      <packagereq type="conditional" requires="koffice-core">koffice-l10n-Norwegian-Nynorsk</packagereq>
       <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-nb_NO</packagereq>
     </packagelist>
   </group>
@@ -5727,9 +5803,7 @@
       <packagereq type="optional">koffice-kspread</packagereq>
       <packagereq type="optional">koffice-kugar</packagereq>
       <packagereq type="optional">koffice-kword</packagereq>
-      <packagereq type="optional">koffice-suite</packagereq>
       <packagereq type="optional">magicpoint</packagereq>
-      <packagereq type="optional">openoffice.org</packagereq>
       <packagereq type="optional">openoffice.org-base</packagereq>
       <packagereq type="default">openoffice.org-calc</packagereq>
       <packagereq type="default">openoffice.org-draw</packagereq>
@@ -5811,9 +5885,10 @@
     <uservisible>false</uservisible>
     <langonly>pl</langonly>
     <packagelist>
-      <packagereq type="conditional" requires="kdelibs">kde-i18n-Polish</packagereq>
-      <packagereq type="conditional" requires="man-pages">man-pages-pl</packagereq>
+      <packagereq type="conditional" requires="kdebase">kde-i18n-Polish</packagereq>
+      <packagereq type="conditional" requires="koffice-core">koffice-l10n-Polish</packagereq>
       <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-pl_PL</packagereq>
+      <packagereq type="conditional" requires="man-pages">man-pages-pl</packagereq>
     </packagelist>
   </group>
 
@@ -5878,7 +5953,8 @@
     <uservisible>false</uservisible>
     <langonly>pt</langonly>
     <packagelist>
-      <packagereq type="conditional" requires="kdelibs">kde-i18n-Portuguese</packagereq>
+      <packagereq type="conditional" requires="kdebase">kde-i18n-Portuguese</packagereq>
+      <packagereq type="conditional" requires="koffice-core">koffice-l10n-Portuguese</packagereq>
       <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-pt_PT</packagereq>
     </packagelist>
   </group>
@@ -6185,9 +6261,10 @@
     <uservisible>false</uservisible>
     <langonly>pa</langonly>
     <packagelist>
-      <packagereq type="conditional" requires="kdelibs">kde-i18n-Punjabi</packagereq>
+      <packagereq type="conditional" requires="kdebase">kde-i18n-Punjabi</packagereq>
       <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-pa_IN</packagereq>
       <packagereq type="conditional" requires="kdelibs">scim-qtimm</packagereq>
+      <packagereq type="conditional" requires="kdelibs">uim-qtimmodule</packagereq>
     </packagelist>
   </group>
 
@@ -6252,7 +6329,8 @@
     <uservisible>false</uservisible>
     <langonly>ro</langonly>
     <packagelist>
-      <packagereq type="conditional" requires="kdelibs">kde-i18n-Romanian</packagereq>
+      <packagereq type="conditional" requires="kdebase">kde-i18n-Romanian</packagereq>
+      <packagereq type="conditional" requires="koffice-core">koffice-l10n-Romanian</packagereq>
     </packagelist>
   </group>
 
@@ -6436,9 +6514,10 @@
     <uservisible>false</uservisible>
     <langonly>ru</langonly>
     <packagelist>
-      <packagereq type="conditional" requires="kdelibs">kde-i18n-Russian</packagereq>
-      <packagereq type="conditional" requires="man-pages">man-pages-ru</packagereq>
+      <packagereq type="conditional" requires="kdebase">kde-i18n-Russian</packagereq>
+      <packagereq type="conditional" requires="koffice-core">koffice-l10n-Russian</packagereq>
       <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-ru</packagereq>
+      <packagereq type="conditional" requires="man-pages">man-pages-ru</packagereq>
       <packagereq type="conditional" requires="xorg-x11-server-Xorg">xorg-x11-fonts-cyrillic</packagereq>
     </packagelist>
   </group>
@@ -6504,7 +6583,10 @@
     <uservisible>false</uservisible>
     <langonly>sr</langonly>
     <packagelist>
-      <packagereq type="conditional" requires="kdelibs">kde-i18n-Serbian</packagereq>
+      <packagereq type="conditional" requires="kdebase">kde-i18n-Serbian</packagereq>
+      <packagereq type="conditional" requires="kdebase">kde-i18n-Serbian-Latin</packagereq>
+      <packagereq type="conditional" requires="koffice-core">koffice-l10n-Serbian</packagereq>
+      <packagereq type="conditional" requires="koffice-core">koffice-l10n-Serbian-Latin</packagereq>
     </packagelist>
   </group>
 
@@ -6688,7 +6770,8 @@
     <uservisible>false</uservisible>
     <langonly>sk</langonly>
     <packagelist>
-      <packagereq type="conditional" requires="kdelibs">kde-i18n-Slovak</packagereq>
+      <packagereq type="conditional" requires="kdebase">kde-i18n-Slovak</packagereq>
+      <packagereq type="conditional" requires="koffice-core">koffice-l10n-Slovak</packagereq>
       <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-sk_SK</packagereq>
     </packagelist>
   </group>
@@ -6754,7 +6837,8 @@
     <uservisible>false</uservisible>
     <langonly>sl</langonly>
     <packagelist>
-      <packagereq type="conditional" requires="kdelibs">kde-i18n-Slovenian</packagereq>
+      <packagereq type="conditional" requires="kdebase">kde-i18n-Slovenian</packagereq>
+      <packagereq type="conditional" requires="koffice-core">koffice-l10n-Slovenian</packagereq>
       <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-sl_SI</packagereq>
     </packagelist>
   </group>
@@ -6917,7 +7001,7 @@
       <packagereq type="default">xine-skins</packagereq>
       <packagereq type="default">xine-lib</packagereq>
       <packagereq type="default">xine-lib-alsa</packagereq>
-      <packagereq type="default">xine-lib-arts</packagereq>
+      <packagereq type="optional">xine-lib-arts</packagereq>
       <packagereq type="optional">xine-lib-docs</packagereq>
       <packagereq type="default">xine-lib-esd</packagereq>
       <packagereq type="default">xine-lib-flac</packagereq>
@@ -7009,9 +7093,10 @@
     <uservisible>false</uservisible>
     <langonly>es</langonly>
     <packagelist>
-      <packagereq type="conditional" requires="kdelibs">kde-i18n-Spanish</packagereq>
-      <packagereq type="conditional" requires="man-pages">man-pages-es</packagereq>
+      <packagereq type="conditional" requires="kdebase">kde-i18n-Spanish</packagereq>
+      <packagereq type="conditional" requires="koffice-core">koffice-l10n-Spanish</packagereq>
       <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-es</packagereq>
+      <packagereq type="conditional" requires="man-pages">man-pages-es</packagereq>
     </packagelist>
   </group>
 
@@ -7076,7 +7161,8 @@
     <uservisible>false</uservisible>
     <langonly>sv</langonly>
     <packagelist>
-      <packagereq type="conditional" requires="kdelibs">kde-i18n-Swedish</packagereq>
+      <packagereq type="conditional" requires="kdebase">kde-i18n-Swedish</packagereq>
+      <packagereq type="conditional" requires="koffice-core">koffice-l10n-Swedish</packagereq>
       <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-sv</packagereq>
     </packagelist>
   </group>
@@ -7271,8 +7357,10 @@
     <uservisible>false</uservisible>
     <langonly>ta</langonly>
     <packagelist>
-      <packagereq type="conditional" requires="kdelibs">kde-i18n-Tamil</packagereq>
+      <packagereq type="conditional" requires="kdebase">kde-i18n-Tamil</packagereq>
+      <packagereq type="conditional" requires="koffice-core">koffice-l10n-Tamil</packagereq>
       <packagereq type="conditional" requires="kdelibs">scim-qtimm</packagereq>
+      <packagereq type="conditional" requires="kdelibs">uim-qtimmodule</packagereq>
     </packagelist>
   </group>
 
@@ -7506,7 +7594,8 @@
     <uservisible>false</uservisible>
     <langonly>tr</langonly>
     <packagelist>
-      <packagereq type="conditional" requires="kdelibs">kde-i18n-Turkish</packagereq>
+      <packagereq type="conditional" requires="kdebase">kde-i18n-Turkish</packagereq>
+      <packagereq type="conditional" requires="koffice-core">koffice-l10n-Turkish</packagereq>
       <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-tr_TR</packagereq>
     </packagelist>
   </group>
@@ -7572,7 +7661,8 @@
     <uservisible>false</uservisible>
     <langonly>uk</langonly>
     <packagelist>
-      <packagereq type="conditional" requires="kdelibs">kde-i18n-Ukrainian</packagereq>
+      <packagereq type="conditional" requires="kdebase">kde-i18n-Ukrainian</packagereq>
+      <packagereq type="conditional" requires="koffice-core">koffice-l10n-Ukrainian</packagereq>
       <packagereq type="conditional" requires="xorg-x11-server-Xorg">xorg-x11-fonts-cyrillic</packagereq>
 
     </packagelist>
