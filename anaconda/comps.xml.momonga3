@@ -2392,6 +2392,8 @@
       <packagereq type="default">blas</packagereq>
       <packagereq type="default">gnuplot</packagereq>
       <packagereq type="default">lapack</packagereq>
+      <packagereq type="default">maxima</packagereq>
+      <packagereq type="default">maxima-xmaxima</packagereq>
       <packagereq type="default">octave</packagereq>
     </packagelist>
   </group>
@@ -2855,12 +2857,14 @@
       <packagereq type="default">battfink</packagereq>
       <packagereq type="mandatory">control-center</packagereq>
       <packagereq type="optional">dasher</packagereq>
+      <packagereq type="optional">deskbar-applet</packagereq>
       <packagereq type="mandatory">desktop-file-utils</packagereq>
       <packagereq type="default">dvd+rw-tools</packagereq>
       <packagereq type="default">eel</packagereq>
       <packagereq type="default">eog</packagereq>
       <packagereq type="mandatory">esound</packagereq>
       <packagereq type="default">evince</packagereq>
+      <packagereq type="optional">fast-user-switch-applet</packagereq>
       <packagereq type="default">file-roller</packagereq>
       <packagereq type="mandatory">gail</packagereq>
       <packagereq type="default">gcalctool</packagereq>
@@ -2873,19 +2877,22 @@
       <packagereq type="mandatory">gnome-applets</packagereq>
       <packagereq type="default">gnome-audio</packagereq>
       <packagereq type="default">gnome-audio-extra</packagereq>
-      <packagereq type="mandatory">gnome-desktop</packagereq>
       <packagereq type="default">gnome-backgrounds</packagereq>
+      <packagereq type="mandatory">gnome-desktop</packagereq>
+      <packagereq type="default">gnome-doc-utils</packagereq>
       <packagereq type="mandatory">gnome-icon-theme</packagereq>
       <packagereq type="mandatory">gnome-keyring</packagereq>
       <packagereq type="optional">gnome-keyring-manager</packagereq>
       <packagereq type="default">gnome-mag</packagereq>
       <packagereq type="default">gnome-media</packagereq>
+      <packagereq type="mandatory">gnome-menus</packagereq>
       <packagereq type="mandatory">gnome-mime-data</packagereq>
       <packagereq type="mandatory">gnome-nettool</packagereq>
       <packagereq type="default">gnome-netstatus</packagereq>
       <packagereq type="mandatory">gnome-panel</packagereq>
       <packagereq type="default">gnome-pilot</packagereq>
       <packagereq type="default">gnome-power-manager</packagereq>
+      <packagereq type="optional">gnome-python-desktop</packagereq>
       <packagereq type="default">gnome-screensaver</packagereq>
       <packagereq type="mandatory">gnome-session</packagereq>
       <packagereq type="optional">gnome-speech</packagereq>
@@ -2910,13 +2917,14 @@
       <packagereq type="default">gtkam</packagereq>
       <packagereq type="optional">gtkam-gimp</packagereq>
       <packagereq type="optional">gtkdiff</packagereq>
-      <packagereq type="mandatory">gtksourceview</packagereq>
       <packagereq type="mandatory">gtkhtml</packagereq>
+      <packagereq type="mandatory">gtksourceview</packagereq>
       <packagereq type="default">gucharmap</packagereq>
       <packagereq type="default">hal-gnome</packagereq>
       <packagereq type="mandatory">hicolor-icon-theme</packagereq>
       <packagereq type="default">htmlview</packagereq>
       <packagereq type="default">hwbrowser</packagereq>
+      <packagereq type="optional">libgail-gnome</packagereq>
       <packagereq type="default">libgnomecups</packagereq>
       <packagereq type="default">libgnomeprint</packagereq>
       <packagereq type="default">libgnomeprintui</packagereq>
@@ -2936,6 +2944,7 @@
       <packagereq type="mandatory">shared-mime-info</packagereq>
       <packagereq type="default">sodipodi</packagereq>
       <packagereq type="mandatory">startup-notification</packagereq>
+      <packagereq type="optional">system-tools-backends</packagereq>
       <packagereq type="default">vino</packagereq>
       <packagereq type="mandatory">vte</packagereq>
       <packagereq type="default">xscreensaver-base</packagereq>
@@ -3272,11 +3281,18 @@
     <default>true</default>
     <uservisible>true</uservisible>
     <packagelist>
+      <packagereq type="optional">BZFlag</packagereq>
       <packagereq type="default">Maelstrom</packagereq>
+      <packagereq type="optional">armagetronad</packagereq>
+      <packagereq type="optional">csmash</packagereq>
       <packagereq type="default">gnome-games</packagereq>
       <packagereq type="optional">kdeedu</packagereq>
       <packagereq type="optional">kdegames</packagereq>
+      <packagereq type="optional">netmaj</packagereq>
+      <packagereq type="optional">supertux</packagereq>
       <packagereq type="default">tuxracer</packagereq>
+      <packagereq type="optional">tuxkart</packagereq>
+      <packagereq type="optional">xkobo</packagereq>
     </packagelist>
   </group>
 
@@ -3459,13 +3475,15 @@
     <uservisible>true</uservisible>
     <packagelist>
       <packagereq type="optional">balsa</packagereq>
+      <packagereq type="optional">bluefish</packagereq>
       <packagereq type="default">bogofilter</packagereq>
       <packagereq type="default">ekiga</packagereq>
-      <packagereq type="optional">epiphany</packagereq>
+      <packagereq type="default">epiphany</packagereq>
       <packagereq type="default">firefox</packagereq>
       <packagereq type="default">gaim</packagereq>
       <packagereq type="optional">galeon</packagereq>
       <packagereq type="default">gftp</packagereq>
+      <packagereq type="optional">gnomeicu</packagereq>
       <packagereq type="optional">kazehakase</packagereq>
       <packagereq type="optional">kita</packagereq>
       <packagereq type="optional">kdewebdev</packagereq>
@@ -3607,13 +3625,16 @@
       <packagereq type="default">gimp-print-cups</packagereq>
       <packagereq type="default">gimp-print-utils</packagereq>
       <packagereq type="default">gimp-pygimp</packagereq>
+      <packagereq type="default">inkscape</packagereq>
       <packagereq type="optional">kdegraphics</packagereq>
+      <packagereq type="optional">libsane-hpaio</packagereq>
       <packagereq type="default">netpbm-progs</packagereq>
       <packagereq type="default">sane-frontends</packagereq>
+      <packagereq type="optional">sodipodi</packagereq>
+      <packagereq type="optional">xfig</packagereq>
       <packagereq type="default">xsane</packagereq>
       <packagereq type="default">xsane-gimp</packagereq>
-      <packagereq type="optional">libsane-hpaio</packagereq>
-      <packagereq type="optional">xfig</packagereq>
+      <packagereq type="optional">zphoto</packagereq>
     </packagelist>
   </group>
 
@@ -4473,6 +4494,7 @@
       <packagereq type="default">kdepim</packagereq>
       <packagereq type="default">kdetoys</packagereq>
       <packagereq type="default">kdeutils</packagereq>
+      <packagereq type="default">kdewebdev</packagereq>
       <packagereq type="default">kfish</packagereq>
       <packagereq type="default">kita</packagereq>
       <packagereq type="default">kipi-plugins</packagereq>
@@ -4495,8 +4517,10 @@
       <packagereq type="default">krename</packagereq>
       <packagereq type="default">libakode</packagereq>
       <packagereq type="default">openoffice.org-kde</packagereq>
+      <packagereq type="default">qtparted</packagereq>
       <packagereq type="default">rosegarden</packagereq>
       <packagereq type="mandatory">scim-qtimm</packagereq>
+      <packagereq type="default">scribus</packagereq>
       <packagereq type="default">skim</packagereq>
       <packagereq type="default">skim-honoka</packagereq>
       <packagereq type="default">skim-scim-anthy</packagereq>
@@ -4645,7 +4669,6 @@
       <packagereq type="default">kdesdk</packagereq>
       <packagereq type="optional">kdesdk-devel</packagereq>
       <packagereq type="default">kdevelop</packagereq>
-      <packagereq type="default">kdewebdev</packagereq>
       <packagereq type="default">koffice-devel</packagereq>
       <packagereq type="default">libakode-devel</packagereq>
       <packagereq type="default">libkexif-devel</packagereq>
@@ -5690,6 +5713,7 @@
       <packagereq type="default">gpdf</packagereq>
       <packagereq type="optional">kdepim</packagereq>
       <packagereq type="optional">gnumeric</packagereq>
+      <packagereq type="optional">kreetingkard</packagereq>
       <packagereq type="optional">koffice-core</packagereq>
       <packagereq type="optional">koffice-filters</packagereq>
       <packagereq type="optional">koffice-karbon</packagereq>
@@ -5720,6 +5744,7 @@
       <packagereq type="default">openoffice.org-xsltfilter</packagereq>
       <packagereq type="optional" basearchonly="true">openoffice.org-pyuno</packagereq>
       <packagereq type="optional">openoffice.org-testtools</packagereq>
+      <packagereq type="optional">scribus</packagereq>
       <packagereq type="optional">xdvik</packagereq>
       <packagereq type="optional">xpdf</packagereq>
     </packagelist>
@@ -6846,6 +6871,7 @@
     <default>true</default>
     <uservisible>true</uservisible>
     <packagelist>
+      <packagereq type="optional">TiMidity++</packagereq>
       <packagereq type="default" basearchonly="true">HelixPlayer</packagereq>
       <packagereq type="mandatory">alsa-utils</packagereq>
       <packagereq type="optional">amarok</packagereq>
@@ -6854,14 +6880,17 @@
       <packagereq type="optional">amarok-libvisual</packagereq>
       <packagereq type="optional">amarok-xine</packagereq>
       <packagereq type="optional">amarok-xmms</packagereq>
+      <packagereq type="default">audacity</packagereq>
       <packagereq type="mandatory">aumix</packagereq>
+      <packagereq type="optional">avidemux</packagereq>
       <packagereq type="default">cdda2wav</packagereq>
       <packagereq type="default">cdlabelgen</packagereq>
       <packagereq type="default">cdp</packagereq>
       <packagereq type="default">cdparanoia</packagereq>
       <packagereq type="default">cdrtools</packagereq>
       <packagereq type="default">dvd+rw-tools</packagereq>
-      <packagereq type="optional">gnomebaker</packagereq>
+      <packagereq type="optional">easytag</packagereq>
+      <packagereq type="default">gnomebaker</packagereq>
       <packagereq type="default">grip</packagereq>
       <packagereq type="optional">k3b</packagereq>
       <packagereq type="optional">kaffeine</packagereq>
@@ -6871,6 +6900,7 @@
       <packagereq type="default">kino</packagereq>
       <packagereq type="optional">mikmod</packagereq>
       <packagereq type="default">mkisofs</packagereq>
+      <packagereq type="optional">mplayer</packagereq>
       <packagereq type="optional">mplayer-skins</packagereq>
       <packagereq type="optional">mythtv</packagereq>
       <packagereq type="optional">mythtv-frontend</packagereq>
