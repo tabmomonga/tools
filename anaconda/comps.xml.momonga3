@@ -553,7 +553,6 @@
       <packagereq type="mandatory">at</packagereq>
       <packagereq type="mandatory">attr</packagereq>
       <packagereq type="mandatory">authconfig</packagereq>
-      <packagereq type="optional">pidentd</packagereq>
       <packagereq type="default">autofs</packagereq>
       <packagereq type="mandatory">bc</packagereq>
       <packagereq type="mandatory">bind-utils</packagereq>
@@ -563,6 +562,7 @@
       <packagereq type="default">bluez-utils</packagereq>
       <packagereq type="optional">bridge-utils</packagereq>
       <packagereq type="mandatory">bzip2</packagereq>
+      <packagereq type="default">cabextract</packagereq>
       <packagereq type="mandatory">crontabs</packagereq>
       <packagereq type="mandatory">cyrus-sasl</packagereq>
       <packagereq type="default">dhclient</packagereq>
@@ -581,10 +581,10 @@
       <packagereq type="default">irda-utils</packagereq>
       <packagereq type="optional">jfsutils</packagereq>
       <packagereq type="default">jwhois</packagereq>
-      <packagereq type="optional">kernel-utils</packagereq>
+      <packagereq type="default">kernel-utils</packagereq>
       <packagereq type="default">krb5-workstation</packagereq>
       <packagereq type="default">lftp</packagereq>
-      <packagereq type="optional">lha</packagereq>
+      <packagereq type="default">lha</packagereq>
       <packagereq type="mandatory">logrotate</packagereq>
       <packagereq type="default">logwatch</packagereq>
       <packagereq type="mandatory">lsof</packagereq>
@@ -610,6 +610,7 @@
       <packagereq type="mandatory">pciutils</packagereq>
       <packagereq type="default">pcmciautils</packagereq>
       <packagereq type="default">pdksh</packagereq>
+      <packagereq type="optional">pidentd</packagereq>
       <packagereq type="mandatory">psacct</packagereq>
       <packagereq type="mandatory">quota</packagereq>
       <packagereq type="default">rdate</packagereq>
@@ -2970,8 +2971,8 @@
       <packagereq type="default">sodipodi</packagereq>
       <packagereq type="mandatory">startup-notification</packagereq>
       <packagereq type="optional">system-tools-backends</packagereq>
-      <packagereq type="default">uim-applet</packagereq>
-      <packagereq type="default">uim-gtk</packagereq>
+      <packagereq type="optional">uim-applet</packagereq>
+      <packagereq type="optional">uim-gtk</packagereq>
       <packagereq type="default">vino</packagereq>
       <packagereq type="mandatory">vte</packagereq>
       <packagereq type="default">xscreensaver-base</packagereq>
@@ -3512,6 +3513,7 @@
       <packagereq type="optional">galeon</packagereq>
       <packagereq type="default">gftp</packagereq>
       <packagereq type="optional">gnomeicu</packagereq>
+      <packagereq type="optional">hotwayd</packagereq>
       <packagereq type="optional">kazehakase</packagereq>
       <packagereq type="optional">kita</packagereq>
       <packagereq type="optional">kdewebdev</packagereq>
@@ -4167,7 +4169,6 @@
       <packagereq type="default">iiimf</packagereq>
       <packagereq type="conditional" requires="xorg-x11-server-Xorg">iiimf-xiiimp</packagereq>
       <packagereq type="conditional" requires="xorg-x11-server-Xorg">kinput2</packagereq>
-      <packagereq type="conditional" requires="xorg-x11-server-Xorg">scim</packagereq>
       <packagereq type="conditional" requires="xorg-x11-server-Xorg">scim-anthy</packagereq>
       <packagereq type="conditional" requires="xorg-x11-server-Xorg">scim-bridge</packagereq>
       <packagereq type="conditional" requires="xorg-x11-server-Xorg">scim-canna</packagereq>
@@ -4177,7 +4178,6 @@
       <packagereq type="conditional" requires="xorg-x11-server-Xorg">scim-uim</packagereq>
       <packagereq type="default">skk-jisyo</packagereq>
       <packagereq type="conditional" requires="xorg-x11-server-Xorg">skkinput</packagereq>
-      <packagereq type="conditional" requires="xorg-x11-server-Xorg">uim</packagereq>
       <packagereq type="conditional" requires="xorg-x11-server-Xorg">uim-anthy</packagereq>
       <packagereq type="conditional" requires="xorg-x11-server-Xorg">uim-canna</packagereq>
       <packagereq type="conditional" requires="xorg-x11-server-Xorg">uim-fep</packagereq>
@@ -4550,7 +4550,6 @@
       <packagereq type="optional">kaffeine-mozilla-plugin</packagereq>
       <packagereq type="default">kannadic</packagereq>
       <packagereq type="default">kcpuload</packagereq>
-      <packagereq type="default">kde-i18n</packagereq>
       <packagereq type="default">kdeaccessibility</packagereq>
       <packagereq type="default">kdeaddons</packagereq>
       <packagereq type="default">kdeadmin</packagereq>
@@ -4737,7 +4736,7 @@
       <packagereq type="default">kdebindings-devel</packagereq>
       <packagereq type="mandatory">kdelibs-devel</packagereq>
       <packagereq type="default">kdesdk</packagereq>
-      <packagereq type="optional">kdesdk-devel</packagereq>
+      <packagereq type="default">kdesdk-devel</packagereq>
       <packagereq type="default">kdevelop</packagereq>
       <packagereq type="default">koffice-devel</packagereq>
       <packagereq type="default">libakode-devel</packagereq>
@@ -5184,7 +5183,7 @@
       <packagereq type="default">cyrus-sasl</packagereq>
       <packagereq type="default">dovecot</packagereq>
       <packagereq type="optional">mailman</packagereq>
-      <packagereq type="optional">postfix</packagereq>
+      <packagereq type="default">postfix</packagereq>
       <packagereq type="default">SpamAssassin</packagereq>
       <packagereq type="optional">squirrelmail</packagereq>
     </packagelist>
