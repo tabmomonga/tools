@@ -4567,7 +4567,6 @@
       <packagereq type="default">kfish</packagereq>
       <packagereq type="default">kita</packagereq>
       <packagereq type="default">kipi-plugins</packagereq>
-      <packagereq type="default">koffice-core</packagereq>
       <packagereq type="default">koffice-filters</packagereq>
       <packagereq type="default">koffice-karbon</packagereq>
       <packagereq type="default">koffice-kchart</packagereq>
@@ -4580,7 +4579,6 @@
       <packagereq type="default">koffice-kspread</packagereq>
       <packagereq type="default">koffice-kugar</packagereq>
       <packagereq type="default">koffice-kword</packagereq>
-      <packagereq type="default">koffice-suite</packagereq>
       <packagereq type="default">kompose</packagereq>
       <packagereq type="default">kreetingkard</packagereq>
       <packagereq type="default">krename</packagereq>
@@ -5789,7 +5787,6 @@
       <packagereq type="optional">kdepim</packagereq>
       <packagereq type="optional">gnumeric</packagereq>
       <packagereq type="optional">kreetingkard</packagereq>
-      <packagereq type="optional">koffice-core</packagereq>
       <packagereq type="optional">koffice-filters</packagereq>
       <packagereq type="optional">koffice-karbon</packagereq>
       <packagereq type="optional">koffice-kchart</packagereq>
