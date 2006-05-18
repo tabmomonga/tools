@@ -578,6 +578,7 @@
       <packagereq type="default">ftp</packagereq>
       <packagereq type="default">gnupg</packagereq>
       <packagereq type="default">gpm</packagereq>
+      <packagereq type="optional">hfsutils</packagereq>
       <packagereq type="default">irda-utils</packagereq>
       <packagereq type="optional">jfsutils</packagereq>
       <packagereq type="default">jwhois</packagereq>
