@@ -5348,9 +5348,9 @@
     <default>false</default>
     <uservisible>true</uservisible>
     <packagelist>
-      <packagereq type="mandatory">MySQL</packagereq>
-      <packagereq type="optional">MySQL-bench</packagereq>
-      <packagereq type="optional">MySQL-devel</packagereq>
+      <packagereq type="mandatory">mysql</packagereq>
+      <packagereq type="optional">mysql-bench</packagereq>
+      <packagereq type="optional">mysql-devel</packagereq>
       <packagereq type="default">perl-DBD-MySQL</packagereq>
       <packagereq type="optional">php-mysql</packagereq>
       <packagereq type="optional">qt-MySQL</packagereq>
