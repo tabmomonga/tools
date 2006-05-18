@@ -2881,6 +2881,7 @@
       <packagereq type="default">at-spi</packagereq>
       <packagereq type="mandatory">audiofile</packagereq>
       <packagereq type="default">battfink</packagereq>
+      <packagereq type="default">beagle</packagereq>
       <packagereq type="mandatory">control-center</packagereq>
       <packagereq type="optional">dasher</packagereq>
       <packagereq type="optional">deskbar-applet</packagereq>
