@@ -8309,7 +8309,7 @@
     <id>xfce-desktop</id>
     <name>XFCE</name>
     <description>A lightweight desktop environment that works well on low end machines.</description>
-    <default>false</default>
+    <default>true</default>
     <uservisible>true</uservisible>
     <packagelist>
       <packagereq type="mandatory">libxfce4mcs</packagereq>
