@@ -113,6 +113,7 @@
     <uservisible>true</uservisible>
     <packagelist>
       <packagereq type="default">authconfig-gtk</packagereq>
+      <packagereq type="optional">gparted</packagereq>
       <packagereq type="default">system-config-date</packagereq>
       <packagereq type="default">system-config-keyboard</packagereq>
       <packagereq type="optional">system-config-language</packagereq>
@@ -2936,7 +2937,7 @@
       <packagereq type="optional">gnutls</packagereq>
       <packagereq type="default">gok</packagereq>
       <packagereq type="default">gpdf</packagereq>
-      <packagereq type="optional">gqview</packagereq>
+      <packagereq type="default">gqview</packagereq>
       <packagereq type="default">gthumb</packagereq>
       <packagereq type="default">gstreamer010</packagereq>
       <packagereq type="default">gst-plugins-base</packagereq>
