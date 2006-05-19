@@ -2974,7 +2974,6 @@
       <packagereq type="mandatory">startup-notification</packagereq>
       <packagereq type="optional">system-tools-backends</packagereq>
       <packagereq type="optional">uim-applet</packagereq>
-      <packagereq type="optional">uim-gtk</packagereq>
       <packagereq type="default">vino</packagereq>
       <packagereq type="mandatory">vte</packagereq>
       <packagereq type="default">xscreensaver-base</packagereq>
@@ -4166,9 +4165,9 @@
       <packagereq type="default">Canna</packagereq>
       <packagereq type="default">anthy</packagereq>
       <packagereq type="conditional" requires="xorg-x11-server-Xorg">honoka</packagereq>
-      <packagereq type="default">iiimf-doc</packagereq>
-      <packagereq type="default">iiimf-skk</packagereq>
-      <packagereq type="default">iiimf</packagereq>
+      <packagereq type="conditional" requires="xorg-x11-server-Xorg">iiimf</packagereq>
+      <packagereq type="conditional" requires="xorg-x11-server-Xorg">iiimf-doc</packagereq>
+      <packagereq type="conditional" requires="xorg-x11-server-Xorg">iiimf-skk</packagereq>
       <packagereq type="conditional" requires="xorg-x11-server-Xorg">iiimf-xiiimp</packagereq>
       <packagereq type="conditional" requires="xorg-x11-server-Xorg">kinput2</packagereq>
       <packagereq type="conditional" requires="xorg-x11-server-Xorg">scim-anthy</packagereq>
@@ -4180,11 +4179,12 @@
       <packagereq type="conditional" requires="xorg-x11-server-Xorg">scim-uim</packagereq>
       <packagereq type="default">skk-jisyo</packagereq>
       <packagereq type="conditional" requires="xorg-x11-server-Xorg">skkinput</packagereq>
-      <packagereq type="conditional" requires="xorg-x11-server-Xorg">uim-anthy</packagereq>
-      <packagereq type="conditional" requires="xorg-x11-server-Xorg">uim-canna</packagereq>
-      <packagereq type="conditional" requires="xorg-x11-server-Xorg">uim-fep</packagereq>
-      <packagereq type="conditional" requires="xorg-x11-server-Xorg">uim-prime</packagereq>
-      <packagereq type="conditional" requires="xorg-x11-server-Xorg">uim-skk</packagereq>
+      <packagereq type="default">uim-anthy</packagereq>
+      <packagereq type="default">uim-canna</packagereq>
+      <packagereq type="default">uim-fep</packagereq>
+      <packagereq type="conditional" requires="xorg-x11-server-Xorg">uim-gtk</packagereq>
+      <packagereq type="default">uim-prime</packagereq>
+      <packagereq type="default">uim-skk</packagereq>
       <packagereq type="conditional" requires="xorg-x11-server-Xorg">uim-tomoe-gtk</packagereq>
       <packagereq type="conditional" requires="xorg-x11-server-Xorg">uim-xim</packagereq>
       <packagereq type="default">prime</packagereq>
