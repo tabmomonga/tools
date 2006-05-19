@@ -2497,7 +2497,7 @@
     <uservisible>false</uservisible>
     <langonly>am</langonly>
     <packagelist>
-      <packagereq type="conditional" requires="xorg-x11-server-Xorg">xorg-x11-fonts-ethiopic</packagereq>
+      <packagereq type="conditional" requires="gtk+-common">xorg-x11-fonts-ethiopic</packagereq>
     </packagelist>
   </group>
 
@@ -4164,29 +4164,29 @@
       <packagereq type="conditional" requires="kdelibs">uim-qtimmodule</packagereq>
       <packagereq type="default">Canna</packagereq>
       <packagereq type="default">anthy</packagereq>
-      <packagereq type="conditional" requires="xorg-x11-server-Xorg">honoka</packagereq>
-      <packagereq type="conditional" requires="xorg-x11-server-Xorg">iiimf</packagereq>
-      <packagereq type="conditional" requires="xorg-x11-server-Xorg">iiimf-doc</packagereq>
-      <packagereq type="conditional" requires="xorg-x11-server-Xorg">iiimf-skk</packagereq>
-      <packagereq type="conditional" requires="xorg-x11-server-Xorg">iiimf-xiiimp</packagereq>
-      <packagereq type="conditional" requires="xorg-x11-server-Xorg">kinput2</packagereq>
-      <packagereq type="conditional" requires="xorg-x11-server-Xorg">scim-anthy</packagereq>
-      <packagereq type="conditional" requires="xorg-x11-server-Xorg">scim-bridge</packagereq>
-      <packagereq type="conditional" requires="xorg-x11-server-Xorg">scim-canna</packagereq>
-      <packagereq type="conditional" requires="xorg-x11-server-Xorg">scim-prime</packagereq>
-      <packagereq type="conditional" requires="xorg-x11-server-Xorg">scim-skk</packagereq>
-      <packagereq type="conditional" requires="xorg-x11-server-Xorg">scim-tomoe</packagereq>
-      <packagereq type="conditional" requires="xorg-x11-server-Xorg">scim-uim</packagereq>
+      <packagereq type="conditional" requires="gtk+-common">honoka</packagereq>
+      <packagereq type="conditional" requires="gtk+-common">iiimf</packagereq>
+      <packagereq type="conditional" requires="gtk+-common">iiimf-doc</packagereq>
+      <packagereq type="conditional" requires="gtk+-common">iiimf-skk</packagereq>
+      <packagereq type="conditional" requires="gtk+-common">iiimf-xiiimp</packagereq>
+      <packagereq type="conditional" requires="gtk+-common">kinput2</packagereq>
+      <packagereq type="conditional" requires="gtk+-common">scim-anthy</packagereq>
+      <packagereq type="conditional" requires="gtk+-common">scim-bridge</packagereq>
+      <packagereq type="conditional" requires="gtk+-common">scim-canna</packagereq>
+      <packagereq type="conditional" requires="gtk+-common">scim-prime</packagereq>
+      <packagereq type="conditional" requires="gtk+-common">scim-skk</packagereq>
+      <packagereq type="conditional" requires="gtk+-common">scim-tomoe</packagereq>
+      <packagereq type="conditional" requires="gtk+-common">scim-uim</packagereq>
       <packagereq type="default">skk-jisyo</packagereq>
-      <packagereq type="conditional" requires="xorg-x11-server-Xorg">skkinput</packagereq>
+      <packagereq type="conditional" requires="gtk+-common">skkinput</packagereq>
       <packagereq type="default">uim-anthy</packagereq>
       <packagereq type="default">uim-canna</packagereq>
       <packagereq type="default">uim-fep</packagereq>
-      <packagereq type="conditional" requires="xorg-x11-server-Xorg">uim-gtk</packagereq>
+      <packagereq type="conditional" requires="gtk+-common">uim-gtk</packagereq>
       <packagereq type="default">uim-prime</packagereq>
       <packagereq type="default">uim-skk</packagereq>
-      <packagereq type="conditional" requires="xorg-x11-server-Xorg">uim-tomoe-gtk</packagereq>
-      <packagereq type="conditional" requires="xorg-x11-server-Xorg">uim-xim</packagereq>
+      <packagereq type="conditional" requires="gtk+-common">uim-tomoe-gtk</packagereq>
+      <packagereq type="conditional" requires="gtk+-common">uim-xim</packagereq>
       <packagereq type="default">prime</packagereq>
       <packagereq type="default">prime-dict</packagereq>
       <packagereq type="mandatory" basearchonly="true">jfbterm</packagereq>
@@ -6515,7 +6515,7 @@
       <packagereq type="conditional" requires="koffice-core">koffice-l10n-Russian</packagereq>
       <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-ru</packagereq>
       <packagereq type="conditional" requires="man-pages">man-pages-ru</packagereq>
-      <packagereq type="conditional" requires="xorg-x11-server-Xorg">xorg-x11-fonts-cyrillic</packagereq>
+      <packagereq type="conditional" requires="gtk+-common">xorg-x11-fonts-cyrillic</packagereq>
     </packagelist>
   </group>
 
@@ -7659,7 +7659,7 @@
     <packagelist>
       <packagereq type="conditional" requires="kdelibs">kde-i18n-Ukrainian</packagereq>
       <packagereq type="conditional" requires="koffice-core">koffice-l10n-Ukrainian</packagereq>
-      <packagereq type="conditional" requires="xorg-x11-server-Xorg">xorg-x11-fonts-cyrillic</packagereq>
+      <packagereq type="conditional" requires="gtk+-common">xorg-x11-fonts-cyrillic</packagereq>
 
     </packagelist>
   </group>
