@@ -19,7 +19,7 @@ PKGDIR ~/pkgs
 #        記述します。一行に複数書く事もできますし、MIRROR が複数行あっ
 #        てもかまいません。
 #
-# MIRROR ftp://dist.momonga-linux.org/pub/momonga/development/PKGS
+MIRROR ftp://dist.momonga-linux.org/pub/momonga/development/PKGS
 # MIRROR ftp://ftp.ne.jp/Linux/packages/momonga/development/PKGS
 # MIRROR ftp://ftp.iij.ad.jp/pub/linux/momonga/development/PKGS
 
@@ -54,24 +54,9 @@ DISPLAY :0.0
 #
 # URL_ALIAS <正規表現> <置き換える文字列>
 #
-# => ftp.t.ring.gr.jp
-#URL_ALIAS ^ftp://ftp\.gnu\.org/pub/gnu				ftp://ftp.t.ring.gr.jp/pub/GNU
-#URL_ALIAS ^ftp://ftp\.xemacs\.org/pub/xemacs			ftp://ftp.t.ring.gr.jp/pub/text/xemacs
-#URL_ALIAS ^(?:http://www|ftp://ftp)\.kernel\.org/pub/linux	ftp://ftp.t.ring.gr.jp/pub/linux/kernel.org
-#URL_ALIAS ^ftp://ftp\.gnome\.org/pub/GNOME			ftp://ftp.t.ring.gr.jp/pub/X/gnome
-#URL_ALIAS ^ftp://ftp\.sudo\.ws/pub/sudo			ftp://ftp.t.ring.gr.jp/pub/misc/sudo
-#URL_ALIAS ^ftp://ftp\.ruby-lang\.org/pub/ruby			ftp://ftp.t.ring.gr.jp/pub/lang/ruby
-#URL_ALIAS ^ftp://ftp\.cpan\.org/pub/CPAN			ftp://ftp.t.ring.gr.jp/pub/lang/perl/CPAN
-#URL_ALIAS ^ftp://ftp\.services\.openoffice\.org/pub/OpenOffice\.org	ftp://ftp.t.ring.gr.jp/pub/misc/openoffice
+# => dl.sourceforge.net
+URL_ALIAS ^http://dl\.sourceforge\.net http://jaist.dl.sourceforge.net
 #
-# => osdn.dl.sourceforge.net
-#URL_ALIAS ^http://dl\.sf\.net http://osdn.dl.sourceforge.net
-#URL_ALIAS ^http://[^\.]+?\.dl\.sourceforge\.net http://osdn.dl.sourceforge.net
-#
-# => any
-#URL_ALIAS ^ftp://ftp\.linux-ipv6\.org/pub/usagi http://ftp.kddlabs.co.jp/IPv6/usagi
-#URL_ALIAS ^ftp://sources\.redhat\.com/pub http://mirrors.kernel.org/sources.redhat.com
-#URL_ALIAS ^ftp://ftp\.alsa-project\.org/pub http://www.alsa-project.org/alsa/ftp
 
 # WORKDIR 作業用ディレクトリを指定する．
 #         パッケージ名/BUILD ディレクトリが WORKDIR の下に作られる．
