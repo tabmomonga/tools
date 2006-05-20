@@ -8271,6 +8271,8 @@
       <packagereq type="default">system-config-display</packagereq>
       <packagereq type="default">system-config-network</packagereq>
       <packagereq type="default">pirut</packagereq>
+      <packagereq type="default">rxvt</packagereq>
+      <packagereq type="default">rxvt-unicode</packagereq>
       <packagereq type="default">system-config-printer-gui</packagereq>
       <packagereq type="default">system-config-soundcard</packagereq>
       <packagereq type="default">system-config-users</packagereq>
