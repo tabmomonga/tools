@@ -8327,15 +8327,42 @@
     <default>true</default>
     <uservisible>true</uservisible>
     <packagelist>
+      <packagereq type="default">gtk-xfce-engine</packagereq>
       <packagereq type="mandatory">libxfce4mcs</packagereq>
       <packagereq type="mandatory">libxfce4util</packagereq>
       <packagereq type="mandatory">libxfcegui4</packagereq>
+      <packagereq type="default">xfcalendar</packagereq>
       <packagereq type="default">xfce-mcs-manager</packagereq>
       <packagereq type="default">xfce-mcs-plugins</packagereq>
       <packagereq type="mandatory">xfce-utils</packagereq>
+      <packagereq type="default">xfce4-appfinder</packagereq>
+      <packagereq type="default">xfce4-artwork</packagereq>
+      <packagereq type="default">xfce4-battery-plugin</packagereq>
+      <packagereq type="default">xfce4-clipman-plugin</packagereq>
+      <packagereq type="default">xfce4-cpugraph-plugin</packagereq>
+      <packagereq type="default">xfce4-datetime-plugin</packagereq>
+      <packagereq type="default">xfce4-diskperf-plugin</packagereq>
+      <packagereq type="default">xfce4-fsguard-plugin</packagereq>
+      <packagereq type="default">xfce4-icon-theme</packagereq>
       <packagereq type="default">xfce4-iconbox</packagereq>
+      <packagereq type="default">xfce4-minicmd-plugin</packagereq>
+      <packagereq type="default">xfce4-mixer</packagereq>
+      <packagereq type="default">xfce4-netload-plugin</packagereq>
+      <packagereq type="default">xfce4-notes-plugin</packagereq>
       <packagereq type="mandatory">xfce4-panel</packagereq>
+      <packagereq type="mandatory">xfce4-session</packagereq>
+      <packagereq type="default">xfce4-session-engines</packagereq>
+      <packagereq type="default">xfce4-showdesktop-plugin</packagereq>
+      <packagereq type="default">xfce4-systemload-plugin</packagereq>
       <packagereq type="default">xfce4-systray</packagereq>
+      <packagereq type="default">xfce4-taskbar-plugin</packagereq>
+      <packagereq type="default">xfce4-toys</packagereq>
+      <packagereq type="default">xfce4-trigger-launcher</packagereq>
+      <packagereq type="default">xfce4-wavelan-plugin</packagereq>
+      <packagereq type="default">xfce4-weather-plugin</packagereq>
+      <packagereq type="default">xfce4-windowlist-plugin</packagereq>
+      <packagereq type="default">xfce4-xkb-plugin</packagereq>
+      <packagereq type="default">xfce4-xmms-plugin</packagereq>
       <packagereq type="mandatory">xfdesktop</packagereq>
       <packagereq type="mandatory">xffm</packagereq>
       <packagereq type="default">xfprint</packagereq>
@@ -8360,6 +8387,7 @@
       <packagereq type="mandatory">libxfcegui4-devel</packagereq>
       <packagereq type="default">pygtk-devel</packagereq>
       <packagereq type="mandatory">xfce-mcs-manager-devel</packagereq>
+      <packagereq type="mandatory">xfce4-session-devel</packagereq>
     </packagelist>
   </group>
 
