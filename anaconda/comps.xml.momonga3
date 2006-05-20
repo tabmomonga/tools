@@ -113,7 +113,7 @@
     <uservisible>true</uservisible>
     <packagelist>
       <packagereq type="default">authconfig-gtk</packagereq>
-      <packagereq type="optional">gparted</packagereq>
+      <packagereq type="default">gparted</packagereq>
       <packagereq type="default">system-config-date</packagereq>
       <packagereq type="default">system-config-keyboard</packagereq>
       <packagereq type="optional">system-config-language</packagereq>
@@ -3524,7 +3524,7 @@
       <packagereq type="optional">galeon</packagereq>
       <packagereq type="default">gftp</packagereq>
       <packagereq type="optional">gnomeicu</packagereq>
-      <packagereq type="optional">hotwayd</packagereq>
+      <packagereq type="default">hotwayd</packagereq>
       <packagereq type="optional">kazehakase</packagereq>
       <packagereq type="optional">kita</packagereq>
       <packagereq type="optional">kdewebdev</packagereq>
