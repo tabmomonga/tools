@@ -6202,7 +6202,6 @@
     <default>true</default>
     <uservisible>true</uservisible>
     <packagelist>
-      <packagereq type="mandatory">4Suite</packagereq>
       <packagereq type="default">a2ps</packagereq>
       <packagereq type="optional">bluez-utils-cups</packagereq>
       <packagereq type="mandatory">cups</packagereq>
