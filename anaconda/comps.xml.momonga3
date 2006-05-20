@@ -5819,12 +5819,10 @@
       <packagereq type="default">openoffice.org-impress</packagereq>
       <packagereq type="optional">openoffice.org-kde</packagereq>
       <packagereq type="default">openoffice.org-math</packagereq>
-      <packagereq type="optional">openoffice.org-pyuno</packagereq>
+      <packagereq type="optional" basearchonly="true">openoffice.org-pyuno</packagereq>
       <packagereq type="optional">openoffice.org-testtools</packagereq>
       <packagereq type="default">openoffice.org-writer</packagereq>
       <packagereq type="default">openoffice.org-xsltfilter</packagereq>
-      <packagereq type="optional" basearchonly="true">openoffice.org-pyuno</packagereq>
-      <packagereq type="optional">openoffice.org-testtools</packagereq>
       <packagereq type="optional">scribus</packagereq>
       <packagereq type="optional">xdvik</packagereq>
       <packagereq type="optional">xpdf</packagereq>
