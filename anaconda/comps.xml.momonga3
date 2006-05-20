@@ -3123,6 +3123,8 @@
       <packagereq type="default">gnome-pilot-devel</packagereq>
       <packagereq type="mandatory">gnome-vfs-devel</packagereq>
       <packagereq type="optional">gob2</packagereq>
+      <packagereq type="default">gstreamer010-devel</packagereq>
+      <packagereq type="default">gst-plugins-base-devel</packagereq>
       <packagereq type="default">gtk-doc</packagereq>
       <packagereq type="mandatory">gtk+-devel</packagereq>
       <packagereq type="default">hal-devel</packagereq>
@@ -4758,6 +4760,10 @@
       <packagereq type="mandatory">qt-devel</packagereq>
       <packagereq type="mandatory">sane-backends-devel</packagereq>
       <packagereq type="default">sip</packagereq>
+      <packagereq type="default">gstreamer-devel</packagereq>
+      <packagereq type="default">gst-plugins-devel</packagereq>
+      <packagereq type="default">gstreamer010-devel</packagereq>
+      <packagereq type="default">gst-plugins-base-devel</packagereq>
     </packagelist>
   </group>
 
