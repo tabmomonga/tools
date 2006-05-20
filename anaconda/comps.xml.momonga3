@@ -2946,7 +2946,7 @@
       <packagereq type="optional">gnutls</packagereq>
       <packagereq type="default">gok</packagereq>
       <packagereq type="default">gpdf</packagereq>
-      <packagereq type="default">gqview</packagereq>
+      <packagereq type="optional">gqview</packagereq>
       <packagereq type="default">gthumb</packagereq>
       <packagereq type="default">gstreamer010</packagereq>
       <packagereq type="default">gst-plugins-base</packagereq>
@@ -3657,7 +3657,7 @@
       <packagereq type="default">dia</packagereq>
       <packagereq type="optional">digikam</packagereq>
       <packagereq type="optional">digikamimageplugins</packagereq>
-      <packagereq type="optional">gqview</packagereq>
+      <packagereq type="default">gqview</packagereq>
       <packagereq type="optional">gwenview</packagereq>
       <packagereq type="default">gimp</packagereq>
       <packagereq type="default">gimp-gap</packagereq>
