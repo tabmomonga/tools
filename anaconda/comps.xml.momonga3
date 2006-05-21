@@ -8305,6 +8305,7 @@
       <packagereq type="optional">xorg-x11-resutils</packagereq>
       <packagereq type="optional">xorg-x11-xfs-utils</packagereq>
       <packagereq type="optional">xorg-x11-xsm</packagereq>
+      <packagereq type="default">xterm</packagereq>
     </packagelist>
   </group>
 
