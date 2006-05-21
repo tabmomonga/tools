@@ -1677,6 +1677,7 @@
       <packagereq type="mandatory">readline-devel</packagereq>
       <packagereq type="default">rpm-devel</packagereq>
       <packagereq type="default">slang-devel</packagereq>
+      <packagereq type="default">speex-devel</packagereq>
       <packagereq type="mandatory">zlib-devel</packagereq>
     </packagelist>
   </group>
