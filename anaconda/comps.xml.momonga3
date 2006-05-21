@@ -2886,6 +2886,7 @@
     <default>true</default>
     <uservisible>true</uservisible>
     <packagelist>
+      <packagereq type="mandatory">GConf</packagereq>
       <packagereq type="default">NetworkManager-gnome</packagereq>
       <packagereq type="optional">anjuta</packagereq>
       <packagereq type="mandatory">atk</packagereq>
@@ -2906,7 +2907,6 @@
       <packagereq type="default">file-roller</packagereq>
       <packagereq type="mandatory">gail</packagereq>
       <packagereq type="default">gcalctool</packagereq>
-      <packagereq type="mandatory">GConf</packagereq>
       <packagereq type="optional">gconf-editor</packagereq>
       <packagereq type="default">gedit</packagereq>
       <packagereq type="optional">ghex</packagereq>
@@ -3141,6 +3141,7 @@
       <packagereq type="mandatory">libgnomeui-devel</packagereq>
       <packagereq type="default">libgtkhtml-devel</packagereq>
       <packagereq type="default">libgtop-devel</packagereq>
+      <packagereq type="default">libmusicbrainz-devel</packagereq>
       <packagereq type="default">librsvg-devel</packagereq>
       <packagereq type="mandatory">libxslt-devel</packagereq>
       <packagereq type="mandatory">linc-devel</packagereq>
@@ -4753,6 +4754,8 @@
       <packagereq type="default">libakode-devel</packagereq>
       <packagereq type="default">libkexif-devel</packagereq>
       <packagereq type="default">libkipi-devel</packagereq>
+      <packagereq type="default">libmusicbrainz-devel</packagereq>
+      <packagereq type="default">libtunepimp-devel</packagereq>
       <packagereq type="mandatory">libxslt-devel</packagereq>
       <packagereq type="mandatory">pilot-link-devel</packagereq>
       <packagereq type="default">qtruby</packagereq>
@@ -4760,6 +4763,7 @@
       <packagereq type="mandatory">qt-devel</packagereq>
       <packagereq type="mandatory">sane-backends-devel</packagereq>
       <packagereq type="default">sip</packagereq>
+      <packagereq type="default">taglib-devel</packagereq>
       <packagereq type="default">gstreamer-devel</packagereq>
       <packagereq type="default">gst-plugins-devel</packagereq>
       <packagereq type="default">gstreamer010-devel</packagereq>
