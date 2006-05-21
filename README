@@ -15,6 +15,9 @@
 :機能概要
  パッケージをビルド
 :実行方法
+example.OmoiKondaraを pkgs以下に.OmoiKondara という名前でコピー。
+自分の環境に合わせて編集をする。
+その後で、 
  OmoiKondara [オプション] [パッケージ名...]
 :ライセンス
  Ruby
@@ -75,26 +78,6 @@
   update-mph [ディレクトリ...] (省略すると TOPDIR[-*]以下)
 :ライセンス
  Modified BSD
-
-== OmoiKondara3.rb
-:開発者/メンテナ
- muraken
-:機能概要
- OmoiKondara で使用する予定のライブラリ．
-:実行方法
- 実行してはいけません．
-:ライセンス
- Ruby
-
-== tc_OmoiKondara.rb
-:開発者/メンテナ
- muraken
-:機能概要
- OmoiKondara3.rb のテストケース
-:実行方法
- ruby tc_OmoiKondara.rb
-:ライセンス
- Ruby
 
 == delobso.rb
 :開発者/メンテナ
@@ -176,16 +159,6 @@
 :ライセンス
   Ruby
 
-== lib/*
-:開発者/メンテナ
- muraken
-:機能概要
- 様々なライブラリ
-:実行方法
- 実行しないでください
-:ライセンス
- Ruby と同じ
-
 == correct-mtime
 :開発者/メンテナ
   zunda
@@ -236,9 +209,6 @@
 :ライセンス
 
 == 説明のないファイル 
-*FutoiMomonga
-*OmoiKondara.test
-*OmoiKondara2
 *ana-rpm-size.rb
 *checkspec.rb
 *chkreq.rb
@@ -250,7 +220,6 @@
 *chksrpm
 *cleanupsource
 *cleanupsource.php
-*delobso
 *depgraph
 *deprpme
 *gnu_md5sum_check.php
@@ -264,10 +233,8 @@
 *updatespecdb
 == 非スクリプトファイル
 *ChangeLog
-*example.OmoiKondara
 *example.OmoiKondara2
 *Makefile
-*README.OmoiKondara2
 *README.omokon-modoki
 *rpmvercmp.c
 = 削除したもの
@@ -280,6 +247,46 @@
 *getname.rb
 *mkkondaraiso
 
-必要であるならば、CVSから復活させた上で、
+== 説明が無いため、OBSOLETE送りにしたパッケージ
+*FutoiMomonga
+*OmoiKondara.test
+*OmoiKondara2
+*README.OmoiKondara2
+
+== 使われないため、OBSOLETE送りにしたパッケージ
+== OmoiKondara3.rb
+:開発者/メンテナ
+ muraken
+:機能概要
+ OmoiKondara で使用する予定のライブラリ．
+:実行方法
+ 実行してはいけません．
+:ライセンス
+ Ruby
+
+== tc_OmoiKondara.rb
+:開発者/メンテナ
+ muraken
+:機能概要
+ OmoiKondara3.rb のテストケース
+:実行方法
+ ruby tc_OmoiKondara.rb
+:ライセンス
+ Ruby
+
+== lib/*
+:開発者/メンテナ
+ muraken
+:機能概要
+ 様々なライブラリ
+:実行方法
+ 実行しないでください
+:ライセンス
+ Ruby と同じ
+
+レポジトリから消えていたファイル、
+==delobso==
+
+必要であるならば復活させた上で、
 README(このファイル)に説明を加えること。
 =end
