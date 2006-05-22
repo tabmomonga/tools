@@ -4744,6 +4744,7 @@
     <default>false</default>
     <uservisible>true</uservisible>
     <packagelist>
+      <packagereq type="default">OpenEXR-devel</packagereq>
       <packagereq type="default">PyQt</packagereq>
       <packagereq type="mandatory">arts-devel</packagereq>
       <packagereq type="mandatory">arts-artsc-devel</packagereq>
