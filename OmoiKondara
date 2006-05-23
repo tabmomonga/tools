@@ -1078,6 +1078,7 @@ spec ファイルのデータベースを参照する。
           puts "    not installed" if $VERBOSEOUT
       end
 
+      next unless $DEPGRAPH.db.packages[req.name]
       $DEPGRAPH.db.packages[req.name].each do |a|
         spec = $DEPGRAPH.db.specs[a.spec]
         if build_and_install(req.name, '-Uvh', spec.name) == 4 then
