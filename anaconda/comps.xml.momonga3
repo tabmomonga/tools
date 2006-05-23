@@ -5222,11 +5222,13 @@
     <default>false</default>
     <uservisible>true</uservisible>
     <packagelist>
+      <packagereq type="default">SpamAssassin</packagereq>
       <packagereq type="default">cyrus-sasl</packagereq>
       <packagereq type="default">dovecot</packagereq>
       <packagereq type="optional">mailman</packagereq>
-      <packagereq type="default">postfix</packagereq>
-      <packagereq type="default">SpamAssassin</packagereq>
+      <packagereq type="optional">postfix</packagereq>
+      <packagereq type="default">sendmail</packagereq>
+      <packagereq type="default">sendmail-cf</packagereq>
       <packagereq type="optional">squirrelmail</packagereq>
     </packagelist>
   </group>
