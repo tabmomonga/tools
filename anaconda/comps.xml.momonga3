@@ -629,7 +629,6 @@
       <packagereq type="default">rp-pppoe</packagereq>
       <packagereq type="default">rsh</packagereq>
       <packagereq type="default">rsync</packagereq>
-      <packagereq type="default">sendmail</packagereq>
       <packagereq type="default">setarch</packagereq>
       <packagereq type="default">setuptool</packagereq>
       <packagereq type="default">slocate</packagereq>
@@ -5227,9 +5226,9 @@
       <packagereq type="default">cyrus-sasl</packagereq>
       <packagereq type="default">dovecot</packagereq>
       <packagereq type="optional">mailman</packagereq>
-      <packagereq type="optional">postfix</packagereq>
-      <packagereq type="default">sendmail</packagereq>
-      <packagereq type="default">sendmail-cf</packagereq>
+      <packagereq type="default">postfix</packagereq>
+      <packagereq type="optional">sendmail</packagereq>
+      <packagereq type="optional">sendmail-cf</packagereq>
       <packagereq type="optional">squirrelmail</packagereq>
     </packagelist>
   </group>
