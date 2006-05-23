@@ -629,10 +629,11 @@
       <packagereq type="default">rp-pppoe</packagereq>
       <packagereq type="default">rsh</packagereq>
       <packagereq type="default">rsync</packagereq>
-      <packagereq type="default">smartmontools</packagereq>
+      <packagereq type="default">sendmail</packagereq>
       <packagereq type="default">setarch</packagereq>
       <packagereq type="default">setuptool</packagereq>
       <packagereq type="default">slocate</packagereq>
+      <packagereq type="default">smartmontools</packagereq>
       <packagereq type="optional">squashfs</packagereq>
       <packagereq type="default">stunnel</packagereq>
       <packagereq type="default">sudo</packagereq>
