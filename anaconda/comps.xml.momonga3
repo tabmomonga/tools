@@ -619,6 +619,7 @@
       <packagereq type="default">pcmciautils</packagereq>
       <packagereq type="default">pdksh</packagereq>
       <packagereq type="optional">pidentd</packagereq>
+      <packagereq type="default">postfix</packagereq>
       <packagereq type="mandatory">psacct</packagereq>
       <packagereq type="mandatory">quota</packagereq>
       <packagereq type="default">rdate</packagereq>
