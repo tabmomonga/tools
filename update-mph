@@ -13,7 +13,7 @@ fi
 function scan_pkgdir() {
 	if [ -d $1 ]; then
 		echo Scanning $1 1>&2
-		/usr/sbin/mph-scanpackages -vd $1
+		/usr/sbin/mph-scanpackages -v $1
 	else
 		echo $1 is not a directory. 1>&2
 	fi

@@ -27,8 +27,8 @@ db.names.each do |name|
   topdir = $TOPDIR.dup
 
   Dir.in_dir(name) do
-    if File.exist?('TO.Zoo') then
-      topdir += '-Zoo'
+    if File.exist?('TO.Alter') then
+      topdir += '-Alter'
     elsif File.exist?('TO.Nonfree') then
       topdir += '-Nonfree'
     end
