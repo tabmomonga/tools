@@ -1,14 +1,16 @@
 #! /usr/bin/env ruby
 
 REJECT = [
-  'YUKARI',
-  'TO.Zoo',
-  'TO.NonFree',
+  'TO.Alter',
+  'TO.Nonfree',
   'REMOVE.PLEASE',
   'DISPLAY.PLEASE',
   'NOT.alpha',
   'NOT.ppc',
-  'NOT.i586',
+  'NOT.ppc64',
+  'NOT.i686',
+  'NOT.x86_64',
+  'NOT.ia64',
 ]
 
 class Source
@@ -67,7 +69,7 @@ end # def get_sources(specfile)
 def check(pkg)
   return unless File.exist?("#{pkg}/#{pkg}.spec")
   sources = get_sources "#{pkg}/#{pkg}.spec"
-  IO.foreach("#{pkg}/CVS/Entries") do |line|
+  IO.foreach("#{pkg}/.svn/Entries") do |line|
     next if line =~ /^D/
     filename = line.split('/')[1]
     next if REJECT.include? filename
@@ -85,7 +87,7 @@ def check(pkg)
     unless exist then
       puts "#{pkg}/#{filename} is unused"
     end
-  end # IO.foreach("#{pkg}/CVS/Entries") do |line|
+  end # IO.foreach("#{pkg}/.svn/Entries") do |line|
   sources.each do |src|
     next if src[0].no? or src[1] == 1
     if src[0].name =~ /:\/\// then

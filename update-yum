@@ -7,20 +7,14 @@ if [ -z "$TOPDIR" ]; then
 	exit 1
 fi
 
-# Run mph-scanpackages for each binary RPM locations.
-
-function scan_pkgdir() {
+# Run createrepo for top dir
+function scan() {
 	if [ -d $1 ]; then
 		echo Scanning $1 1>&2
-		/usr/sbin/mph-scanpackages -v $1
+		/usr/bin/createrepo -v $1
 	else
 		echo $1 is not a directory. 1>&2
 	fi
-}
-
-function scan() {
-	scan_pkgdir $1/$ARCH
-	scan_pkgdir $1/noarch
 }
 
 if [ $# = 0 ]; then
