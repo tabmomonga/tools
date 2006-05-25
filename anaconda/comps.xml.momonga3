@@ -8314,7 +8314,8 @@
       <packagereq type="default">usermode-gtk</packagereq>
       <packagereq type="default">vnc-server</packagereq>
       <packagereq type="mandatory">xorg-x11-xinit</packagereq>
-      <packagereq type="mandatory">xorg-x11-xinit-additional</packagereq>
+      <packagereq type="default">xorg-x11-xinit-additional</packagereq>
+      <packagereq type="mandatory">xorg-x11-xinit-base</packagereq>
       <packagereq type="default">xorg-x11-xinit-english</packagereq>
       <packagereq type="default">xorg-x11-xinit-french</packagereq>
       <packagereq type="default">xorg-x11-xinit-german</packagereq>
