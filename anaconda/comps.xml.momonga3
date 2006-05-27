@@ -602,7 +602,7 @@
       <packagereq type="default">mgetty</packagereq>
       <packagereq type="optional">microcode_ctl</packagereq>
       <packagereq type="default">mkbootdisk</packagereq>
-      <packagereq type="default">mph</packagereq>
+      <packagereq type="default">mlocate</packagereq>
       <packagereq type="default">mt-st</packagereq>
       <packagereq type="default">mtools</packagereq>
       <packagereq type="default">mtr</packagereq>
@@ -632,7 +632,6 @@
       <packagereq type="default">rsync</packagereq>
       <packagereq type="default">setarch</packagereq>
       <packagereq type="default">setuptool</packagereq>
-      <packagereq type="default">slocate</packagereq>
       <packagereq type="default">smartmontools</packagereq>
       <packagereq type="optional">squashfs</packagereq>
       <packagereq type="default">stunnel</packagereq>
