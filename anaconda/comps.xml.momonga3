@@ -7011,6 +7011,7 @@
       <packagereq type="default">cdparanoia</packagereq>
       <packagereq type="default">cdrtools</packagereq>
       <packagereq type="default">dvd+rw-tools</packagereq>
+      <packagereq type="default">dvdbackup</packagereq>
       <packagereq type="optional">easytag</packagereq>
       <packagereq type="default">gnomebaker</packagereq>
       <packagereq type="default">grip</packagereq>
