@@ -29,7 +29,14 @@ if ARGV.length == 0
   exit 1
 end
 
-if File.expand_path($PKGDIR) != File.expand_path(Dir.getwd)
+## check whether $PKGDIR is symlink or not
+path =  File.expand_path($PKGDIR)
+if FileTest.symlink?(path)
+  path = File.readlink(path)
+end
+
+## this script must be executed in pkgs/ directory
+if path != File.expand_path(Dir.getwd)
   puts "Run in pkgs/ dir."
   exit 1
 end
