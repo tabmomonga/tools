@@ -4584,6 +4584,7 @@
       <packagereq type="default">kdetoys</packagereq>
       <packagereq type="default">kdeutils</packagereq>
       <packagereq type="default">kdewebdev</packagereq>
+      <packagereq type="default">kerry</packagereq>
       <packagereq type="default">kfish</packagereq>
       <packagereq type="default">kita</packagereq>
       <packagereq type="default">kipi-plugins</packagereq>
@@ -4788,6 +4789,7 @@
       <packagereq type="default">qt-designer</packagereq>
       <packagereq type="mandatory">qt-devel</packagereq>
       <packagereq type="mandatory">sane-backends-devel</packagereq>
+      <packagereq type="default">scribus-devel</packagereq>
       <packagereq type="default">sip</packagereq>
       <packagereq type="default">taglib-devel</packagereq>
       <packagereq type="default">xmms-devel</packagereq>
