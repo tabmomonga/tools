@@ -843,7 +843,7 @@ Sourece/Patch/Icon タグで指定されているファイルをビルド
 #        if $DEBUG_FLAG then
 #          $stderr.puts "MSG: File.unlink BUILD"
 #        end
-        exec_command "[ -L BUILD ] && rm BUILD && mkdir BUILD"
+        exec_command "[ -L BUILD ] && rm BUILD"
         exec_command "mv #{workdir} BUILD"
         if $DEBUG_FLAG then
           $stderr.puts "MSG: mv #{workdir} BUILD"
