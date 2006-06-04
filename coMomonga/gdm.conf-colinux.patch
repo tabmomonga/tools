@@ -1,5 +1,14 @@
---- gdm/gdm.conf.colinux	2005-07-14 11:21:58.000000000 +0900
-+++ gdm/gdm.conf	2005-07-14 11:16:16.000000000 +0900
+--- gdm/gdm.conf.comomo	2006-02-23 15:13:14.000000000 +0900
++++ gdm/gdm.conf	2006-02-23 15:15:57.000000000 +0900
+@@ -60,7 +60,7 @@
+ Group=gdm
+ # To try to kill all clients started at greeter time or in the Init script.
+ # doesn't always work, only if those clients have a window of their own
+-KillInitClients=true
++KillInitClients=false
+ LogDir=/var/gdm
+ # You should probably never change this value unless you have a weird setup
+ PidFile=/var/run/gdm.pid
 @@ -129,7 +129,7 @@
  # Distributions: Ship with this off.  It is never a safe thing to leave
  # out on the net.  Alternatively you can set up /etc/hosts.allow and
