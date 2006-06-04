@@ -1,0 +1,25 @@
+coMomonga 作成方法
+
+1. coMomongaの環境を作成する
+
+  (例)
+  # ./create_repo.sh /momonga/coMomonga.img /comomo-env
+  上記の例では、/comomo-env 以下に /momonga/coMomonga.img をマウントして、
+  coMomonga 環境が作成されます。
+
+  実行には yum でパッケージが取得できる必要があります。
+
+  pkglists/* のパッケージをインストールされます。
+  環境が新しくなったら、上記 pkglists/* をメンテナンスする必要があります。
+
+  create_repo内の
+  XORG_LANG=ja_JP.EUC-JP
+  XORG_SESSION=xfce4
+  XORG_XIM=SCIM
+  を編集する事で、デフォルト環境を変更することができます。
+  (が、うまく機能していない気配です)
+
+  自分で追加したいパッケージは
+  pkglists/pkglist.add 
+  を作成し、パッケージ名を記述すれば、追加可能です。
+
