@@ -625,6 +625,7 @@
       <packagereq type="default">rdate</packagereq>
       <packagereq type="default">rdist</packagereq>
       <packagereq type="default">readahead</packagereq>
+      <packagereq type="optional">reiser4progs</packagereq>
       <packagereq type="optional">reiserfsprogs</packagereq>
       <packagereq type="default">rng-utils</packagereq>
       <packagereq type="default">rp-pppoe</packagereq>
