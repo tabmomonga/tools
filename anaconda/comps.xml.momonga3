@@ -3529,6 +3529,7 @@
       <packagereq type="default">bogofilter</packagereq>
       <packagereq type="default">ekiga</packagereq>
       <packagereq type="default">epiphany</packagereq>
+      <packagereq type="default">evolution</packagereq>
       <packagereq type="default">firefox</packagereq>
       <packagereq type="default">gaim</packagereq>
       <packagereq type="optional">galeon</packagereq>
