@@ -8296,7 +8296,6 @@
       <packagereq type="default">authconfig-gtk</packagereq>
       <packagereq type="default">ttf-bitstream-vera</packagereq>
       <packagereq type="mandatory">momonga-backgrounds</packagereq>
-      <packagereq type="mandatory">momonga-desktop</packagereq>
       <packagereq type="default">firstboot</packagereq>
       <packagereq type="default">glut</packagereq>
       <packagereq type="default">gdm</packagereq>
