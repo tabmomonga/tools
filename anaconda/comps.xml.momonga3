@@ -4182,6 +4182,7 @@
       <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-ja_JP</packagereq>
       <packagereq type="mandatory">truetype-fonts-ja</packagereq>
       <packagereq type="mandatory">mplus</packagereq>
+      <packagereq type="mandatory">opfc-ModuleHP</packagereq>
       <packagereq type="conditional" requires="kdelibs">scim-qtimm</packagereq>
       <packagereq type="conditional" requires="kdelibs">uim-qtimmodule</packagereq>
       <packagereq type="default">Canna</packagereq>
