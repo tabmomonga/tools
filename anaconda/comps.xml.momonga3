@@ -569,6 +569,7 @@
       <packagereq type="mandatory">crontabs</packagereq>
       <packagereq type="mandatory">cyrus-sasl</packagereq>
       <packagereq type="default">dhclient</packagereq>
+      <packagereq type="default">dhcpv6_client</packagereq>
       <packagereq type="default">dmidecode</packagereq>
       <packagereq type="default">dmraid</packagereq>
       <packagereq type="default">diffutils</packagereq>
@@ -5526,6 +5527,7 @@
     <packagelist>
       <packagereq type="default">cyrus-sasl</packagereq>
       <packagereq type="optional">dhcp</packagereq>
+      <packagereq type="optional">dhcpv6</packagereq>
       <packagereq type="optional">freeradius</packagereq>
       <packagereq type="optional">krb5-server</packagereq>
       <packagereq type="optional">netatalk</packagereq>
