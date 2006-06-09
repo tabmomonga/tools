@@ -3685,10 +3685,11 @@
       <packagereq type="default">netpbm-progs</packagereq>
       <packagereq type="default">sane-frontends</packagereq>
       <packagereq type="optional">sodipodi</packagereq>
+      <packagereq type="default">xaralx</packagereq>
       <packagereq type="optional">xfig</packagereq>
       <packagereq type="default">xsane</packagereq>
       <packagereq type="default">xsane-gimp</packagereq>
-      <packagereq type="optional">zphoto</packagereq>
+      <packagereq type="default">zphoto</packagereq>
     </packagelist>
   </group>
 
