@@ -2950,7 +2950,6 @@
       <packagereq type="default">gnopernicus</packagereq>
       <packagereq type="optional">gnutls</packagereq>
       <packagereq type="default">gok</packagereq>
-      <packagereq type="default">gpdf</packagereq>
       <packagereq type="optional">gqview</packagereq>
       <packagereq type="default">gthumb</packagereq>
       <packagereq type="default">gstreamer010</packagereq>
@@ -5837,7 +5836,6 @@
       <packagereq type="default">ebview</packagereq>
       <packagereq type="default">evince</packagereq>
       <packagereq type="optional">gnumeric</packagereq>
-      <packagereq type="default">gpdf</packagereq>
       <packagereq type="optional">kdepim</packagereq>
       <packagereq type="optional">gnumeric</packagereq>
       <packagereq type="optional">kreetingkard</packagereq>
@@ -5867,6 +5865,7 @@
       <packagereq type="default">openoffice.org-writer</packagereq>
       <packagereq type="default">openoffice.org-xsltfilter</packagereq>
       <packagereq type="optional">scribus</packagereq>
+      <packagereq type="default">youtranslate</packagereq>
       <packagereq type="optional">xdvik</packagereq>
       <packagereq type="optional">xpdf</packagereq>
     </packagelist>
