@@ -3538,7 +3538,6 @@
       <packagereq type="optional">gnomeicu</packagereq>
       <packagereq type="default">hotwayd</packagereq>
       <packagereq type="optional">jd</packagereq>
-      <packagereq type="optional">kazehakase</packagereq>
       <packagereq type="optional">kita</packagereq>
       <packagereq type="optional">kdewebdev</packagereq>
       <packagereq type="optional">loqui</packagereq>
