@@ -11,8 +11,8 @@ IMAGEFILE=$1
 REPOBASE=$2
 SCRIPTBASE=`pwd`
 
-INSTALL_XORG=no
-INSTALL_XFCE4=no
+INSTALL_XORG=yes
+INSTALL_XFCE4=yes
 INSTALL_GNOME=no
 INSTALL_KDE=no
 INSTALL_OOO=no
@@ -50,16 +50,16 @@ mount -o loop -t ext2 $IMAGEFILE $REPOBASE
 
 
 echo "Making directories"
-mkdir -p $REPOBASE/dev $REPOBASE/etc
+mkdir -p $REPOBASE/dev $REPOBASE/etc  $REPOBASE/dev/pts
 
 echo "Making /dev/null"
 mknod $REPOBASE/dev/null c 1 3
 
-echo "Makeing /dev/cobdX"
-for num in 0 1 2 3 4 5 6 7 8 9
-do
-	mknod $REPOBASE/dev/cobd$num b 117 $num
-done
+# echo "Makeing /dev/cobdX"
+# for num in 0 1 2 3 4 5 6 7 8 9
+# do
+# 	mknod $REPOBASE/dev/cobd$num b 117 $num
+# done
 
 echo "Makeing /etc/udev/devices/cobdX"
 mkdir -p $REPOBASE/etc/udev/devices/
@@ -68,11 +68,11 @@ do
 	mknod $REPOBASE/etc/udev/devices/cobd$num b 117 $num
 done
 
-echo "Makeing /dev/ttyX"
-for num in 0 1 2 3 4 5 6 7 8 9
-do
-	mknod $REPOBASE/dev/tty$num c 4 $num
-done
+# echo "Makeing /dev/ttyX"
+# for num in 0 1 2 3 4 5 6 7 8 9
+# do
+# 	mknod $REPOBASE/dev/tty$num c 4 $num
+# done
 
 echo "Makeing /etc/udev/devices/ttyX"
 for num in 0 1 2 3 4 5 6 7 8 9
@@ -80,7 +80,17 @@ do
 	mknod $REPOBASE/etc/udev/devices/tty$num c 4 $num
 done
 
+# echo "Makeing /dev/pts/X"
+# for num in 0 1 2 3 4 5 6 7 8 9
+# do
+#         mknod $REPOBASE/dev/pts/$num c 136 $num
+# done
 
+echo "Makeing /etc/udev/devices/random"
+mknod -m 644 $REPOBASE/etc/udev/devices/random c 1 8
+
+echo "Makeing /etc/udev/devices/urandom"
+mknod -m 644 $REPOBASE/etc/udev/devices/urandom c 1 9
 
 echo "Creating /etc/fstab"
 cat << EOF > $REPOBASE/etc/fstab
@@ -96,6 +106,9 @@ cat << EOF > $REPOBASE/etc/hosts
 EOF
 
 touch $REPOBASE/etc/resolv.conf
+
+echo "Mounting /proc"
+mount -t proc proc $REPOBASE/proc
 
 echo "Copying yum setting"
 cp -a /etc/yum.repos.d $REPOBASE/etc/yum.repos.d.tmp
@@ -225,15 +238,15 @@ fi
 
 if [ x$INSTALL_XORG = "xyes" -a -f $PKGLISTS_XORG ]; then
 
-echo "Modifying /etc/X11/gdm/gdm.conf"
-pushd $REPOBASE/etc/X11/gdm
+echo "Modifying /usr/share/gdm/gdm.conf"
+pushd $REPOBASE/usr/share/gdm/
 patch -p1 < $SCRIPTBASE/gdm.conf-colinux.patch
 popd
 
-echo "Modifying /usr/lib/X11/app-defaults/XScreenSaver"
-pushd $REPOBASE/usr/lib/X11/app-defaults/
-patch -p1 < $SCRIPTBASE/xscreensaver-no_stderr.patch
-popd
+# echo "Modifying /usr/share/X11/app-defaults/XScreenSaver"
+# pushd $REPOBASE/usr/share/X11/app-defaults/
+# patch -p1 < $SCRIPTBASE/xscreensaver-no_stderr.patch
+# popd
 
 echo "Modifying /etc/X11/fs/config"
 pushd $REPOBASE/etc/X11/fs

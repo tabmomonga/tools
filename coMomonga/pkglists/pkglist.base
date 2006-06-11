@@ -80,10 +80,8 @@ jwhois
 kbd
 kernel-smp
 kernel-headers
-kernel-utils
 krb5-libs
 kudzu
-kudzu-python
 less
 lftp
 lha
