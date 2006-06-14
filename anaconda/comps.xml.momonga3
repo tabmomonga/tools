@@ -430,10 +430,23 @@
       <packagereq type="default">docbook-style-xsl</packagereq>
       <packagereq type="default">docbook-utils</packagereq>
       <packagereq type="default">docbook-utils-pdf</packagereq>
+      <packagereq type="default">dvipdfmx</packagereq>
+      <packagereq type="default">jadetex</packagereq>
       <packagereq type="default">linuxdoc-tools</packagereq>
+      <packagereq type="default">passivetex</packagereq>
       <packagereq type="default">tetex</packagereq>
       <packagereq type="default">tetex-afm</packagereq>
-      <packagereq type="optional">xdvik</packagereq>
+      <packagereq type="default">tetex-doc</packagereq>
+      <packagereq type="default">tetex-dvipsk</packagereq>
+      <packagereq type="default">tetex-extramacros-jsclasses</packagereq>
+      <packagereq type="default">tetex-extramacros-otf</packagereq>
+      <packagereq type="default">tetex-extramacros-powerdot</packagereq>
+      <packagereq type="default">tetex-extramacros-prosper</packagereq>
+      <packagereq type="default">tetex-extramacros-utf</packagereq>
+      <packagereq type="default">tetex-latex</packagereq>
+      <packagereq type="default">tetex-ptex</packagereq>
+      <packagereq type="default">xdvik</packagereq>
+      <packagereq type="default">xmltex</packagereq>
       <packagereq type="default">xmlto</packagereq>
     </packagelist>
   </group>
