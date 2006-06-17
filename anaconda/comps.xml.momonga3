@@ -566,6 +566,7 @@
       <packagereq type="default">aspell-en</packagereq>
       <packagereq type="mandatory">at</packagereq>
       <packagereq type="mandatory">attr</packagereq>
+      <packagereq type="default">audit</packagereq>
       <packagereq type="mandatory">authconfig</packagereq>
       <packagereq type="default">autofs</packagereq>
       <packagereq type="mandatory">bc</packagereq>
@@ -1203,7 +1204,6 @@
       <packagereq type="mandatory">glibc</packagereq>
       <packagereq type="mandatory" basearchonly="true">grub</packagereq>
       <packagereq type="mandatory">hdparm</packagereq>
-      <packagereq type="mandatory">hotplug</packagereq>
       <packagereq type="mandatory">indexhtml</packagereq>
       <packagereq type="mandatory">initscripts</packagereq>
       <packagereq type="mandatory">iproute</packagereq>
@@ -7338,7 +7338,6 @@
     <uservisible>true</uservisible>
     <packagelist>
       <packagereq type="optional">arpwatch</packagereq>
-      <packagereq type="optional">audit</packagereq>
       <packagereq type="default">bluez-pin</packagereq>
       <packagereq type="default">ckermit</packagereq>
       <packagereq type="optional">createrepo</packagereq>
