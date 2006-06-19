@@ -4571,6 +4571,7 @@
     <uservisible>true</uservisible>
     <packagelist>
       <packagereq type="default">amarok</packagereq>
+      <packagereq type="default">amarok-gstreamer</packagereq>
       <packagereq type="default" basearchonly="true">amarok-helix</packagereq>
       <packagereq type="default">amarok-libvisual</packagereq>
       <packagereq type="default">amarok-xine</packagereq>
@@ -4797,6 +4798,7 @@
       <packagereq type="default">libkexif-devel</packagereq>
       <packagereq type="default">libkipi-devel</packagereq>
       <packagereq type="default">libmusicbrainz-devel</packagereq>
+      <packagereq type="default">libnjb-devel</packagereq>
       <packagereq type="default">libsndfile-devel</packagereq>
       <packagereq type="default">libtunepimp-devel</packagereq>
       <packagereq type="default">libvisual-devel</packagereq>
@@ -7018,6 +7020,7 @@
       <packagereq type="default" basearchonly="true">HelixPlayer</packagereq>
       <packagereq type="mandatory">alsa-utils</packagereq>
       <packagereq type="optional">amarok</packagereq>
+      <packagereq type="optional">amarok-gstreamer</packagereq>
       <packagereq type="optional" basearchonly="true">amarok-helix</packagereq>
       <packagereq type="optional">amarok-libvisual</packagereq>
       <packagereq type="optional">amarok-xine</packagereq>
