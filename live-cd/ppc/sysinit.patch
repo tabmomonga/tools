@@ -1,0 +1,9 @@
+--- /etc/rc.sysinit.org	2006-03-04 23:32:20.000000000 +0900
++++ /etc/rc.sysinit	2006-03-04 23:35:25.000000000 +0900
+@@ -672,3 +672,6 @@
+     /usr/bin/rhgb-client --sysinit
+ fi
+ 
++chmod 1777 /tmp
++chmod 666 /dev/pmu
++/usr/sbin/netconfig
