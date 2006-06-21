@@ -6258,6 +6258,8 @@
       <packagereq type="mandatory">cups</packagereq>
       <packagereq type="default">enscript</packagereq>
       <packagereq type="mandatory">ghostscript</packagereq>
+      <packagereq type="mandatory">ghostscript-cups</packagereq>
+      <packagereq type="mandatory">ghostscript-fonts</packagereq>
       <packagereq type="default">hal-cups-utils</packagereq>
       <packagereq type="default">hplip</packagereq>
       <packagereq type="default">hpijs</packagereq>
