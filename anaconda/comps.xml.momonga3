@@ -4648,6 +4648,7 @@
       <packagereq type="mandatory">xinetd</packagereq>
       <packagereq type="default">xscreensaver-base</packagereq>
       <packagereq type="default">xscreensaver-extras</packagereq>
+      <packagereq type="default">yakuake</packagereq>
     </packagelist>
   </group>
 
