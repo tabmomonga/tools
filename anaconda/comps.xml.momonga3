@@ -4629,6 +4629,7 @@
       <packagereq type="default">krename</packagereq>
       <packagereq type="default">libakode</packagereq>
       <packagereq type="default">openoffice.org-kde</packagereq>
+      <packagereq type="default">pykompiz</packagereq>
       <packagereq type="default">qtparted</packagereq>
       <packagereq type="default">rosegarden</packagereq>
       <packagereq type="default">scim-qtimm</packagereq>
