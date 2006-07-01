@@ -3538,25 +3538,35 @@
     <default>true</default>
     <uservisible>true</uservisible>
     <packagelist>
+      <packagereq type="optional">HelixPlayer-mozilla-plugin</packagereq>
       <packagereq type="optional">balsa</packagereq>
       <packagereq type="optional">bluefish</packagereq>
       <packagereq type="default">bogofilter</packagereq>
       <packagereq type="default">ekiga</packagereq>
       <packagereq type="default">epiphany</packagereq>
+      <packagereq type="default">epiphany-extensions</packagereq>
       <packagereq type="default">evolution</packagereq>
       <packagereq type="default">firefox</packagereq>
+      <packagereq type="optional">firefox-plugin-mozplugger</packagereq>
       <packagereq type="default">gaim</packagereq>
       <packagereq type="optional">galeon</packagereq>
       <packagereq type="default">gftp</packagereq>
       <packagereq type="optional">gnomeicu</packagereq>
       <packagereq type="default">hotwayd</packagereq>
       <packagereq type="optional">jd</packagereq>
+      <packagereq type="optional">kaffeine-firefox-plugin</packagereq>
+      <packagereq type="optional">kaffeine-mozilla-plugin</packagereq>
       <packagereq type="optional">kita</packagereq>
       <packagereq type="optional">kdewebdev</packagereq>
       <packagereq type="default">loqui</packagereq>
       <packagereq type="default">mozilla</packagereq>
       <packagereq type="default">mozilla-chat</packagereq>
+      <packagereq type="default">mozilla-extensions-copyurlplus</packagereq>
+      <packagereq type="default">mozilla-extensions-googlebar</packagereq>
+      <packagereq type="default">mozilla-extensions-linky</packagereq>
+      <packagereq type="default">mozilla-extensions-prefbar</packagereq>
       <packagereq type="default">mozilla-mail</packagereq>
+      <packagereq type="optional">mozplugger</packagereq>
       <packagereq type="default">ochusha</packagereq>
       <packagereq type="default">sylpheed</packagereq>
       <packagereq type="default">thunderbird</packagereq>
@@ -7050,8 +7060,6 @@
       <packagereq type="default">grip</packagereq>
       <packagereq type="optional">k3b</packagereq>
       <packagereq type="optional">kaffeine</packagereq>
-      <packagereq type="optional">kaffeine-firefox-plugin</packagereq>
-      <packagereq type="optional">kaffeine-mozilla-plugin</packagereq>
       <packagereq type="optional">kdemultimedia</packagereq>
       <packagereq type="default">kino</packagereq>
       <packagereq type="optional">mikmod</packagereq>
