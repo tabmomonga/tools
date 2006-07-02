@@ -4590,7 +4590,6 @@
     <uservisible>true</uservisible>
     <packagelist>
       <packagereq type="default">amarok</packagereq>
-      <packagereq type="default">amarok-gstreamer</packagereq>
       <packagereq type="default" basearchonly="true">amarok-helix</packagereq>
       <packagereq type="default">amarok-libvisual</packagereq>
       <packagereq type="default">amarok-xine</packagereq>
@@ -7043,7 +7042,6 @@
       <packagereq type="default" basearchonly="true">HelixPlayer</packagereq>
       <packagereq type="mandatory">alsa-utils</packagereq>
       <packagereq type="optional">amarok</packagereq>
-      <packagereq type="optional">amarok-gstreamer</packagereq>
       <packagereq type="optional" basearchonly="true">amarok-helix</packagereq>
       <packagereq type="optional">amarok-libvisual</packagereq>
       <packagereq type="optional">amarok-xine</packagereq>
