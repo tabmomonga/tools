@@ -3570,6 +3570,7 @@
       <packagereq type="default">ochusha</packagereq>
       <packagereq type="default">sylpheed</packagereq>
       <packagereq type="default">thunderbird</packagereq>
+      <packagereq type="optional">totem-mozilla-plugin</packagereq>
       <packagereq type="default">xchat</packagereq>
     </packagelist>
   </group>
