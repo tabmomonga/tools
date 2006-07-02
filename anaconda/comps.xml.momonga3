@@ -3567,6 +3567,7 @@
       <packagereq type="default">mozilla-extensions-prefbar</packagereq>
       <packagereq type="default">mozilla-language-pack-japanese</packagereq>
       <packagereq type="default">mozilla-mail</packagereq>
+      <packagereq type="default">mozilla-psm</packagereq>
       <packagereq type="optional">mozplugger</packagereq>
       <packagereq type="default">ochusha</packagereq>
       <packagereq type="default">sylpheed</packagereq>
