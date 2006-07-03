@@ -4215,6 +4215,13 @@
       <packagereq type="default">Canna</packagereq>
       <packagereq type="default">anthy</packagereq>
       <packagereq type="conditional" requires="gtk+-common">honoka</packagereq>
+      <packagereq type="conditional" requires="gtk+-common">honoka-plugin-anthy</packagereq>
+      <packagereq type="conditional" requires="gtk+-common">honoka-plugin-ascii</packagereq>
+      <packagereq type="conditional" requires="gtk+-common">honoka-plugin-kanainput</packagereq>
+      <packagereq type="conditional" requires="gtk+-common">honoka-plugin-prime</packagereq>
+      <packagereq type="conditional" requires="gtk+-common">honoka-plugin-romkan</packagereq>
+      <packagereq type="conditional" requires="gtk+-common">honoka-plugin-simpleprediction</packagereq>
+      <packagereq type="conditional" requires="gtk+-common">honoka-plugin-skkdic</packagereq>
       <packagereq type="conditional" requires="gtk+-common">iiimf</packagereq>
       <packagereq type="conditional" requires="gtk+-common">iiimf-doc</packagereq>
       <packagereq type="conditional" requires="gtk+-common">iiimf-skk</packagereq>
