@@ -3794,6 +3794,7 @@
     <langonly>gu</langonly>
     <packagelist>
       <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-gu_IN</packagereq>
+      <packagereq type="mandatory">truetype-fonts-gujarati</packagereq>
       <packagereq type="conditional" requires="kdelibs">scim-qtimm</packagereq>
       <packagereq type="conditional" requires="kdelibs">uim-qtimmodule</packagereq>
     </packagelist>
@@ -3877,6 +3878,7 @@
       <packagereq type="conditional" requires="kdelibs">kde-i18n-Hindi</packagereq>
       <packagereq type="conditional" requires="koffice-core">koffice-l10n-Hindi</packagereq>
       <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-hi_IN</packagereq>
+      <packagereq type="mandatory">truetype-fonts-hindi</packagereq>
       <packagereq type="conditional" requires="kdelibs">scim-qtimm</packagereq>
       <packagereq type="conditional" requires="kdelibs">uim-qtimmodule</packagereq>
     </packagelist>
@@ -6353,6 +6355,7 @@
     <packagelist>
       <packagereq type="conditional" requires="kdelibs">kde-i18n-Punjabi</packagereq>
       <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-pa_IN</packagereq>
+      <packagereq type="mandatory">truetype-fonts-punjabi</packagereq>
       <packagereq type="conditional" requires="kdelibs">scim-qtimm</packagereq>
       <packagereq type="conditional" requires="kdelibs">uim-qtimmodule</packagereq>
     </packagelist>
@@ -7446,6 +7449,7 @@
     <packagelist>
       <packagereq type="conditional" requires="kdelibs">kde-i18n-Tamil</packagereq>
       <packagereq type="conditional" requires="koffice-core">koffice-l10n-Tamil</packagereq>
+      <packagereq type="mandatory">truetype-fonts-tamil</packagereq>
       <packagereq type="conditional" requires="kdelibs">scim-qtimm</packagereq>
       <packagereq type="conditional" requires="kdelibs">uim-qtimmodule</packagereq>
     </packagelist>
