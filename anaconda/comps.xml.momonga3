@@ -626,6 +626,7 @@
       <packagereq type="optional">netconfig</packagereq>
       <packagereq type="default">nfs-utils</packagereq>
       <packagereq type="default">nss_ldap</packagereq>
+      <packagereq type="optional">ntfsprogs</packagereq>
       <packagereq type="mandatory">ntsysv</packagereq>
       <packagereq type="default">openssh-clients</packagereq>
       <packagereq type="default">openssh-server</packagereq>
@@ -1677,7 +1678,8 @@
       <packagereq type="default">libogg-devel</packagereq>
       <packagereq type="default">libselinux-devel</packagereq>
       <packagereq type="mandatory">libtermcap-devel</packagereq>
-      <packagereq type="optional">libusb-devel</packagereq>
+      <packagereq type="default">libtheora-devel</packagereq>
+      <packagereq type="default">libusb-devel</packagereq>
       <packagereq type="default">libuser-devel</packagereq>
       <packagereq type="default">libvorbis-devel</packagereq>
       <packagereq type="default">libxml2-devel</packagereq>
@@ -3150,6 +3152,7 @@
       <packagereq type="default">hal-devel</packagereq>
       <packagereq type="mandatory">libIDL-devel</packagereq>
       <packagereq type="default">libart_lgpl-devel</packagereq>
+      <packagereq type="default">libbeagle-devel</packagereq>
       <packagereq type="mandatory">libbonobo-devel</packagereq>
       <packagereq type="mandatory">libbonoboui-devel</packagereq>
       <packagereq type="mandatory">libglade-devel</packagereq>
@@ -3168,6 +3171,7 @@
       <packagereq type="mandatory">linc-devel</packagereq>
       <packagereq type="default">mozilla-devel</packagereq>
       <packagereq type="mandatory">pango-devel</packagereq>
+      <packagereq type="default">poppler-devel</packagereq>
       <packagereq type="default">pygtk-devel</packagereq>
     </packagelist>
   </group>
@@ -4664,6 +4668,7 @@
       <packagereq type="default">sylpheed</packagereq>
       <packagereq type="optional">uim-qt</packagereq>
       <packagereq type="optional">uim-qtimmodule</packagereq>
+      <packagereq type="default">unixODBC-kde</packagereq>
       <packagereq type="default">xine-lib-alsa</packagereq>
       <packagereq type="default">xine-lib-arts</packagereq>
       <packagereq type="default">xine-lib-esd</packagereq>
@@ -4792,25 +4797,40 @@
     <default>false</default>
     <uservisible>true</uservisible>
     <packagelist>
+      <packagereq type="default">ImageMagick-devel</packagereq>
       <packagereq type="default">OpenEXR-devel</packagereq>
       <packagereq type="default">PyQt</packagereq>
+      <packagereq type="default">anthy-devel</packagereq>
       <packagereq type="mandatory">arts-devel</packagereq>
       <packagereq type="mandatory">arts-artsc-devel</packagereq>
+      <packagereq type="default">aspell-devel</packagereq>
       <packagereq type="default">audiofile-devel</packagereq>
+      <packagereq type="default">avahi-qt3-devel</packagereq>
       <packagereq type="mandatory">cdparanoia-devel</packagereq>
       <packagereq type="mandatory">cups-devel</packagereq>
       <packagereq type="default">dbus-qt</packagereq>
       <packagereq type="default">desktop-file-utils</packagereq>
+      <packagereq type="default">docbook-style-dsssl</packagereq>
       <packagereq type="default">exscalibar-devel</packagereq>
       <packagereq type="default">faac-devel</packagereq>
       <packagereq type="default">ffmpeg-devel</packagereq>
+      <packagereq type="mandatory">fontconfig-devel</packagereq>
+      <packagereq type="default">fribidi-devel</packagereq>
       <packagereq type="default">gamin-devel</packagereq>
+      <packagereq type="default">ghostscript-devel</packagereq>
+      <packagereq type="default">gnupg2</packagereq>
+      <packagereq type="default">gpgme-devel</packagereq>
       <packagereq type="default">gstreamer-devel</packagereq>
       <packagereq type="default">gst-plugins-devel</packagereq>
       <packagereq type="default">gstreamer010-devel</packagereq>
       <packagereq type="default">gst-plugins-base-devel</packagereq>
       <packagereq type="default">hal-devel</packagereq>
+      <packagereq type="default">honoka-devel</packagereq>
       <packagereq type="default">id3lib-devel</packagereq>
+      <packagereq type="default">imlib-devel</packagereq>
+      <packagereq type="default">imlib2-devel</packagereq>
+      <packagereq type="default">jack-devel</packagereq>
+      <packagereq type="default">jadetex</packagereq>
       <packagereq type="default">kdbg</packagereq>
       <packagereq type="default">kdebindings</packagereq>
       <packagereq type="default">kdebindings-devel</packagereq>
@@ -4819,27 +4839,49 @@
       <packagereq type="default">kdesdk-devel</packagereq>
       <packagereq type="default">kdevelop</packagereq>
       <packagereq type="default">koffice-devel</packagereq>
+      <packagereq type="default">ladspa-devel</packagereq>
+      <packagereq type="default">lcms-devel</packagereq>
       <packagereq type="default">libakode-devel</packagereq>
       <packagereq type="default">libart_lgpl-devel</packagereq>
+      <packagereq type="default">libbeagle-devel</packagereq>
+      <packagereq type="default">libexif-devel</packagereq>
       <packagereq type="default">libgphoto2-devel</packagereq>
       <packagereq type="default">libgpod-devel</packagereq>
+      <packagereq type="default">libidn-devel</packagereq>
       <packagereq type="default">libifp-devel</packagereq>
       <packagereq type="default">libkexif-devel</packagereq>
       <packagereq type="default">libkipi-devel</packagereq>
+      <packagereq type="default">liblrdf-devel</packagereq>
       <packagereq type="default">libmusicbrainz-devel</packagereq>
       <packagereq type="default">libnjb-devel</packagereq>
+      <packagereq type="default">libpqxx-devel</packagereq>
+      <packagereq type="default">libsamplerate-devel</packagereq>
       <packagereq type="default">libsndfile-devel</packagereq>
       <packagereq type="default">libtunepimp-devel</packagereq>
       <packagereq type="default">libvisual-devel</packagereq>
+      <packagereq type="default">libwpd-devel</packagereq>
       <packagereq type="mandatory">libxslt-devel</packagereq>
+      <packagereq type="default">mjpegtools-devel</packagereq>
+      <packagereq type="default">mysql-devel</packagereq>
+      <packagereq type="default">net-snmp-devel</packagereq>
+      <packagereq type="default">openslp-devel</packagereq>
       <packagereq type="mandatory">pilot-link-devel</packagereq>
+      <packagereq type="default">poppler-devel</packagereq>
+      <packagereq type="default">postgresql-devel</packagereq>
+      <packagereq type="default">qscintilla-devel</packagereq>
       <packagereq type="default">qtruby</packagereq>
+      <packagereq type="default">qt-MySQL</packagereq>
+      <packagereq type="default">qt-PostgreSQL</packagereq>
       <packagereq type="default">qt-designer</packagereq>
       <packagereq type="mandatory">qt-devel</packagereq>
       <packagereq type="mandatory">sane-backends-devel</packagereq>
+      <packagereq type="default">scim-devel</packagereq>
+      <packagereq type="default">scons</packagereq>
       <packagereq type="default">scribus-devel</packagereq>
       <packagereq type="default">sip</packagereq>
+      <packagereq type="default">subversion-devel</packagereq>
       <packagereq type="default">taglib-devel</packagereq>
+      <packagereq type="default">wv2-devel</packagereq>
       <packagereq type="default">xmms-devel</packagereq>
     </packagelist>
   </group>
@@ -8181,6 +8223,7 @@
       <packagereq type="default">Xaw3d-devel</packagereq>
       <packagereq type="default">freetype2-devel</packagereq>
       <packagereq type="default">gd-devel</packagereq>
+      <packagereq type="default">glut-devel</packagereq>
       <packagereq type="optional">icon-slicer</packagereq>
       <packagereq type="optional">icon-naming-utils</packagereq>
       <packagereq type="default">libdrm-devel</packagereq>
