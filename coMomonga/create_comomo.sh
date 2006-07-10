@@ -50,10 +50,14 @@ mount -o loop -t ext2 $IMAGEFILE $REPOBASE
 
 
 echo "Making directories"
-mkdir -p $REPOBASE/dev $REPOBASE/etc  $REPOBASE/dev/pts
+# mkdir -p $REPOBASE/dev $REPOBASE/etc  $REPOBASE/dev/pts
+mkdir -p $REPOBASE/dev $REPOBASE/etc 
+
+echo "Making /dev/console"
+mknod -m 600 $REPOBASE/dev/console c 5 1
 
 echo "Making /dev/null"
-mknod $REPOBASE/dev/null c 1 3
+mknod -m 666 $REPOBASE/dev/null c 1 3
 
 # echo "Makeing /dev/cobdX"
 # for num in 0 1 2 3 4 5 6 7 8 9
@@ -80,6 +84,9 @@ do
 	mknod $REPOBASE/etc/udev/devices/tty$num c 4 $num
 done
 
+echo "Makeing /etc/udev/devices/ptmx"
+mknod -m 666 $REPOBASE/etc/udev/devices/ptmx c 5 2
+
 # echo "Makeing /dev/pts/X"
 # for num in 0 1 2 3 4 5 6 7 8 9
 # do
@@ -91,6 +98,10 @@ mknod -m 644 $REPOBASE/etc/udev/devices/random c 1 8
 
 echo "Makeing /etc/udev/devices/urandom"
 mknod -m 644 $REPOBASE/etc/udev/devices/urandom c 1 9
+
+echo "Makeing /etc/udev/devices/urandom"
+# chown -v root:tty $REPOBASE/etc/udev/devices/{console,ptmx,tty*}
+chown -v root:tty $REPOBASE/etc/udev/devices/{ptmx,tty*}
 
 echo "Creating /etc/fstab"
 cat << EOF > $REPOBASE/etc/fstab

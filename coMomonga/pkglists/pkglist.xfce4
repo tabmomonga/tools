@@ -3,11 +3,8 @@ dbh
 gtk-xfce-engine
 hicolor-icon-theme
 libxfce4mcs
-libxfce4mcs-devel
 libxfce4util
-libxfce4util-devel
 libxfcegui4
-libxfcegui4-devel
 psutils
 xfcalendar
 xfce-mcs-manager

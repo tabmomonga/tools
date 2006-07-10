@@ -41,7 +41,6 @@ elfutils-libelf
 eject
 ethtool
 expat
-fbset
 file
 filesystem
 findutils
@@ -59,12 +58,10 @@ gnutls
 gpm
 grep
 groff
-grub
 gzip
 hal
 hdparm
 hicolor-icon-theme
-hotplug
 hwdata
 indexhtml
 info
@@ -74,7 +71,6 @@ iputils
 ipv6calc
 jed
 jed-common
-jfbterm
 jfsutils
 jwhois
 kbd
@@ -105,7 +101,6 @@ module-init-tools
 momonga-logos
 momonga-release
 momonga-rpmmacros
-mph
 mt-st
 mtools
 ncurses
@@ -168,10 +163,11 @@ setup
 setuptool
 shadow-utils
 slang
-sqlite3
+sqlite
 stone
 strace
 stunnel
+subversion
 sudo
 sysklogd
 system-config-keyboard

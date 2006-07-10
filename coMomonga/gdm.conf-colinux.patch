@@ -1,5 +1,5 @@
---- ./defaults.conf.orig	2006-06-11 23:10:30.000000000 +0900
-+++ ./defaults.conf	2006-06-11 23:11:34.000000000 +0900
+--- ./defaults.conf.orig	2006-06-25 22:07:14.000000000 +0900
++++ ./defaults.conf	2006-06-25 22:06:07.000000000 +0900
 @@ -97,7 +97,7 @@
  
  # To try to kill all clients started at greeter time or in the Init script.
@@ -9,15 +9,21 @@
  LogDir=/var/log/gdm
  # You should probably never change this value unless you have a weird setup.
  PidFile=/var/run/gdm.pid
-@@ -206,7 +206,7 @@
+@@ -199,12 +199,12 @@
+ [security]
+ # Allow root to login.  It makes sense to turn this off for kiosk use, when
+ # you want to minimize the possibility of break in.
+-AllowRoot=false
++AllowRoot=true
+ # Allow login as root via XDMCP.  This value will be overridden and set to
+ # false if the /etc/default/login file exists and contains
+ # "CONSOLE=/dev/login", and set to true if the /etc/default/login file exists
  # and contains any other value or no value for CONSOLE.
- AllowRemoteRoot=false
+-AllowRemoteRoot=false
++AllowRemoteRoot=true
  # This will allow remote timed login.
--AllowRemoteAutoLogin=false
-+AllowRemoteAutoLogin=true
+ AllowRemoteAutoLogin=false
  # 0 is the most restrictive, 1 allows group write permissions, 2 allows all
- # write permissions.
- RelaxPermissions=0
 @@ -253,7 +253,7 @@
  # access is another alternative but not the safest.  Firewalling port 177 is
  # the safest if you wish to have xdmcp on.  Read the manual for more notes on
