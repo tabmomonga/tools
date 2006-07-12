@@ -7123,6 +7123,7 @@
       <packagereq type="optional">mythtv-frontend</packagereq>
       <packagereq type="optional">mythtv-backend</packagereq>
       <packagereq type="optional">rosegarden</packagereq>
+      <packagereq type="default">rhythmbox</packagereq>
       <packagereq type="default">sound-juicer</packagereq>
       <packagereq type="mandatory">sox</packagereq>
       <packagereq type="default">totem</packagereq>
