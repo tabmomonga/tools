@@ -4,6 +4,15 @@
 # Your kernel image has to be in $ROOT/boot/vmlinuz or $ROOT/vmlinuz
 # 
 
+if [ ! $# = 2 ]; then
+        echo "$0: [live env root dir] [kernel version] [output iso image]"
+        exit 1
+fi
+export ROOT=$1
+export KERNEL=$2
+#ISOFILE=$3
+
+
 export PATH=.:./tools:../tools:/usr/sbin:/usr/bin:/sbin:/bin:/
 
 CHANGEDIR="`dirname \`readlink -f $0\``"
@@ -15,7 +24,8 @@ cd $CHANGEDIR
 
 ./install $ROOT
 
-VMLINUZ=$ROOT/boot/vmlinuz-2.6.15-5m
+VMLINUZ=$ROOT/boot/vmlinuz-$KERNEL
+#VMLINUZ=$ROOT/boot/vmlinuz-2.6.15-5m
 #VMLINUZ=$ROOT/boot/vmlinuz-2.6.15-0.7.7m
 if [ -L "$VMLINUZ" ]; then VMLINUZ=`readlink -f $VMLINUZ`; fi
 if [ "`ls $VMLINUZ 2>/dev/null`" = "" ]; then echo "cannot find $VMLINUZ"; exit 1; fi
@@ -31,7 +41,7 @@ mkdir -p $CDDATA/optional
 mkdir -p $CDDATA/rootcopy
 
 echo "copying cd-root to $CDDATA, using kernel from $VMLINUZ"
-echo "Using kernel modules from /lib/modules/$KERNEL"
+echo "Using kernel modules from $ROOT/lib/modules/$KERNEL"
 cp -R cd-root/* $CDDATA
 cp -R tools $CDDATA
 cp -R info/* $CDDATA

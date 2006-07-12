@@ -1,5 +1,5 @@
---- halt.org	2006-02-12 00:09:43.000000000 +0900
-+++ halt	2006-02-25 01:51:45.000000000 +0900
+--- /etc/rc.d/init.d/halt.org	2006-02-12 00:09:43.000000000 +0900
++++ /etc/rc.d/init.d/halt	2006-02-25 01:51:45.000000000 +0900
 @@ -126,74 +126,6 @@
  [ -x /sbin/quotaoff ] && runcmd $"Turning off quotas: " /sbin/quotaoff -aug
  
@@ -75,8 +75,8 @@
  
  # remove the crash indicator flag
  rm -f /.autofsck
---- netfs.org	2006-02-12 00:09:43.000000000 +0900
-+++ netfs	2006-02-25 01:54:23.000000000 +0900
+--- /etc/rc.d/init.d/netfs.org	2006-02-12 00:09:43.000000000 +0900
++++ /etc/rc.d/init.d/netfs	2006-02-25 01:54:23.000000000 +0900
 @@ -88,32 +88,6 @@
  	action $"Mounting other filesystems: " mount -a -t nonfs,nfs4,smbfs,cifs,ncpfs,gfs
  	;;

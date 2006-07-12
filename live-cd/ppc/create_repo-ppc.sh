@@ -136,9 +136,11 @@ chmod 755 $REPOBASE/etc/init.d/kudzu
 
 echo "Modifying /etc/init.d/halt, /etc/init.d/netfs"
 cp shutdown.patch $REPOBASE/tmp
+cp sysinit.patch $REPOBASE/tmp
 (
 	cd $REPOBASE
 	patch -p1 < $REPOBASE/tmp/shutdown.patch
+	patch -p1 < $REPOBASE/tmp/sysinit.patch
 )
 
 
