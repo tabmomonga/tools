@@ -1067,6 +1067,7 @@
       <packagereq type="conditional" requires="kdelibs">kde-i18n-Chinese</packagereq>
       <packagereq type="conditional" requires="kdelibs">kde-i18n-Chinese-Big5</packagereq>
       <packagereq type="conditional" requires="koffice-core">koffice-l10n-Chinese-Simplified</packagereq>
+      <packagereq type="conditional" requires="koffice-core">koffice-l10n-Chinese-Traditional</packagereq>
       <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-zh_CN</packagereq>
       <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-zh_TW</packagereq>
       <packagereq type="mandatory">truetype-fonts-zh_CN</packagereq>
