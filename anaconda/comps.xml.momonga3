@@ -3550,7 +3550,7 @@
       <packagereq type="default">ekiga</packagereq>
       <packagereq type="default">epiphany</packagereq>
       <packagereq type="default">epiphany-extensions</packagereq>
-      <packagereq type="default">evolution</packagereq>
+      <packagereq type="optional">evolution</packagereq>
       <packagereq type="default">firefox</packagereq>
       <packagereq type="optional">firefox-plugin-mozplugger</packagereq>
       <packagereq type="default">gaim</packagereq>
