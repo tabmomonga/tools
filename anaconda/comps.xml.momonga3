@@ -5952,7 +5952,6 @@
       <packagereq type="default">openoffice.org-writer</packagereq>
       <packagereq type="default">openoffice.org-xsltfilter</packagereq>
       <packagereq type="optional">scribus</packagereq>
-      <packagereq type="default">youtranslate</packagereq>
       <packagereq type="optional">xdvik</packagereq>
       <packagereq type="optional">xpdf</packagereq>
     </packagelist>
