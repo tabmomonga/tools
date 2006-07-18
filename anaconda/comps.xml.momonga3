@@ -5954,6 +5954,7 @@
       <packagereq type="optional">scribus</packagereq>
       <packagereq type="optional">xdvik</packagereq>
       <packagereq type="optional">xpdf</packagereq>
+      <packagereq type="default">youtranslate</packagereq>
     </packagelist>
   </group>
 
