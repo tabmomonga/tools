@@ -7416,7 +7416,7 @@
       <packagereq type="default">bluez-pin</packagereq>
       <packagereq type="default">ckermit</packagereq>
       <packagereq type="optional">createrepo</packagereq>
-      <packagereq type="optional">ethereal</packagereq>
+      <packagereq type="optional">wireshark</packagereq>
       <packagereq type="optional">festival</packagereq>
       <packagereq type="optional">gnome-nettool</packagereq>
       <packagereq type="optional">mrtg</packagereq>
