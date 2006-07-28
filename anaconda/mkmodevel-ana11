@@ -253,7 +253,7 @@ if MK_FULL
   # 14-1. 2≤ÛÃ‹§Œcreaterepo (for the media)
   print "Generating repodata (second time)- "
   STDOUT.flush
-  cd_discinfo = `perl -n -e 'chomp;print;exit 1;' #{DEV_DIR}/#{ARCH}/os-disc1/.discinfo`
+  cd_discinfo = open("#{DEV_DIR}/#{ARCH}/os-disc1/.discinfo"){|f| f.gets.chomp}
   do_cmd "sudo createrepo --outputdir=#{DEV_DIR}/#{ARCH}/os-disc1 --baseurl=\"media://#{cd_discinfo}\" -g #{COMPS_XML} --split #{DEV_DIR}/#{ARCH}/os-disc?"
   do_cmd "rm -rf #{DEV_DIR}/#{ARCH}/.olddata/"
   print "done\n"
