@@ -7116,6 +7116,7 @@
       <packagereq type="optional">kaffeine</packagereq>
       <packagereq type="optional">kdemultimedia</packagereq>
       <packagereq type="default">kino</packagereq>
+      <packagereq type="default">last-exit</packagereq>
       <packagereq type="optional">mikmod</packagereq>
       <packagereq type="default">mkisofs</packagereq>
       <packagereq type="optional">mplayer</packagereq>
@@ -7140,9 +7141,12 @@
       <packagereq type="optional">xine-lib-docs</packagereq>
       <packagereq type="default">xine-lib-esd</packagereq>
       <packagereq type="default">xine-lib-flac</packagereq>
+      <packagereq type="optional">xine-lib-gdk-pixbuf</packagereq>
+      <packagereq type="optional">xine-lib-gnomevfs</packagereq>
       <packagereq type="default">xine-lib-oggvorbis</packagereq>
       <packagereq type="default">xine-lib-oss</packagereq>
       <packagereq type="optional">xine-lib-sdl</packagereq>
+      <packagereq type="optional">xine-lib-smb</packagereq>
       <packagereq type="default">xine-lib-w32dll</packagereq>
       <packagereq type="default">xine-lib-xv</packagereq>
       <packagereq type="default">xmms</packagereq>
