@@ -6,7 +6,7 @@ WORK_DIR = "/dist/Current"
 PROG = $0
 ARCH = "i686"
 SUBARCH = "i686"
-SPLITNUM = 5
+SPLITNUM = 6
 work_dir = File.expand_path WORK_DIR
 LOG = "#{work_dir}/#{PROG.split(/\//)[-1]}.log"
 MOMONGA = "http://dist.momonga-linux.org/pub/momonga/development"
@@ -16,7 +16,7 @@ PKGORDER = "/usr/lib/anaconda-runtime/pkgorder"
 GETFULLCOMPS = "~/bin/getfullcomps.py"
 MAKESTAMP = "sudo /usr/lib/anaconda-runtime/makestamp.py"
 # BUILDINSTALL = "sudo /usr/lib/anaconda-runtime/buildinstall"
-BUILDINSTALL = "sudo ./buildinstall"
+BUILDINSTALL = "LANG=C sudo ./buildinstall"
 SPLITTREE = "sudo /usr/lib/anaconda-runtime/splittree.py"
 CHKRPMDUP = "~/bin/chkrpmdup"
 CHKCOMPS = "~/bin/chkcomps"
@@ -193,6 +193,7 @@ ENV["LD_LIBRARY_PATH"] = "/usr/lib:/usr/X11R6/lib"
 print "Generating repodata - "
 STDOUT.flush
 do_cmd "createrepo -g #{COMPS_XML} #{TREE_DIR}" 
+do_cmd "rm -rf #{DEV_DIR}/#{ARCH}/.olddata"
 print "done\n"
 
 #  9. hdlist の作成
@@ -200,6 +201,16 @@ print "done\n"
 # STDOUT.flush
 # do_cmd "#{GENHDLIST} --productpath Momonga #{TREE_DIR}"
 # print "done\n"
+
+## 10. pkgorder の作成
+#print "Generating pkgorder - "
+#STDOUT.flush
+#cmd  = PKGORDER + " "
+#cmd += TREE_DIR + " "
+#cmd += "#{ARCH} "
+#cmd += "Momonga"
+#do_cmd cmd
+#print "done\n"
 
 # 15. buildinstall の実行
 print "Doing buildinstall - "
@@ -224,16 +235,6 @@ unless File.exist? TREE_DIR + "/isolinux/isolinux.bin"
 end
 print "done\n"
 
-# 10. pkgorder の作成
-print "Generating pkgorder - "
-STDOUT.flush
-cmd  = PKGORDER + " "
-cmd += TREE_DIR + " "
-cmd += "#{ARCH} "
-cmd += "Momonga"
-do_cmd cmd
-print "done\n"
-
 if MK_FULL
   # 14. CD用分割ツリーの作成
   print "Splitting tree for CD - "
@@ -248,6 +249,15 @@ if MK_FULL
   cmd += "--productpath=Momonga"
   do_cmd cmd
   print "done\n"
+
+  # 14-1. 2回目のcreaterepo (for the media)
+  print "Generating repodata (second time)- "
+  STDOUT.flush
+  cd_discinfo = `perl -n -e 'chomp;print;exit 1;' #{DEV_DIR}/#{ARCH}/os-disc1/.discinfo`
+  do_cmd "sudo createrepo --outputdir=#{DEV_DIR}/#{ARCH}/os-disc1 --baseurl=\"media://#{cd_discinfo}\" -g #{COMPS_XML} --split #{DEV_DIR}/#{ARCH}/os-disc?"
+  do_cmd "rm -rf #{DEV_DIR}/#{ARCH}/.olddata/"
+  print "done\n"
+
 end
 
 ## 13. hdlist の更新
@@ -281,25 +291,25 @@ end
 # f.close
 # File.delete COMPS_XML
 # File.rename COMPS_XML + ".new", COMPS_XML
-print "done\n"
+# print "done\n"
 
-# 11. .discinfo の作成
-print "Generating .discinfo - "
-STDOUT.flush
-cmd  = MAKESTAMP + " "
-cmd += "--releasestr='Momonga Linux #{VER}' "
-cmd += "--arch=#{ARCH} "
-cmd += "--discNum='1"
-for n in 2..SPLITNUM
-  cmd += ",#{n}" 
-end
-cmd += "' "
-cmd += "--baseDir=Momonga/base "
-cmd += "--packagesDir=Momonga/RPMS "
-cmd += "--pixmapsDir=Momonga/pixmaps "
-cmd += "--outfile=#{TREE_DIR}/.discinfo"
-do_cmd cmd
-print "done\n"
+## 11. .discinfo の作成
+#print "Generating .discinfo - "
+#STDOUT.flush
+#cmd  = MAKESTAMP + " "
+#cmd += "--releasestr='Momonga Linux #{VER}' "
+#cmd += "--arch=#{ARCH} "
+#cmd += "--discNum='1"
+#for n in 2..SPLITNUM
+#  cmd += ",#{n}" 
+#end
+#cmd += "' "
+#cmd += "--baseDir=Momonga/base "
+#cmd += "--packagesDir=Momonga/RPMS "
+#cmd += "--pixmapsDir=Momonga/pixmaps "
+#cmd += "--outfile=#{TREE_DIR}/.discinfo"
+#do_cmd cmd
+#print "done\n"
 
 if MK_FULL
   # 17. DVD iso image 作成
