@@ -3561,6 +3561,7 @@
       <packagereq type="optional">jd</packagereq>
       <packagereq type="optional">kaffeine-firefox-plugin</packagereq>
       <packagereq type="optional">kaffeine-mozilla-plugin</packagereq>
+      <packagereq type="optional">kasablanca</packagereq>
       <packagereq type="optional">kita</packagereq>
       <packagereq type="optional">kdewebdev</packagereq>
       <packagereq type="default">loqui</packagereq>
@@ -4619,6 +4620,7 @@
       <packagereq type="optional">kaffeine-firefox-plugin</packagereq>
       <packagereq type="optional">kaffeine-mozilla-plugin</packagereq>
       <packagereq type="default">kannadic</packagereq>
+      <packagereq type="default">kasablanca</packagereq>
       <packagereq type="default">kcpuload</packagereq>
       <packagereq type="default">kdeaccessibility</packagereq>
       <packagereq type="default">kdeaddons</packagereq>
