@@ -2449,6 +2449,8 @@
       <packagereq type="default">gnuplot</packagereq>
       <packagereq type="default">lapack</packagereq>
       <packagereq type="default">maxima</packagereq>
+      <packagereq type="default">maxima-exec_clisp</packagereq>
+      <packagereq type="default">maxima-exec_cmucl</packagereq>
       <packagereq type="default">maxima-xmaxima</packagereq>
       <packagereq type="default">octave</packagereq>
     </packagelist>
