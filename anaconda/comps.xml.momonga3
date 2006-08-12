@@ -8404,6 +8404,7 @@
       <packagereq type="optional">momonga-xgl-settings</packagereq>
       <packagereq type="default">openssh-askpass</packagereq>
       <packagereq type="default">openssh-askpass-gnome</packagereq>
+      <packagereq type="default">opfc-ModuleHP</packagereq>
       <packagereq type="default">rhgb</packagereq>
       <packagereq type="default">sdr</packagereq>
       <packagereq type="default">system-config-date</packagereq>
