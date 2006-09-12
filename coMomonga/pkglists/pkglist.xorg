@@ -12,7 +12,6 @@ dbus-x11
 desktop-file-utils
 emacs
 esound
-ethereal
 faad2
 fam
 firefox
@@ -97,7 +96,6 @@ suikyo-ruby
 sylpheed
 system-config-date
 system-config-display
-system-config-mouse
 system-config-network
 system-config-soundcard
 thunderbird
@@ -107,11 +105,9 @@ urw-fonts
 usolame
 vnc
 xchat
-xinitrc
 xloadimage
 xml-common
 xmms
-xorg-x11-deprecated-libs
 xpdf-config
 xpdf
 xscreensaver
@@ -156,3 +152,4 @@ xpdf
 xpdf-config
 xscreensaver-base
 vim-X11
+wireshark

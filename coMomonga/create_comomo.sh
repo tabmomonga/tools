@@ -43,10 +43,10 @@ if [ ! -f $PKGLISTS_BASE ]; then
 fi
 
 echo "Format image file"
-mkfs.ext2 -j $IMAGEFILE
+mkfs.reiserfs -f $IMAGEFILE
 
 echo "Mount image file"
-mount -o loop -t ext2 $IMAGEFILE $REPOBASE
+mount -o loop -t reiserfs $IMAGEFILE $REPOBASE
 
 
 echo "Making directories"
@@ -72,17 +72,23 @@ do
 	mknod $REPOBASE/etc/udev/devices/cobd$num b 117 $num
 done
 
+# echo "Makeing /dev/tty0"
+# mknod $REPOBASE/dev/tty0 c 4 0
+
 # echo "Makeing /dev/ttyX"
 # for num in 0 1 2 3 4 5 6 7 8 9
 # do
 # 	mknod $REPOBASE/dev/tty$num c 4 $num
 # done
 
-echo "Makeing /etc/udev/devices/ttyX"
-for num in 0 1 2 3 4 5 6 7 8 9
-do
-	mknod $REPOBASE/etc/udev/devices/tty$num c 4 $num
-done
+# echo "Makeing /etc/udev/devices/tty0"
+mknod $REPOBASE/etc/udev/devices/tty0 c 4 0
+
+# echo "Makeing /etc/udev/devices/ttyX"
+# for num in 0 1 2 3 4 5 6 7 8 9
+# do
+# 	mknod $REPOBASE/etc/udev/devices/tty$num c 4 $num
+# done
 
 echo "Makeing /etc/udev/devices/ptmx"
 mknod -m 666 $REPOBASE/etc/udev/devices/ptmx c 5 2
@@ -102,10 +108,11 @@ mknod -m 644 $REPOBASE/etc/udev/devices/urandom c 1 9
 echo "Makeing /etc/udev/devices/urandom"
 # chown -v root:tty $REPOBASE/etc/udev/devices/{console,ptmx,tty*}
 chown -v root:tty $REPOBASE/etc/udev/devices/{ptmx,tty*}
+# chown -v root:tty $REPOBASE/etc/udev/devices/ptmx
 
 echo "Creating /etc/fstab"
 cat << EOF > $REPOBASE/etc/fstab
-/dev/cobd0  /               ext2            defaults,noatime    1 1
+/dev/cobd0  /               reiserfs        defaults,noatime    1 1
 /dev/cobd1  swap            swap            defaults            0 0
 none        /dev/pts        devpts          gid=5,mode=620      0 0
 none        /proc           proc            defaults            0 0
@@ -273,6 +280,7 @@ fi
 # echo 'momonga ALL=(ALL) NOPASSWD: ALL' >> $REPOBASE/etc/sudoers
 
 echo "Disable unused startup daemons"
+/usr/sbin/chroot $REPOBASE chkconfig avahi-daemon off
 /usr/sbin/chroot $REPOBASE chkconfig firstboot off
 /usr/sbin/chroot $REPOBASE chkconfig smartd off
 /usr/sbin/chroot $REPOBASE chkconfig cpuspeed off

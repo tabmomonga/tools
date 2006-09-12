@@ -171,7 +171,6 @@ subversion
 sudo
 sysklogd
 system-config-keyboard
-system-config-mouse
 system-config-network-tui
 system-config-securitylevel-tui
 tar
