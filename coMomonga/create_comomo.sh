@@ -6,19 +6,21 @@ PKGLISTS_XFCE4=pkglists/pkglist.xfce4
 PKGLISTS_GNOME=pkglists/pkglist.gnome
 PKGLISTS_KDE=pkglists/pkglist.kde
 PKGLISTS_OOO=pkglists/pkglist.ooo
+PKGLISTS_RAILS=pkglists/pkglist.rails
 PKGLISTS_ADD=pkglists/pkglist.add
 IMAGEFILE=$1
 REPOBASE=$2
 SCRIPTBASE=`pwd`
 
 INSTALL_XORG=yes
-INSTALL_XFCE4=yes
-INSTALL_GNOME=no
+INSTALL_XFCE4=no
+INSTALL_GNOME=yes
+INSTALL_RAILS=yes
 INSTALL_KDE=no
 INSTALL_OOO=no
 
 XORG_LANG=ja_JP.EUC-JP
-XORG_SESSION=xfce4
+XORG_SESSION=gnome
 XORG_XIM=SCIM
 
 
@@ -165,6 +167,12 @@ if [ x$INSTALL_OOO = "xyes" -a -f $PKGLISTS_OOO ]; then
 	echo "Installing OpenOffice.org package"
 	yum -c $REPOBASE/etc/yum.conf.tmp -y --installroot=$REPOBASE install \
 	`cat $PKGLISTS_OOO`
+fi
+
+if [ x$INSTALL_RAILS = "xyes" -a -f $PKGLISTS_RAILS ]; then
+	echo "Installing Ruby on Rails package"
+	yum -c $REPOBASE/etc/yum.conf.tmp -y --installroot=$REPOBASE install \
+	`cat $PKGLISTS_RAILS`
 fi
 
 if [ -f $PKGLISTS_ADD ]; then
