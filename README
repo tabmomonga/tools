@@ -233,7 +233,6 @@ example.OmoiKondaraを pkgs以下に.OmoiKondara という名前でコピー。
 *updatespecdb
 == 非スクリプトファイル
 *ChangeLog
-*example.OmoiKondara2
 *Makefile
 *README.omokon-modoki
 *rpmvercmp.c
@@ -252,6 +251,8 @@ example.OmoiKondaraを pkgs以下に.OmoiKondara という名前でコピー。
 *OmoiKondara.test
 *OmoiKondara2
 *README.OmoiKondara2
+*example.OmoiKondara2
+*example.OmoiKondara.yaml
 
 == 使われないため、OBSOLETE送りにしたパッケージ
 == OmoiKondara3.rb
