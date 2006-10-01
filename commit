@@ -145,7 +145,7 @@ versioning_systems.each do |command|
     pkgnames=[]
     pkgs.each do |pkg|
       pkgnames << pkg[0]
-      svnlog += "== #{pkg[0]}==\n#{pkg[1].join}\n"
+      svnlog += "== #{pkg[0]} ==\n#{pkg[1].join}\n"
     end
 
     pid = Process.fork do
