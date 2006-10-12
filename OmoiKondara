@@ -1036,7 +1036,7 @@ Sourece/Patch/Icon タグで指定されているファイルをビルド
 
     if !$VERBOSEOUT then
       print "#{$hTAG['NAME']} "
-      print "-" * [29 - $hTAG['NAME'].length, 1].max, "> "
+      print "-" * [51 - $hTAG['NAME'].length, 1].max, "> "
     end
   end
 
@@ -1262,7 +1262,7 @@ rpm -ivh する関係上、sudo が password 無しで実行可能
 
     if !$VERBOSEOUT then
       print "\r#{pkg} "
-      print "-" * [29 - pkg.length, 1].max, "> "
+      print "-" * [51 - pkg.length, 1].max, "> "
       STDOUT.flush
     end
     ret = catch(:exit_buildme) do
