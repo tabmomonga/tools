@@ -1,5 +1,14 @@
---- ./defaults.conf.orig	2006-06-25 22:07:14.000000000 +0900
-+++ ./defaults.conf	2006-06-25 22:06:07.000000000 +0900
+--- ./defaults.conf.orig	2006-08-10 03:07:59.000000000 +0900
++++ ./defaults.conf	2006-10-14 19:31:48.000000000 +0900
+@@ -65,7 +65,7 @@
+ 
+ # The greeter for xdmcp logins, usually you want a less graphically intensive
+ # greeter here so it's better to leave this with gdmlogin
+-#RemoteGreeter=/usr/libexec/gdmlogin
++RemoteGreeter=/usr/libexec/gdmgreeter
+ 
+ # Launch the greeter with an additional list of colon separated GTK+ modules.
+ # This is useful for enabling additional feature support e.g. GNOME
 @@ -97,7 +97,7 @@
  
  # To try to kill all clients started at greeter time or in the Init script.

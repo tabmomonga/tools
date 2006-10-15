@@ -7,6 +7,7 @@ PKGLISTS_GNOME=pkglists/pkglist.gnome
 PKGLISTS_KDE=pkglists/pkglist.kde
 PKGLISTS_OOO=pkglists/pkglist.ooo
 PKGLISTS_RAILS=pkglists/pkglist.rails
+PKGLISTS_PERL=pkglists/pkglist.perl
 PKGLISTS_ADD=pkglists/pkglist.add
 IMAGEFILE=$1
 REPOBASE=$2
@@ -16,6 +17,7 @@ INSTALL_XORG=yes
 INSTALL_XFCE4=no
 INSTALL_GNOME=yes
 INSTALL_RAILS=yes
+INSTALL_PERL=yes
 INSTALL_KDE=no
 INSTALL_OOO=no
 
@@ -175,6 +177,12 @@ if [ x$INSTALL_RAILS = "xyes" -a -f $PKGLISTS_RAILS ]; then
 	`cat $PKGLISTS_RAILS`
 fi
 
+if [ x$INSTALL_PERL = "xyes" -a -f $PKGLISTS_PERL ]; then
+	echo "Installing Perl Packages"
+	yum -c $REPOBASE/etc/yum.conf.tmp -y --installroot=$REPOBASE install \
+	`cat $PKGLISTS_PERL`
+fi
+
 if [ -f $PKGLISTS_ADD ]; then
 	echo "Installing additional packages"
 	yum -c $REPOBASE/etc/yum.conf.tmp -y --installroot=$REPOBASE install \
@@ -327,6 +335,7 @@ tar zxvf vmlinux-modules.tar.gz -C $REPOBASE
 
 echo "Cleaning up"
 umount $REPOBASE/proc
+rm -rfv $REPOBASE/home/*
 rm -fv $REPOBASE/etc/yum.conf.tmp
 rm -rf $REPOBASE/etc/yum.repos.d.tmp
 find $REPOBASE -name "*.rpmorig" -exec rm -fv {} \;

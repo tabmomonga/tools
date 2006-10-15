@@ -4,9 +4,11 @@ at-spi
 atk
 audiofile
 battfink
+beagle
 bug-buddy
 cairo
 control-center
+deskbar-applet
 desktop-file-utils
 eel
 eog
@@ -31,6 +33,9 @@ gnome-mime-data
 gnome-netstatus
 gnome-nettool
 gnome-panel
+gnome-python-desktop-applet
+gnome-python-gconf
+gnome-screensaver
 gnome-session
 gnome-spell
 gnome-system-monitor
@@ -63,6 +68,7 @@ nautilus
 nautilus-cd-burner
 pango
 pwlib
+pyparted
 redhat-artwork
 scrollkeeper
 shared-mime-info
