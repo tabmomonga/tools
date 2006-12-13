@@ -120,6 +120,7 @@ ntsysv
 openldap
 openssh
 openssh-clients
+openssh-server
 openssl
 p7zip
 parted
