@@ -17,6 +17,7 @@ class spec_contents:
                     self.Tag[key] = line.split(':')[1].lstrip().rstrip()
 
 if __name__ == "__main__":
-    content = spec_contents("/opt/trunk/pkgs/autoconf/autoconf.spec")
+    import sys
+    content = spec_contents(sys.argv[1])
     content.parse_spec()
     print content.Tag
