@@ -1,0 +1,11 @@
+2007-01-05  Nishio Futoshi  <fut_nis@d3.dion.ne.jp>
+
+	* src/mo_specparse.py: new file
+
+2007-01-04  Nishio Futoshi  <fut_nis@d3.dion.ne.jp>
+	* src/DEFFILE.py.in: new file
+	* src/mo_listpackage.py: Ditto
+	* src/mo_option.py: Ditto
+	* src/mo_packages.py: Ditto
+	* README: Ditto
+
