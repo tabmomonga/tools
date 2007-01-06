@@ -1,10 +1,12 @@
 #! /bin/env python
+import rpm
 
 class spec_contents:
     def __init__(self, specfile):
         self.specfile = specfile
         self.macro_key = ['%global', '%define']
         self.macro = {}
+        self.Sources_URL = []
         self.Sources = []
         self.nosrc = False
         self.srpm_name = ''
@@ -47,6 +49,8 @@ class spec_contents:
             for key in self.macro.iterkeys():
                 self.Sources[i] = \
                     self.Sources[i].replace('%{' + key + '}',self.macro[key])
+                if self.Sources[i].find('http://') or self.Sources[i].find('ftp://'):
+                    self.Sources_URL.append(self.Sources[i])
                 if self.Sources[i].find('/'):
                     self.Sources[i] = self.Sources[i].split('/')[-1]
 
@@ -73,5 +77,6 @@ if __name__ == "__main__":
     content = spec_contents(sys.argv[1])
     content.parse_spec()
     print content.srpm_name
+    print "URL    = ", content.Sources_URL 
     print "SOURCE = ", content.Sources
     print "PATCH  = ", content.Patches
