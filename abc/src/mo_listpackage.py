@@ -1,7 +1,7 @@
 #! /bin/env python
 
 import DEFFILE
-import mo_packages
+import os
 from optparse import OptionParser
 import gettext
 import locale
@@ -32,7 +32,28 @@ parser.add_option("-s", "--skip",
                   help=_("list up SKIP package"))
 (opt, args) = parser.parse_args()
 
-(main, alter, nonfree, orphan, skip) = mo_packages.mo_packages(DEFFILE.PKGDIR, [])
+pkglist = []
+for pkg in os.listdir(DEFFILE.PKGDIR):
+    if os.path.exists(os.path.join(DEFFILE.PKGDIR, pkg, pkg + '.spec')):
+        pkglist.append(pkg)
+    pkglist.sort()
+
+main = []
+alter = []
+nonfree = []
+orphan = []
+skip = []
+for pkg in pkglist:
+    if os.path.exists(os.path.join(DEFFILE.PKGDIR, pkg, 'TO.Alter')):
+        alter.append(pkg)
+    elif os.path.exists(os.path.join(DEFFILE.PKGDIR, pkg, 'TO.Nonfree')):
+        nonfree.append(pkg)
+    elif os.path.exists(os.path.join(DEFFILE.PKGDIR, pkg, 'TO.Orphan')):
+        orphan.append(pkg)
+    elif os.path.exists(os.path.join(DEFFILE.PKGDIR, pkg, '.SKIP')):
+        skip.append(pkg)
+    else:
+        main.append(pkg)
 
 if opt.show_main:
     for pkg in main:

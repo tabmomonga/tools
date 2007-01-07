@@ -1,5 +1,10 @@
 2007-01-07  Nishio Futoshi  <fut_nis@d3.dion.ne.jp>
 
+	* src/mo_get_srpm_name.py : delete
+	* src/mo_option.py: Ditto
+	* src/mo_packages.py: Ditto
+
+	* src/mo_listpackage.py: bood-bye mo_package.py
 	* src/buildList.py : new file
 	* src/optionParse.py : new file
 	* src/DEFFILE.py.in : modify PACKAGE
