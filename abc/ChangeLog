@@ -1,5 +1,6 @@
 2007-01-07  Nishio Futoshi  <fut_nis@d3.dion.ne.jp>
 
+	* src/buildList.py : new file
 	* src/optionParse.py : new file
 	* src/DEFFILE.py.in : modify PACKAGE
 	* src/specParse.py : new file
