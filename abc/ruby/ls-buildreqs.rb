@@ -1,5 +1,5 @@
 #!/usr/bin/ruby
-# by Hiromasa YOSHIMOTO <y@momonga-linux.org>
+
 
 Version = "0.0.1"
 
@@ -18,11 +18,11 @@ opt.on('-q', '--quite', 'suppress verbose msg.') {|v| OPTS[:verbose]=-1 }
 opt.on('-v', '--verbose', 'verbose msg.') {|v| OPTS[:verbose]+=1 }
 opt.parse!(ARGV)
 
+
 db = SQLite3::Database.new("pkgs.db")
 
-
-deps = Set.new
-curr = ARGV
+reqs = Set.new
+curr = ARGV 
 
 loop=0
 
@@ -37,17 +37,20 @@ while loop < OPTS[:recursion]
   candiate = Set.new
 
   curr.each do |name|    
-    candiate.add(name)
-    sql = "select package from specfile_tbl, package_tbl where owner==id and name == '#{name}'"
-    db.execute(sql) do |cand|
-      candiate.add(cand)
+    sql = "select id from specfile_tbl where name == '#{name}'"
+    db.execute(sql) do |id|
+      candiate.add(id)
+    end	
+    sql = "select owner from package_tbl where package == '#{name}'"
+    db.execute(sql) do |owner|
+      candiate.add(owner)
     end
   end
 
-  candiate.each do |name|
-    sql = "select name from specfile_tbl, buildreq_tbl where owner==id and require == '#{name}'"
+  candiate.each do |id|
+    sql = "select name from specfile_tbl, package_tbl where id==owner and package in (select require from buildreq_tbl where owner == #{id})"
     db.execute(sql) do |pkg|
-      if !deps.include?(pkg) then
+      if !reqs.include?(pkg) then
         found.add(pkg)
       end
     end
@@ -62,8 +65,10 @@ while loop < OPTS[:recursion]
     print "#{name}\n"
   end
 
-  deps.merge(found)
+  reqs.merge(found)
   curr = found
 end # end of while loop
+
+
 
 db.close()
