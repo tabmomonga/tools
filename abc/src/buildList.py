@@ -2,9 +2,11 @@
 
 import DEFFILE
 import os
+import rpm
+import specParse
 
 class buildList:
-    def __init__(self, dir = '', opt = {}, pkgs = []):
+    def __init__(self, dir = DEFFILE.PKGDIR, opt = {}, pkgs = []):
         self.buildList = []
         self.dir = dir
         self.pkgs = pkgs
@@ -21,20 +23,41 @@ class buildList:
 
     def isBuild(self, pkg):
         pkgPath = os.path.join(self.dir, pkg)
-        if os.path.exists(os.path.join(pkgPath, pkg + '.spec')):
+        specFileName = os.path.join(pkgPath, pkg + '.spec')
+        if os.path.exists(specFileName):
+            srpmFileName = specParse.specParse(specFileName).getSrpmName()
             if os.path.exists(os.path.join(pkgPath, 'TO.Alter')):
                 if self.alter:
-                    return True
+                    if os.path.exists(os.path.join(DEFFILE.TOPDIR + '-Alter', SRPMS, srpmFileName)):
+                        return False
+                    else:
+                        return True
+                else:
+                    return False
             elif os.path.exists(os.path.join(pkgPath, 'TO.Nonfree')):
                 if self.nonfree:
-                    return True
+                    if os.path.exists(os.path.join(DEFFILE.TOPDIR + '-Nonfree', SRPMS, srpmFileName)):
+                        return False
+                    else:
+                        return True
+                else:
+                    return False
             elif os.path.exists(os.path.join(pkgPath, 'TO.Orphan')):
                 if self.orphan:
-                    return True
+                    if os.path.exists(os.path.join(DEFFILE.TOPDIR + '-Orphan', SRPMS, srpmFileName)):
+                        return False
+                    else:
+                        return True
+                else:
+                    return False
             elif os.path.exists(os.path.join(pkgPath, '.SKIP')):
-                pass
+                return False
             else:
+                if os.path.exists(os.path.join(DEFFILE.TOPDIR, srpmFileName)):
+                    return False
+                else:
                     return True
+
     def addBuildList(self):
         for pkg in self.pkgs:
             if self.isBuild(pkg):

@@ -15,6 +15,7 @@ tag_category = 2
 class specParse:
     def __init__(self, specFileName):
         self.specFileName = specFileName
+        rpm.addMacro('_ipv6', '1')
         ts = rpm.ts()
         self.spec = ts.parseSpec(specFileName)
         self.header = self.spec.header()
@@ -56,13 +57,15 @@ class specParse:
 
 if __name__ == "__main__":
     import sys
-    try:
+#    try:
+    if True:
         spec = specParse(sys.argv[1])
         print spec.getSrpmName()
         print spec.getSources()
         print spec.getNoSources()
         print spec.getPatches()
         print spec.getNoPatches()
-    except:
+    else:
+#    except:
         print "USAGE: ./specParse.py specfile"
 
