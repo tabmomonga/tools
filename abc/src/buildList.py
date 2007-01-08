@@ -28,7 +28,7 @@ class buildList:
             srpmFileName = specParse.specParse(specFileName).getSrpmName()
             if os.path.exists(os.path.join(pkgPath, 'TO.Alter')):
                 if self.alter:
-                    if os.path.exists(os.path.join(DEFFILE.TOPDIR + '-Alter', SRPMS, srpmFileName)):
+                    if os.path.exists(os.path.join(DEFFILE.TOPDIR + '-Alter', 'SRPMS', srpmFileName)):
                         return False
                     else:
                         return True
@@ -36,7 +36,7 @@ class buildList:
                     return False
             elif os.path.exists(os.path.join(pkgPath, 'TO.Nonfree')):
                 if self.nonfree:
-                    if os.path.exists(os.path.join(DEFFILE.TOPDIR + '-Nonfree', SRPMS, srpmFileName)):
+                    if os.path.exists(os.path.join(DEFFILE.TOPDIR + '-Nonfree', 'SRPMS', srpmFileName)):
                         return False
                     else:
                         return True
@@ -44,7 +44,7 @@ class buildList:
                     return False
             elif os.path.exists(os.path.join(pkgPath, 'TO.Orphan')):
                 if self.orphan:
-                    if os.path.exists(os.path.join(DEFFILE.TOPDIR + '-Orphan', SRPMS, srpmFileName)):
+                    if os.path.exists(os.path.join(DEFFILE.TOPDIR + '-Orphan', 'SRPMS', srpmFileName)):
                         return False
                     else:
                         return True
@@ -53,7 +53,7 @@ class buildList:
             elif os.path.exists(os.path.join(pkgPath, '.SKIP')):
                 return False
             else:
-                if os.path.exists(os.path.join(DEFFILE.TOPDIR, srpmFileName)):
+                if os.path.exists(os.path.join(DEFFILE.TOPDIR, 'SRPMS', srpmFileName)):
                     return False
                 else:
                     return True

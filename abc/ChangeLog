@@ -1,5 +1,6 @@
 2007-01-08  Nishio Futoshi  <fut_nis@d3.dion.ne.jp>
 
+	* src/buildList.py (buildList.isBuild): quate SRPMS
 	* src/specParse.py: addMacro(ipv6)
 
 2007-01-07  Nishio Futoshi  <fut_nis@d3.dion.ne.jp>
