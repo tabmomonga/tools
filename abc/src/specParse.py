@@ -54,6 +54,24 @@ class specParse:
             if src[tag_category] == noPatch:
                 noPatches.append(src[tag_filename])
         return noPatches
+    def getDependPackages(self):
+        depPackage = []
+        spec = open(self.specFileName)
+        for content in spec.readlines():
+            if not content.lower().startswith('buildrequires:') and \
+                    not content.lower().startswith('buildprereq:'):
+                continue
+            elif content.startswith('%prep'):
+                break
+            else:
+                while content.endswith('\\'):
+                    nextLine = spec.readline()
+                    if not nextline.startswith('#'):
+                        content += spec.readline()
+                reqList = content.split(':')[1]
+                for reqPkgs in reqList.split(','):
+                    depPackage.append(reqPkgs.strip().split(' ')[0])
+        return depPackage
 
 if __name__ == "__main__":
     import sys
@@ -65,6 +83,7 @@ if __name__ == "__main__":
         print spec.getNoSources()
         print spec.getPatches()
         print spec.getNoPatches()
+        print spec.getDependPackages()
     else:
 #    except:
         print "USAGE: ./specParse.py specfile"
