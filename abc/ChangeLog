@@ -1,6 +1,7 @@
 2007-01-09  Nishio Futoshi  <fut_nis@d3.dion.ne.jp>
 
-	* src/specParse.py (getDependPackages): add method
+	* src/dependDB.py: new file
+	* src/showDB.py: new file
 
 2007-01-08  Nishio Futoshi  <fut_nis@d3.dion.ne.jp>
 
