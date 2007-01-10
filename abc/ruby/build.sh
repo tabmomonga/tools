@@ -54,7 +54,7 @@ function touch_pkg()
 
 function update ()
 {
-    $debug ../tools/update-mph
+    $debug ../tools/update-mph  > /dev/null
     $debug sudo mph-get -f upgrade
 }
 function execute_list()
