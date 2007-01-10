@@ -9,3 +9,7 @@ c = conn.cursor()
 c.execute('select * from depend order by id')
 for row in c:
     print row
+
+c.execute('select * from subPkg order by id')
+for row in c:
+    print row

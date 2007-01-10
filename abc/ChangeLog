@@ -1,3 +1,8 @@
+2007-01-10  Nishio Futoshi  <fut_nis@d3.dion.ne.jp>
+
+	* src/showDB.py: add subPkg database
+	* src/dependDB.py: add subPkg database
+
 2007-01-09  Nishio Futoshi  <fut_nis@d3.dion.ne.jp>
 
 	* src/dependDB.py: new file
