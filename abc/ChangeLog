@@ -1,3 +1,7 @@
+2007-01-11  Nishio Futoshi  <fut_nis@d3.dion.ne.jp>
+
+	* src/dependDB.py: BugFix
+
 2007-01-10  Nishio Futoshi  <fut_nis@d3.dion.ne.jp>
 
 	* src/showDB.py: add subPkg database

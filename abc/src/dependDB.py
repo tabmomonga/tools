@@ -32,12 +32,12 @@ ids = 0
 for pkg in pkglist:
     depPackage = []
     subPackage = []
-    macros = {'name':pkg}
+    macros = {'name':pkg, 'encoding':'utf8', '_sbindir':''}
     spec = open(os.path.join(DEFFILE.PKGDIR, pkg, pkg + '.spec'))
     for content in spec.readlines():
         if content.startswith('%prep'):
             break
-        elif content.startswith('%defile') or content.startswith('%global'):
+        elif content.startswith('%define') or content.startswith('%global'):
             contentList = content.split()
             macroName = ''
             for cont in contentList[1:]:
@@ -61,6 +61,13 @@ for pkg in pkglist:
                 nextLine = spec.readline()
                 if not nextline.startswith('#'):
                     content += spec.readline()
+            for macro in macros.iterkeys():
+                content = content.replace('%{' + macro + '}', macros[macro])
+            # kakkowarui syori
+            content = content.replace('%{__', '')
+            content = content.replace('}', '')
+            content = content.replace('/', '')
+
             reqList = content.split(':')[1]
             for reqPkgs in reqList.split(','):
                 depPackage.append(reqPkgs.strip().split(' ')[0])
@@ -71,7 +78,7 @@ for pkg in pkglist:
         c.execute('insert into depend values (?, ?, ?)', vt)
         id += 1
     for subPkg in subPackage:
-        vt = (id, pkg, subPkg)
+        vt = (ids, pkg, subPkg)
         c.execute('insert into subPkg values (?, ?, ?)', vt)
         ids += 1
 
