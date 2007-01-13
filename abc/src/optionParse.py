@@ -30,6 +30,9 @@ class optionParse:
         parser.add_option("-L", "--alter",
                           default=False, action="store_true", dest="alter",
                           help=_("build Alter(alternative) package, too"))
+        parser.add_option("-m", "--main",
+                          default=False, action="store_true", dest="main",
+                          help=_("main package only"))
         # convenience options
 #        parser.add_option("-r", "--rpmopt", metavar="RPMOPTS",
 #                          dest="rpmopt",
@@ -54,9 +57,6 @@ class optionParse:
 #                          help=_("download from mirror first"))
 
         # ignored options
-#        parser.add_option("-m", "--main",
-#                          default=False, action="store_true", dest="main",
-#                          help=_("main package only"))
 #        parser.add_option("-N", "--nostrict",
 #                          default=False, action="store_true", dest="nostrict",
 #                          help=_("proceed by old behavior"))
