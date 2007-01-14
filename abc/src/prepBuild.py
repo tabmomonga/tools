@@ -1,0 +1,60 @@
+#! /bin/env python
+
+import os
+import DEFFILE
+import specParse
+import shutil
+import urllib
+import urlparse
+
+class prepBuild:
+    def __init__(self, pkg):
+        self.pkg = pkg
+        self.cwd = os.path.join(DEFFILE.PKGDIR, pkg)
+        os.chdir(self.cwd)
+        self.spec = specParse.specParse(os.path.join(self.cwd, pkg + '.spec'))
+        self.createDirs()
+    def createDirs(self):
+        dirs = ['SPECS', 'RPMS', 'SRPMS', 'SOURCES', 'BUILD']
+        for d in dirs:
+            try:
+                os.mkdir(d)
+            except OSError:
+                print "Cannot Create Directory"
+    def placeSourcePatch(self):
+        srcdir = os.path.join(self.cwd, 'SOURCES')
+        for source in self.spec.getSources() + self.spec.getPatches():
+            shutil.copy(source, os.path.join(srcdir,source))
+    def placeNoSourcePatch(self):
+        srcdir = os.path.join(self.cwd, 'SOURCES')
+        for source in self.spec.getNoSources() + self.spec.getNoPatches():
+            filename = urlparse.urlparse(source)[2].split('/')[-1]
+            if os.path.isfile(os.path.join(DEFFILE.TOPDIR, 'SOURCES', filename)):
+                shutil.copy(os.path.join(DEFFILE.TOPDIR, 'SOURCES', filename),
+                            os.path.join(srcdir, filename))
+            else:
+                urllib.urlretrieve(source, os.path.join(srcdir, filename))
+    def createMacroFile(self):
+        file = open('rpmmacros', "w")
+        writeString = '%%_topdir %s\n' % os.getcwd()
+        file.write(writeString)
+        # we need more macros
+        file.close()
+
+        writeFile = open('rpmrc', 'w')
+        readFile = open(os.path.join('..', 'rpmrc'), 'r')
+        for line in readFile.readlines():
+            if not line.startswith('macrofiles:'):
+                writeFile.write(line)
+            else:
+                writeFile.write(line.rstrip('\n') + './rpmmacros:')
+        readFile.close()
+        writeFile.close()
+    
+if __name__ == "__main__":
+    import sys
+    b = prepBuild(sys.argv[1])
+    b.placeSourcePatch()
+    b.placeNoSourcePatch()
+
+    print os.listdir(os.getcwd())

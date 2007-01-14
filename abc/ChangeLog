@@ -1,3 +1,7 @@
+2007-01-14  Nishio Futoshi  <fut_nis@d3.dion.ne.jp>
+
+	* src/prepBuild.py : new file 
+
 2007-01-13  Nishio Futoshi  <fut_nis@d3.dion.ne.jp>
 
 	* src/optionParse.py : comment out many options
