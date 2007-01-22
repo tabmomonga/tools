@@ -1,3 +1,9 @@
+2007-01-22  Nishio Futoshi  <fut_nis@d3.dion.ne.jp>
+
+	* src/buildPackage.py: new file 
+	* src/DEFFILE.py.in: add some macros
+	* src/prepBuild.py: add some macros
+
 2007-01-14  Nishio Futoshi  <fut_nis@d3.dion.ne.jp>
 
 	* src/prepBuild.py : new file 

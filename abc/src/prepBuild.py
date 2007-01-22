@@ -15,7 +15,7 @@ class prepBuild:
         self.spec = specParse.specParse(os.path.join(self.cwd, pkg + '.spec'))
         self.createDirs()
     def createDirs(self):
-        dirs = ['SPECS', 'RPMS', 'SRPMS', 'SOURCES', 'BUILD']
+        dirs = ['RPMS', 'SRPMS', 'SOURCES', 'BUILD']
         for d in dirs:
             try:
                 os.mkdir(d)
@@ -37,7 +37,16 @@ class prepBuild:
     def createMacroFile(self):
         file = open('rpmmacros', "w")
         writeString = '%%_topdir %s\n' % os.getcwd()
+        writeString += '%%_arch %s\n' % DEFFILE.arch
+        writeString += '%%_host_cpu %s\n' % DEFFILE.host_cpu
+        writeString += '%%_host_vender %s\n' % DEFFILE.host_vender
+        writeString += '%%_host_os %s\n' % DEFFILE.host_os
+        writeString += '%%_numjobs %s\n' % DEFFILE.numjobs
+        writeString += '%%_arch %s\n' % DEFFILE.arch
+        writeString += '%smp_mflags -j%{_numjobs}\n'
+        writeString += '%_smp_mflags -j%{_numjobs}\n'
         file.write(writeString)
+
         # we need more macros
         file.close()
 
@@ -56,5 +65,5 @@ if __name__ == "__main__":
     b = prepBuild(sys.argv[1])
     b.placeSourcePatch()
     b.placeNoSourcePatch()
-
+    b.createMacroFile()
     print os.listdir(os.getcwd())

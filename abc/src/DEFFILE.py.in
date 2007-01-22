@@ -6,3 +6,9 @@ TOPDIR = '/opt/PKGS'
 PKGDIR = '/opt/trunk/pkgs'
 
 locale_dir = '/usr/share/locale'
+
+arch = 'i686'
+host_cpu = 'i686'
+host_vender = 'momonga'
+host_os = 'linux'
+numjobs = '2'
