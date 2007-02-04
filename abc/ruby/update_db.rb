@@ -20,17 +20,27 @@ opt.parse!(ARGV)
 d = SpecDB.new
 d.open("pkgs.db")
 
+tmp = Hash.new
+d.db.execute("select name from specfile_tbl") do |name,*|
+  tmp[name]=1
+end
+
+# update or insert entries to databse
 Dir.glob('./*').select do |dir|
   name = File.basename(dir)	
   if !File.exist?("#{name}/#{name}.spec") or
       File.exist?("#{name}/OBSOLETE") or
       File.exist?("#{name}/.SKIP") or
       File.exist?("#{name}/SKIP") then
-    d.delete(name)
   else
     d.update(name, OPTS)
+    tmp.delete(name)
   end
 end
 
-d.close
+# delete entries which are not updated
+tmp.each_key do |name|
+  d.delete(name, OPTS)
+end
 
+d.close

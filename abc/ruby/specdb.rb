@@ -10,8 +10,13 @@ class SpecDB
   def close
     @db.close
   end
+  
+  def db
+    return @db
+  end
 
-  def delete(name)
+  def delete(name, opts = nil)
+    STDERR.puts "deleting  #{name}" if (opts[:verbose]>-1) 
     @db.transaction { |db|
       id = db.get_first_value("select id from specfile_tbl where name == '#{name}'")
       if nil!=id then
@@ -85,6 +90,7 @@ class SpecDB
     db.execute("delete from package_tbl where owner == #{id}");
     db.execute("delete from require_tbl where owner == #{id}");
     db.execute("delete from provide_tbl where owner == #{id}");
+    db.execute("delete from specfile_tbl where id == #{id}");
   end
   
 end  # end of class SpecDB
