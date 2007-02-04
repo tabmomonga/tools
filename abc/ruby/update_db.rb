@@ -18,7 +18,7 @@ opt.parse!(ARGV)
 
 
 d = SpecDB.new
-d.open("pkgs.db")
+d.open("pkgs.db", OPTS)
 
 tmp = Hash.new
 d.db.execute("select name from specfile_tbl") do |name,*|
