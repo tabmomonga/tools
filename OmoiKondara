@@ -61,7 +61,7 @@ begin
 
     class IO
       def IO.read(path, length=nil, offset=nil)
-        port = open(path)
+        port = File.open(path)
         port.pos = offset if offset
         rv = nil
         begin
@@ -1443,7 +1443,7 @@ rpm -ivh する関係上、sudo が password 無しで実行可能
   def recursive_build(path)
     pwd = Dir.pwd
     Dir.chdir path
-    for pn in `ls ./`
+    `ls ./`.each_line do | pn |
       pn.chop!
       if File.directory?(pn) && pn != "BUILD" then
         if pn != "CVS" && pn != "." && pn != ".." &&
