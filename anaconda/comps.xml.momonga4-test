@@ -3561,9 +3561,22 @@
       <packagereq type="optional">kasablanca</packagereq>
       <packagereq type="optional">kita</packagereq>
       <packagereq type="optional">kdewebdev</packagereq>
+      <packagereq type="optional">kftpgrabber</packagereq>
+      <packagereq type="optional">konversation</packagereq>
+      <packagereq type="optional">ktorrent</packagereq>
       <packagereq type="default">loqui</packagereq>
       <packagereq type="optional">mozplugger</packagereq>
       <packagereq type="default">ochusha</packagereq>
+      <packagereq type="default">seamonkey</packagereq>
+      <packagereq type="default">seamonkey-chat</packagereq>
+      <packagereq type="default">seamonkey-extensions-copyurlplus</packagereq>
+      <packagereq type="default">seamonkey-extensions-googlebar</packagereq>
+      <packagereq type="default">seamonkey-extensions-linky</packagereq>
+      <packagereq type="default">seamonkey-extensions-prefbar</packagereq>
+      <packagereq type="default">seamonkey-extensions-tabextensions</packagereq>
+      <packagereq type="default">seamonkey-language-pack-japanese</packagereq>
+      <packagereq type="default">seamonkey-mail</packagereq>
+      <packagereq type="default">seamonkey-psm</packagereq>
       <packagereq type="default">sylpheed</packagereq>
       <packagereq type="default">thunderbird</packagereq>
       <packagereq type="optional">totem-mozilla-plugin</packagereq>
@@ -4593,6 +4606,7 @@
       <packagereq type="default" basearchonly="true">amarok-helix</packagereq>
       <packagereq type="default">amarok-libvisual</packagereq>
       <packagereq type="default">amarok-xine</packagereq>
+      <packagereq type="default">amarok-yauap</packagereq>
       <packagereq type="mandatory">arts</packagereq>
       <packagereq type="default">arts-artsc</packagereq>
       <packagereq type="default">digikam</packagereq>
@@ -4603,6 +4617,7 @@
       <packagereq type="default">kaffeine</packagereq>
       <packagereq type="optional">kaffeine-plugin</packagereq>
       <packagereq type="default">kannadic</packagereq>
+      <packagereq type="default">kaquarium</packagereq>
       <packagereq type="default">kasablanca</packagereq>
       <packagereq type="default">kcpuload</packagereq>
       <packagereq type="default">kdeaccessibility</packagereq>
@@ -4620,6 +4635,8 @@
       <packagereq type="default">kdeutils</packagereq>
       <packagereq type="default">kdewebdev</packagereq>
       <packagereq type="default">kerry</packagereq>
+      <packagereq type="default">kftpgrabber</packagereq>
+      <packagereq type="default">kguitar</packagereq>
       <packagereq type="default">kita</packagereq>
       <packagereq type="default">kipi-plugins</packagereq>
       <packagereq type="default">koffice-filters</packagereq>
@@ -4635,8 +4652,11 @@
       <packagereq type="default">koffice-kugar</packagereq>
       <packagereq type="default">koffice-kword</packagereq>
       <packagereq type="default">kompose</packagereq>
+      <packagereq type="default">konversation</packagereq>
       <packagereq type="default">kreetingkard</packagereq>
       <packagereq type="default">krename</packagereq>
+      <packagereq type="default">ktorrent</packagereq>
+      <packagereq type="default">kyum</packagereq>
       <packagereq type="default">libakode</packagereq>
       <packagereq type="default">openoffice.org-kde</packagereq>
       <packagereq type="optional">pykompiz</packagereq>
@@ -4658,6 +4678,7 @@
       <packagereq type="default">xine-lib-arts</packagereq>
       <packagereq type="default">xine-lib-esd</packagereq>
       <packagereq type="default">xine-lib-flac</packagereq>
+      <packagereq type="default">xine-lib-jack</packagereq>
       <packagereq type="default">xine-lib-oggvorbis</packagereq>
       <packagereq type="default">xine-lib-oss</packagereq>
       <packagereq type="default">xine-lib-sdl</packagereq>
@@ -4784,7 +4805,12 @@
     <packagelist>
       <packagereq type="default">ImageMagick-devel</packagereq>
       <packagereq type="default">OpenEXR-devel</packagereq>
+      <packagereq type="default">PyKDE</packagereq>
+      <packagereq type="default">PyKDE-devel</packagereq>
+      <packagereq type="default">PyKDE-examples</packagereq>
       <packagereq type="default">PyQt</packagereq>
+      <packagereq type="default">PyQt-devel</packagereq>
+      <packagereq type="default">PyQt-examples</packagereq>
       <packagereq type="default">anthy-devel</packagereq>
       <packagereq type="mandatory">arts-devel</packagereq>
       <packagereq type="mandatory">arts-artsc-devel</packagereq>
@@ -4821,7 +4847,11 @@
       <packagereq type="mandatory">kdelibs-devel</packagereq>
       <packagereq type="default">kdesdk</packagereq>
       <packagereq type="default">kdesdk-devel</packagereq>
+      <packagereq type="default">kdesvn</packagereq>
+      <packagereq type="default">kdesvn-kiosvn</packagereq>
+      <packagereq type="default">kdesvn-svnqt-devel</packagereq>
       <packagereq type="default">kdevelop</packagereq>
+      <packagereq type="default">kftpgrabber-devel</packagereq>
       <packagereq type="default">koffice-devel</packagereq>
       <packagereq type="default">ladspa-devel</packagereq>
       <packagereq type="default">lcms-devel</packagereq>
@@ -4863,6 +4893,7 @@
       <packagereq type="default">scons</packagereq>
       <packagereq type="default">scribus-devel</packagereq>
       <packagereq type="default">sip</packagereq>
+      <packagereq type="default">sip-devel</packagereq>
       <packagereq type="default">subversion-devel</packagereq>
       <packagereq type="default">taglib-devel</packagereq>
       <packagereq type="default">wv2-devel</packagereq>
@@ -5473,6 +5504,7 @@
       <packagereq type="mandatory">mysql</packagereq>
       <packagereq type="optional">mysql-bench</packagereq>
       <packagereq type="optional">mysql-devel</packagereq>
+      <packagereq type="default">perl-DBD-mysql</packagereq>
       <packagereq type="optional">php-mysql</packagereq>
       <packagereq type="optional">qt-MySQL</packagereq>
       <packagereq type="optional">qt-ODBC</packagereq>
@@ -7076,6 +7108,7 @@
       <packagereq type="optional" basearchonly="true">amarok-helix</packagereq>
       <packagereq type="optional">amarok-libvisual</packagereq>
       <packagereq type="optional">amarok-xine</packagereq>
+      <packagereq type="optional">amarok-yauap</packagereq>
       <packagereq type="default">audacity</packagereq>
       <packagereq type="mandatory">aumix</packagereq>
       <packagereq type="optional">avidemux</packagereq>
@@ -7091,6 +7124,7 @@
       <packagereq type="optional">k3b</packagereq>
       <packagereq type="optional">kaffeine</packagereq>
       <packagereq type="optional">kdemultimedia</packagereq>
+      <packagereq type="optional">kguitar</packagereq>
       <packagereq type="default">kino</packagereq>
       <packagereq type="default">last-exit</packagereq>
       <packagereq type="optional">mikmod</packagereq>
@@ -7119,6 +7153,7 @@
       <packagereq type="default">xine-lib-flac</packagereq>
       <packagereq type="optional">xine-lib-gdk-pixbuf</packagereq>
       <packagereq type="optional">xine-lib-gnomevfs</packagereq>
+      <packagereq type="default">xine-lib-jack</packagereq>
       <packagereq type="default">xine-lib-oggvorbis</packagereq>
       <packagereq type="default">xine-lib-oss</packagereq>
       <packagereq type="optional">xine-lib-sdl</packagereq>
@@ -8385,6 +8420,7 @@
       <packagereq type="default">pirut</packagereq>
       <packagereq type="default">rxvt</packagereq>
       <packagereq type="default">rxvt-unicode</packagereq>
+      <packagereq type="default">system-config-printer</packagereq>
       <packagereq type="default">system-config-soundcard</packagereq>
       <packagereq type="default">system-config-users</packagereq>
       <packagereq type="default">usermode-gtk</packagereq>
@@ -8449,19 +8485,31 @@
       <packagereq type="default">xfce4-clipman-plugin</packagereq>
       <packagereq type="default">xfce4-cpugraph-plugin</packagereq>
       <packagereq type="default">xfce4-datetime-plugin</packagereq>
+      <packagereq type="default">xfce4-dict-plugin</packagereq>
       <packagereq type="default">xfce4-diskperf-plugin</packagereq>
+      <packagereq type="default">xfce4-eyes-plugin</packagereq>
       <packagereq type="default">xfce4-fsguard-plugin</packagereq>
+      <packagereq type="default">xfce4-genmon-plugin</packagereq>
       <packagereq type="default">xfce4-icon-theme</packagereq>
+      <packagereq type="default">xfce4-mailwatch-plugin</packagereq>
       <packagereq type="default">xfce4-minicmd-plugin</packagereq>
       <packagereq type="default">xfce4-mixer</packagereq>
+      <packagereq type="default">xfce4-mount-plugin</packagereq>
       <packagereq type="default">xfce4-netload-plugin</packagereq>
       <packagereq type="default">xfce4-notes-plugin</packagereq>
       <packagereq type="mandatory">xfce4-panel</packagereq>
+      <packagereq type="default">xfce4-quicklauncher-plugin</packagereq>
+      <packagereq type="default">xfce4-screenshooter-plugin</packagereq>
+      <packagereq type="default">xfce4-sensors-plugin</packagereq>
       <packagereq type="mandatory">xfce4-session</packagereq>
       <packagereq type="default">xfce4-session-engines</packagereq>
+      <packagereq type="default">xfce4-smartbookmark-plugin</packagereq>
       <packagereq type="default">xfce4-systemload-plugin</packagereq>
+      <packagereq type="default">xfce4-timer-plugin</packagereq>
       <packagereq type="default">xfce4-wavelan-plugin</packagereq>
       <packagereq type="default">xfce4-weather-plugin</packagereq>
+      <packagereq type="default">xfce4-websearch-plugin</packagereq>
+      <packagereq type="default">xfce4-xfapplet-plugin</packagereq>
       <packagereq type="default">xfce4-xkb-plugin</packagereq>
       <packagereq type="default">xfce4-xmms-plugin</packagereq>
       <packagereq type="mandatory">xfdesktop</packagereq>
@@ -8488,6 +8536,8 @@
       <packagereq type="mandatory">libxfcegui4-devel</packagereq>
       <packagereq type="default">pygtk2-devel</packagereq>
       <packagereq type="mandatory">xfce-mcs-manager-devel</packagereq>
+      <packagereq type="mandatory">xfce4-dev-tools</packagereq>
+      <packagereq type="mandatory">xfce4-panel-devel</packagereq>
       <packagereq type="mandatory">xfce4-session-devel</packagereq>
     </packagelist>
   </group>
