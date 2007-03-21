@@ -19,9 +19,9 @@ PKGDIR ~/pkgs
 #        記述します。一行に複数書く事もできますし、MIRROR が複数行あっ
 #        てもかまいません。
 #
-MIRROR ftp://dist.momonga-linux.org/pub/momonga/development/PKGS
-# MIRROR ftp://ftp.ne.jp/Linux/packages/momonga/development/PKGS
-# MIRROR ftp://ftp.iij.ad.jp/pub/linux/momonga/development/PKGS
+MIRROR ftp://dist.momonga-linux.org/pub/momonga/development
+# MIRROR ftp://ftp.ne.jp/Linux/packages/momonga/development
+# MIRROR ftp://ftp.iij.ad.jp/pub/linux/momonga/development
 
 # FTP_CMD ソース等をダウンロードする際に使用するコマンド (およびオプション)．
 #
