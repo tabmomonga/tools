@@ -21,7 +21,7 @@ SPLITTREE = "sudo /usr/lib/anaconda-runtime/splittree.py"
 CHKRPMDUP = "~/bin/chkrpmdup"
 CHKCOMPS = "~/bin/chkcomps"
 DEV_DIR = work_dir + "/development"
-COMPS_XML = DEV_DIR + "/#{ARCH}/os/Momonga/base/comps.xml"
+COMPS_XML = DEV_DIR + "/#{ARCH}/os/Momonga/repodata/comps.xml"
 TREE_DIR = DEV_DIR + "/#{ARCH}/os"
 ISO_DIR = DEV_DIR + "/#{ARCH}/iso"
 PKGS_DIR = "/pub/HEAD/PKGS"
@@ -119,8 +119,8 @@ cur_dir = Dir.pwd
 #do_cmd "ln -f noarch/* #{PKGS_DIR}/noarch"
 Dir.chdir PKGS_DIR
 if MK_FULL
-  do_cmd "cp -f #{ARCH}/* #{TREE_DIR}/Momonga/RPMS"
-  do_cmd "cp -f noarch/* #{TREE_DIR}/Momonga/RPMS"
+  do_cmd "cp -f #{ARCH}/* #{TREE_DIR}/Momonga"
+  do_cmd "cp -f noarch/* #{TREE_DIR}/Momonga"
   if ARCH == "x86_64"
     pkglist = open("#{WORK_DIR}/#{SUBPKGS_LIST}")
     pkglist.each do |pkg|
@@ -128,7 +128,7 @@ if MK_FULL
       Dir.glob("#{PKGS_DIR}/*/#{pkg}*.#{SUBARCH}.rpm").each do |file|
         pkgname = `rpm -qp --qf '%{NAME}' #{file} 2>&1`
         if pkg == pkgname
-          do_cmd "cp #{file} #{DEV_DIR}/#{ARCH}/os/Momonga/RPMS/"
+          do_cmd "cp #{file} #{DEV_DIR}/#{ARCH}/os/Momonga/"
         end
       end
     end
@@ -140,13 +140,13 @@ else
     Dir.glob("#{PKGS_DIR}/*/#{pkg}*.#{ARCH}.rpm").each do |file|
       pkgname = `rpm -qp --qf '%{NAME}' #{file} 2>&1`
       if pkg == pkgname
-        do_cmd "cp #{file} #{DEV_DIR}/#{ARCH}/os/Momonga/RPMS/"
+        do_cmd "cp #{file} #{DEV_DIR}/#{ARCH}/os/Momonga/"
       end
     end
     Dir.glob("#{PKGS_DIR}/*/#{pkg}*.noarch.rpm").each do |file|
       pkgname = `rpm -qp --qf '%{NAME}' #{file} 2>&1`
       if pkg == pkgname
-        do_cmd "cp #{file} #{DEV_DIR}/#{ARCH}/os/Momonga/RPMS/"
+        do_cmd "cp #{file} #{DEV_DIR}/#{ARCH}/os/Momonga/"
       end
     end
   end
@@ -166,11 +166,12 @@ print "done\n"
 #  6. 重複しているパッケージの削除
 print "Removing duplication packages - "
 STDOUT.flush
-do_cmd "#{CHKRPMDUP} #{TREE_DIR}/Momonga/RPMS | bash"
+do_cmd "#{CHKRPMDUP} #{TREE_DIR}/Momonga | bash"
 print "done\n"
 
 #  comps.xml をコピー
 print "Copying comps.xml - "
+do_cmd "mkdir -p #{TREE_DIR}/repodata/"
 if MK_FULL
   do_cmd "cp #{work_dir}/comps.xml.momonga3 #{COMPS_XML}"
 else
@@ -181,7 +182,7 @@ print "done\n"
 #  comps.xml のチェック
 print "Checking comps.xml - "
 STDOUT.flush
-do_cmd "#{CHKCOMPS} -v #{TREE_DIR}/Momonga/base/comps.xml #{TREE_DIR}/Momonga/RPMS"
+do_cmd "#{CHKCOMPS} -v #{TREE_DIR}/repodata/comps.xml #{TREE_DIR}/Momonga"
 print "done\n"
 
 #  8. ここ以降 anaconda 使用のため環境変数を設定
