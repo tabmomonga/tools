@@ -1,5 +1,5 @@
 #!/usr/bin/ruby
-
+# by Hiromasa YOSHIMOTO <y@momonga-linux.org>
 
 Version = "0.0.1"
 
@@ -23,6 +23,7 @@ db = SQLite3::Database.new("pkgs.db")
 
 reqs = Set.new
 curr = ARGV 
+curr.map!{|v| v.chomp("/") }
 
 loop=0
 

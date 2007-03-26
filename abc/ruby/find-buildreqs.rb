@@ -23,6 +23,7 @@ db = SQLite3::Database.new("pkgs.db")
 
 deps = Set.new
 curr = ARGV
+curr.map!{|v| v.chomp("/") }
 
 loop=0
 
