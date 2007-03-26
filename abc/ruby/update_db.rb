@@ -43,4 +43,6 @@ tmp.each_key do |name|
   d.delete(name, OPTS)
 end
 
+d.check(OPTS)
+
 d.close

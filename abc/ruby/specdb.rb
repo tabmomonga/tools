@@ -1,12 +1,12 @@
 # specdb.rb
 #
-# by Hiromasa YOSHIMOTO
+# by Hiromasa YOSHIMOTO <y@momonga-linux.org>
 
 require 'sqlite3'
 require 'rpm'
 
 class SpecDB 
-  TABLE_MAJOR_VERSION=1 # increase when the layout break compatibility
+  TABLE_MAJOR_VERSION=2 # increase when the layout break compatibility
   TABLE_MINOR_VERSION=0 # increase when the regeneration of DB is needed
   TABLE_LAYOUT=<<ENDOFSQL
 -- to build spec "owner" needs "require"-"version"-"release"
@@ -25,7 +25,7 @@ drop table if exists package_tbl;
 create table package_tbl (
        owner integer not null,
 
-       package text primary key,
+       package text not null,
        version text default null,
        release text default null,
        epoch   text default null
@@ -96,6 +96,18 @@ ENDOFSQL
     return @db
   end
 
+  def check(opts = nil)
+    opts = @options if nil==opts
+    sql = "select package from package_tbl group by package having count(*) > 1"
+    @db.execute(sql) do |package|
+      STDERR.puts "** Duplicate entries found; These specfiles below provide a package named \"#{package}\""
+      sql = "select name from specfile_tbl, package_tbl where id==owner and package='#{package}'"
+      @db.execute(sql) do |specname|
+        STDERR.puts " #{specname}.spec "
+      end
+    end
+  end
+
   def delete(name, opts = nil)
     opts = @options if nil==opts
 
@@ -148,14 +160,17 @@ ENDOFSQL
       }      
 
       spec.packages.each {|pkg|
+	# add package_tbl entry
         sql = "insert into package_tbl (owner,package,version,release,epoch) values(#{id}, '#{pkg.name}', '#{pkg.version.v}', '#{pkg.version.r}', '#{pkg.version.e}')"
         db.execute(sql)
         
+	# add require_tbl entry
         pkg.requires.each {|req|
           sql = "insert into require_tbl (owner,package,require,version,release,epoch) values(#{id}, '#{pkg.name}', '#{req.name}', '#{req.version.v}', '#{req.version.r}', '#{req.version.e}')"
           db.execute(sql)
         }
         
+	# add provide_tbl entry	
         pkg.provides.each {|prv|
           sql = "insert into provide_tbl (owner,package,provide) values(#{id}, '#{pkg.name}', '#{prv.name}')"
           db.execute(sql)
