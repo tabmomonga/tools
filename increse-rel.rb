@@ -62,7 +62,7 @@ ARGV.each { |file|
 
 	@ver = spec.packages[0].version.v
 
-	relarray = spec.packages[0].version.r..sub(/m\.mo[1-9]/,'').split('.')
+	relarray = spec.packages[0].version.r.sub(/m\.mo[1-9]/,'').split('.')
 	relarray[-1] = relarray[-1].to_i + 1
 	@rel = relarray.join(".") + "m"
 
