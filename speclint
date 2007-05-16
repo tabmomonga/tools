@@ -217,7 +217,7 @@ module Speclint
 
     class << self
       def valid_group?(group); VALID_GROUPS.include? group; end
-      def valid_release?(release); /\A(?:[1-9]\d*|0(?:\.\d+)+)[mk]\.mo[1-9]\z/ =~ release; end
+      def valid_release?(release); /\A.*\.(?:[1-9]\d*|0(?:\.\d+)+)m\.mo[1-9]\z/ =~ release; end
       def transitional_release?(release); /k\z/ =~ release; end
     end
 
