@@ -479,6 +479,7 @@
       <packagereq type="optional">docbook2X</packagereq>
       <packagereq type="optional">kile</packagereq>
       <packagereq type="optional">lilypond</packagereq>
+      <packagereq type="optional">pdfedit</packagereq>
       <packagereq type="optional">python-docutils</packagereq>
       <packagereq type="optional">scribus</packagereq>
     </packagelist>
@@ -3595,19 +3596,20 @@
       <packagereq type="default">Maelstrom</packagereq>
       <packagereq type="optional">armagetronad</packagereq>
       <packagereq type="optional">csmash</packagereq>
+      <packagereq type="optional">fortune-mod</packagereq>
       <packagereq type="default">gnome-games</packagereq>
       <packagereq type="optional">kdeedu</packagereq>
       <packagereq type="optional">kdegames</packagereq>
-      <packagereq type="optional">netmaj</packagereq>
-      <packagereq type="optional">supertux</packagereq>
-      <packagereq type="default">tuxracer</packagereq>
-      <packagereq type="optional">tuxkart</packagereq>
-      <packagereq type="optional">xkobo</packagereq>
-      <packagereq type="optional">fortune-mod</packagereq>
       <packagereq type="optional">monkey-bubble</packagereq>
       <packagereq type="optional">nethack</packagereq>
       <packagereq type="optional">nethack-common</packagereq>
+      <packagereq type="optional">netmaj</packagereq>
+      <packagereq type="optional">supertux</packagereq>
       <packagereq type="optional">supertux-editor</packagereq>
+      <packagereq type="default">tuxracer</packagereq>
+      <packagereq type="optional">tuxkart</packagereq>
+      <packagereq type="optional">tuxtype</packagereq>
+      <packagereq type="optional">xkobo</packagereq>
     </packagelist>
   </group>
 
@@ -3792,6 +3794,7 @@
     <packagelist>
       <packagereq type="optional">HelixPlayer-mozilla-plugin</packagereq>
       <packagereq type="optional">balsa</packagereq>
+      <packagereq type="optional">bittorrent-gui</packagereq>
       <packagereq type="optional">bluefish</packagereq>
       <packagereq type="default">bogofilter</packagereq>
       <packagereq type="default">ekiga</packagereq>
@@ -3800,7 +3803,6 @@
       <packagereq type="optional">evolution</packagereq>
       <packagereq type="default">firefox</packagereq>
       <packagereq type="optional">mozplugger</packagereq>
-      <packagereq type="optional">gaim</packagereq>
       <packagereq type="optional">galeon</packagereq>
       <packagereq type="optional">gftp</packagereq>
       <packagereq type="optional">gnomeicu</packagereq>
@@ -3818,6 +3820,7 @@
       <packagereq type="optional">loqui</packagereq>
       <packagereq type="optional">mozplugger</packagereq>
       <packagereq type="default">ochusha</packagereq>
+      <packagereq type="default">pidgin</packagereq>
       <packagereq type="optional">seamonkey</packagereq>
       <packagereq type="optional">seamonkey-chat</packagereq>
       <packagereq type="optional">seamonkey-extensions-copyurlplus</packagereq>
@@ -3832,7 +3835,6 @@
       <packagereq type="default">thunderbird</packagereq>
       <packagereq type="optional">totem-mozilla-plugin</packagereq>
       <packagereq type="default">xchat</packagereq>
-      <packagereq type="default">pidgin</packagereq>
     </packagelist>
   </group>
 
@@ -3955,9 +3957,6 @@
       <packagereq type="optional">digikamimageplugins</packagereq>
       <packagereq type="optional">f-spot</packagereq>
       <packagereq type="optional">fontforge</packagereq>
-      <packagereq type="optional">gqview</packagereq>
-      <packagereq type="optional">graphviz</packagereq>
-      <packagereq type="optional">gwenview</packagereq>
       <packagereq type="default">gimp</packagereq>
       <packagereq type="default">gimp-gap</packagereq>
       <packagereq type="default">gimp-help</packagereq>
@@ -3965,7 +3964,10 @@
       <packagereq type="default">gimp-print-cups</packagereq>
       <packagereq type="default">gimp-print-utils</packagereq>
       <packagereq type="default">gimp-pygimp</packagereq>
+      <packagereq type="optional">gqview</packagereq>
+      <packagereq type="optional">graphviz</packagereq>
       <packagereq type="optional">gv</packagereq>
+      <packagereq type="optional">gwenview</packagereq>
       <packagereq type="default">inkscape</packagereq>
       <packagereq type="optional">k3d</packagereq>
       <packagereq type="optional">kdegraphics</packagereq>
@@ -6435,6 +6437,7 @@
       <packagereq type="optional">openoffice.org-testtools</packagereq>
       <packagereq type="default">openoffice.org-writer</packagereq>
       <packagereq type="default">openoffice.org-xsltfilter</packagereq>
+      <packagereq type="optional">pdfedit</packagereq>
       <packagereq type="optional">xdvik</packagereq>
       <packagereq type="optional">xpdf</packagereq>
       <packagereq type="default">youtranslate</packagereq>
@@ -7695,9 +7698,11 @@
       <packagereq type="optional">amarok-libvisual</packagereq>
       <packagereq type="optional">amarok-xine</packagereq>
       <packagereq type="optional">amarok-yauap</packagereq>
+      <packagereq type="optional">ardour</packagereq>
       <packagereq type="default">audacity</packagereq>
       <packagereq type="optional">aumix</packagereq>
       <packagereq type="optional">avidemux</packagereq>
+      <packagereq type="optional">bmpx</packagereq>
       <packagereq type="optional">cdda2wav</packagereq>
       <packagereq type="optional">cdlabelgen</packagereq>
       <packagereq type="default">cdparanoia</packagereq>
@@ -7705,6 +7710,9 @@
       <packagereq type="default">dvd+rw-tools</packagereq>
       <packagereq type="optional">dvdauthor</packagereq>
       <packagereq type="optional">dvdbackup</packagereq>
+      <packagereq type="optional">dvdrip</packagereq>
+      <packagereq type="optional">dvdstyler</packagereq>
+      <packagereq type="optional">dvdwizard</packagereq>
       <packagereq type="optional">easytag</packagereq>
       <packagereq type="optional">gnomebaker</packagereq>
       <packagereq type="optional">grip</packagereq>
@@ -7716,6 +7724,9 @@
       <packagereq type="optional">kguitar</packagereq>
       <packagereq type="optional">kino</packagereq>
       <packagereq type="default">last-exit</packagereq>
+      <packagereq type="optional">lmms</packagereq>
+      <packagereq type="optional">lsdvd</packagereq>
+      <packagereq type="optional">lxdvdrip</packagereq>
       <packagereq type="optional">mikmod</packagereq>
       <packagereq type="default">mkisofs</packagereq>
       <packagereq type="optional">mplayer</packagereq>
@@ -7723,18 +7734,19 @@
       <packagereq type="optional">mythtv</packagereq>
       <packagereq type="optional">mythtv-frontend</packagereq>
       <packagereq type="optional">mythtv-backend</packagereq>
+      <packagereq type="optional">qdvdauthor</packagereq>
       <packagereq type="optional">rosegarden</packagereq>
       <packagereq type="default">rhythmbox</packagereq>
       <packagereq type="default">sound-juicer</packagereq>
       <packagereq type="mandatory">sox</packagereq>
       <packagereq type="default">totem</packagereq>
       <packagereq type="default">totem-mozilla-plugin</packagereq>
+      <packagereq type="optional">tovid</packagereq>
       <packagereq type="optional">tvtime</packagereq>
+      <packagereq type="optional">vlc</packagereq>
       <packagereq type="mandatory">vorbis-tools</packagereq>
       <packagereq type="optional">xawtv</packagereq>
       <packagereq type="optional">xcdroast</packagereq>
-      <packagereq type="default">xine-ui</packagereq>
-      <packagereq type="default">xine-skins</packagereq>
       <packagereq type="default">xine-lib</packagereq>
       <packagereq type="default">xine-lib-alsa</packagereq>
       <packagereq type="optional">xine-lib-arts</packagereq>
@@ -7744,12 +7756,17 @@
       <packagereq type="optional">xine-lib-gdk-pixbuf</packagereq>
       <packagereq type="optional">xine-lib-gnomevfs</packagereq>
       <packagereq type="default">xine-lib-jack</packagereq>
+      <packagereq type="optional">xine-lib-musepack</packagereq>
       <packagereq type="default">xine-lib-oggvorbis</packagereq>
       <packagereq type="default">xine-lib-oss</packagereq>
+      <packagereq type="optional">xine-lib-pulseaudio</packagereq>
       <packagereq type="optional">xine-lib-sdl</packagereq>
       <packagereq type="optional">xine-lib-smb</packagereq>
       <packagereq type="default">xine-lib-w32dll</packagereq>
+      <packagereq type="optional">xine-lib-xcb</packagereq>
       <packagereq type="default">xine-lib-xv</packagereq>
+      <packagereq type="default">xine-skins</packagereq>
+      <packagereq type="default">xine-ui</packagereq>
       <packagereq type="default">xmms</packagereq>
       <packagereq type="default">xmms-aac</packagereq>
       <packagereq type="default">xmms-alsa</packagereq>
