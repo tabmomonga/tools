@@ -6515,7 +6515,6 @@
       <packagereq type="optional">openoffice.org-testtools</packagereq>
       <packagereq type="default">openoffice.org-writer</packagereq>
       <packagereq type="default">openoffice.org-xsltfilter</packagereq>
-      <packagereq type="optional">pdfedit</packagereq>
       <packagereq type="optional">xdvik</packagereq>
       <packagereq type="optional">xpdf</packagereq>
       <packagereq type="default">youtranslate</packagereq>
