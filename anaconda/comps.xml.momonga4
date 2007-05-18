@@ -999,8 +999,8 @@
     <uservisible>false</uservisible>
     <langonly>bg</langonly>
     <packagelist>
-      <packagereq type="conditional" requires="xorg-x11-server-Xorg">xorg-x11-fonts-ISO8859-2-100dpi</packagereq>
-      <packagereq type="conditional" requires="xorg-x11-server-Xorg">xorg-x11-fonts-ISO8859-2-75dpi</packagereq>
+      <packagereq type="conditional" requires="gtk2">xorg-x11-fonts-ISO8859-2-100dpi</packagereq>
+      <packagereq type="conditional" requires="gtk2">xorg-x11-fonts-ISO8859-2-75dpi</packagereq>
       <packagereq type="conditional" requires="kdelibs">kde-i18n-Bulgarian</packagereq>
       <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-bg_BG</packagereq>
     </packagelist>
@@ -1143,6 +1143,9 @@
       <packagereq type="mandatory">truetype-fonts-zh_TW</packagereq>
       <packagereq type="conditional" requires="kdelibs">scim-qtimm</packagereq>
       <packagereq type="conditional" requires="kdelibs">uim-qtimmodule</packagereq>
+      <packagereq type="conditional" requires="gtk2">scim-chewing</packagereq>
+      <packagereq type="conditional" requires="gtk2">scim-pinyin</packagereq>
+      <packagereq type="conditional" requires="gtk2">scim-tables-chinese</packagereq>
       <packagereq type="optional">lv</packagereq>
     </packagelist>
   </group>
@@ -1451,8 +1454,8 @@
     <uservisible>false</uservisible>
     <langonly>hr</langonly>
     <packagelist>
-      <packagereq type="conditional" requires="xorg-x11-server-Xorg">xorg-x11-fonts-ISO8859-2-100dpi</packagereq>
-      <packagereq type="conditional" requires="xorg-x11-server-Xorg">xorg-x11-fonts-ISO8859-2-75dpi</packagereq>
+      <packagereq type="conditional" requires="gtk2">xorg-x11-fonts-ISO8859-2-100dpi</packagereq>
+      <packagereq type="conditional" requires="gtk2">xorg-x11-fonts-ISO8859-2-75dpi</packagereq>
       <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-hr_HR</packagereq>
     </packagelist>
   </group>
@@ -1518,8 +1521,8 @@
     <uservisible>false</uservisible>
     <langonly>cs</langonly>
     <packagelist>
-      <packagereq type="conditional" requires="xorg-x11-server-Xorg">xorg-x11-fonts-ISO8859-2-100dpi</packagereq>
-      <packagereq type="conditional" requires="xorg-x11-server-Xorg">xorg-x11-fonts-ISO8859-2-75dpi</packagereq>
+      <packagereq type="conditional" requires="gtk2">xorg-x11-fonts-ISO8859-2-100dpi</packagereq>
+      <packagereq type="conditional" requires="gtk2">xorg-x11-fonts-ISO8859-2-75dpi</packagereq>
       <packagereq type="conditional" requires="kdelibs">kde-i18n-Czech</packagereq>
       <packagereq type="conditional" requires="koffice-core">koffice-l10n-Czech</packagereq>
       <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-cs_CZ</packagereq>
@@ -4534,6 +4537,7 @@
       <packagereq type="conditional" requires="gtk2">scim-anthy</packagereq>
       <packagereq type="conditional" requires="gtk2">scim-bridge</packagereq>
       <packagereq type="conditional" requires="gtk2">scim-canna</packagereq>
+      <packagereq type="conditional" requires="gtk2">scim-input-pad</packagereq>
       <packagereq type="conditional" requires="gtk2">scim-prime</packagereq>
       <packagereq type="conditional" requires="gtk2">scim-skk</packagereq>
       <packagereq type="conditional" requires="gtk2">scim-tomoe</packagereq>
@@ -5336,6 +5340,7 @@
       <packagereq type="mandatory">truetype-fonts-ko</packagereq>
       <packagereq type="conditional" requires="kdelibs">scim-qtimm</packagereq>
       <packagereq type="conditional" requires="kdelibs">uim-qtimmodule</packagereq>
+      <packagereq type="conditional" requires="gtk2">scim-hangul</packagereq>
     </packagelist>
   </group>
 
@@ -7517,7 +7522,7 @@
     <uservisible>false</uservisible>
     <langonly>si</langonly>
     <packagelist>
-      <packagereq type="conditional" requires="xorg-x11-server-Xorg">scim-sinhala</packagereq>
+      <packagereq type="conditional" requires="gtk2">scim-sinhala</packagereq>
     </packagelist>
   </group>
 
