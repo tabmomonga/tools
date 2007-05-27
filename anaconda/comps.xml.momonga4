@@ -5239,6 +5239,7 @@
       <packagereq type="default">liblrdf-devel</packagereq>
       <packagereq type="default">libmusicbrainz-devel</packagereq>
       <packagereq type="default">libnjb-devel</packagereq>
+      <packagereq type="default">libopensync-devel</packagereq>
       <packagereq type="default">libpqxx-devel</packagereq>
       <packagereq type="default">libsamplerate-devel</packagereq>
       <packagereq type="default">libsndfile-devel</packagereq>
