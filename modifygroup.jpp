@@ -1,0 +1,5 @@
+#!/bin/bash
+
+pkg=`echo $1 | sed "s,/,,"`
+
+perl -pi -e 's,Apache Software License,Apache,;s,Development/Libraries/Java,Development/Libraries,;s,Development/Documentation,Documentation,;s,Development/Java,Development/Languages,' $pkg/$pkg.spec
