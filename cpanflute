@@ -69,7 +69,7 @@ print FILE "%define momorel $release
 Summary: $clm_name module for perl $class
 Name: perl-$clm_name
 Version: $clm_version
-Release: %{momorel}m
+Release: %{momorel}m%{?dist}
 License: GPL
 Group: Development/Languages
 Source0: http://www.cpan.org/modules/by-module/$clm_base/$clm_name-%{version}.tar.gz
