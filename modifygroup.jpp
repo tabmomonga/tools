@@ -2,4 +2,7 @@
 
 pkg=`echo $1 | sed "s,/,,"`
 
-perl -pi -e 's,Apache Software License,Apache,;s,Development/Libraries/Java,Development/Libraries,;s,Development/Documentation,Documentation,;s,Development/Java,Development/Languages,' $pkg/$pkg.spec
+perl -pi -e 's,Apache Software License,Apache,;s,Development/Libraries/Java,Development/Libraries,;s,Development/Documentation,Documentation,;s,Development/Java,Development/Languages,;s,Development/Testing,Development/Tools,;s,System/Boot,System Environment/Daemons,;s,Text Processing/Markup/XML,Applications/Text,;s,Apache-like,Apache,;s,Apache License,Apache,;' $pkg/$pkg.spec
+
+echo Checking speclint $pkg
+../tools/speclint $pkg
