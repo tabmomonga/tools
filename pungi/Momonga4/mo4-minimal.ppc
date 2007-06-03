@@ -1,0 +1,21 @@
+# Pungi config file
+#
+# # or ; can be used at the start of a line, ; only to comment inline.
+
+[default]
+product_name = Momonga
+product_path = Momonga
+iso_basename = Momonga-minimal
+bugurl = http://developer.momonga-linux.org/kagemai/
+comps = /home/Momonga/tools/anaconda/comps.xml.momonga4
+manifest = /home/Momonga/tools/pungi/Momonga4/mo4-minimal.manifest
+yumconf = /etc/pungi/yum.conf.ppc
+destdir = /srv/pungi/Momonga
+cachedir = /srv/pungi/cache
+arch = ppc
+version = 4alpha
+flavor = minimal
+discs = 1
+#cdsize = 4608.0 ; Not used if disc count is 1
+getsource = no
+

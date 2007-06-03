@@ -1,0 +1,28 @@
+anaconda-runtime
+momonga-images
+
+firfox
+
+@core --optional
+@base --optional
+@base-x
+@xfce-desktop
+
+truetype-fonts-ja
+opfc-ModuleHP
+anthy
+scim-anthy
+uim-anthy
+prime
+prime-dict
+jfbterm
+lv
+scim-prime
+man-pages-ja
+nkf
+
+-compiz
+-bind
+-bind-libs
+-httpd
+-mod_perl
