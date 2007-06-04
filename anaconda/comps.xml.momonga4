@@ -7799,6 +7799,7 @@
       <packagereq type="optional">easytag</packagereq>
       <packagereq type="optional">gnomebaker</packagereq>
       <packagereq type="optional">grip</packagereq>
+      <packagereq type="optional">gxine</packagereq>
       <packagereq type="optional">k3b</packagereq>
       <packagereq type="optional">k9copy</packagereq>
       <packagereq type="optional">kaffeine</packagereq>
