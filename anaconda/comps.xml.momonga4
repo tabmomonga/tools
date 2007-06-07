@@ -7781,10 +7781,8 @@
       <packagereq type="optional">aumix</packagereq>
       <packagereq type="optional">avidemux</packagereq>
       <packagereq type="optional">bmpx</packagereq>
-      <packagereq type="optional">cdda2wav</packagereq>
       <packagereq type="optional">cdlabelgen</packagereq>
       <packagereq type="default">cdparanoia</packagereq>
-      <packagereq type="optional">cdrtools</packagereq>
       <packagereq type="default">dvd+rw-tools</packagereq>
       <packagereq type="optional">dvdauthor</packagereq>
       <packagereq type="optional">dvdbackup</packagereq>
@@ -7792,9 +7790,11 @@
       <packagereq type="optional">dvdstyler</packagereq>
       <packagereq type="optional">dvdwizard</packagereq>
       <packagereq type="optional">easytag</packagereq>
+      <packagereq type="default">genisoimage</packagereq>
       <packagereq type="optional">gnomebaker</packagereq>
       <packagereq type="optional">grip</packagereq>
       <packagereq type="optional">gxine</packagereq>
+      <packagereq type="default">icedax</packagereq>
       <packagereq type="optional">k3b</packagereq>
       <packagereq type="optional">k9copy</packagereq>
       <packagereq type="optional">kaffeine</packagereq>
@@ -7811,7 +7811,6 @@
       <packagereq type="optional">lsdvd</packagereq>
       <packagereq type="optional">lxdvdrip</packagereq>
       <packagereq type="optional">mikmod</packagereq>
-      <packagereq type="default">mkisofs</packagereq>
       <packagereq type="optional">mplayer</packagereq>
       <packagereq type="optional">mplayer-skins</packagereq>
       <packagereq type="optional">mythtv</packagereq>
@@ -7831,6 +7830,7 @@
       <packagereq type="optional">tvtime</packagereq>
       <packagereq type="optional">vlc</packagereq>
       <packagereq type="mandatory">vorbis-tools</packagereq>
+      <packagereq type="default">wodim</packagereq>
       <packagereq type="optional">xawtv</packagereq>
       <packagereq type="optional">xcdroast</packagereq>
       <packagereq type="default">xine-lib</packagereq>
