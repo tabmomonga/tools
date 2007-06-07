@@ -713,7 +713,6 @@
       <packagereq type="mandatory">tmpwatch</packagereq>
       <packagereq type="mandatory">traceroute</packagereq>
       <packagereq type="default">unzip</packagereq>
-      <packagereq type="default">utempter</packagereq>
       <packagereq type="default">usbutils</packagereq>
       <packagereq type="default">vconfig</packagereq>
       <packagereq type="optional">xfsprogs</packagereq>
@@ -737,7 +736,6 @@
       <packagereq type="optional">iscsi-initiator-utils</packagereq>
       <packagereq type="optional">kexec-tools</packagereq>
       <packagereq type="optional">krbafs-utils</packagereq>
-      <packagereq type="optional">netdump</packagereq>
       <packagereq type="optional">pax</packagereq>
       <packagereq type="optional">star</packagereq>
       <packagereq type="optional">x86info</packagereq>
@@ -1842,9 +1840,8 @@
       <packagereq type="default">krb5-devel</packagereq>
       <packagereq type="default">krbafs-devel</packagereq>
       <packagereq type="default">kudzu-devel</packagereq>
-      <packagereq type="default">libttr-devel</packagereq>
       <packagereq type="default">libacl-devel</packagereq>
-      <packagereq type="default">attr-devel</packagereq>
+      <packagereq type="default">libattr-devel</packagereq>
       <packagereq type="default">libcap-devel</packagereq>
       <packagereq type="default">flac-devel</packagereq>
       <packagereq type="default">libogg-devel</packagereq>
@@ -6124,7 +6121,6 @@
       <packagereq type="optional">freeradius</packagereq>
       <packagereq type="optional">icecast</packagereq>
       <packagereq type="optional">krb5-server</packagereq>
-      <packagereq type="optional">netdump-server</packagereq>
       <packagereq type="optional">netatalk</packagereq>
       <packagereq type="optional">metavnc-server</packagereq>
       <packagereq type="optional">openldap-servers</packagereq>
@@ -6829,7 +6825,6 @@
       <packagereq type="mandatory">postgresql</packagereq>
       <packagereq type="optional">postgresql-contrib</packagereq>
       <packagereq type="optional">postgresql-docs</packagereq>
-      <packagereq type="optional">postgresql-pl</packagereq>
       <packagereq type="default">postgresql-python</packagereq>
       <packagereq type="default">postgresql-server</packagereq>
       <packagereq type="optional">postgresql-tcl</packagereq>
@@ -7859,7 +7854,6 @@
       <packagereq type="default">xine-skins</packagereq>
       <packagereq type="default">xine-ui</packagereq>
       <packagereq type="default">xmms</packagereq>
-      <packagereq type="default">xmms-aac</packagereq>
       <packagereq type="default">xmms-alsa</packagereq>
       <packagereq type="default">xmms-cdread</packagereq>
       <packagereq type="default">xmms-esd</packagereq>
@@ -9499,7 +9493,7 @@
       <packagereq type="default">SDL_mixer-devel</packagereq>
       <packagereq type="default">SDL_net-devel</packagereq>
       <packagereq type="default">Xaw3d-devel</packagereq>
-      <packagereq type="default">freetype2-devel</packagereq>
+      <packagereq type="default">freetype-devel</packagereq>
       <packagereq type="default">gd-devel</packagereq>
       <packagereq type="default">freeglut-devel</packagereq>
       <packagereq type="optional">icon-slicer</packagereq>
@@ -9664,7 +9658,7 @@
       <packagereq type="default">authconfig-gtk</packagereq>
       <packagereq type="optional">Canna</packagereq>
       <packagereq type="default">compiz</packagereq>
-      <packagereq type="optional">ttf-bitstream-vera</packagereq>
+      <packagereq type="optional">bitstream-vera-fonts</packagereq>
       <packagereq type="mandatory">momonga-backgrounds</packagereq>
       <packagereq type="default">firstboot</packagereq>
       <packagereq type="default">gdm</packagereq>
@@ -9681,7 +9675,7 @@
       <packagereq type="default">system-config-display</packagereq>
       <packagereq type="default">system-config-network</packagereq>
       <packagereq type="default">pirut</packagereq>
-      <packagereq type="default">policyoreutils-gui</packagereq>
+      <packagereq type="default">policycoreutils-gui</packagereq>
       <packagereq type="default">rxvt</packagereq>
       <packagereq type="default">rxvt-unicode</packagereq>
       <packagereq type="default">scim-m17n</packagereq>
