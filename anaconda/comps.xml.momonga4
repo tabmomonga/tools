@@ -7822,6 +7822,8 @@
       <packagereq type="optional">mythtv</packagereq>
       <packagereq type="optional">mythtv-frontend</packagereq>
       <packagereq type="optional">mythtv-backend</packagereq>
+      <packagereq type="optional">normalize</packagereq>
+      <packagereq type="optional">normalize-xmms</packagereq>
       <packagereq type="optional">qdvdauthor</packagereq>
       <packagereq type="optional">rosegarden</packagereq>
       <packagereq type="default">rhythmbox</packagereq>
