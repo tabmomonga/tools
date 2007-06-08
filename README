@@ -7,7 +7,7 @@
 *説明のないもの/いらないものは削除。
 *機能の類似したものは統合。
 *使い勝手の統一。
-の方向で?
+の方向で。
 
 ==OmoiKondara
 === Summary
@@ -125,18 +125,6 @@ example.OmoiKondaraを pkgs以下に.OmoiKondara という名前でコピー。
 :ライセンス
  ?
 
-== cpanflute
-:開発者/メンテナ
- kazuhiko (もとは rpm-build パッケージのもの)
-:機能概要
- CPAN module の tarball から spec ファイルを作る。
-:実行方法
-  cpanflute [tarball]
- とすると、/tmp/cpan/spec/ にディレクトリができるので、それを pkgs/ に持っ
- て来る。
-:ライセンス
- GPL
-
 == pick_up_licenses
 :開発者/メンテナ
   zunda
@@ -201,7 +189,6 @@ example.OmoiKondaraを pkgs以下に.OmoiKondara という名前でコピー。
 :ライセンス
   Ruby
 
-
 == 内容テンプレート
 :開発者/メンテナ
 :機能概要
@@ -209,6 +196,36 @@ example.OmoiKondaraを pkgs以下に.OmoiKondara という名前でコピー。
 :ライセンス
 
 == 説明のないファイル 
+N/A
+
+== 非スクリプトファイル
+*ChangeLog
+*Makefile
+*rpmvercmp.c
+
+== 削除したもの
+
+必要であるならば README(このファイル) に説明を加えてから復活させること。
+
+不要なものは積極的に消していこう。
+
+*buildtree
+*chgrel
+*chgrel.STABLE
+*chkcomps.rb
+*ftpsearch
+*getname.rb
+*mkkondaraiso
+
+== 説明が無いため、OBSOLETE送りにしたパッケージ
+*FutoiMomonga
+*OmoiKondara.test
+*OmoiKondara2
+*README.OmoiKondara2
+*example.OmoiKondara2
+*example.OmoiKondara.yaml
+*omokon-modoki.rb
+*README.omokon-modoki
 *ana-rpm-size.rb
 *checkspec.rb
 *chkreq.rb
@@ -227,32 +244,9 @@ example.OmoiKondaraを pkgs以下に.OmoiKondara という名前でコピー。
 *momodo-check.rb
 *mphvercmp.rb
 *myomokon.sh
-*omokon-modoki.rb
 *printrequires
 *repo_check
 *updatespecdb
-== 非スクリプトファイル
-*ChangeLog
-*Makefile
-*README.omokon-modoki
-*rpmvercmp.c
-= 削除したもの
-不要なものは積極的に消していこう。
-*buildtree
-*chgrel
-*chgrel.STABLE
-*chkcomps.rb
-*ftpsearch
-*getname.rb
-*mkkondaraiso
-
-== 説明が無いため、OBSOLETE送りにしたパッケージ
-*FutoiMomonga
-*OmoiKondara.test
-*OmoiKondara2
-*README.OmoiKondara2
-*example.OmoiKondara2
-*example.OmoiKondara.yaml
 
 == 使われないため、OBSOLETE送りにしたパッケージ
 == OmoiKondara3.rb
@@ -285,9 +279,22 @@ example.OmoiKondaraを pkgs以下に.OmoiKondara という名前でコピー。
 :ライセンス
  Ruby と同じ
 
-レポジトリから消えていたファイル、
+レポジトリから消えていたファイル
 ==delobso==
 
-必要であるならば復活させた上で、
-README(このファイル)に説明を加えること。
+== cpanflute
+:開発者/メンテナ
+ kazuhiko (もとは rpm-build パッケージのもの)
+:機能概要
+ CPAN module の tarball から spec ファイルを作る。
+:実行方法
+  cpanflute [tarball]
+ とすると、/tmp/cpan/spec/ にディレクトリができるので、それを pkgs/ に持っ
+ て来る。
+:ライセンス
+ GPL
+:代替品
+ cpanfluteの作成するspec fileは完成度が低いため、
+ cpanspecパッケージを使うべし。
+
 =end
