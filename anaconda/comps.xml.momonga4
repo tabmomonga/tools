@@ -481,6 +481,7 @@
       <packagereq type="optional">kchmviewer</packagereq>
       <packagereq type="optional">kile</packagereq>
       <packagereq type="optional">lilypond</packagereq>
+      <packagereq type="optional">lilypond-doc</packagereq>
       <packagereq type="optional">pdfedit</packagereq>
       <packagereq type="optional">python-docutils</packagereq>
       <packagereq type="optional">scribus</packagereq>
