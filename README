@@ -189,6 +189,16 @@ example.OmoiKondaraを pkgs以下に.OmoiKondara という名前でコピー。
 :ライセンス
   Ruby
 
+== updatespecdb
+:開発者/メンテナ
+  不明
+:機能概要
+  OmoiKondaraの下請けとして、specdbを更新する
+:実行方法
+  直接は実行されない
+:ライセンス
+  不明
+  
 == 内容テンプレート
 :開発者/メンテナ
 :機能概要
@@ -246,7 +256,6 @@ N/A
 *myomokon.sh
 *printrequires
 *repo_check
-*updatespecdb
 
 == 使われないため、OBSOLETE送りにしたパッケージ
 == OmoiKondara3.rb
