@@ -3960,6 +3960,7 @@
       <packagereq type="default">dcraw</packagereq>
       <packagereq type="default">dcraw-gimp</packagereq>
       <packagereq type="optional">digikam</packagereq>
+      <packagereq type="optional">digikam-doc</packagereq>
       <packagereq type="optional">f-spot</packagereq>
       <packagereq type="optional">fontforge</packagereq>
       <packagereq type="default">gimp</packagereq>
@@ -4911,6 +4912,7 @@
       <packagereq type="optional">audiokonverter</packagereq>
       <packagereq type="default">basket</packagereq>
       <packagereq type="default">digikam</packagereq>
+      <packagereq type="default">digikam-doc</packagereq>
       <packagereq type="default">festival</packagereq>
       <packagereq type="default">flite</packagereq>
       <packagereq type="optional">gtk-qt-engine</packagereq>
