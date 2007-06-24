@@ -35,20 +35,20 @@ while loop < OPTS[:recursion]
   loop += 1
 
   found = Set.new
-  candiate = Set.new
+  candidates = Set.new
 
   curr.each do |name|    
-    sql = "select id from specfile_tbl where name == '#{name}'"
+    sql = "select id from specfile_tbl where name glob '#{name}' "
     db.execute(sql) do |id|
-      candiate.add(id)
+      candidates.add(id)
     end	
-    sql = "select owner from package_tbl where package == '#{name}'"
+    sql = "select owner from package_tbl where package glob '#{name}'"
     db.execute(sql) do |owner|
-      candiate.add(owner)
+      candidates.add(owner)
     end
   end
 
-  candiate.each do |id|
+  candidates.each do |id|
     sql = "select name from specfile_tbl, package_tbl where id==owner and package in (select require from buildreq_tbl where owner == #{id})"
     db.execute(sql) do |pkg|
       if !reqs.include?(pkg) then

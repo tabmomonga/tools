@@ -1,6 +1,5 @@
 #!/usr/bin/ruby
 # by Hiromasa YOSHIMOTO <y@momonga-linux.org>
-
 Version = "0.0.1"
 
 $:.unshift(File.dirname($0))
@@ -35,18 +34,21 @@ while loop < OPTS[:recursion]
   loop += 1
 
   found = Set.new
-  candiate = Set.new
+  candidates = Set.new
 
-  curr.each do |name|    
-    candiate.add(name)
-    sql = "select package from specfile_tbl, package_tbl where owner==id and name == '#{name}'"
+  curr.each do |name|   
+    sql = "select name from specfile_tbl where name glob '#{name}' "
     db.execute(sql) do |cand|
-      candiate.add(cand)
+      candidates.add(cand)
+    end
+    sql = "select package from package_tbl where package glob '#{name}' "
+    db.execute(sql) do |cand|
+      candidates.add(cand)
     end
   end
 
-  candiate.each do |name|
-    sql = "select name from specfile_tbl, buildreq_tbl where owner==id and require == '#{name}'"
+  candidates.each do |name|
+    sql = "select name from specfile_tbl, buildreq_tbl where owner==id and require == '#{name}' "
     db.execute(sql) do |pkg|
       if !deps.include?(pkg) then
         found.add(pkg)

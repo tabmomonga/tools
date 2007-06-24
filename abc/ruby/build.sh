@@ -33,7 +33,7 @@ function build_queue ()
     
     LINE=`cat $1 |wc -l `
     if [ 0 -ne $LINE ]; then
-	$debug ../tools/OmoiKondara `cat $1`
+	$debug ../tools/v2/OmoiKondara2 `cat $1`
 	
 	cat /dev/null >  $1
     fi

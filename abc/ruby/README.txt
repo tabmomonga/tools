@@ -1,2 +1,5 @@
 
+find-?.rb
+
+ls-?.rb
 
