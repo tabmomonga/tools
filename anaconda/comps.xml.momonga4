@@ -127,7 +127,6 @@
       <packagereq type="optional">pessulus</packagereq>
       <packagereq type="optional">qtparted</packagereq>
       <packagereq type="optional">system-config-kickstart</packagereq>
-      <packagereq type="optional">yumex</packagereq>
     </packagelist>
   </group>
 
@@ -1871,7 +1870,6 @@
       <packagereq type="conditional" requires="koffice-core">koffice-l10n-Czech</packagereq>
       <packagereq type="conditional" requires="man-pages">man-pages-cs</packagereq>
       <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-cs_CZ</packagereq>
-      <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-dict-cs_CZ</packagereq>
     </packagelist>
   </group>
 
@@ -2257,7 +2255,6 @@
       <packagereq type="default">rcs</packagereq>
       <packagereq type="default">subversion</packagereq>
       <packagereq type="default">swig</packagereq>
-      <packagereq type="default">systemtap</packagereq>
       <packagereq type="default">texinfo</packagereq>
       <packagereq type="default">valgrind</packagereq>
       <packagereq type="optional">bazaar</packagereq>
@@ -2370,7 +2367,7 @@
       <packagereq type="default">minicom</packagereq>
       <packagereq type="default">rp-pppoe</packagereq>
       <packagereq type="default">wvdial</packagereq>
-      <packagereq type="optional">pptp</packagereq>
+      <packagereq type="optional">pptpd</packagereq>
       <packagereq type="optional">statserial</packagereq>
     </packagelist>
   </group>
@@ -2641,7 +2638,6 @@
     <uservisible>true</uservisible>
     <packagelist>
       <packagereq type="mandatory">eclipse-platform</packagereq>
-      <packagereq type="default">eclipse-cdt</packagereq>
       <packagereq type="default">eclipse-jdt</packagereq>
       <packagereq type="optional">eclipse-pde</packagereq>
     </packagelist>
@@ -3724,7 +3720,6 @@
     <uservisible>false</uservisible>
     <langonly>de</langonly>
     <packagelist>
-      <packagereq type="conditional" requires="aspell">aspell-de</packagereq>
       <packagereq type="conditional" requires="kdelibs">kde-i18n-German</packagereq>
       <packagereq type="conditional" requires="koffice-core">koffice-l10n-German</packagereq>
       <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-de</packagereq>
@@ -3856,7 +3851,20 @@
       <packagereq type="default">alacarte</packagereq>
       <packagereq type="default">at-spi</packagereq>
       <packagereq type="default">bug-buddy</packagereq>
-      <packagereq type="default">compiz</packagereq>
+      <packagereq type="default">compiz-core</packagereq>
+      <packagereq type="default">compiz-core-gtk-window-decorator</packagereq>
+      <packagereq type="default">compiz-plugins</packagereq>
+      <packagereq type="default">compiz-plugins-extra</packagereq>
+      <packagereq type="default">compiz-plugins-unsupported</packagereq>
+      <packagereq type="default">bcop</packagereq>
+      <packagereq type="default">libccs</packagereq>
+      <packagereq type="default">ccs-bindings</packagereq>
+      <packagereq type="default">ccs-backend-gconf</packagereq>
+      <packagereq type="default">ccs-settings</packagereq>
+      <packagereq type="default">ccsm</packagereq>
+      <packagereq type="default">emerald</packagereq>
+      <packagereq type="default">emerald-themes</packagereq>
+      <packagereq type="default">beryl-manager</packagereq>
       <packagereq type="default">dvd+rw-tools</packagereq>
       <packagereq type="default">eog</packagereq>
       <packagereq type="default">evince</packagereq>
@@ -5226,7 +5234,6 @@
       <packagereq type="default">jakarta-commons-digester</packagereq>
       <packagereq type="default">jakarta-commons-discovery-javadoc</packagereq>
       <packagereq type="default">jakarta-commons-discovery</packagereq>
-      <packagereq type="default">jakarta-commons-el-javadoc</packagereq>
       <packagereq type="default">jakarta-commons-el</packagereq>
       <packagereq type="default">jakarta-commons-fileupload-javadoc</packagereq>
       <packagereq type="default">jakarta-commons-fileupload</packagereq>
@@ -5413,6 +5420,20 @@
       <packagereq type="default">amarok</packagereq>
       <packagereq type="default">arts-artsc</packagereq>
       <packagereq type="default">basket</packagereq>
+      <packagereq type="default">compiz-core</packagereq>
+      <packagereq type="default">compiz-core-kde-window-decorator</packagereq>
+      <packagereq type="default">compiz-plugins</packagereq>
+      <packagereq type="default">compiz-plugins-extra</packagereq>
+      <packagereq type="default">compiz-plugins-unsupported</packagereq>
+      <packagereq type="default">bcop</packagereq>
+      <packagereq type="default">libccs</packagereq>
+      <packagereq type="default">ccs-bindings</packagereq>
+      <packagereq type="default">ccs-backend-kconfig</packagereq>
+      <packagereq type="default">ccs-settings</packagereq>
+      <packagereq type="default">ccsm</packagereq>
+      <packagereq type="default">emerald</packagereq>
+      <packagereq type="default">emerald-themes</packagereq>
+      <packagereq type="default">beryl-manager</packagereq>
       <packagereq type="default">digikam</packagereq>
       <packagereq type="default">digikam-doc</packagereq>
       <packagereq type="default">festival</packagereq>
@@ -7717,7 +7738,6 @@
     <packagelist>
       <packagereq type="mandatory">ruby</packagereq>
       <packagereq type="default">ruby-devel</packagereq>
-      <packagereq type="default">ruby-mode-emacs</packagereq>
       <packagereq type="optional">ruby-eruby</packagereq>
     </packagelist>
   </group>
@@ -8922,7 +8942,6 @@
     <packagelist>
       <packagereq type="mandatory">fonts-tamil</packagereq>
       <packagereq type="conditional" requires="kdelibs">kde-i18n-Tamil</packagereq>
-      <packagereq type="mandatory">truetype-fonts-tamil</packagereq>
       <packagereq type="conditional" requires="kdelibs">scim-qtimm</packagereq>
       <packagereq type="conditional" requires="kdelibs">uim-qtimmodule</packagereq>
     </packagelist>
@@ -9426,7 +9445,6 @@
     <uservisible>false</uservisible>
     <langonly>ur</langonly>
     <packagelist>
-      <packagereq type="mandatory">truetype-fonts-arabic</packagereq>
     </packagelist>
   </group>
 
@@ -10164,7 +10182,7 @@
     <description xml:lang="ta">ஒரு lightweight பணிமேடை சூழல் குறைந்த செயல்திறன் கொண்ட கணினிகளில் நன்றாக பணியாற்றுகிறது.</description>
     <description xml:lang="te">తక్కువ బరువున్న డెస్కుటాప్ వాతావరణం అది తక్కువ సమాప్తిగల కంప్యూటర్లలో పనిచేస్తుంది.</description>
     <description xml:lang="uk">Невибагливий до ресурсів робочий стіл, що добре працює на слабких машинах.</description>
-    <default>false</default>
+    <default>true</default>
     <uservisible>true</uservisible>
     <packagelist>
       <packagereq type="mandatory">Thunar</packagereq>
