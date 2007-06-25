@@ -5531,6 +5531,7 @@
       <packagereq type="default">xine-lib-xv</packagereq>
       <packagereq type="default">xscreensaver-base</packagereq>
       <packagereq type="default">xscreensaver-extras</packagereq>
+      <packagereq type="default">yakuake</packagereq>
       <packagereq type="optional">amarokFS</packagereq>
       <packagereq type="optional">audiokonverter</packagereq>
       <packagereq type="optional">gtk-qt-engine</packagereq>
@@ -5573,7 +5574,6 @@
       <packagereq type="optional">qdvdauthor</packagereq>
       <packagereq type="optional">smb4k</packagereq>
       <packagereq type="optional">soundkonverter</packagereq>
-      <packagereq type="default">yakuake</packagereq>
     </packagelist>
   </group>
 
