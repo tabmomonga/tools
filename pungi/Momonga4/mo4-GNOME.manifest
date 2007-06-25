@@ -10,18 +10,18 @@ momonga-images
 @legacy-software-support
 @hardware-support
 @gnome-desktop --optional
-@office
-@graphical-internet
-@graphics
-@sound-and-video
-@games
-@authoring-and-publishing
-@editors
+@office --optional
+@graphical-internet --optional
+@graphics --optional
+@sound-and-video --optional
+@games --optional
+@authoring-and-publishing --optional
+@editors --optional
 @engineering-and-scientific
 @education --optional
-@development-tools
-@gnome-software-development
-@x-software-development
+@development-tools --optional
+@gnome-software-development --optional
+@x-software-development --optional
 @ruby
 
 @afrikaans-support
@@ -96,3 +96,50 @@ momonga-images
 @welsh-support
 @xhosa-support
 @zulu-support
+
+-OpenEXR
+-dbus-qt
+-facile
+-kde-i18n
+-kde-i18n-Arabic
+-kde-i18n-Bengali
+-kde-i18n-Brazilian-Portuguese
+-kde-i18n-British-English
+-kde-i18n-Bulgarian
+-kde-i18n-Catalan
+-kde-i18n-Chinese
+-kde-i18n-Chinese-Big5
+-kde-i18n-Czech
+-kde-i18n-Danish
+-kde-i18n-Dutch
+-kde-i18n-Estonian
+-kde-i18n-Finnish
+-kde-i18n-French
+-kde-i18n-German
+-kde-i18n-Greek
+-kde-i18n-Hebrew
+-kde-i18n-Hindi
+-kde-i18n-Hungarian
+-kde-i18n-Icelandic
+-kde-i18n-Italian
+-kde-i18n-Japanese
+-kde-i18n-Korean
+-kde-i18n-Lithuanian
+-kde-i18n-Norwegian-Bookmal
+-kde-i18n-Norwegian-Nynorsk
+-kde-i18n-Polish
+-kde-i18n-Portuguese
+-kde-i18n-Punjabi
+-kde-i18n-Romanian
+-kde-i18n-Russian
+-kde-i18n-Serbian
+-kde-i18n-Serbian-Latin
+-kde-i18n-Slovak
+-kde-i18n-Slovenian
+-kde-i18n-Spanish
+-kde-i18n-Swedish
+-kde-i18n-Tamil
+-kde-i18n-Turkish
+-kde-i18n-Ukrainian
+-kdebase
+-kdeedu
