@@ -10,18 +10,18 @@ momonga-images
 @legacy-software-support
 @hardware-support
 @kde-desktop --optional
-@office
-@graphical-internet
-@graphics
-@sound-and-video
-@games
-@authoring-and-publishing
-@editors
-@engineering-and-scientific
+@office --optional
+@graphical-internet --optional
+@graphics --optional
+@sound-and-video --optional
+@games --optional
+@authoring-and-publishing --optional
+@editors --optional
+@engineering-and-scientific --optional
 @education --optional
-@development-tools
-@kde-software-development
-@x-software-development
+@development-tools --optional
+@kde-software-development --optional
+@x-software-development --optional
 @ruby
 
 @afrikaans-support
