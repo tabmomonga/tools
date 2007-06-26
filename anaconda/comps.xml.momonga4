@@ -5776,6 +5776,7 @@
       <packagereq type="default">mjpegtools-devel</packagereq>
       <packagereq type="default">mysql-devel</packagereq>
       <packagereq type="default">net-snmp-devel</packagereq>
+      <packagereq type="default">obexftp-devel</packagereq>
       <packagereq type="default">openslp-devel</packagereq>
       <packagereq type="default">poppler-devel</packagereq>
       <packagereq type="default">postgresql-devel</packagereq>
