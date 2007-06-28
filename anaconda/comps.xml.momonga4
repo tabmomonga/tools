@@ -5784,6 +5784,7 @@
       <packagereq type="default">qt-MySQL</packagereq>
       <packagereq type="default">qt-PostgreSQL</packagereq>
       <packagereq type="default">qt-designer</packagereq>
+      <packagereq type="default">qt4-devel</packagereq>
       <packagereq type="default">qtruby</packagereq>
       <packagereq type="default">scim-devel</packagereq>
       <packagereq type="default">scons</packagereq>
