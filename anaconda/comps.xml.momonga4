@@ -3857,9 +3857,9 @@
       <packagereq type="default">compiz-plugins-extra</packagereq>
       <packagereq type="default">compiz-plugins-unsupported</packagereq>
       <packagereq type="default">bcop</packagereq>
-      <packagereq type="default">libccs</packagereq>
-      <packagereq type="default">ccs-bindings</packagereq>
-      <packagereq type="default">ccs-backend-gconf</packagereq>
+      <packagereq type="default">libcompizconfig</packagereq>
+      <packagereq type="default">compizconfig-python</packagereq>
+      <packagereq type="default">compizconfig-backend-gconf</packagereq>
       <packagereq type="default">ccs-settings</packagereq>
       <packagereq type="default">ccsm</packagereq>
       <packagereq type="default">emerald</packagereq>
@@ -5426,9 +5426,9 @@
       <packagereq type="default">compiz-plugins-extra</packagereq>
       <packagereq type="default">compiz-plugins-unsupported</packagereq>
       <packagereq type="default">bcop</packagereq>
-      <packagereq type="default">libccs</packagereq>
-      <packagereq type="default">ccs-bindings</packagereq>
-      <packagereq type="default">ccs-backend-kconfig</packagereq>
+      <packagereq type="default">libcompizconfig</packagereq>
+      <packagereq type="default">compizconfig-python</packagereq>
+      <packagereq type="default">compizconfig-backend-kconfig</packagereq>
       <packagereq type="default">ccs-settings</packagereq>
       <packagereq type="default">ccsm</packagereq>
       <packagereq type="default">emerald</packagereq>
