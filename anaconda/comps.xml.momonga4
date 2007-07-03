@@ -7044,7 +7044,6 @@
       <packagereq type="optional">koffice-kspread</packagereq>
       <packagereq type="optional">koffice-kugar</packagereq>
       <packagereq type="optional">koffice-kword</packagereq>
-      <packagereq type="optional">koffice-suite</packagereq>
       <packagereq type="optional">krecipes</packagereq>
       <packagereq type="optional">kreetingkard</packagereq>
       <packagereq type="optional">magicpoint</packagereq>
