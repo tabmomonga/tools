@@ -3634,6 +3634,7 @@
       <packagereq type="optional">armagetronad</packagereq>
       <packagereq type="optional">csmash</packagereq>
       <packagereq type="optional">fortune-mod</packagereq>
+      <packagereq type="optional">freeciv</packagereq>
       <packagereq type="optional">kbilliards</packagereq>
       <packagereq type="optional">kdeedu</packagereq>
       <packagereq type="optional">kdegames</packagereq>
