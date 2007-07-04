@@ -740,6 +740,7 @@
       <packagereq type="optional">acpid</packagereq>
       <packagereq type="optional">apmd</packagereq>
       <packagereq type="optional">authd</packagereq>
+      <packagereq type="optional">btrfs-progs</packagereq>
       <packagereq type="optional">bridge-utils</packagereq>
       <packagereq type="optional">brltty</packagereq>
       <packagereq type="optional">ethtool</packagereq>
@@ -753,6 +754,7 @@
       <packagereq type="optional">lha</packagereq>
       <packagereq type="optional">mkbootdisk</packagereq>
       <packagereq type="optional">mtools</packagereq>
+      <packagereq type="optional">nilfs-utils</packagereq>
       <packagereq type="optional">netconfig</packagereq>
       <packagereq type="optional">ntfsprogs</packagereq>
       <packagereq type="optional">pax</packagereq>
