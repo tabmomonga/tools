@@ -3875,6 +3875,7 @@
       <packagereq type="default">evince</packagereq>
       <packagereq type="default">fast-user-switch-applet</packagereq>
       <packagereq type="default">file-roller</packagereq>
+      <packagereq type="default">fusion-icon</packagereq>
       <packagereq type="default">gcalctool</packagereq>
       <packagereq type="default">gedit</packagereq>
       <packagereq type="default">gnome-audio</packagereq>
@@ -5443,6 +5444,7 @@
       <packagereq type="default">digikam-doc</packagereq>
       <packagereq type="default">festival</packagereq>
       <packagereq type="default">flite</packagereq>
+      <packagereq type="default">fusion-icon</packagereq>
       <packagereq type="default">gtk2-engines</packagereq>
       <packagereq type="default">gwenview</packagereq>
       <packagereq type="default">k3b</packagereq>
