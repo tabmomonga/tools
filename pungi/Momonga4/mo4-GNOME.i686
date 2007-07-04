@@ -16,5 +16,5 @@ arch = i686
 version = 4alpha
 flavor = GNOME
 discs = 1
-# cdsize = 4608.0; not used with discs = 1
+# cdsize = 4000.0; not used with discs = 1
 getsource = no

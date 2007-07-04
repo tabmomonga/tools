@@ -16,5 +16,5 @@ arch = ppc
 version = 4alpha
 flavor = everything
 discs = 2
-cdsize = 4608.0 ; DVD size
+cdsize = 4000.0 ; DVD size
 getsource = no

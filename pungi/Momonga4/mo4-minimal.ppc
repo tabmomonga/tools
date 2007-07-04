@@ -16,6 +16,6 @@ arch = ppc
 version = 4alpha
 flavor = minimal
 discs = 1
-#cdsize = 4608.0 ; Not used if disc count is 1
+#cdsize = 4000.0 ; Not used if disc count is 1
 getsource = no
 
