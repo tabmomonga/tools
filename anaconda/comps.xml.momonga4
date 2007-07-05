@@ -5541,6 +5541,7 @@
       <packagereq type="default">yakuake</packagereq>
       <packagereq type="optional">amarokFS</packagereq>
       <packagereq type="optional">audiokonverter</packagereq>
+      <packagereq type="optional">fusion-icon-qt3</packagereq>
       <packagereq type="optional">gtk-qt-engine</packagereq>
       <packagereq type="optional">k9copy</packagereq>
       <packagereq type="optional">kaffeine-plugin</packagereq>
@@ -5577,7 +5578,6 @@
       <packagereq type="optional">lmms</packagereq>
       <packagereq type="optional">pdfedit</packagereq>
       <packagereq type="optional">polyester</packagereq>
-      <packagereq type="optional">pykompiz</packagereq>
       <packagereq type="optional">qdvdauthor</packagereq>
       <packagereq type="optional">smb4k</packagereq>
       <packagereq type="optional">soundkonverter</packagereq>
@@ -5729,6 +5729,7 @@
       <packagereq type="default">flite-devel</packagereq>
       <packagereq type="default">fribidi-devel</packagereq>
       <packagereq type="default">gamin-devel</packagereq>
+      <packagereq type="default">gammu-devel</packagereq>
       <packagereq type="default">ghostscript-devel</packagereq>
       <packagereq type="default">gnokii-devel</packagereq>
       <packagereq type="default">gnupg2</packagereq>
