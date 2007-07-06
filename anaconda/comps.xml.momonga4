@@ -907,7 +907,6 @@
       <packagereq type="default">rhgb</packagereq>
       <packagereq type="default">rxvt-unicode</packagereq>
       <packagereq type="default">rxvt</packagereq>
-      <packagereq type="default">scim-m17n</packagereq>
       <packagereq type="default">sdr</packagereq>
       <packagereq type="default">synaptics</packagereq>
       <packagereq type="default">system-config-date</packagereq>
@@ -940,6 +939,7 @@
       <packagereq type="optional">metavnc-server</packagereq>
       <packagereq type="optional">momonga-xgl-settings</packagereq>
       <packagereq type="optional">openssh-askpass-gnome</packagereq>
+      <packagereq type="optional">scim-m17n</packagereq>
       <packagereq type="optional">xgl-hardware-list</packagereq>
       <packagereq type="optional">xorg-x11-resutils</packagereq>
       <packagereq type="optional">xorg-x11-server-Xgl</packagereq>
