@@ -23,6 +23,5 @@ nkf
 
 -compiz
 -bind
--bind-libs
 -httpd
 -mod_perl
