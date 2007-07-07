@@ -4281,6 +4281,7 @@
       <packagereq type="optional">seamonkey-psm</packagereq>
       <packagereq type="optional">seamonkey</packagereq>
       <packagereq type="optional">totem-mozilla-plugin</packagereq>
+      <packagereq type="optional">vlc-plugin</packagereq>
     </packagelist>
   </group>
 
