@@ -5608,7 +5608,6 @@
       <packagereq type="default">yakuake</packagereq>
       <packagereq type="optional">amarokFS</packagereq>
       <packagereq type="optional">audiokonverter</packagereq>
-      <packagereq type="optional">fusion-icon-qt3</packagereq>
       <packagereq type="optional">gtk-qt-engine</packagereq>
       <packagereq type="optional">k9copy</packagereq>
       <packagereq type="optional">kaffeine-plugin</packagereq>
