@@ -5510,7 +5510,7 @@
       <packagereq type="default">digikam-doc</packagereq>
       <packagereq type="default">festival</packagereq>
       <packagereq type="default">flite</packagereq>
-      <packagereq type="default">fusion-icon</packagereq>
+      <packagereq type="default">fusion-icon-qt3</packagereq>
       <packagereq type="default">gtk2-engines</packagereq>
       <packagereq type="default">gwenview</packagereq>
       <packagereq type="default">k3b</packagereq>
