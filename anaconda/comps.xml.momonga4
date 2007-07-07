@@ -5308,6 +5308,73 @@
   </group>
 
   <group>
+    <id>kannada-support</id>
+    <name>Kannada Support</name>
+    <name xml:lang="am">ካናዳኛ ድጋፍ</name>
+    <name xml:lang="as">কন্নড় ভাষাৰ সমৰ্থন</name>
+    <name xml:lang="bg">Поддръжка на Каннада</name>
+    <name xml:lang="bn">কানাড়া ব্যবহারের সহায়ক</name>
+    <name xml:lang="bn_IN">কন্নড় ভাষা ব্যবহারের সহায়তা</name>
+    <name xml:lang="bs">Podrška za kanadski</name>
+    <name xml:lang="ca">Suport per al kannada</name>
+    <name xml:lang="cs">Kannada (Indie)</name>
+    <name xml:lang="cy">Cynhaliaeth Kannada</name>
+    <name xml:lang="da">Understøttelse for kannada</name>
+    <name xml:lang="de">Unterstützung für Kannada (Indien)</name>
+    <name xml:lang="el">Υποστήριξη Kannada</name>
+    <name xml:lang="es">Soporte para japonés (kannada)</name>
+    <name xml:lang="et">kannada keele toetus</name>
+    <name xml:lang="fi">Kannadan kielituki</name>
+    <name xml:lang="fr">Support kannada</name>
+    <name xml:lang="gu">કન્નડ આધાર</name>
+    <name xml:lang="hi">कन्नड़ समर्थन</name>
+    <name xml:lang="hr">Podrška za kanadski</name>
+    <name xml:lang="hu">Kannada nyelvi támogatás</name>
+    <name xml:lang="id">Dukungan Kanada</name>
+    <name xml:lang="ilo">Panagsayangkat ti Kannada</name>
+    <name xml:lang="is">Kannada</name>
+    <name xml:lang="it">Supporto per il canadese</name>
+    <name xml:lang="ja">カンナダ語のサポート</name>
+    <name xml:lang="kn">ಕನ್ನಡ ಸಮರ್ಥನೆ</name>
+    <name xml:lang="ko">칸나다어 지원</name>
+    <name xml:lang="lv">Kanādiešu valodas atbalsts</name>
+    <name xml:lang="mk">Поддршка за канада</name>
+    <name xml:lang="ml">കന്നഡ സപ്പോര്‍ട്ട്</name>
+    <name xml:lang="mr">कन्नड समर्थन</name>
+    <name xml:lang="ms">Sokongan Kannada</name>
+    <name xml:lang="nb">Støtte for kannada</name>
+    <name xml:lang="nl">Kannada ondersteuning</name>
+    <name xml:lang="no">Støtte for kanaresisk</name>
+    <name xml:lang="or">କନ୍ନଡ ସହାୟତା</name>
+    <name xml:lang="pa">ਕੰਨੜ ਸਹਿਯੋਗ</name>
+    <name xml:lang="pl">Obsługa kannada</name>
+    <name xml:lang="pt">Suporte a Kannada</name>
+    <name xml:lang="pt_BR">Suporte à Kannada</name>
+    <name xml:lang="ro">Suport pentru kannada</name>
+    <name xml:lang="ru">Поддержка каннадского языка</name>
+    <name xml:lang="si">කන්නද භාශා පහසුකම</name>
+    <name xml:lang="sk">Kanadská podpora</name>
+    <name xml:lang="sl">Podpora Kannadščini (Indijščina)</name>
+    <name xml:lang="sr">Подршка за канаду</name>
+    <name xml:lang="sr@Latn">Podrška za kanadu</name>
+    <name xml:lang="sv">Stöd för kannada</name>
+    <name xml:lang="ta">கன்னட துணை</name>
+    <name xml:lang="te">కన్నడా మద్దతు</name>
+    <name xml:lang="tr">Kanada Dili Desteği</name>
+    <name xml:lang="uk">Підтримка канадської мови</name>
+    <name xml:lang="ur">کانناڈا کا ساتھ</name>
+    <name xml:lang="zh_CN">坎纳达语支持</name>
+    <name xml:lang="zh_TW">卡納達語支援</name>
+    <description/>
+    <default>false</default>
+    <uservisible>false</uservisible>
+    <langonly>kn</langonly>
+    <packagelist>
+      <packagereq type="mandatory">fonts-kannada</packagereq>
+    </packagelist>
+  </group>
+
+  <group>
     <id>kde-desktop</id>
     <name>KDE (K Desktop Environment)</name>
     <name xml:lang="af">KDE (K Desktop Environment)</name>
