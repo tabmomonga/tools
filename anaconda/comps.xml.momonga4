@@ -8958,7 +8958,7 @@
       <packagereq type="optional">unison</packagereq>
       <packagereq type="optional">uucp</packagereq>
       <packagereq type="optional">wine</packagereq>
-      <packagereq type="optional">wireshark</packagereq>
+      <packagereq type="optional">wireshark-gnome</packagereq>
     </packagelist>
   </group>
 
