@@ -10155,6 +10155,7 @@
       <packagereq type="default">freeglut-devel</packagereq>
       <packagereq type="default">freetype-devel</packagereq>
       <packagereq type="default">gd-devel</packagereq>
+      <packagereq type="default">giflib-devel</packagereq>
       <packagereq type="default">libSM-devel</packagereq>
       <packagereq type="default">libXScrnSaver-devel</packagereq>
       <packagereq type="default">libXTrap-devel</packagereq>
@@ -10182,7 +10183,6 @@
       <packagereq type="default">libmng-devel</packagereq>
       <packagereq type="default">libpng-devel</packagereq>
       <packagereq type="default">libtiff-devel</packagereq>
-      <packagereq type="default">libungif-devel</packagereq>
       <packagereq type="default">mesa-libGL-devel</packagereq>
       <packagereq type="default">netpbm-devel</packagereq>
       <packagereq type="default">xorg-x11-xtrans-devel</packagereq>
