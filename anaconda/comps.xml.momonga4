@@ -4421,6 +4421,7 @@
       <packagereq type="optional">gwenview</packagereq>
       <packagereq type="optional">k3d</packagereq>
       <packagereq type="optional">kdegraphics</packagereq>
+      <packagereq type="optional">kgraphviewer</packagereq>
       <packagereq type="optional">kipi-plugins</packagereq>
       <packagereq type="optional">kphotoalbum</packagereq>
       <packagereq type="optional">libsane-hpaio</packagereq>
@@ -5621,6 +5622,7 @@
       <packagereq type="optional">kdirstat</packagereq>
       <packagereq type="optional">kdissert</packagereq>
       <packagereq type="optional">kdocker</packagereq>
+      <packagereq type="optional">kgraphviewer</packagereq>
       <packagereq type="optional">kgtk</packagereq>
       <packagereq type="optional">kguitar</packagereq>
       <packagereq type="optional">kickpim</packagereq>
