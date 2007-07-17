@@ -3868,7 +3868,6 @@
       <packagereq type="default">ccsm</packagereq>
       <packagereq type="default">emerald</packagereq>
       <packagereq type="default">emerald-themes</packagereq>
-      <packagereq type="default">fusion-icon</packagereq>
       <packagereq type="default">dvd+rw-tools</packagereq>
       <packagereq type="default">eog</packagereq>
       <packagereq type="default">evince</packagereq>
@@ -5507,7 +5506,6 @@
       <packagereq type="default">ccsm</packagereq>
       <packagereq type="default">emerald</packagereq>
       <packagereq type="default">emerald-themes</packagereq>
-      <packagereq type="default">fusion-icon-qt3</packagereq>
       <packagereq type="default">digikam</packagereq>
       <packagereq type="default">digikam-doc</packagereq>
       <packagereq type="default">festival</packagereq>
