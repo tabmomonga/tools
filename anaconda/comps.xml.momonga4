@@ -5540,6 +5540,7 @@
       <packagereq type="default">kerry</packagereq>
       <packagereq type="default">keurocalc</packagereq>
       <packagereq type="default">kftpgrabber</packagereq>
+      <packagereq type="default">kicker-compiz</packagereq>
       <packagereq type="default">kile</packagereq>
       <packagereq type="default">kiosktool</packagereq>
       <packagereq type="default">kipi-plugins</packagereq>
@@ -5633,6 +5634,7 @@
       <packagereq type="optional">kmobiletools</packagereq>
       <packagereq type="optional">kmymoney</packagereq>
       <packagereq type="optional">kover</packagereq>
+      <packagereq type="optional">koverartist</packagereq>
       <packagereq type="optional">krusader</packagereq>
       <packagereq type="optional">ksensors</packagereq>
       <packagereq type="optional">kshutdown</packagereq>
@@ -8462,6 +8464,7 @@
       <packagereq type="optional">kino</packagereq>
       <packagereq type="optional">kmplayer</packagereq>
       <packagereq type="optional">kover</packagereq>
+      <packagereq type="optional">koverartist</packagereq>
       <packagereq type="optional">kwave</packagereq>
       <packagereq type="optional">lmms</packagereq>
       <packagereq type="optional">lsdvd</packagereq>
