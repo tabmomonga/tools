@@ -8910,6 +8910,7 @@
     <default>false</default>
     <uservisible>true</uservisible>
     <packagelist>
+      <packagereq type="default">bash-completion</packagereq>
       <packagereq type="default">ckermit</packagereq>
       <packagereq type="default">nmap</packagereq>
       <packagereq type="default">open</packagereq>
