@@ -5814,6 +5814,7 @@
       <packagereq type="default">imlib2-devel</packagereq>
       <packagereq type="default">jack-devel</packagereq>
       <packagereq type="default">jadetex</packagereq>
+      <packagereq type="default">kbanking-devel</packagereq>
       <packagereq type="default">kdbg</packagereq>
       <packagereq type="default">kdebindings-devel</packagereq>
       <packagereq type="default">kdebindings</packagereq>
