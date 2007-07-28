@@ -3649,6 +3649,8 @@
       <packagereq type="optional">tuxkart</packagereq>
       <packagereq type="optional">tuxtype</packagereq>
       <packagereq type="optional">xkobo</packagereq>
+      <packagereq type="optional">xpenguins</packagereq>
+      <packagereq type="optional">xplanet</packagereq>
     </packagelist>
   </group>
 
