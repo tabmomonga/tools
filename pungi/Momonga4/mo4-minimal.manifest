@@ -20,8 +20,20 @@ lv
 scim-prime
 man-pages-ja
 nkf
+uim-skk
 
 -compiz
 -bind
 -httpd
 -mod_perl
+
+-kernel-openvz*
+-kernel-xen
+-kernel-PAE*
+-kernel-debug*
+
+-momonga-backgrounds
+-brltty
+-flite
+-perl-Template-Toolkit
+
