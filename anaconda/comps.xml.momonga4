@@ -5096,6 +5096,7 @@
     <packagelist>
       <packagereq type="mandatory">java-1.5.0-gcj</packagereq>
       <packagereq type="mandatory">libgcj</packagereq>
+      <packagereq type="default">java-sun-j2se1.6-sdk</packagereq>
     </packagelist>
   </group>
 
