@@ -949,6 +949,7 @@
       <packagereq type="optional">xorg-x11-xsm</packagereq>
       <packagereq type="optional">xscreensaver-base</packagereq>
       <packagereq type="optional">xscreensaver-extras</packagereq>
+      <packagereq type="optional">xscreensaver-extras-gss</packagereq>
       <packagereq type="optional">xscreensaver-gl-extras</packagereq>
       <packagereq type="optional">xscreensaver-gl-extras-gss</packagereq>
     </packagelist>
@@ -5609,6 +5610,7 @@
       <packagereq type="default">xine-lib-xv</packagereq>
       <packagereq type="default">xscreensaver-base</packagereq>
       <packagereq type="default">xscreensaver-extras</packagereq>
+      <packagereq type="default">xscreensaver-gl-extras</packagereq>
       <packagereq type="default">yakuake</packagereq>
       <packagereq type="optional">amarokFS</packagereq>
       <packagereq type="optional">audiokonverter</packagereq>
