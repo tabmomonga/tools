@@ -104,6 +104,8 @@ end
   $ARCH_DEP_PKGS_ONLY = false
   $IGNORE_REMOVE      = false
   $FTP_CMD            = ""
+  $FORCE_FETCH        = false
+  $CHECK_ONLY         = false
   $DISPLAY            = ":0.0"
   $hTAG               = Hash.new
   $LOG_PATH           = ""
@@ -298,6 +300,10 @@ getsするが、sec秒以内に終了しない場合にはTimeoutErrorをraiseする。
   def cp_local(n)
     topdir = get_topdir
     if File.exist?("#{topdir}/SOURCES/#{n}") then
+      if $FORCE_FETCH then
+        File.unlink("#{topdir}/SOURCES/#{n}")
+        return false
+      end
       if File.exist?("#{$hTAG['NAME']}/SOURCES/#{n}") then
         md5SRC = `md5sum #{topdir}/SOURCES/#{n}`.split[0]
         md5DEST = `md5sum #{$hTAG['NAME']}/SOURCES/#{n}`.split[0]
@@ -799,6 +805,12 @@ Sourece/Patch/Icon タグで指定されているファイルをビルド
     else
       `echo %OmoiKondara_enable_debug 0 >> rpmmacros`
     end
+    if $CHECK_ONLY then
+      rpmerr = exec_command "rpmbuild --rcfile rpmrc -bp #{pkg}.spec"
+      clean_up(pkg,install)
+      return rpmerr
+    end
+
     if !$IGNORE_REMOVE && File.exist?("REMOVE.PLEASE") && /\-ba|\-bb/ =~ $RPMOPT then
 # .spec をパースしてすべてのサブパッケージを消すべき。
 # すべての .spec の依存関係がただしければ、依存するものも
@@ -1355,6 +1367,23 @@ rpm -ivh する関係上、sudo が password 無しで実行可能
               end
 	    end
 
+            if $FORCE_FETCH then
+              if File.exist?($hTAG["NAME"] + "/SOURCES") then
+                exec_command "rm -rf #{$hTAG['NAME']}/SOURCES"
+                if $DEBUG_FLAG then
+                  $stderr.puts "\n"
+                  $stderr.puts "MSG: exec_command rm -rf #{$hTAG['NAME']}/SOURCES"
+                end
+              end
+  
+              if FileTest.symlink?($hTAG["NAME"] + "/SOURCES") then
+                File.unlink($hTAG["NAME"] + "/SOURCES")
+                if $DEBUG_FLAG then
+                  $stderr.puts "MSG: File.unlink #{$hTAG['NAME']}/SOURCES"
+                end
+              end
+            end
+
 	    workdir = $WORKDIR + "/" + $hTAG["NAME"] + "-" +
                       $hTAG["VERSION"] + "-" + $hTAG["RELEASE"]
             if $DEBUG_FLAG then
@@ -1456,6 +1485,9 @@ rpm -ivh する関係上、sudo が password 無しで実行可能
           pkg = Dir.pwd.split("/")[-1]
           Dir.chdir ".."
           buildme(pkg)
+          if $CHECK_ONLY then
+            next
+          end
           Dir.chdir pkg
         end
       end
@@ -1471,6 +1503,8 @@ options = [
   ["-c", "--cvs",          GetoptLong::NO_ARGUMENT],
   ["-d", "--depend",       GetoptLong::REQUIRED_ARGUMENT],
   ["-f", "--force",        GetoptLong::NO_ARGUMENT],
+  ["-F", "--force-fetch",  GetoptLong::NO_ARGUMENT],
+  ["-o", "--check-only",   GetoptLong::NO_ARGUMENT],
   ["-g", "--checkgroup",   GetoptLong::NO_ARGUMENT],
   ["-i", "--install",      GetoptLong::NO_ARGUMENT],
   ["-m", "--main",         GetoptLong::NO_ARGUMENT],
@@ -1500,6 +1534,8 @@ Usage: ../tools/OmoiKondara [options] [names]
   -c, --cvs               (ignored. remained for compatibility)
   -d, --depend "DEPENDS"  specify dependencies
   -f, --force             force build
+  -F  --force-fetch       force fetch NoSource/NoPatch
+  -o  --check-only        checksum compare(run "rpmbuild -bp")
   -g, --checkgroup        group check only
   -i, --install           force install after build (except kernel and usolame)
   -m, --main              main package only
@@ -1578,6 +1614,10 @@ begin
       $BUILD_ALTER = true
     when "-z"
       $MAIN_ONLY = false
+    when "-F"
+      $FORCE_FETCH = true
+    when "-o"
+      $CHECK_ONLY = true
     when "-h"
       show_usage
     end
