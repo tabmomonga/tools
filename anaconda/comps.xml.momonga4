@@ -8915,6 +8915,7 @@
     <default>false</default>
     <uservisible>true</uservisible>
     <packagelist>
+      <packagereq type="default">audit</packagereq>
       <packagereq type="default">bash-completion</packagereq>
       <packagereq type="default">ckermit</packagereq>
       <packagereq type="default">nmap</packagereq>
@@ -8931,8 +8932,6 @@
       <packagereq type="optional">arj</packagereq>
       <packagereq type="optional">arptables_jf</packagereq>
       <packagereq type="optional">arpwatch</packagereq>
-      <packagereq type="optional">audit</packagereq>
-      <packagereq type="optional">audit</packagereq>
       <packagereq type="optional">bochs</packagereq>
       <packagereq type="optional">cabextract</packagereq>
       <packagereq type="optional">convmv</packagereq>
