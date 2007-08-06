@@ -24,6 +24,7 @@ uim-skk
 
 -compiz
 -bind
+-NetworkManager
 -httpd
 -mod_perl
 
