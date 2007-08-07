@@ -5577,6 +5577,11 @@
       <packagereq type="default">kwlan</packagereq>
       <packagereq type="default">libakode</packagereq>
       <packagereq type="default">openoffice.org-kde</packagereq>
+      <packagereq type="default">qt-MySQL</packagereq>
+      <packagereq type="default">qt-ODBC</packagereq>
+      <packagereq type="default">qt-PostgreSQL</packagereq>
+      <packagereq type="default">qt-sqlite</packagereq>
+      <packagereq type="default">qt-styles</packagereq>
       <packagereq type="default">qtparted</packagereq>
       <packagereq type="default">rosegarden</packagereq>
       <packagereq type="default">rsibreak</packagereq>
@@ -5655,6 +5660,12 @@
       <packagereq type="optional">pdfedit</packagereq>
       <packagereq type="optional">polyester</packagereq>
       <packagereq type="optional">qdvdauthor</packagereq>
+      <packagereq type="optional">qt4</packagereq>
+      <packagereq type="optional">qt4-mysql</packagereq>
+      <packagereq type="optional">qt4-odbc</packagereq>
+      <packagereq type="optional">qt4-postgresql</packagereq>
+      <packagereq type="optional">qt4-sqlite</packagereq>
+      <packagereq type="optional">qt4-x11</packagereq>
       <packagereq type="optional">smb4k</packagereq>
       <packagereq type="optional">soundkonverter</packagereq>
     </packagelist>
@@ -5865,10 +5876,9 @@
       <packagereq type="default">poppler-devel</packagereq>
       <packagereq type="default">postgresql-devel</packagereq>
       <packagereq type="default">qscintilla-devel</packagereq>
-      <packagereq type="default">qt-MySQL</packagereq>
-      <packagereq type="default">qt-PostgreSQL</packagereq>
       <packagereq type="default">qt-designer</packagereq>
       <packagereq type="default">qt4-devel</packagereq>
+      <packagereq type="default">qt4-doc</packagereq>
       <packagereq type="default">qtruby</packagereq>
       <packagereq type="default">scim-devel</packagereq>
       <packagereq type="default">scons</packagereq>
@@ -6614,6 +6624,7 @@
       <packagereq type="optional">php-mysql</packagereq>
       <packagereq type="optional">qt-MySQL</packagereq>
       <packagereq type="optional">qt-ODBC</packagereq>
+      <packagereq type="optional">qt4-mysql</packagereq>
     </packagelist>
   </group>
 
@@ -7575,6 +7586,9 @@
       <packagereq type="optional">postgresql-tcl</packagereq>
       <packagereq type="optional">postgresql-test</packagereq>
       <packagereq type="optional">qt-ODBC</packagereq>
+      <packagereq type="optional">qt-PostgreSQL</packagereq>
+      <packagereq type="optional">qt4-odbc</packagereq>
+      <packagereq type="optional">qt4-postgresql</packagereq>
       <packagereq type="optional">unixODBC-kde</packagereq>
     </packagelist>
   </group>
