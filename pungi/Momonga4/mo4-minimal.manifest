@@ -12,15 +12,10 @@ fonts-japanese
 opfc-ModuleHP
 anthy
 scim-anthy
-uim-anthy
-prime
-prime-dict
 jfbterm
 lv
-scim-prime
 man-pages-ja
 nkf
-uim-skk
 
 -compiz
 -bind
@@ -28,6 +23,7 @@ uim-skk
 -httpd
 -mod_perl
 
+-kernel-kdump*
 -kernel-openvz*
 -kernel-xen
 -kernel-PAE*
