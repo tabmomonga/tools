@@ -8928,7 +8928,7 @@
     <description xml:lang="zh_CN">这组软件包是各类系统工具的集合，譬如：连接 SMB 共享的客户；监控网络交通的工具。</description>
     <description xml:lang="zh_TW">這個群組是系統上許多種工具的收集，例如用來連線到 網路芳鄰(SAMBA)共享的用戶端， 以及用來監視網路流量的工具等等。</description>
     <description xml:lang="zu">Leli qembu liyiqoqo lamathuluzi esistimu ambalwa, njengomthengi wokuxhuma ngokuhlanganyela kwi-SMB kanye namathuluzi okulindwe kuxhumano lomlekeleli.</description>
-    <default>false</default>
+    <default>true</default>
     <uservisible>true</uservisible>
     <packagelist>
       <packagereq type="default">audit</packagereq>
