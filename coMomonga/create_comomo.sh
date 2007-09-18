@@ -50,7 +50,7 @@ echo "Format image file"
 mkfs.reiserfs -f $IMAGEFILE
 
 echo "Mount image file"
-mount -o loop -t reiserfs $IMAGEFILE $REPOBASE
+mount -o loop,noatime -t reiserfs $IMAGEFILE $REPOBASE
 
 
 echo "Making directories"
@@ -119,6 +119,7 @@ cat << EOF > $REPOBASE/etc/fstab
 /dev/cobd0  /               reiserfs        defaults,noatime    1 1
 /dev/cobd1  swap            swap            defaults            0 0
 none        /dev/pts        devpts          gid=5,mode=620      0 0
+sysfs       /sys            sysfs           defaults            0 0
 none        /proc           proc            defaults            0 0
 EOF
 
@@ -130,7 +131,12 @@ EOF
 touch $REPOBASE/etc/resolv.conf
 
 echo "Mounting /proc"
-mount -t proc proc $REPOBASE/proc
+mkdir -p $REPOBASE/proc
+mount none -t proc $REPOBASE/proc
+
+echo "Mounting /sys"
+mkdir -p $REPOBASE/sys
+mount none -t sysfs $REPOBASE/sys
 
 echo "Copying yum setting"
 cp -a /etc/yum.repos.d $REPOBASE/etc/yum.repos.d.tmp
@@ -332,13 +338,18 @@ echo "Extract coLinux module files"
 tar zxvf vmlinux-modules.tar.gz -C $REPOBASE
 
 
-
 echo "Cleaning up"
 umount $REPOBASE/proc
+umount $REPOBASE/sys
 rm -rfv $REPOBASE/home/*
 rm -fv $REPOBASE/etc/yum.conf.tmp
 rm -rf $REPOBASE/etc/yum.repos.d.tmp
 find $REPOBASE -name "*.rpmorig" -exec rm -fv {} \;
+
+echo "Fill Zero Area"
+echo "(dd if=dev/zero of=hoge.img)"
+dd if=/dev/zero of=$REPOBASE/hoge.img bs=1M
+rm -rf $REPOBASE/hoge.img
 
 umount $REPOBASE
 
