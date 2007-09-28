@@ -1,9 +1,6 @@
-Canna-library
 MAKEDEV
 SysVinit
 acl
-acpid
-apmd
 atk
 attr
 authconfig
@@ -12,10 +9,6 @@ bash
 bc
 beecrypt
 bind-utils
-bluez-bluefw
-bluez-hcidump
-bluez-libs
-bluez-utils
 bzip2
 chkconfig
 coreutils

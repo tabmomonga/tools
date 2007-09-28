@@ -1,0 +1,27 @@
+diff -up ./custom.conf.coMomo ./custom.conf
+--- ./custom.conf.coMomo	2007-09-20 02:52:44.000000000 +0900
++++ ./custom.conf	2007-09-20 03:01:16.000000000 +0900
+@@ -53,10 +53,15 @@
+ # Have fun!
+ 
+ [daemon]
++RemoteGreeter=/usr/libexec/gdmlogin
++KillInitClients=true
+ 
+ [security]
++AllowRoot=true
++AllowRemoteRoot=true
+ 
+ [xdmcp]
++Enable=true
+ 
+ [gui]
+ 
+@@ -72,6 +77,7 @@
+ # documentation.
+ #
+ [servers]
++0=inactive
+ 
+ # Also note, that if you redefine a [server-foo] section, then GDM will
+ # use the definition in this file, not the GDM System Defaults configuration

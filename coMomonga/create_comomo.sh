@@ -9,6 +9,7 @@ PKGLISTS_OOO=pkglists/pkglist.ooo
 PKGLISTS_RAILS=pkglists/pkglist.rails
 PKGLISTS_PERL=pkglists/pkglist.perl
 PKGLISTS_ADD=pkglists/pkglist.add
+PKGLISTS_WEB=pkglists/pkglist.web
 IMAGEFILE=$1
 REPOBASE=$2
 SCRIPTBASE=`pwd`
@@ -18,10 +19,11 @@ INSTALL_XFCE4=no
 INSTALL_GNOME=yes
 INSTALL_RAILS=yes
 INSTALL_PERL=yes
+INSTALL_WEB=yes
 INSTALL_KDE=no
 INSTALL_OOO=no
 
-XORG_LANG=ja_JP.EUC-JP
+XORG_LANG=ja_JP.UTF-8
 XORG_SESSION=gnome
 XORG_XIM=SCIM
 
@@ -195,6 +197,11 @@ if [ -f $PKGLISTS_ADD ]; then
 	`cat $PKGLISTS_ADD`
 fi
 
+if [ -f $PKGLISTS_WEB ]; then
+        echo "Installing web packages"
+        yum -c $REPOBASE/etc/yum.conf.tmp -y --installroot=$REPOBASE install \
+        `cat $PKGLISTS_WEB`
+fi
 
 echo "Creating Network settings"
 cat << EOF > $REPOBASE/etc/sysconfig/network
@@ -278,9 +285,9 @@ fi
 
 if [ x$INSTALL_XORG = "xyes" -a -f $PKGLISTS_XORG ]; then
 
-echo "Modifying /usr/share/gdm/gdm.conf"
-pushd $REPOBASE/usr/share/gdm/
-patch -p1 < $SCRIPTBASE/gdm.conf-colinux.patch
+echo "Modifying /etc/X11/gdm/custom.conf"
+pushd $REPOBASE/etc/X11/gdm/
+patch -p1 < $SCRIPTBASE/gdm_custom.conf-xdmcp.patch
 popd
 
 # echo "Modifying /usr/share/X11/app-defaults/XScreenSaver"
@@ -302,6 +309,9 @@ fi
 # echo 'momonga ALL=(ALL) NOPASSWD: ALL' >> $REPOBASE/etc/sudoers
 
 echo "Disable unused startup daemons"
+/usr/sbin/chroot $REPOBASE chkconfig acpid off
+/usr/sbin/chroot $REPOBASE chkconfig apmd off
+/usr/sbin/chroot $REPOBASE chkconfig autofs off
 /usr/sbin/chroot $REPOBASE chkconfig avahi-daemon off
 /usr/sbin/chroot $REPOBASE chkconfig firstboot off
 /usr/sbin/chroot $REPOBASE chkconfig smartd off
@@ -309,10 +319,11 @@ echo "Disable unused startup daemons"
 /usr/sbin/chroot $REPOBASE chkconfig irqbalance off
 /usr/sbin/chroot $REPOBASE chkconfig lm_sensors off
 /usr/sbin/chroot $REPOBASE chkconfig kudzu off
+/usr/sbin/chroot $REPOBASE chkconfig mctrans off
+/usr/sbin/chroot $REPOBASE chkconfig mdmonitor off
 /usr/sbin/chroot $REPOBASE chkconfig pcmcia off
 /usr/sbin/chroot $REPOBASE chkconfig postfix off
-/usr/sbin/chroot $REPOBASE chkconfig autofs off
-/usr/sbin/chroot $REPOBASE chkconfig mdmonitor off
+/usr/sbin/chroot $REPOBASE chkconfig restprecpmd off
 /usr/sbin/chroot $REPOBASE chkconfig xfs off
 
 

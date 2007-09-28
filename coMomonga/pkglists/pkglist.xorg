@@ -7,7 +7,6 @@ chkfontpath-momonga
 cmpskit
 cups
 cups-libs
-dbskkd-cdb
 dbus-x11
 desktop-file-utils
 emacs
@@ -26,7 +25,6 @@ libFS
 libICE
 libSM
 libX11
-libX11-devel
 libXScrnSaver
 libXTrap
 libXau
@@ -82,9 +80,7 @@ rxvt-unicode
 rxvt
 sary
 scim-anthy
-scim-canna
 scim-prime
-scim-skk
 scim-tomoe
 scim
 sdr
@@ -105,12 +101,11 @@ usermode-gtk
 urw-fonts
 usolame
 vnc
+vnc-server
 xchat
 xloadimage
 xml-common
 xmms
-xpdf-config
-xpdf
 xscreensaver
 xsri
 xorg-x11-apps
@@ -132,7 +127,6 @@ xorg-x11-fonts-ethiopic
 xorg-x11-fonts-misc
 xorg-x11-fonts-syriac
 xorg-x11-fonts-truetype
-xorg-x11-proto-devel
 xorg-x11-resutils
 xorg-x11-twm
 xorg-x11-util-macros
@@ -148,9 +142,5 @@ xorg-x11-xinit-base
 xorg-x11-xkb-utils
 xorg-x11-xkbdata
 xorg-x11-xsm
-xorg-x11-xtrans-devel
-xpdf
-xpdf-config
 xscreensaver-base
 vim-X11
-wireshark
