@@ -148,8 +148,11 @@ rsh
 rsync
 ruby
 ruby-rpm
+samba
 samba-client
 samba-common
+samba-doc
+samba-swat
 screen
 sed
 selinux-policy-targeted

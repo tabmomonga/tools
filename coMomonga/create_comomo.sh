@@ -316,14 +316,15 @@ echo "Disable unused startup daemons"
 /usr/sbin/chroot $REPOBASE chkconfig firstboot off
 /usr/sbin/chroot $REPOBASE chkconfig smartd off
 /usr/sbin/chroot $REPOBASE chkconfig cpuspeed off
+/usr/sbin/chroot $REPOBASE chkconfig iptables off
 /usr/sbin/chroot $REPOBASE chkconfig irqbalance off
 /usr/sbin/chroot $REPOBASE chkconfig lm_sensors off
 /usr/sbin/chroot $REPOBASE chkconfig kudzu off
-/usr/sbin/chroot $REPOBASE chkconfig mctrans off
+/usr/sbin/chroot $REPOBASE chkconfig mcstrans off
 /usr/sbin/chroot $REPOBASE chkconfig mdmonitor off
 /usr/sbin/chroot $REPOBASE chkconfig pcmcia off
 /usr/sbin/chroot $REPOBASE chkconfig postfix off
-/usr/sbin/chroot $REPOBASE chkconfig restprecpmd off
+/usr/sbin/chroot $REPOBASE chkconfig restorecond off
 /usr/sbin/chroot $REPOBASE chkconfig xfs off
 
 

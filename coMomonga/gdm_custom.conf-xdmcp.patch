@@ -5,7 +5,7 @@ diff -up ./custom.conf.coMomo ./custom.conf
  # Have fun!
  
  [daemon]
-+RemoteGreeter=/usr/libexec/gdmlogin
++RemoteGreeter=/usr/libexec/gdmgreeter
 +KillInitClients=true
  
  [security]
