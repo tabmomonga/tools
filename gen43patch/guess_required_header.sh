@@ -11,9 +11,18 @@ EOF
     exit 1
 fi
 
+case "$1" in
+EXIT_SUCCESS)
+	echo stdlib.h
+	;;
+INT_MAX)
+	echo limits.h
+	;;
+*)
 man $1 2> /dev/null | colcrt  \
     | grep "#include <.*>" \
     | sed -e 's,#include,,' -e 's,<,,' -e 's,>,,' -e 's,[ ]*,,' \
     | sort | uniq 
-
+	;;
+esac
 exit 0
