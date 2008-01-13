@@ -18,11 +18,17 @@ EXIT_SUCCESS)
 *int64_t|*int32_t)
 	echo stdint.h
 	;;
-INT_MAX|INT_MIN)
+*INT_MAX|*INT_MIN|*LONG_MAX|*LONG_MIN)
 	echo limits.h
 	;;
 std::time_t)
 	echo ctime
+	;;
+auto_ptr)
+	echo memory
+	;;
+abs|find_if|min|max)
+	echo algorithm
 	;;
 *)
 man 3 $1 2> /dev/null | colcrt  \

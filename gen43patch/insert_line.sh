@@ -31,6 +31,7 @@ text=$3
 tmp=$src.backup.$$
 cp $src $tmp || error "failed to cp src as tmp"
 
+chmod u+w $src
 
 cat $tmp | awk -vLINENO="$lineno" -vTEXT="$text" '
 BEGIN{ 

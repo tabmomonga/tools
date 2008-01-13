@@ -36,6 +36,8 @@ grep "^#include.*$header" $src > /dev/null && error "$src seems to be  already i
 tmp=$src.backup.$$
 cp $src $tmp || error "failed to cp src as tmp"
 
+chmod u+w $src
+
 cat $tmp | awk -vHEADER="$header" '
      BEGIN{
 	 found=0
