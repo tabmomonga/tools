@@ -82,8 +82,8 @@ ARGV.each { |file|
 - #{@message}
 EOD
 
-			if line =~ /^%changelog/
-				line.sub!(/^%changelog/, "#{changelog}")
+			if line =~ /^%changelog/i
+				line.sub!(/^%changelog/i, "#{changelog}")
 			end
 
 			@newfile << line
