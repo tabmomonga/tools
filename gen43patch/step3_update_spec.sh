@@ -36,6 +36,8 @@ for x in BUILD/*gcc43.patch; do
 
     file=`basename $x`
     $BIN/append_patch.sh $file $spec
+
+    svn add $file
 done
 
 

@@ -15,11 +15,17 @@ case "$1" in
 EXIT_SUCCESS)
 	echo stdlib.h
 	;;
-INT_MAX)
+*int64_t|*int32_t)
+	echo stdint.h
+	;;
+INT_MAX|INT_MIN)
 	echo limits.h
 	;;
+std::time_t)
+	echo ctime
+	;;
 *)
-man $1 2> /dev/null | colcrt  \
+man 3 $1 2> /dev/null | colcrt  \
     | grep "#include <.*>" \
     | sed -e 's,#include,,' -e 's,<,,' -e 's,>,,' -e 's,[ ]*,,' \
     | sort | uniq 

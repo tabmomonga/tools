@@ -15,5 +15,4 @@ make  2>&1 | tee  $LOG
 gawk -vBIN=$BIN -f $BIN/sub_make_gcc43_patch.awk  $LOG
 
 
-#rm $LOG
-
+rm $LOG

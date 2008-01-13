@@ -29,9 +29,16 @@ cat $spec | grep -i "^patch[0-9]*[ \t]*:[ \t]*$patch" > /dev/null && error "alre
 # search last patch tag
 lastpatch=`cat $spec | awk 'tolower($1)~/^patch[0-9]*:$/ {tmp=$1} END{print tmp}'`
 
+if [ -z "$lastpatch" ]; then
+	lastpatch="BuildRoot:"
+fi
 
 cp $spec $spec.$$
 cat $spec.$$ | awk -vLASTPATCH=$lastpatch -vPATCH=$patch '
+function abort(msg){
+    printf msg
+    exit 3
+}
 BEGIN{ 
     w=match(LASTPATCH,/[1-9][0-9]*/,num)
     if (w!=0){
@@ -42,15 +49,26 @@ BEGIN{
     }
 
 
+    patch_macro_done=0
+    patch_tag_done=0
+
     while (getline>0) { 
 	if ($1~/%build/) {
+	    if (0!=patch_macro_done){
+		abort("**BUG** file parse error")
+	    }	    
 	    print "%patch"pnum" -p1 -b .gcc43~\n"
+	    patch_macro_done=1
 	}
 	
 	print $0
 
 	if ($1==LASTPATCH) {
+	    if (0!=patch_tag_done){
+		abort("**BUG** file parse error")
+	    }
 	    print "Patch"pnum": "PATCH
+	    patch_tag_done=1
 	}
     }
 }

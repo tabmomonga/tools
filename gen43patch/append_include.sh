@@ -40,7 +40,7 @@ cat $tmp | awk -vHEADER="$header" '
      BEGIN{
 	 found=0
 	 while (getline>0){
-	     if (found==0 && $1=="#include"){
+	     if (found==0 && ($1=="#include" || $1~/^#if.*/) ) {
 		 printf("#include <%s>\n",HEADER)
                  found=1
 	     }
