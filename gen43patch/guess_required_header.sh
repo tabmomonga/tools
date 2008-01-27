@@ -18,7 +18,7 @@ EXIT_SUCCESS)
 *int64_t|*int32_t)
 	echo stdint.h
 	;;
-*INT_MAX|*INT_MIN|*LONG_MAX|*LONG_MIN)
+*INT_MAX|*INT_MIN|*LONG_MAX|*LONG_MIN|*CHAR_MAX|*CHAR_MIN|PATH_MAX)
 	echo limits.h
 	;;
 std::time_t)
@@ -27,7 +27,7 @@ std::time_t)
 auto_ptr)
 	echo memory
 	;;
-abs|find_if|min|max)
+abs|find_if|min|max|transform)
 	echo algorithm
 	;;
 *)

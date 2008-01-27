@@ -1,6 +1,6 @@
 
 function abort(msg){
-    printf "ABORT: %s\n", msg
+    printf "ABORT: %s\n", msg > "/dev/stderr"
     exit 1
 }
 function append_include(file,header)
@@ -12,19 +12,30 @@ function insert_line(file,lineno,text)
     system(BIN"/insert_line.sh "file" "lineno" \""text"\"")
 }
 
-BEGIN{"pwd"| getline cur_dir}
+
+BEGIN{stackptr=-1
+    "pwd"| getline  stack[++stackptr] 
+    cur_dir = stack[stackptr]
+}
+
 # entering directory
 $1~/^make.*:$/ && $2=="Entering" && $3=="directory" {
-    cur_dir=substr($4,2,length($4)-2)
+    stack[++stackptr] = substr($4,2,length($4)-2)
+    # update cur_dir
+    cur_dir = stack[stackptr]
 }
 # leaving directory
 $1~/^make.*:$/ && $2=="Leaving" && $3=="directory" {
-    if (cur_dir!=substr($4,2,length($4)-2)) { 
-	abort("parse error")
+    # check
+    if (stack[stackptr] != substr($4,2,length($4)-2)) { 
+	abort("parse error " stack[stackptr] " " $4)
     } 
+    # remove stack top
+    stack[stackptr]=""
+    --stackptr;
+    # update cur_dir
+    cur_dir = stack[stackptr]
 }
-
-
 
 # ERROR: ??? was not declared in this scope
 # JOB:   add "#include <???>"
@@ -109,6 +120,7 @@ $2=="error:" && $0~/no matching function for call to/ {
     funcname=substr(token[1],2,length(token[1])-1)
     
     if (funcname=="sort" ||
+	funcname=="transform" ||
 	funcname=="find" ||
 	funcname=="find_if") {
 	    append_include(srcfile,"algorithm")
