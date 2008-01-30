@@ -1,68 +1,68 @@
 # OmoiKondara configuration file example
 
-# CVS$B$N%j%S%8%g%s$,(B1.59$B0J9_$N(BOmoiKondara$B$G$O!">e$N9T$N$h$&$K(B
-# $B6uGr9T$,$"$C$F$b(BOmoiKondara$B$,F0:n$9$k$h$&$K$J$j$^$7$?!#(B
+# CVSのリビジョンが1.59以降のOmoiKondaraでは、上の行のように
+# 空白行があってもOmoiKondaraが動作するようになりました。
 
-# TOPDIR $B%P%$%J%jCV>l$N%H%C%W%G%#%l%/%H%jL>$r5-=R$7$^$9!#(B
-#        $BI,$:(B1$B$D;XDj$7$^$9!#(B
+# TOPDIR バイナリ置場のトップディレクトリ名を記述します。
+#        必ず1つ指定します。
 TOPDIR ~/PKGS
 
-#        $B3F%Q%C%1!<%8$N%G%#%l%/%H%j$K!"(BTO.Nonfree $B$d(B TO.Orphan $B$J$I$N(B
-#        $B%U%!%$%k$,CV$+$l$F$$$k$H!"(BTOPDIR $B$H$OJL$N%G%#%l%/%H%j$K(B
-#        $B%P%$%J%j$,G[CV$5$l$^$9!#(BTO.XX $B$N>l9g$O(B TOPDIR-XX $B$H$J$j$^$9!#(B
-#        $B>e5-@_DjNc$G$O(B ~/PKGS-Nonfree $B$*$h$S(B ~/PKGS-Orphan $B$KCV$+$l$^$9!#(B
+#        各パッケージのディレクトリに、TO.Nonfree や TO.Orphan などの
+#        ファイルが置かれていると、TOPDIR とは別のディレクトリに
+#        バイナリが配置されます。TO.XX の場合は TOPDIR-XX となります。
+#        上記設定例では ~/PKGS-Nonfree および ~/PKGS-Orphan に置かれます。
 
-# PKGDIR Momonga$B%Q%C%1!<%8%b%8%e!<%k(B(pkgs)$B$N(BSVN$B:n6H%3%T!<$N>l=j$r5-=R$7$^$9!#(B
+# PKGDIR Momongaパッケージモジュール(pkgs)のSVN作業コピーの場所を記述します。
 PKGDIR ~/pkgs
 
-# MIRROR $B%m!<%+%k$K%=!<%9$,L5$$>l9g$K%M%C%H%o!<%/7PM3$G<hF@$K9T$/>l=j$r(B
-#        $B5-=R$7$^$9!#0l9T$KJ#?t=q$/;v$b$G$-$^$9$7!"(BMIRROR $B$,J#?t9T$"$C(B
-#        $B$F$b$+$^$$$^$;$s!#(B
+# MIRROR ローカルにソースが無い場合にネットワーク経由で取得に行く場所を
+#        記述します。一行に複数書く事もできますし、MIRROR が複数行あっ
+#        てもかまいません。
 #
 MIRROR ftp://dist.momonga-linux.org/pub/momonga/development
 # MIRROR ftp://ftp.ne.jp/Linux/packages/momonga/development
 # MIRROR ftp://ftp.iij.ad.jp/pub/linux/momonga/development
 
-# FTP_CMD $B%=!<%9Ey$r%@%&%s%m!<%I$9$k:]$K;HMQ$9$k%3%^%s%I(B ($B$*$h$S%*%W%7%g%s(B)$B!%(B
+# FTP_CMD ソース等をダウンロードする際に使用するコマンド (およびオプション)．
 #
 FTP_CMD lftpget -c
 #FTP_CMD ncftpget -A
 #FTP_CMD wget -c -o wget.log
 
-# DISPLAY $B%S%k%I$9$k:]$K(B X $B%5!<%P$X$N%3%M%/%7%g%s$,I,MW$J$b$N$KBP$7$F@_(B
-#         $BDj$5$l$k(B DISPLAY $B4D6-JQ?t$NCM!%(B
+# DISPLAY ビルドする際に X サーバへのコネクションが必要なものに対して設
+#         定される DISPLAY 環境変数の値．
 #
 DISPLAY :0.0
 
-# DISTCC_HOST distcc $B$G;HMQ$9$k%[%9%H$N;XDj!%(Blocalhost $B$OI,$:DI2C$5$l$k$?$a(B
-#        $B;XDj$7$J$/$F$bNI$$!%(B
+# DISTCC_HOST distcc で使用するホストの指定．localhost は必ず追加されるため
+#        指定しなくても良い．
 #
-# DISTCC_HOST <$B%[%9%HL>(B>[:<$B%]!<%HHV9f(B>] # $B%]!<%HHV9f$r>JN,$7$?$H$-$O(B 3632
+# DISTCC_HOST <ホスト名>[:<ポート番号>] # ポート番号を省略したときは 3632
 #DISTCC_HOST hoge
 #DISTCC_HOST fuga:11111
 
-# DISTCC_VERBOSE distcc $B$N%G%P%C%0%a%C%;!<%8$r=PNO$9$k$+$I$&$+!%(B
-#                $B2<$N9T$N%3%a%s%H$r30$9$H!$%G%P%C%0%a%C%;!<%8$r=PNO$9$k!%(B
+# DISTCC_VERBOSE distcc のデバッグメッセージを出力するかどうか．
+#                下の行のコメントを外すと，デバッグメッセージを出力する．
 #DISTCC_VERBOSE
 
-# NUMJOBS make $B;~$KF1;~$K<B9T$9$k%8%g%V$N?t$N;XDj!%4pK\E*$K$O%S%k%I;~$K(B
-#         $B;H$($k(B CPU $B$N?t$N9g7W$,L\0B!%$D$^$j!$(BSMP $B%^%7%s$J$i(B 2$B!$(Bdistcc
-#         $B$r;HMQ$9$k$J$i(B distcc $B$G;HMQ$9$kA4%^%7%s$N(B CPU $B$N9g7W!%(B
+# NUMJOBS make 時に同時に実行するジョブの数の指定．基本的にはビルド時に
+#         使える CPU の数の合計が目安．つまり，SMP マシンなら 2，distcc
+#         を使用するなら distcc で使用する全マシンの CPU の合計．
 #NUMJOBS 1
 
-# URL_ALIAS $B%=!<%9Ey$N(B URL $B$NCV$-49$($r;XDj$9$k(B (String#sub $B$GCV$-49$($k(B)$B!%(B
+# URL_ALIAS ソース等の URL の置き換えを指定する (String#sub で置き換える)．
 #
-# URL_ALIAS <$B@55,I=8=(B> <$BCV$-49$($kJ8;zNs(B>
+# URL_ALIAS <正規表現> <置き換える文字列>
 #
 # => dl.sourceforge.net
 URL_ALIAS ^http://dl\.sourceforge\.net http://jaist.dl.sourceforge.net
 #
 
-# WORKDIR $B:n6HMQ%G%#%l%/%H%j$r;XDj$9$k!%(B
-#         $B%Q%C%1!<%8L>(B/BUILD $B%G%#%l%/%H%j$,(B WORKDIR $B$N2<$K:n$i$l$k!%(B
-#         $B8m$C$F;XDj$7$?:]$N4m81$r9MN8$7!"(Bclean_up$B;~$K$b:o=|$r9T$o$J$$!%(B
-#         tmpfs$B%U%!%$%k%7%9%F%`$N%G%#%l%/%H%j$r;XDj$9$k$N$r?d>)!%(B
-#         $B%3%a%s%H%"%&%H$7$F$*$1$P!$$3$l$^$GDL$j$NF0$-$K$J$k!%(B
+# WORKDIR 作業用ディレクトリを指定する．
+#         パッケージ名/BUILD ディレクトリが WORKDIR の下に作られる．
+#         誤って指定した際の危険を考慮し、clean_up時にも削除を行わない．
+#         tmpfsファイルシステムのディレクトリを指定するのを推奨．
+#         コメントアウトしておけば，これまで通りの動きになる．
 #WORKDIR	/tmp/OmoiKondara
 
 # cachecc1 (default: off)
