@@ -1,223 +1,223 @@
 =begin
 
-= tools �ǥ��쥯�ȥ���ˤ���ƥ�����ץȤ�����
+= tools ディレクトリ内にある各スクリプトの説明
 
 == TODO
-�ǽ�Ū�ˤ�
-*�����Τʤ����/����ʤ���ΤϺ����
-*��ǽ�����������Τ����硣
-*�Ȥ���������졣
-�������ǡ�
+最終的には
+*説明のないもの/いらないものは削除。
+*機能の類似したものは統合。
+*使い勝手の統一。
+の方向で。
 
 ==OmoiKondara
 === Summary
-:��ȯ��/���ƥ�
-:��ǽ����
- �ѥå�������ӥ��
-:�¹���ˡ
-example.OmoiKondara�� pkgs�ʲ���.OmoiKondara �Ȥ���̾���ǥ��ԡ���
-��ʬ�δĶ��˹�碌���Խ��򤹤롣
-���θ�ǡ� 
- OmoiKondara [���ץ����] [�ѥå�����̾...]
-:�饤����
+:開発者/メンテナ
+:機能概要
+ パッケージをビルド
+:実行方法
+example.OmoiKondaraを pkgs以下に.OmoiKondara という名前でコピー。
+自分の環境に合わせて編集をする。
+その後で、 
+ OmoiKondara [オプション] [パッケージ名...]
+:ライセンス
  Ruby
 === Known Bugs
- * get_no �θ�� cp_to_tree ���ƤӽФ���뤬��cp_to_tree �˥Х�������
-   pkgs/hoge ��ľ���� NoSource �ʥե������Ʊ��̾���Υե����뤬����ȡ�
-   ���줬 pkgs/hoge/SOURCES �˥��ԡ�����Ƥ��ޤ� [2003/12/09 muraken]��
+ * get_no の後で cp_to_tree が呼び出されるが，cp_to_tree にバグがあり
+   pkgs/hoge の直下に NoSource なファイルと同じ名前のファイルがあると，
+   それが pkgs/hoge/SOURCES にコピーされてしまう [2003/12/09 muraken]．
 
 ==commit
-:��ȯ��/���ƥ�
-:��ǽ����
- �ʰץ��ߥåȥġ��롣%changelog�κǽ�Υ���ȥ꤬�����Ȥʤ롣
-:�¹���ˡ
-  commit �ѥå�����̾...
-:�饤����
+:開発者/メンテナ
+:機能概要
+ 簡易コミットツール。%changelogの最初のエントリがログとなる。
+:実行方法
+  commit パッケージ名...
+:ライセンス
 
 ==environment.rb
-:��ȯ��/���ƥ�
+:開発者/メンテナ
  crouton
-:��ǽ����
- ~/.OmoiKondara(�ʤ�)���ɤ�ǳƼ��ѿ�������
-:�¹���ˡ
- Ruby�ξ��
+:機能概要
+ ~/.OmoiKondara(など)を読んで各種変数を設定
+:実行方法
+ Rubyの場合
   $:.unshfit(File.direname($0))
   require 'environment'
- Shell�ξ��
+ Shellの場合
   PATH=`dirname $0`:$PATH
   eval `environment.rb`
-:�饤����
+:ライセンス
  Modified BSD
 
 ==listskip
-:��ȯ��/���ƥ�
+:開発者/メンテナ
  crouton
-:��ǽ����
- .SKIP�Τ���ǥ��쥯�ȥ��ꥹ��
-:�¹���ˡ
-  listskip (�����ʤ�)
-:�饤����
+:機能概要
+ .SKIPのあるディレクトリをリスト
+:実行方法
+  listskip (引数なし)
+:ライセンス
  Modified BSD
 
 == speclint
-:��ȯ��/���ƥ�
+:開発者/メンテナ
  crouton
-:��ǽ����
- �����ɥ饤��ʸ��˽��ä�spec�Υ����å�
-:�¹���ˡ
-  speclint [���ץ����] �ѥå�����̾...
-:�饤����
+:機能概要
+ ガイドライン文書に従ったspecのチェック
+:実行方法
+  speclint [オプション] パッケージ名...
+:ライセンス
  Modified BSD
 
 == update-mph
-:��ȯ��/���ƥ�
+:開発者/メンテナ
  crouton
-:��ǽ����
- �ƥǥ��쥯�ȥ�ˤ�����mph-scanpackages��¹�
-:�¹���ˡ
-  update-mph [�ǥ��쥯�ȥ�...] (��ά����� TOPDIR[-*]�ʲ�)
-:�饤����
+:機能概要
+ 各ディレクトリにおいてmph-scanpackagesを実行
+:実行方法
+  update-mph [ディレクトリ...] (省略すると TOPDIR[-*]以下)
+:ライセンス
  Modified BSD
 
 == delobso.rb
-:��ȯ��/���ƥ�
+:開発者/メンテナ
  dora, kazuhiko
-:��ǽ����
- pkgs �ʲ���ѡ������ơ�.OmoiKondara �� TOPDIR �ʲ������פʥե������ä�
-:�¹���ˡ
- pkgs �ǥ��쥯�ȥ�Ǽ¹Ԥ���
-:�饤����
+:機能概要
+ pkgs 以下をパースして、.OmoiKondara の TOPDIR 以下の不要なファイルを消す
+:実行方法
+ pkgs ディレクトリで実行する
+:ライセンス
  ?
 
 == uninstallobso.rb
-:��ȯ��/���ƥ�
+:開発者/メンテナ
  zunda
-:��ǽ����
- pkgs �ʲ���ѡ������ơ����ץ����ǻ��ꤵ�줿�ѥå������ΥХ��ʥ�ѥå�
- ����̾��ɽ�����롣
-:�¹���ˡ
- pkgs �ǥ��쥯�ȥ�Ǽ¹Ԥ���
-:�饤����
+:機能概要
+ pkgs 以下をパースして、オプションで指定されたパッケージのバイナリパッケ
+ ージ名を表示する。
+:実行方法
+ pkgs ディレクトリで実行する
+:ライセンス
  see "uninstallobso.rb"
 
 == listunused
-:��ȯ��/���ƥ�
+:開発者/メンテナ
  kazuhiko
-:��ǽ����
- SRPM �˴ޤޤ�ʤ��ѥå��ʤɤ�ä�
-:�¹���ˡ
- pkgs �ǥ��쥯�ȥ��
-  listunused [SRPM �ե�����...]
-:�饤����
+:機能概要
+ SRPM に含まれないパッチなどを消す
+:実行方法
+ pkgs ディレクトリで
+  listunused [SRPM ファイル...]
+:ライセンス
  Ruby
 
 == download_all_source
-:��ȯ��/���ƥ�
+:開発者/メンテナ
  ?, kazuhiko
-:��ǽ����
- ����������ɤ�ɬ�פʥե���������Ƽ�ä����
- .OmoiKondara �� MIRROR �ˤ��б����Ƥ��뤬 URL_ALIAS �ˤ�̤�б�
- TO.Nonfree �� TO.Zoo �Τ�Τ��ä���뤫�ɤ����ϡ�OmoiKondara ��Ʊ��
- �褦�� -n �� -m �ʤɤ�����Ǥ���
-:�¹���ˡ
- pkgs �ǥ��쥯�ȥ��
+:機能概要
+ ダウンロードが必要なファイルを全て取って来る
+ .OmoiKondara の MIRROR には対応しているが URL_ALIAS には未対応
+ TO.Nonfree や TO.Zoo のものも取って来るかどうかは、OmoiKondara と同じ
+ ように -n や -m などで制御できる
+:実行方法
+ pkgs ディレクトリで
   download_all_source
-:�饤����
+:ライセンス
  ?
 
 == pick_up_licenses
-:��ȯ��/���ƥ�
+:開発者/メンテナ
   zunda
-:��ǽ����
-  �����ǻ��ꤷ���������ĥ꡼�Υե�������������ƥ饤���󥹤餷��ʸ���򸫤Ĥ��롣
-:�¹���ˡ
-    pick_up_licenses <�������ĥ꡼>
-  -v���ץ�����¿���Ĥ��뤳�Ȥˤ�äơ�ɽ����������¿���ʤ롣
-:�饤����
+:機能概要
+  引数で指定したソースツリーのファイルを走査してライセンスらしき文言を見つける。
+:実行方法
+    pick_up_licenses <ソースツリー>
+  -vオプションを多くつけることによって、表示される情報が多くなる。
+:ライセンス
   see "pick_up_licenses"
 
 == touch_spec.rb
-:��ȯ��/���ƥ�
+:開発者/メンテナ
   kazuhiko (kaz)
-:��ǽ����
-  Ʊ�� ver-rel �� SRPM ������С������ spec �Υ����ॹ����פ��碌�륹����ץ�
-:�¹���ˡ
-  pkgs ����� ../tools/touch_spec.rb
-  �������Ϥʤ�
-:�饤����
+:機能概要
+  同じ ver-rel の SRPM があれば、それに spec のタイムスタンプを合わせるスクリプト
+:実行方法
+  pkgs の中で ../tools/touch_spec.rb
+  引き数はなし
+:ライセンス
   Ruby
 
 == correct-mtime
-:��ȯ��/���ƥ�
+:開発者/メンテナ
   zunda
-:��ǽ����
-  ����󥰥��ԡ����ѹ�����򥳥ߥåȻ���˹�碌��
-:�¹���ˡ
-    correct-mtime [<�ե�����/�ǥ��쥯�ȥ�>]
-:�饤����
+:機能概要
+  ワーキングコピーの変更時刻をコミット時刻に合わせる
+:実行方法
+    correct-mtime [<ファイル/ディレクトリ>]
+:ライセンス
   see "correct-mtime"
 
 == addprops
-:��ȯ��/���ƥ�
+:開発者/メンテナ
   tamo
-:��ǽ����
-  svn status �� "?" ��ɽ�������Τ��������Τ�
-  log �ʤɤ�̵�뤵���뤿��� propset ����
-:�¹���ˡ
+:機能概要
+  svn status で "?" と表示されるのがウザいので
+  log などを無視させるために propset する
+:実行方法
   cd pkgs; sh ../tools/addprops
-:�饤����
+:ライセンス
   Modified BSD
 
 == mphdiff.rb
-:��ȯ��/���ƥ�
+:開発者/メンテナ
   kazuhiko
-:��ǽ����
-  ��Ĥ� mph �ե������ Depends ����� Provides ����Ӥ���
-:�¹���ˡ
+:機能概要
+  二つの mph ファイルの Depends および Provides を比較する
+:実行方法
   mphdiff.rb old.mph new.mph
-  (*.mphrpm �ǤϤʤ� *.mph ���Ϥ�����)
-:�饤����
+  (*.mphrpm ではなく *.mph を渡すこと)
+:ライセンス
   Ruby
 
 == listduplicate.rb
-:��ȯ��/���ƥ�
+:開発者/メンテナ
   kazuhiko
-:��ǽ����
-  ���Х��ʥ�ѥå����������ʣ�����ե�����򸫤Ĥ���
-:�¹���ˡ
+:機能概要
+  全バイナリパッケージから重複したファイルを見つける
+:実行方法
   listduplicate.rb
-:�饤����
+:ライセンス
   Ruby
 
 == updatespecdb
-:��ȯ��/���ƥ�
-  ����
-:��ǽ����
-  OmoiKondara�β������Ȥ��ơ�specdb�򹹿�����
-:�¹���ˡ
-  ľ�ܤϼ¹Ԥ���ʤ�
-:�饤����
-  ����
+:開発者/メンテナ
+  不明
+:機能概要
+  OmoiKondaraの下請けとして、specdbを更新する
+:実行方法
+  直接は実行されない
+:ライセンス
+  不明
   
-== ���ƥƥ�ץ졼��
-:��ȯ��/���ƥ�
-:��ǽ����
-:�¹���ˡ
-:�饤����
+== 内容テンプレート
+:開発者/メンテナ
+:機能概要
+:実行方法
+:ライセンス
 
-== �����Τʤ��ե����� 
+== 説明のないファイル 
 N/A
 
-== �󥹥���ץȥե�����
+== 非スクリプトファイル
 *ChangeLog
 *Makefile
 *rpmvercmp.c
 
-== ����������
+== 削除したもの
 
-ɬ�פǤ���ʤ�� README(���Υե�����) ��������ä��Ƥ������褵���뤳�ȡ�
+必要であるならば README(このファイル) に説明を加えてから復活させること。
 
-���פʤ�Τ��Ѷ�Ū�˾ä��Ƥ�������
+不要なものは積極的に消していこう。
 
 *buildtree
 *chgrel
@@ -227,7 +227,7 @@ N/A
 *getname.rb
 *mkkondaraiso
 
-== ������̵�����ᡢOBSOLETE����ˤ����ѥå�����
+== 説明が無いため、OBSOLETE送りにしたパッケージ
 *FutoiMomonga
 *OmoiKondara.test
 *OmoiKondara2
@@ -257,53 +257,53 @@ N/A
 *printrequires
 *repo_check
 
-== �Ȥ��ʤ����ᡢOBSOLETE����ˤ����ѥå�����
+== 使われないため、OBSOLETE送りにしたパッケージ
 == OmoiKondara3.rb
-:��ȯ��/���ƥ�
+:開発者/メンテナ
  muraken
-:��ǽ����
- OmoiKondara �ǻ��Ѥ���ͽ��Υ饤�֥�ꡥ
-:�¹���ˡ
- �¹Ԥ��ƤϤ����ޤ���
-:�饤����
+:機能概要
+ OmoiKondara で使用する予定のライブラリ．
+:実行方法
+ 実行してはいけません．
+:ライセンス
  Ruby
 
 == tc_OmoiKondara.rb
-:��ȯ��/���ƥ�
+:開発者/メンテナ
  muraken
-:��ǽ����
- OmoiKondara3.rb �Υƥ��ȥ�����
-:�¹���ˡ
+:機能概要
+ OmoiKondara3.rb のテストケース
+:実行方法
  ruby tc_OmoiKondara.rb
-:�饤����
+:ライセンス
  Ruby
 
 == lib/*
-:��ȯ��/���ƥ�
+:開発者/メンテナ
  muraken
-:��ǽ����
- �͡��ʥ饤�֥��
-:�¹���ˡ
- �¹Ԥ��ʤ��Ǥ�������
-:�饤����
- Ruby ��Ʊ��
+:機能概要
+ 様々なライブラリ
+:実行方法
+ 実行しないでください
+:ライセンス
+ Ruby と同じ
 
-��ݥ��ȥ꤫��ä��Ƥ����ե�����
+レポジトリから消えていたファイル
 ==delobso==
 
 == cpanflute
-:��ȯ��/���ƥ�
- kazuhiko (��Ȥ� rpm-build �ѥå������Τ��)
-:��ǽ����
- CPAN module �� tarball ���� spec �ե�������롣
-:�¹���ˡ
+:開発者/メンテナ
+ kazuhiko (もとは rpm-build パッケージのもの)
+:機能概要
+ CPAN module の tarball から spec ファイルを作る。
+:実行方法
   cpanflute [tarball]
- �Ȥ���ȡ�/tmp/cpan/spec/ �˥ǥ��쥯�ȥ꤬�Ǥ���Τǡ������ pkgs/ �˻���
- ����롣
-:�饤����
+ とすると、/tmp/cpan/spec/ にディレクトリができるので、それを pkgs/ に持っ
+ て来る。
+:ライセンス
  GPL
-:������
- cpanflute�κ�������spec file�ϴ����٤��㤤���ᡢ
- cpanspec�ѥå�������Ȥ��٤���
+:代替品
+ cpanfluteの作成するspec fileは完成度が低いため、
+ cpanspecパッケージを使うべし。
 
 =end

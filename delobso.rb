@@ -5,8 +5,8 @@ $:.unshift(File.dirname($0))
 require 'environment'
 load 'updatespecdb'
 
-#specdb ¤¬ OBSOLETES ¤Ï½èÍı¤·¤Æ¤ë¤Î¤Ç¹Í¤¨¤ëÉ¬Í×¤Ê¤·
-#$ ¤Ï¤¤¤«¤ó¤Ç¤·¤ç¡£
+#specdb ãŒ OBSOLETES ã¯å‡¦ç†ã—ã¦ã‚‹ã®ã§è€ƒãˆã‚‹å¿…è¦ãªã—
+#$ ã¯ã„ã‹ã‚“ã§ã—ã‚‡ã€‚
 
 if File.expand_path($PKGDIR) != File.expand_path(Dir.getwd)
   puts "Run in pkgs/ dir."
@@ -21,7 +21,7 @@ ARGV.options {|o|
   o.parse!
 }
 
-#specdb ¤«¤é arch ¤È¤ì¤ë¤è¤¦¤Ë¡£
+#specdb ã‹ã‚‰ arch ã¨ã‚Œã‚‹ã‚ˆã†ã«ã€‚
 RPM.readrc("./rpmrc")
 #ARCH=RPM[%{_target_cpu}]
 ARCH=$ARCH
@@ -47,8 +47,8 @@ $DB.specs.each_value do |spec|
   next unless spec.packages[0]
   next if test(?e, "#{spec.name}/#{$NOTFILE}")
   if !nosource
-#packages[0] ¤Ï¥¦¥½¡£°ã¤¦¾ì¹ç¤â¤¢¤ë¡£
-#specdb ¤¬¼å¤¤¡£
+#packages[0] ã¯ã‚¦ã‚½ã€‚é•ã†å ´åˆã‚‚ã‚ã‚‹ã€‚
+#specdb ãŒå¼±ã„ã€‚
     ($Packages[todir]||={})["#{spec.name}-#{spec.packages[0].version}.src.rpm"] = true
   else
     ($Packages[todir]||={})["#{spec.name}-#{spec.packages[0].version}.nosrc.rpm"] = true
@@ -100,10 +100,10 @@ if ARGV[0] != "-f"
     print "rm #{file}\n"
   end
 
-  printf( "¤±¤¹¤è¡£ (y/N)> " )
+  printf( "ã‘ã™ã‚ˆã€‚ (y/N)> " )
   sAnswer = STDIN.gets().chomp().downcase()
   if( sAnswer != 'y' )
-    printf( "¤¸¤ã¡¢¤±¤µ¤Ê¤¤¡£\n" )
+    printf( "ã˜ã‚ƒã€ã‘ã•ãªã„ã€‚\n" )
     exit
   end
 end
