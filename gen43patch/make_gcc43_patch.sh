@@ -10,7 +10,9 @@ LANG=C
 
 LOG=`mktemp /tmp/$$.XXXXXXX` || exit 1
 
-make $@  2>&1 | tee  $LOG
+CMD=${@:-make}
+
+$CMD  2>&1 | tee  $LOG
 
 gawk -vBIN=$BIN -f $BIN/sub_make_gcc43_patch.awk  $LOG
 

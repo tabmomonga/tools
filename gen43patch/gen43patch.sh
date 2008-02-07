@@ -1,12 +1,10 @@
-#!/bin/sh
-
+#!/bin/bash
 
 BIN=`dirname $0`
 BIN=${BIN:-.}
 
-
 if [ $# -eq 0 ]; then
-	cat<<<EOF 
+	cat<<EOF > /dev/stderr
 usage:
 	$0  package [...]
 EOF

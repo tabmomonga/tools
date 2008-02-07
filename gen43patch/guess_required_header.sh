@@ -27,7 +27,10 @@ std::time_t)
 auto_ptr)
 	echo memory
 	;;
-abs|find_if|min|max|transform)
+numeric_limits)
+	echo limits
+	;;
+abs|find_if|min|max|transform|count|reverse)
 	echo algorithm
 	;;
 *)
