@@ -1,4 +1,4 @@
-#!/usr/bin/env ruby19
+#!/usr/bin/ruby19 -Ku
 # $Id$
 
 $:.unshift(File.dirname($0))
