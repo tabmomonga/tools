@@ -9,7 +9,7 @@ $CONF_FILES = ["./.OmoiKondara","~/.OmoiKondara","/etc/OmoiKondara.conf"]
 $KEEP_FILES = ["TO.Nonfree","TO.Zoo", "TO.Orphan","TO.Alter",
   "SRPM.ONLY","Antenna","SRPM.ONLY",
   "REMOVE.PLEASE","SU.PLEASE","DISPLAY.PLEASE","YUKARI","NO.CCACHE",
-  "OBSOLETE","JAVA","IPv6"]
+  "OBSOLETE","JAVA","IPv6","sources"]
 # NOT.*, REMOVEME.*
 
 def source_list(pkg)
