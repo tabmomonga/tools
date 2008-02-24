@@ -11,7 +11,7 @@ fi
 function scan() {
 	if [ -d $1 ]; then
 		echo Scanning $1 1>&2
-		/usr/bin/createrepo -v -d --update $1
+		/usr/bin/createrepo -v -d $1
 	else
 		echo $1 is not a directory. 1>&2
 	fi
