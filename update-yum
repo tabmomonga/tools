@@ -11,7 +11,11 @@ fi
 function scan() {
 	if [ -d $1 ]; then
 		echo Scanning $1 1>&2
-		/usr/bin/createrepo -v -d $1
+		opt="-v -d"
+		if [ -f $1/repodata/repomd.xml ]; then
+	 		opt="$opt --update"
+		fi
+		/usr/bin/createrepo $opt $1
 	else
 		echo $1 is not a directory. 1>&2
 	fi
