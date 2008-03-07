@@ -73,3 +73,8 @@ URL_ALIAS ^http://dl\.sourceforge\.net http://jaist.dl.sourceforge.net
 #         mkdir CACHECC1_DISTCCDIR
 #         ln -s /usr/libexec/distccwrap CACHECC1_DISTCCDIR
 #CACHECC1_DISTCCDIR /tmp/cachecc1
+
+# ログ(OmoiKondara.log)を圧縮するコマンドの設定。
+# default では "bzip2 -f -9"
+#
+# COMPRESS_CMD lzma -f -9
