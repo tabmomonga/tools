@@ -78,3 +78,12 @@ URL_ALIAS ^http://dl\.sourceforge\.net http://jaist.dl.sourceforge.net
 # default では "bzip2 -f -9"
 #
 # COMPRESS_CMD lzma -f -9
+
+# CHECKSUM_MODE
+# sourcesファイル に checksum が登録されてない場合の動作を指定する
+#
+# 以下の値が設定可能
+# - strict      checksumが登録されていない場合 エラーとする(default)
+# - maintainer  checksumが登録されていない場合 sourcesファイルを作成 or 更新する
+#
+# CHECKSUM_MODE strict
