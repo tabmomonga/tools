@@ -57,6 +57,12 @@ DISPLAY :0.0
 #
 # => dl.sourceforge.net
 URL_ALIAS ^http://dl\.sourceforge\.net http://jaist.dl.sourceforge.net
+#URL_ALIAS ^ftp://gcc\.gnu\.org/pub/gcc ftp://ftp.d.iij.ad.jp/pub/GNU/gcc
+#URL_ALIAS ^ftp://ftp\.gnu\.org/gnu ftp://ftp.iij.ad.jp/pub/GNU
+#URL_ALIAS ^ftp://ftp\.kernel\.org/pub/linux ftp://ftp.iij.ad.jp/pub/linux/kernel/linux
+#URL_ALIAS ^ftp://ftp\.kde\.org/pub/kde ftp://ftp.iij.ad.jp/pub/X11/KDE
+#URL_ALIAS ^ftp://[^\.]+?\.ftp\.kde\.org/pub/kde ftp://ftp.iij.ad.jp/pub/X11/KDE
+
 #
 
 # WORKDIR 作業用ディレクトリを指定する．
