@@ -57,13 +57,11 @@ DISPLAY :0.0
 #
 # => dl.sourceforge.net
 URL_ALIAS ^http://dl\.sourceforge\.net http://jaist.dl.sourceforge.net
-#URL_ALIAS ^ftp://gcc\.gnu\.org/pub/gcc ftp://ftp.d.iij.ad.jp/pub/GNU/gcc
+#URL_ALIAS ^ftp://gcc\.gnu\.org/pub/gcc ftp://ftp.iij.ad.jp/pub/GNU/gcc
 #URL_ALIAS ^ftp://ftp\.gnu\.org/gnu ftp://ftp.iij.ad.jp/pub/GNU
 #URL_ALIAS ^ftp://ftp\.kernel\.org/pub/linux ftp://ftp.iij.ad.jp/pub/linux/kernel/linux
 #URL_ALIAS ^ftp://ftp\.kde\.org/pub/kde ftp://ftp.iij.ad.jp/pub/X11/KDE
 #URL_ALIAS ^ftp://[^\.]+?\.ftp\.kde\.org/pub/kde ftp://ftp.iij.ad.jp/pub/X11/KDE
-
-#
 
 # WORKDIR 作業用ディレクトリを指定する．
 #         パッケージ名/BUILD ディレクトリが WORKDIR の下に作られる．
@@ -72,7 +70,7 @@ URL_ALIAS ^http://dl\.sourceforge\.net http://jaist.dl.sourceforge.net
 #         コメントアウトしておけば，これまで通りの動きになる．
 #WORKDIR	/tmp/OmoiKondara
 
-# cachecc1 (default: off)
+# cachecc1 の設定 (default: off)
 #USE_CACHECC1
 
 # How to use distcc with cachecc1:
