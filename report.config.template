@@ -1,0 +1,22 @@
+# template for report.config (version 0.2)
+#
+# by Hiromasa YOSHIMOTO <y@momonga-linux.org>
+#
+#
+
+# Set your username and password
+USERNAME=anonymous
+PASSWORD=anonymous
+
+# Set your machine information
+HOSTNAME=anonymous
+ARCH=i686
+BRANCH=trunk
+
+# Set http proxy to use
+#PROXY=http://proxy:port
+
+# misc
+VERSION=0.2
+REPORT_URL=http://www.momonga-linux.org/~y/report0/upload.php
+REPORT_LOG=report.log

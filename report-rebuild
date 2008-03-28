@@ -1,0 +1,27 @@
+#!/bin/sh
+#
+# test version
+#
+# by Hiromasa YOSHIMOTO <y@momonga-linux.org>
+
+function error ()
+{
+	echo $@ > /dev/stderr
+	exit 1
+}
+
+
+[ -f report.config ] || error "no report.config"
+
+source report.config || error "source report.config failed."
+
+
+[ -n "$REPORT_LOG" ] || error "bad config"
+
+[ -f $REPORT_LOG ] && mv -f $REPORT_LOG $REPORT_LOG.old
+
+
+# reset timestamp
+date +%s > $REPORT_LOG
+
+exit 0

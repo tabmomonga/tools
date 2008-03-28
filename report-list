@@ -1,0 +1,48 @@
+#!/bin/bash
+
+# test version
+#
+# by Hiromasa YOSHIMOTO <y@momonga-linux.org>
+
+function error ()
+{
+	echo $@ > /dev/stderr
+	exit 1
+}
+
+function usage ()
+{
+    cat<<EOF
+usage:
+$0  [opts]
+    -a    list all status
+    -e    list error status only
+    -h    display this help and exit
+EOF
+    exit 1
+}
+
+
+log=report.log
+opts="-R "
+while getopts "aeh" opt; do
+    case $opt in
+	h) 
+	    usage
+	    ;;
+	a) 
+	    unset log
+	    ;;
+	e) 
+	    opts="$opts -s" 
+	    ;;
+    esac
+done
+shift $(($OPTIND -1))
+
+FETCH=`dirname $0`/report/list-status.sh
+[ -x $FETCH ] || error "no list-status.sh"
+
+$FETCH $opts $log | awk -F, '{printf("%-40s%s\n",$1,$2)}'
+
+exit $?

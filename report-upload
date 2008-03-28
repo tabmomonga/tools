@@ -1,0 +1,42 @@
+#!/bin/sh
+
+# test version
+#
+# by Hiromasa YOSHIMOTO <y@momonga-linux.org>
+
+function error ()
+{
+	echo $@ > /dev/stderr
+	exit 1
+}
+
+
+[ -f report.config ] || error "bad config (no report.config)"
+
+source report.config || error "bad config (source report.config failed)"
+
+[ -n "$REPORT_LOG" ] || error "bad config (no REPORT_LOG)"
+[ -n "$REPORT_URL" ] || error "bad config (no REPORT_URL)"
+
+
+FETCH=`dirname $0`/report/list-status.sh
+[ -x $FETCH ] || error "no list-status.sh"
+
+UPLOAD=`dirname $0`/report/upload.rb
+[ -x $UPLOAD ] || error "no upload.rb"
+
+
+TMP=`mktemp /tmp/report-upload.XXXXXXXX ` || error " mktemp failed."
+
+echo "reading OmoiKondara's logs" > /dev/stderr
+$FETCH -v $REPORT_LOG > $TMP || error "fetch log failed."
+
+echo "" > /dev/stderr
+echo "uploading datas to server" > /dev/stderr
+$UPLOAD report.config $TMP || error "upload failed (LOG: $TMP)"
+
+
+rm $TMP
+date +%s >> $REPORT_LOG
+
+exit 0

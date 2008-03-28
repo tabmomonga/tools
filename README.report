@@ -1,0 +1,30 @@
+-------------------
+ usage
+
+
+$ cd path/to/pkgs
+$ cp report-config.template  report.config
+$ vi report.config
+
+
+$ ../tools/OmoiKondara
+$ report-upload
+
+$ ../tools/OmoiKondara
+$ report-upload
+
+ :
+
+
+--------------------
+ files
+
+ README.report           this file
+ report-config.template  configuration template 
+ report-rebuild          reset dataset
+ report-upload           upload the results
+ report-list             view current results
+ report/*                internal files
+
+
+
