@@ -1,3 +1,7 @@
+Sun Mar 30 08:45:35 2008  Nishio Futoshi  <fut_nis@d3.dion.ne.jp>
+
+	* addprops.ignore: add report.log report.config
+
 Mon Aug 29 11:01:46 2005  Kazuhiko  <kazuhiko@fdiary.net>
 
 	* delobso.rb: display missing files. add '-n', '-O' and '-L'

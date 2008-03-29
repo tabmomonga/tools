@@ -5,3 +5,5 @@ SOURCES
 rpmrc
 rpmmacros
 OmoiKondara.log*
+report.log
+report.config
