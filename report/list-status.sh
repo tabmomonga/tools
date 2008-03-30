@@ -71,6 +71,8 @@ BEGIN {
 stage="ERR_DOWNLOAD"
 }
 
+$0=="prepare buildreqs"   { stage="ERR_BUILDDEP" }
+$0=="prepare sources"     { stage="ERR_DOWNLOAD" }
 $0~/^compare sha256sum of .* NO/ { stage="ERR_CHECKSUM" }
 $0=="error: Failed build dependencies:" { stage="ERR_BUILDDEP" }
 $1=="Executing(%prep):"   { stage="ERR_RPM_INSTALL" }
