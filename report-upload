@@ -10,6 +10,7 @@ function error ()
 	exit 1
 }
 
+export LANG=C
 
 [ -f report.config ] || error "bad config (no report.config)"
 
@@ -28,6 +29,8 @@ UPLOAD=`dirname $0`/report/upload.rb
 
 TMP=`mktemp /tmp/report-upload.XXXXXXXX ` || error " mktemp failed."
 
+TIMESTAMP=`\date +%s`
+
 echo "reading OmoiKondara's logs" > /dev/stderr
 $FETCH -v $REPORT_LOG > $TMP || error "fetch log failed."
 
@@ -35,8 +38,7 @@ echo "" > /dev/stderr
 echo "uploading datas to server" > /dev/stderr
 $UPLOAD report.config $TMP || error "upload failed (LOG: $TMP)"
 
-
 rm $TMP
-date +%s >> $REPORT_LOG
+echo $TIMESTAMP >> $REPORT_LOG
 
 exit 0
