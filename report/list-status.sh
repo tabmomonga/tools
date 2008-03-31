@@ -107,6 +107,10 @@ shift $(($OPTIND - 1))
 
 REPORT_LOG=$1
 
+# this script requires some external commands
+type bc > /dev/null 2>&1 || error " error, please install  \"bc\" command "
+type find > /dev/null 2>&1 || error " error, please install \"find\" command "
+
 # load the last timestamp
 TSTAMP=0
 if [ -n "$REPORT_LOG" -a -f "$REPORT_LOG" ]; then
@@ -114,9 +118,23 @@ if [ -n "$REPORT_LOG" -a -f "$REPORT_LOG" ]; then
     [ "$TSTAMP" -gt 0 ] > /dev/null 2>&1 || error "format error in $REPORT_LOG"
 fi
 
+# generates option string for find
+opt=""
+if [ "$TSTAMP" -gt 0 ]; then
+    NOW=`date +%s`
+    # !!FIXME!!
+    ARG=`echo "($NOW - $TSTAMP + 59) / 60 " | \bc`
+    opt="-mmin -$ARG"
+fi
+
+if [ $progress -ge 0 ]; then
+    echo -n "." > /dev/stderr
+fi
 
 # parse each build logs
-for dir in *; do
+\find -mindepth 2 -maxdepth 2 -name "OmoiKondara.log" $opt | while read log; do
+    dir=`dirname $log`
+    dir=${dir/.\//}
 
     if [ $progress -ge 0 ]; then
 	progress=$(($progress + 1))
@@ -126,25 +144,10 @@ for dir in *; do
 	fi
     fi
 
-    [ -d $dir ] || continue
-
     # skip not build yet
     [ -f $dir/OBSOLETE ] && continue
     [ -f $dir/SKIP ] && continue
     [ -f $dir/.SKIP ] && continue
-
-    # select log file
-    log=$dir/OmoiKondara.log
-    if [ ! -f $log ]; then
-	# retrieve the latest from the compressed logs.
-	log=`\ls $dir/OmoiKondara.log.* 2>/dev/null | tail -n 1`
-    fi
-    # skip if no log file
-    [ -f "$log" ] || continue
-
-    # skip if already reported
-    ts=`stat --format "%Y" "$log"` || error "stat $log faile"
-    [ $TSTAMP -gt $ts ] && continue
 
     code=`check_log  "$log"` || error "check_log $log failed"
 
