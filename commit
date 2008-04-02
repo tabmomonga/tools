@@ -44,7 +44,7 @@ end
 ## check versioning system
 versioning_systems = check_versioning_system( ARGV[0] )
 if versioning_systems.size == 0 then
-  STDERR.puts "no versionning sytem meta-data found."
+  STDERR.puts "no versioning system meta-data found."
   exit 1
 end
 
