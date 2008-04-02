@@ -54,6 +54,7 @@ Too few check points.
 require 'rpm'
 require 'uri'
 require 'strscan'
+require 'etc'
 
 
 module RPM
@@ -224,7 +225,8 @@ module Speclint
     end
 
     def valid_buildroot
-      ::File.join RPM['_tmppath'], %Q(#{File.basename(@filename, '.spec')}-#{packages[0].version.v}-root)
+      # added require 'etc' for use getlogin
+      ::File.join RPM['_tmppath'], %Q(#{File.basename(@filename, '.spec')}-#{packages[0].version.v}-#{packages[0].version.r}-root-#{Etc.getlogin})
     end
 
     attr_reader :filename
