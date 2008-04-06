@@ -110,6 +110,9 @@ REPORT_LOG=$1
 # this script requires some external commands
 type bc > /dev/null 2>&1 || error " error, please install  \"bc\" command "
 type find > /dev/null 2>&1 || error " error, please install \"find\" command "
+type awk > /dev/null 2>&1 || error " error, please install \"awk\" command "
+type svn > /dev/null 2>&1 || error " error, please install \"svn\" command "
+# echo, date
 
 # load the last timestamp
 TSTAMP=0
@@ -135,6 +138,7 @@ fi
 \find -mindepth 2 -maxdepth 2 -name "OmoiKondara.log" $opt | while read log; do
     dir=`dirname $log`
     dir=${dir/.\//}
+    spec=$dir/$dir.spec
 
     if [ $progress -ge 0 ]; then
 	progress=$(($progress + 1))
@@ -149,13 +153,20 @@ fi
     [ -f $dir/SKIP ] && continue
     [ -f $dir/.SKIP ] && continue
 
+    [ -f $spec ] || continue
+
+    # skip when $dir/$dir.spec is newer than $log
+    t1=`stat --format "%Y" "$spec"` || error "stat $spec faile"
+    t2=`stat --format "%Y" "$log"` || error "stat $log faile"
+    [ $t1 -ge $t2 ] && continue
+
     code=`check_log  "$log"` || error "check_log $log failed"
 
     [ -n "$WITHOUT_SUCCESS" -a "SUCCESS" == $code ] && continue
 
     if [ -z "$WITHOUT_REVISION" ]; then
         # retrive svn revision
-	rev=`svn info $dir/ |awk '$0~/^Last Changed Rev: / {print $4}'` || error "svn failed."
+	rev=`svn info $spec |awk '$0~/^Last Changed Rev: / {print $4}'` || error "svn failed."
 	if [ -z "$rev" ]; then
 	    echo "$dir seems not to be managed by svn" > /dev/stderr
             continue
