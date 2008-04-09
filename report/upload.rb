@@ -141,12 +141,13 @@ def sub_upload(args, logs, offset, num)
     #debug("proxy: #{proxy_host}, #{proxy_port}")
   end
 
+  unsafe="/[^-_.!~*'()a-zA-Z\d;\/?:@&=+$,\[\]]/n"
   Net::HTTP::Proxy(proxy_host, proxy_port).start(uri.host, uri.port) {|http|
     
-    query = UploadParams.map{|k| "#{URI.encode(k)}=#{URI.encode(args[k])}" }.join("&")
+    query = UploadParams.map{|k| "#{URI.encode(k,unsafe)}=#{URI.encode(args[k],unsafe)}" }.join("&")
   
     for i in offset..(offset+num-1) do
-      query += "&p[]=#{logs[i][0]}&r[]=#{logs[i][1]}&s[]=#{logs[i][2]}"
+      query += "&p[]=#{URI.encode(logs[i][0],unsafe)}&r[]=#{logs[i][1]}&s[]=#{logs[i][2]}"
     end
 
     debug("#{query}")
