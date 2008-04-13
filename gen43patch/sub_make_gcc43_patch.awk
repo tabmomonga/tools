@@ -39,7 +39,7 @@ $1~/^make.*:$/ && $2=="Leaving" && $3=="directory" {
 
 # ERROR: ??? was not declared in this scope
 # JOB:   add "#include <???>"
-$2=="error:" && ( $0~/was not declared in this scope$/ || $0~/has not been declared$/ ) {
+$2=="error:" && ( $0~/was not declared in this scope$/ || $0~/has not been declared$/ || $0~/'.+' undeclared / ) {
     split($1,file,":")
     srcfile=sprintf("%s/%s", cur_dir, file[1])
 
