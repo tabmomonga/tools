@@ -10,7 +10,7 @@
 $:.unshift(File.dirname($0))
 
 require 'set'
-require 'net/http'
+require 'net/https'
 require 'uri'
 Net::HTTP.version_1_2
 
@@ -142,8 +142,11 @@ def sub_upload(args, logs, offset, num)
   end
 
   unsafe="/[^-_.!~*'()a-zA-Z\d;\/?:@&=+$,\[\]]/n"
-  Net::HTTP::Proxy(proxy_host, proxy_port).start(uri.host, uri.port) {|http|
-    
+  conn = Net::HTTP::Proxy(proxy_host, proxy_port)
+  if "https" == uri.scheme then
+    conn.use_ssl = true
+  end
+  conn.start(uri.host, uri.port) { |http|
     query = UploadParams.map{|k| "#{URI.encode(k,unsafe)}=#{URI.encode(args[k],unsafe)}" }.join("&")
   
     for i in offset..(offset+num-1) do
@@ -151,7 +154,6 @@ def sub_upload(args, logs, offset, num)
     end
 
     debug("#{query}")
-          
     response = http.post(uri.path, query)
     
     puts response.body
