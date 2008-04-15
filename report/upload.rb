@@ -9,22 +9,24 @@
 
 $:.unshift(File.dirname($0))
 
+require 'optparse'
 require 'set'
 require 'net/https'
 require 'uri'
 Net::HTTP.version_1_2
-
 require 'ecode.rb'
 
 
 MAX_UPLOAD_UNIT = 100    # number of upload per request
-CONFIG_VERSION = "0.2"   # config file version
+CONFIG_VERSION = "0.3"   # config file version
 
 UploadParams     = Set.new ["username", "password", 
                             "hostname", "arch", "branch", "version"]
 EssentialParams  = Set.new ["report_url", "report_log"]
 AdditionalParams = Set.new ["proxy"]
 
+Config = Hash.new
+Config[:verbose] = false
 
 # ------------------------------------------------------
 def min(a, b)
@@ -32,7 +34,7 @@ def min(a, b)
 end
 
 def debug(msg)
-  if false then
+  if Config[:verbose] then
     STDERR.puts "#{msg}"
   end
 end
@@ -72,7 +74,7 @@ def load_config(file)
 
   # check version
   if CONFIG_VERSION != "#{args['version']}" then
-    fatal("your config file is too old, please update #{file}")
+    fatal("your config file is too old, please update your #{file}")
     return nil
   end
   # check upload/essential params
@@ -111,7 +113,7 @@ def load_csv_log(file)
 
       status = get_status_number(sstr)
 
-      debug( "#{pname} #{rev} #{status} [#{sstr}]")
+      #debug( "#{pname} #{rev} #{status} [#{sstr}]")
 
       log.push([pname, rev, status]) 
     }
@@ -127,7 +129,7 @@ end
 # 返値は upload したlogの個数
 
 def sub_upload(args, logs, offset, num)
-  debug("sub_upload offset: #{offset} num:#{num}")
+  #debug("sub_upload(offset: #{offset}, num:#{num})")
 
   return -1 if nil == args['report_url']
 
@@ -141,19 +143,25 @@ def sub_upload(args, logs, offset, num)
     #debug("proxy: #{proxy_host}, #{proxy_port}")
   end
 
-  unsafe="/[^-_.!~*'()a-zA-Z\d;\/?:@&=+$,\[\]]/n"
-  conn = Net::HTTP::Proxy(proxy_host, proxy_port)
+  unsafe="[]%; &=-+"
+  conn = Net::HTTP::Proxy(proxy_host, proxy_port).new(uri.host, uri.port)
   if "https" == uri.scheme then
     conn.use_ssl = true
+    # !!FIXME!!  証明書の検証は行わない
+    conn.verify_mode = OpenSSL::SSL::VERIFY_NONE
   end
-  conn.start(uri.host, uri.port) { |http|
+  conn.start { |http|
     query = UploadParams.map{|k| "#{URI.encode(k,unsafe)}=#{URI.encode(args[k],unsafe)}" }.join("&")
-  
+
+    if Config[:verbose] then
+      query += "&magic=1"
+    end
+
     for i in offset..(offset+num-1) do
       query += "&p[]=#{URI.encode(logs[i][0],unsafe)}&r[]=#{logs[i][1]}&s[]=#{logs[i][2]}"
     end
 
-    debug("#{query}")
+    debug("query: #{query}")
     response = http.post(uri.path, query)
     
     puts response.body
@@ -188,6 +196,10 @@ end
 
 
 # ------------------------------------------------------
+
+opts = OptionParser.new
+opts.on("-d", "--debug"){|v| Config[:verbose] = true } 
+opts.parse!(ARGV)
 
 conffile = ARGV[0]
 datafile = ARGV[1]

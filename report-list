@@ -17,15 +17,21 @@ usage:
 $0  [opts]
     -a    list all status
     -e    list error status only
+    -d    debug mode
     -h    display this help and exit
 EOF
     exit 1
 }
 
-
+conf=report.config
 log=report.log
-opts="-R "
-while getopts "aeh" opt; do
+
+[ -f $conf -a -r $conf ] || error "no report.config"
+source $conf || error "failed to load $conf"
+[ -n "$BRANCH" ] || error "bad config (no BRANCH)"
+
+opts="-R -B $BRANCH"
+while getopts "aehd" opt; do
     case $opt in
 	h) 
 	    usage
@@ -36,6 +42,9 @@ while getopts "aeh" opt; do
 	e) 
 	    opts="$opts -s" 
 	    ;;
+	d)
+	    opts="$opts -d"
+	    ;;
     esac
 done
 shift $(($OPTIND -1))
@@ -43,6 +52,6 @@ shift $(($OPTIND -1))
 FETCH=`dirname $0`/report/list-status.sh
 [ -x $FETCH ] || error "no list-status.sh"
 
-$FETCH $opts $log | awk -F, '{printf("%-40s%s\n",$1,$2)}'
+$FETCH $opts $log | awk -F, '{printf("%-60s%s\n",$1,$2)}'
 
 exit $?

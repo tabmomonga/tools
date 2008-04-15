@@ -10,7 +10,31 @@ function error ()
 	exit 1
 }
 
+function usage ()
+{
+    cat<<EOF
+usage:
+$0  [opts]
+    -d    debug mode
+    -h    display this help and exit
+EOF
+    exit 1
+}
+
 export LANG=C
+
+opts=""
+while getopts "dh" opt; do
+    case $opt in
+	h) 
+	    usage
+	    ;;
+	d)
+	    opts="$opts -d"
+	    ;;
+    esac
+done
+shift $(($OPTIND -1))
 
 [ -f report.config ] || error "bad config (no report.config)"
 
@@ -18,7 +42,7 @@ source report.config || error "bad config (source report.config failed)"
 
 [ -n "$REPORT_LOG" ] || error "bad config (no REPORT_LOG)"
 [ -n "$REPORT_URL" ] || error "bad config (no REPORT_URL)"
-
+[ -n "$BRANCH" ] || error "bad config (no BRANCH)"
 
 FETCH=`dirname $0`/report/list-status.sh
 [ -x $FETCH ] || error "no list-status.sh"
@@ -32,11 +56,11 @@ TMP=`mktemp /tmp/report-upload.XXXXXXXX ` || error " mktemp failed."
 TIMESTAMP=`\date +%s`
 
 echo "reading OmoiKondara's logs" > /dev/stderr
-$FETCH -v $REPORT_LOG > $TMP || error "fetch log failed."
+$FETCH $opts -B $BRANCH -v $REPORT_LOG > $TMP || error "fetch log failed."
 
 echo "" > /dev/stderr
 echo "uploading datas to server" > /dev/stderr
-$UPLOAD report.config $TMP || error "upload failed (LOG: $TMP)"
+$UPLOAD $opts report.config $TMP || error "upload failed (LOG: $TMP)"
 
 rm $TMP
 echo $TIMESTAMP >> $REPORT_LOG

@@ -18,6 +18,7 @@ SEP=","                   # field separator
 unset WITHOUT_REVISION
 unset WITHOUT_SUCCESS
 progress=-1               # output progress bar when >= 0
+unset DEBUG
 
 function error 
 {
@@ -25,16 +26,24 @@ function error
     exit 1
 }
 
+function debug
+{
+    [ -n "$DEBUG" ] && echo "   " $@ > /dev/stderr
+}
+
+
 function usage
 {
     cat<<EOF
 usage:
 $0 [opts] [filename]
-  -f FS  set field separator
-  -R     suppress revision number
-  -s     suppress success status
-  -v     output verbose messages
-  -h     show this help message
+  -f FS      set field separator
+  -R         suppress revision number
+  -s         suppress success status
+  -v         output verbose messages
+  -h         show this help message
+  -B BRANCH  show BRANCH only
+  -d         debug mode
 EOF
     exit 1
 }
@@ -87,7 +96,7 @@ END {
     fi
 }
 
-while getopts "hRsv" opt; do
+while getopts "f:B:hRsvd" opt; do
     case $opt in
 	R)
 	    WITHOUT_REVISION="1"
@@ -98,6 +107,15 @@ while getopts "hRsv" opt; do
 	v)
 	    progress=0
 	    ;;
+	f)
+	    SEP=$OPTARG
+	    ;;
+	B)
+	    BRANCH=$OPTARG
+	    ;;
+	d)
+	    DEBUG=1
+	    ;;
 	h) 
 	    usage
 	    ;;
@@ -106,6 +124,24 @@ done
 shift $(($OPTIND - 1))
 
 REPORT_LOG=$1
+
+
+# table for svn's URL
+URL_trunk=
+URL_stable_4=svn/pkgs/branches/TSUPPA4RI
+
+REPO=""
+case "$BRANCH" in
+    trunk)
+	REPO="trunk/pkgs"
+	;;
+    stable_4)
+	REPO="STABLE_3/pkgs"
+	;;
+    *)
+	error "-B $BRANCH is not supported"
+	;;
+esac
 
 # this script requires some external commands
 type bc > /dev/null 2>&1 || error " error, please install  \"bc\" command "
@@ -164,13 +200,26 @@ fi
 
     [ -n "$WITHOUT_SUCCESS" -a "SUCCESS" == $code ] && continue
 
+    # check branch if required
+    if [ -n "$REPO" ]; then
+	svn info $spec 2>/dev/null | grep "^URL: .*$REPO/$spec$" > /dev/null
+	if [ $? -eq 1 ]; then
+	    debug "$dir is not a visioned pkg in $REPO, skip"
+	    continue
+	fi
+    fi
+    # skip if $spec is changed 
+    svn st $dir 2>/dev/null | grep '^M' > /dev/null
+    if [ $? -eq 0 ]; then
+	debug "$dir is modified, skip"
+	continue
+    fi
+
     if [ -z "$WITHOUT_REVISION" ]; then
         # retrive svn revision
 	rev=`svn info $spec |awk '$0~/^Last Changed Rev: / {print $4}'` || error "svn failed."
-	if [ -z "$rev" ]; then
-	    echo "$dir seems not to be managed by svn" > /dev/stderr
-            continue
-	fi
+	[ -z "$rev" ] && continue
+
 	echo "$dir$SEP$rev$SEP$code"
     else
 	echo "$dir$SEP$code"
