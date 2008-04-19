@@ -1,3 +1,7 @@
+2008-04-19  Nishio Futoshi  <fut_nis@d3.dion.ne.jp>
+
+	* addprops.ignore: add report.log.old
+
 Sun Mar 30 08:45:35 2008  Nishio Futoshi  <fut_nis@d3.dion.ne.jp>
 
 	* addprops.ignore: add report.log report.config
