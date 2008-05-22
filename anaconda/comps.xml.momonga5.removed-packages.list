@@ -7,8 +7,6 @@ CriticalMass
 ElectricFence
 FlightGear
 KoboDeluxe
-LabPlot
-LabPlot-doc
 Macaulay2
 MegaMek
 PySolFC
@@ -83,6 +81,8 @@ ballbuster
 ballz
 banshee
 bbkeys
+beagle-evolution
+beagle-gnome
 beneath-a-steel-sky
 beneath-a-steel-sky-cd
 berusky
@@ -123,6 +123,8 @@ charis-fonts
 checkgmail
 chess
 childsplay
+clamav-data
+clamav-milter
 clanbomber
 claws-mail
 cleanfeed
@@ -130,7 +132,6 @@ clips
 clips-doc
 clips-xclips
 clonekeen
-cmigemo
 cobbler
 coco-coq
 codeblocks
@@ -141,7 +142,6 @@ comix
 compat-gcc-34-g77
 compat-libgcc-296
 compat-libstdc++-296
-compat-libstdc++-33
 cone
 conexus-devel
 conexusmm-devel
@@ -296,7 +296,6 @@ gbrainy
 gcc-gnat
 gcin
 gcombust
-gcompris
 gcstar
 gdeskcal
 gdesklets
@@ -343,7 +342,6 @@ glabels
 glade2
 glaxium
 glest
-glibmm24-devel
 glipper
 glob2
 glom
@@ -430,7 +428,6 @@ i8kutils
 ibmonitor
 icewm
 id3v2
-im-chooser
 imp
 inadyn
 inconsolata-fonts
@@ -540,7 +537,6 @@ mmv
 mock
 monotone
 monsterz
-moodle
 moodss
 moomps
 mtx
@@ -549,7 +545,6 @@ muine
 multican
 mybashburn
 mysql-connector-odbc
-nabi
 nagi
 nagios
 nail
@@ -602,7 +597,7 @@ openarena
 openbox
 openlierox
 openoffice.org-extendedPDF
-openoffice.org-voikko
+openoffice.org-langpack-en
 opensc
 openswan
 optipng
@@ -742,10 +737,6 @@ scalapack
 scanbuttond
 scanmem
 scigraphica
-scim-array
-scim-bridge-gtk
-scim-bridge-qt3
-scim-gtk
 scim-rawcode
 scite
 scorched3d
@@ -772,11 +763,6 @@ slingshot
 smarteiffel
 smartmontools-config
 smashteroid
-smc-fonts-dyuthi
-smc-fonts-meera
-smc-fonts-rachana
-smc-fonts-raghumalayalam
-smc-fonts-suruma
 snownews
 sobby
 solarwolf
@@ -787,11 +773,6 @@ spamass-milter
 splint
 sqlgrey
 srecord
-stardict-dic-en
-stardict-dic-ja
-stardict-dic-ru
-stardict-dic-zh_CN
-stardict-dic-zh_TW
 starfighter
 stellarium
 stix-fonts
@@ -826,8 +807,7 @@ tecnoballz
 tellico
 terminus-font-console
 terminus-font-x11
-tesseract
-tetex-prosper
+tetex-eurofont
 tetex-xdvi
 texlive
 texmaker
@@ -914,7 +894,6 @@ widelands
 wifiroamd
 wings
 wise2
-wkf
 wlassistant
 wmix
 wmx
@@ -923,8 +902,6 @@ worldofpadman
 worminator
 wormux
 wp_tray
-wqy-unibit-fonts
-wqy-zenhei-fonts
 wvs-data
 wxGlade
 wyrd
@@ -970,5 +947,4 @@ yumex
 zasx
 zidrav
 zile
-zvbi-fonts
 zzuf
