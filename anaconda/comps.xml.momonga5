@@ -14272,7 +14272,7 @@
       <packagereq type="optional">git</packagereq>
       <packagereq type="optional">gprolog</packagereq>
       <packagereq type="optional">cmucl</packagereq>
-      <packagereq type="optional">uim-devel</packagereq>xorg-x11-server-Xorg
+      <packagereq type="optional">uim-devel</packagereq>
       <packagereq type="optional">Gauche-utf8</packagereq>
       <packagereq type="optional">rpmlint</packagereq>
       <packagereq type="optional">cpanspec</packagereq>
