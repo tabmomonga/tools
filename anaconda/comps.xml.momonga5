@@ -453,7 +453,7 @@
     <packagelist>
       <packagereq type="optional">m17n-db</packagereq>
       <packagereq type="conditional" requires="kde-l10n-Farsi">kdelibs</packagereq>
-      <packagereq type="conditional" requires="kde3-i18n-Farsi">klibs3</packagereq>
+      <packagereq type="conditional" requires="kde3-i18n-Farsi">kdelibs3</packagereq>
       <packagereq type="conditional" requires="koffice-l10n-Farsi">koffice-core</packagereq>
     </packagelist>
   </group>        
@@ -5513,7 +5513,7 @@
       <packagereq type="optional">docbook2X</packagereq>
       <packagereq type="optional">lilypond</packagereq>
       <packagereq type="optional">python-docutils</packagereq>
-      <packagereq type="optional">tetex-extramacros-prosper</packagereq>
+      <packagereq type="optional">tetex-prosper</packagereq>
       <packagereq type="optional">kile</packagereq>
     </packagelist>
   </group>        
