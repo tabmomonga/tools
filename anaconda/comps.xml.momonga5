@@ -7648,6 +7648,7 @@
       <packagereq type="default">amarok</packagereq>
       <packagereq type="default">digikam</packagereq>
       <packagereq type="default">extragear-plasma</packagereq>
+      <packagereq type="default">fedora-gnome-theme</packagereq>
       <packagereq type="default">kaffeine</packagereq>
       <packagereq type="default">kdeaccessibility</packagereq>
       <packagereq type="default">kdeartwork</packagereq>
