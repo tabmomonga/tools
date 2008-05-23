@@ -1,0 +1,230 @@
+== admin-tools ==
+
+<packagereq type="default">pirut</packagereq>
+<packagereq type="default">system-config-soundcard</packagereq>
+
+== authoring-and-publishing ==
+
+== base ==
+
+<packagereq type="mandatory">cyrus-sasl</packagereq>
+<packagereq type="mandatory">libutempter</packagereq>
+<packagereq type="mandatory">vixie-cron</packagereq>
+<packagereq type="default">aspell-en</packagereq>
+<packagereq type="default">aspell</packagereq>
+<packagereq type="default">autofs</packagereq>
+<packagereq type="default">bluez-bluefw</packagereq>
+<packagereq type="default">bluez-hcidump</packagereq>
+<packagereq type="default">bluez-libs</packagereq>
+<packagereq type="default">cpufreq-utils</packagereq>
+<packagereq type="default">diffutils</packagereq>
+<packagereq type="default">dmidecode</packagereq>
+<packagereq type="default">firstboot-tui</packagereq>
+<packagereq type="default">longrun</packagereq>
+<packagereq type="default">mgetty</packagereq>
+<packagereq type="default">mt-st</packagereq>
+<packagereq type="default">net-tools</packagereq>
+<packagereq type="default">pcsc-lite-libs</packagereq>
+<packagereq type="default">perl-devel</packagereq>
+<packagereq type="default">rp-pppoe</packagereq>
+<packagereq type="default">setarch</packagereq>
+<packagereq type="default">system-config-securitylevel-tui</packagereq>
+
+== base-x ==
+
+<packagereq type="mandatory">xorg-x11-fonts-75dpi</packagereq>
+<packagereq type="mandatory">xorg-x11-fonts-ISO8859-1-75dpi</packagereq>
+<packagereq type="mandatory">xorg-x11-fonts-truetype</packagereq>
+<packagereq type="default">dejavu-lgc-fonts</packagereq>
+<packagereq type="default">pirut</packagereq>
+<packagereq type="default">synaptics</packagereq>
+<packagereq type="default">system-config-soundcard</packagereq>
+
+== core ==
+
+<packagereq type="mandatory">kudzu</packagereq>
+<packagereq type="mandatory">libtermcap</packagereq>
+<packagereq type="mandatory">selinux-policy</packagereq>
+<packagereq type="mandatory">selinux-policy-mls</packagereq>
+<packagereq type="mandatory">selinux-policy-strict</packagereq>
+<packagereq type="mandatory">sysklogd</packagereq>
+<packagereq type="mandatory">SysVinit</packagereq>
+<packagereq type="mandatory">termcap</packagereq>
+<packagereq type="mandatory">util-linux</packagereq>
+<packagereq type="mandatory">vim-common</packagereq>
+<packagereq type="default">ash</packagereq>
+<packagereq type="default">elilo</packagereq>
+
+== development-libs ==
+
+<packagereq type="mandatory">libtermcap-devel</packagereq>
+<packagereq type="default">kudzu-devel</packagereq>
+
+== development-tools ==
+
+<packagereq type="default" basearchonly="true">pstack</packagereq>
+<packagereq type="optional">cogito</packagereq>
+
+== dial-up ==
+
+== dns-server ==
+
+<packagereq type="default">caching-nameserver</packagereq>
+
+== eclipse (Fedora Eclipse) ==
+
+<packagereq type="mandatory">eclipse-platform</packagereq>
+
+
+== editors ==
+
+<packagereq type="optional">jed-common</packagereq>
+
+== education ==
+
+== engineering-and-scientific ==
+
+<packagereq type="optional">kalgebra</packagereq>
+<packagereq type="optional">maxima-exec_cmucl</packagereq>
+
+== games ==
+
+<packagereq type="optional">ksudoku</packagereq>
+
+== gnome-desktop ==
+
+<packagereq type="mandatory">esound</packagereq>
+<packagereq type="default">compiz-core</packagereq>
+<packagereq type="default">compiz-core-gtk-window-decorator</packagereq>
+<packagereq type="default">compiz-fusion-plugins-main</packagereq>
+<packagereq type="default">compiz-fusion-plugins-extra</packagereq>
+<packagereq type="default">compiz-fusion-plugins-unsupported</packagereq>
+<packagereq type="default">compiz-bcop</packagereq>
+<packagereq type="default">libcompizconfig</packagereq>
+<packagereq type="default">compizconfig-python</packagereq>
+<packagereq type="default">compizconfig-backend-gconf</packagereq>
+<packagereq type="default">ccs-settings</packagereq>
+<packagereq type="default">ccsm</packagereq>
+<packagereq type="default">emerald</packagereq>
+<packagereq type="default">emerald-themes</packagereq>
+<packagereq type="default">fast-user-switch-applet</packagereq>
+<packagereq type="default">fusion-icon</packagereq>
+<packagereq type="default">gnome-vfs2</packagereq>
+<packagereq type="default">redhat-artwork</packagereq>
+<packagereq type="optional">hal-gnome</packagereq>
+
+== gnome-software-development ==
+
+== graphical-internet ==
+
+<packagereq type="optional">kickpim</packagereq>
+
+== graphics ==
+
+<packagereq type="optional">gwenview</packagereq>
+
+== hardware-support ==
+
+== japanese-support ==
+
+<packagereq type="conditional" requires="gtk2">scim-uim</packagereq>
+
+== java ==
+
+== java-development ==
+
+<packagereq type="default">ant-manifest-only</packagereq>
+
+== kde-desktop ==
+
+<packagereq type="mandatory">arts</packagereq>
+<packagereq type="default">compiz-core</packagereq>
+<packagereq type="default">compiz-core-kde-window-decorator</packagereq>
+<packagereq type="default">compiz-fusion-plugins-main</packagereq>
+<packagereq type="default">compiz-fusion-plugins-extra</packagereq>
+<packagereq type="default">compiz-fusion-plugins-unsupported</packagereq>
+<packagereq type="default">compiz-bcop</packagereq>
+<packagereq type="default">libcompizconfig</packagereq>
+<packagereq type="default">compizconfig-python</packagereq>
+<packagereq type="default">compizconfig-backend-kconfig</packagereq>
+<packagereq type="default">ccs-settings</packagereq>
+<packagereq type="default">ccsm</packagereq>
+<packagereq type="default">emerald</packagereq>
+<packagereq type="default">emerald-themes</packagereq>
+<packagereq type="default">fusion-icon</packagereq>
+<packagereq type="default">gwenview</packagereq>
+<packagereq type="default">kaquarium</packagereq>
+<packagereq type="default">kdeaddons</packagereq>
+<packagereq type="default">kicker-compiz</packagereq>
+<packagereq type="default">knetworkmanager</packagereq>
+<packagereq type="default">sylpheed</packagereq>
+<packagereq type="optional">kalgebra</packagereq>
+<packagereq type="optional">kickpim</packagereq>
+<packagereq type="optional">kima</packagereq>
+<packagereq type="optional">ksmoothdock</packagereq>
+<packagereq type="optional">ksudoku</packagereq>
+<packagereq type="optional">tastymenu</packagereq>
+
+== kde-software-development ==
+
+<packagereq type="mandatory">arts-artsc-devel</packagereq>
+<packagereq type="optional">facile</packagereq>
+<packagereq type="default">qtruby</packagereq>
+
+== legacy-network-server ==
+
+== legacy-software-development ==
+
+== mail-server ==
+
+== mysql ==
+
+== network-server ==
+
+== news-server ==
+
+== office ==
+
+== printing ==
+
+<packagereq type="optional">ghostscript-cups</packagereq>
+
+== ruby ==
+
+== server-cfg ==
+
+<packagereq type="default">system-config-securitylevel</packagereq>
+
+== sound-and-video ==
+
+== sql-server ==
+
+== system-tools ==
+
+<packagereq type="optional">nmap-frontend</packagereq>
+<packagereq type="optional">synaptics</packagereq>
+
+== text-internet ==
+
+== virtualization ==
+
+== web-development ==
+
+== web-server ==
+
+== window-managers ==
+
+== x-software-development ==
+
+== xfce-desktop ==
+
+== xfce-software-development ==
+
+<packagereq type="default">glade2</packagereq>
+
+
+
+
+
+
+
