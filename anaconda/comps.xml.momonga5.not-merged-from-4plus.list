@@ -37,7 +37,6 @@
 <packagereq type="mandatory">xorg-x11-fonts-truetype</packagereq>
 <packagereq type="default">dejavu-lgc-fonts</packagereq>
 <packagereq type="default">pirut</packagereq>
-<packagereq type="default">synaptics</packagereq>
 <packagereq type="default">system-config-soundcard</packagereq>
 
 == core ==
