@@ -3,27 +3,27 @@
 
 
 $ cd path/to/pkgs
-$ cp report-config.template  report.config
+$ cp ../tools/report.config.template  report.config
 $ vi report.config
 
 
 $ ../tools/OmoiKondara
-$ report-upload
+$ ../tools/report-upload
 
+$ ../tools/report-download
+$ ../tools/report-download -t
 $ ../tools/OmoiKondara
-$ report-upload
-
- :
 
 
 --------------------
  files
 
  README.report           this file
- report-config.template  configuration template 
+ report.config.template  configuration template 
  report-rebuild          reset dataset
  report-upload           upload the results
  report-list             view current results
+ report-download         download failed package list
  report/*                internal files
 
 

@@ -1,0 +1,81 @@
+#!/bin/bash
+
+# test version
+#
+# by Hiromasa YOSHIMOTO <y@momonga-linux.org>
+
+function error ()
+{
+	echo $@ > /dev/stderr
+	exit 1
+}
+
+function usage ()
+{
+    cat<<EOF
+usage:
+$0  [opts]
+    -h    display this help and exit
+EOF
+    exit 1
+}
+
+
+function download() {
+    url=${REPORT_URL/upload.php/download_pkgs.php}
+
+    opt="-q -O -"
+    opt="$opt --no-check-certificate"
+    wget $opt "$url?arch=$ARCH&branch=$BRANCH"
+    
+    r=$?
+    [ $r -eq 0 ] || error "wget failed."
+}
+
+#
+conf=report.config
+
+# check arguments and files
+[ -f $conf -a -r $conf ] || error "no report.config"
+source $conf || error "failed to load $conf"
+[ -n "$BRANCH" ] || error "bad config (no BRANCH)"
+[ -n "$ARCH" ] || error "bad config (no ARCH)"
+[ -n "$REPORT_URL" ] || error "bad config (no REPORT_URL)"
+type wget > /dev/null 2>&1 || error "wget is not installed"
+
+
+mode=""
+while getopts "ht" opt; do
+    case $opt in
+	t)
+	    mode="touch"
+	    ;;
+	h) 
+	    usage
+	    ;;
+    esac
+done
+shift $(($OPTIND -1))
+
+# main
+
+case $mode in
+"touch")
+	count=0
+	for pkg in `download`; do
+	    if [ -f $pkg/$pkg.spec ]; then
+		touch $pkg/pkg.spec
+		count=$(($count + 1))
+	    fi
+	done
+	echo "$count package(s) will be rebuilt." > /dev/stderr
+	echo "run ../tools/OmoiKondara && ../tools/report-upload" > /dev/stderr
+	r=0
+	;;
+*)
+	download
+	r=$?
+	;;
+esac
+
+exit $r
