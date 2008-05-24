@@ -45,6 +45,10 @@ while loop < OPTS[:recursion]
     db.execute(sql) do |cand|
       candidates.add(cand)
     end
+    sql = "select provide from provide_tbl where provide glob '#{name}' "
+    db.execute(sql) do |cand|
+      candidates.add(cand)
+    end
   end
 
   candidates.each do |name|
