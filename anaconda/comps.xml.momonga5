@@ -1178,6 +1178,7 @@
       <packagereq type="mandatory">xorg-x11-fonts-ISO8859-1-100dpi</packagereq>
       <packagereq type="mandatory">xorg-x11-fonts-misc</packagereq>
       <packagereq type="mandatory">xorg-x11-fonts-Type1</packagereq>
+      <packagereq type="mandatory">xorg-x11-server-utils</packagereq>
       <packagereq type="mandatory">xorg-x11-server-Xorg</packagereq>
       <packagereq type="mandatory">xorg-x11-xauth</packagereq>
       <packagereq type="mandatory">xorg-x11-xinit</packagereq>
