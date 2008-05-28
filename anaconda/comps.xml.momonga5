@@ -7010,9 +7010,9 @@
     <packagelist>
       <packagereq type="conditional" requires="aspell">aspell-ga</packagereq>
       <packagereq type="conditional" requires="hunspell">hunspell-ga</packagereq>
-      <packagereq type="conditional" requires="kdelibs">kde-l10n-Irish</packagereq>
-      <packagereq type="conditional" requires="kdelibs3">kde3-i18n-Irish</packagereq>
-      <packagereq type="conditional" requires="koffice-core">koffice-l10n-Irish</packagereq>
+      <packagereq type="conditional" requires="kdelibs">kde-l10n-Irish-Gaelic</packagereq>
+      <packagereq type="conditional" requires="kdelibs3">kde3-i18n-Irish-Gaelic</packagereq>
+      <packagereq type="conditional" requires="koffice-core">koffice-l10n-Irish-Gaelic</packagereq>
       <packagereq type="conditional" requires="moodle">moodle-ga</packagereq>
       <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-ga_IE</packagereq>
     </packagelist>
@@ -9228,9 +9228,9 @@
     <uservisible>false</uservisible>
     <langonly>nds</langonly>
     <packagelist>
-      <packagereq type="conditional" requires="kdelibs">kde-l10n-LowSaxon</packagereq>
-      <packagereq type="conditional" requires="kdelibs3">kde3-i18n-LowSaxon</packagereq>
-      <packagereq type="conditional" requires="koffice-core">koffice-l10n-LowSaxon</packagereq>
+      <packagereq type="conditional" requires="kdelibs">kde-l10n-Low-Saxon</packagereq>
+      <packagereq type="conditional" requires="kdelibs3">kde3-i18n-Low-Saxon</packagereq>
+      <packagereq type="conditional" requires="koffice-core">koffice-l10n-Low-Saxon</packagereq>
     </packagelist>
   </group>
   <group>
