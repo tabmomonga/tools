@@ -155,7 +155,6 @@
 <packagereq type="default">kaquarium</packagereq>
 <packagereq type="default">kdeaddons</packagereq>
 <packagereq type="default">kicker-compiz</packagereq>
-<packagereq type="default">knetworkmanager</packagereq>
 <packagereq type="default">sylpheed</packagereq>
 <packagereq type="optional">kalgebra</packagereq>
 <packagereq type="optional">kickpim</packagereq>
