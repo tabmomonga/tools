@@ -8075,6 +8075,7 @@
       <packagereq type="optional">kscope</packagereq>
       <packagereq type="optional">ksensors</packagereq>
       <packagereq type="optional">kshutdown</packagereq>
+      <packagereq type="optional">ksmarttray</packagereq>
       <packagereq type="optional">ktechlab</packagereq>
       <packagereq type="optional">ktrack</packagereq>
       <packagereq type="optional">kwave</packagereq>
