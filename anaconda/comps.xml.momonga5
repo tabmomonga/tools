@@ -8372,6 +8372,7 @@
       <packagereq type="default">taglib-devel</packagereq>
       <packagereq type="default">wv2-devel</packagereq>
       <packagereq type="default">xmms-devel</packagereq>
+      <packagereq type="optional">kdelibs-apidocs</packagereq>
     </packagelist>
   </group>
   <group>
