@@ -6444,6 +6444,7 @@
       <packagereq type="default">iwl3945-firmware</packagereq>
       <packagereq type="default">iwl4965-firmware</packagereq>
       <packagereq type="default">libertas-usb8388-firmware</packagereq>
+      <packagereq type="default">ndiswrapper</packagereq>
       <packagereq type="default">ql2100-firmware</packagereq>
       <packagereq type="default">ql2200-firmware</packagereq>
       <packagereq type="default">ql23xx-firmware</packagereq>
