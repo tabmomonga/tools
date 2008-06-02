@@ -6458,6 +6458,7 @@
       <packagereq type="optional">gpsd</packagereq>
       <packagereq type="optional">gpsd-clients</packagereq>
       <packagereq type="optional">hddtemp</packagereq>
+      <packagereq type="optional">isight-firmware-tools</packagereq>
       <packagereq type="optional">libifp</packagereq>
       <packagereq type="optional">lsscsi</packagereq>
       <packagereq type="optional">openct</packagereq>
