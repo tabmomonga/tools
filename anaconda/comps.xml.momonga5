@@ -7913,6 +7913,7 @@
       <packagereq type="default">arts-artsc</packagereq>
       <packagereq type="default">basket</packagereq>
       <packagereq type="default">compiz-kde</packagereq>
+      <packagereq type="default">crystalsvg-icon-theme</packagereq>
       <packagereq type="default">digikam</packagereq>
       <packagereq type="default">digikam-doc</packagereq>
       <packagereq type="default">extragear-plasma</packagereq>
@@ -7925,7 +7926,6 @@
       <packagereq type="default">k3b</packagereq>
       <packagereq type="default">kaffeine</packagereq>
       <packagereq type="default">kaffeine-plugin</packagereq>
-      <packagereq type="default">kaider</packagereq>
       <packagereq type="default">katapult</packagereq>
       <packagereq type="default">kcoloredit</packagereq>
       <packagereq type="default">kcpuload</packagereq>
@@ -7935,10 +7935,10 @@
       <packagereq type="default">kdeartwork</packagereq>
       <packagereq type="default">kdeartwork-extras</packagereq>
       <packagereq type="default">kdeartwork-icons</packagereq>
-      <packagereq type="default">kdeartwork-icons-crystalsvg</packagereq>
       <packagereq type="default">kdeartwork-kxs</packagereq>
       <packagereq type="default">kdebluetooth</packagereq>
       <packagereq type="default">kdeedu</packagereq>
+      <packagereq type="default">kdeedu-kstars</packagereq>
       <packagereq type="default">kdegames</packagereq>
       <packagereq type="default">kdegraphics</packagereq>
       <packagereq type="default">kdemultimedia</packagereq>
@@ -7990,6 +7990,8 @@
       <packagereq type="default">kwlan</packagereq>
       <packagereq type="default">libakode</packagereq>
       <packagereq type="default">openoffice.org-kde</packagereq>
+      <packagereq type="default">oxygen-icon-theme</packagereq>
+      <packagereq type="default">oxygen-icon-theme-scalable</packagereq>
       <packagereq type="default">qt-mysql</packagereq>
       <packagereq type="default">qt-odbc</packagereq>
       <packagereq type="default">qt-postgresql</packagereq>
@@ -8044,7 +8046,6 @@
       <packagereq type="optional">amarokFS</packagereq>
       <packagereq type="optional">anp</packagereq>
       <packagereq type="optional">audiokonverter</packagereq>
-      <packagereq type="optional">dragonplayer</packagereq>
       <packagereq type="optional">k9copy</packagereq>
       <packagereq type="optional">kannadic</packagereq>
       <packagereq type="optional">kasablanca</packagereq>
@@ -8066,7 +8067,6 @@
       <packagereq type="optional">klamav</packagereq>
       <packagereq type="optional">kleansweep</packagereq>
       <packagereq type="optional">kmediaplayer</packagereq>
-      <packagereq type="optional">kmobiletools</packagereq>
       <packagereq type="optional">kmymoney</packagereq>
       <packagereq type="optional">komparator</packagereq>
       <packagereq type="optional">kompose</packagereq>
@@ -8286,7 +8286,6 @@
       <packagereq type="default">imlib2-devel</packagereq>
       <packagereq type="default">jack-devel</packagereq>
       <packagereq type="default">jadetex</packagereq>
-      <packagereq type="default">kaider</packagereq>
       <packagereq type="default">kbanking-devel</packagereq>
       <packagereq type="default">kdbg</packagereq>
       <packagereq type="default">kdebase-devel</packagereq>
@@ -8299,13 +8298,16 @@
       <packagereq type="default">kdelibs3-devel</packagereq>
       <packagereq type="default">kdemultimedia-devel</packagereq>
       <packagereq type="default">kdenetwork-devel</packagereq>
+      <packagereq type="default">kdepim-devel</packagereq>
       <packagereq type="default">kdepimlibs-devel</packagereq>
       <packagereq type="default">kdesdk</packagereq>
       <packagereq type="default">kdesdk-devel</packagereq>
+      <packagereq type="default">kdesdk-utils</packagereq>
       <packagereq type="default">kdesvn</packagereq>
       <packagereq type="default">kdesvn-kiosvn</packagereq>
       <packagereq type="default">kdesvn-svnqt-devel</packagereq>
       <packagereq type="default">kdevelop</packagereq>
+      <packagereq type="default">kdewebdev-devel</packagereq>
       <packagereq type="default">kdiff3</packagereq>
       <packagereq type="default">kftpgrabber-devel</packagereq>
       <packagereq type="default">koffice-devel</packagereq>
@@ -8375,6 +8377,7 @@
       <packagereq type="default">wv2-devel</packagereq>
       <packagereq type="default">xmms-devel</packagereq>
       <packagereq type="optional">kdelibs-apidocs</packagereq>
+      <packagereq type="optional">kdepimlibs-apidocs</packagereq>
     </packagelist>
   </group>
   <group>
