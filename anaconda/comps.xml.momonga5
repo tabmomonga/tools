@@ -989,6 +989,7 @@
       <packagereq type="default">yum</packagereq>
       <packagereq type="default">yum-utils</packagereq>
       <packagereq type="default">zip</packagereq>
+      <packagereq type="optional">anyremote</packagereq>
       <packagereq type="optional">apmd</packagereq>
       <packagereq type="optional">aspell</packagereq>
       <packagereq type="optional">authd</packagereq>
@@ -8048,6 +8049,7 @@
       <packagereq type="optional">audiokonverter</packagereq>
       <packagereq type="optional">k9copy</packagereq>
       <packagereq type="optional">kannadic</packagereq>
+      <packagereq type="optional">kanyremote</packagereq>
       <packagereq type="optional">kasablanca</packagereq>
       <packagereq type="optional">kbackup</packagereq>
       <packagereq type="optional">kbibtex</packagereq>
