@@ -5137,7 +5137,7 @@
     <default>true</default>
     <uservisible>true</uservisible>
     <packagelist>
-      <packagereq type="default">gnome-games</packagereq>
+      <packagereq type="optional">gnome-games</packagereq>
       <packagereq type="default">joystick</packagereq>
       <packagereq type="optional">armagetronad</packagereq>
       <packagereq type="optional">BZFlag</packagereq>
@@ -5443,7 +5443,6 @@
       <packagereq type="mandatory">metacity</packagereq>
       <packagereq type="mandatory">nautilus</packagereq>
       <packagereq type="mandatory">yelp</packagereq>
-      <packagereq type="default">alacarte</packagereq>
       <packagereq type="default">at-spi</packagereq>
       <packagereq type="default">battfink</packagereq>
       <packagereq type="default">beagle</packagereq>
@@ -5460,19 +5459,16 @@
       <packagereq type="default">gcalctool</packagereq>
       <packagereq type="default">gedit</packagereq>
       <packagereq type="default">gnome-audio</packagereq>
-      <packagereq type="default">gnome-audio-extra</packagereq>
       <packagereq type="default">gnome-backgrounds</packagereq>
       <packagereq type="default">gnome-bluetooth</packagereq>
       <packagereq type="default">gnome-desktop</packagereq>
       <packagereq type="default">gnome-doc-utils</packagereq>
       <packagereq type="default">gnome-icon-theme</packagereq>
       <packagereq type="default">gnome-keyring</packagereq>
-      <packagereq type="default">gnome-keyring-manager</packagereq>
       <packagereq type="default">gnome-media</packagereq>
       <packagereq type="default">gnome-menus</packagereq>
       <packagereq type="default">gnome-mime-data</packagereq>
       <packagereq type="default">gnome-netstatus</packagereq>
-      <packagereq type="default">gnome-pilot</packagereq>
       <packagereq type="default">gnome-power-manager</packagereq>
       <packagereq type="default">gnome-screensaver</packagereq>
       <packagereq type="default">gnome-system-monitor</packagereq>
@@ -5483,7 +5479,6 @@
       <packagereq type="default">gnome-utils</packagereq>
       <packagereq type="default">gnome-vfs2-obexftp</packagereq>
       <packagereq type="default">gnome-volume-manager</packagereq>
-      <packagereq type="default">gnopernicus</packagereq>
       <packagereq type="default">gok</packagereq>
       <packagereq type="default">gst-plugins-base</packagereq>
       <packagereq type="default">gst-plugins-good</packagereq>
@@ -5491,12 +5486,10 @@
       <packagereq type="default">gthumb</packagereq>
       <packagereq type="default">gtk2-engines</packagereq>
       <packagereq type="default">gtkam</packagereq>
-      <packagereq type="default">gucharmap</packagereq>
       <packagereq type="default">hicolor-icon-theme</packagereq>
       <packagereq type="default">htmlview</packagereq>
       <packagereq type="default">hwbrowser</packagereq>
       <packagereq type="default">mousetweaks</packagereq>
-      <packagereq type="default">nautilus-cd-burner</packagereq>
       <packagereq type="default">NetworkManager-gnome</packagereq>
       <packagereq type="default">notification-daemon</packagereq>
       <packagereq type="default">orca</packagereq>
@@ -5505,11 +5498,10 @@
       <packagereq type="default">pulseaudio-module-x11</packagereq>
       <packagereq type="default">scim-bridge</packagereq>
       <packagereq type="default">shared-mime-info</packagereq>
-      <packagereq type="default">tomboy</packagereq>
-      <packagereq type="default">vino</packagereq>
       <packagereq type="default">vte</packagereq>
       <packagereq type="default">xdg-user-dirs-gtk</packagereq>
       <packagereq type="default">zenity</packagereq>
+      <packagereq type="optional">alacarte</packagereq>
       <packagereq type="optional">beagle-doc</packagereq>
       <packagereq type="optional">byzanz</packagereq>
       <packagereq type="optional">dasher</packagereq>
@@ -5518,17 +5510,23 @@
       <packagereq type="optional">ghex</packagereq>
       <packagereq type="optional">gimageview</packagereq>
       <packagereq type="optional">gimmie</packagereq>
+      <packagereq type="optional">gnome-audio-extra</packagereq>
       <packagereq type="optional">gnome-device-manager</packagereq>
+      <packagereq type="optional">gnome-keyring-manager</packagereq>
       <packagereq type="optional">gnome-mag</packagereq>
       <packagereq type="optional">gnome-nettool</packagereq>
+      <packagereq type="optional">gnome-pilot</packagereq>
       <packagereq type="optional">gnome-speech</packagereq>
       <packagereq type="optional">gnome-themes-extras</packagereq>
+      <packagereq type="optional">gnopernicus</packagereq>
       <packagereq type="optional">gnutls</packagereq>
       <packagereq type="optional">gqview</packagereq>
       <packagereq type="optional">grsync</packagereq>
       <packagereq type="optional">gtkam-gimp</packagereq>
+      <packagereq type="optional">gucharmap</packagereq>
       <packagereq type="optional">istanbul</packagereq>
       <packagereq type="optional">nautilus-actions</packagereq>
+      <packagereq type="optional">nautilus-cd-burner</packagereq>
       <packagereq type="optional">nautilus-image-converter</packagereq>
       <packagereq type="optional">pygtk2</packagereq>
       <packagereq type="optional">ruby-gnome2</packagereq>
@@ -5542,7 +5540,9 @@
       <packagereq type="optional">swfdec-gnome</packagereq>
       <packagereq type="optional">tracker-search-tool</packagereq>
       <packagereq type="optional">uim-applet</packagereq>
+      <packagereq type="optional">tomboy</packagereq>
       <packagereq type="optional">vinagre</packagereq>
+      <packagereq type="optional">vino</packagereq>
       <packagereq type="optional">xscreensaver-extras-gss</packagereq>
       <packagereq type="optional">xscreensaver-gl-extras-gss</packagereq>
     </packagelist>
@@ -5909,21 +5909,20 @@
     <uservisible>true</uservisible>
     <packagelist>
       <packagereq type="default">bogofilter</packagereq>
-      <packagereq type="default">ekiga</packagereq>
-      <packagereq type="default">epiphany</packagereq>
       <packagereq type="default">firefox</packagereq>
       <packagereq type="default">nspluginwrapper</packagereq>
       <packagereq type="default">ochusha</packagereq>
       <packagereq type="default">pidgin</packagereq>
       <packagereq type="default">sylpheed</packagereq>
       <packagereq type="default">thunderbird</packagereq>
-      <packagereq type="default">transmission</packagereq>
       <packagereq type="default">xchat</packagereq>
       <packagereq type="optional">anp</packagereq>
       <packagereq type="optional">balsa</packagereq>
       <packagereq type="optional">bittorrent-gui</packagereq>
       <packagereq type="optional">bluefish</packagereq>
       <packagereq type="optional">deskbar-applet</packagereq>
+      <packagereq type="optional">ekiga</packagereq>
+      <packagereq type="optional">epiphany</packagereq>
       <packagereq type="optional">epiphany-extensions</packagereq>
       <packagereq type="optional">evolution</packagereq>
       <packagereq type="optional">galeon</packagereq>
@@ -5964,6 +5963,7 @@
       <packagereq type="optional">seamonkey-psm</packagereq>
       <packagereq type="optional">streamtuner</packagereq>
       <packagereq type="optional">swfdec-mozilla</packagereq>
+      <packagereq type="optional">transmission</packagereq>
       <packagereq type="optional">totem-mozplugin</packagereq>
       <packagereq type="optional">vlc-plugin</packagereq>
     </packagelist>
@@ -6112,7 +6112,6 @@
     <default>true</default>
     <uservisible>true</uservisible>
     <packagelist>
-      <packagereq type="default">f-spot</packagereq>
       <packagereq type="default">dcraw</packagereq>
       <packagereq type="default">dcraw-gimp</packagereq>
       <packagereq type="default">gimp</packagereq>
@@ -6127,6 +6126,7 @@
       <packagereq type="optional">cheese</packagereq>
       <packagereq type="optional">digikam</packagereq>
       <packagereq type="optional">digikam-doc</packagereq>
+      <packagereq type="optional">f-spot</packagereq>
       <packagereq type="optional">fontforge</packagereq>
       <packagereq type="optional">gifsicle</packagereq>
       <packagereq type="optional">gimp-help</packagereq>
