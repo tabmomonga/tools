@@ -5516,6 +5516,7 @@
       <packagereq type="optional">gnome-mag</packagereq>
       <packagereq type="optional">gnome-nettool</packagereq>
       <packagereq type="optional">gnome-pilot</packagereq>
+      <packagereq type="optional">gnome-ppp</packagereq>
       <packagereq type="optional">gnome-speech</packagereq>
       <packagereq type="optional">gnome-themes-extras</packagereq>
       <packagereq type="optional">gnopernicus</packagereq>
