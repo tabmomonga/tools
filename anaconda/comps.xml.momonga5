@@ -5147,6 +5147,7 @@
       <packagereq type="optional">gnuchess</packagereq>
       <packagereq type="optional">kbilliards</packagereq>
       <packagereq type="optional">kdegames</packagereq>
+      <packagereq type="optional">lbreakout2</packagereq>
       <packagereq type="optional">Maelstrom</packagereq>
       <packagereq type="optional">monkey-bubble</packagereq>
       <packagereq type="optional">nethack</packagereq>
