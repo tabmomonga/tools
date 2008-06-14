@@ -8035,6 +8035,7 @@
       <packagereq type="optional">digikam-doc</packagereq>
       <packagereq type="optional">festival</packagereq>
       <packagereq type="optional">flite</packagereq>
+      <packagereq type="optional">foxkit</packagereq>
       <packagereq type="optional">k9copy</packagereq>
       <packagereq type="optional">kannadic</packagereq>
       <packagereq type="optional">kanyremote</packagereq>
@@ -8078,6 +8079,7 @@
       <packagereq type="optional">pdfedit</packagereq>
       <packagereq type="optional">polyester</packagereq>
       <packagereq type="optional">qdvdauthor</packagereq>
+      <packagereq type="optional">qt-recordmydesktop</packagereq>
       <packagereq type="optional">scribus</packagereq>
       <packagereq type="optional">skim</packagereq>
       <packagereq type="optional">skim-honoka</packagereq>
