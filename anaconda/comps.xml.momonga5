@@ -7915,7 +7915,6 @@
       <packagereq type="default">arts-artsc</packagereq>
       <packagereq type="default">basket</packagereq>
       <packagereq type="default">compiz-kde</packagereq>
-      <packagereq type="default">crystalsvg-icon-theme</packagereq>
       <packagereq type="default">digikam</packagereq>
       <packagereq type="default">extragear-plasma</packagereq>
       <packagereq type="default">falf</packagereq>
