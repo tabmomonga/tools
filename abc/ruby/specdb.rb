@@ -182,7 +182,7 @@ ENDOFSQL
     } # end of transaction
 
     # 
-    # spec = nil
+    spec = nil
   end
 
   def initialize  
