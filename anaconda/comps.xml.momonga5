@@ -7916,7 +7916,6 @@
       <packagereq type="default">basket</packagereq>
       <packagereq type="default">compiz-kde</packagereq>
       <packagereq type="default">digikam</packagereq>
-      <packagereq type="default">extragear-plasma</packagereq>
       <packagereq type="default">falf</packagereq>
       <packagereq type="default">fedora-gnome-theme</packagereq>
       <packagereq type="default">gtk-qt-engine</packagereq>
@@ -7942,6 +7941,7 @@
       <packagereq type="default">kdemultimedia</packagereq>
       <packagereq type="default">kdenetwork</packagereq>
       <packagereq type="default">kdepim</packagereq>
+      <packagereq type="default">kdeplasmoids</packagereq>
       <packagereq type="default">kdetoys</packagereq>
       <packagereq type="default">kdetv</packagereq>
       <packagereq type="default">kdeutils</packagereq>
@@ -8242,11 +8242,13 @@
     <default>false</default>
     <uservisible>true</uservisible>
     <packagelist>
+      <packagereq type="optional">akonadi-devel</packagereq>
       <packagereq type="optional">arts-devel</packagereq>
       <packagereq type="optional">anthy-devel</packagereq>
       <packagereq type="optional">apr-devel</packagereq>
       <packagereq type="optional">aspell-devel</packagereq>
       <packagereq type="optional">audiofile-devel</packagereq>
+      <packagereq type="optional">automoc</packagereq>
       <packagereq type="optional">avahi-qt3-devel</packagereq>
       <packagereq type="optional">avahi-qt4-devel</packagereq>
       <packagereq type="optional">cdparanoia-devel</packagereq>
@@ -8350,6 +8352,7 @@
       <packagereq type="optional">ocaml-facile-devel</packagereq>
       <packagereq type="optional">OpenEXR-devel</packagereq>
       <packagereq type="optional">openslp-devel</packagereq>
+      <packagereq type="optional">phonon-devel</packagereq>
       <packagereq type="optional">pilot-link-devel</packagereq>
       <packagereq type="optional">poppler-devel</packagereq>
       <packagereq type="optional">postgresql-devel</packagereq>
