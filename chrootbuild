@@ -1,0 +1,91 @@
+#!/bin/bash
+
+basearch=$1
+prefix=$2
+
+usage() {
+    echo "Usage: $0 [arch] [path]"
+    echo "   arch: i686, x86_64, ppc, ppc64"
+    exit 1
+}
+
+if [ `id -u` -ne 0 ]; then
+    echo "Cannot execute non root user."
+    usage
+fi
+
+if [ $# -ne 2 ]; then
+    usage 
+fi
+
+case $basearch in
+    i686|x86_64|ppc|ppc64)
+      ;;
+    *)
+      usage 
+      ;;
+esac
+
+if (! expr match "$prefix" "/" > /dev/null ); then
+  prefix=`pwd`/$prefix
+fi
+
+if [ ! -d $prefix ]; then
+    echo "Cannot found $prefix"
+    usage
+fi
+
+if [ ! -d $prefix/etc/ ]; then
+    mkdir -p $prefix/etc/
+fi
+cp /etc/resolv.conf $prefix/etc/
+
+echo "Creating yum.conf"
+cat > $prefix/etc/yum.conf <<EOF
+[main]
+cachedir=/var/cache/yum
+debuglevel=2
+reposdir=/dev/null
+logfile=/var/log/yum.log
+retries=20
+obsoletes=1
+gpgcheck=0
+assumeyes=1
+
+[development]
+name=Momonga Linux - Development Tree
+baseurl=http://dist.momonga-linux.org/pub/momonga/development/$basearch/os/
+gpgcheck=0
+
+EOF
+
+echo "Create for ldconfig"
+cat > $prefix/etc/ld.so.conf <<EOF
+include ld.so.conf.d/*.conf
+EOF
+mkdir -p $prefix/etc/ld.so.conf.d
+
+echo "Mounting /proc"
+if [ ! -d $prefix/proc ]; then
+    mkdir -p $prefix/proc
+fi
+mount -o bind /proc $prefix/proc
+
+echo "Bootstrapping yum"
+yum -y --installroot=$prefix install yum vim-minimal dhclient build-momonga
+
+echo "Cleaning up"
+chroot $prefix /usr/bin/yum clean all
+umount $prefix/proc
+
+cp -p $prefix/etc/yum.conf.rpmnew $prefix/etc/yum.conf
+
+echo "Copying device file"
+rsync -auv --stats --progress /dev/ $prefix/dev/
+
+echo "Create fstab"
+cat > $prefix/etc/fstab <<EOF
+none	/dev/pts	devpts	rw	0 0
+EOF
+
+

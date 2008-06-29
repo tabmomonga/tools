@@ -199,6 +199,16 @@ example.OmoiKondaraを pkgs以下に.OmoiKondara という名前でコピー。
 :ライセンス
   不明
   
+== chrootbuild
+:開発者/メンテナ
+  takahata 
+:機能概要
+  chrootbuild用のディレクトリを作成してパッケージをインストールする
+:実行方法
+  chrootbuild [arch] [path]
+:ライセンス
+  Modified BSD
+
 == 内容テンプレート
 :開発者/メンテナ
 :機能概要
