@@ -6140,6 +6140,7 @@
       <packagereq type="optional">kdegraphics</packagereq>
       <packagereq type="optional">kgraphviewer</packagereq>
       <packagereq type="optional">kipi-plugins</packagereq>
+      <packagereq type="optional">kipi-plugins4</packagereq>
       <packagereq type="optional">koffice-krita</packagereq>
       <packagereq type="optional">kphotoalbum</packagereq>
       <packagereq type="optional">libsane-hpaio</packagereq>
@@ -7956,6 +7957,7 @@
       <packagereq type="default">kile</packagereq>
       <packagereq type="default">kiosktool</packagereq>
       <packagereq type="default">kipi-plugins</packagereq>
+      <packagereq type="default">kipi-plugins4</packagereq>
       <packagereq type="default">kita</packagereq>
       <packagereq type="default">kmid</packagereq>
       <packagereq type="default">kmplayer</packagereq>
@@ -8312,6 +8314,7 @@
       <packagereq type="optional">kdewebdev-devel</packagereq>
       <packagereq type="optional">kdiff3</packagereq>
       <packagereq type="optional">kftpgrabber-devel</packagereq>
+      <packagereq type="optional">kipi-plugins4-devel</packagereq>
       <packagereq type="optional">koffice-devel</packagereq>
       <packagereq type="optional">ladspa-devel</packagereq>
       <packagereq type="optional">lcms-devel</packagereq>
