@@ -8274,6 +8274,7 @@
       <packagereq type="optional">gamin-devel</packagereq>
       <packagereq type="optional">gammu-devel</packagereq>
       <packagereq type="optional">ghostscript-devel</packagereq>
+      <packagereq type="optional">gmm-devel</packagereq>
       <packagereq type="optional">gnokii-devel</packagereq>
       <packagereq type="optional">gnupg2</packagereq>
       <packagereq type="optional">gpgme-devel</packagereq>
@@ -8354,6 +8355,7 @@
       <packagereq type="optional">obexftp-devel</packagereq>
       <packagereq type="optional">ocaml-facile-devel</packagereq>
       <packagereq type="optional">OpenEXR-devel</packagereq>
+      <packagereq type="optional">openbabel-devel</packagereq>
       <packagereq type="optional">openslp-devel</packagereq>
       <packagereq type="optional">phonon-devel</packagereq>
       <packagereq type="optional">pilot-link-devel</packagereq>
