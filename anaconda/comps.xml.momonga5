@@ -8079,6 +8079,7 @@
       <packagereq type="optional">nmapsi4</packagereq>
       <packagereq type="optional">pdfedit</packagereq>
       <packagereq type="optional">polyester</packagereq>
+      <packagereq type="optional">qalculate-kde</packagereq>
       <packagereq type="optional">qdvdauthor</packagereq>
       <packagereq type="optional">qt-recordmydesktop</packagereq>
       <packagereq type="optional">scribus</packagereq>
@@ -8338,6 +8339,7 @@
       <packagereq type="optional">libnova-devel</packagereq>
       <packagereq type="optional">libopensync-devel</packagereq>
       <packagereq type="optional">libpqxx-devel</packagereq>
+      <packagereq type="optional">libqalculate-devel</packagereq>
       <packagereq type="optional">libquicktime-devel</packagereq>
       <packagereq type="optional">libsamplerate-devel</packagereq>
       <packagereq type="optional">libsmbclient-devel</packagereq>
