@@ -8034,6 +8034,7 @@
       <packagereq type="optional">anp</packagereq>
       <packagereq type="optional">audiokonverter</packagereq>
       <packagereq type="optional">digikam-doc</packagereq>
+      <packagereq type="optional">eureka</packagereq>
       <packagereq type="optional">festival</packagereq>
       <packagereq type="optional">flite</packagereq>
       <packagereq type="optional">foxkit</packagereq>
