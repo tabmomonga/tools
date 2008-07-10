@@ -18,6 +18,7 @@ ARGV.options {|o|
   o.on('-n', 'display Nonfree missing files, too') {|v| opt[:n] = true}
   o.on('-O', 'display Ohphan missing files, too') {|v| opt[:O] = true}
   o.on('-L', 'display Alter missing files, too') {|v| opt[:L] = true}
+  o.on('-f', 'delete files without quitely') {|v| opt[:f] = true}
   o.parse!
 }
 
@@ -95,11 +96,11 @@ if $Massatu.length == 0
   exit
 end
 
-if ARGV[0] != "-f"
-  $Massatu.sort.each do |file|
-    print "rm #{file}\n"
-  end
+$Massatu.sort.each do |file|
+  print "rm #{file}\n"
+end
 
+if !opt[:f]
   printf( "けすよ。 (y/N)> " )
   sAnswer = STDIN.gets().chomp().downcase()
   if( sAnswer != 'y' )
