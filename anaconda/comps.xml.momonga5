@@ -8082,6 +8082,7 @@
       <packagereq type="optional">polyester</packagereq>
       <packagereq type="optional">qalculate-kde</packagereq>
       <packagereq type="optional">qdvdauthor</packagereq>
+      <packagereq type="optional">qsynth</packagereq>
       <packagereq type="optional">qt-recordmydesktop</packagereq>
       <packagereq type="optional">scribus</packagereq>
       <packagereq type="optional">skim</packagereq>
