@@ -124,9 +124,8 @@
        <packagereq type="optional">pax</packagereq>
        <packagereq type="optional">readahead</packagereq>
 -      <packagereq type="optional">reiserfs-utils</packagereq>
--      <packagereq type="optional">squashfs-tools</packagereq>
 +      <packagereq type="optional">reiserfsprogs</packagereq>
-+      <packagereq type="optional">squashfs</packagereq>
+       <packagereq type="optional">squashfs-tools</packagereq>
        <packagereq type="optional">star</packagereq>
        <packagereq type="optional">tcsh</packagereq>
        <packagereq type="optional">x86info</packagereq>

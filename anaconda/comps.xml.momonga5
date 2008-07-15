@@ -1020,7 +1020,7 @@
       <packagereq type="optional">puppet-server</packagereq>
       <packagereq type="optional">readahead</packagereq>
       <packagereq type="optional">sendmail</packagereq>
-      <packagereq type="optional">squashfs</packagereq>
+      <packagereq type="optional">squashfs-tools</packagereq>
       <packagereq type="optional">star</packagereq>
       <packagereq type="optional">x86info</packagereq>
       <packagereq type="optional">xfsprogs</packagereq>
