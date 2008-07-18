@@ -7942,7 +7942,7 @@
       <packagereq type="default">kdemultimedia</packagereq>
       <packagereq type="default">kdenetwork</packagereq>
       <packagereq type="default">kdepim</packagereq>
-      <packagereq type="default">kdeplasmoids</packagereq>
+      <packagereq type="default">kdeplasma-addons</packagereq>
       <packagereq type="default">kdetoys</packagereq>
       <packagereq type="default">kdetv</packagereq>
       <packagereq type="default">kdeutils</packagereq>
