@@ -8365,6 +8365,8 @@
       <packagereq type="optional">pilot-link-devel</packagereq>
       <packagereq type="optional">poppler-devel</packagereq>
       <packagereq type="optional">postgresql-devel</packagereq>
+      <packagereq type="optional">PyKDE4</packagereq>
+      <packagereq type="optional">PyKDE4-devel</packagereq>
       <packagereq type="optional">PyKDE-devel</packagereq>
       <packagereq type="optional">PyKDE-examples</packagereq>
       <packagereq type="optional">PyKDE</packagereq>
