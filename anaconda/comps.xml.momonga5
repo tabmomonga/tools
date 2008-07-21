@@ -10627,7 +10627,6 @@
       <packagereq type="optional" basearchonly="true">openoffice.org-pyuno</packagereq>
       <packagereq type="default">openoffice.org-writer</packagereq>
       <packagereq type="default">openoffice.org-xsltfilter</packagereq>
-      <packagereq type="default">youtranslate</packagereq>
       <packagereq type="optional">abiword</packagereq>
       <packagereq type="optional">aiksaurus-gtk</packagereq>
       <packagereq type="optional">dia</packagereq>
