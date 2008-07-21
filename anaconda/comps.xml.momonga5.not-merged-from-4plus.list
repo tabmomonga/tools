@@ -183,6 +183,8 @@
 
 == office ==
 
+<packagereq type="default">youtranslate</packagereq>
+
 == printing ==
 
 <packagereq type="optional">ghostscript-cups</packagereq>
