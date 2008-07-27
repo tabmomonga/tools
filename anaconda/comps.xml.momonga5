@@ -5481,8 +5481,8 @@
       <packagereq type="default">gnome-vfs2-obexftp</packagereq>
       <packagereq type="default">gnome-volume-manager</packagereq>
       <packagereq type="default">gok</packagereq>
-      <packagereq type="default">gst-plugins-base</packagereq>
-      <packagereq type="default">gst-plugins-good</packagereq>
+      <packagereq type="default">gstreamer-plugins-base</packagereq>
+      <packagereq type="default">gstreamer-plugins-good</packagereq>
       <packagereq type="default">gstreamer</packagereq>
       <packagereq type="default">gthumb</packagereq>
       <packagereq type="default">gtk2-engines</packagereq>
@@ -5723,7 +5723,7 @@
       <packagereq type="optional">gnome-vfs2-devel</packagereq>
       <packagereq type="optional">gnome-vfsmm-devel</packagereq>
       <packagereq type="optional">gob2</packagereq>
-      <packagereq type="optional">gst-plugins-base-devel</packagereq>
+      <packagereq type="optional">gstreamer-plugins-base-devel</packagereq>
       <packagereq type="optional">gstreamer-devel</packagereq>
       <packagereq type="optional">gtk-doc</packagereq>
       <packagereq type="optional">gtk+extra</packagereq>
@@ -8281,7 +8281,7 @@
       <packagereq type="optional">gnokii-devel</packagereq>
       <packagereq type="optional">gnupg2</packagereq>
       <packagereq type="optional">gpgme-devel</packagereq>
-      <packagereq type="optional">gst-plugins-base-devel</packagereq>
+      <packagereq type="optional">gstreamer-plugins-base-devel</packagereq>
       <packagereq type="optional">gstreamer-devel</packagereq>
       <packagereq type="optional">hal-devel</packagereq>
       <packagereq type="optional">honoka-devel</packagereq>
@@ -12451,7 +12451,7 @@
       <packagereq type="default">cdparanoia</packagereq>
       <packagereq type="default">dvd+rw-tools</packagereq>
       <packagereq type="default">genisoimage</packagereq>
-      <packagereq type="default">gst-plugins-good</packagereq>
+      <packagereq type="default">gstreamer-plugins-good</packagereq>
       <packagereq type="default">icedax</packagereq>
       <packagereq type="default">last-exit</packagereq>
       <packagereq type="default">pulseaudio</packagereq>
