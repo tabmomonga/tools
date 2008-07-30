@@ -11682,6 +11682,7 @@
     <packagelist>
       <packagereq type="conditional" requires="aspell">aspell-sr</packagereq>
       <packagereq type="conditional" requires="gcompris">gcompris-sound-sr</packagereq>
+      <packagereq type="conditional" requires="kdelibs">kde-l10n-Serbian</packagereq>
       <packagereq type="conditional" requires="kdelibs3">kde3-i18n-Serbian</packagereq>
       <packagereq type="conditional" requires="kdelibs3">kde3-i18n-Serbian-Latin</packagereq>
       <packagereq type="conditional" requires="koffice-core">koffice-l10n-Serbian</packagereq>
@@ -13451,6 +13452,7 @@
       <packagereq type="mandatory">m17n-db</packagereq>
       <packagereq type="conditional" requires="aspell">aspell-ta</packagereq>
       <packagereq type="conditional" requires="hunspell">hunspell-ta</packagereq>
+      <packagereq type="conditional" requires="kdelibs">kde-l10n-Tamil</packagereq>
       <packagereq type="conditional" requires="kdelibs3">kde3-i18n-Tamil</packagereq>
       <packagereq type="conditional" requires="moodle">moodle-ta</packagereq>
       <packagereq type="conditional" requires="moodle">moodle-ta_lk</packagereq>
