@@ -7908,6 +7908,7 @@
       <packagereq type="mandatory">kdebase</packagereq>
       <packagereq type="mandatory">kdebase-workspace</packagereq>
       <packagereq type="mandatory">xinetd</packagereq>
+      <packagereq type="mandatory">xdg-user-dirs</packagereq>
       <packagereq type="conditional" requires="scim">scim-bridge</packagereq>
       <packagereq type="default">amarok</packagereq>
       <packagereq type="default">amarok-libvisual</packagereq>
