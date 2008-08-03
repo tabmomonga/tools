@@ -7947,6 +7947,7 @@
       <packagereq type="default">kdetv</packagereq>
       <packagereq type="default">kdeutils</packagereq>
       <packagereq type="default">kdewebdev</packagereq>
+      <packagereq type="default">kdewebdev3</packagereq>
       <packagereq type="default">kerry</packagereq>
       <packagereq type="default">keurocalc</packagereq>
       <packagereq type="default">kfax</packagereq>
@@ -8297,6 +8298,7 @@
       <packagereq type="optional">kdebase-workspace-devel</packagereq>
       <packagereq type="optional">kdebindings-devel</packagereq>
       <packagereq type="optional">kdebindings</packagereq>
+      <packagereq type="optional">kdebindings3</packagereq>
       <packagereq type="optional">kdeedu-devel</packagereq>
       <packagereq type="optional">kdegames-devel</packagereq>
       <packagereq type="optional">kdegraphics-devel</packagereq>
