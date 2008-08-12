@@ -5487,6 +5487,7 @@
       <packagereq type="default">gthumb</packagereq>
       <packagereq type="default">gtk2-engines</packagereq>
       <packagereq type="default">gtkam</packagereq>
+      <packagereq type="default">gvfs</packagereq>
       <packagereq type="default">hicolor-icon-theme</packagereq>
       <packagereq type="default">htmlview</packagereq>
       <packagereq type="default">hwbrowser</packagereq>
@@ -5729,6 +5730,7 @@
       <packagereq type="optional">gtk+extra</packagereq>
       <packagereq type="optional">gtk2-devel</packagereq>
       <packagereq type="optional">gtkmm-devel</packagereq>
+      <packagereq type="optional">gvfs-devel</packagereq>
       <packagereq type="optional">hal-devel</packagereq>
       <packagereq type="optional">libart_lgpl-devel</packagereq>
       <packagereq type="optional">libbeagle-devel</packagereq>
