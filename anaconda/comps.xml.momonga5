@@ -7947,6 +7947,8 @@
       <packagereq type="default">kdenetwork</packagereq>
       <packagereq type="default">kdepim</packagereq>
       <packagereq type="default">kdeplasma-addons</packagereq>
+      <packagereq type="default">kdesdk</packagereq>
+      <packagereq type="default">kdesdk-utils</packagereq>
       <packagereq type="default">kdetoys</packagereq>
       <packagereq type="default">kdetv</packagereq>
       <packagereq type="default">kdeutils</packagereq>
@@ -8314,9 +8316,7 @@
       <packagereq type="optional">kdepim-devel</packagereq>
       <packagereq type="optional">kdepimlibs-apidocs</packagereq>
       <packagereq type="optional">kdepimlibs-devel</packagereq>
-      <packagereq type="optional">kdesdk</packagereq>
       <packagereq type="optional">kdesdk-devel</packagereq>
-      <packagereq type="optional">kdesdk-utils</packagereq>
       <packagereq type="optional">kdesvn</packagereq>
       <packagereq type="optional">kdesvn-kiosvn</packagereq>
       <packagereq type="optional">kdesvn-svnqt-devel</packagereq>
