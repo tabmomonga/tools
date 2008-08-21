@@ -8054,6 +8054,7 @@
       <packagereq type="optional">kbilliards</packagereq>
       <packagereq type="optional">kchmviewer</packagereq>
       <packagereq type="optional">kcometen3</packagereq>
+      <packagereq type="optional">kdebluetooth4</packagereq>
       <packagereq type="optional">kdenlive</packagereq>
       <packagereq type="optional">kdirstat</packagereq>
       <packagereq type="optional">kdissert</packagereq>
