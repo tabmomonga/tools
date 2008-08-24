@@ -7996,6 +7996,7 @@
       <packagereq type="default">openoffice.org-kde</packagereq>
       <packagereq type="default">oxygen-icon-theme</packagereq>
       <packagereq type="default">oxygen-icon-theme-scalable</packagereq>
+      <packagereq type="default">phonon-backend-gst</packagereq>
       <packagereq type="default">qt-mysql</packagereq>
       <packagereq type="default">qt-odbc</packagereq>
       <packagereq type="default">qt-postgresql</packagereq>
