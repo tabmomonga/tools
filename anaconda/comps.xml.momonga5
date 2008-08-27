@@ -5465,6 +5465,7 @@
       <packagereq type="default">gnome-doc-utils</packagereq>
       <packagereq type="default">gnome-icon-theme</packagereq>
       <packagereq type="default">gnome-keyring</packagereq>
+      <packagereq type="default">gnome-keyring-pam</packagereq>
       <packagereq type="default">gnome-media</packagereq>
       <packagereq type="default">gnome-menus</packagereq>
       <packagereq type="default">gnome-mime-data</packagereq>
