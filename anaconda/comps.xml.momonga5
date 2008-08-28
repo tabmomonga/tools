@@ -1230,6 +1230,7 @@
       <packagereq type="optional">iMultiMouse</packagereq>
       <packagereq type="optional">kinput2</packagereq>
       <packagereq type="optional">metavnc-server</packagereq>
+      <packagereq type="optional">momonga-backgrounds-extras</packagereq>
       <packagereq type="optional">momonga-xgl-settings</packagereq>
       <packagereq type="optional">openssh-askpass-gnome</packagereq>
       <packagereq type="optional">rxvt</packagereq>
