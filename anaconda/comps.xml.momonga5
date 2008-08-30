@@ -1236,7 +1236,6 @@
       <packagereq type="optional">scim-m17n</packagereq>
       <packagereq type="optional">uim-gtk</packagereq>
       <packagereq type="optional">uim-m17nlib</packagereq>
-      <packagereq type="optional">xgl-hardware-list</packagereq>
       <packagereq type="optional">vnc-server</packagereq>
       <packagereq type="optional">xorg-x11-resutils</packagereq>
       <packagereq type="optional">xorg-x11-server-Xnest</packagereq>
