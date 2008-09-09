@@ -8068,6 +8068,7 @@
       <packagereq type="optional">kleansweep</packagereq>
       <packagereq type="optional">kmediaplayer</packagereq>
       <packagereq type="optional">kmymoney</packagereq>
+      <packagereq type="optional">kndiswrapper</packagereq>
       <packagereq type="optional">komparator</packagereq>
       <packagereq type="optional">kompose</packagereq>
       <packagereq type="optional">kover</packagereq>
