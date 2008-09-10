@@ -7246,6 +7246,7 @@
       <packagereq type="optional">cmigemo</packagereq>
       <packagereq type="optional">eblook</packagereq>
       <packagereq type="optional">ebview</packagereq>
+      <packagereq type="optional">fbterm</packagereq>
       <packagereq type="optional">iiimf</packagereq>
       <packagereq type="optional">iiimf-canna</packagereq>
       <packagereq type="optional">iiimf-doc</packagereq>
@@ -13287,6 +13288,7 @@
       <packagereq type="optional">dar</packagereq>
       <packagereq type="optional">ebtables</packagereq>
       <packagereq type="optional">momonga-package-config-smart</packagereq>
+      <packagereq type="optional">fbterm</packagereq>
       <packagereq type="optional">festival</packagereq>
       <packagereq type="optional">fuse</packagereq>
       <packagereq type="optional">ghex</packagereq>
