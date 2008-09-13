@@ -5704,7 +5704,6 @@
       <packagereq type="optional">eel2-devel</packagereq>
       <packagereq type="optional">evolution-data-server-devel</packagereq>
       <packagereq type="optional">fontconfig-devel</packagereq>
-      <packagereq type="optional">gail-devel</packagereq>
       <packagereq type="optional">gazpacho</packagereq>
       <packagereq type="optional">GConf2-devel</packagereq>
       <packagereq type="optional">gconfmm-devel</packagereq>
