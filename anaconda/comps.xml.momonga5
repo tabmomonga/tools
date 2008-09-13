@@ -7986,6 +7986,7 @@
       <packagereq type="default">kphotoalbum</packagereq>
       <packagereq type="default">kpowersave</packagereq>
       <packagereq type="default">krecipes</packagereq>
+      <packagereq type="default">krusader</packagereq>
       <packagereq type="default">ksig</packagereq>
       <packagereq type="default">ksshaskpass</packagereq>
       <packagereq type="default">kst</packagereq>
@@ -8076,7 +8077,6 @@
       <packagereq type="optional">koverartist</packagereq>
       <packagereq type="optional">kreetingkard</packagereq>
       <packagereq type="optional">krename</packagereq>
-      <packagereq type="optional">krusader</packagereq>
       <packagereq type="optional">kscope</packagereq>
       <packagereq type="optional">ksensors</packagereq>
       <packagereq type="optional">kshutdown</packagereq>
