@@ -1185,8 +1185,6 @@
       <packagereq type="mandatory">xorg-x11-xinit</packagereq>
       <packagereq type="mandatory">xorg-x11-xinit-base</packagereq>
       <packagereq type="default">authconfig-gtk</packagereq>
-      <packagereq type="default">btnx</packagereq>
-      <packagereq type="default">btnx-config</packagereq>
       <packagereq type="default">firstboot</packagereq>
       <packagereq type="default">gdm</packagereq>
       <packagereq type="default">glx-utils</packagereq>
@@ -1220,6 +1218,8 @@
       <packagereq type="default">xterm</packagereq>
       <packagereq type="optional">Canna</packagereq>
       <packagereq type="optional">bitstream-vera-fonts</packagereq>
+      <packagereq type="optional">btnx</packagereq>
+      <packagereq type="optional">btnx-config</packagereq>
       <packagereq type="optional">devilspie</packagereq>
       <packagereq type="optional">efont-unicode-bdf</packagereq>
       <packagereq type="optional">fonts-chinese</packagereq>
@@ -6454,7 +6454,6 @@
       <packagereq type="default">ql2400-firmware</packagereq>
       <packagereq type="default">rt61pci-firmware</packagereq>
       <packagereq type="default">rt73usb-firmware</packagereq>
-      <packagereq type="default">thinkfinger</packagereq>
       <packagereq type="default">zd1211-firmware</packagereq>
       <packagereq type="optional">ctapi-cyberjack</packagereq>
       <packagereq type="optional">ctapi-cyberjack-pcsc</packagereq>
@@ -6465,6 +6464,7 @@
       <packagereq type="optional">libifp</packagereq>
       <packagereq type="optional">lsscsi</packagereq>
       <packagereq type="optional">openct</packagereq>
+      <packagereq type="optional">thinkfinger</packagereq>
       <packagereq type="optional">tpb</packagereq>
     </packagelist>
   </group>
