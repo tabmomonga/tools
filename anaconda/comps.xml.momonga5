@@ -5912,6 +5912,7 @@
       <packagereq type="default">bogofilter</packagereq>
       <packagereq type="default">firefox</packagereq>
       <packagereq type="default">nspluginwrapper</packagereq>
+      <packagereq type="default">ochusha</packagereq>
       <packagereq type="default">pidgin</packagereq>
       <packagereq type="default">sylpheed</packagereq>
       <packagereq type="default">thunderbird</packagereq>
