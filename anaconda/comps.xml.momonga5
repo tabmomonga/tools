@@ -12461,7 +12461,6 @@
       <packagereq type="default">genisoimage</packagereq>
       <packagereq type="default">gstreamer-plugins-good</packagereq>
       <packagereq type="default">icedax</packagereq>
-      <packagereq type="default">last-exit</packagereq>
       <packagereq type="default">pulseaudio</packagereq>
       <packagereq type="default">pulseaudio-utils</packagereq>
       <packagereq type="default">rhythmbox</packagereq>
@@ -12528,6 +12527,7 @@
       <packagereq type="optional">kover</packagereq>
       <packagereq type="optional">koverartist</packagereq>
       <packagereq type="optional">kwave</packagereq>
+      <packagereq type="optional">last-exit</packagereq>
       <packagereq type="optional">lmms</packagereq>
       <packagereq type="optional">lsdvd</packagereq>
       <packagereq type="optional">lxdvdrip</packagereq>
