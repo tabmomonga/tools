@@ -5911,7 +5911,6 @@
     <packagelist>
       <packagereq type="default">bogofilter</packagereq>
       <packagereq type="default">firefox</packagereq>
-      <packagereq type="default">nspluginwrapper</packagereq>
       <packagereq type="default">ochusha</packagereq>
       <packagereq type="default">pidgin</packagereq>
       <packagereq type="default">sylpheed</packagereq>
@@ -5950,6 +5949,7 @@
       <packagereq type="optional">miro</packagereq>
       <packagereq type="optional">mozplugger</packagereq>
       <packagereq type="optional">mozplugger</packagereq>
+      <packagereq type="optional">nspluginwrapper</packagereq>
       <packagereq type="optional">seamonkey</packagereq>
       <packagereq type="optional">seamonkey-chat</packagereq>
       <packagereq type="optional">seamonkey-dom-inspector</packagereq>
