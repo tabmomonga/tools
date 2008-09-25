@@ -7941,6 +7941,7 @@
       <packagereq type="default">kdeedu-kstars</packagereq>
       <packagereq type="default">kdegames</packagereq>
       <packagereq type="default">kdegraphics</packagereq>
+      <packagereq type="default">kdegraphics3</packagereq>
       <packagereq type="default">kdemultimedia</packagereq>
       <packagereq type="default">kdenetwork</packagereq>
       <packagereq type="default">kdepim</packagereq>
