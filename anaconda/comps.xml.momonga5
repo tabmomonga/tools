@@ -5454,6 +5454,7 @@
       <packagereq type="default">eog</packagereq>
       <packagereq type="default">evince</packagereq>
       <packagereq type="default">file-roller</packagereq>
+      <packagereq type="default">fusion-icon</packagereq>
       <packagereq type="default">gcalctool</packagereq>
       <packagereq type="default">gconf-editor</packagereq>
       <packagereq type="default">gedit</packagereq>
