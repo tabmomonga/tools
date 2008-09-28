@@ -148,6 +148,7 @@
     <packagelist>
       <packagereq type="default">authconfig-gtk</packagereq>
       <packagereq type="default">gnome-packagekit</packagereq>
+      <packagereq type="default">gparted</packagereq>
       <packagereq type="default">system-config-boot</packagereq>
       <packagereq type="default">system-config-date</packagereq>
       <packagereq type="default">system-config-firewall</packagereq>
@@ -158,7 +159,6 @@
       <packagereq type="default">system-config-rootpassword</packagereq>
       <packagereq type="default">system-config-users</packagereq>
       <packagereq type="optional">cacti</packagereq>
-      <packagereq type="optional">gparted</packagereq>
       <packagereq type="optional">gsynaptics</packagereq>
       <packagereq type="optional">lshw-gui</packagereq>
       <packagereq type="optional">pessulus</packagereq>
@@ -936,6 +936,7 @@
       <packagereq type="default">mtr</packagereq>
       <packagereq type="default">nano</packagereq>
       <packagereq type="default">nc</packagereq>
+      <packagereq type="default">netconfig</packagereq>
       <packagereq type="default">nfs-utils</packagereq>
       <packagereq type="default">nss_db</packagereq>
       <packagereq type="default">nss_ldap</packagereq>
@@ -1013,7 +1014,6 @@
       <packagereq type="optional">mkbootdisk</packagereq>
       <packagereq type="optional">mtools</packagereq>
       <packagereq type="optional">nilfs-utils</packagereq>
-      <packagereq type="optional">netconfig</packagereq>
       <packagereq type="optional">ntfsprogs</packagereq>
       <packagereq type="optional">pax</packagereq>
       <packagereq type="optional">puppet</packagereq>
