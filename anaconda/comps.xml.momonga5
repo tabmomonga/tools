@@ -5134,8 +5134,10 @@
     <default>true</default>
     <uservisible>true</uservisible>
     <packagelist>
-      <packagereq type="optional">gnome-games</packagereq>
+      <packagereq type="default">gnome-games</packagereq>
       <packagereq type="default">joystick</packagereq>
+      <packagereq type="default">lbreakout2</packagereq>
+      <packagereq type="default">monkey-bubble</packagereq>
       <packagereq type="optional">armagetronad</packagereq>
       <packagereq type="optional">BZFlag</packagereq>
       <packagereq type="optional">csmash</packagereq>
@@ -5144,9 +5146,7 @@
       <packagereq type="optional">gnuchess</packagereq>
       <packagereq type="optional">kbilliards</packagereq>
       <packagereq type="optional">kdegames</packagereq>
-      <packagereq type="optional">lbreakout2</packagereq>
       <packagereq type="optional">Maelstrom</packagereq>
-      <packagereq type="optional">monkey-bubble</packagereq>
       <packagereq type="optional">nethack</packagereq>
       <packagereq type="optional">nethack-common</packagereq>
       <packagereq type="optional">netmaj</packagereq>
@@ -5455,6 +5455,7 @@
       <packagereq type="default">evince</packagereq>
       <packagereq type="default">file-roller</packagereq>
       <packagereq type="default">gcalctool</packagereq>
+      <packagereq type="default">gconf-editor</packagereq>
       <packagereq type="default">gedit</packagereq>
       <packagereq type="default">gnome-audio</packagereq>
       <packagereq type="default">gnome-backgrounds</packagereq>
@@ -5469,6 +5470,7 @@
       <packagereq type="default">gnome-mime-data</packagereq>
       <packagereq type="default">gnome-netstatus</packagereq>
       <packagereq type="default">gnome-power-manager</packagereq>
+      <packagereq type="default">gnome-ppp</packagereq>
       <packagereq type="default">gnome-screensaver</packagereq>
       <packagereq type="default">gnome-system-monitor</packagereq>
       <packagereq type="default">gnome-system-tools</packagereq>
@@ -5498,6 +5500,7 @@
       <packagereq type="default">pulseaudio-module-x11</packagereq>
       <packagereq type="default">scim-bridge</packagereq>
       <packagereq type="default">shared-mime-info</packagereq>
+      <packagereq type="default">vino</packagereq>
       <packagereq type="default">vte</packagereq>
       <packagereq type="default">xdg-user-dirs-gtk</packagereq>
       <packagereq type="default">zenity</packagereq>
@@ -5506,7 +5509,6 @@
       <packagereq type="optional">byzanz</packagereq>
       <packagereq type="optional">dasher</packagereq>
       <packagereq type="optional">esc</packagereq>
-      <packagereq type="optional">gconf-editor</packagereq>
       <packagereq type="optional">ghex</packagereq>
       <packagereq type="optional">gimageview</packagereq>
       <packagereq type="optional">gimmie</packagereq>
@@ -5516,7 +5518,6 @@
       <packagereq type="optional">gnome-mag</packagereq>
       <packagereq type="optional">gnome-nettool</packagereq>
       <packagereq type="optional">gnome-pilot</packagereq>
-      <packagereq type="optional">gnome-ppp</packagereq>
       <packagereq type="optional">gnome-speech</packagereq>
       <packagereq type="optional">gnome-themes-extras</packagereq>
       <packagereq type="optional">gnopernicus</packagereq>
@@ -5543,7 +5544,6 @@
       <packagereq type="optional">uim-applet</packagereq>
       <packagereq type="optional">tomboy</packagereq>
       <packagereq type="optional">vinagre</packagereq>
-      <packagereq type="optional">vino</packagereq>
       <packagereq type="optional">xscreensaver-extras-gss</packagereq>
       <packagereq type="optional">xscreensaver-gl-extras-gss</packagereq>
     </packagelist>
