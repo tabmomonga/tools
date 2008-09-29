@@ -1823,7 +1823,7 @@
     <name xml:lang="zh_CN">编译系统基本组成</name>
     <name xml:lang="zh_TW">系統建構群組</name>
     <description/>
-    <default>false</default>
+    <default>true</default>
     <uservisible>false</uservisible>
     <packagelist>
       <packagereq type="mandatory">bash</packagereq>
