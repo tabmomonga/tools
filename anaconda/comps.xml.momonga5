@@ -15310,7 +15310,7 @@
     <description xml:lang="uk">Невибагливий до ресурсів робочий стіл, що добре працює на слабких машинах.</description>
     <description xml:lang="zh_CN">轻量级环境，即使在配置较低的机器上也能胜任。</description>
     <description xml:lang="zh_TW">輕型的桌面環境，適用於低階電腦。</description>
-    <default>false</default>
+    <default>true</default>
     <uservisible>true</uservisible>
     <packagelist>
       <packagereq type="mandatory">libxfce4mcs</packagereq>
