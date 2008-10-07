@@ -6,11 +6,14 @@
 # $ ../tools/listunused srpm srpm srpm ...
 
 $CONF_FILES = ["./.OmoiKondara","~/.OmoiKondara","/etc/OmoiKondara.conf"]
-$KEEP_FILES = ["TO.Nonfree","TO.Zoo", "TO.Orphan","TO.Alter",
+$KEEP_FILES = [
+  "TO.Nonfree","TO.Zoo", "TO.Orphan","TO.Alter",
   "SRPM.ONLY","Antenna","SRPM.ONLY",
   "REMOVE.PLEASE","SU.PLEASE","DISPLAY.PLEASE","YUKARI","NO.CCACHE",
-  "OBSOLETE","JAVA","IPv6","sources"]
-# NOT.*, REMOVEME.*
+  "OBSOLETE","JAVA","IPv6","sources","NO.TMPFS","NO.CACHECC1",
+  "LANG=C","LANG=ja_JP.EUC-JP","LANG=ja_JP.UTF-8","LANG=UTF-8",
+  ]
+# NOT.*, REMOVEME.* is executed by below "grep -v" command
 
 def source_list(pkg)
   return `rpm2cpio #{pkg} | cpio --list 2> /dev/null`.split(/\n/)
