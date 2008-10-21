@@ -1236,8 +1236,6 @@
       <packagereq type="optional">scim-m17n</packagereq>
       <packagereq type="optional">uim-gtk</packagereq>
       <packagereq type="optional">uim-m17nlib</packagereq>
-      <packagereq type="optional">vnc-server</packagereq>
-      <packagereq type="optional">xorg-x11-resutils</packagereq>
       <packagereq type="optional">xorg-x11-server-Xnest</packagereq>
       <packagereq type="optional">xorg-x11-server-Xvfb</packagereq>
       <packagereq type="optional">xorg-x11-xfs</packagereq>
@@ -5447,7 +5445,6 @@
       <packagereq type="default">bluez-gnome</packagereq>
       <packagereq type="default">bug-buddy</packagereq>
       <packagereq type="default">compiz-gnome</packagereq>
-      <packagereq type="default">dasher</packagereq>
       <packagereq type="default">deskbar-applet</packagereq>
       <packagereq type="default">dvd+rw-tools</packagereq>
       <packagereq type="default">eel2</packagereq>
@@ -12466,7 +12463,6 @@
       <packagereq type="default">pulseaudio-utils</packagereq>
       <packagereq type="default">rhythmbox</packagereq>
       <packagereq type="default">sound-juicer</packagereq>
-      <packagereq type="default">sox</packagereq>
       <packagereq type="default">totem</packagereq>
       <packagereq type="default">totem-mozplugin</packagereq>
       <packagereq type="default">totem-nautilus</packagereq>
