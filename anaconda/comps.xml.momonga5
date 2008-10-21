@@ -1236,6 +1236,7 @@
       <packagereq type="optional">scim-m17n</packagereq>
       <packagereq type="optional">uim-gtk</packagereq>
       <packagereq type="optional">uim-m17nlib</packagereq>
+      <packagereq type="optional">xorg-x11-resutils</packagereq>
       <packagereq type="optional">xorg-x11-server-Xnest</packagereq>
       <packagereq type="optional">xorg-x11-server-Xvfb</packagereq>
       <packagereq type="optional">xorg-x11-xfs</packagereq>
