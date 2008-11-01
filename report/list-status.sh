@@ -6,8 +6,6 @@
 # Hiromasa YOSHIMOTO <y@momonga-linux.org>
 #
 #
-#
-# 
 #  output format is "PKGNAME","REVISION","STATUS_STRING"
 
 
@@ -126,17 +124,19 @@ shift $(($OPTIND - 1))
 REPORT_LOG=$1
 
 
-# table for svn's URL
-URL_trunk=
-URL_stable_4=svn/pkgs/branches/TSUPPA4RI
-
 REPO=""
 case "$BRANCH" in
     trunk)
 	REPO="trunk/pkgs"
 	;;
     stable_4)
-	REPO="STABLE_3/pkgs"
+	REPO="branches/STABLE_4/pkgs"
+	;;
+    stable_5)
+	REPO="branches/STABLE_5/pkgs"
+	;;
+    stable_6)
+	REPO="branches/STABLE_6/pkgs"
 	;;
     *)
 	error "-B $BRANCH is not supported"

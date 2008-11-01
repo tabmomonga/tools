@@ -1,4 +1,7 @@
 # -*- ruby -*-
+#
+# by Hiromasa YOSHIMOTO <y@momonga-linux.org>
+#
 
 StatusCodes = {
   0 => "SUCCESS",
