@@ -12,10 +12,14 @@ function error ()
 
 function usage ()
 {
-    cat<<EOF
+    cat<<EOF > /dev/stderr
 usage:
 $0  [opts]
-    -h    display this help and exit
+    -f         retrieves packages reported as "failed"
+    -r         retrieves packages requesting your new report
+    -n NUM     retrieves up to N packages (default 100)
+    -t         touch specs
+    -h         display this help and exit
 EOF
     exit 1
 }
@@ -23,10 +27,13 @@ EOF
 
 function download() {
     url=${REPORT_URL/upload.php/download_pkgs.php}
+    url="$url?arch=${ARCH}&branch=${BRANCH}"
+    url="$url&fail=${req_fail}&req=${req_repo}&num=${num}"
 
     opt="-q -O -"
     opt="$opt --no-check-certificate"
-    wget $opt "$url?arch=$ARCH&branch=$BRANCH"
+
+    wget $opt "$url" 
     
     r=$?
     [ $r -eq 0 ] || error "wget failed."
@@ -43,12 +50,23 @@ source $conf || error "failed to load $conf"
 [ -n "$REPORT_URL" ] || error "bad config (no REPORT_URL)"
 type wget > /dev/null 2>&1 || error "wget is not installed"
 
-
-mode=""
-while getopts "ht" opt; do
+req_fail=0
+req_repo=0
+num=100
+mode=
+while getopts "frtn:h" opt; do
     case $opt in
+	f)
+	    req_fail=1
+	    ;;
+	r)
+	    req_repo=1
+	    ;;
 	t)
 	    mode="touch"
+	    ;;
+	n)
+	    num=$OPTARG
 	    ;;
 	h) 
 	    usage
@@ -57,9 +75,15 @@ while getopts "ht" opt; do
 done
 shift $(($OPTIND -1))
 
+if [ 0 -eq "$req_repo" -a 0 -eq "$req_fail" ]; then
+    usage
+fi
+
 # main
 
-case $mode in
+export num req_repo req_fail
+
+case "$mode" in
 "touch")
 	count=0
 	for pkg in `download`; do
