@@ -106,7 +106,7 @@ ARGV.each do |pkg|
     if File.exist?("#{pkg}/sources") then
       unless sources_file_vced then
         STDERR.puts 'Please add sources file!'
-        STRERR.puts 'svn add sources'
+        STDERR.puts 'svn add sources'
         problem_found = true
       end
       s = Array.new
