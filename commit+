@@ -129,7 +129,7 @@ ARGV.each do |pkg|
         STDERR.puts 'svn revert sources'
       else
         STDERR.puts 'Please create and add sources file!'
-        STRERR.puts 'svn add sources'
+        STDERR.puts 'svn add sources'
       end
       problem_found = true
     end
