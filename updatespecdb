@@ -145,7 +145,7 @@ class SpecDB
 
       if verbose then
         STDERR.puts name
-        STDERR.print "\rscanning specfile: #{100*i/@names.length}%"
+        STDERR.print "\rscanning specfile: #{100*i/@names.length}% "
         STDERR.flush
       end
     end # @names.each_with_index do |name, i|
