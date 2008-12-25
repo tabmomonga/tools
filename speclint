@@ -70,7 +70,7 @@ end
 module Speclint
   class Spec < RPM::Spec
     VALID_LICENSES = %w(Apache Artistic BSD Creative\ Commons CPL EPL GFDL
-      LGPLv2\+ LGPLv2 LGPL GPLv2\+ GPLv2 GPLv3\+ GPLv3 GPL\+ GPL \
+      LGPLv3\+ LGPLv3 LGPLv2\+ LGPLv2 LGPL GPLv2\+ GPLv2 GPLv3\+ GPLv3 GPL\+ GPL \
       LPPL Modified\ BSD \
       MIT/X MIT MPLv1\.1 MPL OPL PHP Public\ Domain QPL Ruby OFL)
 
