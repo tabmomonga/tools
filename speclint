@@ -51,11 +51,14 @@ Too few check points.
 
 =end
 
+$TOOLDIR = File.dirname($0)
+$:.unshift($TOOLDIR)
+
 require 'rpm'
 require 'uri'
 require 'strscan'
 require 'etc'
-
+require 'environment'
 
 module RPM
   class Package
@@ -211,8 +214,11 @@ module Speclint
 
     def lint
       result = LintResult.new # Collecting Parameter pattern (as in xUnit)
-      %w(license group release buildroot
-         forbidden_tags source_locations).each do |test|
+      (if rpm46? then
+         %w(license group release forbidden_tags source_locations)
+       else
+         %w(license group release buildroot forbidden_tags source_locations)
+       end).each do |test|
         next if $checkpoint && ( $checkpoint != test )
         send('lint_' + test, result)
       end
