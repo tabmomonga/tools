@@ -1,0 +1,401 @@
+#!/usr/bin/env ruby
+# $Id: speclint,v 1.33 2003/10/24 06:54:43 crouton Exp $
+
+# $ rd2 -rrd/rd2man-lib <this_file> | nroff -man
+
+=begin
+
+= NAME
+
+speclint - Check RPM spec validity.
+
+= SYNOPSIS
+
+speclint [-v] [--check-only=checkpoint] (spec|package)...
+
+speclint --list-valid-groups | --list-valid-licenses
+
+= DESCRIPTION
+
+speclint checks given spec files from several points of view.
+
+= OPTIONS
+
+: -v, --verbose
+  Also reports valid specs and warnings in addition to errors.
+: --check-only=checkpoint
+  Check only the specified checkpoint
+  (checkpoint: license|group|release|buildroot|tags|url[s]|filter)
+: --list-valid-groups
+  List valid groups.
+: --list-valid-licenses
+  List valid licenses.
+: -h, --help
+  Print usage.
+: --usage
+  Print usage.
+
+= DIAGNOSTICS
+
+If all specs are OK, exit status is 0. Otherwise, number of specs
+with errors is returned.
+
+= AUTHOR
+
+Written by OZAWA -Crouton- Sakuro <crouton@momonga-linux.org>
+Modified by HOSONO Hidetomo <h12o@momonga-linux.org>
+
+= BUG
+
+Too few check points.
+
+=end
+
+$TOOLDIR = File.dirname($0)
+$:.unshift($TOOLDIR)
+
+require 'rpm'
+require 'uri'
+require 'strscan'
+require 'etc'
+require 'environment'
+
+module RPM
+  class Package
+    def license; self[TAG_LICENSE]; end
+    def group; self[TAG_GROUP]; end
+    def vendor; self[TAG_VENDOR]; end
+    def packager; self[TAG_PACKAGER]; end
+    def release; self[TAG_RELEASE]; end
+  end
+end
+
+module Speclint
+  class Spec < RPM::Spec
+    VALID_LICENSES = %w(Apache Artistic BSD Creative\ Commons CPL EPL GFDL
+      LGPLv3\+ LGPLv3 LGPLv2\+ LGPLv2 LGPL GPLv2\+ GPLv2 GPLv3\+ GPLv3 GPL\+ GPL \
+      LPPL Modified\ BSD \
+      MIT/X MIT MPLv1\.1 MPL OPL PHP Public\ Domain QPL Ruby OFL)
+
+    VALID_GROUPS = <<-EOT.strip.split(/\n\s+/)
+      Amusements/Games
+      Amusements/Graphics
+      Applications/Archiving
+      Applications/Communications
+      Applications/Databases
+      Applications/Editors
+      Applications/Emulators
+      Applications/Engineering
+      Applications/File
+      Applications/Internet
+      Applications/Multimedia
+      Applications/Productivity
+      Applications/Publishing
+      Applications/System
+      Applications/Text
+      Development/Debuggers
+      Development/Debug
+      Development/Languages
+      Development/Libraries
+      Development/System
+      Development/Tools
+      Documentation
+      System Environment/Base
+      System Environment/Daemons
+      System Environment/Kernel
+      System Environment/Libraries
+      System Environment/Shells
+      User Interface/Desktops
+      User Interface/X
+      User Interface/X Hardware Support
+    EOT
+
+    SEE_FILE_REGEXP = /\s*see\s+"([^\s]+)"\s*/
+    FREE_FORM_REGEXP = /\"([^"]+)\"/
+    SEE_FILE_IN_FREE_FORM_REGEXP = /see\s+([^\s]+)/
+    OPERATOR_REGEXP = /(?:\s+|and|or|\(|\))/
+    VALID_LICENSE_REGEXP = /(#{VALID_LICENSES.join("|")})/
+
+    def lint_license(result)
+      packages.each do |p|
+        license = p.license
+	scanner = StringScanner::new(license)
+	until scanner.eos?
+	  # valid characters and licenses
+	  next if scanner.scan(OPERATOR_REGEXP)
+	  next if scanner.scan(VALID_LICENSE_REGEXP)
+	  # free form license
+	  if scanner.scan(FREE_FORM_REGEXP) then
+	    FREE_FORM_REGEXP =~ scanner.matched
+	    license_name = $1
+	    unless SEE_FILE_IN_FREE_FORM_REGEXP =~ license_name then
+              result.append_warning %Q(Free form license: #{license_name} for #{p}.)
+	    else
+              result.append_warning %Q(Use `see "#{$1}"' instead of `"see #{$1}"'.) #'
+	    end
+	    next
+	  end
+	  # see FILE
+	  if scanner.scan(SEE_FILE_REGEXP) then
+	    SEE_FILE_REGEXP =~ scanner.matched
+            result.append_warning %Q(Must check file: #{$1} for #{p}.)
+	    next
+	  end
+	  # invalid
+          result.append_error %Q(Unknown license '#{license}' for #{p}.)
+	  break
+	end
+      end
+    end
+
+    def lint_group(result)
+      packages.each do |p|
+        g = p.group
+        unless Spec.valid_group?(g)
+          result.append_error %Q(Unknown group '#{g}' for #{p})
+        end
+      end
+    end
+
+    def lint_release(result)
+      packages.each do |p|
+        r = p.release
+        unless Spec.valid_release?(r)
+          result.append_error %Q(Invaid release format #{r} for #{p})
+        end
+        if Spec.transitional_release?(r)
+          result.append_warning %Q(Suffix 'k' in #{p} is allowed transitionally.)
+        end
+      end
+    end
+
+    def lint_buildroot(result)
+      unless valid_buildroot == buildroot
+        result.append_error %Q(Invalid buildroot #{buildroot} for #{valid_buildroot})
+      end
+    end
+
+    def lint_forbidden_tags(result)
+      if RPM['vendor']
+        result.append_error %(Don't use 'Vendor' tag.) #'
+      end
+      if RPM['packager']
+        result.append_error %(Don't use 'Packager' tag.) #'
+      end
+      if !RPM['url']
+        #result.append_error %(Specify 'URL' tag.) #'
+        result.append_warning %(Specify 'URL' tag.) #'
+      elsif /[^\/]\z/ =~ RPM['url']
+        result.append_warning %Q(Suspicious URL: #{RPM['url']})
+        if /index\.html?\z/ =~ RPM['url']
+          result.append_warning %Q(  Did you mean: #{RPM['url'].sub(/index\.html?\z/, '')})
+        elsif RPM['url']['#']
+          result.append_warning %Q(  Did you mean: #{RPM['url'].sub(/#.*\z/, '')})
+        elsif not /\.html?\z/ =~ RPM['url']
+          result.append_warning %Q(  Did you mean: #{RPM['url']}/)
+        end
+      end
+    end
+
+    def lint_source_locations(result)
+      sources.each do |source|
+        if source.no?
+          uri = URI.parse source.fullname
+          if uri.nil?
+            result.append_error %(Invalid URI syntax for #{source})
+          elsif uri.scheme.nil?
+            result.append_warning %(URI form is desirable for #{source})
+          elsif ! %w(http ftp).include? uri.scheme
+            result.append_warning %(URI scheme should be http or ftp for #{source})
+          end
+        end
+      end
+    end
+
+    def lint_filter(result)
+      open(self.specfile, 'r') { |f|
+        changelog_in = false
+        f.each { |l|
+          next if /^#/ =~ l
+          if /^%changelog/ =~ l then
+            changelog_in = true
+            next
+          elsif changelog_in and /^%/ =~ l then
+            changelog_in = false
+            next
+          elsif not changelog_in and /%\{_initrddir\}/ =~ l then
+            result.append_error("Do not use %{_initrddir}.")
+          end
+        }
+      }
+      result
+    end
+
+    def lint
+      result = LintResult.new # Collecting Parameter pattern (as in xUnit)
+      (if rpm46? then
+         %w(license group release forbidden_tags source_locations filter)
+       else
+         %w(license group release buildroot forbidden_tags source_locations filter)
+       end).each do |test|
+        next if $checkpoint && ( $checkpoint != test )
+        send('lint_' + test, result)
+      end
+      result
+    end
+
+    class << self
+      def valid_group?(group); VALID_GROUPS.include? group; end
+      def valid_release?(release); /\A(.*\.)*(?:[1-9]\d*|0(?:\.\d+)+)m\.mo[1-9]\z/ =~ release; end
+      def transitional_release?(release); /k\z/ =~ release; end
+    end
+
+    def valid_buildroot
+      # added require 'etc' for use getlogin
+      ::File.join RPM['_tmppath'], %Q(#{File.basename(@filename, '.spec')}-#{packages[0].version.v}-#{packages[0].version.r}-root-#{Etc.getlogin})
+    end
+
+    attr_reader :filename
+
+    def self.new(filename)
+      super.instance_eval{ @filename = filename; self }
+    end
+  end
+
+  class LintResult
+    def initialize
+      @errors = []
+      @warnings = []
+    end
+    def append_error(error); @errors << error; end
+    def append_warning(warning); @warnings << warning; end
+    def ok?; ! has_error?; end
+    def has_error?; ! @errors.empty?; end
+    def has_warning?; ! @warnings.empty?; end
+
+    attr_reader :errors, :warnings 
+  end
+end
+
+def usage
+  print <<-EOT
+Usage:
+  speclint [-v|--verbose] [--check-only=checkpoint] specfiles...
+  (checkpoint: license|group|release|buildroot|tags|url[s]|filter)
+  speclint --list-valid-groups | --list-valid-licenses
+  speclint -h | --help | --usage
+  EOT
+end
+
+def list_valid_groups
+  print <<-EOT
+Valid groups:
+  #{Speclint::Spec::VALID_GROUPS.join("\n  ")}
+  EOT
+end
+
+def list_valid_licenses
+  print <<-EOT
+Valid licenses:
+  #{Speclint::Spec::VALID_LICENSES.join("\n  ")}
+
+  "free form license description surrounded by double quotes" and `see "file"'
+  form where "file" (quotes are mandatory) refers to the license description
+  file in the package are also accepted.
+
+  Conjunctions('and' and 'or') are accepted to describe complex licenses.
+  EOT
+end
+
+require 'getoptlong'
+$verbose = false
+$checkpoint = nil
+$opt = GetoptLong.new(
+                      ['-v', '--verbose', GetoptLong::NO_ARGUMENT],
+                      ['--check-only', GetoptLong::REQUIRED_ARGUMENT],
+                      ['--list-valid-groups', GetoptLong::NO_ARGUMENT],
+                      ['--list-valid-licenses', GetoptLong::NO_ARGUMENT],
+                      ['--usage', GetoptLong::NO_ARGUMENT],
+                      ['-h','--help', GetoptLong::NO_ARGUMENT]
+                      )
+
+if ARGV.empty?
+  usage
+  exit 1
+end
+
+$opt.each do |name, value|
+  case name
+  when '-v'
+    $verbose = true
+  when '--list-valid-groups'
+    list_valid_groups
+    exit 1
+  when '--list-valid-licenses'
+    list_valid_licenses
+    exit 1
+  when '--check-only'
+    case value
+    when 'license'
+      $checkpoint = 'license'
+    when 'group'
+      $checkpoint = 'group'
+    when 'release'
+      $checkpoint = 'release'
+    when 'buildroot'
+      $checkpoint = 'buildroot'
+    when 'tags'
+      $checkpoint = 'forbidden_tags'
+    when /\Aurls?\z/
+      $checkpoint = 'source_locations'
+    when 'filter'
+      $checkpoint = 'filter'
+    else
+      usage
+      exit 1
+    end
+  else
+    usage
+    exit 1
+  end
+end
+
+bad_specs = 0
+
+ARGV.each do |arg|
+  if FileTest.directory?(arg)
+    specfile = File.join(arg, File.basename(arg) + '.spec')
+  else
+    specfile = arg
+  end
+  unless FileTest.exist?(specfile)
+    puts %Q(#{specfile}: File does not exist.)
+    bad_specs += 1
+    next
+  end
+  pid = Process.fork do # to separate MacroContext.
+    begin
+      spec = Speclint::Spec.new(specfile)
+    rescue
+      puts %Q(#{specfile}: Parser error.)
+    end
+    exit if spec == nil
+    result = spec.lint
+    if result.ok?
+      puts %Q(#{specfile}: spec OK.) if $verbose
+    else
+      puts %Q(#{specfile}: spec NG.)
+      result.errors.each {|e| puts %Q(#{specfile}: #{e}) }
+    end
+    result.warnings.each {|w| puts %Q(#{specfile}: #{w}) } if $verbose
+    exit result.ok? ? 0 : 1
+  end
+  pid, status = Process.waitpid2(pid)
+  bad_specs += 1 if status.exitstatus != 0
+end
+exit bad_specs
+
+### Local Variables:
+### ruby-indent-level: 2
+### tab-width: 8
+### End:
