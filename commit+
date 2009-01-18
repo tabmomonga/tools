@@ -53,7 +53,7 @@ problem_found=false
 ## lint specfile
 ARGV.each do |pkg|
   pkg = pkg.chop if pkg =~ /\/+$/
-  system("#{$TOOLDIR}/speclint #{pkg}")
+  system("#{$TOOLDIR}/speclint+ #{pkg}")
   if $? != 0 
     puts "!!! #{pkg}/#{pkg}.spec has some spec errors, skipping."
     problem_found=true
