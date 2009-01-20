@@ -69,8 +69,8 @@ ARGV.each { |file|
 	File.open(file, 'r+') { |f|
 		@newfile = ""
 		f.each_line { |line|
-			if line =~ /^%global momorel/
-				rel = line.split(' ')[2].to_i
+			if line =~ /^%global\s+momorel/
+				rel = line.split(/\s+/)[2].to_i
 				rel += 1
 				line = "%global momorel #{rel}\n"
 			end
