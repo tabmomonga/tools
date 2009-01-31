@@ -1,4 +1,4 @@
-# specdb.rb
+# lib/specdb.rb
 #
 # by Hiromasa YOSHIMOTO <y@momonga-linux.org>
 

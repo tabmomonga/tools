@@ -1,15 +1,17 @@
 #!/usr/bin/ruby
+#
 # by Hiromasa YOSHIMOTO <y@momonga-linux.org>
 
-Version = "0.0.1"
-
-$:.unshift(File.dirname($0))
 require 'optparse'
 require 'sqlite3'
 require 'set'
 
+Version = "0.0.1"
 OPTS = {}
-OPTS[:verbose]=0
+
+$:.unshift(File.dirname($0))
+require 'lib/config.rb'
+
 OPTS[:recursion]=1
 opt = OptionParser.new
 opt.on('-f', '--force_update') {|v| OPTS[:force_update] = v }
@@ -17,7 +19,7 @@ opt.on('-q', '--quite', 'suppress verbose msg.') {|v| OPTS[:verbose]=-1 }
 opt.on('-v', '--verbose', 'verbose msg.') {|v| OPTS[:verbose]+=1 }
 opt.parse!(ARGV)
 
-db = SQLite3::Database.new("pkgs.db")
+db = SQLite3::Database.new(OPTS[:specdb_filename])
 
 curr = ARGV
 curr.map!{|v| v.chomp("/") }
@@ -35,3 +37,8 @@ curr.each do |name|
 end
 
 db.close()
+
+# Local Variables:
+# mode: ruby
+# indent-tabs-mode: nil
+# End Variables:

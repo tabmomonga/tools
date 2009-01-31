@@ -3,13 +3,14 @@
 # by Hiromasa YOSHIMOTO <y@momonga-linux.org>
 
 Version = "0.0.1"
+OPTS = {}
 
-$:.unshift(File.dirname($0))
-require 'specdb'
 require 'optparse'
 
-OPTS = {}
-OPTS[:verbose]=0
+$:.unshift(File.dirname($0))
+require 'lib/config.rb'
+require 'lib/specdb.rb'
+
 opt = OptionParser.new
 opt.on('-f', '--force_update') {|v| OPTS[:force_update] = v }
 opt.on('-q', '--quite', 'suppress verbose msg.') {|v| OPTS[:verbose]=-1 }
@@ -18,11 +19,11 @@ opt.parse!(ARGV)
 
 
 d = SpecDB.new
-d.open("pkgs.db", OPTS)
+d.open(OPTS[:specdb_filename], OPTS)
 
 tmp = Hash.new
 d.db.execute("select name from specfile_tbl") do |name,*|
-  tmp[name]=1
+  tmp[name] = 1
 end
 
 # update or insert entries to databse
@@ -46,3 +47,8 @@ end
 d.check(OPTS)
 
 d.close
+
+# Local Variables:
+# mode: ruby
+# indent-tabs-mode: nil
+# End:

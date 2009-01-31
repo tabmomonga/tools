@@ -1,0 +1,58 @@
+#!/bin/bash
+
+. $HOME/bin/config || exit -1
+
+export LANG=C
+
+function remove_test()
+{
+    echo $1
+    echo -n "$1" > /dev/stderr
+    rpm -e --test $1  2>&1 \
+	| awk '$5=="needed" && $7=="(installed)" { print $8; }
+               $3=="needed" && $5=="(installed)" { print $6; }' \
+		   | while read pkg; do
+	echo -n "." > /dev/stderr
+	get_pkg_name $pkg
+    done
+    echo  > /dev/stderr
+}
+
+
+A=`mktemp /tmp/remove_pkg_XXXXXXXX ` || exit -1
+B=`mktemp /tmp/remove_pkg_XXXXXXXX ` || exit -1
+
+(while [ -n "$1" ]; do
+    rpm -q "$1" > /dev/null && remove_test $1 
+    shift
+    done ) | sort | uniq > $A
+
+while [ /bin/true ]; do
+    cat $A | while read pkg; do  remove_test $pkg; done | sort | uniq > $B
+    
+    diff $A $B > /dev/null 
+    [ 0 -eq $? ] && break
+    cp $B $A
+done
+
+num_pkgs=`cat $A | wc -l`
+if [ $num_pkgs -eq 0 ] ; then
+	echo "specified package(s) are not installed."
+	exit 0
+fi
+
+echo 
+## dump  packages to remove
+cat  $A
+
+read -p "delete these $num_pkgs packages? (y/N) " ans
+
+case "$ans" in
+    y|Y)
+	LIST=`cat $A | while read pkg; do echo -n "$pkg "; done`
+	sudo rpm -e $LIST
+	;;
+esac
+
+
+rm -f $A $B

@@ -1,0 +1,57 @@
+#!/usr/bin/ruby
+#
+# by Hiromasa YOSHIMOTO <y@momonga-linux.org>
+
+require 'optparse'
+
+Version = "0.0.1"
+OPTS = {}
+
+$:.unshift(File.dirname($0))
+require 'lib/config.rb'
+require 'lib/pkgdb.rb'
+
+opt = OptionParser.new
+opt.on('-f', '--force_update') {|v| OPTS[:force_update] = v }
+opt.on('-q', '--quite', 'suppress verbose msg.') {|v| OPTS[:verbose]=-1 }
+opt.on('-v', '--verbose', 'verbose msg.') {|v| OPTS[:verbose]+=1 }
+opt.parse!(ARGV)
+
+d = PkgDB.new
+d.open(OPTS[:pkgdb_filename], OPTS)
+
+# update or insert entries to databse
+if  ARGV.size == 0 then
+  removeQ= Hash.new
+  d.db.execute("select pkgfile from pkg_tbl") do |pkgfile|
+    removeQ[pkgfile]=1
+  end
+
+  addQ=[]
+  OPTS[:pkgdir_list].each {|dir|
+    
+    Dir.glob('#{dir}/*.rpm').select do |pkgfile|
+      addQ.push(pkgfile)
+      removeQ.delete(pkgfile)
+    end
+  }
+
+  d.update_list(addQ, OPTS)
+
+  # delete entries which are not updated
+  removeQ.each_key do |pkgfile|
+    d.delete(pkgfile, OPTS)
+  end
+else
+  d.update_list(ARGV, OPTS)
+end
+
+d.check(OPTS)
+
+d.close
+
+# Local Variables:
+# mode: ruby
+# indent-tabs-mode: nil
+# End:
+

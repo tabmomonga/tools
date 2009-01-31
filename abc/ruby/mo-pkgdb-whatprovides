@@ -1,0 +1,33 @@
+#!/usr/bin/ruby
+# by Hiromasa YOSHIMOTO <y@momonga-linux.org>
+
+require 'optparse'
+require 'sqlite3'
+
+OPTS = {}
+Version = "0.0.1"
+
+$:.unshift(File.dirname($0))
+require 'lib/config.rb'
+
+opt = OptionParser.new
+opt.on('-q', '--quite', 'suppress verbose msg.') {|v| OPTS[:verbose]=-1 }
+opt.on('-v', '--verbose', 'verbose msg.') {|v| OPTS[:verbose]+=1 }
+opt.parse!(ARGV)
+
+db = SQLite3::Database.new(OPTS[:pkgdb_filename])
+
+curr = ARGV 
+curr.map!{|v| v.chomp("/") }
+
+curr.each do |cap|    
+  sql = "select pkgfile from capability_tbl, pkg_tbl where capability glob '#{cap}' and id==owner"
+  db.execute(sql) do |pkgfile|
+    print "#{pkgfile}\n"
+  end
+end
+
+# Local Variables:
+# mode: ruby
+# indent-tabs-mode: nil
+# End:
