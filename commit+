@@ -105,8 +105,8 @@ ARGV.each do |pkg|
       !(`(cd ./#{pkg}; svn ls sources 2>/dev/null )` + `(cd ./#{pkg}; svn status sources | grep -v '^\?' | sed -e 's, + ,   ,' | tr -s ' ' | cut -d' ' -f2 )`).empty?
     if File.exist?("#{pkg}/sources") then
       unless sources_file_vced then
-        STDERR.puts 'Please add sources file!'
-        STDERR.puts 'svn add sources'
+        STDERR.puts "Please add #{pkg}/sources file!"
+        STDERR.puts "svn add #{pkg}/sources"
         problem_found = true
       end
       s = Array.new
@@ -125,11 +125,11 @@ ARGV.each do |pkg|
       end
     else
       if sources_file_vced then
-        STDERR.puts 'sources file is deleted or missing!'
-        STDERR.puts 'svn revert sources'
+        STDERR.puts "#{pkg}/sources file is deleted or missing!"
+        STDERR.puts "svn revert #{pkg}/sources"
       else
-        STDERR.puts 'Please create and add sources file!'
-        STDERR.puts 'svn add sources'
+        STDERR.puts "Please create and add #{pkg}/sources file!"
+        STDERR.puts "svn add #{pkg}/sources"
       end
       problem_found = true
     end
