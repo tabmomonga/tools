@@ -3,6 +3,7 @@
 # by Hiromasa YOSHIMOTO <y@momonga-linux.org>
 
 require 'optparse'
+require 'set'
 
 Version = "0.0.1"
 OPTS = {}
@@ -22,24 +23,30 @@ d.open(OPTS[:pkgdb_filename], OPTS)
 
 # update or insert entries to databse
 if  ARGV.size == 0 then
-  removeQ= Hash.new
-  d.db.execute("select pkgfile from pkg_tbl") do |pkgfile|
-    removeQ[pkgfile]=1
+  removeQ= Set.new
+  d.db.execute("select pkgfile from pkg_tbl") do |pkgfile,|
+    removeQ.add(pkgfile)
   end
 
   addQ=[]
-  OPTS[:pkgdir_list].each {|dir|
-    
-    Dir.glob('#{dir}/*.rpm').select do |pkgfile|
-      addQ.push(pkgfile)
-      removeQ.delete(pkgfile)
+  OPTS[:pkgdir_list].each do |dirname|
+    dir = Dir.open(dirname)
+    begin
+      dir.each do |pkgfile|
+        next if ".rpm" != pkgfile[-4,4]
+        f = "#{dirname}/#{pkgfile}"
+        addQ.push(f)
+        removeQ.delete(f)
+      end
+    ensure
+      dir.close
     end
-  }
+  end
 
   d.update_list(addQ, OPTS)
 
   # delete entries which are not updated
-  removeQ.each_key do |pkgfile|
+  removeQ.each do |pkgfile|
     d.delete(pkgfile, OPTS)
   end
 else

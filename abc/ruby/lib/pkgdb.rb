@@ -2,7 +2,7 @@
 #
 # by Hiromasa YOSHIMOTO <y@momonga-linux.org>
 
-require 'sqlite3'
+require 'lib/database.rb'
 require 'rpm'
 
 module RPM
@@ -27,32 +27,17 @@ module RPM
 end # module RPM
 
 
-class PkgDB 
-
-  DependencyData = Struct.new(:name, :version, :rel)
-  class DependencyData
-    def ver
-      if !rel then
-        nil
-      else
-        str = ""
-        str += "#{version.e}:" if version.e
-        str += "#{version.v}"
-        str += "-#{version.r}" if version.r
-        str
-      end
-    end
-  end
+class PkgDB < DBBase
 
   TABLE_MAJOR_VERSION=1 # increase when the layout break compatibility
-  TABLE_MINOR_VERSION=0 # increase when the regeneration of DB is needed
+  TABLE_MINOR_VERSION=1 # increase when the regeneration of DB is needed
   TABLE_LAYOUT=<<ENDOFSQL
 
 -- pkgfile's capabilities (=provides) info
 drop table if exists capability_tbl;
 create table capability_tbl (
        owner integer not null,
-       capability text,
+       capability text not null,
        version text default null
 );
 
@@ -60,8 +45,24 @@ create table capability_tbl (
 drop table if exists dependency_tbl;
 create table dependency_tbl (
        owner integer not null,
-       capability text,
+       capability text not null,
        operator text default null,
+       version text default null
+);
+
+drop table if exists obsolete_tbl;
+create table obsolete_tbl (
+       owner integer not null,
+       capability text not null,
+       operator text default null,
+       version text default null
+);
+
+drop table if exists conflict_tbl;
+create table conflict_tbl (
+       owner integer not null,
+       capability text not null,
+       operator text not null,
        version text default null
 );
 
@@ -80,33 +81,26 @@ create table misc_tbl (
 );
 ENDOFSQL
 
-  def open(database, opts = nil)
-    @options = opts if opts
-
-    @db = SQLite3::Database.new(database)
-
-    needed = true
-    begin
-      r = @db.get_first_row("select major_version,minor_version from misc_tbl")
-      STDERR.puts "database version: #{r[0]}.#{r[1]}" if (@options[:verbose]>1)
-      if nil != r && 
-          TABLE_MAJOR_VERSION == Integer(r[0]) &&
-          TABLE_MINOR_VERSION <= Integer(r[1]) then
-        needed = false
+  DependencyData = Struct.new(:name, :version, :rel)
+  class DependencyData
+    def ver
+      if !rel then
+        nil
+      else
+        str = ""
+        str += "#{version.e}:" if version.e
+        str += "#{version.v}"
+        str += "-#{version.r}" if version.r
+        str
       end
-    rescue SQLite3::SQLException
-      #needed = true
-    end 
-    
-    initialize_database if needed || @options[:force_update]
+    end
   end
 
-  def close
-    @db.close
-  end
-
-  def db
-    return @db
+  def open(database, opts = nil)
+    open_database(database, 
+                  TABLE_LAYOUT,
+                  TABLE_MAJOR_VERSION, 
+                  TABLE_MINOR_VERSION,  opts)
   end
 
   def check(opts = nil)
@@ -122,7 +116,7 @@ ENDOFSQL
   def delete(pkgfile, opts = nil)
     opts = @options if nil==opts
 
-    STDERR.puts "deleting  #{pkgfile}" if (opts[:verbose]>-1) 
+    STDERR.puts "deleting entry for #{pkgfile}" if (opts[:verbose]>1) 
     @db.transaction { |db|
       id = db.get_first_value("select id from pkg_tbl where pkgfile == '#{pkgfile}'")
       if nil != id then
@@ -142,20 +136,19 @@ ENDOFSQL
     opts = @options if nil==opts
 
     @db.transaction { |db|
-      list.each {|filename|
-        
-        timestamp = File.mtime(filename).to_i
-        pkgfile = filename
+      list.each {|pkgfile|
+	STDERR.puts "checking #{pkgfile}\n" if (opts[:verbose]>1)
+        timestamp = File.mtime(pkgfile).to_i
         
         if !opts[:force_update] then
           sql = "select count(id) from pkg_tbl where pkgfile == '#{pkgfile}' and lastupdate>=#{timestamp}"
           if  @db.get_first_value(sql) == "1"  then
-            STDERR.puts "skip #{pkgfile}" if (opts[:verbose]>1) 
+            STDERR.puts "skipping #{pkgfile}" if (opts[:verbose]>1) 
             next
           end
         end
         
-        STDERR.puts "updating  #{pkgfile}" if (opts[:verbose]>-1) 
+        STDERR.puts "updating entry for #{pkgfile}" if (opts[:verbose]>-1) 
         
         # create spec entry
         db.execute("insert or ignore into pkg_tbl (pkgfile) values('#{pkgfile}')")
@@ -179,6 +172,20 @@ ENDOFSQL
           v  = r.rel ? "'#{r.ver}'" : "NULL"
           db.execute("insert into dependency_tbl (owner, capability, operator, version) values (#{id}, '#{req.name}', #{op}, #{v})")
         }
+
+        pkg.conflicts.each {|conflict|
+          r = conflict.to_struct
+          op = r.rel ? "'#{r.rel}'" : "NULL"
+          v  = r.rel ? "'#{r.ver}'" : "NULL"
+          db.execute("insert into conflict_tbl (owner, capability, operator, version) values (#{id}, '#{conflict.name}', #{op}, #{v})")
+        }
+
+        pkg.obsoletes.each {|obso|
+          r = obso.to_struct
+          op = r.rel ? "'#{r.rel}'" : "NULL"
+          v  = r.rel ? "'#{r.ver}'" : "NULL"
+          db.execute("insert into obsolete_tbl (owner, capability, operator, version) values (#{id}, '#{obso.name}', #{op}, #{v})")
+        }
       
         # update spec's timestamp
         db.execute("update pkg_tbl set lastupdate = #{timestamp} where id==#{id}")
@@ -187,24 +194,10 @@ ENDOFSQL
     }
   end
 
-  def initialize  
-    @options = {}
-    @options[:verbose] = 0
-  end 
-
   private  
   def delete_cached(db, id)
     db.execute("delete from capability_tbl where owner == #{id}")
     db.execute("delete from dependency_tbl where owner == #{id}")
-  end
-
-  private
-  def initialize_database
-    STDERR.puts "initializing database " if @options[:verbose] > -1
-    @db.transaction { |db|
-      db.execute_batch(TABLE_LAYOUT)
-      db.execute("insert into misc_tbl values(#{TABLE_MAJOR_VERSION},#{TABLE_MINOR_VERSION},0)")
-    }
   end
 
 end  # end of class PkgDB

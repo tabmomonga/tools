@@ -2,10 +2,10 @@
 #
 # by Hiromasa YOSHIMOTO <y@momonga-linux.org>
 
-require 'sqlite3'
+require 'lib/database.rb'
 require 'rpm'
 
-class SpecDB 
+class SpecDB < DBBase
   TABLE_MAJOR_VERSION=2 # increase when the layout break compatibility
   TABLE_MINOR_VERSION=0 # increase when the regeneration of DB is needed
   TABLE_LAYOUT=<<ENDOFSQL
@@ -68,32 +68,10 @@ create table misc_tbl (
 ENDOFSQL
 
   def open(database, opts = nil)
-    @options = opts if opts
-
-    @db = SQLite3::Database.new(database)
-
-    needed = true
-    begin
-      r = @db.get_first_row("select major_version,minor_version from misc_tbl")
-      STDERR.puts "database version: #{r[0]}.#{r[1]}" if (@options[:verbose]>1)
-      if nil != r && 
-          TABLE_MAJOR_VERSION == Integer(r[0]) &&
-          TABLE_MINOR_VERSION <= Integer(r[1]) then
-        needed = false
-      end
-    rescue SQLite3::SQLException
-      #needed = true
-    end 
-    
-    initialize_database if needed || @options[:force_update]
-  end
-
-  def close
-    @db.close
-  end
-
-  def db
-    return @db
+    open_database(database, 
+                  TABLE_LAYOUT,
+                  TABLE_MAJOR_VERSION, 
+                  TABLE_MINOR_VERSION,  opts)
   end
 
   def check(opts = nil)
@@ -111,7 +89,7 @@ ENDOFSQL
   def delete(name, opts = nil)
     opts = @options if nil==opts
 
-    STDERR.puts "deleting  #{name}" if (opts[:verbose]>-1) 
+    STDERR.puts "deleting entry for #{name}" if (opts[:verbose]>-1) 
     @db.transaction { |db|
       id = db.get_first_value("select id from specfile_tbl where name == '#{name}'")
       if nil!=id then
@@ -144,7 +122,7 @@ ENDOFSQL
     end
     
     @db.transaction { |db|
-      STDERR.puts "updating  #{name}" if (opts[:verbose]>-1) 
+      STDERR.puts "updating entry for #{name}" if (opts[:verbose]>-1) 
 
       # create spec entry
       db.execute("insert or ignore into specfile_tbl (name) values('#{name}')")
@@ -184,11 +162,6 @@ ENDOFSQL
     # 
     spec = nil
   end
-
-  def initialize  
-    @options = {}
-    @options[:verbose] = 0
-  end 
   
   private  
   def delete_cache(db, id)
@@ -197,14 +170,4 @@ ENDOFSQL
     db.execute("delete from require_tbl where owner == #{id}")
     db.execute("delete from provide_tbl where owner == #{id}")
   end
-
-  private
-  def initialize_database
-    STDERR.puts "initializing database " if @options[:verbose] > -1
-    @db.transaction { |db|
-      db.execute_batch(TABLE_LAYOUT)
-      db.execute("insert into misc_tbl values(#{TABLE_MAJOR_VERSION},#{TABLE_MINOR_VERSION},0)")
-    }
-  end
-
 end  # end of class SpecDB

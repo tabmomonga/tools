@@ -27,16 +27,21 @@ d.db.execute("select name from specfile_tbl") do |name,*|
 end
 
 # update or insert entries to databse
-Dir.glob('./*').select do |dir|
-  name = File.basename(dir)	
-  if !File.exist?("#{name}/#{name}.spec") or
-      File.exist?("#{name}/OBSOLETE") or
-      File.exist?("#{name}/.SKIP") or
-      File.exist?("#{name}/SKIP") then
-  else
-    d.update(name, OPTS)
-    tmp.delete(name)
+dir = Dir.open('.')
+begin
+  dir.each do |dirname|
+    name = File.basename(dirname)	
+    if !File.exist?("#{name}/#{name}.spec") or
+        File.exist?("#{name}/OBSOLETE") or
+        File.exist?("#{name}/.SKIP") or
+        File.exist?("#{name}/SKIP") then
+    else
+      d.update(name, OPTS)
+      tmp.delete(name)
+    end
   end
+ensure
+  dir.close
 end
 
 # delete entries which are not updated
