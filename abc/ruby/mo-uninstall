@@ -1,7 +1,5 @@
 #!/bin/bash
 
-. $HOME/bin/config || exit -1
-
 export LANG=C
 
 function remove_test()
