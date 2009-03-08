@@ -25,7 +25,7 @@ speclint checks given spec files from several points of view.
   Also reports valid specs and warnings in addition to errors.
 : --check-only=checkpoint
   Check only the specified checkpoint
-  (checkpoint: license|group|release|buildroot|tags|url[s])
+  (checkpoint: license|group|release|buildroot|tags|url[s]|filter)
 : --list-valid-groups
   List valid groups.
 : --list-valid-licenses
@@ -212,12 +212,31 @@ module Speclint
       end
     end
 
+    def lint_filter(result)
+      open(self.specfile, 'r') { |f|
+        changelog_in = false
+        f.each { |l|
+          next if /^#/ =~ l
+          if /^%changelog/ =~ l then
+            changelog_in = true
+            next
+          elsif changelog_in and /^%/ =~ l then
+            changelog_in = false
+            next
+          elsif not changelog_in and /%\{_initrddir\}/ =~ l then
+            result.append_error("Do not use %{_initrddir}.")
+          end
+        }
+      }
+      result
+    end
+
     def lint
       result = LintResult.new # Collecting Parameter pattern (as in xUnit)
       (if rpm46? then
-         %w(license group release forbidden_tags source_locations)
+         %w(license group release forbidden_tags source_locations filter)
        else
-         %w(license group release buildroot forbidden_tags source_locations)
+         %w(license group release buildroot forbidden_tags source_locations filter)
        end).each do |test|
         next if $checkpoint && ( $checkpoint != test )
         send('lint_' + test, result)
@@ -262,7 +281,7 @@ def usage
   print <<-EOT
 Usage:
   speclint [-v|--verbose] [--check-only=checkpoint] specfiles...
-  (checkpoint: license|group|release|buildroot|tags|url[s])
+  (checkpoint: license|group|release|buildroot|tags|url[s]|filter)
   speclint --list-valid-groups | --list-valid-licenses
   speclint -h | --help | --usage
   EOT
@@ -329,6 +348,8 @@ $opt.each do |name, value|
       $checkpoint = 'forbidden_tags'
     when /\Aurls?\z/
       $checkpoint = 'source_locations'
+    when 'filter'
+      $checkpoint = 'filter'
     else
       usage
       exit 1

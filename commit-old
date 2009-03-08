@@ -53,7 +53,7 @@ problem_found=false
 ## lint specfile
 ARGV.each do |pkg|
   pkg = pkg.chop if pkg =~ /\/+$/
-  system("#{$TOOLDIR}/speclint+ #{pkg}")
+  system("#{$TOOLDIR}/speclint-old #{pkg}")
   if $? != 0 
     puts "!!! #{pkg}/#{pkg}.spec has some spec errors, skipping."
     problem_found=true
@@ -86,7 +86,6 @@ ARGV.each do |pkg|
       entries = `(cd ./#{pkg}; svn ls 2>/dev/null )`.split(/\n/) + `(cd ./#{pkg}; svn status |grep -v '^\?'| sed -e 's, + ,   ,' | tr -s ' ' | cut -d' ' -f2 )`.split(/\n/)
           # ' + ' appears if new file was added by merging
     end
-    entries.delete('sources') # neglect sources file
     missing = sources - entries
     if missing.size > 0 then
       STDERR.puts 'Please add following file(s)!'
@@ -95,43 +94,6 @@ ARGV.each do |pkg|
       STDERR.puts
       problem_found = true
     #  exit 1
-    end
-  end
-
-  # check sources file (sorry, confusing variable names)
-  nosrcs = spec.sources.collect { |s| File.basename(s.to_s) if s.no? }.compact  
-  unless nosrcs.empty? then
-    sources_file_vced = # means sources file version controlled
-      !(`(cd ./#{pkg}; svn ls sources 2>/dev/null )` + `(cd ./#{pkg}; svn status sources | grep -v '^\?' | sed -e 's, + ,   ,' | tr -s ' ' | cut -d' ' -f2 )`).empty?
-    if File.exist?("#{pkg}/sources") then
-      unless sources_file_vced then
-        STDERR.puts "Please add #{pkg}/sources file!"
-        STDERR.puts "svn add #{pkg}/sources"
-        problem_found = true
-      end
-      s = Array.new
-      open("#{pkg}/sources") { |f|
-        while l = f.gets
-          if /^[0-9abcdef]+\s+([^\s]+)/ =~ l then
-            s << File.basename($1)
-          end
-        end
-      }
-      missing = nosrcs.collect { |n| n unless s.include?(n) }.compact
-      unless missing.empty? then
-        STDERR.puts 'Please add sha256sum(s) of following file(s)!'
-        missing.each { |m| STDERR.puts "#{pkg}/#{m}" }
-        problem_found = true
-      end
-    else
-      if sources_file_vced then
-        STDERR.puts "#{pkg}/sources file is deleted or missing!"
-        STDERR.puts "svn revert #{pkg}/sources"
-      else
-        STDERR.puts "Please create and add #{pkg}/sources file!"
-        STDERR.puts "svn add #{pkg}/sources"
-      end
-      problem_found = true
     end
   end
 end
