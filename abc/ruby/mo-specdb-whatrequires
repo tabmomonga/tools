@@ -14,6 +14,7 @@ require 'lib/config.rb'
 
 OPTS[:recursion]=1
 opt = OptionParser.new
+opt.on('-r N', '--recursion=N', 'max depth') {|v| OPTS[:recursion] = Integer(v) }
 opt.on('-f', '--force_update') {|v| OPTS[:force_update] = v }
 opt.on('-q', '--quite', 'suppress verbose msg.') {|v| OPTS[:verbose]=-1 }
 opt.on('-v', '--verbose', 'verbose msg.') {|v| OPTS[:verbose]+=1 }
@@ -21,8 +22,52 @@ opt.parse!(ARGV)
 
 db = SQLite3::Database.new(OPTS[:specdb_filename])
 
-p "not implemented yet"
+pkgs = Set.new
+curr = ARGV
+curr.map!{|v| v.chomp("/") }
 
+loop=0
+
+while loop < OPTS[:recursion] 
+  print "\n" if (loop>0)
+
+  STDERR.puts "loop #{loop}" if (OPTS[:verbose]>1)
+
+  loop += 1
+
+  found = Set.new
+  candidates = Set.new
+
+  curr.each do |name|   
+    sql = "SELECT capability FROM capa_view WHERE capability GLOB '#{name}' "
+    db.execute(sql) do |cand,*|
+      candidates.add(cand)
+    end
+  end
+
+  candidates.each do |name|
+    sql = "SELECT name FROM require_tbl INNER JOIN specfile_tbl ON owner==id WHERE capability == '#{name}' GROUP BY name"
+    db.execute(sql) do |pkg|
+      if !pkgs.include?(pkg) then
+        found.add(pkg)
+      end
+    end
+  end
+  
+  if found.empty? then
+    break
+  end
+
+
+  found.each do |name|
+    print "#{name}\n"
+  end
+
+  pkgs.merge(found)
+  curr = found
+end # end of while loop
+
+db.close()
 # Local Variables:
 # mode: ruby
 # indent-tabs-mode: nil

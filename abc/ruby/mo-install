@@ -1,3 +1,70 @@
-#!/bin/sh
+#!/usr/bin/ruby
+# by Hiromasa YOSHIMOTO <y@momonga-linux.org>
 
-echo "not implemented yet"
+require 'optparse'
+require 'sqlite3'
+require 'set'
+
+OPTS = {}
+Version = "0.0.1"
+
+$:.unshift(File.dirname($0))
+require 'lib/config.rb'
+require 'lib/install.rb'
+require 'lib/pkgdb.rb'
+
+def remove_version(str)
+  str.split('-')[0..-3].join('-')
+end
+
+OPTS[:verbose]+=1
+OPTS[:max_retry]=20
+opt = OptionParser.new
+opt.on('-q', '--quite', 'suppress verbose msg.') {|v| OPTS[:verbose]=-1 }
+opt.on('-v', '--verbose', 'verbose msg.') {|v| OPTS[:verbose]+=1 }
+opt.parse!(ARGV)
+
+d = PkgDB.new
+d.open(OPTS[:pkgdb_filename], OPTS)
+
+capabilities = ARGV 
+capabilities.map!{|v| v.chomp("/") }
+
+if 0==capabilities.count then
+  # usage
+  STDERR.puts <<-EOT
+  usage:
+     #{$0}  [CAPABILITY|FILENAME ...]
+
+  install/upgrade package(s)
+  EOT
+end
+
+pkgs, msg = select_required_packages(d.db, capabilities, OPTS)
+
+if msg then
+  abort("ERROR: #{msg}")
+end
+
+if 0==pkgs.count then
+  STDERR.puts "already installed"
+  exit(0)
+end
+
+puts "Installing following package(s)"
+pkgs.each do |pkg|
+  puts "\t#{File.basename(pkg)}"
+end
+
+cmd="rpm -vU --force #{pkgs.to_a.join(' ')}"
+STDERR.puts "executing command is\n#{cmd}" if OPTS[:verbose]>1
+
+system(cmd)
+abort("ERROR: failed") unless $?.to_i == 0
+
+exit(0)
+
+# Local Variables:
+# mode: ruby
+# indent-tabs-mode: nil
+# End:

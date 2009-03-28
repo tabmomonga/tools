@@ -21,9 +21,14 @@ curr = ARGV
 curr.map!{|v| v.chomp("/") }
 
 curr.each do |pkgfile|    
-  sql = "select capability from dependency_tbl, pkg_tbl where pkgfile glob '#{pkgfile}' and id==owner"
+  sql = "SELECT capability FROM dependency_tbl INNER JOIN pkg_tbl ON id==owner WHERE pkgfile GLOB '#{pkgfile}'"
   db.execute(sql) do |cap|
     print "#{cap}\n"
+    
+#    sql = "SELECT pkgfile FROM capability_tbl INNER JOIN pkg_tbl ON id==owner WHERE capability == '#{cap}'"
+#    db.execute(sql) do |pkgfile|
+#      print "#{pkgfile}\n"
+#    end
   end
 end
 

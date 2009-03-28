@@ -24,21 +24,27 @@ db = SQLite3::Database.new(OPTS[:specdb_filename])
 curr = ARGV
 curr.map!{|v| v.chomp("/") }
 
-curr.each do |name|
-  sql  = "select name from specfile_tbl, package_tbl where package glob '#{name}' and id == owner "
-  db.execute(sql) do |spec|
-    print "#{spec}\n"
+
+candidates = Set.new
+
+curr.each do |name|   
+  sql = "SELECT capability FROM capa_view WHERE capability GLOB '#{name}' "
+  db.execute(sql) do |cand|
+    candidates.add(cand)
   end
-  
-  sql  = "select name from specfile_tbl, provide_tbl where provide glob '#{name}' and id == owner "
-  db.execute(sql) do |spec|
-    print "#{spec}\n"
+end
+
+candidates.each do |name|
+  sql = "SELECT name FROM capa_view INNER JOIN specfile_tbl ON owner==id WHERE capability == '#{name}' GROUP BY name "
+  db.execute(sql) do |pkg|
+    print "#{pkg}\n"
   end
 end
 
 db.close()
 
+
 # Local Variables:
 # mode: ruby
 # indent-tabs-mode: nil
-# End Variables:
+# End:

@@ -20,11 +20,10 @@ opt.on('-q', '--quite', 'suppress verbose msg.') {|v| OPTS[:verbose]=-1 }
 opt.on('-v', '--verbose', 'verbose msg.') {|v| OPTS[:verbose]+=1 }
 opt.parse!(ARGV)
 
-
 db = SQLite3::Database.new(OPTS[:specdb_filename])
 
-reqs = Set.new
-curr = ARGV 
+pkgs = Set.new
+curr = ARGV
 curr.map!{|v| v.chomp("/") }
 
 loop=0
@@ -39,22 +38,25 @@ while loop < OPTS[:recursion]
   found = Set.new
   candidates = Set.new
 
-  curr.each do |name|    
-    sql = "select id from specfile_tbl where name glob '#{name}' "
-    db.execute(sql) do |id|
+  curr.each do |name|
+    sql = "SELECT id FROM specfile_tbl WHERE name GLOB '#{name}'"
+    db.execute(sql) do |id,*|
       candidates.add(id)
-    end	
-    sql = "select owner from package_tbl where package glob '#{name}'"
-    db.execute(sql) do |owner|
-      candidates.add(owner)
     end
+#    sql = "SELECT owner FROM capa_view WHERE capability GLOB '#{name}'"
+#    db.execute(sql) do |owner,*|
+#      candidates.add(owner)
+#    end
   end
 
   candidates.each do |id|
-    sql = "select name from specfile_tbl, package_tbl where id==owner and package in (select require from buildreq_tbl where owner == #{id})"
-    db.execute(sql) do |pkg|
-      if !reqs.include?(pkg) then
-        found.add(pkg)
+    sql = "SELECT capability FROM buildreq_tbl WHERE owner == '#{id}'"
+    db.execute(sql) do |cap|
+      sql = "SELECT name FROM capa_view INNER JOIN specfile_tbl ON owner=id WHERE capability == '#{cap}' GROUP BY name"
+      db.execute(sql) do |pkg|
+        if !pkgs.include?(pkg) then
+          found.add(pkg)
+        end
       end
     end
   end
@@ -68,11 +70,9 @@ while loop < OPTS[:recursion]
     print "#{name}\n"
   end
 
-  reqs.merge(found)
+  pkgs.merge(found)
   curr = found
 end # end of while loop
-
-
 
 db.close()
 
@@ -80,4 +80,3 @@ db.close()
 # mode: ruby
 # indent-tabs-mode: nil
 # End:
-

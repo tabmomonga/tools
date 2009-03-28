@@ -1,5 +1,5 @@
 #!/usr/bin/ruby
-# -*- ruby -*-
+#
 # by Hiromasa YOSHIMOTO <y@momonga-linux.org>
 
 require 'optparse'
@@ -22,8 +22,7 @@ opt.parse!(ARGV)
 
 db = SQLite3::Database.new(OPTS[:specdb_filename])
 
-
-deps = Set.new
+pkgs = Set.new
 curr = ARGV
 curr.map!{|v| v.chomp("/") }
 
@@ -40,24 +39,16 @@ while loop < OPTS[:recursion]
   candidates = Set.new
 
   curr.each do |name|   
-    sql = "select name from specfile_tbl where name glob '#{name}' "
-    db.execute(sql) do |cand|
-      candidates.add(cand)
-    end
-    sql = "select package from package_tbl where package glob '#{name}' "
-    db.execute(sql) do |cand|
-      candidates.add(cand)
-    end
-    sql = "select provide from provide_tbl where provide glob '#{name}' "
-    db.execute(sql) do |cand|
+    sql = "SELECT capability FROM capa_view WHERE capability GLOB '#{name}' "
+    db.execute(sql) do |cand,*|
       candidates.add(cand)
     end
   end
 
   candidates.each do |name|
-    sql = "select name from specfile_tbl, buildreq_tbl where owner==id and require == '#{name}' "
+    sql = "SELECT name FROM buildreq_tbl INNER JOIN specfile_tbl ON owner==id WHERE capability == '#{name}' GROUP BY name"
     db.execute(sql) do |pkg|
-      if !deps.include?(pkg) then
+      if !pkgs.include?(pkg) then
         found.add(pkg)
       end
     end
@@ -72,12 +63,12 @@ while loop < OPTS[:recursion]
     print "#{name}\n"
   end
 
-  deps.merge(found)
+  pkgs.merge(found)
   curr = found
 end # end of while loop
 
 db.close()
-### Local Variables:
-### mode: ruby
-### indent-tabs-mode: nil
-### End Variables:
+# Local Variables:
+# mode: ruby
+# indent-tabs-mode: nil
+# End:

@@ -6,6 +6,7 @@ Version = "0.0.1"
 OPTS = {}
 
 require 'optparse'
+require 'set'
 
 $:.unshift(File.dirname($0))
 require 'lib/config.rb'
@@ -21,33 +22,28 @@ opt.parse!(ARGV)
 d = SpecDB.new
 d.open(OPTS[:specdb_filename], OPTS)
 
-tmp = Hash.new
-d.db.execute("select name from specfile_tbl") do |name,*|
-  tmp[name] = 1
-end
-
 # update or insert entries to databse
-dir = Dir.open('.')
-begin
-  dir.each do |dirname|
-    name = File.basename(dirname)	
-    if !File.exist?("#{name}/#{name}.spec") or
-        File.exist?("#{name}/OBSOLETE") or
-        File.exist?("#{name}/.SKIP") or
-        File.exist?("#{name}/SKIP") then
-    else
-      d.update(name, OPTS)
-      tmp.delete(name)
+if ARGV.size == 0 then
+  removeQ = Set.new
+  addQ = Set.new
+  d.db.execute("select name from specfile_tbl") do |name,*|
+    removeQ.add(name)
+  end
+  
+  Dir.open('.').each do |dirname,*|
+    name = File.basename(dirname)    
+    if File.exist?("#{name}/#{name}.spec") then
+      addQ.add(name)
+      removeQ.delete(name)
     end
   end
-ensure
-  dir.close
+
+  d.update_list(addQ, OPTS)
+  d.delete_list(removeQ, OPTS)
+else
+  d.update_list(ARGV, OPTS)
 end
 
-# delete entries which are not updated
-tmp.each_key do |name|
-  d.delete(name, OPTS)
-end
 
 d.check(OPTS)
 

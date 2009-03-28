@@ -3,41 +3,20 @@
 # by Hiromasa YOSHIMOTO <y@momonga-linux.org>
 
 require 'lib/database.rb'
-require 'rpm'
-
-module RPM
-  class Dependency
-    def to_struct
-      relation = if le? then
-                   '<='
-                 elsif lt? then
-                   '<'
-                 elsif ge? then
-                   '>='
-                 elsif gt? then
-                   '>'
-                 elsif eq? then
-                   '=='
-                 else
-                   nil
-                 end
-      PkgDB::DependencyData.new(name, relation ? version : nil, relation)
-    end
-  end
-end # module RPM
-
 
 class PkgDB < DBBase
 
-  TABLE_MAJOR_VERSION=1 # increase when the layout break compatibility
-  TABLE_MINOR_VERSION=1 # increase when the regeneration of DB is needed
+  TABLE_MAJOR_VERSION=2 # increase when the layout breaks compatibility
+  TABLE_MINOR_VERSION=2 # increase when rebuild DB is required
   TABLE_LAYOUT=<<ENDOFSQL
 
 -- pkgfile's capabilities (=provides) info
 drop table if exists capability_tbl;
 create table capability_tbl (
        owner integer not null,
+
        capability text not null,
+       comparison text default null,
        version text default null
 );
 
@@ -45,24 +24,27 @@ create table capability_tbl (
 drop table if exists dependency_tbl;
 create table dependency_tbl (
        owner integer not null,
+
        capability text not null,
-       operator text default null,
+       comparison text default null,
        version text default null
 );
 
 drop table if exists obsolete_tbl;
 create table obsolete_tbl (
        owner integer not null,
+
        capability text not null,
-       operator text default null,
+       comparison text default null,
        version text default null
 );
 
 drop table if exists conflict_tbl;
 create table conflict_tbl (
        owner integer not null,
+
        capability text not null,
-       operator text not null,
+       comparison text default null,
        version text default null
 );
 
@@ -70,6 +52,8 @@ drop table if exists pkg_tbl;
 create table pkg_tbl (
        id integer primary key autoincrement,
        pkgfile text unique,
+       pkgname text,
+       buildtime integer,
        lastupdate integer
 );
 
@@ -80,21 +64,6 @@ create table misc_tbl (
        lastupdate integer
 );
 ENDOFSQL
-
-  DependencyData = Struct.new(:name, :version, :rel)
-  class DependencyData
-    def ver
-      if !rel then
-        nil
-      else
-        str = ""
-        str += "#{version.e}:" if version.e
-        str += "#{version.v}"
-        str += "-#{version.r}" if version.r
-        str
-      end
-    end
-  end
 
   def open(database, opts = nil)
     open_database(database, 
@@ -160,35 +129,28 @@ ENDOFSQL
         # insert capability(=provides)
         pkg = RPM::Package.open(pkgfile)
         pkg.provides.each {|prov|
-          d = prov.to_struct
-          v = d.rel ? "'#{d.ver}'" : "NULL"
-          db.execute("insert into capability_tbl (owner, capability, version) values (#{id}, '#{prov.name}', #{v})")
+          name, op, ver = prov.conv
+          db.execute("insert into capability_tbl (owner, capability, comparison, version) values (#{id}, #{name}, #{op}, #{ver})")
         }
 
         # insert dependency(=requires)
         pkg.requires.each {|req|
-          r = req.to_struct
-          op = r.rel ? "'#{r.rel}'" : "NULL"
-          v  = r.rel ? "'#{r.ver}'" : "NULL"
-          db.execute("insert into dependency_tbl (owner, capability, operator, version) values (#{id}, '#{req.name}', #{op}, #{v})")
+          name, op, ver = req.conv
+          db.execute("insert into dependency_tbl (owner, capability, comparison, version) values (#{id}, #{name}, #{op}, #{ver})")
         }
 
         pkg.conflicts.each {|conflict|
-          r = conflict.to_struct
-          op = r.rel ? "'#{r.rel}'" : "NULL"
-          v  = r.rel ? "'#{r.ver}'" : "NULL"
-          db.execute("insert into conflict_tbl (owner, capability, operator, version) values (#{id}, '#{conflict.name}', #{op}, #{v})")
+          name, op, ver = conflict.conv
+          db.execute("insert into conflict_tbl (owner, capability, comparison, version) values (#{id}, #{name}, #{op}, #{ver})")
         }
 
         pkg.obsoletes.each {|obso|
-          r = obso.to_struct
-          op = r.rel ? "'#{r.rel}'" : "NULL"
-          v  = r.rel ? "'#{r.ver}'" : "NULL"
-          db.execute("insert into obsolete_tbl (owner, capability, operator, version) values (#{id}, '#{obso.name}', #{op}, #{v})")
+          name, op, ver = obso.conv
+          db.execute("insert into obsolete_tbl (owner, capability, comparison, version) values (#{id}, #{name}, #{op}, #{ver})")
         }
       
-        # update spec's timestamp
-        db.execute("update pkg_tbl set lastupdate = #{timestamp} where id==#{id}")
+
+        db.execute("UPDATE pkg_tbl SET lastupdate = #{timestamp}, buildtime = #{pkg[RPM::TAG_BUILDTIME]}, pkgname = '#{pkg[RPM::TAG_NAME]}' WHERE id==#{id}")
         pkg = nil
       }
     }

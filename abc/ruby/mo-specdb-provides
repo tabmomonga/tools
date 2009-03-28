@@ -22,46 +22,29 @@ opt.parse!(ARGV)
 
 db = SQLite3::Database.new(OPTS[:specdb_filename])
 
-reqs = Set.new
-curr = ARGV 
+provs = Set.new
+curr = ARGV
 curr.map!{|v| v.chomp("/") }
 
-found = Set.new
 candidates = Set.new
 
-curr.each do |name|    
-  sql = "select id from specfile_tbl where name glob '#{name}' "
-  db.execute(sql) do |id|
-    candidates.add(id)
-  end	
-  sql = "select owner from package_tbl where package glob '#{name}' "
-  db.execute(sql) do |owner|
+curr.each do |name|   
+  sql = "SELECT owner FROM capa_view WHERE capability GLOB '#{name}' "
+  db.execute(sql) do |owner,*|
     candidates.add(owner)
   end
 end
 
 candidates.each do |id|
-  sql = "select package from package_tbl where owner==#{id}"
-  db.execute(sql) do |pkg|
-    if !reqs.include?(pkg) then
-      found.add(pkg)
-    end
-  end
-  sql = "select provide from provide_tbl where owner==#{id}"
-  db.execute(sql) do |pkg|
-    if !reqs.include?(pkg) then
-      found.add(pkg)
-    end
+  sql = "SELECT capability FROM capa_view WHERE owner=='#{id}' GROUP BY capability"
+  db.execute(sql) do |cap,*|
+    print "#{cap}\n"
   end
 end
-
-found.each do |name|
-  print "#{name}\n"
-end
-
 
 db.close()
-### Local Variables:
-### mode: ruby
-### indent-tabs-mode: nil
-### End Variables:
+
+# Local Variables:
+# mode: ruby
+# indent-tabs-mode: nil
+# End:

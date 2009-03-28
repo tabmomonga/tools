@@ -2,7 +2,64 @@
 #
 # by Hiromasa YOSHIMOTO <y@momonga-linux.org>
 
+require 'rpm'
 require 'sqlite3'
+
+
+module RPM
+  class Dependency
+    def conv
+      relation = if le? then
+                   '<='
+                 elsif lt? then
+                   '<'
+                 elsif ge? then
+                   '>='
+                 elsif gt? then
+                   '>'
+                 elsif eq? then
+                   '=='
+                 else
+                   nil
+                 end
+
+      if relation.nil?
+        return "'#{name}'", "NULL", "NULL"
+      else
+        v  = version.e.nil? ? "" : "#{version.e}:" 
+        v += "#{version.v}"
+        v += "-#{version.r}" if version.r
+        return "'#{name}'", "'#{relation}'", "'#{v}'"
+      end
+    end
+  end
+end # module RPM
+
+# package の version を比較する
+# なお op, ver2 が共に  nil の場合は true を返す
+def compare_version(ver1, op, ver2)
+  return true if op.nil? and ver2.nil? 
+    
+  v1 = RPM::Version.new(ver1)
+  v2 = RPM::Version.new(ver2)
+  eq = (v1 <=> v2)
+  case op
+  when '>'
+    eq > 0
+  when '>='
+    eq >= 0
+  when '<'
+    eq < 0
+  when '<='
+    eq <= 0
+  when '=='
+    eq == 0
+  when '='
+    eq == 0
+  else
+    abort("unknown op,#{op}")
+  end
+end
 
 class DBBase
   def open_database(database, layout, major, minor, opts = nil)
@@ -49,3 +106,4 @@ class DBBase
   end
 
 end  # end of class DBBase
+
