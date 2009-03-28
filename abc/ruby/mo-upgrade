@@ -85,7 +85,7 @@ STDERR.puts "#{queue.size} updated package(s) found"  if OPTS[:verbose]>0
 
 STDERR.puts "Resolving dependencies" if OPTS[:verbose]>0
 
-pkgs, msg = select_required_packages(db, queue.to_a, OPTS)
+pkgs, msg = select_required_packages(d.db, queue.to_a, OPTS)
 
 if msg then
   STDERR.puts "#{msg}, abort"
