@@ -1,9 +1,12 @@
-#! /usr/bin/env ruby
+#!/usr/bin/ruby19 -Ku
+# -*- ruby-mode -*-
+
 require 'getoptlong'
 
-$:.unshift(File.dirname($0))
+$:.unshift(File.dirname($0) + '/v2')
+
 require 'environment'
-load 'updatespecdb'
+load '../tools/v2/updatespecdb'
 
 if File.expand_path($PKGDIR) != File.expand_path(Dir.getwd)
   puts "Run in pkgs/ dir."

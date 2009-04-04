@@ -1,9 +1,12 @@
-#! /usr/bin/env ruby
-require 'optparse'
+#!/usr/bin/ruby19 -Ku
+# -*- ruby-mode -*-
 
-$:.unshift(File.dirname($0))
+$:.unshift(File.dirname($0) + '/v2')
+
+require 'optparse'
 require 'environment'
-load 'updatespecdb'
+require 'getoptlong'
+load '../tools/v2/updatespecdb'
 
 #specdb が OBSOLETES は処理してるので考える必要なし
 #$ はいかんでしょ。
@@ -55,11 +58,15 @@ $DB.specs.each_value do |spec|
     ($Packages[todir]||={})["#{spec.name}-#{spec.packages[0].version}.nosrc.rpm"] = true
   end
   spec.packages.each do |pkg|
-    arch = ARCH
-    if spec.archs[0]
-      arch = spec.archs[0]
+    if $STORE and pkg.arch then
+      ($Packages[todir]||={})["#{pkg.name}-#{pkg.version}.#{pkg.arch}.rpm"] = true
+    else
+      arch = ARCH
+      if spec.archs[0]
+        arch = spec.archs[0]
+      end
+      ($Packages[todir]||={})["#{pkg.name}-#{pkg.version}.#{arch}.rpm"] = true
     end
-    ($Packages[todir]||={})["#{pkg.name}-#{pkg.version}.#{arch}.rpm"] = true
   end
 end
 
@@ -73,7 +80,12 @@ Dir.glob("#{$TOPDIR}*").each do |top|
   when "#{$TOPDIR}-Alter"
     next unless opt[:L]
   end
-  Dir.glob("#{top}/#{ARCH}/*.rpm\0#{top}/noarch/*.rpm\0#{top}/SRPMS/*.rpm").each do |rpm|
+  glob_str = if $STORE then
+               "#{top}/#{$STORE}/*.rpm\0#{top}/SRPMS/*.rpm"
+             else
+               "#{top}/#{ARCH}/*.rpm\0#{top}/noarch/*.rpm\0#{top}/SRPMS/*.rpm"
+             end
+  Dir.glob(glob_str).each do |rpm|
     if !$Packages[top] || !$Packages[top][File.basename(rpm)]
       $Massatu << rpm
     else

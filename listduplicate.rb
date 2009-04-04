@@ -1,8 +1,12 @@
-#! /usr/bin/env ruby
+#!/usr/bin/ruby19 -Ku
+# -*- ruby-mode -*-
+
 require 'rpm'
 
-$:.unshift(File.dirname($0))
+$:.unshift(File.dirname($0) + '/v2')
+
 require 'environment'
+require 'getoptlong'
 
 if ARGV[0] == '-a'
   glob_pattern = "#{$TOPDIR}*"
@@ -14,7 +18,12 @@ files = Hash.new{|i,k| i[k]=[]}
 
 ARCH=$ARCH
 Dir.glob(glob_pattern).each do |top|
-  Dir.glob("#{top}/#{ARCH}/*.rpm\0#{top}/noarch/*.rpm").each do |rpm|
+  glob_str = if $STORE then
+               "#{top}/#{$STORE}/*.rpm"
+             else
+               "#{top}/#{ARCH}/*.rpm\0#{top}/noarch/*.rpm"
+             end
+  Dir.glob(glob_str).each do |rpm|
     begin
       pkg = RPM::Package.open(rpm)
       pkg.files.each do |file|

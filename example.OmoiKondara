@@ -23,7 +23,7 @@ MIRROR ftp://dist.momonga-linux.org/pub/momonga/development
 # MIRROR ftp://ftp.ne.jp/Linux/packages/momonga/development
 # MIRROR ftp://ftp.iij.ad.jp/pub/linux/momonga/development
 
-# FTP_CMD ソース等をダウンロードする際に使用するコマンド (およびオプション)．
+# FTP_CMD ソース等をダウンロードする際に使用するコマンド (およびオプション)。
 #
 FTP_CMD lftpget -c
 #FTP_CMD ncftpget -A
@@ -31,27 +31,27 @@ FTP_CMD lftpget -c
 #FTP_CMD aria2c
 
 # DISPLAY ビルドする際に X サーバへのコネクションが必要なものに対して設
-#         定される DISPLAY 環境変数の値．
+#         定される DISPLAY 環境変数の値。
 #
 DISPLAY :0.0
 
-# DISTCC_HOST distcc で使用するホストの指定．localhost は必ず追加されるため
-#        指定しなくても良い．
+# DISTCC_HOST distcc で使用するホストの指定。localhost は必ず追加されるため
+#        指定しなくても良い。
 #
 # DISTCC_HOST <ホスト名>[:<ポート番号>] # ポート番号を省略したときは 3632
 #DISTCC_HOST hoge
 #DISTCC_HOST fuga:11111
 
-# DISTCC_VERBOSE distcc のデバッグメッセージを出力するかどうか．
-#                下の行のコメントを外すと，デバッグメッセージを出力する．
+# DISTCC_VERBOSE distcc のデバッグメッセージを出力するかどうか。
+#                下の行のコメントを外すと、デバッグメッセージを出力する。
 #DISTCC_VERBOSE
 
-# NUMJOBS make 時に同時に実行するジョブの数の指定．基本的にはビルド時に
-#         使える CPU の数の合計が目安．つまり，SMP マシンなら 2，distcc
-#         を使用するなら distcc で使用する全マシンの CPU の合計．
+# NUMJOBS make 時に同時に実行するジョブの数の指定。基本的にはビルド時に
+#         使える CPU の数の合計が目安。つまり、SMP マシンなら 2、distcc
+#         を使用するなら distcc で使用する全マシンの CPU の合計。
 #NUMJOBS 1
 
-# URL_ALIAS ソース等の URL の置き換えを指定する (String#sub で置き換える)．
+# URL_ALIAS ソース等の URL の置き換えを指定する (String#sub で置き換える)。
 #
 # URL_ALIAS <正規表現> <置き換える文字列>
 #
@@ -63,11 +63,11 @@ URL_ALIAS ^http://dl\.sourceforge\.net http://jaist.dl.sourceforge.net
 #URL_ALIAS ^ftp://ftp\.kde\.org/pub/kde ftp://ftp.iij.ad.jp/pub/X11/KDE
 #URL_ALIAS ^ftp://[^\.]+?\.ftp\.kde\.org/pub/kde ftp://ftp.iij.ad.jp/pub/X11/KDE
 
-# WORKDIR 作業用ディレクトリを指定する．
-#         パッケージ名/BUILD ディレクトリが WORKDIR の下に作られる．
-#         誤って指定した際の危険を考慮し、clean_up時にも削除を行わない．
-#         tmpfsファイルシステムのディレクトリを指定するのを推奨．
-#         コメントアウトしておけば，これまで通りの動きになる．
+# WORKDIR 作業用ディレクトリを指定する。
+#         パッケージ名/BUILD ディレクトリが WORKDIR の下に作られる。
+#         誤って指定した際の危険を考慮し、clean_up時にも削除を行わない。
+#         tmpfsファイルシステムのディレクトリを指定するのを推奨。
+#         コメントアウトしておけば、これまで通りの動きになる。
 #WORKDIR	/tmp/OmoiKondara
 
 # cachecc1 の設定 (default: off)
@@ -91,3 +91,7 @@ URL_ALIAS ^http://dl\.sourceforge\.net http://jaist.dl.sourceforge.net
 # - maintainer  checksumが登録されていない場合 sourcesファイルを作成 or 更新する
 #
 # CHECKSUM_MODE strict
+
+# STORE rpm ファイルの保存先を指定する。
+#       TOPDIR 内の STORE ディレクトリに rpm ファイルが保存される。
+#STORE RPMS
