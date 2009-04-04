@@ -39,6 +39,7 @@ if [ ! -d $prefix/etc/ ]; then
     mkdir -p $prefix/etc/
 fi
 cp /etc/resolv.conf $prefix/etc/
+cp /etc/localtime $prefix/etc/
 
 echo "Creating yum.conf"
 cat > $prefix/etc/yum.conf <<EOF
