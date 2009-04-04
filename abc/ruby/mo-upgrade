@@ -31,7 +31,7 @@ d.open(OPTS[:pkgdb_filename], OPTS)
 
 # install済のpackageと、そのbuildtimeを取得
 installed = []
-`rpm -qa --qf '%{NAME},%{VERSION},%{RELEASE},%{BUILDTIME}\n'`.each_line do |line|
+`LANG=C \\rpm -qa --qf '%{NAME},%{VERSION},%{RELEASE},%{BUILDTIME}\n'`.each_line do |line|
   column = line.chomp.split(',')
   v  = column[1]
   v += "-#{column[2]}" if column[2]!=""
@@ -43,11 +43,33 @@ STDERR.puts "Searching updated packages"  if OPTS[:verbose]>0
 queue = Set.new
 installed.each do |name,version,buildtime|
 
+  # 1) 特定のパッケージは 更新しない
   next if holds.include?(name)
 
   found = false
 
-  # obsoleteの処理
+  # 2) 同名かつbuildtimeの新しいpackageがあれば、更新
+  sql = "SELECT pkgfile,buildtime FROM pkg_tbl WHERE pkgname=='#{name}'"
+  d.db.execute(sql) do |pkgfile,ts|
+    if ts.to_i != buildtime then
+      STDERR.puts "#{name} is updated by #{pkgfile}" if OPTS[:verbose]>1
+      queue.add(pkgfile)
+    end
+    found = true
+  end
+  next if found
+
+  # 3) "#{name}"をprovideしているpackageがあれば、代替
+  sql = "SELECT pkgfile,comparison,version,buildtime FROM capability_tbl INNER JOIN pkg_tbl ON owner==id WHERE capability=='#{name}' AND pkgname!='#{name}'"
+  d.db.execute(sql) do |pkgfile,comparison,version1,buildtime1|
+    next if version1 && compare_version(version1, "<", version)
+    STDERR.puts "#{name} is updated by #{pkgfile}" if OPTS[:verbose]>1
+    queue.add(pkgfile)
+    found = true
+  end
+  next if found
+
+  # 4) "#{name}"をobsoleteしているpackageがあれば、代替
   sql = "SELECT pkgfile,comparison,version,buildtime FROM obsolete_tbl INNER JOIN pkg_tbl ON owner=id WHERE capability=='#{name}'"
   d.db.execute(sql) do |pkgfile,comparison,version1,buildtime1|
     next if !compare_version(version, comparison, version1)
@@ -59,20 +81,12 @@ installed.each do |name,version,buildtime|
   end
   next if found
 
-  # 同名かつbuildtimeの新しいpackageを探す
-  sql = "SELECT pkgfile,buildtime FROM pkg_tbl WHERE pkgname=='#{name}'"
-  d.db.execute(sql) do |pkgfile,ts|
-    if ts.to_i != buildtime then
-      STDERR.puts "#{name} is updated by #{pkgfile}" if OPTS[:verbose]>1
-      queue.add(pkgfile)
-      found = true
-    end
-  end
-
+  # 該当パッケージ無し
+  STDERR.puts "Warning: No package found for #{name}" if OPTS[:verbose]>1
 end
 
 if queue.size == 0 then
-  STDERR.puts "No updated package found."
+  STDERR.puts "No updated found."
   exit(0)
 end
 
@@ -81,7 +95,7 @@ if OPTS[:verbose]>1 then
     STDERR.puts " #{file}" 
   end
 end
-STDERR.puts "#{queue.size} updated package(s) found"  if OPTS[:verbose]>0
+STDERR.puts "#{queue.size} updated packages found"  if OPTS[:verbose]>0
 
 STDERR.puts "Resolving dependencies" if OPTS[:verbose]>0
 
@@ -92,6 +106,7 @@ if msg then
   exit(1)
 end
 
+STDERR.puts "Installing #{pkgs.size} packages" if OPTS[:verbose]>0
 
 cmd="rpm -vU --force #{pkgs.to_a.join(' ')}"
 system(cmd)
