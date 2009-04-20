@@ -1,0 +1,16 @@
+#!/usr/bin/ruby19 -Ku
+
+$:.unshift(File.dirname($0))
+if FileTest.symlink?($0) then
+        $:.unshift(File.dirname($0) + "/v2")
+end
+
+require 'environment'
+require 'rpm'
+
+Dir::glob("#{$PKGDIR}/*/*spec").each {|f|
+	spec = RPM::Spec.open(f)
+	spec.packages.each {|pkg|
+		printf "#{pkg.name},#{pkg.version.v},#{pkg.version.r}\n"
+	}
+}
