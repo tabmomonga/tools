@@ -41,6 +41,22 @@ fi
 cp /etc/resolv.conf $prefix/etc/
 cp /etc/localtime $prefix/etc/
 
+echo "Create fstab"
+cat > $prefix/etc/fstab <<EOF
+tmpfs	/dev/shm	tmpfs	defaults	0 0
+devpts	/dev/pts	devpts	gid=5,mode=620	0 0
+sysfs	/sys		sysfs	defaults	0 0
+proc	/proc		proc	defaults	0 0
+EOF
+
+echo "Create mtab"
+cat > $prefix/etc/mtab <<EOF
+/proc /proc proc rw,relatime 0 0
+sysfs /sys sysfs rw,relatime 0 0
+devpts /dev/pts devpts rw,relatime,mode=600,ptmxmode=000 0 0
+tmpfs /dev/shm tmpfs rw,relatime 0 0
+EOF
+
 echo "Creating yum.conf"
 cat > $prefix/etc/yum.conf <<EOF
 [main]
@@ -73,23 +89,18 @@ fi
 mount -o bind /proc $prefix/proc
 
 echo "Bootstrapping yum"
-yum -y --installroot=$prefix install yum vim-minimal dhclient build-momonga
+setarch $basearch yum -y --installroot=$prefix install yum vim-minimal dhclient build-momonga
 
 echo "Cleaning up"
-chroot $prefix /usr/bin/yum clean all
+rm -f $prefix/var/lib/rpm/__db.*
+#setarch $basearch chroot $prefix (cd /var/lib/rpm; /usr/bin/db_recover)
+
+# setarch $basearch chroot $prefix /usr/bin/yum clean all
 umount $prefix/proc
 
 cp -p $prefix/etc/yum.conf.rpmnew $prefix/etc/yum.conf
 
 echo "Copying device file"
 rsync -auv --stats --progress /dev/ $prefix/dev/
-
-echo "Create fstab"
-cat > $prefix/etc/fstab <<EOF
-tmpfs	/dev/shm	tmpfs	defaults	0 0
-devpts	/dev/pts	devpts	gid=5,mode=620	0 0
-sysfs	/sys		sysfs	defaults	0 0
-proc	/proc		proc	defaults	0 0
-EOF
 
 
