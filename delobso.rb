@@ -98,9 +98,13 @@ Dir.glob("#{$TOPDIR}*").each do |top|
     end
   end
   ($Packages[top]||[]).sort.each do |k,v|
-    dir = k.split(/\./)[-2]
-    dir = 'SRPMS' if /src/ =~ dir
-    puts "#{top}/#{dir}/#{k} is missing"
+    if $STORE then
+      puts "#{top}/#{$STORE}/#{k} is missing"
+    else
+      dir = k.split(/\./)[-2]
+      dir = 'SRPMS' if /src/ =~ dir
+      puts "#{top}/#{dir}/#{k} is missing"
+    end
   end
 end
 
