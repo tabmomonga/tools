@@ -3260,8 +3260,8 @@
       <packagereq type="optional">CodeAnalyst-gui</packagereq>
       <packagereq type="optional">ElectricFence</packagereq>
       <packagereq type="optional">alex</packagereq>
-      <packagereq type="optional">astyle</packagereq>
       <packagereq type="optional">aplus-fsf</packagereq>
+      <packagereq type="optional">astyle</packagereq>
       <packagereq type="optional">bzr</packagereq>
       <packagereq type="optional">check</packagereq>
       <packagereq type="optional">clisp</packagereq>

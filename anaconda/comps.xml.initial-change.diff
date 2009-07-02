@@ -1,5 +1,5 @@
 --- comps.xml.f11	2009-07-03 03:54:33.000000000 +0900
-+++ comps.xml	2009-07-03 05:25:55.000000000 +0900
++++ comps.xml	2009-07-03 05:50:35.000000000 +0900
 @@ -168,15 +168,12 @@
        <packagereq type="optional">cacti</packagereq>
        <packagereq type="optional">dbench</packagereq>
@@ -370,7 +370,7 @@
 -      <packagereq type="optional">abicheck</packagereq>
        <packagereq type="optional">alex</packagereq>
 -      <packagereq type="optional">alleyoop</packagereq>
--      <packagereq type="optional">aplus-fsf</packagereq>
+       <packagereq type="optional">aplus-fsf</packagereq>
 -      <packagereq type="optional">archmage</packagereq>
 -      <packagereq type="optional">asa</packagereq>
        <packagereq type="optional">astyle</packagereq>
@@ -378,7 +378,6 @@
 -      <packagereq type="optional">bigloo</packagereq>
 -      <packagereq type="optional">bugzilla</packagereq>
 -      <packagereq type="optional">buildbot</packagereq>
-+      <packagereq type="optional">aplus-fsf</packagereq>
        <packagereq type="optional">bzr</packagereq>
        <packagereq type="optional">check</packagereq>
 -      <packagereq type="optional">clips</packagereq>
