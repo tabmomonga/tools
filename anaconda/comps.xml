@@ -3951,7 +3951,6 @@
       <packagereq type="optional">freehdl</packagereq>
       <packagereq type="optional">kdesvn</packagereq>
       <packagereq type="optional">minicom</packagereq>
-      <packagereq type="optional">planner</packagereq>
       <packagereq type="optional">qemu</packagereq>
     </packagelist>
   </group>        
@@ -5844,7 +5843,6 @@
       <packagereq type="default">bluez-gnome</packagereq>
       <packagereq type="default">bug-buddy</packagereq>
       <packagereq type="default">compiz-gnome</packagereq>
-      <packagereq type="default">dasher</packagereq>
       <packagereq type="default">deskbar-applet</packagereq>
       <packagereq type="default">dvd+rw-tools</packagereq>
       <packagereq type="default">eel2</packagereq>
@@ -5866,7 +5864,6 @@
       <packagereq type="default">gnome-menus</packagereq>
       <packagereq type="default">gnome-mime-data</packagereq>
       <packagereq type="default">gnome-netstatus</packagereq>
-      <packagereq type="default">gnome-pilot</packagereq>
       <packagereq type="default">gnome-power-manager</packagereq>
       <packagereq type="default">gnome-ppp</packagereq>
       <packagereq type="default">gnome-screensaver</packagereq>
@@ -5895,7 +5892,6 @@
       <packagereq type="default">pulseaudio-module-x11</packagereq>
       <packagereq type="default">scim-bridge</packagereq>
       <packagereq type="default">shared-mime-info</packagereq>
-      <packagereq type="default">tomboy</packagereq>
       <packagereq type="default">vino</packagereq>
       <packagereq type="default">vte</packagereq>
       <packagereq type="default">xdg-user-dirs-gtk</packagereq>
@@ -5903,6 +5899,7 @@
       <packagereq type="optional">alacarte</packagereq>
       <packagereq type="optional">beagle-doc</packagereq>
       <packagereq type="optional">byzanz</packagereq>
+      <packagereq type="optional">dasher</packagereq>
       <packagereq type="optional">esc</packagereq>
       <packagereq type="optional">gedit-plugins</packagereq>
       <packagereq type="optional">ghex</packagereq>
@@ -5913,6 +5910,7 @@
       <packagereq type="optional">gnome-device-manager</packagereq>
       <packagereq type="optional">gnome-mag</packagereq>
       <packagereq type="optional">gnome-nettool</packagereq>
+      <packagereq type="optional">gnome-pilot</packagereq>
       <packagereq type="optional">gnome-speech</packagereq>
       <packagereq type="optional">gnome-themes-extras</packagereq>
       <packagereq type="optional">gnopernicus</packagereq>
@@ -5938,6 +5936,7 @@
       <packagereq type="optional">stardict-dic-en</packagereq>
       <packagereq type="optional">startup-notification</packagereq>
       <packagereq type="optional">swfdec-gnome</packagereq>
+      <packagereq type="optional">tomboy</packagereq>
       <packagereq type="optional">tracker-search-tool</packagereq>
       <packagereq type="optional">uim-applet</packagereq>
       <packagereq type="optional">vinagre</packagereq>
@@ -7057,7 +7056,6 @@
       <packagereq type="default">cheese</packagereq>
       <packagereq type="default">dcraw</packagereq>
       <packagereq type="default">dcraw-gimp</packagereq>
-      <packagereq type="default">f-spot</packagereq>
       <packagereq type="default">gimp</packagereq>
       <packagereq type="default">gimp-gap</packagereq>
       <packagereq type="default">gimp-pygimp</packagereq>
@@ -7070,6 +7068,7 @@
       <packagereq type="optional">blender</packagereq>
       <packagereq type="optional">digikam</packagereq>
       <packagereq type="optional">digikam-doc</packagereq>
+      <packagereq type="optional">f-spot</packagereq>
       <packagereq type="optional">gifsicle</packagereq>
       <packagereq type="optional">gimp-help</packagereq>
       <packagereq type="optional">gnome-scan</packagereq>
@@ -13318,7 +13317,6 @@
       <packagereq type="default">openoffice.org-math</packagereq>
       <packagereq type="default">openoffice.org-writer</packagereq>
       <packagereq type="default">openoffice.org-xsltfilter</packagereq>
-      <packagereq type="default">planner</packagereq>
       <packagereq type="optional">MagicPoint</packagereq>
       <packagereq type="optional">abiword</packagereq>
       <packagereq type="optional">aiksaurus-gtk</packagereq>
@@ -13352,6 +13350,7 @@
       <packagereq type="optional">openoffice.org-pyuno</packagereq>
       <packagereq type="optional">openoffice.org-testtools</packagereq>
       <packagereq type="optional">openoffice.org-voikko</packagereq>
+      <packagereq type="optional">planner</packagereq>
       <packagereq type="optional">qcad</packagereq>
       <packagereq type="optional">sunbird</packagereq>
       <packagereq type="optional">xdvik</packagereq>
