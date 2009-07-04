@@ -2067,17 +2067,18 @@
       <packagereq type="mandatory">cjkuni-ukai-fonts</packagereq>
       <packagereq type="mandatory">cjkuni-uming-fonts</packagereq>
       <packagereq type="default">taipeifonts</packagereq>
-      <packagereq type="default">scim-python-pinyin</packagereq>
-      <packagereq type="default">scim-python-xingma-cangjie</packagereq>
-      <packagereq type="default">scim-python-xingma-erbi</packagereq>
-      <packagereq type="default">scim-python-xingma-wubi</packagereq>
-      <packagereq type="default">scim-python-xingma-zhengma</packagereq>
       <packagereq type="optional">gcin</packagereq>
       <packagereq type="optional">lv</packagereq>
       <packagereq type="optional">m17n-db</packagereq>
       <packagereq type="optional">scim-array</packagereq>
       <packagereq type="optional">scim-fcitx</packagereq>
       <packagereq type="optional">scim-pinyin</packagereq>
+      <packagereq type="optional">scim-python-chinese</packagereq>
+      <packagereq type="optional">scim-python-pinyin</packagereq>
+      <packagereq type="optional">scim-python-xingma-cangjie</packagereq>
+      <packagereq type="optional">scim-python-xingma-erbi</packagereq>
+      <packagereq type="optional">scim-python-xingma-wubi</packagereq>
+      <packagereq type="optional">scim-python-xingma-zhengma</packagereq>
       <packagereq type="optional">stardict-dic-zh_CN</packagereq>
       <packagereq type="optional">stardict-dic-zh_TW</packagereq>
       <packagereq type="optional">wqy-bitmap-fonts</packagereq>
@@ -2098,7 +2099,6 @@
       <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-zh_CN</packagereq>
       <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-zh_TW</packagereq>
       <packagereq type="conditional" requires="xorg-x11-server-Xorg">scim-chewing</packagereq>
-      <packagereq type="conditional" requires="xorg-x11-server-Xorg">scim-python-chinese</packagereq>
       <packagereq type="conditional" requires="xorg-x11-server-Xorg">scim-tables-chinese</packagereq>
       <packagereq type="conditional" requires="xorg-x11-server-Xorg">scim-tables-chinese-extra</packagereq>
     </packagelist>
