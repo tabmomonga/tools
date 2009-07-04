@@ -1,0 +1,317 @@
+== admin-tools ==
+
+== authoring-and-publishing ==
+
+== base ==
+
+<packagereq type="mandatory">acl</packagereq> => == core ==
+<packagereq type="mandatory">attr</packagereq> >= ==core ==
+<packagereq type="mandatory">cronie</packagereq> => == core ==
+<packagereq type="default">gpm</packagereq> => "optional"
+<packagereq type="default">dhclient</packagereq> => == core ==
+<packagereq type="default">reiserfsprogs</packagereq> => reiserfs-utils
+<packagereq type="default">sysreport</packagereq> => sos
+<packagereq type="optional">nilfs-utils</packagereq> => "default"
+<packagereq type="optional">readahead</packagereq> => "default"
+
+== buildsys-build ==
+
+== clustering ==
+
+== core ==
+
+<packagereq type="mandatory">prelink</packagereq> => == base ==
+<packagereq type="mandatory">hdparm</packagereq> => == hardware-support ==
+<packagereq type="default">ppc64-utils</packagereq>
+<packagereq type="default">yaboot</packagereq>
+
+== dns-server ==
+
+== development-libs ==
+
+<packagereq type="default">curl-devel</packagereq> => libcurl-devel
+
+== development-tools ==
+
+<packagereq type="optional">bazaar</packagereq> => bzr
+<packagereq type="optional">Gauche-utf8</packagereq> => gauche-utf8
+<packagereq type="optional">gcl</packagereq> TO.Alter
+<packagereq type="optional">uim-devel</packagereq>
+<packagereq type="optional">uim-applet</packagereq>
+
+== dial-up ==
+
+<packagereq type="optional">isdn4k-utils</packagereq> => "default"
+
+== editors ==
+
+== education ==
+
+<packagereq type="conditional" requires="gcompris">gcompris-sound-en</packagereq>
+<packagereq type="optional">gcompris</packagereq>
+
+== electronic-lab ==
+
+== engineering-and-scientific ==
+
+<packagereq type="optional">gchempaint</packagereq> => gnome-chemistry-utils
+<packagereq type="optional">ktechlab</packagereq> => == electronic-lab ==
+<packagereq type="optional">xcircuit</packagereq> => == electronic-lab ==
+<packagereq type="optional">LabPlot</packagereq>
+<packagereq type="optional">texmacs</packagereq> => TeXmacs
+
+== ftp-server ==
+
+== eclipse ==
+
+<packagereq type="optional">eclipse-cdt</packagereq> => eclipse
+<packagereq type="optional">eclipse-changelog</packagereq> => eclipse
+<packagereq type="optional">eclipse-jdt</packagereq> => eclipse
+<packagereq type="optional">eclipse-pde</packagereq> => eclipse
+<packagereq type="optional">eclipse-rpm-editor</packagereq> => eclipse
+
+== fedora-packager ==
+
+== font-design ==
+
+== fonts ==
+
+This section's following all packages are replaced.
+
+<packagereq type="default">baekmuk-ttf-fonts-gulim</packagereq>
+<packagereq type="default">cjkunifonts-uming</packagereq>
+<packagereq type="default">dejavu-fonts</packagereq>
+<packagereq type="default">dejavu-fonts-experimental</packagereq>
+<packagereq type="default">liberation-fonts</packagereq>
+<packagereq type="default">lohit-fonts-bengali</packagereq>
+<packagereq type="default">lohit-fonts-gujarati</packagereq>
+<packagereq type="default">lohit-fonts-hindi</packagereq>
+<packagereq type="default">lohit-fonts-kannada</packagereq>
+<packagereq type="default">lohit-fonts-malayalam</packagereq>
+<packagereq type="default">lohit-fonts-oriya</packagereq>
+<packagereq type="default">lohit-fonts-punjabi</packagereq>
+<packagereq type="default">lohit-fonts-tamil</packagereq>
+<packagereq type="default">lohit-fonts-telugu</packagereq>
+<packagereq type="default">thaifonts-scalable</packagereq>
+<packagereq type="default">VLGothic-fonts</packagereq>
+<packagereq type="optional">baekmuk-ttf-fonts-batang</packagereq>
+<packagereq type="optional">baekmuk-ttf-fonts-dotum</packagereq>
+<packagereq type="optional">baekmuk-ttf-fonts-hline</packagereq>
+<packagereq type="optional">bitstream-vera-fonts</packagereq>
+<packagereq type="optional">cjkunifonts-ukai</packagereq>
+<packagereq type="optional">dejavu-lgc-fonts</packagereq>
+<packagereq type="optional">edrip-fonts</packagereq>
+<packagereq type="optional">samyak-fonts-devanagari</packagereq>
+<packagereq type="optional">samyak-fonts-gujarati</packagereq>
+<packagereq type="optional">samyak-fonts-malayalam</packagereq>
+<packagereq type="optional">samyak-fonts-oriya</packagereq>
+<packagereq type="optional">samyak-fonts-tamil</packagereq>
+<packagereq type="optional">sazanami-fonts-gothic</packagereq>
+<packagereq type="optional">sazanami-fonts-mincho</packagereq>
+<packagereq type="optional">smc-fonts-dyuthi</packagereq>
+<packagereq type="optional">smc-fonts-meera</packagereq>
+<packagereq type="optional">smc-fonts-rachana</packagereq>
+<packagereq type="optional">smc-fonts-raghumalayalam</packagereq>
+<packagereq type="optional">smc-fonts-suruma</packagereq>
+<packagereq type="optional">VLGothic-fonts-proportional</packagereq>
+
+== gnome-desktop ==
+
+<packagereq type="default">gnome-bluetooth</packagereq> => gnome-bluez
+<packagereq type="default">gnome-system-tools</packagereq> TO.Orphan
+<packagereq type="default">gnome-volume-manager</packagereq> => gnome-media
+<packagereq type="optional">dasher</packagereq> => "default"
+<packagereq type="optional">gnome-keyring-manager</packagereq> => seahorse
+<packagereq type="optional">gnome-pilot</packagereq> => "default"
+<packagereq type="optional">gucharmap</packagereq> => "default" and => == font-design ==
+<packagereq type="optional">system-tools-backends</packagereq> TO.Orphan
+<packagereq type="optional">tomboy</packagereq> => "default"
+
+== gnome-software-development ==
+
+== games ==
+
+== graphical-internet ==
+
+<packagereq type="optional">anp</packagereq> => amarok
+<packagereq type="optional">miro</packagereq> => Miro
+
+== graphics ==
+
+<packagereq type="optional">f-spot</packagereq> => "default"
+<packagereq type="optional">fontforge</packagereq> => == font-design ==
+<packagereq type="optional">kipi-plugins4</packagereq> => kipi-plugins
+<packagereq type="optional">libsane-hpaio</packagereq> => "default"
+<packagereq type="optional">skencil</packagereq>
+
+== hardware-support ==
+
+== haskell ==
+
+== input-methods ==
+
+== java ==
+
+<packagereq type="optional">java-sun-j2se1.6-sdk</packagereq> TO.Alter
+
+== java-development ==
+
+<packagereq type="mandatory">eclipse-ecj</packagereq> => ecj
+<packagereq type="optional">bcel-demo</packagereq> => bcel
+<packagereq type="optional">bcel-manual</packagereq> => bcel
+<packagereq type="default">java-1.5.0-gcj-javadoc</packagereq> => "optional"
+
+== kde-desktop ==
+
+<packagereq type="default">amarok-libvisual</packagereq> => amarok
+<packagereq type="default">amarok-xine</packagereq> => amarok
+<packagereq type="default">amarok-yauap</packagereq> => amarok
+<packagereq type="default">kdeartwork-extras</packagereq> => kdeartwork
+<packagereq type="default">kdeartwork-icons</packagereq> => kdeartwork
+<packagereq type="default">kipi-plugins4</packagereq> => kipi-plugins
+<packagereq type="default">oxygen-icon-theme</packagereq> => oxygen-icons
+<packagereq type="default">oxygen-icon-theme-scalable</packagereq> => oxygen-icons-scalable
+<packagereq type="default">phonon-backend-gst</packagereq> => phonon-backend-gstreamer
+<packagereq type="default">qt-sqlite</packagereq> => qt
+<packagereq type="optional" basearchonly="true">amarok-helix</packagereq> => amarok
+<packagereq type="optional">amarokFS</packagereq> => amarok
+<packagereq type="optional">anp</packagereq> => amarok
+<packagereq type="optional">kmediaplayer</packagereq> => kdemultimedia
+<packagereq type="optional">scribus</packagereq> => "default"
+
+== kde-software-development ==
+
+<packagereq type="optional">kbanking-devel</packagereq> => qbanking-devel
+<packagereq type="optional">kdebindings3</packagereq> => kdebindings
+<packagereq type="optional">kipi-plugins4-devel</packagereq> => kipi-plugins-devel
+<packagereq type="optional">libkdcraw-devel</packagereq> => kdegraphics-devel
+<packagereq type="optional">libkexiv2-devel</packagereq> => kdegraphics-devel
+<packagereq type="optional">libkipi-devel</packagereq> => kdegraphics-devel
+<packagereq type="optional">mlt++-devel</packagereq> => mlt-devel
+<packagereq type="optional">phonon-devel</packagereq> => qt-devel
+
+== lxde-desktop ==
+
+== legacy-fonts ==
+
+<packagereq type="optional">culmus-fonts</packagereq>
+<packagereq type="optional">fonts-japanese</packagereq>
+
+== legacy-network-server ==
+
+== legacy-software-development ==
+
+== legacy-software-development ==
+
+== mail-server ==
+
+<packagereq type="optional">SpamAssassin</packagereq> => spamassasin and => "default"
+
+== mingw32 ==
+
+This section is not modified and removed.
+
+== mysql ==
+
+<packagereq type="default">perl-DBD-mysql</packagereq> => perl-DBD-MySQL
+
+== network-server ==
+
+<packagereq type="optional">vnc-server</packagereq> => tigervnc-server
+
+== news-server ==
+
+== ocaml ==
+
+== office ==
+
+<packagereq type="optional">magicpoint</packagereq> => MagicPoint
+<packagereq type="optional">planner</packagereq> => "default"
+
+== online-docs ==
+
+== sql-server ==
+
+== printing ==
+
+<packagereq type="mandatory">ghostscript-resource</packagereq> => ghostscript
+<packagereq type="default">bluez-utils-cups</packagereq> => bluez-cups
+
+== ruby ==
+
+== server-cfg ==
+
+== sound-and-video ==
+
+<packagereq type="mandatory">sox</packagereq> => "default"
+<packagereq type="default">totem-nautilus</packagereq> => nautilus
+<packagereq type="optional">miro</packagereq> => Miro
+<packagereq type="optional">amarokFS</packagereq> => amarok
+<packagereq type="optional" basearchonly="true">amarok-helix</packagereq> => amarok
+<packagereq type="optional">amarok-libvisual</packagereq> => amarok
+<packagereq type="optional">amarok-xine</packagereq> => amarok
+<packagereq type="optional">amarok-yauap</packagereq> => amarok
+<packagereq type="optional">kmediaplayer</packagereq> => kdemultimedia
+<packagereq type="optional">totem-lirc</packagereq> => totem
+
+== sugar-desktop ==
+
+This section is not modified and removed.
+
+== system-tools ==
+
+<packagereq type="default">audit</packagereq> => == core ==
+<packagereq type="default">open</packagereq> => kbd and => == core ==
+<packagereq type="default">vnc</packagereq> => tigervnc
+
+== text-internet ==
+
+== virtualization ==
+
+<packagereq type="default">kvm</packagereq> => qemu-kvm
+
+== web-development ==
+
+== web-server ==
+
+== window-managers ==
+
+== smb-server ==
+
+== x-software-development ==
+
+== base-x ==
+
+<packagereq type="mandatory">xorg-x11-fonts-100dpi</packagereq> => == legacy-fonts ==
+<packagereq type="mandatory">xorg-x11-fonts-ISO8859-1-100dpi</packagereq> => == legacy-fonts ==
+<packagereq type="mandatory">xorg-x11-fonts-Type1</packagereq> => == legacy-fonts ==
+<packagereq type="mandatory">xorg-x11-fonts-misc</packagereq> => == legacy-fonts ==
+<packagereq type="default">opfc-ModuleHP</packagereq> => ipa-gothic-fonts and ipa-pgothic-fonts
+<packagereq type="default">rhgb</packagereq> => plymouth
+<packagereq type="default">synaptics</packagereq> => xorg-x11-drv-synaptics
+<packagereq type="default">system-config-display</packagereq> => "optional"
+<packagereq type="default">vnc-server</packagereq> => tigervnc-server and "optional"
+<packagereq type="default">xorg-x11-apps</packagereq> => "optional"
+<packagereq type="default">xorg-x11-twm</packagereq> => "optional"
+<packagereq type="optional">bitstream-vera-fonts</packagereq> => bitstream-vera-fonts-compat
+<packagereq type="optional">fonts-chinese</packagereq>
+<packagereq type="optional">fonts-japanese</packagereq>
+<packagereq type="optional">fonts-korean</packagereq>
+<packagereq type="optional">kinput2</packagereq> => == input-methods ==
+<packagereq type="optional">Canna</packagereq> => == input-methods ==
+<packagereq type="optional">scim-m17n</packagereq> => == input-methods ==
+<packagereq type="optional">uim-gtk</packagereq> => == input-methods ==
+<packagereq type="optional">uim-m17nlib</packagereq> => == input-methods ==
+
+== xfce-desktop ==
+
+<packagereq type="mandatory">libxfce4mcs</packagereq> => xfconf
+<packagereq type="mandatory">xfce4-session-engines</packagereq> => "default"
+<packagereq type="default">xfce-mcs-manager</packagereq> => xfce4-settings
+<packagereq type="default">xfce-mcs-plugins</packagereq> => xfce4-settings
+<packagereq type="optional">mousepad</packagereq> => "default"
+<packagereq type="optional">xfce4-minicmd-plugin</packagereq> => xfce4-verve-plugin
+
+== xfce-software-development ==
+
+<packagereq type="optional">libxfce4mcs-devel</packagereq> >= xfconf-devel
