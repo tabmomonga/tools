@@ -5,7 +5,7 @@
 == base ==
 
 <packagereq type="mandatory">acl</packagereq> => == core ==
-<packagereq type="mandatory">attr</packagereq> >= ==core ==
+<packagereq type="mandatory">attr</packagereq> => ==core ==
 <packagereq type="mandatory">cronie</packagereq> => == core ==
 <packagereq type="default">gpm</packagereq> => "optional"
 <packagereq type="default">dhclient</packagereq> => == core ==
