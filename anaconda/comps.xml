@@ -6841,7 +6841,6 @@
     <packagelist>
       <packagereq type="default">bogofilter</packagereq>
       <packagereq type="default">ekiga</packagereq>
-      <packagereq type="default">evolution</packagereq>
       <packagereq type="default">firefox</packagereq>
       <packagereq type="default">ochusha</packagereq>
       <packagereq type="default">pidgin</packagereq>
