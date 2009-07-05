@@ -174,6 +174,7 @@
       <packagereq type="optional">kpackagekit</packagereq>
       <packagereq type="optional">lshw-gui</packagereq>
       <packagereq type="optional">luma</packagereq>
+      <packagereq type="optional">partitionmanager</packagereq>
       <packagereq type="optional">pessulus</packagereq>
       <packagereq type="optional">qtparted</packagereq>
       <packagereq type="optional">system-config-kickstart</packagereq>
@@ -1167,6 +1168,7 @@
       <packagereq type="optional">squashfs-tools</packagereq>
       <packagereq type="optional">star</packagereq>
       <packagereq type="optional">tcsh</packagereq>
+      <packagereq type="optional">wicd</packagereq>
       <packagereq type="optional">x86info</packagereq>
       <packagereq type="optional">xfsprogs</packagereq>
       <packagereq type="optional">yum-updatesd</packagereq>
@@ -5940,6 +5942,7 @@
       <packagereq type="optional">tracker-search-tool</packagereq>
       <packagereq type="optional">uim-applet</packagereq>
       <packagereq type="optional">vinagre</packagereq>
+      <packagereq type="optional">wicd</packagereq>
       <packagereq type="optional">xscreensaver-extras-gss</packagereq>
       <packagereq type="optional">xscreensaver-gl-extras-gss</packagereq>
       <packagereq type="conditional" requires="ibus">ibus-gtk</packagereq>
@@ -6882,6 +6885,8 @@
       <packagereq type="optional">midori</packagereq>
       <packagereq type="optional">mozplugger</packagereq>
       <packagereq type="optional">nspluginwrapper</packagereq>
+      <packagereq type="optional">qbittorrent</packagereq>
+      <packagereq type="optional">qwit</packagereq>
       <packagereq type="optional">seamonkey</packagereq>
       <packagereq type="optional">seamonkey-chat</packagereq>
       <packagereq type="optional">seamonkey-dom-inspector</packagereq>
@@ -7069,6 +7074,7 @@
       <packagereq type="optional">digikam</packagereq>
       <packagereq type="optional">digikam-doc</packagereq>
       <packagereq type="optional">f-spot</packagereq>
+      <packagereq type="optional">fotowall</packagereq>
       <packagereq type="optional">gifsicle</packagereq>
       <packagereq type="optional">gimp-help</packagereq>
       <packagereq type="optional">gnome-scan</packagereq>
@@ -9231,9 +9237,9 @@
       <packagereq type="mandatory">kdebase</packagereq>
       <packagereq type="mandatory">kdebase-workspace</packagereq>
       <packagereq type="mandatory">kdelibs</packagereq>
+      <packagereq type="mandatory">kdm</packagereq>
       <packagereq type="mandatory">xinetd</packagereq>
       <packagereq type="mandatory">xdg-user-dirs</packagereq>
-      <packagereq type="default">NetworkManager-gnome</packagereq>
       <packagereq type="default">PolicyKit-kde</packagereq>
       <packagereq type="default">amarok</packagereq>
       <packagereq type="default">arts-artsc</packagereq>
@@ -9242,12 +9248,14 @@
       <packagereq type="default">digikam</packagereq>
       <packagereq type="default">falf</packagereq>
       <packagereq type="default">fedora-gnome-theme</packagereq>
+      <packagereq type="default">gdm</packagereq>
       <packagereq type="default">gtk-qt-engine</packagereq>
       <packagereq type="default">gtk2-engines</packagereq>
       <packagereq type="default">k3b</packagereq>
       <packagereq type="default">kaffeine</packagereq>
       <packagereq type="default">kaffeine-plugin</packagereq>
       <packagereq type="default">katapult</packagereq>
+      <packagereq type="default">kaudiocreator</packagereq>
       <packagereq type="default">kcoloredit</packagereq>
       <packagereq type="default">kcpuload</packagereq>
       <packagereq type="default">kdeaccessibility</packagereq>
@@ -9258,11 +9266,12 @@
       <packagereq type="default">kdeartwork-screensavers</packagereq>
       <packagereq type="default">kdeartwork-sounds</packagereq>
       <packagereq type="default">kdeartwork-wallpapers</packagereq>
+      <packagereq type="default">kdebase-runtime-flags</packagereq>
       <packagereq type="default">kdebase-workspace-googlegadgets</packagereq>
       <packagereq type="default">kdebase-workspace-python-applet</packagereq>
       <packagereq type="default">kdebase-workspace-wallpapers</packagereq>
       <packagereq type="default">kdebluetooth</packagereq>
-      <packagereq type="default">kdeclassic-icon-theme</packagereq>
+      <packagereq type="default">kdebluetooth4</packagereq>
       <packagereq type="default">kdeedu</packagereq>
       <packagereq type="default">kdeedu-kstars</packagereq>
       <packagereq type="default">kdeedu-marble</packagereq>
@@ -9273,6 +9282,7 @@
       <packagereq type="default">kdemultimedia</packagereq>
       <packagereq type="default">kdenetwork</packagereq>
       <packagereq type="default">kdepim</packagereq>
+      <packagereq type="default">kdepim-runtime</packagereq>
       <packagereq type="default">kdeplasma-addons</packagereq>
       <packagereq type="default">kdesdk</packagereq>
       <packagereq type="default">kdesdk-utils</packagereq>
@@ -9290,6 +9300,8 @@
       <packagereq type="default">kgraphviewer</packagereq>
       <packagereq type="default">kiconedit</packagereq>
       <packagereq type="default">kile</packagereq>
+      <packagereq type="default">kio_msits</packagereq>
+      <packagereq type="default">kio_sysinfo</packagereq>
       <packagereq type="default">kiosktool</packagereq>
       <packagereq type="default">kipi-plugins</packagereq>
       <packagereq type="default">kita</packagereq>
@@ -9298,6 +9310,7 @@
       <packagereq type="default">knemo</packagereq>
       <packagereq type="default">knetstats</packagereq>
       <packagereq type="default">knetworkmanager</packagereq>
+      <packagereq type="default">knetworkmanager4</packagereq>
       <packagereq type="default">koffice-filters</packagereq>
       <packagereq type="default">koffice-karbon</packagereq>
       <packagereq type="default">koffice-kchart</packagereq>
@@ -9322,11 +9335,12 @@
       <packagereq type="default">ksynaptics</packagereq>
       <packagereq type="default">ksysguardd</packagereq>
       <packagereq type="default">ktorrent</packagereq>
-      <packagereq type="default">kwlan</packagereq>
+      <packagereq type="default">nuvola-icon-theme</packagereq>
       <packagereq type="default">openoffice.org-kde</packagereq>
       <packagereq type="default">oxygen-cursor-themes</packagereq>
       <packagereq type="default">oxygen-icons</packagereq>
       <packagereq type="default">oxygen-icons-scalable</packagereq>
+      <packagereq type="default">partitionmanager</packagereq>
       <packagereq type="default">phonon-backend-gstreamer</packagereq>
       <packagereq type="default">phonon-backend-xine</packagereq>
       <packagereq type="default">qt-mysql</packagereq>
@@ -9338,7 +9352,6 @@
       <packagereq type="default">qt3-PostgreSQL</packagereq>
       <packagereq type="default">qt3-sqlite</packagereq>
       <packagereq type="default">qt3-styles</packagereq>
-      <packagereq type="default">qtparted</packagereq>
       <packagereq type="default">rosegarden</packagereq>
       <packagereq type="default">rsibreak</packagereq>
       <packagereq type="default">scim-bridge</packagereq>
@@ -9346,7 +9359,7 @@
       <packagereq type="default">scim-qtimm</packagereq>
       <packagereq type="default">scim-qtimm-qt4</packagereq>
       <packagereq type="default">scim-tomoe</packagereq>
-      <packagereq type="default">scribus</packagereq>
+      <packagereq type="default">skrooge</packagereq>
       <packagereq type="default">system-config-printer-kde</packagereq>
       <packagereq type="default">zenity</packagereq>
       <packagereq type="default">uim-qt</packagereq>
@@ -9375,6 +9388,7 @@
       <packagereq type="optional">eureka</packagereq>
       <packagereq type="optional">festival</packagereq>
       <packagereq type="optional">flite</packagereq>
+      <packagereq type="optional">fotowall</packagereq>
       <packagereq type="optional">foxkit</packagereq>
       <packagereq type="optional">k9copy</packagereq>
       <packagereq type="optional">kannadic</packagereq>
@@ -9385,7 +9399,7 @@
       <packagereq type="optional">kbilliards</packagereq>
       <packagereq type="optional">kchmviewer</packagereq>
       <packagereq type="optional">kcometen4</packagereq>
-      <packagereq type="optional">kdebluetooth4</packagereq>
+      <packagereq type="optional">kdeclassic-icon-theme</packagereq>
       <packagereq type="optional">kdenlive</packagereq>
       <packagereq type="optional">kdirstat</packagereq>
       <packagereq type="optional">kdissert</packagereq>
@@ -9405,6 +9419,7 @@
       <packagereq type="optional">kompose</packagereq>
       <packagereq type="optional">kover</packagereq>
       <packagereq type="optional">koverartist</packagereq>
+      <packagereq type="optional">kradio</packagereq>
       <packagereq type="optional">kreetingkard</packagereq>
       <packagereq type="optional">krename</packagereq>
       <packagereq type="optional">kscope</packagereq>
@@ -9413,16 +9428,24 @@
       <packagereq type="optional">ksmarttray</packagereq>
       <packagereq type="optional">ktechlab</packagereq>
       <packagereq type="optional">ktrack</packagereq>
+      <packagereq type="optional">kwakeonlan</packagereq>
       <packagereq type="optional">kwave</packagereq>
+      <packagereq type="optional">kwlan</packagereq>
       <packagereq type="optional">kyum</packagereq>
       <packagereq type="optional">lmms</packagereq>
       <packagereq type="optional">nmapsi4</packagereq>
       <packagereq type="optional">pdfedit</packagereq>
       <packagereq type="optional">polyester</packagereq>
       <packagereq type="optional">qalculate-kde</packagereq>
+      <packagereq type="optional">qbittorrent</packagereq>
       <packagereq type="optional">qdvdauthor</packagereq>
       <packagereq type="optional">qsynth</packagereq>
       <packagereq type="optional">qt-recordmydesktop</packagereq>
+      <packagereq type="optional">qtparted</packagereq>
+      <packagereq type="optional">qtractor</packagereq>
+      <packagereq type="optional">qtrans</packagereq>
+      <packagereq type="optional">qwit</packagereq>
+      <packagereq type="optional">scribus</packagereq>
       <packagereq type="optional">skim</packagereq>
       <packagereq type="optional">skim-honoka</packagereq>
       <packagereq type="optional">skim-scim-anthy</packagereq>
@@ -9437,6 +9460,7 @@
       <packagereq type="optional">speedcrunch</packagereq>
       <packagereq type="optional">xine-lib-smb</packagereq>
       <packagereq type="optional">webkam</packagereq>
+      <packagereq type="optional">wicd</packagereq>
       <packagereq type="conditional" requires="ibus">ibus-qt</packagereq>
       <packagereq type="conditional" requires="scim">scim-bridge</packagereq>
     </packagelist>
@@ -9595,6 +9619,7 @@
    <description xml:lang="zu">Faka lama phakethe ukuze uthuthukise imiyalelo yemidwebo ye-QT kanye ne-KDE.</description>
     <packagelist>
       <packagereq type="optional">OpenEXR-devel</packagereq>
+      <packagereq type="optional">PolicyKit-kde-devel</packagereq>
       <packagereq type="optional">PyKDE</packagereq>
       <packagereq type="optional">PyKDE-devel</packagereq>
       <packagereq type="optional">PyKDE-examples</packagereq>
@@ -9606,6 +9631,8 @@
       <packagereq type="optional">PyQt-examples</packagereq>
       <packagereq type="optional">PyQt4</packagereq>
       <packagereq type="optional">PyQt4-devel</packagereq>
+      <packagereq type="optional">QtRuby</packagereq>
+      <packagereq type="optional">QtRuby-devel</packagereq>
       <packagereq type="optional">akonadi-devel</packagereq>
       <packagereq type="optional">arts-devel</packagereq>
       <packagereq type="optional">anthy-devel</packagereq>
@@ -9624,6 +9651,7 @@
       <packagereq type="optional">dbus-qt3-devel</packagereq>
       <packagereq type="optional">djvulibre-devel</packagereq>
       <packagereq type="optional">desktop-file-utils</packagereq>
+      <packagereq type="optional">digikam-devel</packagereq>
       <packagereq type="optional">docbook-style-dsssl</packagereq>
       <packagereq type="optional">eigen-devel</packagereq>
       <packagereq type="optional">exiv2-devel</packagereq>
@@ -9653,30 +9681,45 @@
       <packagereq type="optional">kdbg</packagereq>
       <packagereq type="optional">kdebase-devel</packagereq>
       <packagereq type="optional">kdebase-workspace-devel</packagereq>
-      <packagereq type="optional">kdebindings-devel</packagereq>
       <packagereq type="optional">kdebindings</packagereq>
+      <packagereq type="optional">kdebindings-devel</packagereq>
       <packagereq type="optional">kdeedu-devel</packagereq>
       <packagereq type="optional">kdegames-devel</packagereq>
       <packagereq type="optional">kdegraphics-devel</packagereq>
       <packagereq type="optional">kdelibs-apidocs</packagereq>
       <packagereq type="optional">kdelibs-devel</packagereq>
+      <packagereq type="optional">kdelibs-experimental-devel</packagereq>
       <packagereq type="optional">kdelibs3-devel</packagereq>
       <packagereq type="optional">kdemultimedia-devel</packagereq>
       <packagereq type="optional">kdenetwork-devel</packagereq>
       <packagereq type="optional">kdepim-devel</packagereq>
+      <packagereq type="optional">kdepim-runtime-devel</packagereq>
       <packagereq type="optional">kdepimlibs-apidocs</packagereq>
       <packagereq type="optional">kdepimlibs-devel</packagereq>
       <packagereq type="optional">kdesdk</packagereq>
       <packagereq type="optional">kdesdk-devel</packagereq>
       <packagereq type="optional">kdesvn</packagereq>
       <packagereq type="optional">kdesvn-kiosvn</packagereq>
+      <packagereq type="optional">kdesvn-svnqt</packagereq>
       <packagereq type="optional">kdesvn-svnqt-devel</packagereq>
       <packagereq type="optional">kdevelop</packagereq>
+      <packagereq type="optional">kdevelop-devel</packagereq>
+      <packagereq type="optional">kdevplatform</packagereq>
+      <packagereq type="optional">kdevplatform-devel</packagereq>
       <packagereq type="optional">kdewebdev-devel</packagereq>
       <packagereq type="optional">kdiff3</packagereq>
       <packagereq type="optional">kftpgrabber-devel</packagereq>
+      <packagereq type="optional">kimono</packagereq>
       <packagereq type="optional">kipi-plugins-devel</packagereq>
+      <packagereq type="optional">kmid-devel</packagereq>
       <packagereq type="optional">koffice-devel</packagereq>
+      <packagereq type="optional">korundum</packagereq>
+      <packagereq type="optional">korundum-devel</packagereq>
+      <packagereq type="optional">kross-falcon</packagereq>
+      <packagereq type="optional">kross-ruby</packagereq>
+      <packagereq type="optional">kross-python</packagereq>
+      <packagereq type="optional">kscope-devel</packagereq>
+      <packagereq type="optional">kst-devel</packagereq>
       <packagereq type="optional">ladspa-devel</packagereq>
       <packagereq type="optional">lcms-devel</packagereq>
       <packagereq type="optional">libakode-devel</packagereq>
@@ -9713,23 +9756,29 @@
       <packagereq type="optional">ocaml-facile-devel</packagereq>
       <packagereq type="optional">openbabel-devel</packagereq>
       <packagereq type="optional">openslp-devel</packagereq>
+      <packagereq type="optional">php-qt</packagereq>
       <packagereq type="optional">pilot-link-devel</packagereq>
+      <packagereq type="optional">polkit-qt-devel</packagereq>
       <packagereq type="optional">poppler-devel</packagereq>
       <packagereq type="optional">postgresql-devel</packagereq>
       <packagereq type="optional">qbanking-devel</packagereq>
       <packagereq type="optional">qca2-devel</packagereq>
+      <packagereq type="optional">php-qt-devel</packagereq>
       <packagereq type="optional">qimageblitz-devel</packagereq>
       <packagereq type="optional">qt-devel</packagereq>
       <packagereq type="optional">qt3-designer</packagereq>
       <packagereq type="optional">qt3-devel</packagereq>
       <packagereq type="optional">qscintilla-devel</packagereq>
+      <packagereq type="optional">qyoto</packagereq>
+      <packagereq type="optional">qyoto-devel</packagereq>
       <packagereq type="optional">sane-backends-devel</packagereq>
       <packagereq type="optional">scim-devel</packagereq>
       <packagereq type="optional">scons</packagereq>
       <packagereq type="optional">scribus-devel</packagereq>
-      <packagereq type="optional">sip-devel</packagereq>
       <packagereq type="optional">sip</packagereq>
+      <packagereq type="optional">sip-devel</packagereq>
       <packagereq type="optional">smb4k-devel</packagereq>
+      <packagereq type="optional">soprano-apidocs</packagereq>
       <packagereq type="optional">soprano-devel</packagereq>
       <packagereq type="optional">strigi-devel</packagereq>
       <packagereq type="optional">subversion-devel</packagereq>
@@ -13352,6 +13401,8 @@
       <packagereq type="optional">openoffice.org-voikko</packagereq>
       <packagereq type="optional">planner</packagereq>
       <packagereq type="optional">qcad</packagereq>
+      <packagereq type="optional">qtrans</packagereq>
+      <packagereq type="optional">skrooge</packagereq>
       <packagereq type="optional">sunbird</packagereq>
       <packagereq type="optional">xdvik</packagereq>
       <packagereq type="optional">xfbib</packagereq>
@@ -15510,6 +15561,7 @@
       <packagereq type="optional">jack</packagereq>
       <packagereq type="optional">k3b</packagereq>
       <packagereq type="optional">kaffeine</packagereq>
+      <packagereq type="optional">kaudiocreator</packagereq>
       <packagereq type="optional">kdemultimedia</packagereq>
       <packagereq type="optional">kdenlive</packagereq>
       <packagereq type="optional">kdetv</packagereq>
@@ -15520,6 +15572,7 @@
       <packagereq type="optional">kmplayer</packagereq>
       <packagereq type="optional">kover</packagereq>
       <packagereq type="optional">koverartist</packagereq>
+      <packagereq type="optional">kradio</packagereq>
       <packagereq type="optional">kwave</packagereq>
       <packagereq type="optional">last-exit</packagereq>
       <packagereq type="optional">lmms</packagereq>
@@ -15538,6 +15591,7 @@
       <packagereq type="optional">pulseaudio-module-lirc</packagereq>
       <packagereq type="optional">pulseaudio-module-zeroconf</packagereq>
       <packagereq type="optional">qdvdauthor</packagereq>
+      <packagereq type="optional">qtractor</packagereq>
       <packagereq type="optional">rosegarden</packagereq>
       <packagereq type="optional">soundconverter</packagereq>
       <packagereq type="optional">soundkonverter</packagereq>
@@ -16315,6 +16369,7 @@
       <packagereq type="optional">kleansweep</packagereq>
       <packagereq type="optional">krusader</packagereq>
       <packagereq type="optional">ksmarttray</packagereq>
+      <packagereq type="optional">kwakeonlan</packagereq>
       <packagereq type="optional">lirc</packagereq>
       <packagereq type="optional">lzop</packagereq>
       <packagereq type="optional">momonga-package-config-smart</packagereq>
