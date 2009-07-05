@@ -3954,6 +3954,7 @@
       <packagereq type="optional">kdesvn</packagereq>
       <packagereq type="optional">minicom</packagereq>
       <packagereq type="optional">qemu</packagereq>
+      <packagereq type="optional">qtbsch3v</packagereq>
     </packagelist>
   </group>        
   <group>
@@ -9440,6 +9441,7 @@
       <packagereq type="optional">qdvdauthor</packagereq>
       <packagereq type="optional">qsynth</packagereq>
       <packagereq type="optional">qt-recordmydesktop</packagereq>
+      <packagereq type="optional">qtbsch3v</packagereq>
       <packagereq type="optional">qtparted</packagereq>
       <packagereq type="optional">qtractor</packagereq>
       <packagereq type="optional">qtrans</packagereq>
@@ -15574,6 +15576,8 @@
       <packagereq type="optional">kradio</packagereq>
       <packagereq type="optional">kwave</packagereq>
       <packagereq type="optional">last-exit</packagereq>
+      <packagereq type="optional">last.fm</packagereq>
+      <packagereq type="optional">lastagent</packagereq>
       <packagereq type="optional">lmms</packagereq>
       <packagereq type="optional">lsdvd</packagereq>
       <packagereq type="optional">lxdvdrip</packagereq>
