@@ -15611,6 +15611,8 @@
       <packagereq type="optional">xine-lib-arts</packagereq>
       <packagereq type="optional">xine-lib-gdk-pixbuf</packagereq>
       <packagereq type="optional">xine-lib-gnomevfs</packagereq>
+      <packagereq type="optional">xine-lib-smb</packagereq>
+      <packagereq type="optional">xine-skins</packagereq>
       <packagereq type="optional">xmms</packagereq>
       <packagereq type="optional">xmms-alsa</packagereq>
       <packagereq type="optional">xmms-arts</packagereq>
@@ -15626,11 +15628,10 @@
       <packagereq type="optional">xmms-pulse</packagereq>
       <packagereq type="optional">xmms-scrobbler</packagereq>
       <packagereq type="optional">xmms-skins</packagereq>
-      <packagereq type="optional">xine-lib-smb</packagereq>
-      <packagereq type="optional">xine-skins</packagereq>
       <packagereq type="optional">xmms-vorbis</packagereq>
       <packagereq type="optional">xmms-vumeter</packagereq>
       <packagereq type="optional">xmms-xosd</packagereq>
+      <packagereq type="optional">xmms2</packagereq>
       <packagereq type="conditional" requires="xine-lib">xine-lib-pulseaudio</packagereq>
     </packagelist>
   </group>        
