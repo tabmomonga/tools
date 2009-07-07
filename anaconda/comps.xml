@@ -8577,6 +8577,7 @@
    <name xml:lang="zu">Ukuxhasa kwesiJaphani</name>
    <description></description>
     <packagelist>
+      <packagereq type="default">opfc-ModuleHP</packagereq>
       <packagereq type="default">anthy</packagereq>
       <packagereq type="default">ipa-gothic-fonts</packagereq>
       <packagereq type="default">ipa-pgothic-fonts</packagereq>
@@ -19058,6 +19059,7 @@
       <packagereq type="default">kerneloops</packagereq>
       <packagereq type="default">krb5-auth-dialog</packagereq>
       <packagereq type="default">openssh-askpass</packagereq>
+      <packagereq type="default">opfc-ModuleHP</packagereq>
       <packagereq type="default">plymouth-system-theme</packagereq>
       <packagereq type="default">policycoreutils-gui</packagereq>
       <packagereq type="default">rxvt-unicode</packagereq>
