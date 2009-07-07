@@ -154,6 +154,7 @@
    <description xml:lang="zh_TW">這個群組是系統中圖形管理工具的收集，例如用來管理使用者帳號與設定系統硬體。</description>
    <description xml:lang="zu">Leli qembu liyiqoqo lamathuluzi okuphatha emidwebo yesistimu, njengokuphatha ama-akhawunti omphathi kanye nengaphakathi yekhomputha yesistimu yokuhlanganisa.</description>
     <packagelist>
+      <packagereq type="default">PackageKit-gtk-module</packagereq>
       <packagereq type="default">authconfig-gtk</packagereq>
       <packagereq type="default">gnome-packagekit</packagereq>
       <packagereq type="default">system-config-boot</packagereq>
