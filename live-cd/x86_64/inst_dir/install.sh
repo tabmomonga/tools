@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 export PATH=$PATH:/usr/sbin:/sbin
 export LANG=C

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 [ -f ../tools/addprops.ignore ] || exit 1
 

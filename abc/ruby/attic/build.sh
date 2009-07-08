@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # by Hiromasa YOSHIMOTO <y@momonga-linux.org>
 

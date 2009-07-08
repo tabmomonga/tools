@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 PKGLISTS_BASE=pkglists/pkglist.base
 PKGLISTS_XORG=pkglists/pkglist.xorg
