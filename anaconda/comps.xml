@@ -9464,7 +9464,6 @@
       <packagereq type="optional">webkam</packagereq>
       <packagereq type="optional">wicd</packagereq>
       <packagereq type="conditional" requires="ibus">ibus-qt</packagereq>
-      <packagereq type="conditional" requires="scim">scim-bridge</packagereq>
     </packagelist>
   </group>        
   <group>
