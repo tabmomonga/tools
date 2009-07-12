@@ -12548,7 +12548,7 @@
       <packagereq type="conditional" requires="hunspell">hunspell-ne</packagereq>
       <packagereq type="conditional" requires="xorg-x11-server-Xorg">ibus-m17n</packagereq>
       <packagereq type="conditional" requires="kdelibs">kde-l10n-Nepali</packagereq>
-      <packagereq type="conditional" requires="koffice-core">koffice-l10n-Nepali</packagereq>
+      <packagereq type="conditional" requires="koffice-core">koffice-l10n-Nepalese</packagereq>
     </packagelist>
   </group>        
   <group>
