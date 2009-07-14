@@ -5869,7 +5869,6 @@
       <packagereq type="default">gnome-mime-data</packagereq>
       <packagereq type="default">gnome-netstatus</packagereq>
       <packagereq type="default">gnome-power-manager</packagereq>
-      <packagereq type="default">gnome-ppp</packagereq>
       <packagereq type="default">gnome-screensaver</packagereq>
       <packagereq type="default">gnome-system-monitor</packagereq>
       <packagereq type="default">gnome-themes</packagereq>
@@ -5915,6 +5914,7 @@
       <packagereq type="optional">gnome-mag</packagereq>
       <packagereq type="optional">gnome-nettool</packagereq>
       <packagereq type="optional">gnome-pilot</packagereq>
+      <packagereq type="optional">gnome-ppp</packagereq>
       <packagereq type="optional">gnome-speech</packagereq>
       <packagereq type="optional">gnome-themes-extras</packagereq>
       <packagereq type="optional">gnopernicus</packagereq>
@@ -6842,7 +6842,6 @@
    <description xml:lang="zu">Leli qembu libala iposi lekhomputha elemidwebo, i-web, kanye nabantu bokuxoxa.</description>
     <packagelist>
       <packagereq type="default">bogofilter</packagereq>
-      <packagereq type="default">ekiga</packagereq>
       <packagereq type="default">firefox</packagereq>
       <packagereq type="default">ochusha</packagereq>
       <packagereq type="default">pidgin</packagereq>
@@ -6856,6 +6855,7 @@
       <packagereq type="optional">bittorrent-gui</packagereq>
       <packagereq type="optional">bluefish</packagereq>
       <packagereq type="optional">deskbar-applet</packagereq>
+      <packagereq type="optional">ekiga</packagereq>
       <packagereq type="optional">empathy</packagereq>
       <packagereq type="optional">epiphany</packagereq>
       <packagereq type="optional">epiphany-extensions</packagereq>
