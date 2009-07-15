@@ -9272,7 +9272,6 @@
       <packagereq type="default">kdebase-workspace-python-applet</packagereq>
       <packagereq type="default">kdebase-workspace-wallpapers</packagereq>
       <packagereq type="default">kdebluetooth</packagereq>
-      <packagereq type="default">kdebluetooth4</packagereq>
       <packagereq type="default">kdeedu</packagereq>
       <packagereq type="default">kdeedu-kstars</packagereq>
       <packagereq type="default">kdeedu-marble</packagereq>
