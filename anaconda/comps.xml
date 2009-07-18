@@ -8595,6 +8595,7 @@
       <packagereq type="default">skk-jisyo</packagereq>
       <packagereq type="default">suikyo-ruby</packagereq>
       <packagereq type="default">uim-anthy</packagereq>
+      <packagereq type="default">uim-anthy-utf8</packagereq>
       <packagereq type="default">uim-fep</packagereq>
       <packagereq type="default">uim-prime</packagereq>
       <packagereq type="default">uim-skk</packagereq>
