@@ -9337,7 +9337,6 @@
       <packagereq type="default">ksysguardd</packagereq>
       <packagereq type="default">ktorrent</packagereq>
       <packagereq type="default">nuvola-icon-theme</packagereq>
-      <packagereq type="default">openoffice.org-kde</packagereq>
       <packagereq type="default">oxygen-cursor-themes</packagereq>
       <packagereq type="default">oxygen-icons</packagereq>
       <packagereq type="default">oxygen-icons-scalable</packagereq>
@@ -13395,7 +13394,6 @@
       <packagereq type="optional">openoffice.org-base</packagereq>
       <packagereq type="optional">openoffice.org-emailmerge</packagereq>
       <packagereq type="optional">openoffice.org-javafilter</packagereq>
-      <packagereq type="optional">openoffice.org-kde</packagereq>
       <packagereq type="optional">openoffice.org-ooolatex</packagereq>
       <packagereq type="optional">openoffice.org-pyuno</packagereq>
       <packagereq type="optional">openoffice.org-testtools</packagereq>
