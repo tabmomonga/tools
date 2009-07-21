@@ -16308,7 +16308,6 @@
    <description xml:lang="zh_TW">這個群組是系統上許多種工具的收集，例如用來連線到網路芳鄰（SAMBA）共享的用戶端，以及用來監視網路流量的工具等等。</description>
    <description xml:lang="zu">Leli qembu liyiqoqo lamathuluzi esistimu ambalwa, njengomthengi wokuxhuma ngokuhlanganyela kwi-SMB kanye namathuluzi okulindwe kuxhumano lomlekeleli.</description>
     <packagelist>
-      <packagereq type="default">BackupPC</packagereq>
       <packagereq type="default">NetworkManager-openconnect</packagereq>
       <packagereq type="default">NetworkManager-openvpn</packagereq>
       <packagereq type="default">NetworkManager-vpnc</packagereq>
@@ -16331,6 +16330,7 @@
       <packagereq type="default">yum-utils</packagereq>
       <packagereq type="default">zisofs-tools</packagereq>
       <packagereq type="default">zsh</packagereq>
+      <packagereq type="optional">BackupPC</packagereq>
       <packagereq type="optional">amanda-client</packagereq>
       <packagereq type="optional">arj</packagereq>
       <packagereq type="optional">arptables_jf</packagereq>
