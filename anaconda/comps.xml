@@ -1161,14 +1161,12 @@
       <packagereq type="optional">mgetty</packagereq>
       <packagereq type="optional">mkbootdisk</packagereq>
       <packagereq type="optional">mtools</packagereq>
-      <packagereq type="optional">ntfsprogs</packagereq>
       <packagereq type="optional">pax</packagereq>
       <packagereq type="optional">puppet</packagereq>
       <packagereq type="optional">puppet-server</packagereq>
       <packagereq type="optional">sendmail</packagereq>
       <packagereq type="optional">squashfs-tools</packagereq>
       <packagereq type="optional">star</packagereq>
-      <packagereq type="optional">tcsh</packagereq>
       <packagereq type="optional">wicd</packagereq>
       <packagereq type="optional">x86info</packagereq>
       <packagereq type="optional">xfsprogs</packagereq>
@@ -2811,7 +2809,6 @@
       <packagereq type="mandatory">bind</packagereq>
       <packagereq type="mandatory">dnssec-conf</packagereq>
       <packagereq type="default">bind-chroot</packagereq>
-      <packagereq type="optional">bind</packagereq>
       <packagereq type="optional">dnsperf</packagereq>
       <packagereq type="optional">ldns</packagereq>
       <packagereq type="optional">nsd</packagereq>
@@ -3348,7 +3345,6 @@
       <packagereq type="optional">gcc-objc</packagereq>
       <packagereq type="optional">ghc</packagereq>
       <packagereq type="optional">giggle</packagereq>
-      <packagereq type="optional">git</packagereq>
       <packagereq type="optional">gnu-smalltalk</packagereq>
       <packagereq type="optional">gphpedit</packagereq>
       <packagereq type="optional">gprolog</packagereq>
@@ -4123,7 +4119,6 @@
       <packagereq type="optional">geomview</packagereq>
       <packagereq type="optional">ginac</packagereq>
       <packagereq type="optional">gnome-chemistry-utils</packagereq>
-      <packagereq type="optional">gnuplot</packagereq>
       <packagereq type="optional">gts</packagereq>
       <packagereq type="optional">hdf</packagereq>
       <packagereq type="optional">hdf5</packagereq>
@@ -5899,7 +5894,6 @@
       <packagereq type="default">vte</packagereq>
       <packagereq type="default">xdg-user-dirs-gtk</packagereq>
       <packagereq type="default">zenity</packagereq>
-      <packagereq type="optional">alacarte</packagereq>
       <packagereq type="optional">beagle-doc</packagereq>
       <packagereq type="optional">byzanz</packagereq>
       <packagereq type="optional">dasher</packagereq>
@@ -6902,7 +6896,6 @@
       <packagereq type="optional">seamonkey-psm</packagereq>
       <packagereq type="optional">streamtuner</packagereq>
       <packagereq type="optional">swfdec-mozilla</packagereq>
-      <packagereq type="optional">transmission</packagereq>
       <packagereq type="optional">totem-mozplugin</packagereq>
       <packagereq type="optional">vlc-plugin</packagereq>
     </packagelist>
@@ -8162,7 +8155,6 @@
       <packagereq type="optional">Canna</packagereq>
       <packagereq type="optional">gcin</packagereq>
       <packagereq type="optional">gok</packagereq>
-      <packagereq type="optional">ibus-qt</packagereq>
       <packagereq type="optional">ibus-table-additional</packagereq>
       <packagereq type="optional">iok</packagereq>
       <packagereq type="optional">kinput2</packagereq>
@@ -8636,12 +8628,9 @@
       <packagereq type="optional">mfiler3</packagereq>
       <packagereq type="optional">migemo</packagereq>
       <packagereq type="optional">mona-fonts</packagereq>
-      <packagereq type="optional">nkf</packagereq>
       <packagereq type="optional">oniguruma</packagereq>
-      <packagereq type="optional">perl-NKF</packagereq>
       <packagereq type="optional">scim-canna</packagereq>
       <packagereq type="optional">skk-emacs</packagereq>
-      <packagereq type="optional">skk-jisyo</packagereq>
       <packagereq type="optional">stardict-dic-ja</packagereq>
       <packagereq type="optional">uim-canna</packagereq>
       <packagereq type="optional">wkf</packagereq>
@@ -15539,7 +15528,6 @@
       <packagereq type="optional">audacious</packagereq>
       <packagereq type="optional">aumix</packagereq>
       <packagereq type="optional">avidemux</packagereq>
-      <packagereq type="optional">bluez-alsa</packagereq>
       <packagereq type="optional">bmpx</packagereq>
       <packagereq type="optional">cdlabelgen</packagereq>
       <packagereq type="optional">cdrdao-gcdmaster</packagereq>
@@ -19109,7 +19097,6 @@
       <packagereq type="optional">xscreensaver-extras-gss</packagereq>
       <packagereq type="optional">xscreensaver-gl-extras</packagereq>
       <packagereq type="optional">xscreensaver-gl-extras-gss</packagereq>
-      <packagereq type="optional">xterm</packagereq>
     </packagelist>
   </group>        
   <group>
@@ -19264,10 +19251,8 @@
       <packagereq type="optional">Terminal</packagereq>
       <packagereq type="optional">orage</packagereq>
       <packagereq type="optional">ristretto</packagereq>
-      <packagereq type="optional">thunar-archive-plugin</packagereq>
       <packagereq type="optional">thunar-media-tags-plugin</packagereq>
       <packagereq type="optional">thunar-shares-plugin</packagereq>
-      <packagereq type="optional">xarchiver</packagereq>
       <packagereq type="optional">xfbib</packagereq>
       <packagereq type="optional">xfburn</packagereq>
       <packagereq type="optional">xfce4-battery-plugin</packagereq>
@@ -19282,7 +19267,6 @@
       <packagereq type="optional">xfce4-eyes-plugin</packagereq>
       <packagereq type="optional">xfce4-fsguard-plugin</packagereq>
       <packagereq type="optional">xfce4-genmon-plugin</packagereq>
-      <packagereq type="optional">xfce4-mailwatch-plugin</packagereq>
       <packagereq type="optional">xfce4-mount-plugin</packagereq>
       <packagereq type="optional">xfce4-mpc-plugin</packagereq>
       <packagereq type="optional">xfce4-netload-plugin</packagereq>
@@ -19307,7 +19291,6 @@
       <packagereq type="optional">xfce4-xkb-plugin</packagereq>
       <packagereq type="optional">xfce4-xmms-plugin</packagereq>
       <packagereq type="optional">xfmpc</packagereq>
-      <packagereq type="optional">xfwm4-themes</packagereq>
     </packagelist>
   </group>        
   <group>
