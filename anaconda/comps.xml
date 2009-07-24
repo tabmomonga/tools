@@ -5416,6 +5416,8 @@
       <packagereq type="optional">lohit-sindhi-fonts</packagereq>
       <packagereq type="optional">madan-fonts</packagereq>
       <packagereq type="optional">mathml-fonts</packagereq>
+      <packagereq type="optional">meguri-fonts</packagereq>
+      <packagereq type="optional">meguri-p-fonts</packagereq>
       <packagereq type="optional">mgopen-canonica-fonts</packagereq>
       <packagereq type="optional">mgopen-cosmetica-fonts</packagereq>
       <packagereq type="optional">mgopen-modata-fonts</packagereq>
@@ -8576,6 +8578,8 @@
       <packagereq type="default">kakasi-dict</packagereq>
       <packagereq type="default">lv</packagereq>
       <packagereq type="default">nkf</packagereq>
+      <packagereq type="default">meguri-fonts</packagereq>
+      <packagereq type="default">meguri-p-fonts</packagereq>
       <packagereq type="default">mplus</packagereq>
       <packagereq type="default">perl-NKF</packagereq>
       <packagereq type="default">prime</packagereq>
