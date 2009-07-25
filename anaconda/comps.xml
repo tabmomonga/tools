@@ -8580,6 +8580,7 @@
       <packagereq type="default">nkf</packagereq>
       <packagereq type="default">meguri-fonts</packagereq>
       <packagereq type="default">meguri-p-fonts</packagereq>
+      <packagereq type="default">monapo-fonts</packagereq>
       <packagereq type="default">mplus</packagereq>
       <packagereq type="default">perl-NKF</packagereq>
       <packagereq type="default">prime</packagereq>
