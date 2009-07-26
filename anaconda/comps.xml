@@ -5422,6 +5422,7 @@
       <packagereq type="optional">mgopen-cosmetica-fonts</packagereq>
       <packagereq type="optional">mgopen-modata-fonts</packagereq>
       <packagereq type="optional">mgopen-moderna-fonts</packagereq>
+      <packagereq type="optional">monapo-fonts</packagereq>
       <packagereq type="optional">myanmar3-unicode-fonts</packagereq>
       <packagereq type="optional">nafees-web-naskh-fonts</packagereq>
       <packagereq type="optional">oldstandard-sfd-fonts</packagereq>
