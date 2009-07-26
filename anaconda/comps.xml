@@ -9237,6 +9237,7 @@
       <packagereq type="mandatory">kdm</packagereq>
       <packagereq type="mandatory">xinetd</packagereq>
       <packagereq type="mandatory">xdg-user-dirs</packagereq>
+      <packagereq type="default">NetworkManager-gnome</packagereq>
       <packagereq type="default">PolicyKit-kde</packagereq>
       <packagereq type="default">amarok</packagereq>
       <packagereq type="default">arts-artsc</packagereq>
@@ -9305,7 +9306,6 @@
       <packagereq type="default">kmplayer</packagereq>
       <packagereq type="default">knemo</packagereq>
       <packagereq type="default">knetstats</packagereq>
-      <packagereq type="default">knetworkmanager</packagereq>
       <packagereq type="default">knetworkmanager4</packagereq>
       <packagereq type="default">koffice-filters</packagereq>
       <packagereq type="default">koffice-karbon</packagereq>
