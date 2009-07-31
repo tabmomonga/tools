@@ -94,4 +94,4 @@ URL_ALIAS ^http://dl\.sourceforge\.net http://jaist.dl.sourceforge.net
 
 # STORE rpm ファイルの保存先を指定する。
 #       TOPDIR 内の STORE ディレクトリに rpm ファイルが保存される。
-#STORE RPMS
+STORE RPMS
