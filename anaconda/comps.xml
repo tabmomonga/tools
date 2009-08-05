@@ -15561,8 +15561,8 @@
       <packagereq type="optional">kdetv</packagereq>
       <packagereq type="optional">kguitar</packagereq>
       <packagereq type="optional">kid3</packagereq>
-      <packagereq type="optional">kid3</packagereq>
       <packagereq type="optional">kino</packagereq>
+      <packagereq type="optional">kmediafactory</packagereq>
       <packagereq type="optional">kmplayer</packagereq>
       <packagereq type="optional">kover</packagereq>
       <packagereq type="optional">koverartist</packagereq>
