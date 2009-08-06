@@ -25,9 +25,9 @@ MIRROR ftp://dist.momonga-linux.org/pub/momonga/development
 
 # FTP_CMD ソース等をダウンロードする際に使用するコマンド (およびオプション)。
 #
-FTP_CMD lftpget -c
+FTP_CMD lftpget 
 #FTP_CMD ncftpget -A
-#FTP_CMD wget -c -o wget.log
+#FTP_CMD wget -o wget.log
 #FTP_CMD aria2c
 
 # DISPLAY ビルドする際に X サーバへのコネクションが必要なものに対して設
