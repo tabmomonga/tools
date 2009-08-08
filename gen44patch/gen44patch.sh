@@ -1,6 +1,7 @@
 #!/bin/bash
 
 BIN=`dirname $0`
+BIN=`readlink -f $BIN`
 BIN=${BIN:-.}
 
 if [ $# -eq 0 ]; then

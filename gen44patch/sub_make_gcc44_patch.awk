@@ -5,7 +5,7 @@ function abort(msg){
 }
 function append_include(file,header)
 {
-    system(BIN"/append_include.sh "file" "header" gcc43~")
+    system(BIN"/append_include.sh "file" "header" gcc44~")
 }
 function insert_line(file,lineno,text)
 {
@@ -37,11 +37,20 @@ $1~/^make.*:$/ && $2=="Leaving" && $3=="directory" {
     cur_dir = stack[stackptr]
 }
 
+function makesrcfile(cur,file)
+{
+    if ( file~/^\// ) {
+	return file
+    } else {
+	return sprintf("%s/%s", cur, file)
+    }
+}
+
 # ERROR: ??? was not declared in this scope
 # JOB:   add "#include <???>"
 $2=="error:" && ( $0~/was not declared in this scope$/ || $0~/has not been declared$/ || $0~/'.+' undeclared / ) {
     split($1,file,":")
-    srcfile=sprintf("%s/%s", cur_dir, file[1])
+    srcfile=makesrcfile(cur_dir, file[1])
 
     ##print srcfile, "***" , $0
 
@@ -62,7 +71,7 @@ $2=="error:" && ( $0~/was not declared in this scope$/ || $0~/has not been decla
 # JOB: #include <typeinfo>
 $2=="error:" && $0~/typeinfo> before using typeid$/ {
     split($1,file,":")
-    srcfile=sprintf("%s/%s", cur_dir, file[1])
+    srcfile=makesrcfile(cur_dir, file[1])
 
     append_include(srcfile,"typeinfo")
 }
@@ -71,7 +80,7 @@ $2=="error:" && $0~/typeinfo> before using typeid$/ {
 # JOB:   add "#include <memory>"
 $2=="error:" && $0~/ISO C\+\+ forbids declaration of 'auto_ptr' with no type$/ {
     split($1,file,":")
-    srcfile=sprintf("%s/%s", cur_dir, file[1])
+    srcfile=makesrcfile(cur_dir, file[1])
 
     append_include(srcfile,"memory")
 }
@@ -80,7 +89,7 @@ $2=="error:" && $0~/ISO C\+\+ forbids declaration of 'auto_ptr' with no type$/ {
 # JOB:   #undef "???"
 $2=="error:" && $0~/redefined$/ {
     split($1,file,":")
-    srcfile=sprintf("%s/%s", cur_dir, file[1])
+    srcfile=makesrcfile(cur_dir, file[1])
     lineno=file[2]
     label=substr($3,2,length($3)-2)
     insert_line(srcfile,lineno,"#undef "label)
@@ -90,7 +99,7 @@ $2=="error:" && $0~/redefined$/ {
 # JOB:   #include  <???>
 $2=="error:" && $0~/is not a member of 'std'$/ {
     split($1,file,":")
-    srcfile=sprintf("%s/%s", cur_dir, file[1])
+    srcfile=makesrcfile(cur_dir, file[1])
 
     funcname=substr($3,2,length($3)-2)
 
@@ -114,7 +123,7 @@ $2=="error:" && $0~/is not a member of 'std'$/ {
 # ERROR:  no matching function for call to 'find ...
 $2=="error:" && $0~/no matching function for call to/ {
     split($1,file,":")
-    srcfile=sprintf("%s/%s", cur_dir, file[1])
+    srcfile=makesrcfile(cur_dir, file[1])
 
     split($9,token,"(")
     funcname=substr(token[1],2,length(token[1])-1)

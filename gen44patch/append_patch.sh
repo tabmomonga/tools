@@ -57,7 +57,7 @@ BEGIN{
 	    if (0!=patch_macro_done){
 		abort("**BUG** file parse error")
 	    }	    
-	    print "%patch"pnum" -p1 -b .gcc43~\n"
+	    print "%patch"pnum" -p1 -b .gcc44~\n"
 	    patch_macro_done=1
 	}
 	

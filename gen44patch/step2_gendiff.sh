@@ -4,6 +4,7 @@
 #
 
 BIN=`dirname $0`
+BIN=`readlink -f $BIN`
 BIN=${BIN:-.}
 
 LANG=C 
@@ -13,7 +14,7 @@ cd BUILD || exit 1
 
 for dir in *; do
     [ -d $dir ] || continue
-    gendiff $dir .gcc43~  > $dir-gcc43.patch
+    gendiff $dir .gcc44~  > $dir-gcc44.patch
 done
 
 cd ..
@@ -21,7 +22,7 @@ cd ..
 echo 
 echo " genereated file(s) :"
 echo
-ls -la  BUILD/*gcc43.patch
+ls -la  BUILD/*gcc44.patch
 echo
 
 exit 
