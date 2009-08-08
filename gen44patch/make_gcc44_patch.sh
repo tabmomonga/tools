@@ -4,6 +4,7 @@
 #
 
 BIN=`dirname $0`
+BIN=`readlink -f $BIN`
 BIN=${BIN:-.}
 
 LANG=C 

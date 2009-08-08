@@ -4,6 +4,7 @@
 #
 
 BIN=`dirname $0`
+BIN=`readlink -f $BIN`
 BIN=${BIN:-.}
 
 function error 
@@ -30,7 +31,7 @@ cat $spec | grep -i "^patch[0-9]*[ \t]*:[ \t]*$patch" > /dev/null && error "alre
 lastpatch=`cat $spec | awk 'tolower($1)~/^patch[0-9]*:$/ {tmp=$1} END{print tmp}'`
 
 if [ -z "$lastpatch" ]; then
-	lastpatch="BuildRoot:"
+	lastpatch="buildroot:"
 fi
 
 cp $spec $spec.$$
@@ -63,7 +64,7 @@ BEGIN{
 	
 	print $0
 
-	if ($1==LASTPATCH) {
+	if (tolower($1)==LASTPATCH) {
 	    if (0!=patch_tag_done){
 		abort("**BUG** file parse error")
 	    }
