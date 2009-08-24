@@ -3,9 +3,10 @@ require 'getoptlong'
 
 $:.unshift(File.dirname($0))
 require 'environment'
+require 'pathname'
 load 'updatespecdb'
 
-if File.expand_path($PKGDIR) != File.expand_path(Dir.getwd)
+if Pathname.new($PKGDIR).realpath != Pathname.new(Dir.getwd).realpath
   puts "Run in pkgs/ dir."
   exit 1
 end
@@ -21,7 +22,7 @@ end # class Dir
 
 options = [
   ["-m", "--main",         GetoptLong::NO_ARGUMENT],
-  ["-z", "--zoo",          GetoptLong::NO_ARGUMENT],
+  ["-l", "--alter",        GetoptLong::NO_ARGUMENT],
   ["-n", "--nonfree",      GetoptLong::NO_ARGUMENT],
   ["-h", "--help",         GetoptLong::NO_ARGUMENT]
 ]
@@ -30,8 +31,8 @@ def show_usage()
   print <<END_OF_USAGE
 Usage: ../tools/download_all_source [options]
   -m, --main              main package only (default)
-  -z, --zoo               build Zoo package, too
-  -n, --nonfree           build Nonfree package, too
+  -l, --alter             download Alter package, too
+  -n, --nonfree           download Nonfree package, too
   -h  --help              show this message
 END_OF_USAGE
   exit
@@ -45,7 +46,7 @@ begin
     case on
     when "-m"
       $MAIN_ONLY = true
-    when "-z"
+    when "-l"
       $MAIN_ONLY = false
     when "-n"
       $NONFREE = true
