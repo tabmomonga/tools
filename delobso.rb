@@ -12,8 +12,8 @@ load '../tools/v2/updatespecdb'
 #specdb が OBSOLETES は処理してるので考える必要なし
 #$ はいかんでしょ。
 
-if Pathname.new(File.expand_path($PKGDIR)).realpath != Pathname.new(File.expand_path(Dir.getwd)).realpath
-  puts "Run in pkgs/ dir."
+if Pathname.new($PKGDIR).realpath != Pathname.new(Dir.getwd).realpath
+  puts "Run in pkgs/ dir. Check .OmoiKondara PKGDIR setting also."
   exit 1
 end
 
