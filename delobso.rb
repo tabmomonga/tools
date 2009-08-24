@@ -6,12 +6,13 @@ $:.unshift(File.dirname($0) + '/v2')
 require 'optparse'
 require 'environment'
 require 'getoptlong'
+require 'pathname'
 load '../tools/v2/updatespecdb'
 
 #specdb が OBSOLETES は処理してるので考える必要なし
 #$ はいかんでしょ。
 
-if File.expand_path($PKGDIR) != File.expand_path(Dir.getwd)
+if Pathname.new(File.expand_path($PKGDIR)).realpath != Pathname.new(File.expand_path(Dir.getwd)).realpath
   puts "Run in pkgs/ dir."
   exit 1
 end
