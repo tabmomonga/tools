@@ -23,6 +23,7 @@ ARGV.options {|o|
   o.on('-O', 'display Ohphan missing files, too') {|v| opt[:O] = true}
   o.on('-L', 'display Alter missing files, too') {|v| opt[:L] = true}
   o.on('-f', 'delete files without quitely') {|v| opt[:f] = true}
+  o.on('--ignore-sources', 'do not delete source files') {|v| opt[:is] = true}
   o.parse!
 }
 
@@ -93,9 +94,11 @@ Dir.glob("#{$TOPDIR}*").each do |top|
       $Packages[top].delete(File.basename(rpm))
     end
   end
-  Dir.glob("#{top}/SOURCES/*").each do |src|
-    if !$Sources[top] || !$Sources[top][File.basename(src)]
-      $Massatu << src
+  unless opt[:is] then
+    Dir.glob("#{top}/SOURCES/*").each do |src|
+      if !$Sources[top] || !$Sources[top][File.basename(src)]
+        $Massatu << src
+      end
     end
   end
   ($Packages[top]||[]).sort.each do |k,v|
