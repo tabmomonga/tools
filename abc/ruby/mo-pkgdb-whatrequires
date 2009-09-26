@@ -21,14 +21,12 @@ curr = ARGV
 curr.map!{|v| v.chomp("/") }
 
 curr.each do |cap|    
-  sql = "SELECT capability FROM capability_tbl WHERE capability GLOB '#{cap}' GROUP BY capability"
-  db.execute(sql) do |cap,*|
-    sql = "SELECT pkgfile FROM dependency_tbl INNER JOIN pkg_tbl ON id==owner WHERE capability == '#{cap}'"
-    db.execute(sql) do |pkgfile,*|
-      print "#{pkgfile}\n"
-    end
+  sql = "SELECT pkgfile FROM dependency_tbl INNER JOIN pkg_tbl ON owner=id WHERE capability GLOB '#{cap}'"
+  db.execute(sql) do |pkgfile,*|
+    printf "#{pkgfile}\n"
   end
 end
+
 
 # Local Variables:
 # mode: ruby

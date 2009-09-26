@@ -153,11 +153,11 @@ ENDOFSQL
         # delete old datas
         delete_cache(db, id)
 
-        if File.exist?("#{specname}/OBSOLETE") or
-            File.exist?("#{specname}/.SKIP") or
-            File.exist?("#{specname}/SKIP") then
-          next
-        end
+#        if File.exist?("#{specname}/OBSOLETE") or
+#            File.exist?("#{specname}/.SKIP") or
+#            File.exist?("#{specname}/SKIP") then
+#          next
+#        end
 
         # create new datas
         spec.buildrequires.each {|cap|
