@@ -7417,6 +7417,7 @@
       <packagereq type="default">hdparm</packagereq>
       <packagereq type="default">ipw2100-firmware</packagereq>
       <packagereq type="default">ipw2200-firmware</packagereq>
+      <packagereq type="default">iwl1000-firmware</packagereq>
       <packagereq type="default">iwl3945-firmware</packagereq>
       <packagereq type="default">iwl4965-firmware</packagereq>
       <packagereq type="default">iwl5000-firmware</packagereq>
