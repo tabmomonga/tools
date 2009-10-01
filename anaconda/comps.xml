@@ -6887,17 +6887,12 @@
       <packagereq type="optional">qbittorrent</packagereq>
       <packagereq type="optional">qwit</packagereq>
       <packagereq type="optional">seamonkey</packagereq>
-      <packagereq type="optional">seamonkey-chat</packagereq>
-      <packagereq type="optional">seamonkey-dom-inspector</packagereq>
       <packagereq type="optional">seamonkey-extensions-copyurlplus</packagereq>
       <packagereq type="optional">seamonkey-extensions-googlebar</packagereq>
       <packagereq type="optional">seamonkey-extensions-linky</packagereq>
       <packagereq type="optional">seamonkey-extensions-prefbar</packagereq>
       <packagereq type="optional">seamonkey-extensions-tabextensions</packagereq>
-      <packagereq type="optional">seamonkey-js-debugger</packagereq>
       <packagereq type="optional">seamonkey-language-pack-japanese</packagereq>
-      <packagereq type="optional">seamonkey-mail</packagereq>
-      <packagereq type="optional">seamonkey-psm</packagereq>
       <packagereq type="optional">streamtuner</packagereq>
       <packagereq type="optional">swfdec-mozilla</packagereq>
       <packagereq type="optional">totem-mozplugin</packagereq>
