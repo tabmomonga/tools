@@ -9667,6 +9667,7 @@
       <packagereq type="optional">gstreamer-devel</packagereq>
       <packagereq type="optional">hal-devel</packagereq>
       <packagereq type="optional">honoka-devel</packagereq>
+      <packagereq type="optional">html2ps</packagereq>
       <packagereq type="optional">id3lib-devel</packagereq>
       <packagereq type="optional">ImageMagick-devel</packagereq>
       <packagereq type="optional">imlib-devel</packagereq>
