@@ -9776,6 +9776,7 @@
       <packagereq type="optional">scim-devel</packagereq>
       <packagereq type="optional">scons</packagereq>
       <packagereq type="optional">scribus-devel</packagereq>
+      <packagereq type="optional">skim-devel</packagereq>
       <packagereq type="optional">sip</packagereq>
       <packagereq type="optional">sip-devel</packagereq>
       <packagereq type="optional">smb4k-devel</packagereq>
