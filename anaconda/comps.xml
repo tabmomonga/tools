@@ -9769,6 +9769,8 @@
       <packagereq type="optional">qscintilla-devel</packagereq>
       <packagereq type="optional">qyoto</packagereq>
       <packagereq type="optional">qyoto-devel</packagereq>
+      <packagereq type="optional">rb_libtorrent-devel</packagereq>
+      <packagereq type="optional">rb_libtorrent-devel-staticl</packagereq>
       <packagereq type="optional">sane-backends-devel</packagereq>
       <packagereq type="optional">scim-devel</packagereq>
       <packagereq type="optional">scons</packagereq>
