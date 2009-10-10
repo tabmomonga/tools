@@ -9688,6 +9688,7 @@
       <packagereq type="optional">kdepim-runtime-devel</packagereq>
       <packagereq type="optional">kdepimlibs-apidocs</packagereq>
       <packagereq type="optional">kdepimlibs-devel</packagereq>
+      <packagereq type="optional">kdeplasma-addons-devel</packagereq>
       <packagereq type="optional">kdesdk</packagereq>
       <packagereq type="optional">kdesdk-devel</packagereq>
       <packagereq type="optional">kdesvn</packagereq>
