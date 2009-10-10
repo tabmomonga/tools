@@ -9251,6 +9251,7 @@
       <packagereq type="default">kaffeine-plugin</packagereq>
       <packagereq type="default">katapult</packagereq>
       <packagereq type="default">kaudiocreator</packagereq>
+      <packagereq type="default">kbluetooth</packagereq>
       <packagereq type="default">kcoloredit</packagereq>
       <packagereq type="default">kcpuload</packagereq>
       <packagereq type="default">kdeaccessibility</packagereq>
