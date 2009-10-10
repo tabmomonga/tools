@@ -6885,6 +6885,7 @@
       <packagereq type="optional">mozplugger</packagereq>
       <packagereq type="optional">nspluginwrapper</packagereq>
       <packagereq type="optional">qbittorrent</packagereq>
+      <packagereq type="optional">qtwitter</packagereq>
       <packagereq type="optional">qwit</packagereq>
       <packagereq type="optional">seamonkey</packagereq>
       <packagereq type="optional">seamonkey-extensions-copyurlplus</packagereq>
@@ -9438,6 +9439,7 @@
       <packagereq type="optional">qtparted</packagereq>
       <packagereq type="optional">qtractor</packagereq>
       <packagereq type="optional">qtrans</packagereq>
+      <packagereq type="optional">qtwitter</packagereq>
       <packagereq type="optional">qwit</packagereq>
       <packagereq type="optional">scribus</packagereq>
       <packagereq type="optional">skim</packagereq>
@@ -9725,7 +9727,9 @@
       <packagereq type="optional">libidn-devel</packagereq>
       <packagereq type="optional">libifp-devel</packagereq>
       <packagereq type="optional">libkexif-devel</packagereq>
+      <packagereq type="optional">liblastfm-devel</packagereq>
       <packagereq type="optional">liblrdf-devel</packagereq>
+      <packagereq type="optional">liblqr-1-devel</packagereq>
       <packagereq type="optional">libmtp-devel</packagereq>
       <packagereq type="optional">libmusicbrainz-devel</packagereq>
       <packagereq type="optional">libnjb-devel</packagereq>
