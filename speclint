@@ -218,6 +218,7 @@ module Speclint
 
     def lint_filter(result)
       open(self.specfile, 'r') { |f|
+        # check %{_initrddir}
         changelog_in = false
         f.each { |l|
           next if /^#/ =~ l
@@ -228,7 +229,14 @@ module Speclint
             changelog_in = false
             next
           elsif not changelog_in and /%\{_initrddir\}/ =~ l then
-            result.append_error("Do not use %{_initrddir}.")
+            result.append_error("Do not use %{_initrddir}")
+          end
+        }
+        # check momorel
+        f.rewind
+        f.each { |l|
+          if /^%global\s+momorel/ =~ l then
+            result.append_error("momorel must be an integer") unless (/^%global\s+momorel\s+\d+\s$/ =~ l)
           end
         }
       }
