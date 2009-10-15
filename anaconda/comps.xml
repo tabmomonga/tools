@@ -7086,6 +7086,7 @@
       <packagereq type="optional">sane-frontends</packagereq>
       <packagereq type="optional">sodipodi</packagereq>
       <packagereq type="optional">uniconvertor</packagereq>
+      <packagereq type="optional">x3f-tools</packagereq>
       <packagereq type="optional">xaralx</packagereq>
       <packagereq type="optional">xfig</packagereq>
     </packagelist>
@@ -9457,6 +9458,7 @@
       <packagereq type="optional">xine-lib-smb</packagereq>
       <packagereq type="optional">webkam</packagereq>
       <packagereq type="optional">wicd</packagereq>
+      <packagereq type="optional">x3f-tools-kde</packagereq>
       <packagereq type="conditional" requires="ibus">ibus-qt</packagereq>
     </packagelist>
   </group>        
