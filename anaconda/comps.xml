@@ -9242,6 +9242,7 @@
       <packagereq type="default">arts-artsc</packagereq>
       <packagereq type="default">basket</packagereq>
       <packagereq type="default">compiz-kde</packagereq>
+      <packagereq type="default">devinfo</packagereq>
       <packagereq type="default">digikam</packagereq>
       <packagereq type="default">falf</packagereq>
       <packagereq type="default">fedora-gnome-theme</packagereq>
