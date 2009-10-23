@@ -9242,7 +9242,6 @@
       <packagereq type="default">arts-artsc</packagereq>
       <packagereq type="default">basket</packagereq>
       <packagereq type="default">compiz-kde</packagereq>
-      <packagereq type="default">devinfo</packagereq>
       <packagereq type="default">digikam</packagereq>
       <packagereq type="default">falf</packagereq>
       <packagereq type="default">fedora-gnome-theme</packagereq>
@@ -9379,6 +9378,7 @@
       <packagereq type="default">xscreensaver-gl-extras</packagereq>
       <packagereq type="default">yakuake</packagereq>
       <packagereq type="optional">audiokonverter</packagereq>
+      <packagereq type="optional">devinfo</packagereq>
       <packagereq type="optional">digikam-doc</packagereq>
       <packagereq type="optional">eureka</packagereq>
       <packagereq type="optional">festival</packagereq>
