@@ -7424,6 +7424,7 @@
       <packagereq type="default">iwl4965-firmware</packagereq>
       <packagereq type="default">iwl5000-firmware</packagereq>
       <packagereq type="default">iwl5150-firmware</packagereq>
+      <packagereq type="default">iwl6000-firmware</packagereq>
       <packagereq type="default">libertas-usb8388-firmware</packagereq>
       <packagereq type="default">ndiswrapper</packagereq>
       <packagereq type="default">printer-filters</packagereq>
