@@ -3,149 +3,127 @@
 $TOOLDIR = File.dirname($0)
 $:.unshift($TOOLDIR)
 
-require 'environment.rb'
+require 'environment'
 require 'rpm'
+require 'svn/client'
 
-# check which versioning system is available
-def check_versioning_system(pkg)
-  versioning_systems = []
-
-  # check for cvs
-  if File.directory? "#{pkg}/CVS" then
-    versioning_systems.push("cvs")
-  end
-
-  # check for svn
-  if File.directory? "#{pkg}/.svn" then
-    versioning_systems.push("svn")
-  end
-
-  versioning_systems
-end
+UNVERSIONED = 2
+DELETED = 6
+problem_found = false
 
 ## check arguments
 if ARGV.length == 0
-  puts "#{$0} pkgs...."
+  STDERR.puts("Error: please specify package names")
+  STDERR.puts("% #{$0} pkg1 pkg2 ...")
   exit 1
 end
 
 ## check whether $PKGDIR is symlink or not
-path =  File.expand_path($PKGDIR)
+path = File.expand_path($PKGDIR)
 if FileTest.symlink?(path)
   path = File.readlink(path)
 end
 
 ## this script must be executed in pkgs/ directory
 if path != File.expand_path(Dir.getwd)
-  puts "Run in pkgs/ dir."
+  STDERR.puts("Error: please run #{$0} in pkgs/ directory")
   exit 1
 end
-
-## check versioning system
-versioning_systems = check_versioning_system( ARGV[0] )
-if versioning_systems.size == 0 then
-  STDERR.puts "no versioning system meta-data found."
-  exit 1
-end
-
-problem_found=false
 
 ## lint specfile
-ARGV.each do |pkg|
+ARGV.each { |pkg|
   pkg = pkg.chop if pkg =~ /\/+$/
   system("#{$TOOLDIR}/speclint #{pkg}")
-  if $? != 0 
-    puts "!!! #{pkg}/#{pkg}.spec has some spec errors, skipping."
-    problem_found=true
+  if $? != 0
+    STDERR.puts("Error: #{pkg}/#{pkg}.spec has some lint errors")
+    problem_found = true
     next
   end
-end
-if problem_found then
-  exit 1
-end
+}
+exit 1 if problem_found
 
 ## find files to add
-ARGV.each do |pkg|
+ARGV.each { |pkg|
   pkg = pkg.chop if pkg =~ /\/+$/
-  RPM.readrc("/usr/lib/rpm/rpmrc")
+  RPM.readrc('/usr/lib/rpm/rpmrc')
   RPM.verbosity = RPM::LOG_ERR
+
   spec = RPM::Spec.open("#{pkg}/#{pkg}.spec")
-  if spec.nil? then
-    STDERR.puts "\n#{pkg}/#{pkg}.spec: error occurred."
-    problem_found=true
+  if spec.nil?
+    STDERR.puts
+    STDERR.puts("Error: #{pkg}/#{pkg}.spec has some parse errors")
+    problem_found = true
     next
   end
-  sources = spec.sources.collect{|s| File.basename( s.to_s ) unless s.no?}.compact
+
+  sources = spec.sources.collect{ |s| File.basename( s.to_s ) unless s.no? }.compact
   sources << "#{pkg}.spec"
-  versioning_systems.each do |command|
-    entries = []
-    case command
-    when "cvs"
-      entries = `cat ./#{pkg}/CVS/Entries | grep -v '^D' | sed -e 's,^/,,' -e 's,/.*,,' | grep -v '^NOT\.' | grep -v '^REMOVEME' `.split(/\n/)
-    when "svn"
-      entries = `(cd ./#{pkg}; svn ls 2>/dev/null )`.split(/\n/) + `(cd ./#{pkg}; svn status |grep -v '^\?'| sed -e 's, + ,   ,' | tr -s ' ' | cut -d' ' -f2 )`.split(/\n/)
-          # ' + ' appears if new file was added by merging
-    end
-    entries.delete('sources') # neglect sources file
-    missing = sources - entries
-    if missing.size > 0 then
-      STDERR.puts 'Please add following file(s)!'
-      STDERR.print "#{command} add"
-      missing.each{|i| STDERR.print " #{pkg}/#{i}"}
-      STDERR.puts
-      problem_found = true
-    #  exit 1
-    end
+
+  irregular = []
+  svnctx = Svn::Client::Context.new
+  svnctx.st("#{Dir.getwd}/#{pkg}", nil, true, true) { |path, status|
+    irregular << File.basename(path) if status.text_status == UNVERSIONED
+    irregular << File.basename(path) if status.text_status == DELETED
+  }
+
+  missing = sources & irregular
+  if missing.size > 0
+    STDERR.puts('Error: unversioned/missing/deleted files found')
+    STDERR.puts('Please add following files')
+    STDERR.print("% svn add")
+    missing.each{ |i| STDERR.print(" #{pkg}/#{i}") }
+    STDERR.puts
+    problem_found = true
   end
 
   # check sources file (sorry, confusing variable names)
-  nosrcs = spec.sources.collect { |s| File.basename(s.to_s) if s.no? }.compact  
-  unless nosrcs.empty? then
-    sources_file_vced = # means sources file version controlled
-      !(`(cd ./#{pkg}; svn ls | grep sources 2>/dev/null )` + `(cd ./#{pkg}; svn status sources | grep -v '^\?' | sed -e 's, + ,   ,' | tr -s ' ' | cut -d' ' -f2 )`).empty?
-    if File.exist?("#{pkg}/sources") then
-      unless sources_file_vced then
-        STDERR.puts "Please add #{pkg}/sources file!"
-        STDERR.puts "svn add #{pkg}/sources"
+  nosrcs = spec.sources.collect { |s| File.basename(s.to_s) if s.no? }.compact
+  unless nosrcs.empty?
+    if File.exist?("#{pkg}/sources")
+      if irregular.include?('sources')
+        STDERR.puts("Error: #{pkg}/sources is not under version control")
+        STDERR.puts("Please add #{pkg}/sources file")
+        STDERR.puts("% svn add #{pkg}/sources")
         problem_found = true
       end
       s = Array.new
       open("#{pkg}/sources") { |f|
         while l = f.gets
-          if /^[0-9abcdef]+\s+([^\s]+)/ =~ l then
+          if /^[0-9abcdef]+\s+([^\s]+)/ =~ l
             s << File.basename($1)
           end
         end
       }
       missing = nosrcs.collect { |n| n unless s.include?(n) }.compact
-      unless missing.empty? then
-        STDERR.puts 'Please add sha256sum(s) of following file(s)!'
+      unless missing.empty?
+        STDERR.puts("Error: #{pkg}/sources has no proper sha256sum")
+        STDERR.puts('Please add sha256sum of following files')
         missing.each { |m| STDERR.puts "#{pkg}/#{m}" }
         problem_found = true
       end
     else
-      if sources_file_vced then
-        STDERR.puts "#{pkg}/sources file is deleted or missing!"
-        STDERR.puts "svn revert #{pkg}/sources"
+      if irregular.include?('sources')
+        STDERR.puts("Error: #{pkg}/sources does not exits")
+        STDERR.puts("Please create and add #{pkg}/sources file")
+        STDERR.puts("% svn add #{pkg}/sources")
       else
-        STDERR.puts "Please create and add #{pkg}/sources file!"
-        STDERR.puts "svn add #{pkg}/sources"
+        STDERR.puts("Error: #{pkg}/sources does not exits, but it's under version control")
+        STDERR.puts("#{pkg}/sources file is deleted or missing")
+        STDERR.puts("% svn revert #{pkg}/sources")
       end
       problem_found = true
     end
   end
-end
-if problem_found then
-  exit 1
-end
+}
+exit 1 if problem_found
 
 ## collect information of specs
-pkgs=[]
-ARGV.each do |pkg|
+pkgs = []
+ARGV.each { |pkg|
   pkg = pkg.chop if pkg =~ /\/+$/
   logs = []
   context = :out_of_changelog
-  open(File.join(pkg, "#{pkg}.spec")).each do |l|
+  open(File.join(pkg, "#{pkg}.spec")).each { |l|
     case context
     when :out_of_changelog
       context = :changelog_begin if /^%changelog/i =~ l
@@ -161,39 +139,23 @@ ARGV.each do |pkg|
 	logs << l
       end
     end
-  end
-  pkgs.push [pkg,logs]
-end
+  }
+  pkgs << [pkg, logs]
+}
 
-##
+## commit and update
 ## pkgs[i][0]: name of package, pkgs[i][1]: array of each log line
-versioning_systems.each do |command|
-  case command
-  when "cvs"
-    pkgs.each do |pkg|
-      pid = Process.fork do
-        exec "/usr/bin/cvs", 'commit', '-m', pkg[1].join, pkg[0]
-      end
-      Process.waitpid2(pid)
-      system "/usr/bin/cvs up #{pkg[0]} "
-      puts pkg[1].join
-    end
-  when "svn"
-    svnlog=""
-    pkgnames=[]
-    pkgs.each do |pkg|
-      pkgnames << pkg[0]
-      svnlog += "== #{pkg[0]} ==\n#{pkg[1].join}\n"
-    end
-
-    pid = Process.fork do
-      exec "/usr/bin/svn", 'commit', '-m', svnlog, *pkgnames
-    end
-    Process.waitpid2(pid)
-    pkgnames.each do |pkg|
-      system "(cd ./#{pkg}; /usr/bin/svn up )"
-    end
-    puts svnlog
-  end
-end
-
+svnlog = ''
+pkgnames = []
+pkgs.each { |pkg|
+  pkgnames << pkg[0]
+  svnlog += "== #{pkg[0]} ==\n#{pkg[1].join}\n"
+}
+pid = Process.fork {
+  exec "/usr/bin/svn", 'commit', '-m', svnlog, *pkgnames
+}
+Process.waitpid2(pid)
+pkgnames.each { |pkg|
+  system("(cd ./#{pkg}; /usr/bin/svn up)")
+}
+puts svnlog
