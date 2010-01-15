@@ -61,7 +61,7 @@ ARGV.each { |pkg|
 
   irregular = []
   svnctx = Svn::Client::Context.new
-  svnctx.st("#{Dir.getwd}/#{pkg}", nil, true, true) { |path, status|
+  svnctx.st("#{Dir.getwd}/#{pkg}", nil, true, true, false) { |path, status|
     irregular << File.basename(path) if status.text_status == UNVERSIONED
     irregular << File.basename(path) if status.text_status == DELETED
   }
