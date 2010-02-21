@@ -1,4 +1,5 @@
 #!/usr/bin/ruby
+# -*- coding: euc-jp -*-
 # by Hiromasa YOSHIMOTO <y@momonga-linux.org>
 
 require 'optparse'

@@ -1,3 +1,4 @@
+# -*- coding: euc-jp -*-
 # lib/install.rb
 #
 # by Hiromasa YOSHIMOTO <y@momonga-linux.org>
@@ -6,12 +7,12 @@
 
 def rpmq_buildtime(pkgfile)
   name = File.basename(pkgfile).split('-')[0..-3].join('-')
-  ts=`rpm -q --qf '%{BUILDTIME}' #{name}`.to_i
+  ts=`LANG=C \\rpm -q --qf '%{BUILDTIME}' #{name}`.to_i
   return ts
 end
 
 def file_buildtime(filename)
-  ts=`rpm -q --qf '%{BUILDTIME}' #{filename}`.to_i
+  ts=`LANG=C \\rpm -q --qf '%{BUILDTIME}' #{filename}`.to_i
   return ts
 end
 
@@ -86,7 +87,7 @@ def select_required_packages(db, requested, opts = nil)
 
     missing = Set.new
     
-    cmd="rpm --test -vU #{installpkg.to_a.join(' ')} 2>&1"
+    cmd="LANG=C \\rpm --test -vU #{installpkg.to_a.join(' ')} 2>&1"
     log=`#{cmd}`
     log.each_line do |line|
       line.chomp!
