@@ -106,54 +106,107 @@ ENDOFSQL
 
     @db.transaction { |db|
       list.each {|pkgfile|
-	STDERR.puts "checking #{pkgfile}\n" if (opts[:verbose]>1)
-        timestamp = File.mtime(pkgfile).to_i
-        
-        if !opts[:force_update] then
-          sql = "select count(id) from pkg_tbl where pkgfile == '#{pkgfile}' and lastupdate>=#{timestamp}"
-          if  @db.get_first_value(sql) == "1"  then
-            STDERR.puts "skipping #{pkgfile}" if (opts[:verbose]>1) 
-            next
-          end
-        end
-        
-        STDERR.puts "updating entry for #{pkgfile}" if (opts[:verbose]>-1) 
-        
-        # create spec entry
-        db.execute("insert or ignore into pkg_tbl (pkgfile) values('#{pkgfile}')")
-        id = db.get_first_value("select id from pkg_tbl where pkgfile == '#{pkgfile}'")
-        
-        # delete old datas
-        delete_cached(db, id)
-
-        # insert capability(=provides)
-        pkg = RPM::Package.open(pkgfile)
-        pkg.provides.each {|prov|
-          name, op, ver = prov.conv
-          db.execute("insert into capability_tbl (owner, capability, comparison, version) values (#{id}, #{name}, #{op}, #{ver})")
-        }
-
-        # insert dependency(=requires)
-        pkg.requires.each {|req|
-          name, op, ver = req.conv
-          db.execute("insert into dependency_tbl (owner, capability, comparison, version) values (#{id}, #{name}, #{op}, #{ver})")
-        }
-
-        pkg.conflicts.each {|conflict|
-          name, op, ver = conflict.conv
-          db.execute("insert into conflict_tbl (owner, capability, comparison, version) values (#{id}, #{name}, #{op}, #{ver})")
-        }
-
-        pkg.obsoletes.each {|obso|
-          name, op, ver = obso.conv
-          db.execute("insert into obsolete_tbl (owner, capability, comparison, version) values (#{id}, #{name}, #{op}, #{ver})")
-        }
-      
-
-        db.execute("UPDATE pkg_tbl SET lastupdate = #{timestamp}, buildtime = #{pkg[RPM::TAG_BUILDTIME]}, pkgname = '#{pkg[RPM::TAG_NAME]}' WHERE id==#{id}")
-        pkg = nil
+        update_one(db, pkgfile, opts)
       }
     }
+  end
+
+  private
+  def update_one(db, pkgfile, opts) 
+    STDERR.puts "checking #{pkgfile}\n" if (opts[:verbose]>1)
+    timestamp = File.mtime(pkgfile).to_i
+    
+    if !opts[:force_update] then
+      sql = "select count(id) from pkg_tbl where pkgfile == '#{pkgfile}' and lastupdate>=#{timestamp}"
+      if  @db.get_first_value(sql) == "1"  then
+        STDERR.puts "skipping #{pkgfile}" if (opts[:verbose]>1) 
+        return
+      end
+    end
+        
+    STDERR.puts "updating entry for #{pkgfile}" if (opts[:verbose]>-1) 
+    
+    # create spec entry
+    db.execute("insert or ignore into pkg_tbl (pkgfile) values('#{pkgfile}')")
+    id = db.get_first_value("select id from pkg_tbl where pkgfile == '#{pkgfile}'")
+    
+    # delete old datas
+    delete_cached(db, id)
+    
+    # insert capability(=provides)
+    pkg = RPM::Package.open(pkgfile)
+    pkg.provides.each {|prov|
+      name, op, ver = prov.conv
+      db.execute("insert into capability_tbl (owner, capability, comparison, version) values (#{id}, #{name}, #{op}, #{ver})")
+    }
+    
+    # insert dependency(=requires)
+    pkg.requires.each {|req|
+      name, op, ver = req.conv
+      db.execute("insert into dependency_tbl (owner, capability, comparison, version) values (#{id}, #{name}, #{op}, #{ver})")
+    }
+    
+    pkg.conflicts.each {|conflict|
+      name, op, ver = conflict.conv
+      db.execute("insert into conflict_tbl (owner, capability, comparison, version) values (#{id}, #{name}, #{op}, #{ver})")
+    }
+    
+    pkg.obsoletes.each {|obso|
+      name, op, ver = obso.conv
+      db.execute("insert into obsolete_tbl (owner, capability, comparison, version) values (#{id}, #{name}, #{op}, #{ver})")
+    }
+    
+    
+    db.execute("UPDATE pkg_tbl SET lastupdate = #{timestamp}, buildtime = #{pkg[RPM::TAG_BUILDTIME]}, pkgname = '#{pkg[RPM::TAG_NAME]}' WHERE id==#{id}")
+    pkg = nil
+    STDERR.puts "checking #{pkgfile}\n" if (opts[:verbose]>1)
+    timestamp = File.mtime(pkgfile).to_i
+    
+    if !opts[:force_update] then
+      sql = "select count(id) from pkg_tbl where pkgfile == '#{pkgfile}' and lastupdate>=#{timestamp}"
+      if  @db.get_first_value(sql) == "1"  then
+        STDERR.puts "skipping #{pkgfile}" if (opts[:verbose]>1) 
+        return
+      end
+    end
+    
+    STDERR.puts "updating entry for #{pkgfile}" if (opts[:verbose]>-1) 
+    
+    # create spec entry
+    db.execute("insert or ignore into pkg_tbl (pkgfile) values('#{pkgfile}')")
+    id = db.get_first_value("select id from pkg_tbl where pkgfile == '#{pkgfile}'")
+    
+    # delete old datas
+    delete_cached(db, id)
+    
+    # insert capability(=provides)
+    pkg = RPM::Package.open(pkgfile)
+    pkg.provides.each {|prov|
+      name, op, ver = prov.conv
+      db.execute("insert into capability_tbl (owner, capability, comparison, version) values (#{id}, #{name}, #{op}, #{ver})")
+    }
+    
+    # insert dependency(=requires)
+    pkg.requires.each {|req|
+      name, op, ver = req.conv
+      db.execute("insert into dependency_tbl (owner, capability, comparison, version) values (#{id}, #{name}, #{op}, #{ver})")
+    }
+    
+    pkg.conflicts.each {|conflict|
+      name, op, ver = conflict.conv
+      db.execute("insert into conflict_tbl (owner, capability, comparison, version) values (#{id}, #{name}, #{op}, #{ver})")
+    }
+    
+    pkg.obsoletes.each {|obso|
+      name, op, ver = obso.conv
+      db.execute("insert into obsolete_tbl (owner, capability, comparison, version) values (#{id}, #{name}, #{op}, #{ver})")
+    }
+    
+    
+    db.execute("UPDATE pkg_tbl SET lastupdate = #{timestamp}, buildtime = #{pkg[RPM::TAG_BUILDTIME]}, pkgname = '#{pkg[RPM::TAG_NAME]}' WHERE id==#{id}")
+    pkg = nil
+  rescue
+    STDERR.puts "#{pkgfile} is bad rpm package, skip" if (opts[:verbose]>-1)
   end
 
   private  
