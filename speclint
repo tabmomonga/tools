@@ -229,7 +229,7 @@ module Speclint
             changelog_in = false
             next
           elsif not changelog_in and /%\{_initrddir\}/ =~ l then
-            result.append_error("Do not use %{_initrddir}")
+            result.append_error("Do not use %{_initrddir}, use %{_initscriptdir}")
           end
         }
         # check momorel
