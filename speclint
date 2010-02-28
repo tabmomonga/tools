@@ -218,9 +218,11 @@ module Speclint
 
     def lint_filter(result)
       open(self.specfile, 'r') { |f|
-        # check %{_initrddir}
+        # check %{_initrddir}, buildprereq and prereq
         changelog_in = false
+        i = 0
         f.each { |l|
+          i += 1
           next if /^#/ =~ l
           if /^%changelog/ =~ l then
             changelog_in = true
@@ -229,7 +231,11 @@ module Speclint
             changelog_in = false
             next
           elsif not changelog_in and /%\{_initrddir\}/ =~ l then
-            result.append_error("Do not use %{_initrddir}, use %{_initscriptdir}")
+            result.append_error("Do not use %{_initrddir}: line number #{i}")
+          elsif not changelog_in and (/^BuildPreReq/i =~ l) then
+            result.append_error("Do not use BuildPreReq: line number #{i}")
+          elsif not changelog_in and (/^PreReq/i =~ l) then
+            result.append_error("Do not use PreReq: line number #{i}")
           end
         }
         # check momorel
