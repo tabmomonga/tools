@@ -79,7 +79,7 @@ ARGV.each { |pkg|
   # check sources file (sorry, confusing variable names)
   nosrcs = spec.sources.collect { |s| File.basename(s.to_s) if s.no? }.compact
   unless nosrcs.empty?
-    if File.exist?("#{pkg}/sources")
+    if FileTest.exist?("#{pkg}/sources")
       if irregular.include?('sources')
         STDERR.puts("Error: #{pkg}/sources is not under version control")
         STDERR.puts("Please add #{pkg}/sources file")
@@ -112,6 +112,19 @@ ARGV.each { |pkg|
         STDERR.puts("% svn revert #{pkg}/sources")
       end
       problem_found = true
+    end
+  end
+
+  # add props
+  unless problem_found
+    unless FileTest.directory?("#{pkg}/.svn")
+      STDERR.puts("Error: #{pkg} is not under version control")
+      STDERR.puts("Please add #{pkg} directory")
+      STDERR.puts("% svn add [-N] #{pkg}")
+      problem_found = true
+    end
+    unless FileTest.exist?("#{pkg}/.svn/dir-prop-base")
+      system("svn propset svn:ignore -F ../tools/addprops.ignore #{pkg}")
     end
   end
 }
