@@ -1,4 +1,4 @@
-#!/usr/bin/ruby
+#!/usr/bin/ruby -rubygems -rubygems
 #
 # by Hiromasa YOSHIMOTO <y@momonga-linux.org>
 
