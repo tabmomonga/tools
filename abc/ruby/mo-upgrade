@@ -12,19 +12,17 @@ $:.unshift(File.dirname($0))
 require 'lib/config.rb'
 require 'lib/install.rb'
 require 'lib/pkgdb.rb'
+require 'lib/upgrade.rb'
 
+OPTS[:strict]=false
 OPTS[:verbose]+=1
 OPTS[:max_retry]=64
 opt = OptionParser.new
+opt.on('-S', '--strict', 'strict mode') {|v| OPTS[:strict]=true }
+opt.on(      '--permissive', 'permissive mode (default)') {|v| OPTS[:strict]=false }
 opt.on('-q', '--quite', 'suppress verbose msg.') {|v| OPTS[:verbose]=-1 }
 opt.on('-v', '--verbose', 'verbose msg.') {|v| OPTS[:verbose]+=1 }
 opt.parse!(ARGV)
-
-
-#
-# 更新しないpackageの配列
-# !!FIXME!!  設定ファイルを別途用意する
-holds = [ "kernel", "lame", "lame-devel", "usolame-devel", "usolame" ]
 
 d = PkgDB.new
 d.open(OPTS[:pkgdb_filename], OPTS)
@@ -38,79 +36,11 @@ installed = []
   installed.push([column[0],v,column[3].to_i])
 end
 
-
-STDERR.puts "Searching updated packages"  if OPTS[:verbose]>0
-queue = Set.new
-installed.each do |name,version,buildtime|
-
-  # 1) 特定のパッケージは 更新しない
-  next if holds.include?(name)
-
-  found = false
-
-  # 2) 同名かつbuildtimeの新しいpackageがあれば、更新
-  sql = "SELECT pkgfile,buildtime FROM pkg_tbl WHERE pkgname=='#{name}'"
-  d.db.execute(sql) do |pkgfile,ts|
-    if ts.to_i != buildtime then
-      STDERR.puts "#{name} is updated by #{pkgfile}" if OPTS[:verbose]>1
-      queue.add(pkgfile)
-    end
-    found = true
-  end
-  next if found
-
-  # 3) "#{name}"をprovideしているpackageがあれば、代替
-  sql = "SELECT pkgfile,comparison,version,buildtime FROM capability_tbl INNER JOIN pkg_tbl ON owner==id WHERE capability=='#{name}' AND pkgname!='#{name}'"
-  d.db.execute(sql) do |pkgfile,comparison,version1,buildtime1|
-    next if version1 && compare_version(version1, "<", version)
-    STDERR.puts "#{name} is updated by #{pkgfile}" if OPTS[:verbose]>1
-    queue.add(pkgfile)
-    found = true
-  end
-  next if found
-
-  # 4) "#{name}"をobsoleteしているpackageがあれば、代替
-  sql = "SELECT pkgfile,comparison,version,buildtime FROM obsolete_tbl INNER JOIN pkg_tbl ON owner=id WHERE capability=='#{name}'"
-  d.db.execute(sql) do |pkgfile,comparison,version1,buildtime1|
-    next if !compare_version(version, comparison, version1)
-    if buildtime.to_i != buildtime1 then
-      STDERR.puts "#{name} is obsoleted by #{pkgfile}" if OPTS[:verbose]>1
-      queue.add(pkgfile)
-      found = true
-    end
-  end
-  next if found
-
-  # 該当パッケージ無し
-  STDERR.puts "Warning: No package found for #{name}" if OPTS[:verbose]>1
+if true == OPTS[:strict] then
+  upgrade_strict(installed, d, OPTS)
+else
+  upgrade_permissive(installed, d, OPTS)
 end
-
-if queue.size == 0 then
-  STDERR.puts "No updated found."
-  exit(0)
-end
-
-if OPTS[:verbose]>1 then
-  queue.each do |file|
-    STDERR.puts " #{file}" 
-  end
-end
-STDERR.puts "#{queue.size} updated packages found"  if OPTS[:verbose]>0
-
-STDERR.puts "Resolving dependencies" if OPTS[:verbose]>0
-
-pkgs, msg = select_required_packages(d.db, queue.to_a, OPTS)
-
-if msg then
-  STDERR.puts "#{msg}, abort"
-  exit(1)
-end
-
-STDERR.puts "Installing #{pkgs.size} packages" if OPTS[:verbose]>0
-
-cmd="rpm -vU --force #{pkgs.to_a.join(' ')}"
-system(cmd)
-abort("failed to #{cmd}") unless $?.to_i == 0
 
 exit(0)
 
