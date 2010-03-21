@@ -3,8 +3,8 @@
 # by Hiromasa YOSHIMOTO <y@momonga-linux.org>
 
 require 'rpm'
+begin; require 'rubygems'; rescue LoadError; end 
 require 'sqlite3'
-
 
 module RPM
   class Dependency

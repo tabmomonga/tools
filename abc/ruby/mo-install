@@ -1,8 +1,7 @@
-#!/usr/bin/ruby -rubygems
+#!/usr/bin/ruby
 # by Hiromasa YOSHIMOTO <y@momonga-linux.org>
 
 require 'optparse'
-require 'sqlite3'
 require 'set'
 
 OPTS = {}
