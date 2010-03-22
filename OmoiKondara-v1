@@ -5,6 +5,20 @@ $:.unshift(File.dirname($0))
 require 'environment'
 require 'getoptlong'
 require 'timeout'
+
+found_rpmvercmp = false
+"#{ENV['PATH']}:../tools".split(/:/).each do |path|
+  path = File.expand_path(path)
+  if found_rpmvercmp == false && FileTest.exist?("#{path}/rpmvercmp")
+    found_rpmvercmp = true
+  end
+end
+if found_rpmvercmp == false
+  $stderr.puts "FATAL: rpmvercmp not found."
+  $stderr.puts "F.Y.I: please execute make command in directory 'tools'"
+  exit 1
+end
+
 begin
   require 'rpmmodule'
   $CANNOTSTRICT = false

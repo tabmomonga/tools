@@ -165,22 +165,13 @@ else
   $stderr.puts %Q(WARNING: unsupported architecture #{$ARCH})
 end
 
-found_rpmvercmp = false
 found_ftp_cmd = false
 ftp_cmd_name = $FTP_CMD.split[0]
 "#{ENV['PATH']}:../tools".split(/:/).each do |path|
   path = File.expand_path(path)
-  if found_rpmvercmp == false && FileTest.exist?("#{path}/rpmvercmp")
-    found_rpmvercmp = true
-  end
   if found_ftp_cmd == false && FileTest.exist?("#{path}/#{ftp_cmd_name}")
     found_ftp_cmd = true
   end
-end
-if found_rpmvercmp == false
-  $stderr.puts "FATAL: rpmvercmp not found."
-  $stderr.puts "F.Y.I: please execute make command in directory 'tools'"
-  exit 1
 end
 if found_ftp_cmd == false
   $stderr.puts "FATAL: #{ftp_cmd_name} not found."
