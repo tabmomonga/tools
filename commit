@@ -8,6 +8,8 @@ require 'rpm'
 require 'svn/client'
 
 UNVERSIONED = 2
+NORMAL = 3
+ADDED = 4
 DELETED = 6
 problem_found = false
 
@@ -64,6 +66,10 @@ ARGV.each { |pkg|
   svnctx.st("#{Dir.getwd}/#{pkg}", nil, true, true, false) { |path, status|
     irregular << File.basename(path) if status.text_status == UNVERSIONED
     irregular << File.basename(path) if status.text_status == DELETED
+    if File.basename(path) == '.specdb' && 
+        (status.text_status == ADDED || status.text_status == NORMAL)
+      irregular << File.basename(path)
+    end
   }
 
   missing = sources & irregular
@@ -112,6 +118,11 @@ ARGV.each { |pkg|
         STDERR.puts("% svn revert #{pkg}/sources")
       end
       problem_found = true
+    end
+    if irregular.include?('.specdb')
+      STDERR.puts("Error: #{pkg}/.specdb is under version control")
+      STDERR.puts("Please remove #{pkg}/.specdb")
+      STDERR.puts("% svn rm --force #{pkg}/.specdb")
     end
   end
 
