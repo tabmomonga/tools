@@ -21,6 +21,9 @@ find -name "*.c" -o -name "*.h" -o -name "*.cpp" -o -name "*.cxx" | while read f
 	-e 's,GTK_WIDGET_REALIZED,gtk_widget_get_realized,g' \
 	-e 's,GTK_WIDGET_IS_SENSITIVE,gtk_widget_get_sensitive,g' \
 	-e 's,GTK_WIDGET_DRAWABLE,gtk_widget_is_drawable,g' \
+	-e 's,GTK_WIDGET_SENSITIVE,gtk_widget_get_sensitive,g' \
+	-e 's,GTK_WIDGET_MAPPED,gtk_widget_get_mapped,g' \
+	-e 's,GTK_WIDGET_NO_WINDOW,gtk_widget_get_has_window,g' \
     $f
 
     diff $f $f.gtk220~ > /dev/null
