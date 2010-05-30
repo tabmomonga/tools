@@ -18,5 +18,5 @@ BRANCH=trunk
 
 # misc
 VERSION=0.3
-REPORT_URL=https://www.momonga-linux.org/~y/report0/upload.php
+REPORT_URL=http://www.momonga-linux.org/~y/report0/upload.php
 REPORT_LOG=report.log
