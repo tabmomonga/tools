@@ -8761,6 +8761,7 @@
       <packagereq type="optional">scim-hangul</packagereq>
       <packagereq type="optional">scim-input-pad</packagereq>
       <packagereq type="optional">scim-m17n</packagereq>
+      <packagereq type="optional">scim-mozc</packagereq>
       <packagereq type="optional">scim-prime</packagereq>
       <packagereq type="optional">scim-python-chinese</packagereq>
       <packagereq type="optional">scim-python-english</packagereq>
