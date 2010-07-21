@@ -6454,6 +6454,7 @@
       <packagereq type="default">pulseaudio-module-x11</packagereq>
       <packagereq type="default">scim-bridge</packagereq>
       <packagereq type="default">shared-mime-info</packagereq>
+      <packagereq type="default">udisks</packagereq>
       <packagereq type="default">vino</packagereq>
       <packagereq type="default">vte</packagereq>
       <packagereq type="default">xdg-user-dirs-gtk</packagereq>
