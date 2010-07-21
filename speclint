@@ -76,6 +76,7 @@ module Speclint
        GPLv3\+  GPLv3  GPLv2\+  GPLv2  GPL\+ GPL \
       AGPLv3\+ AGPLv3 AGPLv2\+ AGPLv2 AGPL\+ AGPL \
       LGPLv3\+ LGPLv3 LGPLv2\+ LGPLv2 LGPL\+ LGPL \
+      ASL\ 2.0 \
       LPPL CPL EPL GFDL \
       Modified\ BSD BSD MIT/X MIT MPLv1\.1 MPL \
       Creative\ Commons Public\ Domain \
