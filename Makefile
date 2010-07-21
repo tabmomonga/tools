@@ -7,6 +7,9 @@ endif
 ifeq ($(RPM_VER), 4.7)
 LIBS = -lrpm -lpopt -lrpmio
 endif
+ifeq ($(RPM_VER), 4.8)
+LIBS = -lrpm -lpopt -lrpmio
+endif
 ifndef LIBS
 LIBS = -lrpm -lpopt -lrpmio -lrpmdb
 endif
