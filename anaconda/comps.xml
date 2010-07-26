@@ -6439,7 +6439,6 @@
       <packagereq type="default">gstreamer</packagereq>
       <packagereq type="default">gstreamer-plugins-base</packagereq>
       <packagereq type="default">gstreamer-plugins-good</packagereq>
-      <packagereq type="default">gthumb</packagereq>
       <packagereq type="default">gtk2-engines</packagereq>
       <packagereq type="default">gtkam</packagereq>
       <packagereq type="default">gucharmap</packagereq>
@@ -6481,6 +6480,7 @@
       <packagereq type="optional">gqview</packagereq>
       <packagereq type="optional">grsync</packagereq>
       <packagereq type="optional">gtkam-gimp</packagereq>
+      <packagereq type="optional">gthumb</packagereq>
       <packagereq type="optional">hamster-applet</packagereq>
       <packagereq type="optional">istanbul</packagereq>
       <packagereq type="optional">nautilus-actions</packagereq>
@@ -7630,6 +7630,7 @@
       <packagereq type="default">cheese</packagereq>
       <packagereq type="default">dcraw</packagereq>
       <packagereq type="default">dcraw-gimp</packagereq>
+      <packagereq type="default">f-spot</packagereq>
       <packagereq type="default">gimp</packagereq>
       <packagereq type="default">gimp-gap</packagereq>
       <packagereq type="default">gimp-pygimp</packagereq>
@@ -7642,7 +7643,6 @@
       <packagereq type="optional">blender</packagereq>
       <packagereq type="optional">digikam</packagereq>
       <packagereq type="optional">digikam-doc</packagereq>
-      <packagereq type="optional">f-spot</packagereq>
       <packagereq type="optional">fotowall</packagereq>
       <packagereq type="optional">gifsicle</packagereq>
       <packagereq type="optional">gimp-help</packagereq>
