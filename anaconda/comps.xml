@@ -7652,6 +7652,8 @@
       <packagereq type="optional">pstoedit</packagereq>
       <packagereq type="optional">qtpfsgui</packagereq>
       <packagereq type="optional">qiv</packagereq>
+      <packagereq type="optional">rawstudio</packagereq>
+      <packagereq type="optional">rawtherapee</packagereq>
       <packagereq type="optional">sane-frontends</packagereq>
       <packagereq type="optional">skanlite</packagereq>
       <packagereq type="optional">sodipodi</packagereq>
