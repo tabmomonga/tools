@@ -8801,6 +8801,8 @@
       <packagereq type="optional">uim-skk</packagereq>
       <packagereq type="optional">uim-tomoe-gtk</packagereq>
       <packagereq type="optional">uim-xim</packagereq>
+      <packagereq type="conditional" requires="gtk2">gtk2-immodules</packagereq>
+      <packagereq type="conditional" requires="gtk2">gtk2-immodule-xim</packagereq>
       <packagereq type="conditional" requires="gtk2">ibus-gtk</packagereq>
       <packagereq type="conditional" requires="qt">ibus-qt</packagereq>
     </packagelist>
