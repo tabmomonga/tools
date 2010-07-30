@@ -89,7 +89,7 @@ fi
 mount -o bind /proc $prefix/proc
 
 echo "Bootstrapping yum"
-setarch $basearch yum -y --installroot=$prefix install yum vim-minimal dhclient build-momonga
+setarch $basearch yum -y --installroot=$prefix install yum vim-minimal dhclient sudo lv passwd build-momonga
 
 echo "Cleaning up"
 rm -f $prefix/var/lib/rpm/__db.*
@@ -103,4 +103,6 @@ cp -p $prefix/etc/yum.conf.rpmnew $prefix/etc/yum.conf
 echo "Copying device file"
 rsync -auv --stats --progress /dev/ $prefix/dev/
 
+echo "Copying passwd shadow group sudoers"
+cp -p /etc/{passwd,shadow,group,sudoers} $prefix/etc/
 
