@@ -1,4 +1,5 @@
-#!/usr/bin/env ruby
+#!/usr/bin/ruby -Ku
+# -*- coding: utf-8 -*-
 
 $TOOLDIR = File.dirname($0)
 $:.unshift($TOOLDIR)
