@@ -1,4 +1,5 @@
-#!/usr/bin/env ruby
+#!/usr/bin/ruby -Ku
+# -*- coding: utf-8 -*-
 # $Id: speclint,v 1.33 2003/10/24 06:54:43 crouton Exp $
 
 # $ rd2 -rrd/rd2man-lib <this_file> | nroff -man
