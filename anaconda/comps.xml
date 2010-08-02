@@ -6472,6 +6472,7 @@
     <packagelist>
       <packagereq type="mandatory">control-center</packagereq>
       <packagereq type="mandatory">fedora-gnome-theme</packagereq>
+      <packagereq type="mandatory">gnome-applets</packagereq>
       <packagereq type="mandatory">gnome-panel</packagereq>
       <packagereq type="mandatory">gnome-session</packagereq>
       <packagereq type="mandatory">gnome-terminal</packagereq>
