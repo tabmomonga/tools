@@ -6532,9 +6532,11 @@
       <packagereq type="default">gtk2-engines</packagereq>
       <packagereq type="default">gtkam</packagereq>
       <packagereq type="default">gucharmap</packagereq>
+      <packagereq type="default">gvfs-afc</packagereq>
       <packagereq type="default">hicolor-icon-theme</packagereq>
       <packagereq type="default">htmlview</packagereq>
       <packagereq type="default">hwbrowser</packagereq>
+      <packagereq type="default">ifuse</packagereq>
       <packagereq type="default">mousetweaks</packagereq>
       <packagereq type="default">notification-daemon</packagereq>
       <packagereq type="default">orca</packagereq>
