@@ -155,6 +155,7 @@
     <packagelist>
       <packagereq type="default">authconfig-gtk</packagereq>
       <packagereq type="default">gnome-packagekit</packagereq>
+      <packagereq type="default">momonga-nonfree-package-builder</packagereq>
       <packagereq type="default">system-config-boot</packagereq>
       <packagereq type="default">system-config-date</packagereq>
       <packagereq type="default">system-config-firewall</packagereq>
