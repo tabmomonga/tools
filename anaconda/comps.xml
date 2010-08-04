@@ -481,8 +481,6 @@
       <packagereq type="optional">sil-lateef-fonts</packagereq>
       <packagereq type="optional">sil-scheherazade-fonts</packagereq>
       <packagereq type="conditional" requires="aspell">aspell-ar</packagereq>
-      <packagereq type="conditional" requires="eclipse-platform">eclipse-nls-ar</packagereq>
-      <packagereq type="conditional" requires="gcompris">gcompris-sound-ar</packagereq>
       <packagereq type="conditional" requires="hunspell">hunspell-ar</packagereq>
       <packagereq type="conditional" requires="kdelibs">kde-l10n-Arabic</packagereq>
       <packagereq type="conditional" requires="kdelibs3">kde3-i18n-Arabic</packagereq>
@@ -1213,6 +1211,7 @@
       <packagereq type="optional">wicd</packagereq>
       <packagereq type="optional">x86info</packagereq>
       <packagereq type="optional">xfsprogs</packagereq>
+      <packagereq type="optional">xz</packagereq>
       <packagereq type="optional">yum-langpacks</packagereq>
       <packagereq type="optional">yum-updatesd</packagereq>
       <packagereq type="conditional" requires="aspell">aspell-en</packagereq>
@@ -1292,7 +1291,6 @@
    <description></description>
     <packagelist>
       <packagereq type="conditional" requires="autocorr-en">autocorr-eu</packagereq>
-      <packagereq type="conditional" requires="gcompris">gcompris-sound-eu</packagereq>
       <packagereq type="conditional" requires="hunspell">hunspell-eu</packagereq>
       <packagereq type="conditional" requires="kdelibs">kde-l10n-Basque</packagereq>
       <packagereq type="conditional" requires="kdelibs3">kde3-i18n-Basque</packagereq>
@@ -1734,8 +1732,6 @@
     <packagelist>
       <packagereq type="conditional" requires="aspell">aspell-pt</packagereq>
       <packagereq type="conditional" requires="autocorr-en">autocorr-pt</packagereq>
-      <packagereq type="conditional" requires="eclipse-platform">eclipse-nls-pt_BR</packagereq>
-      <packagereq type="conditional" requires="gcompris">gcompris-sound-pt</packagereq>
       <packagereq type="conditional" requires="hunspell">hunspell-pt</packagereq>
       <packagereq type="conditional" requires="hyphen">hyphen-pt</packagereq>
       <packagereq type="conditional" requires="kdelibs">kde-l10n-Brazilian-Portuguese</packagereq>
@@ -2068,7 +2064,6 @@
    <description></description>
     <packagelist>
       <packagereq type="conditional" requires="aspell">aspell-ca</packagereq>
-      <packagereq type="conditional" requires="childsplay">childsplay-alphabet_sounds_ca</packagereq>
       <packagereq type="conditional" requires="hunspell">hunspell-ca</packagereq>
       <packagereq type="conditional" requires="hyphen">hyphen-ca</packagereq>
       <packagereq type="conditional" requires="kdelibs">kde-l10n-Catalan</packagereq>
@@ -2253,6 +2248,9 @@
       <packagereq type="conditional" requires="moodle">moodle-zh_tw</packagereq>
       <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-zh_CN</packagereq>
       <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-zh_TW</packagereq>
+      <packagereq type="conditional" requires="xorg-x11-server-Xorg">scim-chewing</packagereq>
+      <packagereq type="conditional" requires="xorg-x11-server-Xorg">scim-tables-chinese</packagereq>
+      <packagereq type="conditional" requires="xorg-x11-server-Xorg">scim-tables-chinese-extra</packagereq>
     </packagelist>
   </group>        
   <group>
@@ -3254,8 +3252,6 @@
       <packagereq type="optional">m17n-db</packagereq>
       <packagereq type="conditional" requires="aspell">aspell-da</packagereq>
       <packagereq type="conditional" requires="autocorr-en">autocorr-da</packagereq>
-      <packagereq type="conditional" requires="eclipse-platform">eclipse-nls-da</packagereq>
-      <packagereq type="conditional" requires="gcompris">gcompris-sound-da</packagereq>
       <packagereq type="conditional" requires="hunspell">hunspell-da</packagereq>
       <packagereq type="conditional" requires="hyphen">hyphen-da</packagereq>
       <packagereq type="conditional" requires="kdelibs">kde-l10n-Danish</packagereq>
@@ -4066,7 +4062,6 @@
    <name xml:lang="zu">Ukuxhasa kwesiDashi</name>
    <description></description>
     <packagelist>
-      <packagereq type="conditional" requires="LabPlot-doc">LabPlot-doc-nl</packagereq>
       <packagereq type="conditional" requires="aspell">aspell-nl</packagereq>
       <packagereq type="conditional" requires="autocorr-en">autocorr-nl</packagereq>
       <packagereq type="conditional" requires="hunspell">hunspell-nl</packagereq>
@@ -4233,6 +4228,7 @@
       <packagereq type="optional">uim-emacs</packagereq>
       <packagereq type="optional">vim-X11</packagereq>
       <packagereq type="optional">xemacs</packagereq>
+      <packagereq type="optional">xemacs-sumo</packagereq>
       <packagereq type="optional">xjed</packagereq>
     </packagelist>
   </group>        
@@ -8778,7 +8774,6 @@
    <description></description>
     <packagelist>
       <packagereq type="conditional" requires="aspell">aspell-id</packagereq>
-      <packagereq type="conditional" requires="gcompris">gcompris-sound-id</packagereq>
       <packagereq type="conditional" requires="hunspell">hunspell-id</packagereq>
       <packagereq type="conditional" requires="hyphen">hyphen-id</packagereq>
       <packagereq type="conditional" requires="kdelibs">kde-l10n-Indonesian</packagereq>
@@ -16386,7 +16381,6 @@
    <name xml:lang="zh_TW">索馬利語支援</name>
    <description></description>
     <packagelist>
-      <packagereq type="conditional" requires="gcompris">gcompris-sound-so</packagereq>
       <packagereq type="conditional" requires="hunspell">hunspell-so</packagereq>
       <packagereq type="conditional" requires="moodle">moodle-so</packagereq>
     </packagelist>
@@ -19398,6 +19392,7 @@
       <packagereq type="default">crypto-utils</packagereq>
       <packagereq type="default">distcache</packagereq>
       <packagereq type="default">httpd-manual</packagereq>
+      <packagereq type="default">kagemai</packagereq>
       <packagereq type="default">mod_perl</packagereq>
       <packagereq type="default">mod_python</packagereq>
       <packagereq type="default">mod_ssl</packagereq>
@@ -20193,7 +20188,6 @@
       <packagereq type="default">rxvt-unicode</packagereq>
       <packagereq type="default">sdr</packagereq>
       <packagereq type="default">setroubleshoot</packagereq>
-      <packagereq type="default">smolt-firstboot</packagereq>
       <packagereq type="default">system-config-date</packagereq>
       <packagereq type="default">system-config-display</packagereq>
       <packagereq type="default">system-config-firewall</packagereq>
