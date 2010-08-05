@@ -22,7 +22,7 @@ StatusCodes = {
 
 
 def get_status_number(string)
-  r = StatusCodes.index(string)
+  r = StatusCodes.key(string)
   return (nil!=r)?r:9999
 end
 
