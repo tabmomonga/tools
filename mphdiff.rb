@@ -1,4 +1,5 @@
-#!/usr/bin/env ruby
+#!/usr/bin/ruby -Ku
+# -*- coding: utf-8 -*-
 
 unless ARGV.size == 2
   puts "Usage: #{$0} old.mph new.mph"

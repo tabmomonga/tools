@@ -1,4 +1,5 @@
-#!/usr/bin/env ruby
+#!/usr/bin/ruby -Ku
+# -*- coding: utf-8 -*-
 
 if ARGV.size != 4
   print "Usage: #{$0} root_img 5 reiserfs kernel-co-2.6.10-24m.i686.rpm\n"

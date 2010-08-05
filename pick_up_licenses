@@ -1,4 +1,5 @@
-#!/usr/bin/env ruby
+#!/usr/bin/ruby -Ku
+# -*- coding: utf-8 -*-
 # $Id: pick_up_licenses,v 1.15 2003/11/26 16:25:05 zunda Exp $
 #
 # picks up signatures for licenses from source trees

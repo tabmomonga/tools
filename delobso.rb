@@ -1,4 +1,5 @@
-#!/usr/bin/ruby19 -Ku
+#!/usr/bin/ruby -Ku
+# -*- coding: utf-8 -*-
 # -*- ruby-mode -*-
 
 $:.unshift(File.dirname($0) + '/v2')

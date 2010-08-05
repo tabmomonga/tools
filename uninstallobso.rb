@@ -1,4 +1,5 @@
-#!/usr/bin/env ruby
+#!/usr/bin/ruby -Ku
+# -*- coding: utf-8 -*-
 #
 # This program scans through your CVS working copy for the packages and
 # lists binary packages names with the file OBSOLETE in its directory.

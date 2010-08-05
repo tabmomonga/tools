@@ -1,4 +1,5 @@
-#!/usr/bin/ruby
+#!/usr/bin/ruby -Ku
+# -*- coding: utf-8 -*-
 
 require 'rpm'
 require 'optparse'

@@ -1,4 +1,5 @@
-#!/usr/bin/env ruby
+#!/usr/bin/ruby -Ku
+# -*- coding: utf-8 -*-
 
 # get sha256sum via network, directly
 # you can get local file's sha256sum, too
