@@ -1,4 +1,4 @@
-#!/usr/bin/ruby
+#!/usr/bin/ruby -Ku
 #
 # by Hiromasa YOSHIMOTO <y@momonga-linux.org>
 
@@ -26,7 +26,7 @@ d.open(OPTS[:specdb_filename], OPTS)
 if ARGV.size == 0 then
   removeQ = Set.new
   addQ = Set.new
-  d.db.execute("select name from specfile_tbl") do |name,*|
+  d.db.execute("select name from specfile_tbl") do |name,|
     removeQ.add(name)
   end
   

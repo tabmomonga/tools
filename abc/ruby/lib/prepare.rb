@@ -6,11 +6,11 @@ require 'lib/common.rb'
 
 class Job 
 
-  # [RPM46] rpmbuild ���Ϥ� --macros ���ץ������������롣
-  # rpmbuild �� --macros ���ץ������Ϥ��ȡ�����ΰ�����
-  # rpm-4.6.0-rc3/lib/rpmrc.c �� macrofiles ����񤭤���롣
-  # ʸ����˴ޤޤ�� %{_target} �ʤɤΥޥ����� * �� ~ �Ϥ�����Ÿ������롣
-  # ���������ޥ����Ͼ嵭�� rpmrc.c ���������Ƥ����Τ˸¤���Ȼפ���
+  # [RPM46] rpmbuild に渡す --macros オプションを生成する。
+  # rpmbuild に --macros オプションを渡すと、それの引数で
+  # rpm-4.6.0-rc3/lib/rpmrc.c の macrofiles が上書きされる。
+  # 文字列に含まれる %{_target} などのマクロや * と ~ はちゃんと展開される。
+  # ただし、マクロは上記の rpmrc.c で定義されているものに限られると思う。
   private
   def generate_macrofiles(path)
     '--macros=' \
@@ -25,25 +25,25 @@ class Job
     "#{path}/rpmmacros "
   end
 
-  # rpmrc�ե�����ο��� basefile �򸵤�
-  # ������rpmrc�ե������������� newfile �Ȥ�����¸����
+  # rpmrcファイルの雛型 basefile を元に
+  # 新しいrpmrcファイルを作成し、 newfile として保存する
   #
-  # �軰����������ե�����(OPTFLAGS)�����ꤵ�줿����
-  # ����ե���������Ƥ˽��ä� newfile���optflags: �Ԥ��ִ�����
+  # 第三引数で設定ファイル(OPTFLAGS)が指定された場合は
+  # 設定ファイルの内容に従って newfile中のoptflags: 行を置換する
   #
-  # ����ե�����(OPTFLAGS)�ν񼰤ϰʲ����̤�
-  # - �ִ��롼��("pattern" �� "replacement" ����)���ԤŤĵ���
-  # - ʣ�����ִ��롼��򵭽Ҥ������ϡ���Ƭ������֤��ִ�������Ԥ�  
-  # - ��Ƭʸ����"#"�ǻϤޤ��(�����ȹ�)���ڤӶ��Ԥ�̵�뤹��
+  # 設定ファイル(OPTFLAGS)の書式は以下の通り
+  # - 置換ルール("pattern" と "replacement" の対)を一行づつ記述
+  # - 複数の置換ルールを記述した場合は、先頭から順番に置換処理を行う  
+  # - 先頭文字が"#"で始まる行(コメント行)、及び空行は無視する
   #
-  # ����ե�����ε�����ϰʲ����̤�
-  # �ִ�������)
+  # 設定ファイルの記述例は以下の通り
+  # 置換する場合)
   #    -O3 -O2
   #    -O3 "-O2 -ftree-vectorize"
-  # ���������)
+  # 削除する場合)
   #     -O3 ""
   #     "-mtune=[^ ]*"   ""
-  # �ɲä�����)
+  # 追加する場合)
   #     $    " -Wall"
   #     ^    "-Wall"
 
@@ -74,10 +74,10 @@ class Job
 
     newf = File.open(newfile, 'w')
     File.open(basefile, 'r').each { |line|
-      # macrofiles: �� �ιԤϺ������
+      # macrofiles: 〜 の行は削除する
       next if line[0,10] == "macrofiles"
       
-      # ����ե����� OPTFLAGS �����Ƥ˽��äơ� optflags: ���ιԤ��Խ�
+      # 設定ファイル OPTFLAGS の内容に従って、 optflags: 〜の行を編集
       if pats.size and line[0,9] == "optflags:"
         col = line.split(' ')
         str = col[2..-1].join(' ')
@@ -94,10 +94,10 @@ class Job
     newf.close
   end
 
-  # baserpmrc �������
+  # baserpmrc を雛形に
   #    #{dir}/rpmrc
   #    #{dir}/rpmmacros 
-  # ����������
+  # を生成する
   #
   def generate_rpmrc_and_rpmmacros(dir, baserpmrc)
     momo_assert{ File.directory?(dir) }
@@ -152,7 +152,7 @@ EOS
     }
   end
   
-  # #{dir}/rpmbuild.sh ������
+  # #{dir}/rpmbuild.sh を生成
   #
   #
   def generate_rpmbuild_sh(dir)

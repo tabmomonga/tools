@@ -1,4 +1,4 @@
-#!/usr/bin/ruby
+#!/usr/bin/ruby -Ku
 # by Hiromasa YOSHIMOTO <y@momonga-linux.org>
 
 require 'optparse'

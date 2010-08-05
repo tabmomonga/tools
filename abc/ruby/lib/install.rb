@@ -1,4 +1,4 @@
-# -*- coding: euc-jp -*-
+# -*- coding: utf-8 -*-
 # lib/install.rb
 #
 # by Hiromasa YOSHIMOTO <y@momonga-linux.org>
@@ -81,7 +81,7 @@ def select_required_packages(db, requested, opts = nil)
     end
 
     if installpkg.count == before  then
-      # ¤¹¤Ç¤ËinstallºÑ¤Î¾ì¹ç
+      # ã™ã§ã«installæ¸ˆã®å ´åˆ
       return 
     end
 

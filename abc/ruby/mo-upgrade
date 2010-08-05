@@ -1,5 +1,5 @@
-#!/usr/bin/ruby
-# -*- coding: euc-jp -*-
+#!/usr/bin/ruby -Ku
+# -*- coding: utf-8 -*-
 # by Hiromasa YOSHIMOTO <y@momonga-linux.org>
 
 require 'optparse'
@@ -27,7 +27,7 @@ opt.parse!(ARGV)
 d = PkgDB.new
 d.open(OPTS[:pkgdb_filename], OPTS)
 
-# install済のpackageと、そのbuildtimeを取得
+# Retrieves installed packages and its buildtimes
 installed = []
 `LANG=C \\rpm -qa --qf '%{NAME},%{VERSION},%{RELEASE},%{BUILDTIME}\n'`.each_line do |line|
   column = line.chomp.split(',')

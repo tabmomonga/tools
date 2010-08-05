@@ -1,4 +1,4 @@
-#!/usr/bin/ruby
+#!/usr/bin/ruby -Ku
 #
 # by Hiromasa YOSHIMOTO <y@momonga-linux.org>
 
@@ -31,14 +31,14 @@ candidates = Set.new
 
 curr.each do |name|   
   sql = "SELECT owner FROM capa_view WHERE capability GLOB '#{name}' "
-  db.execute(sql) do |owner,*|
+  db.execute(sql) do |owner,|
     candidates.add(owner)
   end
 end
 
 candidates.each do |id|
   sql = "SELECT capability FROM capa_view WHERE owner=='#{id}' GROUP BY capability"
-  db.execute(sql) do |cap,*|
+  db.execute(sql) do |cap,|
     print "#{cap}\n"
   end
 end

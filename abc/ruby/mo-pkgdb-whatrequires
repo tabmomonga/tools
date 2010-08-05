@@ -1,4 +1,4 @@
-#!/usr/bin/ruby
+#!/usr/bin/ruby -Ku
 # by Hiromasa YOSHIMOTO <y@momonga-linux.org>
 
 require 'optparse'
@@ -24,7 +24,7 @@ curr.map!{|v| v.chomp("/") }
 
 curr.each do |cap|    
   sql = "SELECT pkgfile FROM dependency_tbl INNER JOIN pkg_tbl ON owner=id WHERE capability GLOB '#{cap}'"
-  db.execute(sql) do |pkgfile,*|
+  db.execute(sql) do |pkgfile,|
     printf "#{pkgfile}\n"
   end
 end

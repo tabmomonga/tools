@@ -1,10 +1,19 @@
+# -*- coding: utf-8 -*-
 # lib/database.rb
 #
 # by Hiromasa YOSHIMOTO <y@momonga-linux.org>
 
-require 'rpm'
-begin; require 'rubygems'; rescue LoadError; end 
-require 'sqlite3'
+begin
+  require 'rpm'
+rescue LoadError
+  abort "A package 'ruby-rpm' is not installed, abort"
+end
+begin
+  begin; require 'rubygems'; rescue LoadError; end 
+  require 'sqlite3'
+rescue LoadError
+  abort "A package 'rubygem-sqlite3-ruby' is not installed, abort"
+end
 
 module RPM
   class Dependency
@@ -35,8 +44,8 @@ module RPM
   end
 end # module RPM
 
-# package ¤Î version ¤òÈæ³Ó¤¹¤ë
-# ¤Ê¤ª op, ver2 ¤¬¶¦¤Ë  nil ¤Î¾ì¹ç¤Ï true ¤òÊÖ¤¹
+# package ã® version ã‚’æ¯”è¼ƒã™ã‚‹
+# ãªãŠ op, ver2 ãŒå…±ã«  nil ã®å ´åˆã¯ true ã‚’è¿”ã™
 def compare_version(ver1, op, ver2)
   return true if op.nil? and ver2.nil? 
     

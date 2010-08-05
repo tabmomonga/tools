@@ -1,12 +1,12 @@
-# -*- coding: euc-jp -*-
+# -*- coding: utf-8 -*-
 # by Hiromasa YOSHIMOTO <y@momonga-linux.org>
 
 require 'lib/database.rb'
 require 'lib/install.rb'
 
 #
-# ¹¹¿·¤·¤Ê¤¤package¤ÎÇÛÎó
-# !!FIXME!!  ÀßÄê¥Õ¥¡¥¤¥ë¤òÊÌÅÓÍÑ°Õ¤¹¤ë
+# æ›´æ–°ã—ãªã„packageã®é…åˆ—
+# !!FIXME!!  è¨­å®šãƒ•ã‚¡ã‚¤ãƒ«ã‚’åˆ¥é€”ç”¨æ„ã™ã‚‹
 HOLDS = [ "kernel", "lame", "lame-devel", "usolame-devel", "usolame" ]
 
 def upgrade_strict(installed, d, opts)
@@ -14,12 +14,12 @@ def upgrade_strict(installed, d, opts)
   queue = Set.new
   installed.each do |name,version,buildtime|
     
-    # 1) ÆÃÄê¤Î¥Ñ¥Ã¥±¡¼¥¸¤Ï ¹¹¿·¤·¤Ê¤¤
+    # 1) ç‰¹å®šã®ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã¯ æ›´æ–°ã—ãªã„
     next if HOLDS.include?(name)
     
     found = false
     
-    # 2) "#{name}"¤òobsolete¤·¤Æ¤¤¤ëpackage¤¬¤¢¤ì¤Ğ¡¢ÂåÂØ
+    # 2) "#{name}"ã‚’obsoleteã—ã¦ã„ã‚‹packageãŒã‚ã‚Œã°ã€ä»£æ›¿
     sql = "SELECT pkgfile,comparison,version,buildtime FROM obsolete_tbl INNER JOIN pkg_tbl ON owner=id WHERE capability=='#{name}'"
     d.db.execute(sql) do |pkgfile,comparison,version1,buildtime1|
       next if !compare_version(version, comparison, version1)
@@ -31,7 +31,7 @@ def upgrade_strict(installed, d, opts)
     end
     next if found
     
-    # 3) Æ±Ì¾¤«¤Äbuildtime¤Î¿·¤·¤¤package¤¬¤¢¤ì¤Ğ¡¢¹¹¿·
+    # 3) åŒåã‹ã¤buildtimeã®æ–°ã—ã„packageãŒã‚ã‚Œã°ã€æ›´æ–°
     sql = "SELECT pkgfile,buildtime FROM pkg_tbl WHERE pkgname=='#{name}'"
     d.db.execute(sql) do |pkgfile,ts|
       if ts.to_i != buildtime then
@@ -42,7 +42,7 @@ def upgrade_strict(installed, d, opts)
     end
     next if found
     
-    # 4) "#{name}"¤òprovide¤·¤Æ¤¤¤ëpackage¤¬¤¢¤ì¤Ğ¡¢ÂåÂØ
+    # 4) "#{name}"ã‚’provideã—ã¦ã„ã‚‹packageãŒã‚ã‚Œã°ã€ä»£æ›¿
     sql = "SELECT pkgfile,comparison,version,buildtime FROM capability_tbl INNER JOIN pkg_tbl ON owner==id WHERE capability=='#{name}' AND pkgname!='#{name}'"
     d.db.execute(sql) do |pkgfile,comparison,version1,buildtime1|
       next if version1 && compare_version(version1, "<", version)
@@ -52,7 +52,7 @@ def upgrade_strict(installed, d, opts)
     end
     next if found
     
-    # ³ºÅö¥Ñ¥Ã¥±¡¼¥¸Ìµ¤·
+    # è©²å½“ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ç„¡ã—
     STDERR.puts "Warning: No package found for #{name}" if opts[:verbose]>1
   end
   
@@ -68,8 +68,8 @@ def upgrade_strict(installed, d, opts)
   end
   STDERR.puts "#{queue.size} updated packages found"  if opts[:verbose]>0
   
-  # strict¥â¡¼¥É
-  # °ì¤Ä¤Ç¤â¹¹¿·½ĞÍè¤Ê¤¤¥Ñ¥Ã¥±¡¼¥¸¤¬¤¢¤ì¤Ğupgrade½èÍı¤òÃæÃÇ¤¹¤ë
+  # strictãƒ¢ãƒ¼ãƒ‰
+  # ä¸€ã¤ã§ã‚‚æ›´æ–°å‡ºæ¥ãªã„ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ãŒã‚ã‚Œã°upgradeå‡¦ç†ã‚’ä¸­æ–­ã™ã‚‹
   STDERR.puts "Resolving dependencies" if opts[:verbose]>0
   
   pkgs, msg = select_required_packages(d.db, queue.to_a, opts)
@@ -94,7 +94,7 @@ end
 def upgrade_permissive(installed, d, opts)
   installed.each do |name,version,buildtime|
 
-    # ÆÃÄê¤Î¥Ñ¥Ã¥±¡¼¥¸¤Ï ¹¹¿·¤·¤Ê¤¤
+    # ç‰¹å®šã®ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã¯ æ›´æ–°ã—ãªã„
     next if HOLDS.include?(name)
 
     queue = Set.new

@@ -1,4 +1,4 @@
-#!/usr/bin/ruby
+#!/usr/bin/ruby -Ku
 #
 # by Hiromasa YOSHIMOTO <y@momonga-linux.org>
 
@@ -42,14 +42,14 @@ while loop < OPTS[:recursion]
 
   curr.each do |name|   
     sql = "SELECT capability FROM capa_view WHERE capability GLOB '#{name}' "
-    db.execute(sql) do |cand,*|
+    db.execute(sql) do |cand,|
       candidates.add(cand)
     end
   end
 
   candidates.each do |name|
     sql = "SELECT name FROM buildreq_tbl INNER JOIN specfile_tbl ON owner==id WHERE capability == '#{name}' GROUP BY name"
-    db.execute(sql) do |pkg|
+    db.execute(sql) do |pkg,|
       if !pkgs.include?(pkg) then
         found.add(pkg)
       end
