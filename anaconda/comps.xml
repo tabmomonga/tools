@@ -15477,7 +15477,7 @@
    <description xml:lang="zu">Ukuxhasa okulula kolimi lokuhlela imisebenzi ye-Rubys.</description>
     <packagelist>
       <packagereq type="mandatory">ruby</packagereq>
-      <packagereq type="mandatory">ruby19</packagereq>
+      <packagereq type="mandatory">ruby18</packagereq>
       <packagereq type="default">elisp-ruby-mode</packagereq>
       <packagereq type="optional">ruby-devel</packagereq>
       <packagereq type="optional">ruby-eruby</packagereq>
