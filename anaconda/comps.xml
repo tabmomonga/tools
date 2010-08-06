@@ -9913,7 +9913,6 @@
       <packagereq type="default">gdm</packagereq>
       <packagereq type="default">gtk2-engines</packagereq>
       <packagereq type="default">k3b</packagereq>
-      <packagereq type="default">kaffeine</packagereq>
       <packagereq type="default">kaffeine3</packagereq>
       <packagereq type="default">kaudiocreator</packagereq>
       <packagereq type="default">kbluetooth</packagereq>
@@ -10070,6 +10069,7 @@
       <packagereq type="optional">fotowall</packagereq>
       <packagereq type="optional">gammu</packagereq>
       <packagereq type="optional">k9copy</packagereq>
+      <packagereq type="optional">kaffeine</packagereq>
       <packagereq type="optional">kaffeine-plugin</packagereq>
       <packagereq type="optional">kannadic</packagereq>
       <packagereq type="optional">kanyremote</packagereq>
