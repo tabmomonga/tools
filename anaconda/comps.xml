@@ -9343,6 +9343,7 @@
       <packagereq type="default">uim-anthy</packagereq>
       <packagereq type="default">uim-anthy-utf8</packagereq>
       <packagereq type="default">uim-fep</packagereq>
+      <packagereq type="default">uim-mozc</packagereq>
       <packagereq type="default">uim-prime</packagereq>
       <packagereq type="default">uim-skk</packagereq>
       <packagereq type="default">vlgothic-fonts</packagereq>
@@ -9403,6 +9404,7 @@
       <packagereq type="conditional" requires="xorg-x11-server-Xorg">scim-anthy</packagereq>
       <packagereq type="conditional" requires="xorg-x11-server-Xorg">scim-bridge</packagereq>
       <packagereq type="conditional" requires="xorg-x11-server-Xorg">scim-input-pad</packagereq>
+      <packagereq type="conditional" requires="xorg-x11-server-Xorg">scim-mozc</packagereq>
       <packagereq type="conditional" requires="xorg-x11-server-Xorg">scim-prime</packagereq>
       <packagereq type="conditional" requires="xorg-x11-server-Xorg">scim-skk</packagereq>
       <packagereq type="conditional" requires="xorg-x11-server-Xorg">scim-tomoe</packagereq>
