@@ -7757,7 +7757,6 @@
       <packagereq type="default">cheese</packagereq>
       <packagereq type="default">dcraw</packagereq>
       <packagereq type="default">dcraw-gimp</packagereq>
-      <packagereq type="default">f-spot</packagereq>
       <packagereq type="default">gimp</packagereq>
       <packagereq type="default">gimp-data-extras</packagereq>
       <packagereq type="default">gimp-gap</packagereq>
@@ -7773,6 +7772,7 @@
       <packagereq type="optional">blender</packagereq>
       <packagereq type="optional">digikam</packagereq>
       <packagereq type="optional">digikam-doc</packagereq>
+      <packagereq type="optional">f-spot</packagereq>
       <packagereq type="optional">fotowall</packagereq>
       <packagereq type="optional">geeqie</packagereq>
       <packagereq type="optional">gifsicle</packagereq>
