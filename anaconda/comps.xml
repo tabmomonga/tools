@@ -10021,7 +10021,6 @@
       <packagereq type="default">uim-qt4</packagereq>
       <packagereq type="default">uim-qt4immodule</packagereq>
       <packagereq type="default">uim-qtimmodule</packagereq>
-      <packagereq type="default">unixODBC-kde</packagereq>
       <packagereq type="default">waheela</packagereq>
       <packagereq type="default">webkitkde</packagereq>
       <packagereq type="default">webkitpart</packagereq>
@@ -10142,6 +10141,7 @@
       <packagereq type="optional">soundkonverter</packagereq>
       <packagereq type="optional">speedcrunch</packagereq>
       <packagereq type="optional">transmission</packagereq>
+      <packagereq type="optional">unixODBC-kde</packagereq>
       <packagereq type="optional">webkam</packagereq>
       <packagereq type="optional">wicd</packagereq>
       <packagereq type="optional">xine-lib-smb</packagereq>
