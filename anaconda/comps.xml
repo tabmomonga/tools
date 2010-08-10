@@ -9928,7 +9928,6 @@
       <packagereq type="default">kdeedu-math-cantor-R</packagereq>
       <packagereq type="default">kdegames</packagereq>
       <packagereq type="default">kdegraphics</packagereq>
-      <packagereq type="default">kdegraphics3</packagereq>
       <packagereq type="default">kdemultimedia</packagereq>
       <packagereq type="default">kdenetwork</packagereq>
       <packagereq type="default">kdepim</packagereq>
@@ -10065,6 +10064,7 @@
       <packagereq type="optional">kcm_devinfo</packagereq>
       <packagereq type="optional">kcometen4</packagereq>
       <packagereq type="optional">kdeclassic-icon-theme</packagereq>
+      <packagereq type="optional">kdegraphics3</packagereq>
       <packagereq type="optional">kdenlive</packagereq>
       <packagereq type="optional">kdirstat</packagereq>
       <packagereq type="optional">kdissert</packagereq>
