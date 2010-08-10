@@ -9995,6 +9995,7 @@
       <packagereq type="default">qt-odbc</packagereq>
       <packagereq type="default">qt-postgresql</packagereq>
       <packagereq type="default">qt-sqlite</packagereq>
+      <packagereq type="default">qt-tds</packagereq>
       <packagereq type="default">qt-x11</packagereq>
       <packagereq type="default">qt3-MySQL</packagereq>
       <packagereq type="default">qt3-ODBC</packagereq>
