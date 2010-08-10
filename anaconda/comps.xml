@@ -7748,7 +7748,6 @@
       <packagereq type="default">ufraw</packagereq>
       <packagereq type="default">xsane</packagereq>
       <packagereq type="default">xsane-gimp</packagereq>
-      <packagereq type="default">zphoto</packagereq>
       <packagereq type="optional">blender</packagereq>
       <packagereq type="optional">digikam</packagereq>
       <packagereq type="optional">digikam-doc</packagereq>
@@ -7780,6 +7779,7 @@
       <packagereq type="optional">x3f-tools</packagereq>
       <packagereq type="optional">xaralx</packagereq>
       <packagereq type="optional">xfig</packagereq>
+      <packagereq type="optional">zphoto</packagereq>
     </packagelist>
   </group>        
   <group>
