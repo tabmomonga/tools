@@ -1,5 +1,5 @@
 --- Fedora-13-comps.xml	2010-05-13 09:42:00.000000000 +0900
-+++ comps.xml	2010-08-08 07:53:20.000000000 +0900
++++ comps.xml	2010-08-10 06:23:53.000000000 +0900
 @@ -155,6 +155,7 @@
      <packagelist>
        <packagereq type="default">authconfig-gtk</packagereq>
@@ -2348,7 +2348,6 @@
 +      <packagereq type="default">cheese</packagereq>
 +      <packagereq type="default">dcraw</packagereq>
 +      <packagereq type="default">dcraw-gimp</packagereq>
-+      <packagereq type="default">f-spot</packagereq>
        <packagereq type="default">gimp</packagereq>
        <packagereq type="default">gimp-data-extras</packagereq>
 -      <packagereq type="default">gimp-help</packagereq>
@@ -2376,10 +2375,10 @@
 -      <packagereq type="optional">comix</packagereq>
 -      <packagereq type="optional">dcraw</packagereq>
        <packagereq type="optional">digikam</packagereq>
--      <packagereq type="optional">f-spot</packagereq>
++      <packagereq type="optional">digikam-doc</packagereq>
+       <packagereq type="optional">f-spot</packagereq>
 -      <packagereq type="optional">fyre</packagereq>
 -      <packagereq type="optional">gcolor2</packagereq>
-+      <packagereq type="optional">digikam-doc</packagereq>
 +      <packagereq type="optional">fotowall</packagereq>
        <packagereq type="optional">geeqie</packagereq>
        <packagereq type="optional">gifsicle</packagereq>
