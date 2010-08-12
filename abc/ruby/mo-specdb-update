@@ -30,7 +30,7 @@ if ARGV.size == 0 then
     removeQ.add(name)
   end
   
-  Dir.open('.').each do |dirname,*|
+  Dir.open('.').each do |dirname,|
     name = File.basename(dirname)    
     if File.exist?("#{name}/#{name}.spec") then
       addQ.add(name)

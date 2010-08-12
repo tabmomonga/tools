@@ -88,10 +88,10 @@ ENDOFSQL
   def check(opts = nil)
     opts = @options if nil==opts
     sql = "select capability from package_tbl group by capability having count(*) > 1"
-    @db.execute(sql) do |cap|
+    @db.execute(sql) do |cap,|
       STDERR.puts "WARNING: Duplicate entries found; These specfiles below conflict on \"#{cap}\""
       sql = "select name FROM package_tbl INNER JOIN specfile_tbl ON owner==id WHERE capability='#{cap}'"
-      @db.execute(sql) do |name|
+      @db.execute(sql) do |name,|
         STDERR.puts " #{name}"
       end
     end
@@ -101,7 +101,7 @@ ENDOFSQL
     opts = @options if nil==opts
 
     @db.transaction { |db|
-      list.each { |name,*|
+      list.each { |name,|
         STDERR.puts "deleting entry for #{name}" if (opts[:verbose]>-1) 
         id = db.get_first_value("select id from specfile_tbl where name == '#{name}'")
         if nil!=id then
@@ -128,14 +128,14 @@ ENDOFSQL
 
         if !opts[:force_update] then
           sql = "select count(id) from specfile_tbl where name == '#{specname}' and lastupdate>=#{timestamp}"
-          if  @db.get_first_value(sql) == "1"  then
+          if  @db.get_first_value(sql) == 1  then
             STDERR.puts "skip #{specname}" if (opts[:verbose]>0) 
             next
           end
         end
 
         # RPM::Spec will crash when RPM.readrc() is not called.
-        RPM.readrc('rpmrc')
+        RPM.readrc('/usr/lib/rpm/momonga/rpmrc:./rpmrc:./dot.rpmrc')
 
         spec = RPM::Spec.open(filename)
         if spec.nil? then

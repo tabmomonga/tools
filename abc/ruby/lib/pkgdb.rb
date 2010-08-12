@@ -6,8 +6,8 @@ require 'lib/database.rb'
 
 class PkgDB < DBBase
 
-  TABLE_MAJOR_VERSION=2 # increase when the layout breaks compatibility
-  TABLE_MINOR_VERSION=2 # increase when rebuild DB is required
+  TABLE_MAJOR_VERSION=3 # increase when the layout breaks compatibility
+  TABLE_MINOR_VERSION=0 # increase when rebuild DB is required
   TABLE_LAYOUT=<<ENDOFSQL
 
 -- pkgfile's capabilities (=provides) info
@@ -55,6 +55,12 @@ create table pkg_tbl (
        pkgname text,
        buildtime integer,
        lastupdate integer
+);
+
+drop table if exists file_tbl;
+create table file_tbl (
+       owner integer not null,
+       path text
 );
 
 drop table if exists misc_tbl;
@@ -118,7 +124,7 @@ ENDOFSQL
     
     if !opts[:force_update] then
       sql = "select count(id) from pkg_tbl where pkgfile == '#{pkgfile}' and lastupdate>=#{timestamp}"
-      if  @db.get_first_value(sql) == "1"  then
+      if  db.get_first_value(sql) == 1  then
         STDERR.puts "skipping #{pkgfile}" if (opts[:verbose]>1) 
         return
       end
@@ -156,56 +162,16 @@ ENDOFSQL
       db.execute("insert into obsolete_tbl (owner, capability, comparison, version) values (#{id}, #{name}, #{op}, #{ver})")
     }
     
+    pkg.files.each {|file|
+      path = file.path
+      db.execute("insert into file_tbl (owner, path) values (?, ?)", [id, path])
+    }
     
     db.execute("UPDATE pkg_tbl SET lastupdate = #{timestamp}, buildtime = #{pkg[RPM::TAG_BUILDTIME]}, pkgname = '#{pkg[RPM::TAG_NAME]}' WHERE id==#{id}")
     pkg = nil
-    STDERR.puts "checking #{pkgfile}\n" if (opts[:verbose]>1)
-    timestamp = File.mtime(pkgfile).to_i
-    
-    if !opts[:force_update] then
-      sql = "select count(id) from pkg_tbl where pkgfile == '#{pkgfile}' and lastupdate>=#{timestamp}"
-      if  @db.get_first_value(sql) == "1"  then
-        STDERR.puts "skipping #{pkgfile}" if (opts[:verbose]>1) 
-        return
-      end
-    end
-    
-    STDERR.puts "updating entry for #{pkgfile}" if (opts[:verbose]>-1) 
-    
-    # create spec entry
-    db.execute("insert or ignore into pkg_tbl (pkgfile) values('#{pkgfile}')")
-    id = db.get_first_value("select id from pkg_tbl where pkgfile == '#{pkgfile}'")
-    
-    # delete old datas
-    delete_cached(db, id)
-    
-    # insert capability(=provides)
-    pkg = RPM::Package.open(pkgfile)
-    pkg.provides.each {|prov|
-      name, op, ver = prov.conv
-      db.execute("insert into capability_tbl (owner, capability, comparison, version) values (#{id}, #{name}, #{op}, #{ver})")
-    }
-    
-    # insert dependency(=requires)
-    pkg.requires.each {|req|
-      name, op, ver = req.conv
-      db.execute("insert into dependency_tbl (owner, capability, comparison, version) values (#{id}, #{name}, #{op}, #{ver})")
-    }
-    
-    pkg.conflicts.each {|conflict|
-      name, op, ver = conflict.conv
-      db.execute("insert into conflict_tbl (owner, capability, comparison, version) values (#{id}, #{name}, #{op}, #{ver})")
-    }
-    
-    pkg.obsoletes.each {|obso|
-      name, op, ver = obso.conv
-      db.execute("insert into obsolete_tbl (owner, capability, comparison, version) values (#{id}, #{name}, #{op}, #{ver})")
-    }
-    
-    
-    db.execute("UPDATE pkg_tbl SET lastupdate = #{timestamp}, buildtime = #{pkg[RPM::TAG_BUILDTIME]}, pkgname = '#{pkg[RPM::TAG_NAME]}' WHERE id==#{id}")
-    pkg = nil
-  rescue
+
+  rescue => e
+    STDERR.puts "   exception: #{e} " if (opts[:verbose]>-1)
     STDERR.puts "#{pkgfile} is bad rpm package, skip" if (opts[:verbose]>-1)
   end
 
@@ -213,6 +179,9 @@ ENDOFSQL
   def delete_cached(db, id)
     db.execute("delete from capability_tbl where owner == #{id}")
     db.execute("delete from dependency_tbl where owner == #{id}")
+    db.execute("delete from conflict_tbl where owner == #{id}")
+    db.execute("delete from obsolete_tbl where owner == #{id}")
+    db.execute("delete from file_tbl where owner == #{id}")
   end
 
 end  # end of class PkgDB

@@ -89,6 +89,9 @@ class DBBase
       #needed = true
     end 
     
+    @db.execute("PRAGMA temp_store = 2")
+    @db.execute("PRAGMA journal_mode = MEMORY")
+    @db.execute("PRAGMA synchronous =  0")
     initialize_database(layout, major, minor) if needed || @options[:force_update]
   end
 
