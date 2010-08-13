@@ -80,7 +80,8 @@ module Speclint
       ASL\ 2.0 \
       LPPL CPL EPL GFDL \
       Modified\ BSD BSD MIT/X MIT MPLv1\.1 MPL \
-      Creative\ Commons Public\ Domain \
+      Creative\ Commons CC-BY-SA \
+      Public\ Domain \
       PHP OPL QPL Ruby OFL)
 
     VALID_GROUPS = <<-EOT.strip.split(/\n\s+/)
