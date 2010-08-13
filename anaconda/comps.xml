@@ -20159,6 +20159,7 @@
     <packagelist>
       <packagereq type="mandatory">bitmap-fonts-compat</packagereq>
       <packagereq type="mandatory">momonga-backgrounds</packagereq>
+      <packagereq type="mandatory">natsuki-backgrounds-single</packagereq>
       <packagereq type="mandatory">xorg-x11-drivers</packagereq>
       <packagereq type="mandatory">xorg-x11-server-Xorg</packagereq>
       <packagereq type="mandatory">xorg-x11-server-utils</packagereq>

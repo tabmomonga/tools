@@ -1,5 +1,5 @@
 --- Fedora-13-comps.xml	2010-05-13 09:42:00.000000000 +0900
-+++ comps.xml	2010-08-14 00:07:55.000000000 +0900
++++ comps.xml	2010-08-14 04:55:06.000000000 +0900
 @@ -155,6 +155,7 @@
      <packagelist>
        <packagereq type="default">authconfig-gtk</packagereq>
@@ -5153,12 +5153,13 @@
      </packagelist>
    </group>        
    <group>
-@@ -20615,10 +20157,14 @@
+@@ -20615,10 +20157,15 @@
     <description xml:lang="zh_TW">安裝這個套件群組以使用基礎的圖形（X）使用者介面。</description>
     <description xml:lang="zu">Faka leli qembu lama phakethe elizosetshenziswa kwisiqu soxhumano lomsebenzisi lemidwebo (X).</description>
      <packagelist>
 +      <packagereq type="mandatory">bitmap-fonts-compat</packagereq>
 +      <packagereq type="mandatory">momonga-backgrounds</packagereq>
++      <packagereq type="mandatory">natsuki-backgrounds-single</packagereq>
        <packagereq type="mandatory">xorg-x11-drivers</packagereq>
        <packagereq type="mandatory">xorg-x11-server-Xorg</packagereq>
 +      <packagereq type="mandatory">xorg-x11-server-utils</packagereq>
@@ -5168,7 +5169,7 @@
        <packagereq type="default">abrt-desktop</packagereq>
        <packagereq type="default">authconfig-gtk</packagereq>
        <packagereq type="default">cups-pk-helper</packagereq>
-@@ -20626,33 +20172,55 @@
+@@ -20626,33 +20173,55 @@
        <packagereq type="default">firstboot</packagereq>
        <packagereq type="default">glx-utils</packagereq>
        <packagereq type="default">gnome-packagekit</packagereq>
@@ -5232,7 +5233,7 @@
        <packagereq type="optional">rxvt</packagereq>
        <packagereq type="optional">sakura</packagereq>
        <packagereq type="optional">slim</packagereq>
-@@ -20662,12 +20230,8 @@
+@@ -20662,12 +20231,8 @@
        <packagereq type="optional">termit</packagereq>
        <packagereq type="optional">tigervnc-server</packagereq>
        <packagereq type="optional">ucs-miscfixed-fonts</packagereq>
@@ -5247,7 +5248,7 @@
        <packagereq type="optional">xlockmore</packagereq>
        <packagereq type="optional">xorg-x11-apps</packagereq>
        <packagereq type="optional">xorg-x11-resutils</packagereq>
-@@ -20680,7 +20244,9 @@
+@@ -20680,7 +20245,9 @@
        <packagereq type="optional">xscreensaver</packagereq>
        <packagereq type="optional">xscreensaver-base</packagereq>
        <packagereq type="optional">xscreensaver-extras</packagereq>
@@ -5257,7 +5258,7 @@
        <packagereq type="optional">xterm</packagereq>
      </packagelist>
    </group>        
-@@ -20807,7 +20373,6 @@
+@@ -20807,7 +20374,6 @@
     <description xml:lang="zh_TW">輕型的桌面環境，適用於低階電腦。</description>
      <packagelist>
        <packagereq type="mandatory">Thunar</packagereq>
@@ -5265,7 +5266,7 @@
        <packagereq type="mandatory">libxfce4menu</packagereq>
        <packagereq type="mandatory">libxfce4util</packagereq>
        <packagereq type="mandatory">libxfcegui4</packagereq>
-@@ -20818,8 +20383,10 @@
+@@ -20818,8 +20384,10 @@
        <packagereq type="mandatory">xfconf</packagereq>
        <packagereq type="mandatory">xfdesktop</packagereq>
        <packagereq type="mandatory">xfwm4</packagereq>
@@ -5276,7 +5277,7 @@
        <packagereq type="default">mousepad</packagereq>
        <packagereq type="default">orage</packagereq>
        <packagereq type="default">polkit-gnome</packagereq>
-@@ -20828,14 +20395,14 @@
+@@ -20828,14 +20396,14 @@
        <packagereq type="default">xarchiver</packagereq>
        <packagereq type="default">xfce4-appfinder</packagereq>
        <packagereq type="default">xfce4-icon-theme</packagereq>
@@ -5294,7 +5295,7 @@
        <packagereq type="optional">xfbib</packagereq>
        <packagereq type="optional">xfburn</packagereq>
        <packagereq type="optional">xfce4-battery-plugin</packagereq>
-@@ -20850,39 +20417,30 @@
+@@ -20850,39 +20418,30 @@
        <packagereq type="optional">xfce4-eyes-plugin</packagereq>
        <packagereq type="optional">xfce4-fsguard-plugin</packagereq>
        <packagereq type="optional">xfce4-genmon-plugin</packagereq>
@@ -5335,7 +5336,7 @@
        <packagereq type="conditional" requires="pinentry">pinentry-gtk</packagereq>
      </packagelist>
    </group>        
-@@ -21012,15 +20570,20 @@
+@@ -21012,15 +20571,20 @@
     <description xml:lang="uk">Встановіть ці пакети для розробки графічних програм GTK+ та XFCE.</description>
     <description xml:lang="zh_TW">安裝這些套件以開發 GTK+ 與 XFCE 圖形應用程式。</description>
      <packagelist>
