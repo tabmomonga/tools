@@ -10119,6 +10119,7 @@
       <packagereq type="optional">lmms</packagereq>
       <packagereq type="optional">luminance</packagereq>
       <packagereq type="optional">minitunes</packagereq>
+      <packagereq type="optional">momonga-backgrounds-extras-kde</packagereq>
       <packagereq type="optional">nmapsi4</packagereq>
       <packagereq type="optional">pdfedit</packagereq>
       <packagereq type="optional">polyester</packagereq>
@@ -20158,7 +20159,6 @@
    <description xml:lang="zu">Faka leli qembu lama phakethe elizosetshenziswa kwisiqu soxhumano lomsebenzisi lemidwebo (X).</description>
     <packagelist>
       <packagereq type="mandatory">bitmap-fonts-compat</packagereq>
-      <packagereq type="mandatory">momonga-backgrounds</packagereq>
       <packagereq type="mandatory">natsuki-backgrounds-single</packagereq>
       <packagereq type="mandatory">xorg-x11-drivers</packagereq>
       <packagereq type="mandatory">xorg-x11-server-Xorg</packagereq>
