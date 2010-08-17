@@ -9927,11 +9927,9 @@
       <packagereq type="default">kdeartwork-kxs</packagereq>
       <packagereq type="default">kdeartwork-screensavers</packagereq>
       <packagereq type="default">kdeartwork-sounds</packagereq>
-      <packagereq type="default">kdeartwork-wallpapers</packagereq>
       <packagereq type="default">kdebase-runtime-flags</packagereq>
       <packagereq type="default">kdebase-workspace-googlegadgets</packagereq>
       <packagereq type="default">kdebase-workspace-python-applet</packagereq>
-      <packagereq type="default">kdebase-workspace-wallpapers</packagereq>
       <packagereq type="default">kdeedu</packagereq>
       <packagereq type="default">kdeedu-kstars</packagereq>
       <packagereq type="default">kdeedu-marble</packagereq>
@@ -10074,6 +10072,8 @@
       <packagereq type="optional">kchmviewer</packagereq>
       <packagereq type="optional">kcm_devinfo</packagereq>
       <packagereq type="optional">kcometen4</packagereq>
+      <packagereq type="optional">kdeartwork-wallpapers</packagereq>
+      <packagereq type="optional">kdebase-workspace-wallpapers</packagereq>
       <packagereq type="optional">kdeclassic-icon-theme</packagereq>
       <packagereq type="optional">kdegraphics3</packagereq>
       <packagereq type="optional">kdenlive</packagereq>

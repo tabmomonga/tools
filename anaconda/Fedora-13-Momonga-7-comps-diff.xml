@@ -1,5 +1,5 @@
---- Fedora-13-comps.xml	2010-05-13 09:42:00.000000000 +0900
-+++ comps.xml	2010-08-14 04:55:06.000000000 +0900
+--- Fedora-13-comps.xml	2010-08-15 19:34:31.000000000 +0900
++++ comps.xml	2010-08-17 20:04:06.000000000 +0900
 @@ -155,6 +155,7 @@
      <packagelist>
        <packagereq type="default">authconfig-gtk</packagereq>
@@ -2978,11 +2978,9 @@
        <packagereq type="default">kdeartwork-screensavers</packagereq>
 -      <packagereq type="default">kdebase</packagereq>
 +      <packagereq type="default">kdeartwork-sounds</packagereq>
-+      <packagereq type="default">kdeartwork-wallpapers</packagereq>
 +      <packagereq type="default">kdebase-runtime-flags</packagereq>
 +      <packagereq type="default">kdebase-workspace-googlegadgets</packagereq>
        <packagereq type="default">kdebase-workspace-python-applet</packagereq>
-+      <packagereq type="default">kdebase-workspace-wallpapers</packagereq>
 +      <packagereq type="default">kdeedu</packagereq>
 +      <packagereq type="default">kdeedu-kstars</packagereq>
 +      <packagereq type="default">kdeedu-marble</packagereq>
@@ -3148,9 +3146,9 @@
 -      <packagereq type="optional">kdeadmin</packagereq>
 -      <packagereq type="optional">kdeartwork</packagereq>
 -      <packagereq type="optional">kdeartwork-sounds</packagereq>
--      <packagereq type="optional">kdeartwork-wallpapers</packagereq>
+       <packagereq type="optional">kdeartwork-wallpapers</packagereq>
 -      <packagereq type="optional">kdebase-workspace-googlegadgets</packagereq>
--      <packagereq type="optional">kdebase-workspace-wallpapers</packagereq>
+       <packagereq type="optional">kdebase-workspace-wallpapers</packagereq>
        <packagereq type="optional">kdeclassic-icon-theme</packagereq>
 -      <packagereq type="optional">kdeedu</packagereq>
 -      <packagereq type="optional">kdetoys</packagereq>
