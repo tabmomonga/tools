@@ -10059,6 +10059,7 @@
       <packagereq type="optional">flite</packagereq>
       <packagereq type="optional">fotowall</packagereq>
       <packagereq type="optional">gammu</packagereq>
+      <packagereq type="optional">grip-kde</packagereq>
       <packagereq type="optional">k9copy</packagereq>
       <packagereq type="optional">kaffeine</packagereq>
       <packagereq type="optional">kaffeine-plugin</packagereq>
