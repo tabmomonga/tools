@@ -834,7 +834,6 @@
       <packagereq type="default">docbook5-schemas</packagereq>
       <packagereq type="default">docbook5-style-xsl</packagereq>
       <packagereq type="default">linuxdoc-tools</packagereq>
-      <packagereq type="default">texlive</packagereq>
       <packagereq type="default">xhtml1-dtds</packagereq>
       <packagereq type="default">xmlto</packagereq>
       <packagereq type="optional">BibTool</packagereq>
@@ -853,24 +852,8 @@
       <packagereq type="optional">pdfedit</packagereq>
       <packagereq type="optional">python-docutils</packagereq>
       <packagereq type="optional">scribus</packagereq>
-      <packagereq type="optional">texlive</packagereq>
-      <packagereq type="optional">texlive-afm2pl</packagereq>
-      <packagereq type="optional">texlive-doc</packagereq>
-      <packagereq type="optional">texlive-dvipdfmx</packagereq>
-      <packagereq type="optional">texlive-dvipsk</packagereq>
-      <packagereq type="optional">texlive-makejvf</packagereq>
-      <packagereq type="optional">texlive-pdftex</packagereq>
-      <packagereq type="optional">texlive-texmf-latex-powerdot</packagereq>
-      <packagereq type="optional">texlive-texmf-latex-prosper</packagereq>
-      <packagereq type="optional">texlive-texmf-latexmk</packagereq>
-      <packagereq type="optional">texlive-texmf-platex-jsclasses</packagereq>
-      <packagereq type="optional">texlive-texmf-platex-otf</packagereq>
-      <packagereq type="optional">texlive-texmf-platex-utf</packagereq>
-      <packagereq type="optional">texlive-texmf-xmltex-passivetex</packagereq>
       <packagereq type="optional">txt2rss</packagereq>
       <packagereq type="optional">w3c-markup-validator</packagereq>
-      <packagereq type="optional">xdvik</packagereq>
-      <packagereq type="conditional" requires="texlive">texlive-texmf-latex-cm-lgc</packagereq>
     </packagelist>
   </group>        
   <group>
@@ -4464,7 +4447,6 @@
       <packagereq type="default">perl-Verilog-CodeGen</packagereq>
       <packagereq type="default">perl-Verilog-Readmem</packagereq>
       <packagereq type="default">qtoctave</packagereq>
-      <packagereq type="default">texlive-texmf-latex-IEEEtran</packagereq>
       <packagereq type="default">tkcvs</packagereq>
       <packagereq type="default">tkgate</packagereq>
       <packagereq type="default">xcircuit</packagereq>
@@ -7908,8 +7890,6 @@
       <packagereq type="conditional" requires="moodle">moodle-el</packagereq>
       <packagereq type="conditional" requires="mythes-en">mythes-el</packagereq>
       <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-el_GR</packagereq>
-      <packagereq type="conditional" requires="texlive">texlive-texmf-latex-cm-lgc</packagereq>
-      <packagereq type="conditional" requires="texlive">texlive-texmf-latex-kerkis</packagereq>
     </packagelist>
   </group>        
   <group>
@@ -8368,7 +8348,6 @@
       <packagereq type="conditional" requires="kdelibs3">kde3-i18n-Hebrew</packagereq>
       <packagereq type="conditional" requires="moodle">moodle-he</packagereq>
       <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-he_IL</packagereq>
-      <packagereq type="conditional" requires="texlive">tex-fonts-hebrew</packagereq>
     </packagelist>
   </group>        
   <group>
@@ -10488,7 +10467,6 @@
       <packagereq type="optional">strigi-devel</packagereq>
       <packagereq type="optional">subversion-devel</packagereq>
       <packagereq type="optional">taglib-devel</packagereq>
-      <packagereq type="optional">texlive-pdftex</packagereq>
       <packagereq type="optional">webkitpart-devel</packagereq>
       <packagereq type="optional">wv2-devel</packagereq>
       <packagereq type="optional">xmms-devel</packagereq>
@@ -14255,10 +14233,7 @@
       <packagereq type="optional">qtrans</packagereq>
       <packagereq type="optional">skrooge</packagereq>
       <packagereq type="optional">sunbird</packagereq>
-      <packagereq type="optional">texlive-texmf-latex-IEEEtran</packagereq>
-      <packagereq type="optional">xdvik</packagereq>
       <packagereq type="optional">xfbib</packagereq>
-      <packagereq type="optional">xpdf</packagereq>
       <packagereq type="conditional" requires="hyphen">hyphen-en</packagereq>
       <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-en</packagereq>
     </packagelist>
