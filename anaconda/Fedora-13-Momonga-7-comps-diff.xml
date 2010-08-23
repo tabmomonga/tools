@@ -1,5 +1,5 @@
 --- Fedora-13-comps.xml	2010-08-15 19:34:31.000000000 +0900
-+++ comps.xml	2010-08-22 01:46:15.000000000 +0900
++++ comps.xml	2010-08-23 22:49:56.000000000 +0900
 @@ -155,6 +155,7 @@
      <packagelist>
        <packagereq type="default">authconfig-gtk</packagereq>
@@ -1565,7 +1565,15 @@
      </packagelist>
    </group>        
    <group>
-@@ -6808,10 +6536,11 @@
+@@ -6789,6 +6517,7 @@
+       <packagereq type="default">NetworkManager-vpnc</packagereq>
+       <packagereq type="default">PackageKit-command-not-found</packagereq>
+       <packagereq type="default">PackageKit-gtk-module</packagereq>
++      <packagereq type="default">alacarte</packagereq>
+       <packagereq type="default">at-spi</packagereq>
+       <packagereq type="default">brasero-nautilus</packagereq>
+       <packagereq type="default">caribou</packagereq>
+@@ -6808,10 +6537,11 @@
        <packagereq type="default">gnome-backgrounds</packagereq>
        <packagereq type="default">gnome-bluetooth</packagereq>
        <packagereq type="default">gnome-color-manager</packagereq>
@@ -1578,7 +1586,7 @@
        <packagereq type="default">gnome-power-manager</packagereq>
        <packagereq type="default">gnome-screensaver</packagereq>
        <packagereq type="default">gnome-system-monitor</packagereq>
-@@ -6826,7 +6555,9 @@
+@@ -6826,7 +6556,9 @@
        <packagereq type="default">gvfs-archive</packagereq>
        <packagereq type="default">gvfs-gphoto2</packagereq>
        <packagereq type="default">gvfs-smb</packagereq>
@@ -1589,7 +1597,7 @@
        <packagereq type="default">mousetweaks</packagereq>
        <packagereq type="default">nautilus-sendto</packagereq>
        <packagereq type="default">notification-daemon</packagereq>
-@@ -6837,90 +6568,70 @@
+@@ -6837,90 +6569,69 @@
        <packagereq type="default">seahorse</packagereq>
        <packagereq type="default">shotwell</packagereq>
        <packagereq type="default">simple-scan</packagereq>
@@ -1597,7 +1605,7 @@
        <packagereq type="default">vino</packagereq>
        <packagereq type="default">xdg-user-dirs-gtk</packagereq>
        <packagereq type="default">zenity</packagereq>
-       <packagereq type="optional">alacarte</packagereq>
+-      <packagereq type="optional">alacarte</packagereq>
 -      <packagereq type="optional">avant-window-navigator</packagereq>
 -      <packagereq type="optional">beagle-evolution</packagereq>
 -      <packagereq type="optional">beagle-gnome</packagereq>
