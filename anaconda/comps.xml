@@ -6517,6 +6517,7 @@
       <packagereq type="default">NetworkManager-vpnc</packagereq>
       <packagereq type="default">PackageKit-command-not-found</packagereq>
       <packagereq type="default">PackageKit-gtk-module</packagereq>
+      <packagereq type="default">alacarte</packagereq>
       <packagereq type="default">at-spi</packagereq>
       <packagereq type="default">brasero-nautilus</packagereq>
       <packagereq type="default">caribou</packagereq>
@@ -6571,7 +6572,6 @@
       <packagereq type="default">vino</packagereq>
       <packagereq type="default">xdg-user-dirs-gtk</packagereq>
       <packagereq type="default">zenity</packagereq>
-      <packagereq type="optional">alacarte</packagereq>
       <packagereq type="optional">beagle-doc</packagereq>
       <packagereq type="optional">byzanz</packagereq>
       <packagereq type="optional">dasher</packagereq>
