@@ -20163,7 +20163,6 @@
       <packagereq type="default">sdr</packagereq>
       <packagereq type="default">setroubleshoot</packagereq>
       <packagereq type="default">system-config-date</packagereq>
-      <packagereq type="default">system-config-display</packagereq>
       <packagereq type="default">system-config-firewall</packagereq>
       <packagereq type="default">system-config-network</packagereq>
       <packagereq type="default">system-config-printer</packagereq>
