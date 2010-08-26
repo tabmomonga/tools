@@ -61,6 +61,8 @@ ARGV.each { |file|
 
 	spec = RPM::Spec.open(file)
 
+	@epoch = spec.packages[0].version.e
+
 	@ver = spec.packages[0].version.v
 
 	relarray = spec.packages[0].version.r.sub(/m\.mo[1-9]/,'').split('.')
@@ -76,10 +78,16 @@ ARGV.each { |file|
 				line = "%global momorel #{rel}\n"
 			end
 
+			evr = if @epoch.nil? || @epoch.zero?
+					"#{@ver}-#{@rel}"
+                              else
+                                	"#{@epoch}:#{@ver}-#{@rel}"
+                              end
+
 			changelog = <<-EOD
 %changelog
 * #{date} #{@myname} <#{@myaddr}>
-- (#{@ver}-#{@rel})
+- (#{evr})
 - #{@message}
 EOD
 
