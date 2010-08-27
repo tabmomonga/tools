@@ -1,5 +1,5 @@
 --- Fedora-13-comps.xml	2010-08-15 19:34:31.000000000 +0900
-+++ comps.xml	2010-08-24 20:32:33.000000000 +0900
++++ comps.xml	2010-08-27 22:47:10.000000000 +0900
 @@ -155,6 +155,7 @@
      <packagelist>
        <packagereq type="default">authconfig-gtk</packagereq>
@@ -1597,11 +1597,7 @@
        <packagereq type="default">mousetweaks</packagereq>
        <packagereq type="default">nautilus-sendto</packagereq>
        <packagereq type="default">notification-daemon</packagereq>
-@@ -6837,90 +6569,69 @@
-       <packagereq type="default">seahorse</packagereq>
-       <packagereq type="default">shotwell</packagereq>
-       <packagereq type="default">simple-scan</packagereq>
--      <packagereq type="default">vinagre</packagereq>
+@@ -6841,86 +6573,65 @@
        <packagereq type="default">vino</packagereq>
        <packagereq type="default">xdg-user-dirs-gtk</packagereq>
        <packagereq type="default">zenity</packagereq>
@@ -1705,7 +1701,6 @@
 -      <packagereq type="optional">wp_tray</packagereq>
 -      <packagereq type="optional">xiphos</packagereq>
 +      <packagereq type="optional">uim-applet</packagereq>
-+      <packagereq type="optional">vinagre</packagereq>
 +      <packagereq type="optional">wicd</packagereq>
        <packagereq type="optional">xscreensaver-extras-gss</packagereq>
        <packagereq type="optional">xscreensaver-gl-extras-gss</packagereq>
