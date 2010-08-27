@@ -6569,6 +6569,7 @@
       <packagereq type="default">seahorse</packagereq>
       <packagereq type="default">shotwell</packagereq>
       <packagereq type="default">simple-scan</packagereq>
+      <packagereq type="default">vinagre</packagereq>
       <packagereq type="default">vino</packagereq>
       <packagereq type="default">xdg-user-dirs-gtk</packagereq>
       <packagereq type="default">zenity</packagereq>
@@ -6625,7 +6626,6 @@
       <packagereq type="optional">tomboy</packagereq>
       <packagereq type="optional">tracker-search-tool</packagereq>
       <packagereq type="optional">uim-applet</packagereq>
-      <packagereq type="optional">vinagre</packagereq>
       <packagereq type="optional">wicd</packagereq>
       <packagereq type="optional">xscreensaver-extras-gss</packagereq>
       <packagereq type="optional">xscreensaver-gl-extras-gss</packagereq>
