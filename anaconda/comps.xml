@@ -8845,16 +8845,17 @@
    <description xml:lang="zh_TW">國際文字輸入法的輸入法套件。</description>
     <packagelist>
       <packagereq type="default">ibus</packagereq>
-      <packagereq type="default">ibus-anthy</packagereq>
-      <packagereq type="default">ibus-chewing</packagereq>
-      <packagereq type="default">ibus-hangul</packagereq>
-      <packagereq type="default">ibus-m17n</packagereq>
-      <packagereq type="default">ibus-mozc</packagereq>
-      <packagereq type="default">ibus-pinyin</packagereq>
-      <packagereq type="default">ibus-pinyin-open-phrase</packagereq>
-      <packagereq type="default">ibus-rawcode</packagereq>
-      <packagereq type="default">m17n-contrib</packagereq>
-      <packagereq type="default">m17n-db</packagereq>
+      <packagereq type="optional">ibus-anthy</packagereq>
+      <packagereq type="optional">ibus-chewing</packagereq>
+      <packagereq type="optional">ibus-hangul</packagereq>
+      <packagereq type="optional">ibus-m17n</packagereq>
+      <packagereq type="optional">ibus-mozc</packagereq>
+      <packagereq type="optional">ibus-pinyin</packagereq>
+      <packagereq type="optional">ibus-pinyin-open-phrase</packagereq>
+      <packagereq type="optional">ibus-rawcode</packagereq>
+      <packagereq type="optional">ibus-skk</packagereq>
+      <packagereq type="optional">m17n-contrib</packagereq>
+      <packagereq type="optional">m17n-db</packagereq>
       <packagereq type="optional">Canna</packagereq>
       <packagereq type="optional">gcin</packagereq>
       <packagereq type="optional">gok</packagereq>
@@ -9371,6 +9372,9 @@
       <packagereq type="conditional" requires="moodle">moodle-ja</packagereq>
       <packagereq type="conditional" requires="nqc-doc">nqc-doc-ja</packagereq>
       <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-ja_JP</packagereq>
+      <packagereq type="conditional" requires="xorg-x11-server-Xorg">ibus-anthy</packagereq>
+      <packagereq type="conditional" requires="xorg-x11-server-Xorg">ibus-mozc</packagereq>
+      <packagereq type="conditional" requires="xorg-x11-server-Xorg">ibus-skk</packagereq>
       <packagereq type="conditional" requires="xorg-x11-server-Xorg">scim-anthy</packagereq>
       <packagereq type="conditional" requires="xorg-x11-server-Xorg">scim-bridge</packagereq>
       <packagereq type="conditional" requires="xorg-x11-server-Xorg">scim-input-pad</packagereq>
@@ -11014,6 +11018,7 @@
       <packagereq type="conditional" requires="man-pages">man-pages-ko</packagereq>
       <packagereq type="conditional" requires="moodle">moodle-ko</packagereq>
       <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-ko_KR</packagereq>
+      <packagereq type="conditional" requires="xorg-x11-server-Xorg">ibus-hangul</packagereq>
       <packagereq type="conditional" requires="xorg-x11-server-Xorg">scim-hangul</packagereq>
     </packagelist>
   </group>        
