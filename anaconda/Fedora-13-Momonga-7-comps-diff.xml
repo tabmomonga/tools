@@ -1,5 +1,5 @@
 --- Fedora-13-comps.xml	2010-08-15 19:34:31.000000000 +0900
-+++ comps.xml	2010-08-27 22:47:10.000000000 +0900
++++ comps.xml	2010-08-29 01:22:44.000000000 +0900
 @@ -155,6 +155,7 @@
      <packagelist>
        <packagereq type="default">authconfig-gtk</packagereq>
@@ -2517,19 +2517,17 @@
        <packagereq type="conditional" requires="moodle">moodle-id</packagereq>
      </packagelist>
    </group>        
-@@ -9468,103 +8844,37 @@
+@@ -9468,103 +8844,38 @@
     <description xml:lang="uk">Пакети для вводу тексту різними мовами.</description>
     <description xml:lang="zh_TW">國際文字輸入法的輸入法套件。</description>
      <packagelist>
-+      <packagereq type="default">ibus</packagereq>
-       <packagereq type="default">ibus-anthy</packagereq>
-       <packagereq type="default">ibus-chewing</packagereq>
-       <packagereq type="default">ibus-hangul</packagereq>
-       <packagereq type="default">ibus-m17n</packagereq>
-+      <packagereq type="default">ibus-mozc</packagereq>
-       <packagereq type="default">ibus-pinyin</packagereq>
-       <packagereq type="default">ibus-pinyin-open-phrase</packagereq>
-       <packagereq type="default">ibus-rawcode</packagereq>
+-      <packagereq type="default">ibus-anthy</packagereq>
+-      <packagereq type="default">ibus-chewing</packagereq>
+-      <packagereq type="default">ibus-hangul</packagereq>
+-      <packagereq type="default">ibus-m17n</packagereq>
+-      <packagereq type="default">ibus-pinyin</packagereq>
+-      <packagereq type="default">ibus-pinyin-open-phrase</packagereq>
+-      <packagereq type="default">ibus-rawcode</packagereq>
 -      <packagereq type="default">im-chooser</packagereq>
 -      <packagereq type="default">imsettings</packagereq>
 -      <packagereq type="default">m17n-contrib-assamese</packagereq>
@@ -2550,8 +2548,18 @@
 -      <packagereq type="optional">WritRecogn</packagereq>
 -      <packagereq type="optional">cellwriter</packagereq>
 -      <packagereq type="optional">fcitx</packagereq>
-+      <packagereq type="default">m17n-contrib</packagereq>
-+      <packagereq type="default">m17n-db</packagereq>
++      <packagereq type="default">ibus</packagereq>
++      <packagereq type="optional">ibus-anthy</packagereq>
++      <packagereq type="optional">ibus-chewing</packagereq>
++      <packagereq type="optional">ibus-hangul</packagereq>
++      <packagereq type="optional">ibus-m17n</packagereq>
++      <packagereq type="optional">ibus-mozc</packagereq>
++      <packagereq type="optional">ibus-pinyin</packagereq>
++      <packagereq type="optional">ibus-pinyin-open-phrase</packagereq>
++      <packagereq type="optional">ibus-rawcode</packagereq>
++      <packagereq type="optional">ibus-skk</packagereq>
++      <packagereq type="optional">m17n-contrib</packagereq>
++      <packagereq type="optional">m17n-db</packagereq>
 +      <packagereq type="optional">Canna</packagereq>
        <packagereq type="optional">gcin</packagereq>
        <packagereq type="optional">gok</packagereq>
@@ -2631,7 +2639,7 @@
        <packagereq type="optional">scim-python-chinese</packagereq>
        <packagereq type="optional">scim-python-english</packagereq>
        <packagereq type="optional">scim-python-pinyin</packagereq>
-@@ -9572,25 +8882,42 @@
+@@ -9572,25 +8883,42 @@
        <packagereq type="optional">scim-python-xingma-erbi</packagereq>
        <packagereq type="optional">scim-python-xingma-wubi</packagereq>
        <packagereq type="optional">scim-python-xingma-zhengma</packagereq>
@@ -2679,7 +2687,7 @@
      </packagelist>
    </group>        
    <group>
-@@ -9776,8 +9103,9 @@
+@@ -9776,8 +9104,9 @@
        <packagereq type="conditional" requires="aspell">aspell-ga</packagereq>
        <packagereq type="conditional" requires="hunspell">hunspell-ga</packagereq>
        <packagereq type="conditional" requires="hyphen">hyphen-ga</packagereq>
@@ -2691,7 +2699,7 @@
        <packagereq type="conditional" requires="moodle">moodle-ga</packagereq>
        <packagereq type="conditional" requires="mythes-en">mythes-ga</packagereq>
        <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-ga_IE</packagereq>
-@@ -9862,17 +9190,13 @@
+@@ -9862,17 +9191,13 @@
     <name xml:lang="zu">Ukuxhasa kwesiNtaliyani</name>
     <description></description>
      <packagelist>
@@ -2711,7 +2719,7 @@
        <packagereq type="conditional" requires="man-pages">man-pages-it</packagereq>
        <packagereq type="conditional" requires="moodle">moodle-it</packagereq>
        <packagereq type="conditional" requires="mythes-en">mythes-it</packagereq>
-@@ -9962,57 +9286,103 @@
+@@ -9962,57 +9287,106 @@
     <name xml:lang="zu">Ukuxhasa kwesiJaphani</name>
     <description></description>
      <packagelist>
@@ -2817,6 +2825,9 @@
        <packagereq type="conditional" requires="moodle">moodle-ja</packagereq>
        <packagereq type="conditional" requires="nqc-doc">nqc-doc-ja</packagereq>
        <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-ja_JP</packagereq>
++      <packagereq type="conditional" requires="xorg-x11-server-Xorg">ibus-anthy</packagereq>
++      <packagereq type="conditional" requires="xorg-x11-server-Xorg">ibus-mozc</packagereq>
++      <packagereq type="conditional" requires="xorg-x11-server-Xorg">ibus-skk</packagereq>
 +      <packagereq type="conditional" requires="xorg-x11-server-Xorg">scim-anthy</packagereq>
 +      <packagereq type="conditional" requires="xorg-x11-server-Xorg">scim-bridge</packagereq>
 +      <packagereq type="conditional" requires="xorg-x11-server-Xorg">scim-input-pad</packagereq>
@@ -2833,7 +2844,7 @@
      </packagelist>
    </group>        
    <group>
-@@ -10305,6 +9675,7 @@
+@@ -10305,6 +9679,7 @@
        <packagereq type="mandatory">sinjdoc</packagereq>
        <packagereq type="default">ant-antlr</packagereq>
        <packagereq type="default">ant-apache-bcel</packagereq>
@@ -2841,7 +2852,7 @@
        <packagereq type="default">ant-apache-log4j</packagereq>
        <packagereq type="default">ant-apache-oro</packagereq>
        <packagereq type="default">ant-apache-regexp</packagereq>
-@@ -10313,6 +9684,8 @@
+@@ -10313,6 +9688,8 @@
        <packagereq type="default">ant-javadoc</packagereq>
        <packagereq type="default">ant-javamail</packagereq>
        <packagereq type="default">ant-jdepend</packagereq>
@@ -2850,7 +2861,7 @@
        <packagereq type="default">ant-junit</packagereq>
        <packagereq type="default">ant-manual</packagereq>
        <packagereq type="default">ant-nodeps</packagereq>
-@@ -10339,18 +9712,28 @@
+@@ -10339,18 +9716,28 @@
        <packagereq type="default">gnu-getopt-javadoc</packagereq>
        <packagereq type="default">jakarta-commons-beanutils</packagereq>
        <packagereq type="default">jakarta-commons-beanutils-javadoc</packagereq>
@@ -2879,7 +2890,7 @@
        <packagereq type="default">jakarta-commons-lang</packagereq>
        <packagereq type="default">jakarta-commons-lang-javadoc</packagereq>
        <packagereq type="default">jakarta-commons-launcher</packagereq>
-@@ -10361,6 +9744,7 @@
+@@ -10361,6 +9748,7 @@
        <packagereq type="default">jakarta-commons-modeler-javadoc</packagereq>
        <packagereq type="default">jakarta-commons-pool</packagereq>
        <packagereq type="default">jakarta-commons-pool-javadoc</packagereq>
@@ -2887,7 +2898,7 @@
        <packagereq type="default">jakarta-commons-validator</packagereq>
        <packagereq type="default">jakarta-commons-validator-javadoc</packagereq>
        <packagereq type="default">jakarta-oro</packagereq>
-@@ -10390,7 +9774,6 @@
+@@ -10390,7 +9778,6 @@
        <packagereq type="default">log4j</packagereq>
        <packagereq type="default">log4j-javadoc</packagereq>
        <packagereq type="default">log4j-manual</packagereq>
@@ -2895,7 +2906,7 @@
        <packagereq type="default">mx4j</packagereq>
        <packagereq type="default">mx4j-javadoc</packagereq>
        <packagereq type="default">mx4j-manual</packagereq>
-@@ -10420,19 +9803,22 @@
+@@ -10420,19 +9807,22 @@
        <packagereq type="optional">findbugs</packagereq>
        <packagereq type="optional">findbugs-javadoc</packagereq>
        <packagereq type="optional">findbugs-tools</packagereq>
@@ -2921,7 +2932,7 @@
     <uservisible>true</uservisible>
     <display_order>1024</display_order>
     <name>KDE Software Compilation</name>
-@@ -10478,120 +9864,281 @@
+@@ -10478,120 +9868,281 @@
     <description xml:lang="uk">До складу KDE SC входять робочий стіл KDE Plasma - графічний інтерфейс, що налаштовується та надає панель програм, робочий стіл, системні значки, віджети робочого столу та інші потужні програми KDE.</description>
      <packagelist>
        <packagereq type="mandatory">kdebase-runtime</packagereq>
@@ -3262,7 +3273,7 @@
      </packagelist>
    </group>        
    <group>
-@@ -10745,34 +10292,185 @@
+@@ -10745,34 +10296,185 @@
     <description xml:lang="zh_TW">安裝這些套件以開發 QT 與 KDE 圖形應用程式。</description>
     <description xml:lang="zu">Faka lama phakethe ukuze uthuthukise imiyalelo yemidwebo ye-QT kanye ne-KDE.</description>
      <packagelist>
@@ -3460,7 +3471,7 @@
      </packagelist>
    </group>        
    <group>
-@@ -10846,12 +10544,13 @@
+@@ -10846,12 +10548,13 @@
     <description></description>
      <packagelist>
        <packagereq type="mandatory">lohit-kannada-fonts</packagereq>
@@ -3476,7 +3487,7 @@
        <packagereq type="conditional" requires="moodle">moodle-kn</packagereq>
        <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-kn_IN</packagereq>
      </packagelist>
-@@ -10909,8 +10608,9 @@
+@@ -10909,8 +10612,9 @@
     <description></description>
      <packagelist>
        <packagereq type="mandatory">lohit-devanagari-fonts</packagereq>
@@ -3487,7 +3498,7 @@
        <packagereq type="conditional" requires="xorg-x11-server-Xorg">ibus-m17n</packagereq>
      </packagelist>
    </group>        
-@@ -10967,6 +10667,7 @@
+@@ -10967,6 +10671,7 @@
      <packagelist>
        <packagereq type="conditional" requires="hunspell">hunspell-csb</packagereq>
        <packagereq type="conditional" requires="kdelibs">kde-l10n-Kashubian</packagereq>
@@ -3495,7 +3506,7 @@
      </packagelist>
    </group>        
    <group>
-@@ -11018,6 +10719,7 @@
+@@ -11018,6 +10723,7 @@
      <packagelist>
        <packagereq type="conditional" requires="hunspell">hunspell-kk</packagereq>
        <packagereq type="conditional" requires="kdelibs">kde-l10n-Kazakh</packagereq>
@@ -3503,7 +3514,7 @@
        <packagereq type="conditional" requires="moodle">moodle-kk</packagereq>
      </packagelist>
    </group>        
-@@ -11083,10 +10785,11 @@
+@@ -11083,10 +10789,11 @@
        <packagereq type="default">khmeros-metal-chrieng-fonts</packagereq>
        <packagereq type="default">khmeros-muol-fonts</packagereq>
        <packagereq type="default">khmeros-siemreap-fonts</packagereq>
@@ -3517,7 +3528,7 @@
        <packagereq type="conditional" requires="moodle">moodle-km</packagereq>
      </packagelist>
    </group>        
-@@ -11193,6 +10896,8 @@
+@@ -11193,6 +10900,8 @@
      <packagelist>
        <packagereq type="mandatory">lohit-devanagari-fonts</packagereq>
        <packagereq type="default">iok</packagereq>
@@ -3526,7 +3537,7 @@
        <packagereq type="conditional" requires="xorg-x11-server-Xorg">ibus-m17n</packagereq>
      </packagelist>
    </group>        
-@@ -11287,7 +10992,7 @@
+@@ -11287,7 +10996,7 @@
        <packagereq type="optional">baekmuk-ttf-gulim-fonts</packagereq>
        <packagereq type="optional">baekmuk-ttf-hline-fonts</packagereq>
        <packagereq type="optional">lv</packagereq>
@@ -3535,7 +3546,7 @@
        <packagereq type="optional">nabi</packagereq>
        <packagereq type="optional">un-extra-fonts-bom</packagereq>
        <packagereq type="optional">un-extra-fonts-jamobatang</packagereq>
-@@ -11302,14 +11007,14 @@
+@@ -11302,14 +11011,15 @@
        <packagereq type="optional">un-extra-fonts-vada</packagereq>
        <packagereq type="optional">un-extra-fonts-yetgul</packagereq>
        <packagereq type="conditional" requires="autocorr-en">autocorr-ko</packagereq>
@@ -3548,11 +3559,12 @@
        <packagereq type="conditional" requires="man-pages">man-pages-ko</packagereq>
        <packagereq type="conditional" requires="moodle">moodle-ko</packagereq>
        <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-ko_KR</packagereq>
++      <packagereq type="conditional" requires="xorg-x11-server-Xorg">ibus-hangul</packagereq>
 +      <packagereq type="conditional" requires="xorg-x11-server-Xorg">scim-hangul</packagereq>
      </packagelist>
    </group>        
    <group>
-@@ -11531,7 +11236,7 @@
+@@ -11531,7 +11241,7 @@
     <description></description>
      <packagelist>
        <packagereq type="mandatory">dejavu-sans-fonts</packagereq>
@@ -3561,7 +3573,7 @@
        <packagereq type="conditional" requires="moodle">moodle-lo</packagereq>
      </packagelist>
    </group>        
-@@ -11642,7 +11347,8 @@
+@@ -11642,7 +11352,8 @@
        <packagereq type="conditional" requires="hunspell">hunspell-lv</packagereq>
        <packagereq type="conditional" requires="hyphen">hyphen-lv</packagereq>
        <packagereq type="conditional" requires="kdelibs">kde-l10n-Latvian</packagereq>
@@ -3571,7 +3583,7 @@
        <packagereq type="conditional" requires="moodle">moodle-lv</packagereq>
      </packagelist>
    </group>        
-@@ -11751,6 +11457,7 @@
+@@ -11751,6 +11462,7 @@
     <description xml:lang="uk">Пакети зі старими растровими та векторними шрифтами</description>
     <description xml:lang="zh_TW">較舊的 bitmap 與向量字型套件</description>
      <packagelist>
@@ -3579,7 +3591,7 @@
        <packagereq type="default">xorg-x11-fonts-100dpi</packagereq>
        <packagereq type="default">xorg-x11-fonts-ISO8859-15-100dpi</packagereq>
        <packagereq type="default">xorg-x11-fonts-Type1</packagereq>
-@@ -11761,7 +11468,6 @@
+@@ -11761,7 +11473,6 @@
        <packagereq type="optional">bitmap-fangsongti-fonts</packagereq>
        <packagereq type="optional">bitmap-fixed-fonts</packagereq>
        <packagereq type="optional">bitmap-lucida-typewriter-fonts</packagereq>
@@ -3587,7 +3599,7 @@
        <packagereq type="optional">culmus-aharoni-clm-fonts</packagereq>
        <packagereq type="optional">culmus-caladings-clm-fonts</packagereq>
        <packagereq type="optional">culmus-david-clm-fonts</packagereq>
-@@ -11785,25 +11491,11 @@
+@@ -11785,25 +11496,11 @@
        <packagereq type="optional">jisksp16-1990-fonts</packagereq>
        <packagereq type="optional">knm-new-fixed-fonts</packagereq>
        <packagereq type="optional">libdockapp-fonts</packagereq>
@@ -3615,7 +3627,7 @@
        <packagereq type="optional">urw-fonts</packagereq>
        <packagereq type="optional">wqy-bitmap-fonts</packagereq>
        <packagereq type="optional">wqy-unibit-fonts</packagereq>
-@@ -11819,7 +11511,7 @@
+@@ -11819,7 +11516,7 @@
        <packagereq type="optional">xorg-x11-fonts-ISO8859-9-75dpi</packagereq>
        <packagereq type="optional">xorg-x11-fonts-cyrillic</packagereq>
        <packagereq type="optional">xorg-x11-fonts-ethiopic</packagereq>
@@ -3624,7 +3636,7 @@
      </packagelist>
    </group>        
    <group>
-@@ -11970,6 +11662,7 @@
+@@ -11970,6 +11667,7 @@
     <description xml:lang="zu">Lama phakethe abala abalekeleli boxhumano oludala lwemithetho elandelwayo njenge-rsh kanye ne-telnet.</description>
      <packagelist>
        <packagereq type="optional">bootparamd</packagereq>
@@ -3632,7 +3644,7 @@
        <packagereq type="optional">rarpd</packagereq>
        <packagereq type="optional">rsh-server</packagereq>
        <packagereq type="optional">rusers</packagereq>
-@@ -12115,11 +11808,12 @@
+@@ -12115,11 +11813,12 @@
     <description xml:lang="uk">Ці пакети забезпечують сумісність з попередніми випусками.</description>
     <description xml:lang="zh_TW">這些套件提供了較早版本的相容性支援。</description>
      <packagelist>
@@ -3650,7 +3662,7 @@
      </packagelist>
    </group>        
    <group>
-@@ -12200,9 +11894,7 @@
+@@ -12200,9 +11899,7 @@
     <name xml:lang="zu">Ukuthuthukiswa Kwengaphakathi lekhomputha Kwensalelo</name>
     <description></description>
      <packagelist>
@@ -3661,7 +3673,7 @@
        <packagereq type="optional">compat-db</packagereq>
      </packagelist>
    </group>        
-@@ -12280,8 +11972,8 @@
+@@ -12280,8 +11977,8 @@
      <packagelist>
        <packagereq type="conditional" requires="hunspell">hunspell-lt</packagereq>
        <packagereq type="conditional" requires="hyphen">hyphen-lt</packagereq>
@@ -3671,7 +3683,7 @@
        <packagereq type="conditional" requires="moodle">moodle-lt</packagereq>
        <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-lt_LT</packagereq>
      </packagelist>
-@@ -12342,8 +12034,9 @@
+@@ -12342,8 +12039,9 @@
     <description></description>
      <packagelist>
        <packagereq type="conditional" requires="hunspell">hunspell-nds</packagereq>
@@ -3683,7 +3695,7 @@
      </packagelist>
    </group>        
    <group>
-@@ -12598,33 +12291,20 @@
+@@ -12598,33 +12296,20 @@
      <packagelist>
        <packagereq type="default">cyrus-sasl</packagereq>
        <packagereq type="default">dovecot</packagereq>
@@ -3720,7 +3732,7 @@
        <packagereq type="optional">uw-imap</packagereq>
      </packagelist>
    </group>        
-@@ -12681,9 +12361,8 @@
+@@ -12681,9 +12366,8 @@
     <description></description>
      <packagelist>
        <packagereq type="mandatory">lohit-devanagari-fonts</packagereq>
@@ -3731,7 +3743,7 @@
        <packagereq type="conditional" requires="xorg-x11-server-Xorg">ibus-m17n</packagereq>
        <packagereq type="conditional" requires="kdelibs">kde-l10n-Maithili</packagereq>
        <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-mai_IN</packagereq>
-@@ -12812,7 +12491,8 @@
+@@ -12812,7 +12496,8 @@
     <description></description>
      <packagelist>
        <packagereq type="conditional" requires="hunspell">hunspell-ms</packagereq>
@@ -3741,7 +3753,7 @@
        <packagereq type="conditional" requires="moodle">moodle-ms</packagereq>
        <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-ms_MY</packagereq>
      </packagelist>
-@@ -12884,8 +12564,8 @@
+@@ -12884,8 +12569,8 @@
     <name xml:lang="zh_TW">馬拉雅拉姆語支援</name>
     <description></description>
      <packagelist>
@@ -3752,7 +3764,7 @@
        <packagereq type="default">iok</packagereq>
        <packagereq type="default">lohit-malayalam-fonts</packagereq>
        <packagereq type="default">samyak-malayalam-fonts</packagereq>
-@@ -13132,11 +12812,10 @@
+@@ -13132,11 +12817,10 @@
     <description></description>
      <packagelist>
        <packagereq type="mandatory">lohit-devanagari-fonts</packagereq>
@@ -3765,7 +3777,7 @@
        <packagereq type="conditional" requires="hunspell">hunspell-mr</packagereq>
        <packagereq type="conditional" requires="hyphen">hyphen-mr</packagereq>
        <packagereq type="conditional" requires="xorg-x11-server-Xorg">ibus-m17n</packagereq>
-@@ -13402,7 +13081,6 @@
+@@ -13402,7 +13086,6 @@
     <description></description>
      <packagelist>
        <packagereq type="conditional" requires="autocorr-en">autocorr-mn</packagereq>
@@ -3773,7 +3785,7 @@
        <packagereq type="conditional" requires="hunspell">hunspell-mn</packagereq>
        <packagereq type="conditional" requires="hyphen">hyphen-mn</packagereq>
        <packagereq type="conditional" requires="moodle">moodle-mn</packagereq>
-@@ -13572,6 +13250,7 @@
+@@ -13572,6 +13255,7 @@
        <packagereq type="optional">mysqlreport</packagereq>
        <packagereq type="optional">mysqltuner</packagereq>
        <packagereq type="optional">php-mysql</packagereq>
@@ -3781,7 +3793,7 @@
        <packagereq type="optional">qt-mysql</packagereq>
        <packagereq type="optional">qt3-MySQL</packagereq>
      </packagelist>
-@@ -13688,12 +13367,13 @@
+@@ -13688,12 +13372,13 @@
     <description></description>
      <packagelist>
        <packagereq type="mandatory">lohit-devanagari-fonts</packagereq>
@@ -3797,7 +3809,7 @@
      </packagelist>
    </group>        
    <group>
-@@ -13849,44 +13529,28 @@
+@@ -13849,44 +13534,28 @@
        <packagereq type="default">cyrus-sasl</packagereq>
        <packagereq type="optional">amanda-server</packagereq>
        <packagereq type="optional">cobbler</packagereq>
@@ -3844,7 +3856,7 @@
      </packagelist>
    </group>        
    <group>
-@@ -14039,11 +13703,6 @@
+@@ -14039,11 +13708,6 @@
     <description xml:lang="zu">Leli qembu likuvumela ukuba uhlanganise isistimu yakho njengo mlekeleli wezindaba.</description>
      <packagelist>
        <packagereq type="mandatory">inn</packagereq>
@@ -3856,7 +3868,7 @@
      </packagelist>
    </group>        
    <group>
-@@ -14196,17 +13855,15 @@
+@@ -14196,17 +13860,15 @@
     <description></description>
      <packagelist>
        <packagereq type="conditional" requires="aspell">aspell-no</packagereq>
@@ -3878,7 +3890,7 @@
        <packagereq type="conditional" requires="moodle">moodle-nn</packagereq>
        <packagereq type="conditional" requires="moodle">moodle-no</packagereq>
        <packagereq type="conditional" requires="moodle">moodle-no_gr</packagereq>
-@@ -14307,10 +13964,11 @@
+@@ -14307,10 +13969,11 @@
        <packagereq type="mandatory">ocaml-ocamldoc</packagereq>
        <packagereq type="mandatory">ocaml-runtime</packagereq>
        <packagereq type="mandatory">ocaml-x11</packagereq>
@@ -3891,7 +3903,7 @@
        <packagereq type="optional">ocaml-camomile-devel</packagereq>
        <packagereq type="optional">ocaml-csv-devel</packagereq>
        <packagereq type="optional">ocaml-curl-devel</packagereq>
-@@ -14326,7 +13984,6 @@
+@@ -14326,7 +13989,6 @@
        <packagereq type="optional">ocaml-ssl-devel</packagereq>
        <packagereq type="optional">ocaml-xml-light-devel</packagereq>
        <packagereq type="optional">ocaml-xmlrpc-light-devel</packagereq>
@@ -3899,7 +3911,7 @@
      </packagelist>
    </group>        
    <group>
-@@ -14528,6 +14185,7 @@
+@@ -14528,6 +14190,7 @@
     <description xml:lang="zh_TW">應用程式包括了辦公室套裝軟體、PDF 檢視器等等。</description>
     <description xml:lang="zu">Imiyalelo ibala amathuluzi ehhovisi, ababuki be-PDF, kanye nokuningi.</description>
      <packagelist>
@@ -3907,7 +3919,7 @@
        <packagereq type="default">evince</packagereq>
        <packagereq type="default">openoffice.org-calc</packagereq>
        <packagereq type="default">openoffice.org-draw</packagereq>
-@@ -14536,77 +14194,47 @@
+@@ -14536,77 +14199,47 @@
        <packagereq type="default">openoffice.org-math</packagereq>
        <packagereq type="default">openoffice.org-writer</packagereq>
        <packagereq type="default">openoffice.org-xsltfilter</packagereq>
@@ -4004,7 +4016,7 @@
        <packagereq type="conditional" requires="hyphen">hyphen-en</packagereq>
        <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-en</packagereq>
      </packagelist>
-@@ -14789,8 +14417,8 @@
+@@ -14789,8 +14422,8 @@
     <description></description>
      <packagelist>
        <packagereq type="mandatory">lohit-oriya-fonts</packagereq>
@@ -4015,7 +4027,7 @@
        <packagereq type="default">iok</packagereq>
        <packagereq type="default">samyak-oriya-fonts</packagereq>
        <packagereq type="conditional" requires="aspell">aspell-or</packagereq>
-@@ -14954,12 +14582,13 @@
+@@ -14954,12 +14587,13 @@
     <description></description>
      <packagelist>
        <packagereq type="default">sil-scheherazade-fonts</packagereq>
@@ -4032,7 +4044,7 @@
        <packagereq type="conditional" requires="moodle">moodle-fa</packagereq>
      </packagelist>
    </group>        
-@@ -15044,15 +14673,13 @@
+@@ -15044,15 +14678,13 @@
        <packagereq type="optional">fonts-ISO8859-2</packagereq>
        <packagereq type="optional">fonts-ISO8859-2-100dpi</packagereq>
        <packagereq type="optional">fonts-ISO8859-2-75dpi</packagereq>
@@ -4050,7 +4062,7 @@
        <packagereq type="conditional" requires="man-pages">man-pages-pl</packagereq>
        <packagereq type="conditional" requires="moodle">moodle-pl</packagereq>
        <packagereq type="conditional" requires="mythes-en">mythes-pl</packagereq>
-@@ -15140,13 +14767,11 @@
+@@ -15140,13 +14772,11 @@
      <packagelist>
        <packagereq type="conditional" requires="aspell">aspell-pt</packagereq>
        <packagereq type="conditional" requires="autocorr-en">autocorr-pt</packagereq>
@@ -4066,7 +4078,7 @@
        <packagereq type="conditional" requires="moodle">moodle-pt</packagereq>
        <packagereq type="conditional" requires="mythes-en">mythes-pt</packagereq>
        <packagereq type="conditional" requires="nqc-doc">nqc-doc-pt</packagereq>
-@@ -15304,19 +14929,18 @@
+@@ -15304,19 +14934,18 @@
        <packagereq type="default">PyGreSQL</packagereq>
        <packagereq type="default">libdbi-dbd-pgsql</packagereq>
        <packagereq type="default">perl-DBD-Pg</packagereq>
@@ -4088,7 +4100,7 @@
        <packagereq type="optional">unixODBC-kde</packagereq>
      </packagelist>
    </group>        
-@@ -15473,11 +15097,14 @@
+@@ -15473,11 +15102,14 @@
        <packagereq type="mandatory">cups</packagereq>
        <packagereq type="mandatory">ghostscript</packagereq>
        <packagereq type="mandatory">ghostscript-cups</packagereq>
@@ -4103,7 +4115,7 @@
        <packagereq type="default">hpijs</packagereq>
        <packagereq type="default">hplip</packagereq>
        <packagereq type="default">mpage</packagereq>
-@@ -15566,17 +15193,17 @@
+@@ -15566,17 +15198,17 @@
     <description></description>
      <packagelist>
        <packagereq type="mandatory">lohit-punjabi-fonts</packagereq>
@@ -4125,7 +4137,7 @@
      </packagelist>
    </group>        
    <group>
-@@ -15657,16 +15284,15 @@
+@@ -15657,16 +15289,15 @@
     <name xml:lang="zu">Ukuxhasa kwesiRomani</name>
     <description></description>
      <packagelist>
@@ -4144,7 +4156,7 @@
        <packagereq type="conditional" requires="moodle">moodle-ro</packagereq>
        <packagereq type="conditional" requires="mythes-en">mythes-ro</packagereq>
      </packagelist>
-@@ -15824,9 +15450,10 @@
+@@ -15824,9 +15455,10 @@
     <description xml:lang="zu">Ukuxhasa okulula kolimi lokuhlela imisebenzi ye-Rubys.</description>
      <packagelist>
        <packagereq type="mandatory">ruby</packagereq>
@@ -4158,7 +4170,7 @@
        <packagereq type="optional">ruby-ri</packagereq>
      </packagelist>
    </group>        
-@@ -15914,23 +15541,19 @@
+@@ -15914,23 +15546,19 @@
        <packagereq type="optional">fonts-KOI8-R</packagereq>
        <packagereq type="optional">fonts-KOI8-R-100dpi</packagereq>
        <packagereq type="optional">fonts-KOI8-R-75dpi</packagereq>
@@ -4186,7 +4198,7 @@
        <packagereq type="conditional" requires="man-pages">man-pages-ru</packagereq>
        <packagereq type="conditional" requires="moodle">moodle-ru</packagereq>
        <packagereq type="conditional" requires="mythes-en">mythes-ru</packagereq>
-@@ -16040,7 +15663,7 @@
+@@ -16040,7 +15668,7 @@
     <name xml:lang="zh_TW">梵語支援</name>
     <description></description>
      <packagelist>
@@ -4195,7 +4207,7 @@
        <packagereq type="conditional" requires="hyphen">hyphen-sa</packagereq>
        <packagereq type="conditional" requires="xorg-x11-server-Xorg">ibus-m17n</packagereq>
      </packagelist>
-@@ -16176,14 +15799,17 @@
+@@ -16176,14 +15804,17 @@
        <packagereq type="optional">fonts-ISO8859-2</packagereq>
        <packagereq type="optional">fonts-ISO8859-2-100dpi</packagereq>
        <packagereq type="optional">fonts-ISO8859-2-75dpi</packagereq>
@@ -4218,7 +4230,7 @@
        <packagereq type="conditional" requires="moodle">moodle-sr_cr</packagereq>
        <packagereq type="conditional" requires="moodle">moodle-sr_cr_bo</packagereq>
        <packagereq type="conditional" requires="moodle">moodle-sr_lt</packagereq>
-@@ -16339,11 +15965,13 @@
+@@ -16339,11 +15970,13 @@
     <description xml:lang="zu">Leli qembu liqukethe wonke amathuluzi enhlanganiselo omlekeleli wemfuneko we-Red hat.</description>
      <packagelist>
        <packagereq type="default">cups-pk-helper</packagereq>
@@ -4232,7 +4244,7 @@
        <packagereq type="optional">system-config-bind</packagereq>
        <packagereq type="optional">system-switch-mail-gnome</packagereq>
      </packagelist>
-@@ -16401,7 +16029,7 @@
+@@ -16401,7 +16034,7 @@
     <description></description>
      <packagelist>
        <packagereq type="mandatory">lohit-devanagari-fonts</packagereq>
@@ -4241,7 +4253,7 @@
        <packagereq type="default">iok</packagereq>
        <packagereq type="conditional" requires="xorg-x11-server-Xorg">ibus-m17n</packagereq>
      </packagelist>
-@@ -16473,13 +16101,15 @@
+@@ -16473,13 +16106,15 @@
     <description></description>
      <packagelist>
        <packagereq type="mandatory">lklug-fonts</packagereq>
@@ -4259,7 +4271,7 @@
      </packagelist>
    </group>        
    <group>
-@@ -16563,14 +16193,14 @@
+@@ -16563,14 +16198,14 @@
        <packagereq type="optional">fonts-ISO8859-2</packagereq>
        <packagereq type="optional">fonts-ISO8859-2-100dpi</packagereq>
        <packagereq type="optional">fonts-ISO8859-2-75dpi</packagereq>
@@ -4277,7 +4289,7 @@
        <packagereq type="conditional" requires="moodle">moodle-sk</packagereq>
        <packagereq type="conditional" requires="mythes-en">mythes-sk</packagereq>
        <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-sk_SK</packagereq>
-@@ -16661,9 +16291,9 @@
+@@ -16661,9 +16296,9 @@
        <packagereq type="conditional" requires="autocorr-en">autocorr-sl</packagereq>
        <packagereq type="conditional" requires="hunspell">hunspell-sl</packagereq>
        <packagereq type="conditional" requires="hyphen">hyphen-sl</packagereq>
@@ -4289,7 +4301,7 @@
        <packagereq type="conditional" requires="moodle">moodle-sl</packagereq>
        <packagereq type="conditional" requires="mythes-en">mythes-sl</packagereq>
        <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-sl_SI</packagereq>
-@@ -16725,7 +16355,6 @@
+@@ -16725,7 +16360,6 @@
     <name xml:lang="zh_TW">索馬利語支援</name>
     <description></description>
      <packagelist>
@@ -4297,7 +4309,7 @@
        <packagereq type="conditional" requires="hunspell">hunspell-so</packagereq>
        <packagereq type="conditional" requires="moodle">moodle-so</packagereq>
      </packagelist>
-@@ -16881,10 +16510,14 @@
+@@ -16881,10 +16515,14 @@
     <description xml:lang="zu">Kusuka ekuqoshweni kwe-CD kuya ekudlalweni kwama-CD kanye namafayela onondaba, leli phakethe likuvumela ukuba usebenze ngesistimu yomsindo kanye nevidiyo.</description>
      <packagelist>
        <packagereq type="mandatory">alsa-utils</packagereq>
@@ -4312,7 +4324,7 @@
        <packagereq type="default">genisoimage</packagereq>
        <packagereq type="default">gstreamer-plugins-good</packagereq>
        <packagereq type="default">icedax</packagereq>
-@@ -16896,123 +16529,129 @@
+@@ -16896,123 +16534,129 @@
        <packagereq type="default">sox</packagereq>
        <packagereq type="default">totem</packagereq>
        <packagereq type="default">totem-mozplugin</packagereq>
@@ -4521,7 +4533,7 @@
      </packagelist>
    </group>        
    <group>
-@@ -17229,14 +16868,11 @@
+@@ -17229,14 +16873,11 @@
        <packagereq type="optional">man-pages-es-extra</packagereq>
        <packagereq type="conditional" requires="aspell">aspell-es</packagereq>
        <packagereq type="conditional" requires="autocorr-en">autocorr-es</packagereq>
@@ -4538,7 +4550,7 @@
        <packagereq type="conditional" requires="man-pages">man-pages-es</packagereq>
        <packagereq type="conditional" requires="moodle">moodle-es</packagereq>
        <packagereq type="conditional" requires="mythes-en">mythes-es</packagereq>
-@@ -17559,17 +17195,14 @@
+@@ -17559,17 +17200,14 @@
     <name xml:lang="zu">Ukuxhasa KwesiSwidishi</name>
     <description></description>
      <packagelist>
@@ -4559,7 +4571,7 @@
        <packagereq type="conditional" requires="moodle">moodle-sv</packagereq>
        <packagereq type="conditional" requires="mythes-en">mythes-sv</packagereq>
        <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-sv</packagereq>
-@@ -17724,12 +17357,14 @@
+@@ -17724,12 +17362,14 @@
     <description xml:lang="zh_TW">這個群組是系統上許多種工具的收集，例如用來連線到網路芳鄰（SAMBA）共享的用戶端，以及用來監視網路流量的工具等等。</description>
     <description xml:lang="zu">Leli qembu liyiqoqo lamathuluzi esistimu ambalwa, njengomthengi wokuxhuma ngokuhlanganyela kwi-SMB kanye namathuluzi okulindwe kuxhumano lomlekeleli.</description>
      <packagelist>
@@ -4575,7 +4587,7 @@
        <packagereq type="default">jigdo</packagereq>
        <packagereq type="default">nmap</packagereq>
        <packagereq type="default">ntfs-3g</packagereq>
-@@ -17746,30 +17381,22 @@
+@@ -17746,30 +17386,22 @@
        <packagereq type="default">yum-utils</packagereq>
        <packagereq type="default">zisofs-tools</packagereq>
        <packagereq type="default">zsh</packagereq>
@@ -4607,7 +4619,7 @@
        <packagereq type="optional">convmv</packagereq>
        <packagereq type="optional">crack</packagereq>
        <packagereq type="optional">crash</packagereq>
-@@ -17778,155 +17405,84 @@
+@@ -17778,155 +17410,84 @@
        <packagereq type="optional">ddclient</packagereq>
        <packagereq type="optional">denyhosts</packagereq>
        <packagereq type="optional">dkms</packagereq>
@@ -4777,7 +4789,7 @@
      </packagelist>
    </group>        
    <group>
-@@ -18122,8 +17678,8 @@
+@@ -18122,8 +17683,8 @@
     <description></description>
      <packagelist>
        <packagereq type="mandatory">lohit-tamil-fonts</packagereq>
@@ -4788,7 +4800,7 @@
        <packagereq type="default">iok</packagereq>
        <packagereq type="default">samyak-tamil-fonts</packagereq>
        <packagereq type="default">serafettin-cartoon-fonts</packagereq>
-@@ -18131,7 +17687,8 @@
+@@ -18131,7 +17692,8 @@
        <packagereq type="conditional" requires="hunspell">hunspell-ta</packagereq>
        <packagereq type="conditional" requires="hyphen">hyphen-ta</packagereq>
        <packagereq type="conditional" requires="xorg-x11-server-Xorg">ibus-m17n</packagereq>
@@ -4798,7 +4810,7 @@
        <packagereq type="conditional" requires="moodle">moodle-ta</packagereq>
        <packagereq type="conditional" requires="moodle">moodle-ta_lk</packagereq>
        <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-ta_IN</packagereq>
-@@ -18204,8 +17761,8 @@
+@@ -18204,8 +17766,8 @@
     <description></description>
      <packagelist>
        <packagereq type="mandatory">lohit-telugu-fonts</packagereq>
@@ -4809,7 +4821,7 @@
        <packagereq type="default">iok</packagereq>
        <packagereq type="default">pothana2000-fonts</packagereq>
        <packagereq type="default">vemana2000-fonts</packagereq>
-@@ -18420,44 +17977,15 @@
+@@ -18420,44 +17982,15 @@
        <packagereq type="default">mutt</packagereq>
        <packagereq type="default">slrn</packagereq>
        <packagereq type="optional">abook</packagereq>
@@ -4855,7 +4867,7 @@
        <packagereq type="optional">youtube-dl</packagereq>
      </packagelist>
    </group>        
-@@ -18533,7 +18061,7 @@
+@@ -18533,7 +18066,7 @@
     <name xml:lang="zh_TW">泰文支援</name>
     <description></description>
      <packagelist>
@@ -4864,7 +4876,7 @@
        <packagereq type="default">thai-scalable-garuda-fonts</packagereq>
        <packagereq type="default">thai-scalable-kinnari-fonts</packagereq>
        <packagereq type="default">thai-scalable-loma-fonts</packagereq>
-@@ -18550,6 +18078,7 @@
+@@ -18550,6 +18083,7 @@
        <packagereq type="conditional" requires="hunspell">hunspell-th</packagereq>
        <packagereq type="conditional" requires="xorg-x11-server-Xorg">ibus-m17n</packagereq>
        <packagereq type="conditional" requires="kdelibs">kde-l10n-Thai</packagereq>
@@ -4872,7 +4884,7 @@
        <packagereq type="conditional" requires="moodle">moodle-th</packagereq>
        <packagereq type="conditional" requires="nqc-doc">nqc-doc-th</packagereq>
        <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-th_TH</packagereq>
-@@ -18610,7 +18139,7 @@
+@@ -18610,7 +18144,7 @@
     <name xml:lang="zh_TW">西藏語支援</name>
     <description></description>
      <packagelist>
@@ -4881,7 +4893,7 @@
        <packagereq type="mandatory">tibetan-machine-uni-fonts</packagereq>
        <packagereq type="default">jomolhari-fonts</packagereq>
        <packagereq type="conditional" requires="xorg-x11-server-Xorg">ibus-m17n</packagereq>
-@@ -18894,11 +18423,9 @@
+@@ -18894,11 +18428,9 @@
        <packagereq type="optional">xorg-x11-fonts-ISO8859-9-100dpi</packagereq>
        <packagereq type="optional">xorg-x11-fonts-ISO8859-9-75dpi</packagereq>
        <packagereq type="conditional" requires="autocorr-en">autocorr-tr</packagereq>
@@ -4895,7 +4907,7 @@
        <packagereq type="conditional" requires="moodle">moodle-tr</packagereq>
        <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-tr_TR</packagereq>
      </packagelist>
-@@ -19036,12 +18563,11 @@
+@@ -19036,12 +18568,11 @@
        <packagereq type="optional">fonts-KOI8-R-100dpi</packagereq>
        <packagereq type="optional">fonts-KOI8-R-75dpi</packagereq>
        <packagereq type="optional">xorg-x11-fonts-cyrillic</packagereq>
@@ -4910,7 +4922,7 @@
        <packagereq type="conditional" requires="man-pages">man-pages-uk</packagereq>
        <packagereq type="conditional" requires="moodle">moodle-uk</packagereq>
        <packagereq type="conditional" requires="mythes-en">mythes-uk</packagereq>
-@@ -19155,9 +18681,9 @@
+@@ -19155,9 +18686,9 @@
     <name xml:lang="zh_TW">烏都語支援</name>
     <description></description>
      <packagelist>
@@ -4921,7 +4933,7 @@
        <packagereq type="default">dejavu-sans-fonts</packagereq>
        <packagereq type="default">dejavu-sans-mono-fonts</packagereq>
        <packagereq type="default">nafees-web-naskh-fonts</packagereq>
-@@ -19363,8 +18889,8 @@
+@@ -19363,8 +18894,8 @@
     <name xml:lang="zh_TW">越南語支援</name>
     <description></description>
      <packagelist>
@@ -4932,7 +4944,7 @@
        <packagereq type="optional">scim-tables-vietnamese</packagereq>
        <packagereq type="conditional" requires="autocorr-en">autocorr-vi</packagereq>
        <packagereq type="conditional" requires="hunspell">hunspell-vi</packagereq>
-@@ -19495,10 +19021,13 @@
+@@ -19495,10 +19026,13 @@
      <packagelist>
        <packagereq type="mandatory">python-virtinst</packagereq>
        <packagereq type="default">libvirt</packagereq>
@@ -4946,7 +4958,7 @@
      </packagelist>
    </group>        
    <group>
-@@ -19555,6 +19084,8 @@
+@@ -19555,6 +19089,8 @@
      <packagelist>
        <packagereq type="conditional" requires="hunspell">hunspell-wa</packagereq>
        <packagereq type="conditional" requires="kdelibs">kde-l10n-Walloon</packagereq>
@@ -4955,7 +4967,7 @@
      </packagelist>
    </group>        
    <group>
-@@ -19675,10 +19206,6 @@
+@@ -19675,10 +19211,6 @@
      <packagelist>
        <packagereq type="optional">Django</packagereq>
        <packagereq type="optional">TurboGears</packagereq>
@@ -4966,7 +4978,7 @@
        <packagereq type="optional">python-cherrypy</packagereq>
        <packagereq type="optional">rubygem-rails</packagereq>
        <packagereq type="optional">velocity</packagereq>
-@@ -19839,6 +19366,7 @@
+@@ -19839,6 +19371,7 @@
        <packagereq type="default">crypto-utils</packagereq>
        <packagereq type="default">distcache</packagereq>
        <packagereq type="default">httpd-manual</packagereq>
@@ -4974,7 +4986,7 @@
        <packagereq type="default">mod_perl</packagereq>
        <packagereq type="default">mod_python</packagereq>
        <packagereq type="default">mod_ssl</packagereq>
-@@ -19854,12 +19382,6 @@
+@@ -19854,12 +19387,6 @@
        <packagereq type="optional">cherokee</packagereq>
        <packagereq type="optional">dap-server-cgi</packagereq>
        <packagereq type="optional">drupal</packagereq>
@@ -4987,7 +4999,7 @@
        <packagereq type="optional">lighttpd</packagereq>
        <packagereq type="optional">lighttpd-fastcgi</packagereq>
        <packagereq type="optional">mediawiki</packagereq>
-@@ -19875,17 +19397,13 @@
+@@ -19875,17 +19402,13 @@
        <packagereq type="optional">moin</packagereq>
        <packagereq type="optional">moin-latex</packagereq>
        <packagereq type="optional">namazu</packagereq>
@@ -5006,7 +5018,7 @@
        <packagereq type="optional">tiquit</packagereq>
        <packagereq type="optional">tomcat-native</packagereq>
        <packagereq type="optional">tomcat5</packagereq>
-@@ -19973,7 +19491,8 @@
+@@ -19973,7 +19496,8 @@
      <packagelist>
        <packagereq type="conditional" requires="aspell">aspell-cy</packagereq>
        <packagereq type="conditional" requires="hunspell">hunspell-cy</packagereq>
@@ -5016,7 +5028,7 @@
        <packagereq type="conditional" requires="moodle">moodle-cy</packagereq>
        <packagereq type="conditional" requires="openoffice.org-core">openoffice.org-langpack-cy_GB</packagereq>
        <packagereq type="conditional" requires="tkgate">tkgate-cy</packagereq>
-@@ -20094,20 +19613,14 @@
+@@ -20094,20 +19618,14 @@
     <description xml:lang="uk">Прості віконні менеджери, що не є частиною будь-якого робочого середовища.</description>
     <description xml:lang="zh_TW">簡易的視窗管理程式，並非大型桌面環境的一部分。</description>
      <packagelist>
@@ -5037,7 +5049,7 @@
        <packagereq type="optional">xcompmgr</packagereq>
        <packagereq type="optional">xmonad</packagereq>
      </packagelist>
-@@ -20414,55 +19927,62 @@
+@@ -20414,55 +19932,62 @@
     <description xml:lang="zh_TW">這些套件讓您可以為 X 視窗系統開發應用程式。</description>
     <description xml:lang="zu">Lama phakethe akuvumela ukuba uthuthukise imiyalelo Yesistimu Yamawindi ka-X.</description>
      <packagelist>
@@ -5143,7 +5155,7 @@
      </packagelist>
    </group>        
    <group>
-@@ -20615,10 +20135,14 @@
+@@ -20615,10 +20140,14 @@
     <description xml:lang="zh_TW">安裝這個套件群組以使用基礎的圖形（X）使用者介面。</description>
     <description xml:lang="zu">Faka leli qembu lama phakethe elizosetshenziswa kwisiqu soxhumano lomsebenzisi lemidwebo (X).</description>
      <packagelist>
@@ -5158,7 +5170,7 @@
        <packagereq type="default">abrt-desktop</packagereq>
        <packagereq type="default">authconfig-gtk</packagereq>
        <packagereq type="default">cups-pk-helper</packagereq>
-@@ -20626,33 +20150,54 @@
+@@ -20626,33 +20155,54 @@
        <packagereq type="default">firstboot</packagereq>
        <packagereq type="default">glx-utils</packagereq>
        <packagereq type="default">gnome-packagekit</packagereq>
@@ -5221,7 +5233,7 @@
        <packagereq type="optional">rxvt</packagereq>
        <packagereq type="optional">sakura</packagereq>
        <packagereq type="optional">slim</packagereq>
-@@ -20662,12 +20207,8 @@
+@@ -20662,12 +20212,8 @@
        <packagereq type="optional">termit</packagereq>
        <packagereq type="optional">tigervnc-server</packagereq>
        <packagereq type="optional">ucs-miscfixed-fonts</packagereq>
@@ -5236,7 +5248,7 @@
        <packagereq type="optional">xlockmore</packagereq>
        <packagereq type="optional">xorg-x11-apps</packagereq>
        <packagereq type="optional">xorg-x11-resutils</packagereq>
-@@ -20680,7 +20221,9 @@
+@@ -20680,7 +20226,9 @@
        <packagereq type="optional">xscreensaver</packagereq>
        <packagereq type="optional">xscreensaver-base</packagereq>
        <packagereq type="optional">xscreensaver-extras</packagereq>
@@ -5246,7 +5258,7 @@
        <packagereq type="optional">xterm</packagereq>
      </packagelist>
    </group>        
-@@ -20807,7 +20350,6 @@
+@@ -20807,7 +20355,6 @@
     <description xml:lang="zh_TW">輕型的桌面環境，適用於低階電腦。</description>
      <packagelist>
        <packagereq type="mandatory">Thunar</packagereq>
@@ -5254,7 +5266,7 @@
        <packagereq type="mandatory">libxfce4menu</packagereq>
        <packagereq type="mandatory">libxfce4util</packagereq>
        <packagereq type="mandatory">libxfcegui4</packagereq>
-@@ -20818,8 +20360,10 @@
+@@ -20818,8 +20365,10 @@
        <packagereq type="mandatory">xfconf</packagereq>
        <packagereq type="mandatory">xfdesktop</packagereq>
        <packagereq type="mandatory">xfwm4</packagereq>
@@ -5265,7 +5277,7 @@
        <packagereq type="default">mousepad</packagereq>
        <packagereq type="default">orage</packagereq>
        <packagereq type="default">polkit-gnome</packagereq>
-@@ -20828,14 +20372,14 @@
+@@ -20828,14 +20377,14 @@
        <packagereq type="default">xarchiver</packagereq>
        <packagereq type="default">xfce4-appfinder</packagereq>
        <packagereq type="default">xfce4-icon-theme</packagereq>
@@ -5283,7 +5295,7 @@
        <packagereq type="optional">xfbib</packagereq>
        <packagereq type="optional">xfburn</packagereq>
        <packagereq type="optional">xfce4-battery-plugin</packagereq>
-@@ -20850,39 +20394,30 @@
+@@ -20850,39 +20399,30 @@
        <packagereq type="optional">xfce4-eyes-plugin</packagereq>
        <packagereq type="optional">xfce4-fsguard-plugin</packagereq>
        <packagereq type="optional">xfce4-genmon-plugin</packagereq>
@@ -5324,7 +5336,7 @@
        <packagereq type="conditional" requires="pinentry">pinentry-gtk</packagereq>
      </packagelist>
    </group>        
-@@ -21012,15 +20547,20 @@
+@@ -21012,15 +20552,20 @@
     <description xml:lang="uk">Встановіть ці пакети для розробки графічних програм GTK+ та XFCE.</description>
     <description xml:lang="zh_TW">安裝這些套件以開發 GTK+ 與 XFCE 圖形應用程式。</description>
      <packagelist>
