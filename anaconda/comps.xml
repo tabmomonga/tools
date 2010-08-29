@@ -6520,6 +6520,7 @@
       <packagereq type="default">alacarte</packagereq>
       <packagereq type="default">at-spi</packagereq>
       <packagereq type="default">brasero-nautilus</packagereq>
+      <packagereq type="default">bug-buddy</packagereq>
       <packagereq type="default">caribou</packagereq>
       <packagereq type="default">cheese</packagereq>
       <packagereq type="default">compiz-gnome</packagereq>
@@ -20148,7 +20149,6 @@
       <packagereq type="mandatory">xorg-x11-xauth</packagereq>
       <packagereq type="mandatory">xorg-x11-xinit</packagereq>
       <packagereq type="mandatory">xorg-x11-xinit-base</packagereq>
-      <packagereq type="default">abrt-desktop</packagereq>
       <packagereq type="default">authconfig-gtk</packagereq>
       <packagereq type="default">cups-pk-helper</packagereq>
       <packagereq type="default">desktop-backgrounds-basic</packagereq>
