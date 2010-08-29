@@ -8844,7 +8844,7 @@
    <description xml:lang="uk">Пакети для вводу тексту різними мовами.</description>
    <description xml:lang="zh_TW">國際文字輸入法的輸入法套件。</description>
     <packagelist>
-      <packagereq type="default">ibus</packagereq>
+      <packagereq type="optional">ibus</packagereq>
       <packagereq type="optional">ibus-anthy</packagereq>
       <packagereq type="optional">ibus-chewing</packagereq>
       <packagereq type="optional">ibus-hangul</packagereq>
