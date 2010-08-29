@@ -1,5 +1,5 @@
 --- Fedora-13-comps.xml	2010-08-15 19:34:31.000000000 +0900
-+++ comps.xml	2010-08-29 01:22:44.000000000 +0900
++++ comps.xml	2010-08-29 20:15:58.000000000 +0900
 @@ -155,6 +155,7 @@
      <packagelist>
        <packagereq type="default">authconfig-gtk</packagereq>
@@ -2548,7 +2548,7 @@
 -      <packagereq type="optional">WritRecogn</packagereq>
 -      <packagereq type="optional">cellwriter</packagereq>
 -      <packagereq type="optional">fcitx</packagereq>
-+      <packagereq type="default">ibus</packagereq>
++      <packagereq type="optional">ibus</packagereq>
 +      <packagereq type="optional">ibus-anthy</packagereq>
 +      <packagereq type="optional">ibus-chewing</packagereq>
 +      <packagereq type="optional">ibus-hangul</packagereq>
