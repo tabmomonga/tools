@@ -89,22 +89,25 @@ ENDOFSQL
   end
 
   def delete(pkgfile, opts = nil)
+    list = []
+    list.push(filename)
+    delete_list(list, opts)
+  end
+
+  def delete_list(list, opts = nil)
     opts = @options if nil==opts
 
-    STDERR.puts "deleting entry for #{pkgfile}" if (opts[:verbose]>1) 
     @db.transaction { |db|
-      id = db.get_first_value("select id from pkg_tbl where pkgfile == '#{pkgfile}'")
-      if nil != id then
-        delete_cached(db, id)
-        db.execute("delete from pkg_tbl where id == #{id}")
-      end
+      list.each {|pkgfile|
+        delete_one(db, pkgfile, opts)
+      }
     }
   end
   
   def update(filename, opts = nil)
     list=[]
     list.push(filename)
-    update_list(filename, opts)
+    update_list(list, opts)
   end
 
   def update_list(list, opts = nil)
@@ -117,14 +120,25 @@ ENDOFSQL
     }
   end
 
+  private 
+  def delete_one(db, pkgfile, opts)  
+    STDERR.puts "deleting entry for #{pkgfile}" if (opts[:verbose]>1) 
+    id = db.get_first_value("select id from pkg_tbl where pkgfile == '#{pkgfile}'").to_i
+    if nil != id then
+      delete_cached(db, id)
+      db.execute("delete from pkg_tbl where id == #{id}")
+    end
+  end
+
   private
   def update_one(db, pkgfile, opts) 
-    STDERR.puts "checking #{pkgfile}\n" if (opts[:verbose]>1)
-    timestamp = File.mtime(pkgfile).to_i
+    filename = "#{opts[:pkgdir_base]}/#{pkgfile}"
+    STDERR.puts "checking #{filename}\n" if (opts[:verbose]>1)
+    timestamp = File.mtime(filename).to_i
     
     if !opts[:force_update] then
       sql = "select count(id) from pkg_tbl where pkgfile == '#{pkgfile}' and lastupdate>=#{timestamp}"
-      if  db.get_first_value(sql) == 1  then
+      if  db.get_first_value(sql).to_i == 1  then
         STDERR.puts "skipping #{pkgfile}" if (opts[:verbose]>1) 
         return
       end
@@ -134,13 +148,13 @@ ENDOFSQL
     
     # create spec entry
     db.execute("insert or ignore into pkg_tbl (pkgfile) values('#{pkgfile}')")
-    id = db.get_first_value("select id from pkg_tbl where pkgfile == '#{pkgfile}'")
+    id = db.get_first_value("select id from pkg_tbl where pkgfile == '#{pkgfile}'").to_i
     
     # delete old datas
     delete_cached(db, id)
     
     # insert capability(=provides)
-    pkg = RPM::Package.open(pkgfile)
+    pkg = RPM::Package.open(filename)
     pkg.provides.each {|prov|
       name, op, ver = prov.conv
       db.execute("insert into capability_tbl (owner, capability, comparison, version) values (#{id}, #{name}, #{op}, #{ver})")
@@ -162,10 +176,10 @@ ENDOFSQL
       db.execute("insert into obsolete_tbl (owner, capability, comparison, version) values (#{id}, #{name}, #{op}, #{ver})")
     }
     
-    pkg.files.each {|file|
-      path = file.path
-      db.execute("insert into file_tbl (owner, path) values (?, ?)", [id, path])
-    }
+#    pkg.files.each {|file|
+#      path = file.path
+#      db.execute("insert into file_tbl (owner, path) values (?, ?)", [id, path])
+#    }
     
     db.execute("UPDATE pkg_tbl SET lastupdate = #{timestamp}, buildtime = #{pkg[RPM::TAG_BUILDTIME]}, pkgname = '#{pkg[RPM::TAG_NAME]}' WHERE id==#{id}")
     pkg = nil

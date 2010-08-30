@@ -24,6 +24,8 @@ opt.on('-q', '--quite', 'suppress verbose msg.') {|v| OPTS[:verbose]=-1 }
 opt.on('-v', '--verbose', 'verbose msg.') {|v| OPTS[:verbose]+=1 }
 opt.parse!(ARGV)
 
+OPTS[:readonly] = true
+
 d = PkgDB.new
 d.open(OPTS[:pkgdb_filename], OPTS)
 

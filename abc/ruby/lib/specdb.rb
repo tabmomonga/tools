@@ -103,7 +103,7 @@ ENDOFSQL
     @db.transaction { |db|
       list.each { |name,|
         STDERR.puts "deleting entry for #{name}" if (opts[:verbose]>-1) 
-        id = db.get_first_value("select id from specfile_tbl where name == '#{name}'")
+        id = db.get_first_value("select id from specfile_tbl where name == '#{name}'").to_i
         if nil!=id then
           delete_cache(db, id)
           db.execute("delete from specfile_tbl where id == #{id}")
@@ -128,7 +128,7 @@ ENDOFSQL
 
         if !opts[:force_update] then
           sql = "select count(id) from specfile_tbl where name == '#{specname}' and lastupdate>=#{timestamp}"
-          if  @db.get_first_value(sql) == 1  then
+          if  @db.get_first_value(sql).to_i == 1  then
             STDERR.puts "skip #{specname}" if (opts[:verbose]>0) 
             next
           end
@@ -147,7 +147,7 @@ ENDOFSQL
         
         # create spec entry
         db.execute("insert or ignore into specfile_tbl (name) values('#{specname}')")
-        id = db.get_first_value("select id from specfile_tbl where name == '#{specname}'")
+        id = db.get_first_value("select id from specfile_tbl where name == '#{specname}'").to_i
         # update timestamp
         db.execute("update specfile_tbl set lastupdate = #{timestamp} where name == '#{specname}'")      
         # delete old datas

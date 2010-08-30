@@ -5,7 +5,7 @@
 require 'optparse'
 require 'set'
 
-Version = "0.0.1"
+Version = "0.0.2"
 OPTS = {}
 
 $:.unshift(File.dirname($0))
@@ -30,7 +30,7 @@ if  ARGV.size == 0 then
 
   addQ=[]
   OPTS[:pkgdir_list].each do |dirname|
-    dir = Dir.open(dirname)
+    dir = Dir.open("#{OPTS[:pkgdir_base]}/#{dirname}")
     begin
       dir.each do |pkgfile|
         next if ".rpm" != pkgfile[-4,4]
@@ -46,11 +46,17 @@ if  ARGV.size == 0 then
   d.update_list(addQ, OPTS)
 
   # delete entries which are not updated
-  removeQ.each do |pkgfile|
-    d.delete(pkgfile, OPTS)
-  end
+  d.delete_list(removeQ, OPTS)
 else
-  d.update_list(ARGV, OPTS)
+  momo_assert{ OPTS[:pkgdir_base][-1] != '/' }
+
+  addQ = []
+  ARGV.each do |f|
+    f = File.expand_path(f)
+    f.sub!("#{OPTS[:pkgdir_base]}/", "")
+    addQ.push(f)
+  end
+  d.update_list(addQ, OPTS)
 end
 
 d.check(OPTS)

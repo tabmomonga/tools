@@ -1,6 +1,9 @@
+# -*- coding: utf-8 -*-
 # lib/config.rb
 #
 # by Hiromasa YOSHIMOTO <y@momonga-linux.org>
+
+require 'lib/common.rb'
 
 # -----------------------------------------------------------------
 # 定数
@@ -31,7 +34,6 @@ OPTS[:verbose]           = 0
 OPTS[:debug]             = false
 
 OPTS[:specdb_filename]   = ".specdb.db"
-OPTS[:pkgdb_filename]    = ".pkgdb.db"
 OPTS[:logdb_filename]    = ".logdb.db"
 
 OPTS[:log_file_compress] = true
@@ -97,7 +99,7 @@ class MoConfig
       notfile = 'NOT.ia64'
       arch = 'ia64'
     else
-      STDERR.puts %Q(WARNING: unsupported architecture #{arch})
+      STDERR.puts "WARNING: unsupported architecture #{arch}"
     end
     
     return arch, notfile
@@ -111,9 +113,18 @@ OPTS[:arch], OPTS[:notfile] = MoConfig.get_arch_and_notfile
 
 OPTS[:archdir_list] = [ OPTS[:arch], "noarch" ]
 
+OPTS[:pkgdir_base] = File.dirname(OPTS[:pkgdir])
 OPTS[:pkgdir_list] = []
 Dir.glob("#{OPTS[:pkgdir]}*") {|pkgdir|
+  pkgdir = File.basename(pkgdir)
   OPTS[:archdir_list].each {|archdir|
     OPTS[:pkgdir_list].push("#{pkgdir}/#{archdir}")
   }
 }
+
+OPTS[:pkgdb_filename]    = "#{OPTS[:pkgdir_base]}/pkgdb.db"
+
+
+# パラメータチェック
+momo_assert{ OPTS[:pkgdir_list].size >= 1 }
+momo_assert{ OPTS[:pkgdir_base][-1] != '/' }

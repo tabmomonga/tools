@@ -17,7 +17,6 @@ opt.on('-q', '--quite', 'suppress verbose msg.') {|v| OPTS[:verbose]=-1 }
 opt.on('-v', '--verbose', 'verbose msg.') {|v| OPTS[:verbose]+=1 }
 opt.parse!(ARGV)
 
-
 requested = ARGV 
 requested.map!{|v| v.chomp("/") }
 

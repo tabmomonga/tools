@@ -16,6 +16,8 @@ opt.on('-q', '--quite', 'suppress verbose msg.') {|v| OPTS[:verbose]=-1 }
 opt.on('-v', '--verbose', 'verbose msg.') {|v| OPTS[:verbose]+=1 }
 opt.parse!(ARGV)
 
+OPTS[:readonly] = true
+
 d = PkgDB.new
 d.open(OPTS[:pkgdb_filename], OPTS)
 db = d.db
@@ -23,20 +25,17 @@ db = d.db
 curr = ARGV 
 curr.map!{|v| v.chomp("/") }
 
-result = []
 curr.each do |cap|    
-  sql = "SELECT pkgfile FROM file_tbl INNER JOIN pkg_tbl ON owner=id WHERE path GLOB '*#{cap}*'"
-  db.execute(sql) do |pkgfile,|
-    result.push(pkgfile)
+  sql = "SELECT path,pkgfile FROM file_tbl INNER JOIN pkg_tbl ON owner=id WHERE path GLOB '*#{cap}*'"
+  db.execute(sql) do |path,pkgfile,|
+    print "#{path}\n"
+    print "#{pkgfile}\n"
   end
-  sql = "SELECT pkgfile FROM capability_tbl INNER JOIN pkg_tbl ON owner=id WHERE capability GLOB '#{cap}'"
-  db.execute(sql) do |pkgfile,|
-    result.push(pkgfile)
+  sql = "SELECT capability,pkgfile FROM capability_tbl INNER JOIN pkg_tbl ON owner=id WHERE capability GLOB '#{cap}'"
+  db.execute(sql) do |cap,pkgfile,|
+    print "#{cap}\n"
+    print "#{pkgfile}\n"
   end
-end
-
-result.sort.uniq.each do |pkgfile|
-  print "#{pkgfile}\n"
 end
 
 # Local Variables:

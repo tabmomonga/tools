@@ -53,6 +53,7 @@ def select_required_packages(db, requested, opts = nil)
       if !found then
         sql = "SELECT pkgfile,buildtime FROM pkg_tbl WHERE pkgname GLOB '#{cap}'"
         db.execute(sql) do |pkgfile,buildtime|
+          pkgfile = "#{OPTS[:pkgdir_base]}/#{pkgfile}"
           ts = rpmq_buildtime(pkgfile)
           if ts != buildtime.to_i then
             STDERR.puts "  Installing #{File.basename(pkgfile)} for #{cap}" if opts[:verbose]>1
@@ -65,6 +66,7 @@ def select_required_packages(db, requested, opts = nil)
       if !found then
         sql = "SELECT pkgfile,buildtime FROM capability_tbl INNER JOIN pkg_tbl ON id==owner WHERE capability GLOB '#{cap}'"
         db.execute(sql) do |pkgfile,buildtime|
+          pkgfile = "#{OPTS[:pkgdir_base]}/#{pkgfile}"
           ts = rpmq_buildtime(pkgfile)
           if ts != buildtime.to_i then
             STDERR.puts "  Installing #{File.basename(pkgfile)} for #{cap}" if opts[:verbose]>1

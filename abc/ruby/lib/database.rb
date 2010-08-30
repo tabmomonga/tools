@@ -74,7 +74,12 @@ class DBBase
   def open_database(database, layout, major, minor, opts = nil)
     @options = opts if opts
 
-    @db = SQLite3::Database.new(database)
+    sqlite3_option = {}
+    if @options[:readonly] then
+      sqlite3_option[:readonly] = true;
+    end
+ 
+    @db = SQLite3::Database.new(database, sqlite3_option)
 
     needed = true
     begin
