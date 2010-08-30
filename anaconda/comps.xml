@@ -20207,7 +20207,6 @@
       <packagereq type="optional">sakura</packagereq>
       <packagereq type="optional">slim</packagereq>
       <packagereq type="optional">switchdesk</packagereq>
-      <packagereq type="optional">system-config-display</packagereq>
       <packagereq type="optional">system-switch-displaymanager</packagereq>
       <packagereq type="optional">termit</packagereq>
       <packagereq type="optional">tigervnc-server</packagereq>
