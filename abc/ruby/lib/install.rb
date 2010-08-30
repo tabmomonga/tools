@@ -43,6 +43,7 @@ def select_required_packages(db, requested, opts = nil)
     requested.each do |cap|
       found = false
       if cap =~ /\.rpm$/ then
+        cap = "#{OPTS[:pkgdir_base]}/#{cap}"
         if !File.exist?(cap) then
           msg = "  no such file, #{cap}"
           return 
