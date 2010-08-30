@@ -48,7 +48,7 @@ if msg then
 end
 
 if 0==pkgs.count then
-  STDERR.puts "already installed"
+  STDERR.puts "already installed" if OPTS[:verbose]>1
   exit(0)
 end
 

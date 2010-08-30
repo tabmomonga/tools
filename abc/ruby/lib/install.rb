@@ -12,7 +12,7 @@ def rpmq_buildtime(pkgfile)
 end
 
 def file_buildtime(filename)
-  ts=`LANG=C \\rpm -q --qf '%{BUILDTIME}' #{filename}`.to_i
+  ts=`LANG=C \\rpm -qp --qf '%{BUILDTIME}' #{filename}`.to_i
   return ts
 end
 
@@ -40,14 +40,24 @@ def select_required_packages(db, requested, opts = nil)
 
     before = installpkg.count
 
-    requested.each do |cap|    
+    requested.each do |cap|
       found = false
-      if cap =~ /\.rpm$/ and File.exist?(cap) then
-        if rpmq_buildtime(cap) != file_buildtime(cap) then
+      if cap =~ /\.rpm$/ then
+        if !File.exist?(cap) then
+          msg = "  no such file, #{cap}"
+          return 
+        end
+
+        current = rpmq_buildtime(cap)
+        target = file_buildtime(cap)
+        if (0 == current) || (current != target) then
           STDERR.puts "  Installing #{cap}" if opts[:verbose]>1
           installpkg.add(cap)
+          found = true
+        else
+          STDERR.puts " #{cap} is already installed" if opts[:verbose]>1
+          next
         end
-        found = true
       end
       
       if !found then
@@ -84,6 +94,7 @@ def select_required_packages(db, requested, opts = nil)
 
     if installpkg.count == before  then
       # すでにinstall済の場合
+      msg = nil
       return 
     end
 
