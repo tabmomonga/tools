@@ -9347,7 +9347,6 @@
       <packagereq type="optional">jisksp16-1990-fonts</packagereq>
       <packagereq type="optional">kcc</packagereq>
       <packagereq type="optional">kinput2</packagereq>
-      <packagereq type="optional">lv</packagereq>
       <packagereq type="optional">m17n-db</packagereq>
       <packagereq type="optional">mecab</packagereq>
       <packagereq type="optional">mecab-ipadic</packagereq>
