@@ -10116,8 +10116,6 @@
       <packagereq type="optional">qsynth</packagereq>
       <packagereq type="optional">qt-recordmydesktop</packagereq>
       <packagereq type="optional">qtbsch3v</packagereq>
-      <packagereq type="optional">qtcurve-gtk2</packagereq>
-      <packagereq type="optional">qtcurve-kde4</packagereq>
       <packagereq type="optional">qtparted</packagereq>
       <packagereq type="optional">qtpfsgui</packagereq>
       <packagereq type="optional">qtractor</packagereq>
