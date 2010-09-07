@@ -9290,7 +9290,9 @@
     <packagelist>
       <packagereq type="default">anthy</packagereq>
       <packagereq type="default">ipa-gothic-fonts</packagereq>
+      <packagereq type="default">ipa-mincho-fonts</packagereq>
       <packagereq type="default">ipa-pgothic-fonts</packagereq>
+      <packagereq type="default">ipa-pmincho-fonts</packagereq>
       <packagereq type="default">japanese-bitmap-fonts</packagereq>
       <packagereq type="default">kakasi-dict</packagereq>
       <packagereq type="default">lv</packagereq>
@@ -9304,12 +9306,6 @@
       <packagereq type="default">ruby-sary</packagereq>
       <packagereq type="default">skk-jisyo</packagereq>
       <packagereq type="default">suikyo-ruby</packagereq>
-      <packagereq type="default">takao-ex-gothic-fonts</packagereq>
-      <packagereq type="default">takao-ex-mincho-fonts</packagereq>
-      <packagereq type="default">takao-gothic-fonts</packagereq>
-      <packagereq type="default">takao-mincho-fonts</packagereq>
-      <packagereq type="default">takao-pgothic-fonts</packagereq>
-      <packagereq type="default">takao-pmincho-fonts</packagereq>
       <packagereq type="default">uim-anthy</packagereq>
       <packagereq type="default">uim-anthy-utf8</packagereq>
       <packagereq type="default">uim-fep</packagereq>
@@ -9341,8 +9337,6 @@
       <packagereq type="optional">iiimf-xiiimp</packagereq>
       <packagereq type="optional">ipa-ex-gothic-fonts</packagereq>
       <packagereq type="optional">ipa-ex-mincho-fonts</packagereq>
-      <packagereq type="optional">ipa-mincho-fonts</packagereq>
-      <packagereq type="optional">ipa-pmincho-fonts</packagereq>
       <packagereq type="optional">jfbterm</packagereq>
       <packagereq type="optional">jisksp16-1990-fonts</packagereq>
       <packagereq type="optional">kcc</packagereq>
@@ -9361,6 +9355,12 @@
       <packagereq type="optional">sazanami-mincho-fonts</packagereq>
       <packagereq type="optional">scim-canna</packagereq>
       <packagereq type="optional">stardict-dic-ja</packagereq>
+      <packagereq type="optional">takao-ex-gothic-fonts</packagereq>
+      <packagereq type="optional">takao-ex-mincho-fonts</packagereq>
+      <packagereq type="optional">takao-gothic-fonts</packagereq>
+      <packagereq type="optional">takao-mincho-fonts</packagereq>
+      <packagereq type="optional">takao-pgothic-fonts</packagereq>
+      <packagereq type="optional">takao-pmincho-fonts</packagereq>
       <packagereq type="optional">uim-canna</packagereq>
       <packagereq type="optional">wkf</packagereq>
       <packagereq type="conditional" requires="autocorr-en">autocorr-ja</packagereq>
