@@ -2576,6 +2576,7 @@
       <packagereq type="mandatory">authconfig</packagereq>
       <packagereq type="mandatory">basesystem</packagereq>
       <packagereq type="mandatory">bash</packagereq>
+      <packagereq type="mandatory">cleanup-packages</packagereq>
       <packagereq type="mandatory">coreutils</packagereq>
       <packagereq type="mandatory">cpio</packagereq>
       <packagereq type="mandatory">cronie</packagereq>
