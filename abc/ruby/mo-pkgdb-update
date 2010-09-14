@@ -14,9 +14,7 @@ require 'lib/pkgdb.rb'
 
 opt = OptionParser.new
 opt.on('-f', '--force_update') {|v| OPTS[:force_update] = v }
-opt.on('-q', '--quite', 'suppress verbose msg.') {|v| OPTS[:verbose]=-1 }
-opt.on('-v', '--verbose', 'verbose msg.') {|v| OPTS[:verbose]+=1 }
-opt.parse!(ARGV)
+MoConfig.parse(ARGV,opt)
 
 d = PkgDB.new
 d.open(OPTS[:pkgdb_filename], OPTS)

@@ -44,10 +44,10 @@ OPTS[:enable_distcc]     = false
 OPTS[:numjobs]           = 1
 
 class MoConfig
+  private 
   def MoConfig.parse_conf(configfile_list)
     configfile_list.each {|configfile|
-      return unless File.exist?(configfile)
-      
+      next unless File.exist?(configfile)
       File.open(configfile).each_line {|line|
         line.chomp!
         next  if line =~ /^#/ or line =~ /^$/
@@ -61,9 +61,14 @@ class MoConfig
           OPTS[:specdir] = File.expand_path(s[0])
         end
       }
+      return true
     }
+    abort "no configration file, abort"
+  rescue => e
+    abort "failed to parse the config file; #{e}, abort"
   end
   
+  private 
   def MoConfig.get_arch_and_notfile
     arch = `uname -m`
     case arch
@@ -104,27 +109,41 @@ class MoConfig
     
     return arch, notfile
   end
+  
+  def MoConfig.parse(argv, opt)
+    configFileList = []
+    opt.on('-C','--config=CONFIGFILE', 'use alternate configuration file'){|v| configFileList.push(v)}
+    opt.on('-q', '--quite', 'suppress verbose msg.') {|v| OPTS[:verbose]=-1 }
+    opt.on('-v', '--verbose', 'verbose msg.') {|v| OPTS[:verbose]+=1 }
+    opt.parse!(ARGV)
 
+    if configFileList.size == 0 then
+      configFileList.concat([".OmoiKondara", "~/.OmoiKondara"])
+    end
+
+    MoConfig.parse_conf(configFileList)
+    
+    if OPTS[:pkgdir] == nil then
+      abort "TOPDIR is not defined in #{configfile}, abort"
+    end
+    
+    OPTS[:arch], OPTS[:notfile] = MoConfig.get_arch_and_notfile
+    
+    OPTS[:archdir_list] = [ OPTS[:arch], "noarch" ]
+    
+    OPTS[:pkgdir_base] = File.dirname(OPTS[:pkgdir])
+    OPTS[:pkgdir_list] = []
+    Dir.glob("#{OPTS[:pkgdir]}*") {|pkgdir|
+      pkgdir = File.basename(pkgdir)
+      OPTS[:archdir_list].each {|archdir|
+        OPTS[:pkgdir_list].push("#{pkgdir}/#{archdir}")
+      }
+    }
+    
+    OPTS[:pkgdb_filename]    = "#{OPTS[:pkgdir_base]}/pkgdb.db"
+    
+    # パラメータチェック
+    momo_assert{ OPTS[:pkgdir_list].size >= 1 }
+    momo_assert{ OPTS[:pkgdir_base][-1] != '/' }
+  end
 end
-
-MoConfig.parse_conf([".OmoiKondara"])
-
-OPTS[:arch], OPTS[:notfile] = MoConfig.get_arch_and_notfile
-
-OPTS[:archdir_list] = [ OPTS[:arch], "noarch" ]
-
-OPTS[:pkgdir_base] = File.dirname(OPTS[:pkgdir])
-OPTS[:pkgdir_list] = []
-Dir.glob("#{OPTS[:pkgdir]}*") {|pkgdir|
-  pkgdir = File.basename(pkgdir)
-  OPTS[:archdir_list].each {|archdir|
-    OPTS[:pkgdir_list].push("#{pkgdir}/#{archdir}")
-  }
-}
-
-OPTS[:pkgdb_filename]    = "#{OPTS[:pkgdir_base]}/pkgdb.db"
-
-
-# パラメータチェック
-momo_assert{ OPTS[:pkgdir_list].size >= 1 }
-momo_assert{ OPTS[:pkgdir_base][-1] != '/' }

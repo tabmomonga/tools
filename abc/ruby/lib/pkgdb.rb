@@ -176,10 +176,10 @@ ENDOFSQL
       db.execute("insert into obsolete_tbl (owner, capability, comparison, version) values (#{id}, #{name}, #{op}, #{ver})")
     }
     
-#    pkg.files.each {|file|
-#      path = file.path
-#      db.execute("insert into file_tbl (owner, path) values (?, ?)", [id, path])
-#    }
+    pkg.files.each {|file|
+      path = file.path
+      db.execute("insert into file_tbl (owner, path) values (?, ?)", [id, path])
+    }
     
     db.execute("UPDATE pkg_tbl SET lastupdate = #{timestamp}, buildtime = #{pkg[RPM::TAG_BUILDTIME]}, pkgname = '#{pkg[RPM::TAG_NAME]}' WHERE id==#{id}")
     pkg = nil

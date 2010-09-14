@@ -15,10 +15,8 @@ require 'lib/specdb.rb'
 OPTS[:recursion]=1
 opt = OptionParser.new
 opt.on('-r N', '--recursion=N', 'max depth') {|v| OPTS[:recursion] = Integer(v) }
-opt.on('-f', '--force_update') {|v| OPTS[:force_update] = v }
-opt.on('-q', '--quite', 'suppress verbose msg.') {|v| OPTS[:verbose]=-1 }
-opt.on('-v', '--verbose', 'verbose msg.') {|v| OPTS[:verbose]+=1 }
-opt.parse!(ARGV)
+MoConfig.parse(ARGV,opt)
+
 
 OPTS[:readonly] = true
 

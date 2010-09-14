@@ -13,9 +13,7 @@ OPTS[:verbose] = 10
 OPTS[:debug]   = true
 
 opt = OptionParser.new
-opt.on('-q', '--quite', 'suppress verbose msg.') {|v| OPTS[:verbose]=-1 }
-opt.on('-v', '--verbose', 'verbose msg.') {|v| OPTS[:verbose]+=1 }
-opt.parse!(ARGV)
+MoConfig.parse(ARGV,opt)
 
 requested = ARGV 
 requested.map!{|v| v.chomp("/") }
