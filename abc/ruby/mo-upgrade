@@ -20,9 +20,7 @@ OPTS[:max_retry]=64
 opt = OptionParser.new
 opt.on('-S', '--strict', 'strict mode') {|v| OPTS[:strict]=true }
 opt.on(      '--permissive', 'permissive mode (default)') {|v| OPTS[:strict]=false }
-opt.on('-q', '--quite', 'suppress verbose msg.') {|v| OPTS[:verbose]=-1 }
-opt.on('-v', '--verbose', 'verbose msg.') {|v| OPTS[:verbose]+=1 }
-opt.parse!(ARGV)
+MoConfig.parse(ARGV,opt)
 
 OPTS[:readonly] = true
 
