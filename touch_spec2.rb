@@ -26,6 +26,8 @@ end # class Dir
 db = SpecDB.new(true)
 
 db.names.each do |name|
+  next if name == 'etherboot' && $ARCH == 'x86_64'
+
   spec = db.specs[name]
   nosources = spec.sources.select{|s| s.no?}
   topdir = $TOPDIR.dup
