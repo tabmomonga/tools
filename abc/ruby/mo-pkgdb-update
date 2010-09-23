@@ -5,7 +5,7 @@
 require 'optparse'
 require 'set'
 
-Version = "0.0.2"
+Version = "0.0.3"
 OPTS = {}
 
 $:.unshift(File.dirname($0))
@@ -13,11 +13,19 @@ require 'lib/config.rb'
 require 'lib/pkgdb.rb'
 
 opt = OptionParser.new
-opt.on('-f', '--force_update') {|v| OPTS[:force_update] = v }
+opt.on('-f', '--force_update', "rebuild all database") {|v| OPTS[:force_update] = v }
+opt.on('--[no-]file-database', "update file database") {|v| OPTS[:update_file_tbl] = v }
 MoConfig.parse(ARGV,opt)
 
 d = PkgDB.new
 d.open(OPTS[:pkgdb_filename], OPTS)
+
+if true == OPTS[:update_file_tbl] then
+  f = d.db.get_first_value('SELECT count(*) FROM misc_tbl WHERE last_file_update == lastupdate')
+  if 0 == f then
+    ## !!FIXME!! we have to rebuild some file_tbl
+  end
+end
 
 # update or insert entries to databse
 if  ARGV.size == 0 then
@@ -59,10 +67,17 @@ end
 
 d.check(OPTS)
 
+## update timestamps
+ts = Time.now.to_i
+if true == OPTS[:update_file_tbl] then
+  d.db.execute("UPDATE misc_tbl SET last_file_update = ?", ts)
+end
+d.db.execute("UPDATE misc_tbl SET lastupdate = ?", ts)
+
+
 d.close
 
 # Local Variables:
 # mode: ruby
 # indent-tabs-mode: nil
 # End:
-

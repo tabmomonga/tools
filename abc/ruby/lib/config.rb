@@ -43,6 +43,8 @@ OPTS[:debug_build]       = false
 OPTS[:enable_distcc]     = false
 OPTS[:numjobs]           = 1
 
+OPTS[:update_file_tbl]   = nil
+
 class MoConfig
   private 
   def MoConfig.parse_conf(configfile_list)
@@ -59,6 +61,8 @@ class MoConfig
           OPTS[:pkgdir] = File.expand_path(s[0])
         when "pkgdir"
           OPTS[:specdir] = File.expand_path(s[0])
+        when "enable_file_database"
+          OPTS[:update_file_tbl] = (s.shift.downcase == "yes")
         end
       }
       return true
@@ -141,7 +145,6 @@ class MoConfig
     }
     
     OPTS[:pkgdb_filename]    = "#{OPTS[:pkgdir_base]}/pkgdb.db"
-    
     # パラメータチェック
     momo_assert{ OPTS[:pkgdir_list].size >= 1 }
     momo_assert{ OPTS[:pkgdir_base][-1] != '/' }

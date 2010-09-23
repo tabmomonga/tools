@@ -6,7 +6,7 @@ require 'lib/database.rb'
 
 class PkgDB < DBBase
 
-  TABLE_MAJOR_VERSION=3 # increase when the layout breaks compatibility
+  TABLE_MAJOR_VERSION=4 # increase when the layout breaks compatibility
   TABLE_MINOR_VERSION=0 # increase when rebuild DB is required
   TABLE_LAYOUT=<<ENDOFSQL
 
@@ -51,8 +51,8 @@ create table conflict_tbl (
 drop table if exists pkg_tbl;
 create table pkg_tbl (
        id integer primary key autoincrement,
-       pkgfile text unique,
-       pkgname text,
+       pkgfile text,
+       pkgname text unique,
        buildtime integer,
        lastupdate integer
 );
@@ -65,9 +65,10 @@ create table file_tbl (
 
 drop table if exists misc_tbl;
 create table misc_tbl (
-       major_version integer,
-       minor_version integer,
-       lastupdate integer
+       major_version    integer,
+       minor_version    integer,
+       lastupdate       integer,  -- unixtime when pkg_tbl checked
+       last_file_update intege    -- unixtime when file_tbl checked
 );
 ENDOFSQL
 
@@ -82,7 +83,7 @@ ENDOFSQL
     opts = @options if nil==opts
     sql = "select pkgfile,max(id) as id from pkg_tbl group by pkgfile having count(*) > 1"
     @db.execute(sql) do |pkgfile,id|
-      STDERR.puts "warrning: pkg_tbl has broken entries, fixing them..."
+      STDERR.puts "warrning: #{pkgfile} has broken entries, fixing them..."
       sql = "delete from pkg_tbl where pkgfile == '#{pkgfile}' and id != #{id}"
       @db.execute(sql)
     end
@@ -107,17 +108,19 @@ ENDOFSQL
   def update(filename, opts = nil)
     list=[]
     list.push(filename)
-    update_list(list, opts)
+    return update_list(list, opts)
   end
 
   def update_list(list, opts = nil)
     opts = @options if nil==opts
 
+    r = false
     @db.transaction { |db|
       list.each {|pkgfile|
-        update_one(db, pkgfile, opts)
+        r |= update_one(db, pkgfile, opts)
       }
     }
+    return r
   end
 
   private 
@@ -130,25 +133,31 @@ ENDOFSQL
     end
   end
 
+  #
+  #
+  # returns true when DB is updated, otherwise returns false
   private
   def update_one(db, pkgfile, opts) 
     filename = "#{opts[:pkgdir_base]}/#{pkgfile}"
     STDERR.puts "checking #{filename}\n" if (opts[:verbose]>1)
     timestamp = File.mtime(filename).to_i
-    
+    pkgname = File.basename(pkgfile).split("-")[0..-3].join("-")
+
     if !opts[:force_update] then
-      sql = "select count(id) from pkg_tbl where pkgfile == '#{pkgfile}' and lastupdate>=#{timestamp}"
+      sql = "select count(id) from pkg_tbl where pkgname == '#{pkgname}' and lastupdate>=#{timestamp}"
       if  db.get_first_value(sql).to_i == 1  then
         STDERR.puts "skipping #{pkgfile}" if (opts[:verbose]>1) 
-        return
+        return false
       end
     end
         
-    STDERR.puts "updating entry for #{pkgfile}" if (opts[:verbose]>-1) 
-    
-    # create spec entry
-    db.execute("insert or ignore into pkg_tbl (pkgfile) values('#{pkgfile}')")
-    id = db.get_first_value("select id from pkg_tbl where pkgfile == '#{pkgfile}'").to_i
+    STDERR.puts "updating entry for #{pkgname}" if (opts[:verbose]>-1) 
+
+    # create pkg_tbl entry
+    db.execute("insert or ignore into pkg_tbl (pkgname, pkgfile) values(?,?)",
+               [pkgname, pkgfile])
+    id = db.get_first_value("select id from pkg_tbl where pkgname == ?",
+                            [pkgname]).to_i
     
     # delete old datas
     delete_cached(db, id)
@@ -176,17 +185,23 @@ ENDOFSQL
       db.execute("insert into obsolete_tbl (owner, capability, comparison, version) values (#{id}, #{name}, #{op}, #{ver})")
     }
     
-    pkg.files.each {|file|
-      path = file.path
-      db.execute("insert into file_tbl (owner, path) values (?, ?)", [id, path])
-    }
-    
-    db.execute("UPDATE pkg_tbl SET lastupdate = #{timestamp}, buildtime = #{pkg[RPM::TAG_BUILDTIME]}, pkgname = '#{pkg[RPM::TAG_NAME]}' WHERE id==#{id}")
+    if opts[:update_file_tbl] then
+      pkg.files.each {|file|
+        path = file.path
+        db.execute("insert into file_tbl (owner, path) values (?, ?)", 
+                   [id, path])
+      }
+    end
+
+    db.execute("UPDATE pkg_tbl SET lastupdate = ?, buildtime = ? WHERE id == ?",
+               [timestamp, pkg[RPM::TAG_BUILDTIME], id])
     pkg = nil
 
+    return true
   rescue => e
     STDERR.puts "   exception: #{e} " if (opts[:verbose]>-1)
     STDERR.puts "#{pkgfile} is bad rpm package, skip" if (opts[:verbose]>-1)
+    return false
   end
 
   private  
