@@ -24,15 +24,13 @@ curr = ARGV
 curr.map!{|v| v.chomp("/") }
 
 curr.each do |cap|    
-  sql = "SELECT path,pkgfile FROM file_tbl INNER JOIN pkg_tbl ON owner=id WHERE path GLOB '*#{cap}*'"
-  db.execute(sql) do |path,pkgfile,|
-    print "#{path}\n"
-    print "#{pkgfile}\n"
+  sql = "SELECT path,pkgname FROM file_tbl INNER JOIN pkg_tbl ON owner=id WHERE path GLOB '*#{cap}*'"
+  db.execute(sql) do |path,pkgname,|
+    print "#{path} - #{pkgname}\n"
   end
-  sql = "SELECT capability,pkgfile FROM capability_tbl INNER JOIN pkg_tbl ON owner=id WHERE capability GLOB '#{cap}'"
-  db.execute(sql) do |cap,pkgfile,|
-    print "#{cap}\n"
-    print "#{pkgfile}\n"
+  sql = "SELECT capability,pkgname FROM capability_tbl INNER JOIN pkg_tbl ON owner=id WHERE capability GLOB '#{cap}'"
+  db.execute(sql) do |cap,pkgname,|
+    print "#{cap} - #{pkgname}\n"
   end
 end
 
