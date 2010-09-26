@@ -146,13 +146,28 @@ $2=="error:" && $0~/no matching function for call to/ {
 
 # ERROR: error: cannot call constructor 'X::X' directory
 # JOB:  s,X::X,X,g
-$2=="error:" && $0~/cannot call constructor/ && $6~/^'[^:]*::[^:]*'$/ && $7=="directly" {
+$2=="error:" && $0~/cannot call constructor/ && $6~/^'.*[^:]*::[^:]*'$/ && $7=="directly" {
     split($1,file,":")
     srcfile=makesrcfile(cur_dir, file[1])
     lineno=file[2]
     gsub(/'/,"", $6)
     split($6,symbol,"::")
-    if (symbol[1]==symbol[2]) {
-	replace(srcfile, lineno, $6, symbol[1])
+    n=length(symbol)
+    if (symbol[n-1]==symbol[n]) {
+	replace(srcfile, lineno, symbol[n]"::"symbol[n], symbol[n])
+    }
+}
+
+# ERROR: error: 'X::X' names the constructor, not the type
+# JOB:  s,X::X,X,g
+$2=="error:" && $0~/names the constructor, not the type$/ && $3~/^'.*[^:]*::[^:]*'$/ {
+    split($1,file,":")
+    srcfile=makesrcfile(cur_dir, file[1])
+    lineno=file[2]
+    gsub(/'/,"", $3)
+    split($3,symbol,"::")
+    n=length(symbol)
+    if (symbol[n-1]==symbol[n]) {
+	replace(srcfile, lineno, symbol[n]"::"symbol[n], symbol[n])
     }
 }
