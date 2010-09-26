@@ -154,11 +154,12 @@ ENDOFSQL
     STDERR.puts "updating entry for #{pkgname}" if (opts[:verbose]>-1) 
 
     # create pkg_tbl entry
-    db.execute("insert or ignore into pkg_tbl (pkgname, pkgfile) values(?,?)",
-               [pkgname, pkgfile])
+    db.execute("insert or ignore into pkg_tbl (pkgname) values(?)",
+               [pkgname])
     id = db.get_first_value("select id from pkg_tbl where pkgname == ?",
                             [pkgname]).to_i
-    
+    STDERR.puts "id :#{id} pkgname: #{pkgname}" if opts[:verbose]>1
+
     # delete old datas
     delete_cached(db, id)
     
@@ -193,8 +194,8 @@ ENDOFSQL
       }
     end
 
-    db.execute("UPDATE pkg_tbl SET lastupdate = ?, buildtime = ? WHERE id == ?",
-               [timestamp, pkg[RPM::TAG_BUILDTIME], id])
+    db.execute("UPDATE pkg_tbl SET pkgfile = ?, lastupdate = ?, buildtime = ? WHERE id == ?",
+               [pkgfile, timestamp, pkg[RPM::TAG_BUILDTIME], id])
     pkg = nil
 
     return true
