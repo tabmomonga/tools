@@ -1,3 +1,6 @@
+#!/usr/bin/awk -f
+#
+# by Hiromasa YOSHIMOTO
 
 function abort(msg){
     printf "ABORT: %s\n", msg > "/dev/stderr"
@@ -9,7 +12,12 @@ function append_include(file,header)
 }
 function insert_line(file,lineno,text)
 {
-    system(BIN"/insert_line.sh "file" "lineno" \""text"\"")
+    system(BIN"/insert_line.sh "file" "lineno" \""text"\" gcc45~")
+}
+
+function replace(file, lineno, oldstr, newstr)
+{
+    system(BIN"/replace.sh "file" "lineno" "oldstr" "newstr" gcc45~")
 }
 
 
@@ -136,3 +144,15 @@ $2=="error:" && $0~/no matching function for call to/ {
     }
 }
 
+# ERROR: error: cannot call constructor 'X::X' directory
+# JOB:  s,X::X,X,g
+$2=="error:" && $0~/cannot call constructor/ && $6~/^'[^:]*::[^:]*'$/ && $7=="directly" {
+    split($1,file,":")
+    srcfile=makesrcfile(cur_dir, file[1])
+    lineno=file[2]
+    gsub(/'/,"", $6)
+    split($6,symbol,"::")
+    if (symbol[1]==symbol[2]) {
+	replace(srcfile, lineno, $6, symbol[1])
+    }
+}
