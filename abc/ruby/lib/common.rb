@@ -6,10 +6,10 @@ def momo_abort(msg)
   STDERR.puts ""
   STDERR.puts caller
   STDERR.puts ""
-  STDERR.puts ""
-  STDERR.puts "abort"
-  STDERR.puts ""
   STDERR.puts "please report this message to devel.ja@momonga-linux.org"
+  STDERR.puts ""
+  STDERR.puts "pwd: #{Dir.pwd}"
+  STDERR.puts "command: #{$PROGRAM_NAME} #{ARGV.join(' ')}"
   STDERR.puts ""
   STDERR.puts "***********************"
   exit!(4)

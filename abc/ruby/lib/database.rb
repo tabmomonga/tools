@@ -90,6 +90,8 @@ class DBBase
           minor <= Integer(r[1]) then
         needed = false
       end
+    rescue SQLite3::BusyException
+      abort "database [#{database}] is locked, abort." 
     rescue SQLite3::SQLException
       #needed = true
     end 

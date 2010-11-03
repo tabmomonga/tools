@@ -49,7 +49,10 @@ class MoConfig
   private 
   def MoConfig.parse_conf(configfile_list)
     configfile_list.each {|configfile|
-      next unless File.exist?(configfile)
+      if not File.readable?(configfile) 
+        STDERR.puts "failed to read #{configfile}"
+        next
+      end
       File.open(configfile).each_line {|line|
         line.chomp!
         next  if line =~ /^#/ or line =~ /^$/
@@ -143,7 +146,7 @@ class MoConfig
         OPTS[:pkgdir_list].push("#{pkgdir}/#{archdir}")
       }
     }
-    
+
     OPTS[:pkgdb_filename]    = "#{OPTS[:pkgdir_base]}/pkgdb.db"
     # パラメータチェック
     momo_assert{ OPTS[:pkgdir_list].size >= 1 }
