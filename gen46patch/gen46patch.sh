@@ -1,4 +1,5 @@
 #!/bin/bash
+# by Hiromasa YOSHIMOTO
 
 BIN=`dirname $0`
 BIN=`readlink -f $BIN`
@@ -47,7 +48,7 @@ function process
 max_loop=20
 
 while [ -n "$1" ]; do
-    if [ -d $1/BUILD -a $1/$1.spec ]; then	
+    if [ -d $1/BUILD -a -f $1/$1.spec ]; then	
 	(cd $1; process $1.spec)
     fi
     shift

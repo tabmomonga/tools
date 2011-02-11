@@ -15,7 +15,7 @@ CMD=${@:-make}
 
 $CMD  2>&1 | tee  $LOG
 
-gawk -vBIN=$BIN -f $BIN/sub_make_gcc45_patch.awk  $LOG
+gawk -vBIN=$BIN -f $BIN/sub_make_gcc46_patch.awk  $LOG
 
 
 rm $LOG

@@ -28,7 +28,7 @@ spec=$2
 cat $spec | grep -i "^patch[0-9]*[ \t]*:[ \t]*$patch" > /dev/null && error "already added"
 
 # search last patch tag
-lastpatch=`cat $spec | awk 'tolower($1)~/^patch[0-9]*:$/ {tmp=$1} END{print tmp}'`
+lastpatch=`cat $spec | awk 'tolower($1)~/^patch[0-9]*/ {tmp=$1} END{print tmp}'`
 
 if [ -z "$lastpatch" ]; then
 	lastpatch="buildroot:"
@@ -58,13 +58,13 @@ BEGIN{
 	    if (0!=patch_macro_done){
 		abort("**BUG** file parse error")
 	    }	    
-	    print "%patch"pnum" -p1 -b .gcc45~\n"
+	    print "%patch"pnum" -p1 -b .gcc46~\n"
 	    patch_macro_done=1
 	}
 	
 	print $0
 
-	if (tolower($1)==LASTPATCH) {
+	if (tolower($1)==tolower(LASTPATCH)) {
 	    if (0!=patch_tag_done){
 		abort("**BUG** file parse error")
 	    }

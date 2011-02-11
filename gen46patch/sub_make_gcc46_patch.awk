@@ -8,16 +8,16 @@ function abort(msg){
 }
 function append_include(file,header)
 {
-    system(BIN"/append_include.sh "file" "header" gcc45~")
+    system(BIN"/append_include.sh "file" "header" gcc46~")
 }
 function insert_line(file,lineno,text)
 {
-    system(BIN"/insert_line.sh "file" "lineno" \""text"\" gcc45~")
+    system(BIN"/insert_line.sh "file" "lineno" \""text"\" gcc46~")
 }
 
 function replace(file, lineno, oldstr, newstr)
 {
-    system(BIN"/replace.sh "file" "lineno" "oldstr" "newstr" gcc45~")
+    system(BIN"/replace.sh "file" "lineno" "oldstr" "newstr" gcc46~")
 }
 
 
@@ -170,4 +170,57 @@ $2=="error:" && $0~/names the constructor, not the type$/ && $3~/^'.*[^:]*::[^:]
     if (symbol[n-1]==symbol[n]) {
 	replace(srcfile, lineno, symbol[n]"::"symbol[n], symbol[n])
     }
+}
+
+# ERROR: converting to non-pointer type 'XXX' from NULL
+# JOB:  s,NULL,0,g
+$2=="error:" && $0~/converting to non-pointer type '[^']*' from NULL$/ {
+    split($1,file,":")
+    srcfile=makesrcfile(cur_dir, file[1])
+    lineno=file[2]
+    replace(srcfile, lineno, "NULL", 0)
+}
+
+# -------------------------------
+# GCC 4.6
+
+# error: 'NULL' was not declared in this scope
+$2=="error:" && $0~/'NULL' was not declared in this scope/ {
+    split($1,file,":")
+    srcfile=makesrcfile(cur_dir, file[1])
+
+    append_include(srcfile,"stdlib.h")
+}
+
+
+# error: 'size_t' has not been declared
+# error: 'size_t' does not name a type
+$2=="error:" && ( $0~/error: 'size_t' has not been declared/ || 
+		  $0~/error: 'size_t' does not name a type/) {
+    split($1,file,":")
+    srcfile=makesrcfile(cur_dir, file[1])
+
+    append_include(srcfile,"stddef.h")
+}
+
+# error: 'offsetof' has not been declared
+# error: 'offsetof' was not declared in this scope
+$2=="error:" && ( $0~/error: 'offsetof' has not been declared/ || 
+		  $0~/error: 'offsetof' does not name a type/) {
+    split($1,file,":")
+    srcfile=makesrcfile(cur_dir, file[1])
+
+    append_include(srcfile,"stddef.h")
+}
+
+# error: 'ptrdiff_t' has not been declared
+# error: 'ptrdiff_t' does not name a type
+# error: 'ptrdiff_t' was not declared in this scope
+$2=="error:" && ( $0~/error: 'ptrdiff_t' has not been declared/ ||
+		  $0~/error: 'ptrdiff_t' does not name a type/ ||
+		  $0~/error: 'ptrdiff_t' was not declared in this scope/) {
+    split($1,file,":")
+    srcfile=makesrcfile(cur_dir, file[1])
+
+    append_include(srcfile,"stddef.h")
 }
