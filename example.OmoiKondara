@@ -29,6 +29,7 @@ FTP_CMD lftpget
 #FTP_CMD ncftpget -A
 #FTP_CMD wget -o wget.log
 #FTP_CMD aria2c
+#FTP_CMD curl -O
 
 # DISPLAY ビルドする際に X サーバへのコネクションが必要なものに対して設
 #         定される DISPLAY 環境変数の値。
