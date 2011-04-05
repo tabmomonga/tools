@@ -1,0 +1,44 @@
+#!/usr/bin/ruby -Ku
+# by Hiromasa YOSHIMOTO <y@momonga-linux.org>
+
+
+require 'optparse'
+
+OPTS = {}
+Version = "0.0.1"
+
+$:.unshift(File.dirname($0))
+require 'lib/config.rb'
+require 'lib/pkgdb.rb'
+
+ignorepath = []
+
+opt = OptionParser.new
+opt.on('--ignore=PATH', 'ignore PATH') {|v| ignorepath.push(v)}
+MoConfig.parse(ARGV,opt)
+
+OPTS[:readonly] = true
+
+d = PkgDB.new
+d.open(OPTS[:pkgdb_filename], OPTS)
+db = d.db
+
+sql = 'SELECT path FROM file_tbl GROUP BY path HAVING count(path) >1'
+db.execute(sql) do |path,|
+
+  r = ignorepath.each do |x| 
+    break if path.include?(x)
+  end
+  next if r.nil?
+
+  print "#{path}\n"
+  sql2 = "SELECT pkgname FROM pkg_tbl INNER JOIN file_tbl ON owner = id WHERE path LIKE ? GROUP BY pkgname"
+  db.execute(sql2, [path]) do |pkgname,|
+    print "  #{pkgname}\n"
+  end
+end
+
+# Local Variables:
+# mode: ruby
+# indent-tabs-mode: nil
+# End:
