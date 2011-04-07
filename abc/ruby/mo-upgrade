@@ -29,11 +29,11 @@ d.open(OPTS[:pkgdb_filename], OPTS)
 
 # Retrieves installed packages and its buildtimes
 installed = []
-`LANG=C \\rpm -qa --qf '%{NAME},%{VERSION},%{RELEASE},%{BUILDTIME}\n'`.each_line do |line|
+`LANG=C \\rpm -qa --qf '%{NAME},%{VERSION},%{RELEASE},%{BUILDTIME},%{ARCH}\n'`.each_line do |line|
   column = line.chomp.split(',')
   v  = column[1]
   v += "-#{column[2]}" if column[2]!=""
-  installed.push([column[0],v,column[3].to_i])
+  installed.push([column[0],v,column[3].to_i,column[4]])
 end
 
 if true == OPTS[:strict] then

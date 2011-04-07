@@ -10,18 +10,19 @@ require 'lib/install.rb'
 HOLDS = [ "kernel", "lame", "lame-devel", "usolame-devel", "usolame" ]
 
 
-def append_install_queue(queue, name, version, buildtime, d, opts)
+def append_install_queue(queue, name, version, buildtime, arch,
+                         d, opts)
   found = false
   
   # 1) 特定のパッケージは 更新しない
   return  if HOLDS.include?(name)
  
   # 2) "#{name}"をobsoleteしているpackageがあれば、代替
-  sql = "SELECT pkgfile,comparison,version,buildtime FROM obsolete_tbl INNER JOIN pkg_tbl ON owner=id WHERE capability=='#{name}'"
-  d.db.execute(sql) do |pkgfile,comparison,version1,buildtime1|
+  sql = 'SELECT pkgfile,comparison,version,buildtime FROM obsolete_tbl INNER JOIN pkg_tbl ON owner=id WHERE capability==? AND arch==?'
+  d.db.execute(sql, [name,arch]) do |pkgfile,comparison,version1,buildtime1|
     next if !compare_version(version, comparison, version1)
     if buildtime.to_i != buildtime1 then
-      STDERR.puts "#{name} is obsoleted by #{pkgfile}" if opts[:verbose]>1
+      STDERR.puts "#{name}.#{arch} is obsoleted by #{pkgfile}" if opts[:verbose]>1
       queue.add(pkgfile)
       found = true
     end
@@ -29,10 +30,10 @@ def append_install_queue(queue, name, version, buildtime, d, opts)
   return if found
   
   # 3) 同名かつbuildtimeの新しいpackageがあれば、更新
-  sql = "SELECT pkgfile,buildtime FROM pkg_tbl WHERE pkgname=='#{name}'"
-  d.db.execute(sql) do |pkgfile,ts|
+  sql = 'SELECT pkgfile,buildtime FROM pkg_tbl WHERE pkgname==? AND arch==?'
+  d.db.execute(sql, [name, arch]) do |pkgfile,ts|
     if ts.to_i != buildtime then
-      STDERR.puts "#{name} is updated by #{pkgfile}" if opts[:verbose]>1
+      STDERR.puts "#{name}.#{arch} is updated by #{pkgfile}" if opts[:verbose]>1
       queue.add(pkgfile)
     end
     found = true
@@ -40,17 +41,17 @@ def append_install_queue(queue, name, version, buildtime, d, opts)
   return if found
   
   # 4) "#{name}"をprovideしているpackageがあれば、代替
-  sql = "SELECT pkgfile,comparison,version,buildtime FROM capability_tbl INNER JOIN pkg_tbl ON owner==id WHERE capability=='#{name}' AND pkgname!='#{name}'"
-  d.db.execute(sql) do |pkgfile,comparison,version1,buildtime1|
+  sql = 'SELECT pkgfile,comparison,version,buildtime FROM capability_tbl INNER JOIN pkg_tbl ON owner==id WHERE capability==? AND pkgname!=? AND arch==?'
+  d.db.execute(sql, [name,name,arch]) do |pkgfile,comparison,version1,buildtime1|
     next if version1 && compare_version(version1, "<", version)
-    STDERR.puts "#{name} is updated by #{pkgfile}" if opts[:verbose]>1
+    STDERR.puts "#{name}.#{arch} is updated by #{pkgfile}" if opts[:verbose]>1
     queue.add(pkgfile)
     found = true
   end
   return if found
   
   # 該当パッケージ無し
-  STDERR.puts "Warning: No package found for #{name}" if opts[:verbose]>1
+  STDERR.puts "Warning: No package found for #{name}.#{arch}" if opts[:verbose]>1
 ensure
   return found
 end
@@ -58,8 +59,9 @@ end
 def upgrade_strict(installed, d, opts)
   STDERR.puts "Searching updated packages"  if opts[:verbose]>0
   queue = Set.new
-  installed.each do |name,version,buildtime|
-    append_install_queue(queue, name, version, buildtime, d, opts)
+  installed.each do |name,version,buildtime,arch|
+    append_install_queue(queue, name, version, buildtime, arch, 
+                         d, opts)
   end
   
   if queue.size == 0 then
@@ -98,10 +100,11 @@ end
 
 
 def upgrade_permissive(installed, d, opts)
-  installed.each do |name,version,buildtime|
+  installed.each do |name,version,buildtime,arch|
 
     queue = Set.new
-    append_install_queue(queue, name, version, buildtime, d, opts)
+    append_install_queue(queue, name, version, buildtime, arch,
+                         d, opts)
     next if queue.size == 0
 
     pkgs, msg = select_required_packages(d.db, queue.to_a, opts)

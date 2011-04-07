@@ -42,11 +42,14 @@ def select_required_packages(db, requested, opts = nil)
 
     requested.each do |cap|
       found = false
+
       if cap =~ /\.rpm$/ then
-        cap = "#{OPTS[:pkgdir_base]}/#{cap}"
         if !File.exist?(cap) then
-          msg = "  no such file, #{cap}"
-          return 
+          cap = "#{OPTS[:pkgdir_base]}/#{cap}"
+          if !File.exist?(cap) then
+            msg = "  no such file, #{cap}"
+            return
+          end
         end
 
         current = rpmq_buildtime(cap)
@@ -62,8 +65,8 @@ def select_required_packages(db, requested, opts = nil)
       end
       
       if !found then
-        sql = "SELECT pkgfile,buildtime FROM pkg_tbl WHERE pkgname GLOB '#{cap}'"
-        db.execute(sql) do |pkgfile,buildtime|
+        sql = 'SELECT pkgfile,buildtime FROM pkg_tbl WHERE pkgname GLOB ?'
+        db.execute(sql, [cap]) do |pkgfile,buildtime|
           pkgfile = "#{OPTS[:pkgdir_base]}/#{pkgfile}"
           ts = rpmq_buildtime(pkgfile)
           if ts != buildtime.to_i then
@@ -75,8 +78,8 @@ def select_required_packages(db, requested, opts = nil)
       end
 
       if !found then
-        sql = "SELECT pkgfile,buildtime FROM capability_tbl INNER JOIN pkg_tbl ON id==owner WHERE capability GLOB '#{cap}'"
-        db.execute(sql) do |pkgfile,buildtime|
+        sql = 'SELECT pkgfile,buildtime FROM capability_tbl INNER JOIN pkg_tbl ON id==owner WHERE capability GLOB ?'
+        db.execute(sql, [cap]) do |pkgfile,buildtime|
           pkgfile = "#{OPTS[:pkgdir_base]}/#{pkgfile}"
           ts = rpmq_buildtime(pkgfile)
           if ts != buildtime.to_i then
@@ -126,7 +129,7 @@ def select_required_packages(db, requested, opts = nil)
   end
 
   if count>=opts[:max_retry] then
-    msg = "Too many dependancies"
+    msg = "Too many dependancies, abort"
   end
 
 ensure

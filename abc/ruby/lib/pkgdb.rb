@@ -6,7 +6,7 @@ require 'lib/database.rb'
 
 class PkgDB < DBBase
 
-  TABLE_MAJOR_VERSION=4 # increase when the layout breaks compatibility
+  TABLE_MAJOR_VERSION=5 # increase when the layout breaks compatibility
   TABLE_MINOR_VERSION=0 # increase when rebuild DB is required
   TABLE_LAYOUT=<<ENDOFSQL
 
@@ -51,10 +51,12 @@ create table conflict_tbl (
 drop table if exists pkg_tbl;
 create table pkg_tbl (
        id integer primary key autoincrement,
-       pkgfile text,
-       pkgname text unique,
+       pkgfile text unique,
+       pkgname text,
        buildtime integer,
-       lastupdate integer
+       arch text,
+       lastupdate integer,
+       unique(pkgname,arch)
 );
 
 drop table if exists file_tbl;
@@ -84,8 +86,8 @@ ENDOFSQL
     sql = "select pkgfile,max(id) as id from pkg_tbl group by pkgfile having count(*) > 1"
     @db.execute(sql) do |pkgfile,id|
       STDERR.puts "warrning: #{pkgfile} has broken entries, fixing them..."
-      sql = "delete from pkg_tbl where pkgfile == '#{pkgfile}' and id != #{id}"
-      @db.execute(sql)
+      sql = 'delete from pkg_tbl where pkgfile == ? and id != ?'
+      @db.execute(sql, [pkgfile, id])
     end
   end
 
@@ -142,10 +144,11 @@ ENDOFSQL
     STDERR.puts "checking #{filename}\n" if (opts[:verbose]>1)
     timestamp = File.mtime(filename).to_i
     pkgname = File.basename(pkgfile).split("-")[0..-3].join("-")
+    arch = File.basename(pkgfile).split('.')[-2]
 
     if !opts[:force_update] then
-      sql = "select count(id) from pkg_tbl where pkgname == '#{pkgname}' and lastupdate>=#{timestamp}"
-      if  db.get_first_value(sql).to_i == 1  then
+      sql = 'select count(id) from pkg_tbl where pkgname == ? AND arch == ? AND lastupdate >= ?'
+      if db.get_first_value(sql, [pkgname, arch, timestamp]).to_i == 1  then
         STDERR.puts "skipping #{pkgfile}" if (opts[:verbose]>1) 
         return false
       end
@@ -154,11 +157,11 @@ ENDOFSQL
     STDERR.puts "updating entry for #{pkgname}" if (opts[:verbose]>-1) 
 
     # create pkg_tbl entry
-    db.execute("insert or ignore into pkg_tbl (pkgname) values(?)",
-               [pkgname])
-    id = db.get_first_value("select id from pkg_tbl where pkgname == ?",
-                            [pkgname]).to_i
-    STDERR.puts "id :#{id} pkgname: #{pkgname}" if opts[:verbose]>1
+    db.execute('insert or ignore into pkg_tbl (pkgname,arch) values(?,?)',
+               [pkgname, arch])
+    id = db.get_first_value('select id from pkg_tbl where pkgname == ? AND arch == ?',
+                            [pkgname,arch]).to_i
+    STDERR.puts "id :#{id} pkgname: #{pkgname}.#{arch}" if opts[:verbose]>1
 
     # delete old datas
     delete_cached(db, id)
