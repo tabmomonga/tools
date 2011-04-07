@@ -78,6 +78,7 @@ class MoConfig
   private 
   def MoConfig.get_arch_and_notfile
     arch = `uname -m`
+    arch.chomp!
     case arch
     when 'x86_64'
       notfile = 'NOT.x86_64'
