@@ -82,7 +82,7 @@ module Speclint
       Modified\ BSD BSD MIT/X MIT MPLv1\.1 MPL \
       Creative\ Commons CC-BY-SA \
       Public\ Domain \
-      PHP OPL QPL Ruby OFL)
+      PHP OPL QPL Ruby SNIA OFL)
 
     VALID_GROUPS = <<-EOT.strip.split(/\n\s+/)
       Amusements/Games
