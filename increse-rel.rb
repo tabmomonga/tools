@@ -75,7 +75,8 @@ ARGV.each { |file|
 			if line =~ /^%global\s+momorel/
 				rel = line.split(/\s+/)[2].to_i
 				rel += 1
-				line = "%global momorel #{rel}\n"
+				len = line.length - line.split(/\s+/)[2].length - 1
+				line = line[0, len] + "#{rel}\n"
 			end
 
 			evr = if @epoch.nil? || @epoch.zero?
