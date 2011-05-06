@@ -8,7 +8,7 @@ date   = Time.now.strftime('%a %b %d %Y')
 
 if ARGV == nil || ARGV.size == 0
 	program = $0.split('/')[-1]
-	puts "Usage: #{program} [ -a, --address ADDRESS ] [ -m, --message MESSAGE ] [ -n, --name NAME ] {specfile|dir}..."
+	puts "Usage: #{program} [ -a, --address ADDRESS ] [ -m, --message MESSAGE ] [ -n, --name NAME ] [ -d, --date DATE ] {specfile|dir}..."
 	exit 1
 end
 
@@ -25,6 +25,9 @@ ARGV.options { |opt|
 		@myname = v
 	}
 
+        opt.on('-d DATE', '--date DATE', String, 'Changelog date') {|v|
+                @chlogdate = v
+        }
 	opt.parse!
 }
 
@@ -43,9 +46,13 @@ if ! @myname
 	exit 1
 end
  
+if @chlogdate
+        date = @chlogdate
+end
+
 if ARGV == nil || ARGV.size == 0
 	program = $0.split('/')[-1]
-	puts "Usage: #{program} [ -a, --address ADDRESS ] [ -m, --message MESSAGE ] [ -n, --name NAME ] {specfile|dir}..."
+	puts "Usage: #{program} [ -a, --address ADDRESS ] [ -m, --message MESSAGE ] [ -n, --name NAME ] [ -d, --date DATE ] {specfile|dir}..."
 	exit 1
 end
 
@@ -53,7 +60,11 @@ ARGV.each { |file|
 	if /\.spec$/ !~ file
 		file = file.delete('/')
 		if FileTest.exist?("#{file}/#{file}.spec")
-			file = "#{file}/#{file}.spec"
+			if FileTest.exist?("#{file}/SKIP") || FileTest.exist?("#{file}/OBSOLETE")
+				next
+			else
+				file = "#{file}/#{file}.spec"
+			end
 		else
 			next
 		end
