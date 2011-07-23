@@ -1,4 +1,6 @@
-#!/usr/bin/ruby -Ku
+#!/usr/bin/ruby
+# -*- coding: utf-8 -*-
+#
 # by Hiromasa YOSHIMOTO <y@momonga-linux.org>
 
 require 'optparse'

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # lib/specdb.rb
 #
 # by Hiromasa YOSHIMOTO <y@momonga-linux.org>
@@ -6,7 +7,7 @@ require 'lib/database.rb'
 
 class SpecDB < DBBase
   TABLE_MAJOR_VERSION=3 # increase when the layout breaks compatibility
-  TABLE_MINOR_VERSION=0 # increase when we have to rebuild the DB
+  TABLE_MINOR_VERSION=1 # increase when we have to rebuild the DB
   TABLE_LAYOUT=<<ENDOFSQL
 
 drop table if exists buildreq_tbl;

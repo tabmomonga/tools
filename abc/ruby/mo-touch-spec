@@ -1,4 +1,5 @@
 #!/bin/bash
+# -*- coding: utf-8 -*-
 # by Hiromasa YOSHIMOTO <y@momonga-linux.org>
 
 function do_touch ()

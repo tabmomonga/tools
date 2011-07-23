@@ -53,7 +53,7 @@ class MoConfig
         STDERR.puts "failed to read #{configfile}"
         next
       end
-      File.open(configfile).each_line {|line|
+      File.open(configfile, "r:utf-8").each_line {|line|
         line.chomp!
         next  if line =~ /^#/ or line =~ /^$/
         s = line.split(/\s+/, 2)
@@ -88,7 +88,7 @@ class MoConfig
       arch = 'i686'
     when /^alpha/
       notfile = 'NOT.alpha'
-      open('/proc/cpuinfo').readlines.each do |line|
+      open('/proc/cpuinfo','r:utf-8').readlines.each do |line|
         if line =~ /^cpu model\s*:\s*EV([0-9]).*$/ && $1 == '5'
           arch = 'alphaev5'
           break
@@ -96,7 +96,7 @@ class MoConfig
       end
     when 'mips'
       notfile = 'NOT.mips'
-      open('/proc/cpuinfo').readlines.each do |line|
+      open('/proc/cpuinfo','r:utf-8').readlines.each do |line|
         if line =~ /^cpu model\s*:\s*R5900.*/
         arch = 'mipsel'
           break

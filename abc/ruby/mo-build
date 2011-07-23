@@ -1,3 +1,4 @@
 #!/bin/bash
+# -*- coding: utf-8 -*-
 
 ../tools/v2/OmoiKondara2 $@

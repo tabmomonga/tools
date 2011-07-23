@@ -17,26 +17,31 @@ opt = OptionParser.new
 opt.on('--ignore=PATH', 'ignore PATH') {|v| ignorepath.push(v)}
 MoConfig.parse(ARGV,opt)
 
-OPTS[:readonly] = true
+#OPTS[:readonly] = true
 
 d = PkgDB.new
 d.open(OPTS[:pkgdb_filename], OPTS)
 db = d.db
 
-sql = 'SELECT path FROM file_tbl GROUP BY path HAVING count(path) >1'
-db.execute(sql) do |path,|
-
-  r = ignorepath.each do |x| 
-    break if path.include?(x)
-  end
-  next if r.nil?
-
-  print "#{path}\n"
-  sql2 = "SELECT pkgname FROM pkg_tbl INNER JOIN file_tbl ON owner = id WHERE path LIKE ? GROUP BY pkgname"
-  db.execute(sql2, [path]) do |pkgname,|
-    print "  #{pkgname}\n"
+require 'set'
+delQ = Set.new
+pkgs = Set.new
+sql = 'SELECT pkgname,arch,id,lastupdate FROM pkg_tbl'
+db.execute(sql) do |pkgname,arch,|
+  name="#{pkgname}.#{arch}"
+  if pkgs.include?(name) then
+    delQ.add([pkgname,arch])
+  else
+    pkgs.add(name)
   end
 end
+
+delQ.each do |name,arch|
+  db.execute('DELETE FROM pkg_tbl WHERE pkgname LIKE ? AND arch LIKE ?',
+             [name, arch])
+end
+
+exit
 
 # Local Variables:
 # mode: ruby

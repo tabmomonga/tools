@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # lib/pkgdb.rb
 #
 # by Hiromasa YOSHIMOTO <y@momonga-linux.org>
@@ -7,7 +8,7 @@ require 'lib/database.rb'
 class PkgDB < DBBase
 
   TABLE_MAJOR_VERSION=5 # increase when the layout breaks compatibility
-  TABLE_MINOR_VERSION=0 # increase when rebuild DB is required
+  TABLE_MINOR_VERSION=1 # increase when rebuild DB is required
   TABLE_LAYOUT=<<ENDOFSQL
 
 -- pkgfile's capabilities (=provides) info
@@ -83,12 +84,19 @@ ENDOFSQL
 
   def check(opts = nil)
     opts = @options if nil==opts
-    sql = "select pkgfile,max(id) as id from pkg_tbl group by pkgfile having count(*) > 1"
-    @db.execute(sql) do |pkgfile,id|
-      STDERR.puts "warrning: #{pkgfile} has broken entries, fixing them..."
-      sql = 'delete from pkg_tbl where pkgfile == ? and id != ?'
-      @db.execute(sql, [pkgfile, id])
-    end
+
+    @db.transaction { |db|
+      db.execute('DELETE FROM pkg_tbl WHERE pkgfile IS NULL')
+
+      sql = 'SELECT pkgfile,MAX(id) AS id FROM pkg_tbl GROUP BY pkgfile HAVING COUNT(*) > 1'
+      db.execute(sql) do |pkgfile,id|
+        STDERR.puts "warrning: #{pkgfile} has broken entries, fixing them..."
+        sql = 'DELETE FROM pkg_tbl WHERE pkgfile == ? AND id != ?'
+        db.execute(sql, [pkgfile, id])
+      end
+    }
+  rescue => e
+    STDERR.puts "   exception: #{e} " if (opts[:verbose]>-1)
   end
 
   def delete(pkgfile, opts = nil)
@@ -116,13 +124,18 @@ ENDOFSQL
   def update_list(list, opts = nil)
     opts = @options if nil==opts
 
-    r = false
-    @db.transaction { |db|
-      list.each {|pkgfile|
-        r |= update_one(db, pkgfile, opts)
-      }
+    failed = false
+    @db.transaction
+    list.each {|pkgfile|
+      failed = ! update_one(@db, pkgfile, opts)
+      break if failed
     }
-    return r
+    if failed then
+      @db.rollback
+    else
+      @db.commit
+    end
+    return !failed
   end
 
   private 
@@ -140,7 +153,7 @@ ENDOFSQL
   # returns true when DB is updated, otherwise returns false
   private
   def update_one(db, pkgfile, opts) 
-    filename = "#{opts[:pkgdir_base]}/#{pkgfile}"
+    filename = "#{opts[:pkgdir_base]}/#{pkgfile}".encode(Encoding::ASCII)
     STDERR.puts "checking #{filename}\n" if (opts[:verbose]>1)
     timestamp = File.mtime(filename).to_i
     pkgname = File.basename(pkgfile).split("-")[0..-3].join("-")
@@ -150,7 +163,7 @@ ENDOFSQL
       sql = 'select count(id) from pkg_tbl where pkgname == ? AND arch == ? AND lastupdate >= ?'
       if db.get_first_value(sql, [pkgname, arch, timestamp]).to_i == 1  then
         STDERR.puts "skipping #{pkgfile}" if (opts[:verbose]>1) 
-        return false
+        return true
       end
     end
         
@@ -170,7 +183,8 @@ ENDOFSQL
     pkg = RPM::Package.open(filename)
     pkg.provides.each {|prov|
       name, op, ver = prov.conv
-      db.execute("insert into capability_tbl (owner, capability, comparison, version) values (#{id}, #{name}, #{op}, #{ver})")
+      db.execute("insert into capability_tbl (owner, capability, comparison, version) values (?,?,?,?)",
+                 [id, name, op, ver])
     }
     
     # insert dependency(=requires)
@@ -191,7 +205,7 @@ ENDOFSQL
     
     if opts[:update_file_tbl] then
       pkg.files.each {|file|
-        path = file.path
+        path = file.path.encode(Encoding::ASCII, :replace => "?")
         db.execute("insert into file_tbl (owner, path) values (?, ?)", 
                    [id, path])
       }

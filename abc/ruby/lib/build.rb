@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 require 'lib/common.rb'
 
 class Job

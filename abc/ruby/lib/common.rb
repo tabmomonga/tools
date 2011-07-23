@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 
 def momo_abort(msg)
   STDERR.puts ""
@@ -82,7 +83,7 @@ class Job
 
     file = "#{@specdir}/Build.log"
     backup_logfile(file)
-    @log = File.open(file, "a+")
+    @log = File.open(file, "a+:utf-8")
 
     @valid = true
   end

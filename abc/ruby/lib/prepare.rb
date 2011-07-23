@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # lib/prepare.rb
 #
 # by Hiromasa YOSHIMOTO <y@momonga-linux.org>
@@ -50,7 +51,7 @@ class Job
   def copy_rpmrc(basefile, newfile, optfile = nil)
     pats = []
     if !optfile.nil?
-      File.open(optfile).each { |line|
+      File.open(optfile,"r:utf-8").each { |line|
         line.chomp!
         
         token = line.scan(/\"[^\"]*\"|[^\" \t]+/)
@@ -72,8 +73,8 @@ class Job
       }
     end
 
-    newf = File.open(newfile, 'w')
-    File.open(basefile, 'r').each { |line|
+    newf = File.open(newfile, 'w:utf-8')
+    File.open(basefile, 'r:utf-8').each { |line|
       # macrofiles: 〜 の行は削除する
       next if line[0,10] == "macrofiles"
       
@@ -119,7 +120,7 @@ class Job
       `echo '#{macrofiles}#{mcfile}' >> #{rcfile}`
     end
     
-    File.open(mcfile, "w") {|f|
+    File.open(mcfile, "w:utf-8") {|f|
       f.puts <<EOS
 %_topdir #{dir}
 %_arch #{OPTS[:arch]}
@@ -157,7 +158,7 @@ EOS
   #
   def generate_rpmbuild_sh(dir)
     file = "#{dir}/rpmbuild.sh"
-    File.open(file, "w+") {|f|
+    File.open(file, "w+:utf-8") {|f|
       args = ""
       args += generate_macrofiles(dir) if  rpm46?
 

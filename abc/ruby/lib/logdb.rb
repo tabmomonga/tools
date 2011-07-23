@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # lib/logdb.rb
 #
 # by Hiromasa YOSHIMOTO <y@momonga-linux.org>

@@ -1,2 +1,3 @@
 #!/bin/bash
+# -*- coding: utf-8 -*-
 ../tools/report-download $@
