@@ -20,6 +20,10 @@ MoConfig.parse(ARGV,opt)
 d = PkgDB.new
 d.open(OPTS[:pkgdb_filename], OPTS)
 
+
+# Temporarily disable automatic indexing
+d.db.execute('PRAGMA automatic_index = false');
+
 if true == OPTS[:update_file_tbl] then
   f = d.db.get_first_value('SELECT count(*) FROM misc_tbl WHERE last_file_update == lastupdate')
   if 0 == f then
@@ -76,6 +80,8 @@ if true == OPTS[:update_file_tbl] then
 end
 d.db.execute("UPDATE misc_tbl SET lastupdate = ?", ts)
 
+# Regenerate index
+d.db.execute("ANALYZE")
 
 d.close
 

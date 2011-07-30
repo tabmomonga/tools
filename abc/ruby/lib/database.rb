@@ -31,21 +31,28 @@ module RPM
                  else
                    nil
                  end
+      # !!FIXME!!
+      # now we can not handle non-ascii charcter.
+      # note; for example, ipa-ex-gothic-fonts has a
+      # UTF string in its provides field.
+      n = name.encode(Encoding::ASCII, :replace => '?')
 
       if relation.nil?
-        return "'#{name}'", "NULL", "NULL"
+        return n, 'NULL', 'NULL'
       else
-        v  = version.e.nil? ? "" : "#{version.e}:" 
-        v += "#{version.v}"
+        v  = version.e.nil? ? '' : "#{version.e}:" 
+        v += version.v
         v += "-#{version.r}" if version.r
-        return "'#{name}'", "'#{relation}'", "'#{v}'"
+        return n, relation, v
       end
     end
   end
 end # module RPM
 
-# package の version を比較する
-# なお op, ver2 が共に  nil の場合は true を返す
+# Compares package version strings
+#
+# note; this method returns true 
+# when both of op and ver2 are nill
 def compare_version(ver1, op, ver2)
   return true if op.nil? and ver2.nil? 
     
@@ -96,9 +103,9 @@ class DBBase
       #needed = true
     end 
     
-    @db.execute("PRAGMA temp_store = 2")
-    @db.execute("PRAGMA journal_mode = MEMORY")
-    @db.execute("PRAGMA synchronous =  0")
+    @db.execute('PRAGMA temp_store = 2')
+    @db.execute('PRAGMA journal_mode = MEMORY')
+    @db.execute('PRAGMA synchronous =  0')
     initialize_database(layout, major, minor) if needed || @options[:force_update]
   end
 
@@ -120,7 +127,8 @@ class DBBase
     STDERR.puts "initializing database " if @options[:verbose] > -1
     @db.transaction { |db|
       db.execute_batch(layout)
-      db.execute("insert into misc_tbl(major_version, minor_version, lastupdate) values(#{major},#{minor},0)")
+      db.execute('insert into misc_tbl(major_version, minor_version, lastupdate) values(?,?,0)',
+                 [major, minor])
     }
   end
 

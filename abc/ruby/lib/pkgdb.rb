@@ -141,10 +141,10 @@ ENDOFSQL
   private 
   def delete_one(db, pkgfile, opts)  
     STDERR.puts "deleting entry for #{pkgfile}" if (opts[:verbose]>1) 
-    id = db.get_first_value("select id from pkg_tbl where pkgfile == '#{pkgfile}'").to_i
+    id = db.get_first_value('select id from pkg_tbl where pkgfile == ?', [pkgfile]).to_i
     if nil != id then
       delete_cached(db, id)
-      db.execute("delete from pkg_tbl where id == #{id}")
+      db.execute('delete from pkg_tbl where id == ?', [id])
     end
   end
 
@@ -153,6 +153,7 @@ ENDOFSQL
   # returns true when DB is updated, otherwise returns false
   private
   def update_one(db, pkgfile, opts) 
+    pkgfile.encode!(Encoding::ASCII)
     filename = "#{opts[:pkgdir_base]}/#{pkgfile}".encode(Encoding::ASCII)
     STDERR.puts "checking #{filename}\n" if (opts[:verbose]>1)
     timestamp = File.mtime(filename).to_i
@@ -183,35 +184,38 @@ ENDOFSQL
     pkg = RPM::Package.open(filename)
     pkg.provides.each {|prov|
       name, op, ver = prov.conv
-      db.execute("insert into capability_tbl (owner, capability, comparison, version) values (?,?,?,?)",
+      db.execute('insert into capability_tbl (owner, capability, comparison, version) values (?,?,?,?)',
                  [id, name, op, ver])
     }
     
     # insert dependency(=requires)
     pkg.requires.each {|req|
       name, op, ver = req.conv
-      db.execute("insert into dependency_tbl (owner, capability, comparison, version) values (#{id}, #{name}, #{op}, #{ver})")
+      db.execute('insert into dependency_tbl (owner, capability, comparison, version) values (?,?,?,?)',
+                 [id, name, op, ver])
     }
     
     pkg.conflicts.each {|conflict|
       name, op, ver = conflict.conv
-      db.execute("insert into conflict_tbl (owner, capability, comparison, version) values (#{id}, #{name}, #{op}, #{ver})")
+      db.execute('insert into conflict_tbl (owner, capability, comparison, version) values (?,?,?,?)',
+                 [id, name, op, ver])
     }
     
     pkg.obsoletes.each {|obso|
       name, op, ver = obso.conv
-      db.execute("insert into obsolete_tbl (owner, capability, comparison, version) values (#{id}, #{name}, #{op}, #{ver})")
+      db.execute('insert into obsolete_tbl (owner, capability, comparison, version) values (?,?,?,?)',
+                 [id, name, op, ver])
     }
     
     if opts[:update_file_tbl] then
       pkg.files.each {|file|
         path = file.path.encode(Encoding::ASCII, :replace => "?")
-        db.execute("insert into file_tbl (owner, path) values (?, ?)", 
+        db.execute('insert into file_tbl (owner, path) values (?, ?)', 
                    [id, path])
       }
     end
 
-    db.execute("UPDATE pkg_tbl SET pkgfile = ?, lastupdate = ?, buildtime = ? WHERE id == ?",
+    db.execute('UPDATE pkg_tbl SET pkgfile = ?, lastupdate = ?, buildtime = ? WHERE id == ?',
                [pkgfile, timestamp, pkg[RPM::TAG_BUILDTIME], id])
     pkg = nil
 
@@ -224,11 +228,11 @@ ENDOFSQL
 
   private  
   def delete_cached(db, id)
-    db.execute("delete from capability_tbl where owner == #{id}")
-    db.execute("delete from dependency_tbl where owner == #{id}")
-    db.execute("delete from conflict_tbl where owner == #{id}")
-    db.execute("delete from obsolete_tbl where owner == #{id}")
-    db.execute("delete from file_tbl where owner == #{id}")
+    db.execute('delete from capability_tbl where owner == ?', [id])
+    db.execute('delete from dependency_tbl where owner == ?', [id])
+    db.execute('delete from conflict_tbl where owner == ?', [id])
+    db.execute('delete from obsolete_tbl where owner == ?', [id])
+    db.execute('delete from file_tbl where owner == ?', [id])
   end
 
 end  # end of class PkgDB

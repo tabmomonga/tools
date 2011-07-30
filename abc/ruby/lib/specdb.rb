@@ -128,8 +128,8 @@ ENDOFSQL
         timestamp = timestamp1>timestamp2 ? timestamp1 : timestamp2
 
         if !opts[:force_update] then
-          sql = "select count(id) from specfile_tbl where name == '#{specname}' and lastupdate>=#{timestamp}"
-          if  @db.get_first_value(sql).to_i == 1  then
+          sql = 'select count(id) from specfile_tbl where name == ? and lastupdate>=?'
+          if  @db.get_first_value(sql, [specname,timestamp]).to_i == 1  then
             STDERR.puts "skip #{specname}" if (opts[:verbose]>0) 
             next
           end
@@ -147,10 +147,10 @@ ENDOFSQL
         STDERR.puts "updating entry for #{specname}" if (opts[:verbose]>-1) 
         
         # create spec entry
-        db.execute("insert or ignore into specfile_tbl (name) values('#{specname}')")
-        id = db.get_first_value("select id from specfile_tbl where name == '#{specname}'").to_i
+        db.execute('insert or ignore into specfile_tbl (name) values(?)', [specname])
+        id = db.get_first_value('select id from specfile_tbl where name == ?', [specname]).to_i
         # update timestamp
-        db.execute("update specfile_tbl set lastupdate = #{timestamp} where name == '#{specname}'")      
+        db.execute('update specfile_tbl set lastupdate = ? where name == ?', [timestamp ,specname])      
         # delete old datas
         delete_cache(db, id)
 
@@ -163,29 +163,29 @@ ENDOFSQL
         # create new datas
         spec.buildrequires.each {|cap|
           name, op, ver = cap.conv
-          sql = "insert into buildreq_tbl (owner,capability,comparison,version) values(#{id}, #{name}, #{op}, #{ver})"
-          db.execute(sql)
+          sql = 'insert into buildreq_tbl (owner,capability,comparison,version) values(?,?,?,?)'
+          db.execute(sql, [id, name, op, ver])
         }      
         
         spec.packages.each {|pkg|
           # add package_tbl entry
           name = "'#{pkg.name}'"
           ver  =  pkg.version.nil? ? 'NULL' : "'#{pkg.version}'"
-          sql = "insert into package_tbl (owner,capability,comparison,version) values(#{id}, #{name}, '==', #{ver})"
-          db.execute(sql)
+          sql = 'insert into package_tbl (owner,capability,comparison,version) values(?,?,?,?)'
+          db.execute(sql, [id, name, '==', ver])
           
           # add require_tbl entry
           pkg.requires.each {|cap|
             name, op, ver = cap.conv
-            sql = "insert into require_tbl (owner,capability,comparison,version) values(#{id}, #{name}, #{op}, #{ver})"
-            db.execute(sql)
+            sql = 'insert into require_tbl (owner,capability,comparison,version) values(?,?,?,?)'
+            db.execute(sql, [id, name, op, ver])
           }
           
           # add provide_tbl entry	
           pkg.provides.each {|cap|
             name, op, ver = cap.conv
-            sql = "insert into provide_tbl (owner,capability,comparison,version) values(#{id}, #{name}, #{op}, #{ver})"
-            db.execute(sql)
+            sql = 'insert into provide_tbl (owner,capability,comparison,version) values(?,?,?,?)'
+            db.execute(sql, [id, name, op, ver])
           }        
         }
       }
@@ -194,10 +194,10 @@ ENDOFSQL
   
   private  
   def delete_cache(db, id)
-    db.execute("delete from buildreq_tbl where owner == #{id}")
-    db.execute("delete from package_tbl where owner == #{id}")
-    db.execute("delete from require_tbl where owner == #{id}")
-    db.execute("delete from provide_tbl where owner == #{id}")
+    db.execute('delete from buildreq_tbl where owner == ?', [id])
+    db.execute('delete from package_tbl where owner == ?', [id])
+    db.execute('delete from require_tbl where owner == ?', [id])
+    db.execute('delete from provide_tbl where owner == ?', [id])
   end
 
 end  # end of class SpecDB
