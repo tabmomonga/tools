@@ -209,7 +209,7 @@ ENDOFSQL
   private 
   def delete_one(db, pkgfile, opts)  
     STDERR.puts "deleting entry for #{pkgfile}" if (opts[:verbose]>1) 
-    id = @stmt_select_id_from_pkg_tbl1.execute!([pkgfile]).to_i
+    id = @stmt_select_id_from_pkg_tbl1.get_first_value([pkgfile]).to_i
     if nil != id then
       delete_cached(db, id)
       @stmt_delete_from_pkg_tbl.execute!([id])
