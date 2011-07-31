@@ -49,11 +49,19 @@ module RPM
   end
 end # module RPM
 
+module SQLite3
+  class Statement
+    def get_first_value( *bind_vars )
+      execute!( *bind_vars ) { |row| return row[0] }
+      nil
+    end
+  end
+end
+
 # Compares package version strings
 #
-# note; this method returns true 
-# when both of op and ver2 are nill
 def compare_version(ver1, op, ver2)
+  return true if op == 'NULL'
   return true if op.nil? and ver2.nil? 
     
   v1 = RPM::Version.new(ver1)

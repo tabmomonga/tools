@@ -84,6 +84,64 @@ ENDOFSQL
                   TABLE_LAYOUT,
                   TABLE_MAJOR_VERSION, 
                   TABLE_MINOR_VERSION,  opts)
+    
+    # for update_list()
+    @stmt_select_count_id_from_specfile_tbl =
+      @db.prepare('select count(id) from specfile_tbl where name == ? and lastupdate>=?')
+    @stmt_insert_or_ignore_into_specfile_tbl =
+      @db.prepare('insert or ignore into specfile_tbl (name) values(?)')
+    @stmt_select_id_from_specfile_tbl =
+      @db.prepare('select id from specfile_tbl where name == ?')
+    @stmt_update_specfile_tbl =
+      @db.prepare('update specfile_tbl set lastupdate = ? where name == ?')
+
+    @stmt_insert_into_buildreq_tbl =
+      @db.prepare('insert into buildreq_tbl (owner,capability,comparison,version) values(?,?,?,?)')
+    @stmt_insert_into_package_tbl =
+      @db.prepare('insert into package_tbl (owner,capability,comparison,version) values(?,?,?,?)')
+    @stmt_insert_into_require_tbl =
+      @db.prepare('insert into require_tbl (owner,capability,comparison,version) values(?,?,?,?)')
+    @stmt_insert_into_provide_tbl =
+      @db.prepare('insert into provide_tbl (owner,capability,comparison,version) values(?,?,?,?)')
+
+    # for delete_cache()
+    @stmt_delete_from_buildreq_tbl =
+      @db.prepare('delete from buildreq_tbl where owner == ?')
+    @stmt_delete_from_package_tbl =
+      @db.prepare('delete from package_tbl where owner == ?')
+    @stmt_delete_from_require_tbl =
+      @db.prepare('delete from require_tbl where owner == ?')
+    @stmt_delete_from_provide_tbl =
+      @db.prepare('delete from provide_tbl where owner == ?')
+
+    # for delete_list()
+    @stmt_delete_from_specfile_tbl =
+      @db.prepare('delete from specfile_tbl where id == ?')
+
+  end
+
+  def close
+    # for update_list()
+    @stmt_select_count_id_from_specfile_tbl.close
+    @stmt_insert_or_ignore_into_specfile_tbl.close
+    @stmt_select_id_from_specfile_tbl.close
+    @stmt_update_specfile_tbl.close
+
+    @stmt_insert_into_buildreq_tbl.close
+    @stmt_insert_into_package_tbl.close
+    @stmt_insert_into_require_tbl.close
+    @stmt_insert_into_provide_tbl.close
+
+    # for delete_cache()
+    @stmt_delete_from_buildreq_tbl.close
+    @stmt_delete_from_package_tbl.close
+    @stmt_delete_from_require_tbl.close
+    @stmt_delete_from_provide_tbl.close
+
+    # for delete_list()
+    @stmt_delete_from_specfile_tbl.close
+
+    super()
   end
 
   def check(opts = nil)
@@ -104,10 +162,10 @@ ENDOFSQL
     @db.transaction { |db|
       list.each { |name,|
         STDERR.puts "deleting entry for #{name}" if (opts[:verbose]>-1) 
-        id = db.get_first_value("select id from specfile_tbl where name == '#{name}'").to_i
-        if nil!=id then
-          delete_cache(db, id)
-          db.execute("delete from specfile_tbl where id == #{id}")
+        id = @stmt_select_id_from_specfile_tbl.get_first_value([name]).to_i
+        if nil != id then
+          delete_cache(id)
+          @stmt_delete_from_specfile_tbl.execute!([id])
         end
       }
     }
@@ -128,8 +186,8 @@ ENDOFSQL
         timestamp = timestamp1>timestamp2 ? timestamp1 : timestamp2
 
         if !opts[:force_update] then
-          sql = 'select count(id) from specfile_tbl where name == ? and lastupdate>=?'
-          if  @db.get_first_value(sql, [specname,timestamp]).to_i == 1  then
+          count = @stmt_select_count_id_from_specfile_tbl.get_first_value([specname,timestamp]).to_i
+          if  count == 1  then
             STDERR.puts "skip #{specname}" if (opts[:verbose]>0) 
             next
           end
@@ -147,12 +205,12 @@ ENDOFSQL
         STDERR.puts "updating entry for #{specname}" if (opts[:verbose]>-1) 
         
         # create spec entry
-        db.execute('insert or ignore into specfile_tbl (name) values(?)', [specname])
-        id = db.get_first_value('select id from specfile_tbl where name == ?', [specname]).to_i
+        @stmt_insert_or_ignore_into_specfile_tbl.execute!([specname])
+        id = @stmt_select_id_from_specfile_tbl.get_first_value([specname]).to_i
         # update timestamp
-        db.execute('update specfile_tbl set lastupdate = ? where name == ?', [timestamp ,specname])      
+        @stmt_update_specfile_tbl.execute!([timestamp, specname])
         # delete old datas
-        delete_cache(db, id)
+        delete_cache(id)
 
 #        if File.exist?("#{specname}/OBSOLETE") or
 #            File.exist?("#{specname}/.SKIP") or
@@ -163,41 +221,38 @@ ENDOFSQL
         # create new datas
         spec.buildrequires.each {|cap|
           name, op, ver = cap.conv
-          sql = 'insert into buildreq_tbl (owner,capability,comparison,version) values(?,?,?,?)'
-          db.execute(sql, [id, name, op, ver])
+          @stmt_insert_into_buildreq_tbl.execute!([id, name, op, ver])
         }      
         
         spec.packages.each {|pkg|
           # add package_tbl entry
-          name = "'#{pkg.name}'"
-          ver  =  pkg.version.nil? ? 'NULL' : "'#{pkg.version}'"
-          sql = 'insert into package_tbl (owner,capability,comparison,version) values(?,?,?,?)'
-          db.execute(sql, [id, name, '==', ver])
+          name = pkg.name
+          ver  =  pkg.version.nil? ? 'NULL' : "#{pkg.version}"
+          @stmt_insert_into_package_tbl.execute!([id, name, '==', ver])
           
           # add require_tbl entry
           pkg.requires.each {|cap|
             name, op, ver = cap.conv
-            sql = 'insert into require_tbl (owner,capability,comparison,version) values(?,?,?,?)'
-            db.execute(sql, [id, name, op, ver])
+            @stmt_insert_into_require_tbl.execute!([id, name, op, ver])
           }
           
           # add provide_tbl entry	
           pkg.provides.each {|cap|
             name, op, ver = cap.conv
-            sql = 'insert into provide_tbl (owner,capability,comparison,version) values(?,?,?,?)'
-            db.execute(sql, [id, name, op, ver])
-          }        
+            @stmt_insert_into_provide_tbl.execute!([id, name, op, ver])
+          }
         }
+        spec = nil
       }
     } # end of transaction
   end
   
   private  
-  def delete_cache(db, id)
-    db.execute('delete from buildreq_tbl where owner == ?', [id])
-    db.execute('delete from package_tbl where owner == ?', [id])
-    db.execute('delete from require_tbl where owner == ?', [id])
-    db.execute('delete from provide_tbl where owner == ?', [id])
+  def delete_cache(id)
+    @stmt_delete_from_buildreq_tbl.execute!([id])
+    @stmt_delete_from_package_tbl.execute!([id])
+    @stmt_delete_from_require_tbl.execute!([id])
+    @stmt_delete_from_provide_tbl.execute!([id])
   end
 
 end  # end of class SpecDB
