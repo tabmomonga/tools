@@ -229,7 +229,9 @@ ENDOFSQL
         spec.packages.each {|pkg|
           # add package_tbl entry
           name = pkg.name
-          ver  =  pkg.version.nil? ? 'NULL' : "#{pkg.version}"
+          ver  = pkg.version.nil? ? 'NULL' : "#{pkg.version}"
+          name.encode!(Encoding::ASCII)
+          ver.encode!(Encoding::ASCII)
           @stmt_insert_into_package_tbl.execute!([id, name, '==', ver])
           
           # add require_tbl entry
