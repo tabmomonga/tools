@@ -8,7 +8,7 @@ require 'lib/database.rb'
 class PkgDB < DBBase
 
   TABLE_MAJOR_VERSION=5 # increase when the layout breaks compatibility
-  TABLE_MINOR_VERSION=1 # increase when rebuild DB is required
+  TABLE_MINOR_VERSION=2 # increase when rebuild DB is required
   TABLE_LAYOUT=<<ENDOFSQL
 
 -- pkgfile's capabilities (=provides) info

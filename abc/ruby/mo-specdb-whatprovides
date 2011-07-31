@@ -43,7 +43,7 @@ candidates.each do |name|
   end
 end
 
-db.close()
+d.close()
 
 
 # Local Variables:

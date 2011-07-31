@@ -76,7 +76,7 @@ while loop < OPTS[:recursion]
   curr = found
 end # end of while loop
 
-db.close()
+d.close()
 
 # Local Variables:
 # mode: ruby

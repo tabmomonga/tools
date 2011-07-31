@@ -72,7 +72,7 @@ while loop < OPTS[:recursion]
   pkgs.merge(found)
   curr = found
 end # end of while loop
-db.close()
+d.close()
 
 # Local Variables:
 # mode: ruby

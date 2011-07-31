@@ -7,7 +7,7 @@ require 'lib/database.rb'
 
 class SpecDB < DBBase
   TABLE_MAJOR_VERSION=3 # increase when the layout breaks compatibility
-  TABLE_MINOR_VERSION=1 # increase when we have to rebuild the DB
+  TABLE_MINOR_VERSION=2 # increase when we have to rebuild the DB
   TABLE_LAYOUT=<<ENDOFSQL
 
 drop table if exists buildreq_tbl;
@@ -146,11 +146,11 @@ ENDOFSQL
 
   def check(opts = nil)
     opts = @options if nil==opts
-    sql = "select capability from package_tbl group by capability having count(*) > 1"
+    sql = 'select capability from package_tbl group by capability having count(*) > 1'
     @db.execute(sql) do |cap,|
       STDERR.puts "WARNING: Duplicate entries found; These specfiles below conflict on \"#{cap}\""
-      sql = "select name FROM package_tbl INNER JOIN specfile_tbl ON owner==id WHERE capability='#{cap}'"
-      @db.execute(sql) do |name,|
+      sql = 'select name FROM package_tbl INNER JOIN specfile_tbl ON owner==id WHERE capability=?'
+      @db.execute(sql,[cap]) do |name,|
         STDERR.puts " #{name}"
       end
     end
@@ -175,8 +175,10 @@ ENDOFSQL
     opts = @options if nil==opts
 
     @db.transaction { |db|
-      list.each { |specname|
+      list.each { |sn|
+        specname=sn.encode(Encoding::ASCII)
         filename="#{specname}/#{specname}.spec"
+        filename.encode!(Encoding::ASCII)
 
         # We should check timestamps both of directory and specfile so
         # that database will be updated whenever the special files

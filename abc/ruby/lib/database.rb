@@ -43,7 +43,7 @@ module RPM
         v  = version.e.nil? ? '' : "#{version.e}:" 
         v += version.v
         v += "-#{version.r}" if version.r
-        return n, relation, v
+        return n, relation, v.encode(Encoding::ASCII, :replace => '?')
       end
     end
   end
