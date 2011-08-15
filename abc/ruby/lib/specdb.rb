@@ -159,7 +159,8 @@ ENDOFSQL
   def delete_list(list, opts = nil)
     opts = @options if nil==opts
 
-    @db.transaction { |db|
+    begin
+      @db.transaction
       list.each { |name,|
         STDERR.puts "deleting entry for #{name}" if (opts[:verbose]>-1) 
         id = @stmt_select_id_from_specfile_tbl.get_first_value([name]).to_i
@@ -168,13 +169,17 @@ ENDOFSQL
           @stmt_delete_from_specfile_tbl.execute!([id])
         end
       }
-    }
+      @db.commit
+    rescue => evar
+      STDERR.puts "err #{evar}"
+      @db.rollback
+    end
   end
   
   def update_list(list, opts = nil)
     opts = @options if nil==opts
-
-    @db.transaction { |db|
+    begin
+      @db.transaction
       list.each { |sn|
         specname=sn.encode(Encoding::ASCII)
         filename="#{specname}/#{specname}.spec"
@@ -195,15 +200,19 @@ ENDOFSQL
           end
         end
 
-        # RPM::Spec will crash when RPM.readrc() is not called.
-        RPM.readrc('/usr/lib/rpm/momonga/rpmrc:./rpmrc:./dot.rpmrc')
-
-        spec = RPM::Spec.open(filename)
+        spec = nil
+        begin 
+          # RPM::Spec will crash when RPM.readrc() is not called.
+          RPM.readrc('/usr/lib/rpm/momonga/rpmrc:./rpmrc:./dot.rpmrc')
+          
+          spec = RPM::Spec.open(filename)
+        rescue => evar
+          STDERR.puts "WARNING: #{evar}"
+        end
         if spec.nil? then
-          STDERR.puts "failed to parse, ignoring #{filename}."
+          STDERR.puts "skip #{filename}" if (opts[:verbose]>-1)
           next
         end
-        
         STDERR.puts "updating entry for #{specname}" if (opts[:verbose]>-1) 
         
         # create spec entry
@@ -248,7 +257,12 @@ ENDOFSQL
         }
         spec = nil
       }
-    } # end of transaction
+
+      @db.commit
+    rescue => evar
+      STDERR.puts "err #{evar}"
+      @db.rollback
+    end
   end
   
   private  
