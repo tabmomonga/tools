@@ -31,7 +31,11 @@ $pkgs_list = ARGV
 
 $pkgs_list.each do |pkg|
   name = rpm_name(pkg)
-  entries = `ls ./#{name}/.svn/text-base | sed -e 's/\.svn-base$//g' | grep -v '^NOT\.' | grep -v '^REMOVEME' `.split(/\n/)
+  if File.exist?("ls ./#{name}/.svn/text-base")
+    entries = `ls ./#{name}/.svn/text-base | sed -e 's/\.svn-base$//g' | grep -v '^NOT\.' | grep -v '^REMOVEME' `.split(/\n/)
+  else
+    entries = `svn list #{name} | grep -v '^NOT\.' | grep -v '^REMOVEME' `.split(/\n/)
+  end
   unused = (entries - source_list(pkg) - $KEEP_FILES)
   if (unused.length != 0)
     files = unused.join(" #{name}/")
