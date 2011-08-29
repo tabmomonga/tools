@@ -129,13 +129,13 @@ ARGV.each { |pkg|
 
   # add props
   unless problem_found
-    unless FileTest.directory?("#{pkg}/.svn")
+    unless FileTest.directory?("#{pkg}/.svn") || system("svn info #{pkg} > /dev/null 2>&1") 
       STDERR.puts("Error: #{pkg} is not under version control")
       STDERR.puts("Please add #{pkg} directory")
       STDERR.puts("% svn add [-N] #{pkg}")
       problem_found = true
     end
-    unless FileTest.exist?("#{pkg}/.svn/dir-prop-base")
+    unless FileTest.exist?("#{pkg}/.svn/dir-prop-base") || system("svn proplist #{pkg} 2>&1 | grep 'svn:ignore' > /dev/null 2>&1") 
       system("svn propset svn:ignore -F ../tools/addprops.ignore #{pkg}")
     end
   end
