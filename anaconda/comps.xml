@@ -2887,7 +2887,7 @@
       <packagereq type="mandatory">vim-minimal</packagereq>
       <packagereq type="mandatory">yum</packagereq>
       <packagereq type="default">efibootmgr</packagereq>
-      <packagereq type="default">grub</packagereq>
+      <packagereq type="default">grub2</packagereq>
       <packagereq type="default">silo</packagereq>
       <packagereq type="default">systemd</packagereq>
     </packagelist>
