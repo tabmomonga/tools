@@ -1,0 +1,2637 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Tamas Szanto <tszanto@mol.hu>, 2004.
+# Arpad Biro <biro_arpad@yahoo.com>, 2004, 2005, 2006, 2007.
+# Peter Borsa <peter.borsa@gmail.com>, 2011.
+# Máté Gelei <gelei.mate1@gmail.com>, 2011.
+# Nikolas Slivka <snicore@gmail.com>, 2010.
+# Zoltan Hoppár <hopparz@gmail.com>, 2011.
+# Dimitris Glezos <glezos@indifex.com>, 2011.
+msgid ""
+msgstr ""
+"Project-Id-Version: comps\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-30 14:49-0400\n"
+"PO-Revision-Date: 2011-08-30 18:52+0000\n"
+"Last-Translator: notting <notting@redhat.com>\n"
+"Language-Team: Hungarian <trans-hu@lists.fedoraproject.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: hu\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+
+#: ../comps-f14.xml.in.h:1 ../comps-f15.xml.in.h:1 ../comps-f16.xml.in.h:1
+#: ../comps-f17.xml.in.h:1 ../comps-el6.xml.in.h:5
+msgid "A lightweight desktop environment that works well on low end machines."
+msgstr ""
+"Pehelysúlyú asztal környezet, ami gyengébb gépeken is jól használható."
+
+#: ../comps-f14.xml.in.h:2 ../comps-f15.xml.in.h:2 ../comps-f16.xml.in.h:2
+#: ../comps-f17.xml.in.h:2
+msgid "A set of applications that are considered critical path"
+msgstr "Egy sor alkalmazás, amelyek kritikus út"
+
+#: ../comps-f14.xml.in.h:3 ../comps-f15.xml.in.h:3 ../comps-f16.xml.in.h:3
+#: ../comps-f17.xml.in.h:3
+msgid ""
+"A set of packages that provide the Critical Path functionality for the GNOME"
+" desktop"
+msgstr ""
+"Csomagok egy halmaza, amelyek a Kritikus Útvonal funkcionalitást biztosítják"
+" a GNOME asztal számára"
+
+#: ../comps-f14.xml.in.h:4 ../comps-f15.xml.in.h:4 ../comps-f16.xml.in.h:4
+#: ../comps-f17.xml.in.h:4
+msgid ""
+"A set of packages that provide the Critical Path functionality for the KDE "
+"desktop"
+msgstr ""
+"Csomagok egy halmaza, amelyek a Kritikus Útvonal funkcionalitást "
+"biztosítják a KDE asztal számára"
+
+#: ../comps-f14.xml.in.h:5 ../comps-f15.xml.in.h:5 ../comps-f16.xml.in.h:5
+#: ../comps-f17.xml.in.h:5
+msgid ""
+"A set of packages that provide the Critical Path functionality for the LXDE "
+"desktop"
+msgstr ""
+"Csomagok egy halmaza, amelyek a Kritikus Útvonal funkcionalitást "
+"biztosítják az LXDE asztal számára"
+
+#: ../comps-f14.xml.in.h:6 ../comps-f15.xml.in.h:6 ../comps-f16.xml.in.h:6
+#: ../comps-f17.xml.in.h:6
+msgid ""
+"A set of packages that provide the Critical Path functionality for the Xfce "
+"desktop"
+msgstr ""
+"Csomagok egy halmaza, amelyek a Kritikus Útvonal funkcionalitást "
+"biztosítják az XFCE asztal számára"
+
+#: ../comps-f14.xml.in.h:7 ../comps-f15.xml.in.h:7 ../comps-f16.xml.in.h:7
+#: ../comps-f17.xml.in.h:7
+msgid ""
+"A set of packages that provide the shared platform for Critical Path "
+"functionality on all Fedora spins"
+msgstr ""
+"Csomagok egy halmaza, amelyek osztott platformot biztosítanak a Kritikus "
+"Útvonal funkcionalitáshoz minden Fedora változaton"
+
+#: ../comps-f14.xml.in.h:8 ../comps-f15.xml.in.h:8 ../comps-f16.xml.in.h:8
+#: ../comps-f17.xml.in.h:8
+msgid "A software playground for learning about learning."
+msgstr "Szoftver játszótér tanulásra a tanulásról."
+
+#: ../comps-f14.xml.in.h:9 ../comps-f15.xml.in.h:9 ../comps-f16.xml.in.h:9
+#: ../comps-f17.xml.in.h:9 ../comps-el4.xml.in.h:1 ../comps-el5.xml.in.h:1
+msgid "Administration Tools"
+msgstr "Adminisztrációs eszközök"
+
+#: ../comps-f14.xml.in.h:10 ../comps-f15.xml.in.h:10 ../comps-f16.xml.in.h:10
+#: ../comps-f17.xml.in.h:10 ../comps-el6.xml.in.h:13
+msgid "Afrikaans Support"
+msgstr "Afrikán (Dél-Afrika-i holland) támogatás"
+
+#: ../comps-f14.xml.in.h:11 ../comps-f15.xml.in.h:12 ../comps-f16.xml.in.h:12
+#: ../comps-f17.xml.in.h:12 ../comps-el6.xml.in.h:14
+msgid "Albanian Support"
+msgstr "Albán támogatás"
+
+#: ../comps-f14.xml.in.h:12 ../comps-f15.xml.in.h:13 ../comps-f16.xml.in.h:13
+#: ../comps-f17.xml.in.h:13 ../comps-el6.xml.in.h:20
+msgid "Amazigh Support"
+msgstr "Amazig (berber, Marokkó) támogatás"
+
+#: ../comps-f14.xml.in.h:13 ../comps-f15.xml.in.h:14 ../comps-f16.xml.in.h:14
+#: ../comps-f17.xml.in.h:14 ../comps-el4.xml.in.h:2 ../comps-el5.xml.in.h:2
+#: ../comps-el6.xml.in.h:21
+msgid "Applications"
+msgstr "Alkalmazások"
+
+#: ../comps-f14.xml.in.h:14 ../comps-f15.xml.in.h:15 ../comps-f16.xml.in.h:15
+#: ../comps-f17.xml.in.h:15
+msgid "Applications to perform a variety of tasks"
+msgstr "Alkalmazások számos feladathoz"
+
+#: ../comps-f14.xml.in.h:15 ../comps-f15.xml.in.h:16 ../comps-f16.xml.in.h:16
+#: ../comps-f17.xml.in.h:16 ../comps-el4.xml.in.h:4 ../comps-el5.xml.in.h:4
+#: ../comps-el6.xml.in.h:22
+msgid "Arabic Support"
+msgstr "Arab támogatás"
+
+#: ../comps-f14.xml.in.h:16 ../comps-f15.xml.in.h:17 ../comps-f16.xml.in.h:17
+#: ../comps-f17.xml.in.h:17 ../comps-el4.xml.in.h:5 ../comps-el5.xml.in.h:5
+#: ../comps-el6.xml.in.h:23
+msgid "Armenian Support"
+msgstr "Örmény támogatás"
+
+#: ../comps-f14.xml.in.h:17 ../comps-f15.xml.in.h:18 ../comps-f16.xml.in.h:18
+#: ../comps-f17.xml.in.h:18 ../comps-el6.xml.in.h:24
+msgid "Assamese Support"
+msgstr "Asszám (India) támogatás"
+
+#: ../comps-f14.xml.in.h:18 ../comps-f15.xml.in.h:19 ../comps-f16.xml.in.h:19
+#: ../comps-f17.xml.in.h:19
+msgid "Asturian Support"
+msgstr "Asturian támogatás"
+
+#: ../comps-f14.xml.in.h:19 ../comps-f15.xml.in.h:20 ../comps-f16.xml.in.h:20
+#: ../comps-f17.xml.in.h:20 ../comps-el4.xml.in.h:6 ../comps-el5.xml.in.h:6
+msgid "Authoring and Publishing"
+msgstr "Irás és kiadás"
+
+#: ../comps-f14.xml.in.h:20 ../comps-f15.xml.in.h:21 ../comps-f16.xml.in.h:21
+#: ../comps-f17.xml.in.h:21 ../comps-el6.xml.in.h:25
+msgid "Azerbaijani Support"
+msgstr "Azerbajdzsáni támogatás"
+
+#: ../comps-f14.xml.in.h:21 ../comps-f15.xml.in.h:22 ../comps-f16.xml.in.h:22
+#: ../comps-f17.xml.in.h:22 ../comps-el6.xml.in.h:28
+msgid "Base"
+msgstr "Alap"
+
+#: ../comps-f14.xml.in.h:22 ../comps-f15.xml.in.h:23 ../comps-f16.xml.in.h:23
+#: ../comps-f17.xml.in.h:23 ../comps-el4.xml.in.h:7 ../comps-el5.xml.in.h:7
+msgid "Base System"
+msgstr "Alaprendszer"
+
+#: ../comps-f14.xml.in.h:23 ../comps-f15.xml.in.h:24 ../comps-f16.xml.in.h:24
+#: ../comps-f17.xml.in.h:24
+msgid "Basic support for the Ruby programming language."
+msgstr "Alapszintű támogatás a ruby programozási nyelvhez."
+
+#: ../comps-f14.xml.in.h:24 ../comps-f15.xml.in.h:25 ../comps-f16.xml.in.h:25
+#: ../comps-f17.xml.in.h:25 ../comps-el6.xml.in.h:30
+msgid "Basque Support"
+msgstr "Baszk támogatás"
+
+#: ../comps-f14.xml.in.h:25 ../comps-f15.xml.in.h:26 ../comps-f16.xml.in.h:26
+#: ../comps-f17.xml.in.h:26 ../comps-el6.xml.in.h:31
+msgid "Belarusian Support"
+msgstr "Fehérorosz támogatás"
+
+#: ../comps-f14.xml.in.h:26 ../comps-f15.xml.in.h:27 ../comps-f16.xml.in.h:27
+#: ../comps-f17.xml.in.h:27 ../comps-el6.xml.in.h:32
+msgid "Bengali Support"
+msgstr "Bengáli  támogatás"
+
+#: ../comps-f14.xml.in.h:27 ../comps-f15.xml.in.h:28 ../comps-f16.xml.in.h:28
+#: ../comps-f17.xml.in.h:28 ../comps-el6.xml.in.h:33
+msgid "Bhutanese Support"
+msgstr "Butáni támogatás"
+
+#: ../comps-f14.xml.in.h:28 ../comps-f15.xml.in.h:29 ../comps-f16.xml.in.h:29
+#: ../comps-f17.xml.in.h:29
+msgid "Books and Guides"
+msgstr "Könyvek és segédletek"
+
+#: ../comps-f14.xml.in.h:29 ../comps-f15.xml.in.h:30 ../comps-f16.xml.in.h:30
+#: ../comps-f17.xml.in.h:30
+msgid "Books and Guides for Fedora users and developers"
+msgstr "Könyvek és segédletek Fedora használóknak és fejlesztőknek"
+
+#: ../comps-f14.xml.in.h:30 ../comps-f15.xml.in.h:31 ../comps-f16.xml.in.h:31
+#: ../comps-f17.xml.in.h:31
+msgid "Bosnian Support"
+msgstr "Bosnyák támogatás"
+
+#: ../comps-f14.xml.in.h:31 ../comps-f15.xml.in.h:32 ../comps-f16.xml.in.h:32
+#: ../comps-f17.xml.in.h:32 ../comps-el6.xml.in.h:34
+msgid "Brazilian Portuguese Support"
+msgstr "Brazíliai portugál támogatás"
+
+#: ../comps-f14.xml.in.h:32 ../comps-f15.xml.in.h:33 ../comps-f16.xml.in.h:33
+#: ../comps-f17.xml.in.h:33 ../comps-el6.xml.in.h:35
+msgid "Breton Support"
+msgstr "Breton támogatás"
+
+#: ../comps-f14.xml.in.h:33 ../comps-f15.xml.in.h:34 ../comps-f16.xml.in.h:34
+#: ../comps-f17.xml.in.h:34 ../comps-el5.xml.in.h:8 ../comps-el6.xml.in.h:36
+msgid "Buildsystem building group"
+msgstr "Építőrendszer építő csoport"
+
+#: ../comps-f14.xml.in.h:34 ../comps-f15.xml.in.h:35 ../comps-f16.xml.in.h:35
+#: ../comps-f17.xml.in.h:35 ../comps-el6.xml.in.h:37
+msgid "Bulgarian Support"
+msgstr "Bolgár támogatás"
+
+#: ../comps-f14.xml.in.h:35 ../comps-f15.xml.in.h:36 ../comps-f16.xml.in.h:36
+#: ../comps-f17.xml.in.h:36 ../comps-el6.xml.in.h:39
+msgid "Catalan Support"
+msgstr "Katalán támogatás"
+
+#: ../comps-f14.xml.in.h:36 ../comps-f15.xml.in.h:37 ../comps-f16.xml.in.h:37
+#: ../comps-f17.xml.in.h:37 ../comps-el6.xml.in.h:41
+msgid "Chichewa Support"
+msgstr "Csicseva (DK-Afrika) támogatás"
+
+#: ../comps-f14.xml.in.h:37 ../comps-el6.xml.in.h:42
+msgid "Chinese Support"
+msgstr "Kínai támogatás"
+
+#: ../comps-f14.xml.in.h:38 ../comps-f15.xml.in.h:39 ../comps-f16.xml.in.h:39
+#: ../comps-f17.xml.in.h:40
+msgid "Clustering"
+msgstr "Fürtözés"
+
+#: ../comps-f14.xml.in.h:39 ../comps-f15.xml.in.h:40 ../comps-f16.xml.in.h:40
+#: ../comps-f17.xml.in.h:41
+msgid "Clustering Support"
+msgstr "Fürtözés támogatás"
+
+#: ../comps-f14.xml.in.h:40 ../comps-f15.xml.in.h:41 ../comps-f16.xml.in.h:41
+#: ../comps-f17.xml.in.h:42
+msgid "Content"
+msgstr "Tartalom"
+
+#: ../comps-f14.xml.in.h:41 ../comps-f15.xml.in.h:42 ../comps-f16.xml.in.h:42
+#: ../comps-f17.xml.in.h:43 ../comps-el6.xml.in.h:52
+msgid "Coptic Support"
+msgstr "Kopt (Egyiptom) támogatás"
+
+#: ../comps-f14.xml.in.h:42 ../comps-f15.xml.in.h:43 ../comps-f16.xml.in.h:43
+#: ../comps-f17.xml.in.h:44 ../comps-el6.xml.in.h:53
+msgid "Core"
+msgstr "Mag"
+
+#: ../comps-f14.xml.in.h:43 ../comps-f15.xml.in.h:44 ../comps-f16.xml.in.h:44
+#: ../comps-f17.xml.in.h:45
+msgid "Critical Path (Applications)"
+msgstr "Kritikus elérés (Alkalmazások)"
+
+#: ../comps-f14.xml.in.h:44 ../comps-f15.xml.in.h:45 ../comps-f16.xml.in.h:45
+#: ../comps-f17.xml.in.h:46
+msgid "Critical Path (Base)"
+msgstr "Kritikus Útvonal (Alap)"
+
+#: ../comps-f14.xml.in.h:45 ../comps-f15.xml.in.h:46 ../comps-f16.xml.in.h:46
+#: ../comps-f17.xml.in.h:47
+msgid "Critical Path (GNOME)"
+msgstr "Kritikus Útvonal (GNOME)"
+
+#: ../comps-f14.xml.in.h:46 ../comps-f15.xml.in.h:47 ../comps-f16.xml.in.h:47
+#: ../comps-f17.xml.in.h:48
+msgid "Critical Path (KDE)"
+msgstr "Kritikus elérés (KDE)"
+
+#: ../comps-f14.xml.in.h:47 ../comps-f15.xml.in.h:48 ../comps-f16.xml.in.h:48
+#: ../comps-f17.xml.in.h:49
+msgid "Critical Path (LXDE)"
+msgstr "Kritikus elérés (LXDE)"
+
+#: ../comps-f14.xml.in.h:48 ../comps-f15.xml.in.h:49 ../comps-f16.xml.in.h:49
+#: ../comps-f17.xml.in.h:50
+msgid "Critical Path (Xfce)"
+msgstr "Kritikus elérés (Xfce)"
+
+#: ../comps-f14.xml.in.h:49 ../comps-f15.xml.in.h:50 ../comps-f16.xml.in.h:50
+#: ../comps-f17.xml.in.h:51 ../comps-el6.xml.in.h:54
+msgid "Croatian Support"
+msgstr "Horvát támogatás"
+
+#: ../comps-f14.xml.in.h:50 ../comps-f15.xml.in.h:51 ../comps-f16.xml.in.h:51
+#: ../comps-f17.xml.in.h:52 ../comps-el5.xml.in.h:9 ../comps-el6.xml.in.h:55
+msgid "Czech Support"
+msgstr "Cseh támogatás"
+
+#: ../comps-f14.xml.in.h:51 ../comps-f15.xml.in.h:52 ../comps-f16.xml.in.h:52
+#: ../comps-f17.xml.in.h:53
+msgid "DNS Name Server"
+msgstr "DNS névkiszolgáló"
+
+#: ../comps-f14.xml.in.h:52 ../comps-f15.xml.in.h:53 ../comps-f16.xml.in.h:53
+#: ../comps-f17.xml.in.h:54 ../comps-el6.xml.in.h:56
+msgid "Danish Support"
+msgstr "Dán támogatás"
+
+#: ../comps-f14.xml.in.h:53 ../comps-f15.xml.in.h:55 ../comps-f16.xml.in.h:55
+#: ../comps-f17.xml.in.h:56 ../comps-el5.xml.in.h:10
+msgid "Design and Simulation tools for hardware engineers"
+msgstr "Tervező és szimulációs eszközök hardvermérnököknek"
+
+#: ../comps-f14.xml.in.h:54 ../comps-f15.xml.in.h:56 ../comps-f16.xml.in.h:56
+#: ../comps-f17.xml.in.h:57 ../comps-el4.xml.in.h:8 ../comps-el5.xml.in.h:11
+msgid "Desktop Environments"
+msgstr "Asztali környezetek"
+
+#: ../comps-f14.xml.in.h:55 ../comps-f15.xml.in.h:57 ../comps-f16.xml.in.h:57
+#: ../comps-f17.xml.in.h:58 ../comps-el4.xml.in.h:9 ../comps-el5.xml.in.h:12
+msgid "Desktop environments"
+msgstr "Asztali környezetek"
+
+#: ../comps-f14.xml.in.h:56 ../comps-f15.xml.in.h:58 ../comps-f16.xml.in.h:58
+#: ../comps-f17.xml.in.h:59 ../comps-el4.xml.in.h:10 ../comps-el5.xml.in.h:13
+#: ../comps-el6.xml.in.h:65
+msgid "Development"
+msgstr "Fejlesztés"
+
+#: ../comps-f14.xml.in.h:57 ../comps-f15.xml.in.h:59 ../comps-f16.xml.in.h:59
+#: ../comps-f17.xml.in.h:60
+msgid "Development Libraries"
+msgstr "Fejlesztő programkönyvtárak"
+
+#: ../comps-f14.xml.in.h:58 ../comps-f15.xml.in.h:60 ../comps-f16.xml.in.h:60
+#: ../comps-f17.xml.in.h:61 ../comps-el4.xml.in.h:11 ../comps-el5.xml.in.h:14
+msgid "Development Tools"
+msgstr "Fejlesztőeszközök"
+
+#: ../comps-f14.xml.in.h:59 ../comps-f15.xml.in.h:61 ../comps-f16.xml.in.h:61
+#: ../comps-f17.xml.in.h:62 ../comps-el6.xml.in.h:70
+msgid "Dial-up Networking Support"
+msgstr "Telefonos hálózat támogatása"
+
+#: ../comps-f14.xml.in.h:60 ../comps-f15.xml.in.h:62 ../comps-f16.xml.in.h:62
+#: ../comps-f17.xml.in.h:63 ../comps-el6.xml.in.h:72
+msgid "Directory Server"
+msgstr "Könyvtár kiszolgáló"
+
+#: ../comps-f14.xml.in.h:61 ../comps-f15.xml.in.h:63 ../comps-f16.xml.in.h:63
+#: ../comps-f17.xml.in.h:64
+msgid "Dogtag Certificate System"
+msgstr "Dogtag Igazoló Rendszer"
+
+#: ../comps-f14.xml.in.h:62 ../comps-f15.xml.in.h:64 ../comps-f16.xml.in.h:64
+#: ../comps-f17.xml.in.h:65 ../comps-el6.xml.in.h:73
+msgid "Dutch Support"
+msgstr "Holland támogatás"
+
+#: ../comps-f14.xml.in.h:63 ../comps-f15.xml.in.h:65 ../comps-f16.xml.in.h:65
+#: ../comps-f17.xml.in.h:66 ../comps-el4.xml.in.h:13 ../comps-el5.xml.in.h:16
+msgid "Editors"
+msgstr "Szerkesztők"
+
+#: ../comps-f14.xml.in.h:64 ../comps-f15.xml.in.h:66 ../comps-f16.xml.in.h:66
+#: ../comps-f17.xml.in.h:67 ../comps-el4.xml.in.h:14 ../comps-el5.xml.in.h:17
+#: ../comps-el6.xml.in.h:77
+msgid "Educational Software"
+msgstr "Oktatóprogramok"
+
+#: ../comps-f14.xml.in.h:65 ../comps-f15.xml.in.h:67 ../comps-f16.xml.in.h:67
+#: ../comps-f17.xml.in.h:68 ../comps-el4.xml.in.h:15 ../comps-el5.xml.in.h:18
+msgid "Educational software for learning"
+msgstr "Oktatóprogramok tanuláshoz"
+
+#: ../comps-f14.xml.in.h:66 ../comps-f15.xml.in.h:68 ../comps-f16.xml.in.h:68
+#: ../comps-f17.xml.in.h:69 ../comps-el5.xml.in.h:19 ../comps-el6.xml.in.h:79
+msgid "Electronic Lab"
+msgstr "Elektronikai Labor"
+
+#: ../comps-f14.xml.in.h:67 ../comps-f15.xml.in.h:69 ../comps-f16.xml.in.h:69
+#: ../comps-f17.xml.in.h:70 ../comps-el4.xml.in.h:16 ../comps-el5.xml.in.h:20
+msgid "Engineering and Scientific"
+msgstr "Technika és tudomány"
+
+#: ../comps-f14.xml.in.h:68 ../comps-f15.xml.in.h:70 ../comps-f16.xml.in.h:70
+#: ../comps-f17.xml.in.h:71 ../comps-el6.xml.in.h:84
+msgid "English (UK) Support"
+msgstr "Angol (UK) támogatás"
+
+#: ../comps-f14.xml.in.h:69 ../comps-f15.xml.in.h:71 ../comps-f16.xml.in.h:71
+#: ../comps-f17.xml.in.h:72
+msgid "Enterprise-class open source Certificate Authority"
+msgstr "Vállalati szintű, nyílt forráskódú hitelesítés-szolgáltatás"
+
+#: ../comps-f14.xml.in.h:70 ../comps-f15.xml.in.h:72 ../comps-f16.xml.in.h:72
+#: ../comps-f17.xml.in.h:73 ../comps-el6.xml.in.h:85
+msgid "Esperanto Support"
+msgstr "Eszperantó támogatás"
+
+#: ../comps-f14.xml.in.h:71 ../comps-f15.xml.in.h:73 ../comps-f16.xml.in.h:73
+#: ../comps-f17.xml.in.h:74 ../comps-el6.xml.in.h:86
+msgid "Estonian Support"
+msgstr "Észt támogatás"
+
+#: ../comps-f14.xml.in.h:72 ../comps-f15.xml.in.h:74 ../comps-f16.xml.in.h:74
+#: ../comps-f17.xml.in.h:75 ../comps-el6.xml.in.h:87
+msgid "Ethiopic Support"
+msgstr "Etióp támogatás"
+
+#: ../comps-f14.xml.in.h:73 ../comps-f15.xml.in.h:75 ../comps-f16.xml.in.h:75
+#: ../comps-f17.xml.in.h:76 ../comps-el4.xml.in.h:17 ../comps-el5.xml.in.h:21
+msgid "FTP Server"
+msgstr "FTP-kiszolgáló"
+
+#: ../comps-f14.xml.in.h:74 ../comps-f15.xml.in.h:76 ../comps-f16.xml.in.h:76
+#: ../comps-f17.xml.in.h:77 ../comps-el6.xml.in.h:90
+msgid "Faroese Support"
+msgstr "Feröeri támogatás"
+
+#: ../comps-f14.xml.in.h:75 ../comps-f15.xml.in.h:77 ../comps-f16.xml.in.h:77
+#: ../comps-f17.xml.in.h:78
+msgid "Fedora Eclipse"
+msgstr "Fedora Eclipse"
+
+#: ../comps-f14.xml.in.h:76 ../comps-f15.xml.in.h:78 ../comps-f16.xml.in.h:78
+#: ../comps-f17.xml.in.h:79 ../comps-el4.xml.in.h:18 ../comps-el5.xml.in.h:22
+#: ../comps-el6.xml.in.h:91
+msgid "Fedora Packager"
+msgstr "Fedora csomagoló"
+
+#: ../comps-f14.xml.in.h:77 ../comps-f15.xml.in.h:79 ../comps-f16.xml.in.h:79
+#: ../comps-f17.xml.in.h:80 ../comps-el6.xml.in.h:93
+msgid "Fijian Support"
+msgstr "Fidzsi támogatás"
+
+#: ../comps-f14.xml.in.h:78 ../comps-f15.xml.in.h:80 ../comps-f16.xml.in.h:80
+#: ../comps-f17.xml.in.h:81
+msgid "Filesystems"
+msgstr "Fájlrendszerek"
+
+#: ../comps-f14.xml.in.h:79 ../comps-f15.xml.in.h:81 ../comps-f16.xml.in.h:81
+#: ../comps-f17.xml.in.h:82 ../comps-el6.xml.in.h:94
+msgid "Filipino Support"
+msgstr "Filipinó (Fülöp-szk.) támogatás"
+
+#: ../comps-f14.xml.in.h:80 ../comps-f15.xml.in.h:82 ../comps-f16.xml.in.h:82
+#: ../comps-f17.xml.in.h:83 ../comps-el6.xml.in.h:95
+msgid "Finnish Support"
+msgstr "Finn támogatás"
+
+#: ../comps-f14.xml.in.h:81 ../comps-f15.xml.in.h:83 ../comps-f16.xml.in.h:83
+#: ../comps-f17.xml.in.h:84
+msgid "Font design and packaging"
+msgstr "Betű tervezés és csomagolás"
+
+#: ../comps-f14.xml.in.h:82 ../comps-f15.xml.in.h:84 ../comps-f16.xml.in.h:84
+#: ../comps-f17.xml.in.h:85 ../comps-el6.xml.in.h:97
+msgid "Fonts"
+msgstr "Betűkészletek"
+
+#: ../comps-f14.xml.in.h:83 ../comps-f15.xml.in.h:85 ../comps-f16.xml.in.h:85
+#: ../comps-f17.xml.in.h:86
+msgid "Fonts packages for rendering text on the desktop."
+msgstr "Betűkészlet csomagok szöveg megjelenítéséhez az asztalon."
+
+#: ../comps-f14.xml.in.h:84 ../comps-f15.xml.in.h:86 ../comps-f16.xml.in.h:86
+#: ../comps-f17.xml.in.h:87 ../comps-el6.xml.in.h:99
+msgid "French Support"
+msgstr "Francia támogatás"
+
+#: ../comps-f14.xml.in.h:85 ../comps-f15.xml.in.h:87 ../comps-f16.xml.in.h:87
+#: ../comps-f17.xml.in.h:88 ../comps-el6.xml.in.h:100
+msgid "Frisian Support"
+msgstr "Fríz (Német-öböl) támogatás"
+
+#: ../comps-f14.xml.in.h:86 ../comps-f15.xml.in.h:88 ../comps-f16.xml.in.h:88
+#: ../comps-f17.xml.in.h:89 ../comps-el6.xml.in.h:101
+msgid "Friulian Support"
+msgstr "Friuli (rétóromán Svájc/Olaszo.) támogatás"
+
+#: ../comps-f14.xml.in.h:87 ../comps-f15.xml.in.h:89 ../comps-f16.xml.in.h:89
+#: ../comps-f17.xml.in.h:90 ../comps-el4.xml.in.h:19 ../comps-el5.xml.in.h:23
+msgid ""
+"From CD recording to playing audio CDs and multimedia files, this package "
+"group allows you to work with sound and video on the system."
+msgstr ""
+"A CD-írástól a hang-CD-k és multimédiás fájlok lejátszásáig – ez a "
+"csomagcsoport hanggal és videóval kapcsolatos programokat tartalmaz."
+
+#: ../comps-f14.xml.in.h:88 ../comps-f15.xml.in.h:90 ../comps-f16.xml.in.h:90
+#: ../comps-f17.xml.in.h:91 ../comps-el4.xml.in.h:20 ../comps-el5.xml.in.h:24
+msgid "GNOME Desktop Environment"
+msgstr "GNOME asztal környezet"
+
+#: ../comps-f14.xml.in.h:89 ../comps-f15.xml.in.h:91 ../comps-f16.xml.in.h:91
+#: ../comps-f17.xml.in.h:92 ../comps-el4.xml.in.h:21 ../comps-el5.xml.in.h:25
+msgid "GNOME Software Development"
+msgstr "GNOME szoftverfejlesztés"
+
+#: ../comps-f14.xml.in.h:90 ../comps-f15.xml.in.h:92 ../comps-f16.xml.in.h:92
+#: ../comps-f17.xml.in.h:93
+msgid ""
+"GNOME is a powerful graphical user interface which includes a panel, "
+"desktop, system icons, and a graphical file manager."
+msgstr ""
+"A GNOME hatalmas grafikus környezet panellel, munkaasztallal, "
+"rendszerikonokkal és grafikus fájlkezelővel."
+
+#: ../comps-f14.xml.in.h:91 ../comps-f15.xml.in.h:93 ../comps-f16.xml.in.h:93
+#: ../comps-f17.xml.in.h:94 ../comps-el6.xml.in.h:103
+msgid "Gaelic Support"
+msgstr "Gélik (Íro. és Skócia) támogatás"
+
+#: ../comps-f14.xml.in.h:92 ../comps-f15.xml.in.h:94 ../comps-f16.xml.in.h:94
+#: ../comps-f17.xml.in.h:95 ../comps-el6.xml.in.h:104
+msgid "Galician Support"
+msgstr "Galíciai (Spanyolo.) támogatás"
+
+#: ../comps-f14.xml.in.h:93 ../comps-f15.xml.in.h:95 ../comps-f16.xml.in.h:95
+#: ../comps-f17.xml.in.h:96 ../comps-el5.xml.in.h:27
+msgid "Games and Entertainment"
+msgstr "Játékok és szórakozás"
+
+#: ../comps-f14.xml.in.h:94 ../comps-f15.xml.in.h:96 ../comps-f16.xml.in.h:96
+#: ../comps-f17.xml.in.h:97 ../comps-el6.xml.in.h:106
+msgid "Georgian Support"
+msgstr "Grúz támogatás"
+
+#: ../comps-f14.xml.in.h:95 ../comps-f15.xml.in.h:97 ../comps-f16.xml.in.h:97
+#: ../comps-f17.xml.in.h:98 ../comps-el6.xml.in.h:107
+msgid "German Support"
+msgstr "Német támogatás"
+
+#: ../comps-f14.xml.in.h:96 ../comps-f15.xml.in.h:98 ../comps-f16.xml.in.h:98
+#: ../comps-f17.xml.in.h:99 ../comps-el4.xml.in.h:23 ../comps-el5.xml.in.h:28
+msgid "Graphical Internet"
+msgstr "Grafikus Internet"
+
+#: ../comps-f14.xml.in.h:97 ../comps-f15.xml.in.h:99 ../comps-f16.xml.in.h:99
+#: ../comps-f17.xml.in.h:100 ../comps-el4.xml.in.h:24 ../comps-el5.xml.in.h:29
+msgid "Graphics"
+msgstr "Grafika"
+
+#: ../comps-f14.xml.in.h:98 ../comps-f15.xml.in.h:100
+#: ../comps-f16.xml.in.h:100 ../comps-f17.xml.in.h:101
+#: ../comps-el6.xml.in.h:111
+msgid "Greek Support"
+msgstr "Görög támogatás"
+
+#: ../comps-f14.xml.in.h:99 ../comps-f15.xml.in.h:101
+#: ../comps-f16.xml.in.h:101 ../comps-f17.xml.in.h:102
+#: ../comps-el6.xml.in.h:112
+msgid "Gujarati Support"
+msgstr "Gudzsarati (India) támogatás"
+
+#: ../comps-f14.xml.in.h:100 ../comps-f15.xml.in.h:103
+#: ../comps-f16.xml.in.h:103 ../comps-f17.xml.in.h:104
+#: ../comps-el4.xml.in.h:25 ../comps-el5.xml.in.h:30
+msgid "Hardware Support"
+msgstr "Hardvertámogatás"
+
+#: ../comps-f14.xml.in.h:101 ../comps-f15.xml.in.h:104
+#: ../comps-f16.xml.in.h:104 ../comps-f17.xml.in.h:105
+msgid "Haskell"
+msgstr "Haskell"
+
+#: ../comps-f14.xml.in.h:102 ../comps-f15.xml.in.h:105
+#: ../comps-f16.xml.in.h:105 ../comps-f17.xml.in.h:106
+#: ../comps-el4.xml.in.h:26 ../comps-el5.xml.in.h:31 ../comps-el6.xml.in.h:114
+msgid "Hebrew Support"
+msgstr "Héber támogatás"
+
+#: ../comps-f14.xml.in.h:103 ../comps-f15.xml.in.h:106
+#: ../comps-f16.xml.in.h:106 ../comps-f17.xml.in.h:107
+#: ../comps-el6.xml.in.h:115
+msgid "Hiligaynon Support"
+msgstr "Hiligaynon (Fülöp-szk.) támogatás"
+
+#: ../comps-f14.xml.in.h:104 ../comps-f15.xml.in.h:107
+#: ../comps-f16.xml.in.h:107 ../comps-f17.xml.in.h:108
+#: ../comps-el6.xml.in.h:116
+msgid "Hindi Support"
+msgstr "Hindi (India) támogatás"
+
+#: ../comps-f14.xml.in.h:105 ../comps-f15.xml.in.h:108
+#: ../comps-f16.xml.in.h:108 ../comps-f17.xml.in.h:109
+#: ../comps-el6.xml.in.h:117
+msgid "Hungarian Support"
+msgstr "Magyar támogatás"
+
+#: ../comps-f14.xml.in.h:106 ../comps-f15.xml.in.h:109
+#: ../comps-f16.xml.in.h:109 ../comps-f17.xml.in.h:110
+#: ../comps-el6.xml.in.h:118
+msgid "Icelandic Support"
+msgstr "Izlandi támogatás"
+
+#: ../comps-f14.xml.in.h:107 ../comps-f15.xml.in.h:110
+#: ../comps-f16.xml.in.h:110 ../comps-f17.xml.in.h:111
+#: ../comps-el6.xml.in.h:119
+msgid "Indonesian Support"
+msgstr "Indonéz támogatás"
+
+#: ../comps-f14.xml.in.h:108 ../comps-f15.xml.in.h:111
+#: ../comps-f16.xml.in.h:111 ../comps-f17.xml.in.h:113
+#: ../comps-el6.xml.in.h:121
+msgid "Input Methods"
+msgstr "Bevitel eljárások"
+
+#: ../comps-f14.xml.in.h:109 ../comps-f15.xml.in.h:112
+#: ../comps-f16.xml.in.h:112 ../comps-f17.xml.in.h:114
+msgid "Input method packages for the input of international text."
+msgstr "Bevitel eljárás csomagok nemzetközi szövegek bevitelére"
+
+#: ../comps-f14.xml.in.h:110 ../comps-f15.xml.in.h:113
+#: ../comps-f16.xml.in.h:113 ../comps-f17.xml.in.h:115
+#: ../comps-el4.xml.in.h:27 ../comps-el5.xml.in.h:32
+msgid ""
+"Install these packages in order to develop GTK+ and GNOME graphical "
+"applications."
+msgstr ""
+"Telepítse e csomagokat GTK+ és GNOME grafikus alkalmazások fejlesztéséhez!"
+
+#: ../comps-f14.xml.in.h:111 ../comps-f15.xml.in.h:114
+#: ../comps-f16.xml.in.h:114 ../comps-f17.xml.in.h:116
+msgid ""
+"Install these packages in order to develop GTK+ and XFCE graphical "
+"applications."
+msgstr ""
+"Telepítse e csomagokat GTK+ és XFCE grafikus alkalmazások fejlesztéséhez!"
+
+#: ../comps-f14.xml.in.h:112 ../comps-f15.xml.in.h:115
+#: ../comps-f16.xml.in.h:115 ../comps-f17.xml.in.h:117
+#: ../comps-el4.xml.in.h:28 ../comps-el5.xml.in.h:33
+msgid "Install these packages to develop QT and KDE graphical applications."
+msgstr ""
+"Telepítse e csomagokat QT és KDE grafikus alkalmazások fejlesztéséhez!"
+
+#: ../comps-f14.xml.in.h:113 ../comps-f15.xml.in.h:116
+#: ../comps-f16.xml.in.h:116 ../comps-f17.xml.in.h:118
+msgid ""
+"Install these tools to enable the system to print or act as a print server."
+msgstr ""
+"Telepítse e csomagokat nyomtatáshoz és nyomtatókiszolgáló kialakításához!"
+
+#: ../comps-f14.xml.in.h:114 ../comps-f15.xml.in.h:117
+#: ../comps-f16.xml.in.h:117 ../comps-f17.xml.in.h:119
+#: ../comps-el4.xml.in.h:29 ../comps-el5.xml.in.h:34
+msgid ""
+"Install this group of packages to use the base graphical (X) user interface."
+msgstr ""
+"Telepítse e csomagok csoportját alap grafikus (X) felület használatához!"
+
+#: ../comps-f14.xml.in.h:115 ../comps-f15.xml.in.h:118
+#: ../comps-f16.xml.in.h:118 ../comps-f17.xml.in.h:120
+msgid "Integrated Development Environments based on Eclipse."
+msgstr "Eclipse-re épülő integrált fejlesztőkörnyezetek."
+
+#: ../comps-f14.xml.in.h:116 ../comps-f15.xml.in.h:119
+#: ../comps-f16.xml.in.h:119 ../comps-f17.xml.in.h:121
+#: ../comps-el6.xml.in.h:122
+msgid "Interlingua Support"
+msgstr "Interlingua támogatás"
+
+#: ../comps-f14.xml.in.h:117 ../comps-f15.xml.in.h:120
+#: ../comps-f16.xml.in.h:120 ../comps-f17.xml.in.h:122
+#: ../comps-el6.xml.in.h:125
+msgid "Inuktitut Support"
+msgstr "Inuit támogatás"
+
+#: ../comps-f14.xml.in.h:118 ../comps-f15.xml.in.h:121
+#: ../comps-f16.xml.in.h:121 ../comps-f17.xml.in.h:123
+#: ../comps-el6.xml.in.h:126
+msgid "Irish Support"
+msgstr "Ír támogatás"
+
+#: ../comps-f14.xml.in.h:119 ../comps-f15.xml.in.h:122
+#: ../comps-f16.xml.in.h:122 ../comps-f17.xml.in.h:124
+#: ../comps-el6.xml.in.h:127
+msgid "Italian Support"
+msgstr "Olasz támogatás"
+
+#: ../comps-f14.xml.in.h:120 ../comps-f15.xml.in.h:123
+#: ../comps-f16.xml.in.h:123 ../comps-f17.xml.in.h:125
+#: ../comps-el4.xml.in.h:30 ../comps-el5.xml.in.h:35 ../comps-el6.xml.in.h:128
+msgid "Japanese Support"
+msgstr "Japán támogatás"
+
+#: ../comps-f14.xml.in.h:121 ../comps-f15.xml.in.h:124
+#: ../comps-f16.xml.in.h:124 ../comps-f17.xml.in.h:126
+#: ../comps-el4.xml.in.h:31
+msgid "Java"
+msgstr "Java"
+
+#: ../comps-f14.xml.in.h:122 ../comps-f15.xml.in.h:125
+#: ../comps-f16.xml.in.h:125 ../comps-f17.xml.in.h:127
+#: ../comps-el4.xml.in.h:32
+msgid "Java Development"
+msgstr "Java fejlesztés"
+
+#: ../comps-f14.xml.in.h:123 ../comps-f15.xml.in.h:126
+#: ../comps-f16.xml.in.h:126 ../comps-f17.xml.in.h:128
+msgid "KDE Software Compilation"
+msgstr "KDE szoftvergyűjtemény"
+
+#: ../comps-f14.xml.in.h:124 ../comps-f15.xml.in.h:127
+#: ../comps-f16.xml.in.h:127 ../comps-f17.xml.in.h:129
+#: ../comps-el4.xml.in.h:34 ../comps-el5.xml.in.h:37
+msgid "KDE Software Development"
+msgstr "KDE szoftverfejlesztés"
+
+#: ../comps-f14.xml.in.h:125 ../comps-f15.xml.in.h:128
+#: ../comps-f16.xml.in.h:128 ../comps-f17.xml.in.h:130
+#: ../comps-el6.xml.in.h:132
+msgid "Kannada Support"
+msgstr "Kanada (India) támogatás"
+
+#: ../comps-f14.xml.in.h:126 ../comps-f15.xml.in.h:129
+#: ../comps-f16.xml.in.h:129 ../comps-f17.xml.in.h:131
+#: ../comps-el6.xml.in.h:133
+msgid "Kashmiri Support"
+msgstr "Kasmír (India) támogatás"
+
+#: ../comps-f14.xml.in.h:127 ../comps-f15.xml.in.h:130
+#: ../comps-f16.xml.in.h:130 ../comps-f17.xml.in.h:132
+#: ../comps-el6.xml.in.h:134
+msgid "Kashubian Support"
+msgstr "Kasub (Lengyelo.) támogatás"
+
+#: ../comps-f14.xml.in.h:128 ../comps-f15.xml.in.h:131
+#: ../comps-f16.xml.in.h:131 ../comps-f17.xml.in.h:133
+#: ../comps-el6.xml.in.h:135
+msgid "Kazakh Support"
+msgstr "Kazah támogatás"
+
+#: ../comps-f14.xml.in.h:129 ../comps-f15.xml.in.h:132
+#: ../comps-f16.xml.in.h:132 ../comps-f17.xml.in.h:134
+#: ../comps-el6.xml.in.h:136
+msgid "Khmer Support"
+msgstr "Kmer (Kambodzsa) támogatás"
+
+#: ../comps-f14.xml.in.h:130 ../comps-f15.xml.in.h:133
+#: ../comps-f16.xml.in.h:133 ../comps-f17.xml.in.h:135
+#: ../comps-el6.xml.in.h:137
+msgid "Kinyarwanda Support"
+msgstr "Ruandai támogatás"
+
+#: ../comps-f14.xml.in.h:131 ../comps-f15.xml.in.h:134
+#: ../comps-f16.xml.in.h:134 ../comps-f17.xml.in.h:136
+#: ../comps-el6.xml.in.h:138
+msgid "Konkani Support"
+msgstr "Konkani (India) támogatás"
+
+#: ../comps-f14.xml.in.h:132 ../comps-f15.xml.in.h:135
+#: ../comps-f16.xml.in.h:135 ../comps-f17.xml.in.h:137
+#: ../comps-el6.xml.in.h:139
+msgid "Korean Support"
+msgstr "Koreai támogatás"
+
+#: ../comps-f14.xml.in.h:133 ../comps-f15.xml.in.h:136
+#: ../comps-f16.xml.in.h:136 ../comps-f17.xml.in.h:138
+#: ../comps-el6.xml.in.h:140
+msgid "Kurdish Support"
+msgstr "Kurd támogatás"
+
+#: ../comps-f14.xml.in.h:134 ../comps-f15.xml.in.h:138
+#: ../comps-f16.xml.in.h:138 ../comps-f17.xml.in.h:140
+msgid "LXDE"
+msgstr "LXDE"
+
+#: ../comps-f14.xml.in.h:135 ../comps-f15.xml.in.h:139
+#: ../comps-f16.xml.in.h:139 ../comps-f17.xml.in.h:141
+msgid ""
+"LXDE is a lightweight X11 desktop environment designed for computers with "
+"low hardware specifications like netbooks, mobile devices or older "
+"computers."
+msgstr ""
+"Az LXDE egy pehelykönnyű X11 asztal környezet alacsony hardverspecifikációjú"
+" számítógépek számára mint például netbookok, mobil eszközök vagy régebbi "
+"számítógépek."
+
+#: ../comps-f14.xml.in.h:136 ../comps-f15.xml.in.h:140
+#: ../comps-f16.xml.in.h:140 ../comps-f17.xml.in.h:142
+msgid "Languages"
+msgstr "Nyelvek"
+
+#: ../comps-f14.xml.in.h:137 ../comps-f15.xml.in.h:141
+#: ../comps-f16.xml.in.h:141 ../comps-f17.xml.in.h:143
+#: ../comps-el6.xml.in.h:141
+msgid "Lao Support"
+msgstr "Laoszi támogatás"
+
+#: ../comps-f14.xml.in.h:138 ../comps-f15.xml.in.h:142
+#: ../comps-f16.xml.in.h:142 ../comps-f17.xml.in.h:144
+#: ../comps-el6.xml.in.h:143
+msgid "Latin Support"
+msgstr "Latin támogatás"
+
+#: ../comps-f14.xml.in.h:139 ../comps-f15.xml.in.h:143
+#: ../comps-f16.xml.in.h:143 ../comps-f17.xml.in.h:145
+#: ../comps-el6.xml.in.h:144
+msgid "Latvian Support"
+msgstr "Lett támogatás"
+
+#: ../comps-f14.xml.in.h:140 ../comps-f15.xml.in.h:144
+#: ../comps-f16.xml.in.h:144 ../comps-f17.xml.in.h:146
+msgid "Legacy Fonts"
+msgstr "Örökölt betűkészletek"
+
+#: ../comps-f14.xml.in.h:141 ../comps-f15.xml.in.h:145
+#: ../comps-f16.xml.in.h:145 ../comps-f17.xml.in.h:147
+msgid "Legacy Network Server"
+msgstr "Hálózat kiszolgáló örökség"
+
+#: ../comps-f14.xml.in.h:142 ../comps-f15.xml.in.h:146
+#: ../comps-f16.xml.in.h:146 ../comps-f17.xml.in.h:148
+msgid "Legacy Software Development"
+msgstr "Szoftverfejlesztés örökség"
+
+#: ../comps-f14.xml.in.h:143 ../comps-f15.xml.in.h:147
+#: ../comps-f16.xml.in.h:147 ../comps-f17.xml.in.h:149
+msgid "Legacy Software Support"
+msgstr "Örökség szoftvertámogatás"
+
+#: ../comps-f14.xml.in.h:144 ../comps-f15.xml.in.h:150
+#: ../comps-f16.xml.in.h:150 ../comps-f17.xml.in.h:152
+#: ../comps-el6.xml.in.h:147
+msgid "Lithuanian Support"
+msgstr "Litván támogatás"
+
+#: ../comps-f14.xml.in.h:145 ../comps-f15.xml.in.h:152
+#: ../comps-f16.xml.in.h:152 ../comps-f17.xml.in.h:154
+#: ../comps-el6.xml.in.h:148
+msgid "Low Saxon Support"
+msgstr "Alsószász támogatás"
+
+#: ../comps-f14.xml.in.h:146 ../comps-f15.xml.in.h:155
+#: ../comps-f16.xml.in.h:155 ../comps-f17.xml.in.h:157
+#: ../comps-el6.xml.in.h:149
+msgid "Luxembourgish Support"
+msgstr "Luxemburgi támogatás"
+
+#: ../comps-f14.xml.in.h:147 ../comps-f15.xml.in.h:156
+#: ../comps-f16.xml.in.h:156 ../comps-f17.xml.in.h:158
+#: ../comps-el6.xml.in.h:150
+msgid "Macedonian Support"
+msgstr "Macedón támogatás"
+
+#: ../comps-f14.xml.in.h:148 ../comps-f15.xml.in.h:157
+#: ../comps-f16.xml.in.h:157 ../comps-f17.xml.in.h:159
+#: ../comps-el6.xml.in.h:151
+msgid "Machine and user identity servers."
+msgstr "Gép és használó identitás kiszolgálók."
+
+#: ../comps-f14.xml.in.h:149 ../comps-f15.xml.in.h:158
+#: ../comps-f16.xml.in.h:158 ../comps-f17.xml.in.h:160
+#: ../comps-el4.xml.in.h:36 ../comps-el5.xml.in.h:39
+msgid "Mail Server"
+msgstr "Levelező kiszolgáló"
+
+#: ../comps-f14.xml.in.h:150 ../comps-f15.xml.in.h:159
+#: ../comps-f16.xml.in.h:159 ../comps-f17.xml.in.h:161
+#: ../comps-el6.xml.in.h:153
+msgid "Maithili Support"
+msgstr "Maitili (India, Nepál) támogatás"
+
+#: ../comps-f14.xml.in.h:151 ../comps-f15.xml.in.h:160
+#: ../comps-f16.xml.in.h:160 ../comps-f17.xml.in.h:162
+#: ../comps-el6.xml.in.h:154
+msgid "Malagasy Support"
+msgstr "Madagaszkári támogatás"
+
+#: ../comps-f14.xml.in.h:152 ../comps-f15.xml.in.h:161
+#: ../comps-f16.xml.in.h:161 ../comps-f17.xml.in.h:163
+#: ../comps-el6.xml.in.h:155
+msgid "Malay Support"
+msgstr "Maláj támogatás"
+
+#: ../comps-f14.xml.in.h:153 ../comps-f15.xml.in.h:162
+#: ../comps-f16.xml.in.h:162 ../comps-f17.xml.in.h:164
+#: ../comps-el6.xml.in.h:156
+msgid "Malayalam Support"
+msgstr "Malajalam (India) támogatás"
+
+#: ../comps-f14.xml.in.h:154 ../comps-f15.xml.in.h:163
+#: ../comps-f16.xml.in.h:163 ../comps-f17.xml.in.h:165
+#: ../comps-el6.xml.in.h:157
+msgid "Maltese Support"
+msgstr "Máltai támogatás"
+
+#: ../comps-f14.xml.in.h:155 ../comps-f15.xml.in.h:164
+#: ../comps-f16.xml.in.h:164 ../comps-f17.xml.in.h:166
+#: ../comps-el6.xml.in.h:158
+msgid "Manx Support"
+msgstr "Mani (Egyesült Királyság) támogatás"
+
+#: ../comps-f14.xml.in.h:156 ../comps-f15.xml.in.h:165
+#: ../comps-f16.xml.in.h:165 ../comps-f17.xml.in.h:167
+#: ../comps-el6.xml.in.h:159
+msgid "Maori Support"
+msgstr "Maori támogatás"
+
+#: ../comps-f14.xml.in.h:157 ../comps-f15.xml.in.h:166
+#: ../comps-f16.xml.in.h:166 ../comps-f17.xml.in.h:168
+#: ../comps-el6.xml.in.h:160
+msgid "Marathi Support"
+msgstr "Marati (India) támogatás"
+
+#: ../comps-f14.xml.in.h:158 ../comps-f15.xml.in.h:167
+#: ../comps-f16.xml.in.h:167 ../comps-f17.xml.in.h:170
+msgid "MeeGo NetBook UX Environment"
+msgstr "MeeGo Netbook UX Környezet"
+
+#: ../comps-f14.xml.in.h:159 ../comps-f15.xml.in.h:168
+#: ../comps-f16.xml.in.h:168 ../comps-f17.xml.in.h:171
+msgid "MeeGo NetBook UX is an desktop environment for NetBook/NetTop devices."
+msgstr ""
+"A MeeGo Netbook UX egy asztali környezet netbook és nettop számítógépekhez."
+
+#: ../comps-f14.xml.in.h:160 ../comps-f15.xml.in.h:169
+#: ../comps-f16.xml.in.h:169 ../comps-f17.xml.in.h:172
+#: ../comps-el6.xml.in.h:163
+msgid "Milkymist"
+msgstr "Milkymist"
+
+#: ../comps-f14.xml.in.h:161 ../comps-f15.xml.in.h:170
+#: ../comps-f16.xml.in.h:170 ../comps-f17.xml.in.h:173
+msgid "MinGW cross-compiler"
+msgstr "MinGW kereszt-fordítóprogram"
+
+#: ../comps-f14.xml.in.h:162 ../comps-f15.xml.in.h:171
+#: ../comps-f16.xml.in.h:171 ../comps-f17.xml.in.h:174
+#: ../comps-el6.xml.in.h:165
+msgid "Mongolian Support"
+msgstr "Mongol támogatás"
+
+#: ../comps-f14.xml.in.h:163 ../comps-f15.xml.in.h:173
+#: ../comps-f16.xml.in.h:173 ../comps-f17.xml.in.h:176
+msgid "MySQL Database"
+msgstr "MySQL adatbázis"
+
+#: ../comps-f14.xml.in.h:164 ../comps-f15.xml.in.h:174
+#: ../comps-f16.xml.in.h:174 ../comps-f17.xml.in.h:177
+#: ../comps-el6.xml.in.h:168
+msgid "Myanmar (Burmese) Support"
+msgstr "Mianmari támogatás"
+
+#: ../comps-f14.xml.in.h:165 ../comps-f15.xml.in.h:175
+#: ../comps-f16.xml.in.h:175 ../comps-f17.xml.in.h:178
+#: ../comps-el6.xml.in.h:171
+msgid "Nepali Support"
+msgstr "Nepáli támogatás"
+
+#: ../comps-f14.xml.in.h:166 ../comps-f15.xml.in.h:176
+#: ../comps-f16.xml.in.h:176 ../comps-f17.xml.in.h:179
+#: ../comps-el4.xml.in.h:37 ../comps-el5.xml.in.h:40
+msgid "Network Servers"
+msgstr "Hálózat kiszolgálók"
+
+#: ../comps-f14.xml.in.h:167 ../comps-f15.xml.in.h:177
+#: ../comps-f16.xml.in.h:177 ../comps-f17.xml.in.h:180
+#: ../comps-el4.xml.in.h:38 ../comps-el5.xml.in.h:41
+msgid "News Server"
+msgstr "Hírkiszolgáló"
+
+#: ../comps-f14.xml.in.h:168 ../comps-f15.xml.in.h:179
+#: ../comps-f16.xml.in.h:179 ../comps-f17.xml.in.h:182
+#: ../comps-el6.xml.in.h:176
+msgid "Northern Sotho Support"
+msgstr "Észak-szotó (Dél-Afrika) támogatás"
+
+#: ../comps-f14.xml.in.h:169 ../comps-f15.xml.in.h:180
+#: ../comps-f16.xml.in.h:180 ../comps-f17.xml.in.h:183
+#: ../comps-el6.xml.in.h:177
+msgid "Norwegian Support"
+msgstr "Norvég támogatás"
+
+#: ../comps-f14.xml.in.h:170 ../comps-f15.xml.in.h:181
+#: ../comps-f16.xml.in.h:181 ../comps-f17.xml.in.h:184
+msgid "OCaml"
+msgstr "OCaml"
+
+#: ../comps-f14.xml.in.h:171 ../comps-f15.xml.in.h:182
+#: ../comps-f16.xml.in.h:182 ../comps-f17.xml.in.h:185
+#: ../comps-el6.xml.in.h:178
+msgid "Occitan Support"
+msgstr "Okszitán (Provence, Fro.) támogatás"
+
+#: ../comps-f14.xml.in.h:172 ../comps-f15.xml.in.h:183
+#: ../comps-f16.xml.in.h:183 ../comps-f17.xml.in.h:186
+#: ../comps-el4.xml.in.h:39 ../comps-el5.xml.in.h:42
+msgid "Office/Productivity"
+msgstr "Iroda/termelékenység"
+
+#: ../comps-f14.xml.in.h:173 ../comps-f15.xml.in.h:184
+#: ../comps-f16.xml.in.h:184 ../comps-f17.xml.in.h:187
+msgid "Older bitmap and vector fonts packages"
+msgstr "Régebbi bittérképes és vektoros betűcsomagok"
+
+#: ../comps-f14.xml.in.h:174 ../comps-f15.xml.in.h:185
+#: ../comps-f16.xml.in.h:185 ../comps-f17.xml.in.h:188
+msgid "Online Help and Documentation"
+msgstr "Hálózati súgó és iratok"
+
+#: ../comps-f14.xml.in.h:175
+msgid "OpenOffice.org Development"
+msgstr "OpenOffice.org Fejlesztés"
+
+#: ../comps-f14.xml.in.h:176 ../comps-f15.xml.in.h:186
+#: ../comps-f16.xml.in.h:186 ../comps-f17.xml.in.h:189
+#: ../comps-el6.xml.in.h:180
+msgid "Oriya Support"
+msgstr "Orija (India) támogatás"
+
+#: ../comps-f14.xml.in.h:177 ../comps-f15.xml.in.h:188
+#: ../comps-f16.xml.in.h:188 ../comps-f17.xml.in.h:191
+#: ../comps-el4.xml.in.h:40 ../comps-el5.xml.in.h:43
+msgid ""
+"Packages which provide functionality for developing and building "
+"applications."
+msgstr "Alkalmazások fejlesztését és építését biztosító csomagok."
+
+#: ../comps-f14.xml.in.h:178 ../comps-f15.xml.in.h:189
+#: ../comps-f16.xml.in.h:189 ../comps-f17.xml.in.h:192
+msgid "Perl Development"
+msgstr "Perl programfejlesztés"
+
+#: ../comps-f14.xml.in.h:179 ../comps-f15.xml.in.h:190
+#: ../comps-f16.xml.in.h:190 ../comps-f17.xml.in.h:193
+#: ../comps-el6.xml.in.h:187
+msgid "Persian Support"
+msgstr "Perzsa támogatás"
+
+#: ../comps-f14.xml.in.h:180 ../comps-f15.xml.in.h:191
+#: ../comps-f16.xml.in.h:191 ../comps-f17.xml.in.h:194
+#: ../comps-el6.xml.in.h:190
+msgid "Polish Support"
+msgstr "Lengyel támogatás"
+
+#: ../comps-f14.xml.in.h:181 ../comps-f15.xml.in.h:192
+#: ../comps-f16.xml.in.h:192 ../comps-f17.xml.in.h:195
+#: ../comps-el6.xml.in.h:191
+msgid "Portuguese Support"
+msgstr "Portugál támogatás"
+
+#: ../comps-f14.xml.in.h:182 ../comps-f15.xml.in.h:193
+#: ../comps-f16.xml.in.h:193 ../comps-f17.xml.in.h:196
+msgid "PostgreSQL Database"
+msgstr "PostgreSQL adatbázis"
+
+#: ../comps-f14.xml.in.h:183 ../comps-f15.xml.in.h:194
+#: ../comps-f16.xml.in.h:194 ../comps-f17.xml.in.h:197
+msgid "Printing Support"
+msgstr "Nyomtatás támogatás"
+
+#: ../comps-f14.xml.in.h:184 ../comps-f15.xml.in.h:195
+#: ../comps-f16.xml.in.h:195 ../comps-f17.xml.in.h:198
+#: ../comps-el6.xml.in.h:198
+msgid "Punjabi Support"
+msgstr "Pandzsab (India/Pakisztán) támogatás"
+
+#: ../comps-f14.xml.in.h:185 ../comps-f15.xml.in.h:198
+#: ../comps-f16.xml.in.h:198 ../comps-f17.xml.in.h:201
+#: ../comps-el6.xml.in.h:200
+msgid "Romanian Support"
+msgstr "Román támogatás"
+
+#: ../comps-f14.xml.in.h:186 ../comps-f15.xml.in.h:199
+#: ../comps-f16.xml.in.h:199 ../comps-f17.xml.in.h:202
+msgid "Ruby"
+msgstr "Ruby"
+
+#: ../comps-f14.xml.in.h:187 ../comps-f15.xml.in.h:200
+#: ../comps-f16.xml.in.h:200 ../comps-f17.xml.in.h:203
+#: ../comps-el6.xml.in.h:201
+msgid "Russian Support"
+msgstr "Orosz támogatás"
+
+#: ../comps-f14.xml.in.h:188 ../comps-f15.xml.in.h:201
+#: ../comps-f16.xml.in.h:201 ../comps-f17.xml.in.h:204
+msgid "Samoan Support"
+msgstr "Szamoai támogatás"
+
+#: ../comps-f14.xml.in.h:189 ../comps-f15.xml.in.h:202
+#: ../comps-f16.xml.in.h:202 ../comps-f17.xml.in.h:205
+#: ../comps-el6.xml.in.h:204
+msgid "Sanskrit Support"
+msgstr "Szanszkrit (India) támogatás"
+
+#: ../comps-f14.xml.in.h:190 ../comps-f15.xml.in.h:203
+#: ../comps-f16.xml.in.h:203 ../comps-f17.xml.in.h:206
+#: ../comps-el6.xml.in.h:205
+msgid "Sardinian Support"
+msgstr "Szárd (Olaszo.) támogatás"
+
+#: ../comps-f14.xml.in.h:191 ../comps-f15.xml.in.h:204
+#: ../comps-f16.xml.in.h:204 ../comps-f17.xml.in.h:207
+#: ../comps-el6.xml.in.h:209
+msgid "Serbian Support"
+msgstr "Szerb támogatás"
+
+#: ../comps-f14.xml.in.h:192 ../comps-f15.xml.in.h:205
+#: ../comps-f16.xml.in.h:205 ../comps-f17.xml.in.h:208
+msgid "Server Configuration Tools"
+msgstr "Kiszolgálóbeállító eszközök"
+
+#: ../comps-f14.xml.in.h:193 ../comps-f15.xml.in.h:206
+#: ../comps-f16.xml.in.h:206 ../comps-f17.xml.in.h:209
+#: ../comps-el4.xml.in.h:41 ../comps-el5.xml.in.h:44
+msgid "Servers"
+msgstr "Kiszolgálók"
+
+#: ../comps-f14.xml.in.h:194 ../comps-f15.xml.in.h:208
+#: ../comps-f16.xml.in.h:208 ../comps-f17.xml.in.h:211
+#: ../comps-el4.xml.in.h:42 ../comps-el5.xml.in.h:45
+msgid ""
+"Simple window managers that aren't part of a larger desktop environment."
+msgstr ""
+"Egyszerű ablakkezelők, amelyek nem részei egy nagyobb asztali környezetnek."
+
+#: ../comps-f14.xml.in.h:195 ../comps-f15.xml.in.h:210
+#: ../comps-f16.xml.in.h:210 ../comps-f17.xml.in.h:213
+#: ../comps-el6.xml.in.h:215
+msgid "Sindhi Support"
+msgstr "Szindi (Pakisztán) támogatás"
+
+#: ../comps-f14.xml.in.h:196 ../comps-f15.xml.in.h:211
+#: ../comps-f16.xml.in.h:211 ../comps-f17.xml.in.h:214
+#: ../comps-el6.xml.in.h:216
+msgid "Sinhala Support"
+msgstr "Szinala (Sri Lanka) támogatás"
+
+#: ../comps-f14.xml.in.h:197 ../comps-f15.xml.in.h:212
+#: ../comps-f16.xml.in.h:212 ../comps-f17.xml.in.h:215
+#: ../comps-el6.xml.in.h:217
+msgid "Slovak Support"
+msgstr "Szlovák támogatás"
+
+#: ../comps-f14.xml.in.h:198 ../comps-f15.xml.in.h:213
+#: ../comps-f16.xml.in.h:213 ../comps-f17.xml.in.h:216
+#: ../comps-el6.xml.in.h:218
+msgid "Slovenian Support"
+msgstr "Szlovén támogatás"
+
+#: ../comps-f14.xml.in.h:199 ../comps-f15.xml.in.h:214
+#: ../comps-f16.xml.in.h:214 ../comps-f17.xml.in.h:217
+msgid "Smallest possible installation"
+msgstr "Lehetséges legkisebb telepítés"
+
+#: ../comps-f14.xml.in.h:200 ../comps-f15.xml.in.h:215
+#: ../comps-f16.xml.in.h:215 ../comps-f17.xml.in.h:218
+#: ../comps-el4.xml.in.h:43 ../comps-el5.xml.in.h:46
+msgid "Software used for running network servers"
+msgstr "Hálózat kiszolgálók futtatásához használt szoftver"
+
+#: ../comps-f14.xml.in.h:201 ../comps-f15.xml.in.h:216
+#: ../comps-f16.xml.in.h:216 ../comps-f17.xml.in.h:219
+msgid "Somali Support"
+msgstr "Szomáli támogatás"
+
+#: ../comps-f14.xml.in.h:202 ../comps-f15.xml.in.h:217
+#: ../comps-f16.xml.in.h:217 ../comps-f17.xml.in.h:220
+msgid ""
+"Sometimes called text editors, these are programs that allow you to create "
+"and edit text files. This includes Emacs and Vi."
+msgstr ""
+"Ezekkel a – néha szövegszerkesztőnek nevezett – programokkal szöveges "
+"fájlokat lehet készíteni és szerkeszteni. Közéjük tartozik például az Emacs "
+"és a Vi is."
+
+#: ../comps-f14.xml.in.h:203 ../comps-f15.xml.in.h:218
+#: ../comps-f16.xml.in.h:218 ../comps-f17.xml.in.h:221
+#: ../comps-el4.xml.in.h:45 ../comps-el5.xml.in.h:48
+msgid "Sound and Video"
+msgstr "Hang és videó"
+
+#: ../comps-f14.xml.in.h:204 ../comps-f15.xml.in.h:219
+#: ../comps-f16.xml.in.h:219 ../comps-f17.xml.in.h:222
+#: ../comps-el6.xml.in.h:225
+msgid "Southern Ndebele Support"
+msgstr "Dél-ndebelei (Zimbabve) támogatás"
+
+#: ../comps-f14.xml.in.h:205 ../comps-f15.xml.in.h:220
+#: ../comps-f16.xml.in.h:220 ../comps-f17.xml.in.h:223
+#: ../comps-el6.xml.in.h:226
+msgid "Southern Sotho Support"
+msgstr "Dél-szotó (Dél-Afrika) támogatás"
+
+#: ../comps-f14.xml.in.h:206 ../comps-f15.xml.in.h:221
+#: ../comps-f16.xml.in.h:221 ../comps-f17.xml.in.h:224
+#: ../comps-el6.xml.in.h:227
+msgid "Spanish Support"
+msgstr "Spanyol támogatás"
+
+#: ../comps-f14.xml.in.h:207 ../comps-f15.xml.in.h:222
+#: ../comps-f16.xml.in.h:222 ../comps-f17.xml.in.h:225
+msgid "Sugar Desktop Environment"
+msgstr "Sugar asztal környezet"
+
+#: ../comps-f14.xml.in.h:208 ../comps-f15.xml.in.h:223
+#: ../comps-f16.xml.in.h:223 ../comps-f17.xml.in.h:226
+msgid ""
+"Support for cross-compiling programs to 32 bit Windows targets, testing "
+"them, and building installers, all from within Fedora."
+msgstr ""
+"32 bites Windows célra fordító programok támogatása, kipróbálásuk, és "
+"telepítők építése mind Fedorán belül."
+
+#: ../comps-f14.xml.in.h:209 ../comps-f15.xml.in.h:224
+#: ../comps-f16.xml.in.h:224 ../comps-f17.xml.in.h:227
+msgid "Support for developing programs in the Haskell programming language."
+msgstr ""
+"Támogatás a haskell programozási nyelven történő programfejlesztéshez."
+
+#: ../comps-f14.xml.in.h:210 ../comps-f15.xml.in.h:225
+#: ../comps-f16.xml.in.h:225 ../comps-f17.xml.in.h:228
+#: ../comps-el4.xml.in.h:46
+msgid "Support for developing programs in the Java programming language."
+msgstr "Támogatás a Java programnyelven történő programok fejlesztéséhez."
+
+#: ../comps-f14.xml.in.h:211 ../comps-f15.xml.in.h:226
+#: ../comps-f16.xml.in.h:226 ../comps-f17.xml.in.h:229
+msgid "Support for developing programs in the Perl programming language."
+msgstr "Támogatás a Perl programozási nyelven történő programfejlesztéshez."
+
+#: ../comps-f14.xml.in.h:212 ../comps-f15.xml.in.h:227
+#: ../comps-f16.xml.in.h:227 ../comps-f17.xml.in.h:230
+msgid ""
+"Support for developing software using the Objective CAML programming "
+"language and libraries."
+msgstr ""
+"Támogatás Objective CAML programnyelven illetve programkönyvtárakkal történő"
+" fejlesztéshez."
+
+#: ../comps-f14.xml.in.h:213 ../comps-f15.xml.in.h:228
+#: ../comps-f16.xml.in.h:228 ../comps-f17.xml.in.h:231
+#: ../comps-el4.xml.in.h:47
+msgid "Support for running programs written in the Java programming language."
+msgstr "Támogatás a Java programnyelven írt programok futtatásához."
+
+#: ../comps-f14.xml.in.h:214 ../comps-f15.xml.in.h:229
+#: ../comps-f16.xml.in.h:229 ../comps-f17.xml.in.h:232
+#: ../comps-el6.xml.in.h:233
+msgid "Swahili Support"
+msgstr "Szvahili (DK-Afrika) támogatás"
+
+#: ../comps-f14.xml.in.h:215 ../comps-f15.xml.in.h:230
+#: ../comps-f16.xml.in.h:230 ../comps-f17.xml.in.h:233
+#: ../comps-el6.xml.in.h:234
+msgid "Swati Support"
+msgstr "Szvati (Pakisztán) támogatás"
+
+#: ../comps-f14.xml.in.h:216 ../comps-f15.xml.in.h:231
+#: ../comps-f16.xml.in.h:231 ../comps-f17.xml.in.h:234
+#: ../comps-el6.xml.in.h:235
+msgid "Swedish Support"
+msgstr "Svéd támogatás"
+
+#: ../comps-f14.xml.in.h:217 ../comps-f15.xml.in.h:232
+#: ../comps-f16.xml.in.h:232 ../comps-f17.xml.in.h:235
+#: ../comps-el4.xml.in.h:48 ../comps-el5.xml.in.h:49
+msgid "System Tools"
+msgstr "Rendszereszközök"
+
+#: ../comps-f14.xml.in.h:218 ../comps-f15.xml.in.h:233
+#: ../comps-f16.xml.in.h:233 ../comps-f17.xml.in.h:236
+#: ../comps-el6.xml.in.h:238
+msgid "Tagalog Support"
+msgstr "Tagalog (Fülöp-szk.) támogatás"
+
+#: ../comps-f14.xml.in.h:219 ../comps-f15.xml.in.h:234
+#: ../comps-f16.xml.in.h:234 ../comps-f17.xml.in.h:237
+#: ../comps-el6.xml.in.h:239
+msgid "Tajik Support"
+msgstr "Tádzsik támogatás"
+
+#: ../comps-f14.xml.in.h:220 ../comps-f15.xml.in.h:235
+#: ../comps-f16.xml.in.h:235 ../comps-f17.xml.in.h:238
+#: ../comps-el6.xml.in.h:240
+msgid "Tamil Support"
+msgstr "Tamil (India/Sri Lanka) támogatás"
+
+#: ../comps-f14.xml.in.h:221 ../comps-f15.xml.in.h:236
+#: ../comps-f16.xml.in.h:236 ../comps-f17.xml.in.h:239
+#: ../comps-el6.xml.in.h:243
+msgid "Telugu Support"
+msgstr "Telugu (India) támogatás"
+
+#: ../comps-f14.xml.in.h:222 ../comps-f15.xml.in.h:237
+#: ../comps-f16.xml.in.h:237 ../comps-f17.xml.in.h:240
+#: ../comps-el6.xml.in.h:244
+msgid "Tetum Support"
+msgstr "Tetum (K-Timor) támogatás"
+
+#: ../comps-f14.xml.in.h:223 ../comps-f15.xml.in.h:238
+#: ../comps-f16.xml.in.h:238 ../comps-f17.xml.in.h:241
+msgid "Text and other Free content."
+msgstr "Szöveges és egyéb szabad tartalom."
+
+#: ../comps-f14.xml.in.h:224 ../comps-f15.xml.in.h:239
+#: ../comps-f16.xml.in.h:239 ../comps-f17.xml.in.h:242
+#: ../comps-el4.xml.in.h:49 ../comps-el5.xml.in.h:50
+msgid "Text-based Internet"
+msgstr "Szöveg-alapú internet"
+
+#: ../comps-f14.xml.in.h:225 ../comps-f15.xml.in.h:240
+#: ../comps-f16.xml.in.h:240 ../comps-f17.xml.in.h:243
+#: ../comps-el6.xml.in.h:245
+msgid "Thai Support"
+msgstr "Táj támogatás"
+
+#: ../comps-f14.xml.in.h:226 ../comps-f15.xml.in.h:241
+#: ../comps-f16.xml.in.h:241 ../comps-f17.xml.in.h:244
+msgid ""
+"The KDE SC includes the KDE Plasma Desktop, a highly-configurable graphical "
+"user interface which includes a panel, desktop, system icons and desktop "
+"widgets, and many powerful KDE applications."
+msgstr ""
+"A KDE szoftvergyűjtemény tartalmazza a KDE Plazma Asztalt, egy részletesen "
+"konfigurálható grafikus felhasználói felületet amelynek része a panel, az "
+"asztal, az ikonok és az asztali widgetek és a többi KDE alkalmazás."
+
+#: ../comps-f14.xml.in.h:227 ../comps-f15.xml.in.h:242
+#: ../comps-f16.xml.in.h:242 ../comps-f17.xml.in.h:245
+#: ../comps-el4.xml.in.h:51 ../comps-el5.xml.in.h:52
+msgid "The applications include office suites, PDF viewers, and more."
+msgstr ""
+"Ezek a csomagok irodai csomagokat, PDF-nézőket és más hasonló programokat "
+"tartalmaznak."
+
+#: ../comps-f14.xml.in.h:228 ../comps-f15.xml.in.h:243
+#: ../comps-f16.xml.in.h:243 ../comps-f17.xml.in.h:246
+msgid ""
+"The packages in this group are core libraries needed to develop "
+"applications."
+msgstr ""
+"Ezek a csomagok alkalmazásfejlesztéshez szükséges mag programkönyvtárakat "
+"tartalmaznak."
+
+#: ../comps-f14.xml.in.h:229 ../comps-f15.xml.in.h:244
+#: ../comps-f16.xml.in.h:244 ../comps-f17.xml.in.h:247
+#: ../comps-el4.xml.in.h:52 ../comps-el5.xml.in.h:53
+msgid "These packages allow you to configure an IMAP or SMTP mail server."
+msgstr ""
+"Ezek a csomagok IMAP és SMTP levelező kiszolgálók beállításához szükségesek."
+
+#: ../comps-f14.xml.in.h:230 ../comps-f15.xml.in.h:245
+#: ../comps-f16.xml.in.h:245 ../comps-f17.xml.in.h:248
+msgid ""
+"These packages allow you to develop applications for the X Window System."
+msgstr "E csomagok X Window System alkalmazások fejlesztéséhez szükségesek."
+
+#: ../comps-f14.xml.in.h:231
+msgid ""
+"These packages are helpful when developing OpenOffice.org extensions or "
+"macros."
+msgstr ""
+"Ezek a csomagok hasznosak, ha OpenOffice.org kiegészítőket vagy makrókat "
+"fejleszt."
+
+#: ../comps-f14.xml.in.h:232 ../comps-f15.xml.in.h:247
+#: ../comps-f16.xml.in.h:247 ../comps-f17.xml.in.h:250
+#: ../comps-el4.xml.in.h:53 ../comps-el5.xml.in.h:54
+msgid ""
+"These packages are helpful when developing web applications or web pages."
+msgstr ""
+"E csomagok webes alkalmazások és weblapok fejlesztéséhez használhatók."
+
+#: ../comps-f14.xml.in.h:233 ../comps-f15.xml.in.h:249
+#: ../comps-f16.xml.in.h:249 ../comps-f17.xml.in.h:252
+msgid ""
+"These packages include network-based servers such as DHCP, Kerberos and NIS."
+msgstr ""
+"E csomagokban hálózat kiszolgálók vannak (például DHCP, Kerberos és NIS)."
+
+#: ../comps-f14.xml.in.h:234 ../comps-f15.xml.in.h:250
+#: ../comps-f16.xml.in.h:250 ../comps-f17.xml.in.h:253
+msgid ""
+"These packages include servers for old network protocols such as rsh and "
+"telnet."
+msgstr ""
+"E csomagokban régi hálózat protokollok, például rsh és telnet kiszolgálók "
+"vannak."
+
+#: ../comps-f14.xml.in.h:235 ../comps-f15.xml.in.h:251
+#: ../comps-f16.xml.in.h:251 ../comps-f17.xml.in.h:254
+msgid "These packages provide a virtualization environment."
+msgstr "E csomagok virtualizációs környezetet biztosítanak."
+
+#: ../comps-f14.xml.in.h:236 ../comps-f15.xml.in.h:252
+#: ../comps-f16.xml.in.h:252 ../comps-f17.xml.in.h:255
+msgid "These packages provide compatibility with previous releases."
+msgstr ""
+"E csomagok korábbi változatokkal való kompatibilitás megőrzéséhez "
+"szükségesek."
+
+#: ../comps-f14.xml.in.h:237 ../comps-f15.xml.in.h:253
+#: ../comps-f16.xml.in.h:253 ../comps-f17.xml.in.h:256
+msgid ""
+"These packages provide support for various locales including fonts and input"
+" methods."
+msgstr ""
+"E csomagok különféle helyeknek nyújtanak támogatást, például betűkészleteket"
+" és beviteli módszereket."
+
+#: ../comps-f14.xml.in.h:238 ../comps-f15.xml.in.h:254
+#: ../comps-f16.xml.in.h:254 ../comps-f17.xml.in.h:257
+msgid ""
+"These tools allow you to create documents in the DocBook format and convert "
+"them into HTML, PDF, Postscript, and text."
+msgstr ""
+"E programok DocBook formátumú dokumentumok készítéséhez, továbbá azok HTML, "
+"PDF, PostScript illetve szöveges formátumra való konvertálásához "
+"szükségesek."
+
+#: ../comps-f14.xml.in.h:239 ../comps-f15.xml.in.h:255
+#: ../comps-f16.xml.in.h:255 ../comps-f17.xml.in.h:258
+#: ../comps-el4.xml.in.h:55 ../comps-el5.xml.in.h:56
+msgid "These tools allow you to run a Web server on the system."
+msgstr "Ezek az eszközök webkiszolgáló üzemeltetését teszik lehetővé."
+
+#: ../comps-f14.xml.in.h:240 ../comps-f15.xml.in.h:256
+#: ../comps-f16.xml.in.h:256 ../comps-f17.xml.in.h:259
+#: ../comps-el4.xml.in.h:56 ../comps-el5.xml.in.h:57
+msgid "These tools allow you to run an FTP server on the system."
+msgstr "Ezek az eszközök FTP kiszolgáló üzemeltetését teszik lehetővé."
+
+#: ../comps-f14.xml.in.h:241 ../comps-f15.xml.in.h:257
+#: ../comps-f16.xml.in.h:257 ../comps-f17.xml.in.h:260
+#: ../comps-el4.xml.in.h:57 ../comps-el5.xml.in.h:58
+msgid ""
+"These tools include core development tools such as automake, gcc, perl, "
+"python, and debuggers."
+msgstr ""
+"Ezek alapvető fejlesztőeszközök, például az automake, gcc, perl, python és "
+"nyomkövetők."
+
+#: ../comps-f14.xml.in.h:242 ../comps-f15.xml.in.h:258
+#: ../comps-f16.xml.in.h:258 ../comps-f17.xml.in.h:261
+#: ../comps-el4.xml.in.h:58 ../comps-el5.xml.in.h:59
+msgid "This group allows you to configure the system as a news server."
+msgstr "Ez a csoport hírkiszolgáló üzemeltetésére való."
+
+#: ../comps-f14.xml.in.h:243 ../comps-f15.xml.in.h:259
+#: ../comps-f16.xml.in.h:259 ../comps-f17.xml.in.h:262
+msgid ""
+"This group contains all of Red Hat's custom server configuration tools."
+msgstr ""
+"Ez a csoport a Red Hat saját kiszolgálóbeállítási programjait tartalmazza."
+
+#: ../comps-f14.xml.in.h:244 ../comps-f15.xml.in.h:260
+#: ../comps-f16.xml.in.h:260 ../comps-f17.xml.in.h:263
+msgid ""
+"This group includes a minimal set of packages. Useful for creating small "
+"router/firewall boxes, for example."
+msgstr ""
+"Ez a csoport a minimálisan szükséges csomagokat tartalmazza. Például "
+"egyszerű útválasztó vagy tűzfal doboz kialakításához hasznos."
+
+#: ../comps-f14.xml.in.h:245 ../comps-f15.xml.in.h:261
+#: ../comps-f16.xml.in.h:261 ../comps-f17.xml.in.h:264
+#: ../comps-el4.xml.in.h:59 ../comps-el5.xml.in.h:60
+msgid "This group includes graphical email, Web, and chat clients."
+msgstr ""
+"E csoport grafikus levelezőprogramokat, webböngészőket és csevegőprogramokat"
+" tartalmaz."
+
+#: ../comps-f14.xml.in.h:246 ../comps-f15.xml.in.h:262
+#: ../comps-f16.xml.in.h:262 ../comps-f17.xml.in.h:265
+#: ../comps-el4.xml.in.h:60 ../comps-el5.xml.in.h:61
+msgid ""
+"This group includes packages for performing mathematical and scientific "
+"computations and plotting, as well as unit conversion."
+msgstr ""
+"E csoportba matematikai és tudományos számítások elvégzésére, "
+"grafikonrajzolásra, valamint mértékegység-konverzióra használható programok "
+"kerültek."
+
+#: ../comps-f14.xml.in.h:247 ../comps-f15.xml.in.h:263
+#: ../comps-f16.xml.in.h:263 ../comps-f17.xml.in.h:266
+#: ../comps-el4.xml.in.h:61 ../comps-el5.xml.in.h:62
+msgid "This group includes packages to help you manipulate and scan images."
+msgstr ""
+"E csoport képek beolvasására és feldolgozására alkalmas csomagokat "
+"tartalmaz."
+
+#: ../comps-f14.xml.in.h:248 ../comps-f15.xml.in.h:264
+#: ../comps-f16.xml.in.h:264 ../comps-f17.xml.in.h:267
+#: ../comps-el4.xml.in.h:62 ../comps-el5.xml.in.h:63
+msgid ""
+"This group includes text-based email, Web, and chat clients. These "
+"applications do not require the X Window System."
+msgstr ""
+"Ebbe a csoportba szöveges levelezők, webböngészők és csevegők kerültek. Ezek"
+" az X Window System grafikus rendszer nélkül is használhatók."
+
+#: ../comps-f14.xml.in.h:249 ../comps-f15.xml.in.h:265
+#: ../comps-f16.xml.in.h:265 ../comps-f17.xml.in.h:268
+#: ../comps-el4.xml.in.h:63 ../comps-el5.xml.in.h:64
+msgid ""
+"This group is a collection of graphical administration tools for the system,"
+" such as for managing user accounts and configuring system hardware."
+msgstr ""
+"E csoportba grafikus felületű adminisztratív eszközök, például felhasználó "
+"számlákat igazgató és hardverbeállító programok kerültek."
+
+#: ../comps-f14.xml.in.h:250 ../comps-f15.xml.in.h:266
+#: ../comps-f16.xml.in.h:266 ../comps-f17.xml.in.h:269
+#: ../comps-el4.xml.in.h:66 ../comps-el5.xml.in.h:67
+msgid ""
+"This group is a collection of tools and resources of Armenian environments."
+msgstr ""
+"E csoport örmény környezetekben használható eszközök és erőforrások "
+"gyűjteménye."
+
+#: ../comps-f14.xml.in.h:251 ../comps-f15.xml.in.h:267
+#: ../comps-f16.xml.in.h:267 ../comps-f17.xml.in.h:270
+#: ../comps-el4.xml.in.h:69 ../comps-el5.xml.in.h:71
+msgid ""
+"This group is a collection of tools for various hardware specific utilities."
+msgstr ""
+"E csoport különböző hardverspecifikus segédprogramokhoz való eszközök "
+"gyűjteménye."
+
+#: ../comps-f14.xml.in.h:252 ../comps-f15.xml.in.h:268
+#: ../comps-f16.xml.in.h:268 ../comps-f17.xml.in.h:271
+msgid ""
+"This group is a collection of tools used in the design, modification, "
+"manipulation, and packaging of fonts."
+msgstr ""
+"E csoport betűkészletek tervezésére, változtatására és csomagolására "
+"használt eszközök gyűjteménye."
+
+#: ../comps-f14.xml.in.h:253 ../comps-f15.xml.in.h:269
+#: ../comps-f16.xml.in.h:269 ../comps-f17.xml.in.h:272
+#: ../comps-el4.xml.in.h:70 ../comps-el5.xml.in.h:72
+msgid ""
+"This group is a collection of various tools for the system, such as the "
+"client for connecting to SMB shares and tools to monitor network traffic."
+msgstr ""
+"E csoport különféle eszközök – mint SMB-megosztásokhoz kapcsolódó ügyfél és "
+"a hálózati forgalom figyelő – gyűjteménye."
+
+#: ../comps-f14.xml.in.h:254 ../comps-f15.xml.in.h:270
+#: ../comps-f16.xml.in.h:270 ../comps-f17.xml.in.h:274
+msgid ""
+"This package group allows you to run a DNS name server (BIND) on the system."
+msgstr ""
+"E csomagcsoport DNS-kiszolgáló (BIND) kialakításához szükséges programokat "
+"tartalmaz."
+
+#: ../comps-f14.xml.in.h:255 ../comps-f15.xml.in.h:271
+#: ../comps-f16.xml.in.h:271 ../comps-f17.xml.in.h:275
+msgid ""
+"This package group allows you to share files between Linux and MS "
+"Windows(tm) systems."
+msgstr ""
+"E csomagcsoportban olyan programok találhatók, amelyek Linux és MS "
+"Windows(tm) rendszerek közötti fájlmegosztásra alkalmasak."
+
+#: ../comps-f14.xml.in.h:256 ../comps-f15.xml.in.h:272
+#: ../comps-f16.xml.in.h:272 ../comps-f17.xml.in.h:276
+msgid "This package group contains packages useful for use with MySQL."
+msgstr "E csomagcsoport MySQL használatához tartalmaz hasznos csomagokat."
+
+#: ../comps-f14.xml.in.h:257 ../comps-f15.xml.in.h:273
+#: ../comps-f16.xml.in.h:273 ../comps-f17.xml.in.h:277
+msgid "This package group includes packages useful for use with Postgresql."
+msgstr ""
+"E csomagcsoport PostgreSQL használatához tartalmaz hasznos csomagokat."
+
+#: ../comps-f14.xml.in.h:258 ../comps-f15.xml.in.h:274
+#: ../comps-f16.xml.in.h:274 ../comps-f17.xml.in.h:278
+#: ../comps-el6.xml.in.h:252
+msgid "Tibetan Support"
+msgstr "Tibeti támogatás"
+
+#: ../comps-f14.xml.in.h:259 ../comps-f15.xml.in.h:276
+#: ../comps-f16.xml.in.h:276 ../comps-f17.xml.in.h:280
+msgid "Tonga Support"
+msgstr "Tongai támogatás"
+
+#: ../comps-f14.xml.in.h:260 ../comps-f15.xml.in.h:277
+#: ../comps-f16.xml.in.h:277 ../comps-f17.xml.in.h:281
+#: ../comps-el6.xml.in.h:253
+msgid "Toolchain for Milkymist hardware engineers."
+msgstr "Eszköztár Milkymist hardver mérnökök részére."
+
+#: ../comps-f14.xml.in.h:261 ../comps-f15.xml.in.h:278
+#: ../comps-f16.xml.in.h:278 ../comps-f17.xml.in.h:282
+#: ../comps-el4.xml.in.h:71 ../comps-el5.xml.in.h:73
+msgid "Tools and Utilities needed by a Fedora Packager"
+msgstr "Eszközök és segédprogramok, amik Fedora csomagolóknak kellenek"
+
+#: ../comps-f14.xml.in.h:262 ../comps-f15.xml.in.h:280
+#: ../comps-f16.xml.in.h:280 ../comps-f17.xml.in.h:284
+#: ../comps-el6.xml.in.h:264
+msgid "Tsonga Support"
+msgstr "Conga (Dél-Afrika) támogatás"
+
+#: ../comps-f14.xml.in.h:263 ../comps-f15.xml.in.h:281
+#: ../comps-f16.xml.in.h:281 ../comps-f17.xml.in.h:285
+#: ../comps-el6.xml.in.h:265
+msgid "Tswana Support"
+msgstr "Cvána (Dél-Afrika) támogatás"
+
+#: ../comps-f14.xml.in.h:264 ../comps-f15.xml.in.h:282
+#: ../comps-f16.xml.in.h:282 ../comps-f17.xml.in.h:286
+#: ../comps-el6.xml.in.h:268
+msgid "Turkish Support"
+msgstr "Török támogatás"
+
+#: ../comps-f14.xml.in.h:265 ../comps-f15.xml.in.h:283
+#: ../comps-f16.xml.in.h:283 ../comps-f17.xml.in.h:287
+#: ../comps-el6.xml.in.h:269
+msgid "Turkmen Support"
+msgstr "Türkmén támogatás"
+
+#: ../comps-f14.xml.in.h:266 ../comps-f15.xml.in.h:284
+#: ../comps-f16.xml.in.h:284 ../comps-f17.xml.in.h:288
+#: ../comps-el6.xml.in.h:270
+msgid "Ukrainian Support"
+msgstr "Ukrán támogatás"
+
+#: ../comps-f14.xml.in.h:267 ../comps-f15.xml.in.h:285
+#: ../comps-f16.xml.in.h:285 ../comps-f17.xml.in.h:289
+#: ../comps-el6.xml.in.h:271
+msgid "Upper Sorbian Support"
+msgstr "Szorb (vend Németo/Lengyelo.) támogatás"
+
+#: ../comps-f14.xml.in.h:268 ../comps-f15.xml.in.h:286
+#: ../comps-f16.xml.in.h:286 ../comps-f17.xml.in.h:290
+#: ../comps-el6.xml.in.h:272
+msgid "Urdu Support"
+msgstr "Urdu (Pakisztán) támogatás"
+
+#: ../comps-f14.xml.in.h:269 ../comps-f15.xml.in.h:287
+#: ../comps-f16.xml.in.h:287 ../comps-f17.xml.in.h:291
+#: ../comps-el6.xml.in.h:274
+msgid "Uzbek Support"
+msgstr "Üzbég támogatás"
+
+#: ../comps-f14.xml.in.h:270 ../comps-f15.xml.in.h:288
+#: ../comps-f16.xml.in.h:288 ../comps-f17.xml.in.h:292
+#: ../comps-el4.xml.in.h:72 ../comps-el5.xml.in.h:74
+msgid "Various core pieces of the system."
+msgstr "A rendszer különböző alapkomponensei"
+
+#: ../comps-f14.xml.in.h:271 ../comps-f15.xml.in.h:289
+#: ../comps-f16.xml.in.h:289 ../comps-f17.xml.in.h:293
+#: ../comps-el5.xml.in.h:75
+msgid "Various ways to relax and spend your free time."
+msgstr "Különféle programok szabadidő kellemes eltöltéséhez."
+
+#: ../comps-f14.xml.in.h:272 ../comps-f15.xml.in.h:290
+#: ../comps-f16.xml.in.h:290 ../comps-f17.xml.in.h:294
+#: ../comps-el6.xml.in.h:276
+msgid "Venda Support"
+msgstr "Venda (Dél-Afrika) támogatás"
+
+#: ../comps-f14.xml.in.h:273 ../comps-f15.xml.in.h:291
+#: ../comps-f16.xml.in.h:291 ../comps-f17.xml.in.h:295
+#: ../comps-el6.xml.in.h:277
+msgid "Vietnamese Support"
+msgstr "Vietnámi támogatás"
+
+#: ../comps-f14.xml.in.h:274 ../comps-f15.xml.in.h:292
+#: ../comps-f16.xml.in.h:292 ../comps-f17.xml.in.h:296
+#: ../comps-el6.xml.in.h:278
+msgid "Virtualization"
+msgstr "Virtualizáció"
+
+#: ../comps-f14.xml.in.h:275 ../comps-f15.xml.in.h:293
+#: ../comps-f16.xml.in.h:293 ../comps-f17.xml.in.h:297
+#: ../comps-el6.xml.in.h:283
+msgid "Walloon Support"
+msgstr "Vallon (Belgium) támogatás"
+
+#: ../comps-f14.xml.in.h:276 ../comps-f15.xml.in.h:294
+#: ../comps-f16.xml.in.h:294 ../comps-f17.xml.in.h:298
+#: ../comps-el4.xml.in.h:73 ../comps-el5.xml.in.h:76
+msgid "Web Development"
+msgstr "Webfejlesztés"
+
+#: ../comps-f14.xml.in.h:277 ../comps-f15.xml.in.h:295
+#: ../comps-f16.xml.in.h:295 ../comps-f17.xml.in.h:299
+#: ../comps-el4.xml.in.h:74 ../comps-el5.xml.in.h:77 ../comps-el6.xml.in.h:284
+msgid "Web Server"
+msgstr "Webkiszolgáló"
+
+#: ../comps-f14.xml.in.h:278 ../comps-f15.xml.in.h:296
+#: ../comps-f16.xml.in.h:296 ../comps-f17.xml.in.h:300
+#: ../comps-el6.xml.in.h:287
+msgid "Welsh Support"
+msgstr "Velszi támogatás"
+
+#: ../comps-f14.xml.in.h:279 ../comps-f15.xml.in.h:297
+#: ../comps-f16.xml.in.h:297 ../comps-f17.xml.in.h:301
+#: ../comps-el4.xml.in.h:75 ../comps-el5.xml.in.h:78
+msgid "Window Managers"
+msgstr "Ablakkezelők"
+
+#: ../comps-f14.xml.in.h:280 ../comps-f15.xml.in.h:298
+#: ../comps-f16.xml.in.h:298 ../comps-f17.xml.in.h:302
+msgid "Windows File Server"
+msgstr "Windows fájlkiszolgáló"
+
+#: ../comps-f14.xml.in.h:281 ../comps-f15.xml.in.h:299
+#: ../comps-f16.xml.in.h:299 ../comps-f17.xml.in.h:303
+msgid "X Software Development"
+msgstr "X szoftverfejlesztés"
+
+#: ../comps-f14.xml.in.h:282 ../comps-f15.xml.in.h:300
+#: ../comps-f16.xml.in.h:300 ../comps-f17.xml.in.h:304
+#: ../comps-el4.xml.in.h:76 ../comps-el5.xml.in.h:79 ../comps-el6.xml.in.h:289
+msgid "X Window System"
+msgstr "X ablakrendszer"
+
+#: ../comps-f14.xml.in.h:283
+msgid "XFCE"
+msgstr "XFCE"
+
+#: ../comps-f14.xml.in.h:284 ../comps-f15.xml.in.h:301
+#: ../comps-f16.xml.in.h:301 ../comps-f17.xml.in.h:305
+msgid "XFCE Software Development"
+msgstr "XFCE szoftverfejlesztés"
+
+#: ../comps-f14.xml.in.h:285 ../comps-f15.xml.in.h:303
+#: ../comps-f16.xml.in.h:303 ../comps-f17.xml.in.h:307
+#: ../comps-el6.xml.in.h:292
+msgid "Xhosa Support"
+msgstr "Kóza (Dél-Afrika) támogatás"
+
+#: ../comps-f14.xml.in.h:286 ../comps-f15.xml.in.h:305
+#: ../comps-f16.xml.in.h:305 ../comps-f17.xml.in.h:309
+#: ../comps-el6.xml.in.h:293
+msgid "Zulu Support"
+msgstr "Zulu (Dél-Afrika) támogatás"
+
+#: ../comps-f15.xml.in.h:11 ../comps-f16.xml.in.h:11 ../comps-f17.xml.in.h:11
+msgid "Akan Support"
+msgstr "Akan támogatás"
+
+#: ../comps-f15.xml.in.h:38 ../comps-f16.xml.in.h:38 ../comps-f17.xml.in.h:38
+msgid "Chuvash Support"
+msgstr "Chuvash támogatás"
+
+#: ../comps-f15.xml.in.h:54 ../comps-f16.xml.in.h:54 ../comps-f17.xml.in.h:55
+msgid "Design Suite"
+msgstr "Dizájn készlet"
+
+#: ../comps-f15.xml.in.h:102 ../comps-f16.xml.in.h:102
+#: ../comps-f17.xml.in.h:103
+msgid "Haitian Creole Support"
+msgstr "Haiti kreol támogatás"
+
+#: ../comps-f15.xml.in.h:137 ../comps-f16.xml.in.h:137
+#: ../comps-f17.xml.in.h:139
+msgid "Kyrgyz Support"
+msgstr "Kirgiz támogatás"
+
+#: ../comps-f15.xml.in.h:148 ../comps-f16.xml.in.h:148
+#: ../comps-f17.xml.in.h:150
+msgid "LibreOffice Development"
+msgstr "LibreOffice fejlesztés"
+
+#: ../comps-f15.xml.in.h:149 ../comps-f16.xml.in.h:149
+#: ../comps-f17.xml.in.h:151
+msgid "Lingala Support"
+msgstr "Lingala támogatás"
+
+#: ../comps-f15.xml.in.h:151 ../comps-f16.xml.in.h:151
+#: ../comps-f17.xml.in.h:153
+msgid "Low German Support"
+msgstr "Alsó-német támogatás"
+
+#: ../comps-f15.xml.in.h:153 ../comps-f16.xml.in.h:153
+#: ../comps-f17.xml.in.h:155
+msgid "Lower Sorbian Support"
+msgstr "Alsó-szorb támogatás"
+
+#: ../comps-f15.xml.in.h:154 ../comps-f16.xml.in.h:154
+#: ../comps-f17.xml.in.h:156
+msgid "Lule Sami Support"
+msgstr "Lule Sami támogatás"
+
+#: ../comps-f15.xml.in.h:172 ../comps-f16.xml.in.h:172
+#: ../comps-f17.xml.in.h:175
+msgid "Mossi Support"
+msgstr "Mossi támogatás"
+
+#: ../comps-f15.xml.in.h:178 ../comps-f16.xml.in.h:178
+#: ../comps-f17.xml.in.h:181
+msgid "Northern Sami Support"
+msgstr "Északszámi (Észak-Európa) támogatás"
+
+#: ../comps-f15.xml.in.h:187 ../comps-f16.xml.in.h:187
+#: ../comps-f17.xml.in.h:190
+msgid "Oromo Support"
+msgstr "Oromo támogatás"
+
+#: ../comps-f15.xml.in.h:196 ../comps-f16.xml.in.h:196
+#: ../comps-f17.xml.in.h:199
+msgid "Quechua Support"
+msgstr "Quechua támogatás"
+
+#: ../comps-f15.xml.in.h:197 ../comps-f16.xml.in.h:197
+#: ../comps-f17.xml.in.h:200
+msgid "Robotics"
+msgstr "Robotika"
+
+#: ../comps-f15.xml.in.h:207 ../comps-f16.xml.in.h:207
+#: ../comps-f17.xml.in.h:210
+msgid "Shuswap Support"
+msgstr "Shuswap támogatás"
+
+#: ../comps-f15.xml.in.h:209 ../comps-f16.xml.in.h:209
+#: ../comps-f17.xml.in.h:212
+msgid "Simplified Chinese Support"
+msgstr "Egyszerűsített kínai támogatás"
+
+#: ../comps-f15.xml.in.h:246 ../comps-f16.xml.in.h:246
+#: ../comps-f17.xml.in.h:249
+msgid ""
+"These packages are helpful when developing LibreOffice extensions or macros."
+msgstr ""
+"Ezek a csomagok hasznosak, ha LibreOffice kiterjesztéseket vagy makrókat "
+"szeretne fejleszteni."
+
+#: ../comps-f15.xml.in.h:248 ../comps-f16.xml.in.h:248
+#: ../comps-f17.xml.in.h:251
+msgid ""
+"These packages are targeted towards professional designers, like the Fedora "
+"Design Team."
+msgstr ""
+"Ezek a csomagok a professzionális dizájnereket célozzák meg, mint a Fedora "
+"Design csapat."
+
+#: ../comps-f15.xml.in.h:275 ../comps-f16.xml.in.h:275
+#: ../comps-f17.xml.in.h:279
+msgid "Tigrinya Support"
+msgstr "Tigrinya támogatás"
+
+#: ../comps-f15.xml.in.h:279 ../comps-f16.xml.in.h:279
+#: ../comps-f17.xml.in.h:283
+msgid "Traditional Chinese Support"
+msgstr "Hagyományos kínai támogatás"
+
+#: ../comps-f15.xml.in.h:302 ../comps-f16.xml.in.h:302
+#: ../comps-f17.xml.in.h:306 ../comps-el6.xml.in.h:291
+msgid "Xfce"
+msgstr "Xfce"
+
+#: ../comps-f15.xml.in.h:304 ../comps-f16.xml.in.h:304
+#: ../comps-f17.xml.in.h:308
+msgid "Yiddish Support"
+msgstr "Jiddis támogatás"
+
+#: ../comps-f17.xml.in.h:39
+msgid "Cloud Infrastructure"
+msgstr ""
+
+#: ../comps-f17.xml.in.h:112
+msgid "Infrastructure packages for cloud computing."
+msgstr ""
+
+#: ../comps-f17.xml.in.h:169
+msgid "Medical Applications"
+msgstr ""
+
+#: ../comps-f17.xml.in.h:273
+msgid "This is a group of applications related to health care."
+msgstr ""
+
+#: ../comps-el4.xml.in.h:3 ../comps-el5.xml.in.h:3
+msgid "Applications for a variety of tasks"
+msgstr "Alkalmazások változatos célokra"
+
+#: ../comps-el4.xml.in.h:12 ../comps-el5.xml.in.h:15
+msgid "Dialup Networking Support"
+msgstr "Telefonos hálózati támogatás"
+
+#: ../comps-el4.xml.in.h:22 ../comps-el5.xml.in.h:26
+msgid ""
+"GNOME is a powerful, graphical user interface which includes a panel, "
+"desktop, system icons, and a graphical file manager."
+msgstr ""
+"GNOME hatalmas grafikus környezet panellel, asztallal, rendszerikonokkal és "
+"grafikus fájlkezelővel."
+
+#: ../comps-el4.xml.in.h:33 ../comps-el5.xml.in.h:36
+msgid "KDE (K Desktop Environment)"
+msgstr "KDE (K asztal környezet)"
+
+#: ../comps-el4.xml.in.h:35 ../comps-el5.xml.in.h:38
+msgid ""
+"KDE is a powerful, graphical user interface which includes a panel, desktop,"
+" system icons, and a graphical file manager."
+msgstr ""
+"KDE hatalmas grafikus felhasználói környezet panellel, munkaasztallal, "
+"rendszerikonokkal és grafikus fájlkezelővel."
+
+#: ../comps-el4.xml.in.h:44 ../comps-el5.xml.in.h:47
+msgid ""
+"Sometimes called text editors, these are programs that allow you to create "
+"and edit files. These include Emacs and Vi."
+msgstr ""
+"Ezekkel a programokkal szöveges fájlokat lehet szerkeszteni. Közéjük "
+"tartozik például az Emacs és a Vi is."
+
+#: ../comps-el4.xml.in.h:50 ../comps-el5.xml.in.h:51
+msgid "The XEmacs text editor."
+msgstr "XEmacs szövegszerkesztő."
+
+#: ../comps-el4.xml.in.h:54 ../comps-el5.xml.in.h:55
+msgid ""
+"These tools allow you to create documentation in the DocBook format and "
+"convert them to HTML, PDF, Postscript, and text."
+msgstr ""
+"Ezek a programok DocBook formátumú dokumentumok készítéséhez, továbbá azok "
+"HTML, PDF, PostScript illetve szöveges formátumra való konvertálásához "
+"szükségesek."
+
+#: ../comps-el4.xml.in.h:64 ../comps-el5.xml.in.h:65
+msgid "This group is a collection of network servers for specific purposes"
+msgstr ""
+"Ez a csoport – bizonyos célokra való – hálózati kiszolgálók gyűjteménye"
+
+#: ../comps-el4.xml.in.h:65 ../comps-el5.xml.in.h:66
+msgid ""
+"This group is a collection of tools and resources of Arabic environments."
+msgstr ""
+"Ez a csoport arab környezetekbe való eszközök és erőforrások gyűjteménye."
+
+#: ../comps-el4.xml.in.h:67 ../comps-el5.xml.in.h:69
+msgid ""
+"This group is a collection of tools and resources of Hebrew environments."
+msgstr ""
+"Ez a csoport héber környezetekbe való eszközök és erőforrások gyűjteménye."
+
+#: ../comps-el4.xml.in.h:68 ../comps-el5.xml.in.h:70
+msgid ""
+"This group is a collection of tools and resources of Japanese environments."
+msgstr ""
+"Ez a csoport japán környezetekbe való eszközök és erőforrások gyűjteménye."
+
+#: ../comps-el4.xml.in.h:77 ../comps-el5.xml.in.h:80
+msgid "XEmacs"
+msgstr "XEmacs"
+
+#: ../comps-el5.xml.in.h:68
+msgid ""
+"This group is a collection of tools and resources of Czech environments."
+msgstr ""
+"Ez a csoport cseh környezetekbe való eszközök és erőforrások gyűjteménye."
+
+#: ../comps-el6.xml.in.h:1
+msgid "A KDE desktop."
+msgstr "Egy KDE asztal"
+
+#: ../comps-el6.xml.in.h:2
+msgid "A basic development environment."
+msgstr "Egy egyszerű fejlesztőkörnyezet"
+
+#: ../comps-el6.xml.in.h:3
+msgid "A full-purpose office suite, and other productivity tools."
+msgstr "Egy teljeskörű irodai programcsomag, és más eszközök."
+
+#: ../comps-el6.xml.in.h:4
+msgid "A general purpose desktop."
+msgstr "Egy általános célú asztal."
+
+#: ../comps-el6.xml.in.h:6
+msgid "A minimal desktop that can also be used as a thin client."
+msgstr "Minimális asztal, mely használható vékony kliensként is."
+
+#: ../comps-el6.xml.in.h:7
+msgid "A set of tools to manage SAN path availability"
+msgstr "Eszközgyűjtemény SAN elérhetõségek kezeléséhez"
+
+#: ../comps-el6.xml.in.h:8
+msgid "A set of tools to monitor server hardware"
+msgstr "Eszközgyűjtemény szerver hardver felügyeletére"
+
+#: ../comps-el6.xml.in.h:9
+msgid "AMQP messaging broker for systems management."
+msgstr "AMQP üzenetküldő elosztó rendszerirányításhoz"
+
+#: ../comps-el6.xml.in.h:10
+msgid "AMQP messaging client for systems management."
+msgstr "AMQP üzenetküldő kliens rendszerek kezelésére."
+
+#: ../comps-el6.xml.in.h:11
+msgid "Additional Development"
+msgstr "További fejlesztési eszközök"
+
+#: ../comps-el6.xml.in.h:12
+msgid ""
+"Additional development headers and libraries for developing applications"
+msgstr ""
+"További fejlesztési fejlécek és könyvtárak alkalmazások fejlesztéséhez"
+
+#: ../comps-el6.xml.in.h:15
+msgid "Allows the system to act as a SMTP and/or IMAP e-mail server."
+msgstr ""
+"Engedélyezi a rendszernek, hogy SMTP és/vagy IMAP szerverként üzemeljen."
+
+#: ../comps-el6.xml.in.h:16
+msgid "Allows the system to act as a print server."
+msgstr "Engedélyezi a rendszernek, hogy nyomtatószerverként üzemeljen."
+
+#: ../comps-el6.xml.in.h:17
+msgid ""
+"Allows the system to act as a web server, and run Perl and Python web "
+"applications."
+msgstr ""
+"Engedélyezi a rendszernek, hogy webszerverként üzemeljen és Perl vagy Python"
+" alkalmazásokat futtasson."
+
+#: ../comps-el6.xml.in.h:18
+msgid "Allows the system to act as an FTP server."
+msgstr "Engedélyezi a rendszernek, hogy FTP szerverként üzemeljen."
+
+#: ../comps-el6.xml.in.h:19
+msgid "Allows the system to host Java servlets."
+msgstr "Engedélyezi a rendszernek, hogy Java servleteket futtasson."
+
+#: ../comps-el6.xml.in.h:26
+msgid "Backup Client"
+msgstr "Backup kliens"
+
+#: ../comps-el6.xml.in.h:27
+msgid "Backup Server"
+msgstr "Backup szerver"
+
+#: ../comps-el6.xml.in.h:29
+msgid "Basic legacy X Window System compatibility"
+msgstr "Alapvető, visszamenőleges X Window System kompatibilitás"
+
+#: ../comps-el6.xml.in.h:38
+msgid "CIFS file server"
+msgstr "CIFS fájlszerver"
+
+#: ../comps-el6.xml.in.h:40
+msgid "Chhattisgarhi Support"
+msgstr "Chhattisgarhi támogatás"
+
+#: ../comps-el6.xml.in.h:43
+msgid "Client tools for connecting to a backup server and doing backups."
+msgstr ""
+"Kliens eszközök egy backup szerverhez való csatlakozáshoz és mentések "
+"készítéséhez."
+
+#: ../comps-el6.xml.in.h:44
+msgid "Clients for installing and managing virtualization instances."
+msgstr "Kliensek virtualizációs folyamatok telepítésére és kezelésére."
+
+#: ../comps-el6.xml.in.h:45
+msgid "Clients for integration into a network managed by a directory service."
+msgstr "Kliensek beépítésre hálózat által irányított címtárszolgáltatás."
+
+#: ../comps-el6.xml.in.h:46
+msgid "Compatibility libraries"
+msgstr "Kompatibilitási könyvtárak"
+
+#: ../comps-el6.xml.in.h:47
+msgid ""
+"Compatibility libraries for applications built on previous versions of "
+"Enterprise Linux."
+msgstr ""
+"Kompatibilitási könyvtárak korábbi Enterprise Linuxhoz készült alkalmazások "
+"számára."
+
+#: ../comps-el6.xml.in.h:48
+msgid ""
+"Compatibility programs for migration from or working with legacy UNIX "
+"environments."
+msgstr ""
+"Kompatibilitási programok az átmigrálásra, vagy régi UNIX környezettel való "
+"munkára."
+
+#: ../comps-el6.xml.in.h:49
+msgid ""
+"Compatibility programs for migration from or working with legacy X Window "
+"System environments."
+msgstr ""
+"Kompatibilitási programok az átmigrálásra, vagy régi X Window System "
+"környezettel való munkára."
+
+#: ../comps-el6.xml.in.h:50
+msgid "Console internet access tools, often used by administrators."
+msgstr ""
+"Eszközök a parancssorból való internethasználathoz, legtöbbször a "
+"rendszergazdák használják."
+
+#: ../comps-el6.xml.in.h:51
+msgid "Console internet tools"
+msgstr "Konzolos internetes eszközök"
+
+#: ../comps-el6.xml.in.h:57
+msgid "Debugging Tools"
+msgstr "Hibakereső eszközök"
+
+#: ../comps-el6.xml.in.h:58
+msgid "Design and Simulation tools for hardware engineers."
+msgstr "Tervezési és szimulációs eszközök hardveres mérnökök részére"
+
+#: ../comps-el6.xml.in.h:59
+msgid "Desktop"
+msgstr "Asztal"
+
+#: ../comps-el6.xml.in.h:60
+msgid "Desktop Debugging and Performance Tools"
+msgstr "Asztali Hibakeresés és Teljesítmény szabályozó eszközök"
+
+#: ../comps-el6.xml.in.h:61
+msgid "Desktop Platform"
+msgstr "Desktop Platform"
+
+#: ../comps-el6.xml.in.h:62
+msgid "Desktop Platform Development"
+msgstr "Desktop Platform fejlesztés"
+
+#: ../comps-el6.xml.in.h:63
+msgid "Desktops"
+msgstr "Munkaasztalok"
+
+#: ../comps-el6.xml.in.h:64
+msgid "Desktops and thin clients."
+msgstr "Asztalok és vékonykliensek"
+
+#: ../comps-el6.xml.in.h:66
+msgid ""
+"Development headers and libraries for developing applications to run on the "
+"Enterprise Linux Desktop Platform."
+msgstr ""
+"Fejlesztési fejlécek és könyvtárak alkalmazások fejlesztésére, hogy "
+"futásképes legyen az Enterprise Linux Desktop platformján."
+
+#: ../comps-el6.xml.in.h:67
+msgid ""
+"Development headers and libraries for developing applications to run on the "
+"Enterprise Linux Server Platform."
+msgstr ""
+"Fejlesztői fejlécek és könyvtárak alkalmazások fejlesztésére az Enterprise "
+"Linux Server platformon való futtatásukhoz."
+
+#: ../comps-el6.xml.in.h:68
+msgid "Development tools"
+msgstr "Fejlesztői eszközök"
+
+#: ../comps-el6.xml.in.h:69
+msgid "Development tools and libraries."
+msgstr "Fejlesztői eszközök és könyvtárak"
+
+#: ../comps-el6.xml.in.h:71
+msgid "Directory Client"
+msgstr "Directory Kliens"
+
+#: ../comps-el6.xml.in.h:74
+msgid "E-mail server"
+msgstr "E-mail szerver"
+
+#: ../comps-el6.xml.in.h:75
+msgid "Eclipse"
+msgstr "Eclipse"
+
+#: ../comps-el6.xml.in.h:76
+msgid "Eclipse-based Integrated Development Environment."
+msgstr "Eclipse-alapú integrált fejlesztői környezet."
+
+#: ../comps-el6.xml.in.h:78
+msgid "Educational software for learning."
+msgstr "Oktatási szoftverek tanulásra."
+
+#: ../comps-el6.xml.in.h:80
+msgid "Emacs"
+msgstr "Emacs"
+
+#: ../comps-el6.xml.in.h:81
+msgid "Email, chat, and video conferencing software."
+msgstr "E-mail, chat, és videokonferencia szoftver."
+
+#: ../comps-el6.xml.in.h:82
+msgid "Enables the system to attach to network storage."
+msgstr ""
+"Lehetővé teszi a rendszer számára, hogy csatlakoztathasson hálózati tárolót."
+
+#: ../comps-el6.xml.in.h:83
+msgid "End-user applications."
+msgstr "Végfelhasználói szoftverek."
+
+#: ../comps-el6.xml.in.h:88
+msgid "FCoE Storage Client"
+msgstr "FCoE tároló kliens"
+
+#: ../comps-el6.xml.in.h:89
+msgid "FTP server"
+msgstr "FTP szerver"
+
+#: ../comps-el6.xml.in.h:92
+msgid "Fiber Channel over Ethernet support"
+msgstr "FCoE, üvegszálas támogatás"
+
+#: ../comps-el6.xml.in.h:96
+msgid "Firefox web browser"
+msgstr "Firefox webböngésző"
+
+#: ../comps-el6.xml.in.h:98
+msgid "Fonts for rendering text in a variety of languages and scripts."
+msgstr "Betűtípusok a szöveges különféle nyelvekhez és írásmódokhoz."
+
+#: ../comps-el6.xml.in.h:102
+msgid "GUI tools for debugging applications and performance."
+msgstr ""
+"Hibakeresési grafikus eszközök alkalmazások és a teljesítmény javítására."
+
+#: ../comps-el6.xml.in.h:105
+msgid "General Purpose Desktop"
+msgstr "Általános célú asztal"
+
+#: ../comps-el6.xml.in.h:108
+msgid "Graphical Administration Tools"
+msgstr "Grafikus felügyeleti eszközök"
+
+#: ../comps-el6.xml.in.h:109
+msgid ""
+"Graphical system administration tools for managing many aspects of a system."
+msgstr "Grafikus rendszer felügyeleti eszközök több szempontbeli kezelésére."
+
+#: ../comps-el6.xml.in.h:110
+msgid "Graphics Creation Tools"
+msgstr "Grafikus Alkotó Eszközök"
+
+#: ../comps-el6.xml.in.h:113
+msgid "Hardware monitoring utilities"
+msgstr "Hardver segédprogramok"
+
+#: ../comps-el6.xml.in.h:120
+msgid "Infiniband Support"
+msgstr "InfiniBand támogatás"
+
+#: ../comps-el6.xml.in.h:123
+msgid "Internet Applications"
+msgstr "Internetes alkalmazások"
+
+#: ../comps-el6.xml.in.h:124
+msgid "Internet Browser"
+msgstr "Internetböngésző"
+
+#: ../comps-el6.xml.in.h:129
+msgid "Java Platform"
+msgstr "Java Platform"
+
+#: ../comps-el6.xml.in.h:130
+msgid "Java support for the Enterprise Linux Server and Desktop Platforms."
+msgstr "Java-támogatás az Enterprise Linux Server és a Desktop Platformjaira."
+
+#: ../comps-el6.xml.in.h:131
+msgid "KDE Desktop"
+msgstr "KDE asztal"
+
+#: ../comps-el6.xml.in.h:142
+msgid "Large Systems Performance"
+msgstr "Large Systems Performance"
+
+#: ../comps-el6.xml.in.h:145
+msgid "Legacy UNIX compatibility"
+msgstr "Régi UNIX kompatibilitás"
+
+#: ../comps-el6.xml.in.h:146
+msgid "Legacy X Window System compatibility"
+msgstr "Régi X Window System kompatibilitás"
+
+#: ../comps-el6.xml.in.h:152
+msgid "Mainframe Access"
+msgstr "Mainframe hozzáférés"
+
+#: ../comps-el6.xml.in.h:161
+msgid "Messaging Client Support"
+msgstr "Üzenetkezelő Kliens támogatás"
+
+#: ../comps-el6.xml.in.h:162
+msgid "Messaging Server Support"
+msgstr "Üzenetkezelő Szerver támogatás"
+
+#: ../comps-el6.xml.in.h:164
+msgid ""
+"Minimal set of compatibility programs for migration from or working with "
+"legacy X Window System environments."
+msgstr ""
+"Legszükségesebb kompatibilitási programok migrációhoz vagy a régebbi X "
+"Window System környezetbeli munkához."
+
+#: ../comps-el6.xml.in.h:166
+msgid "MySQL Database client"
+msgstr "MySQL adatbázis kliens"
+
+#: ../comps-el6.xml.in.h:167
+msgid "MySQL Database server"
+msgstr "MySQL adatbázis szerver"
+
+#: ../comps-el6.xml.in.h:169
+msgid "NFS file server"
+msgstr "NFS fájlszerver"
+
+#: ../comps-el6.xml.in.h:170
+msgid "NFS file server."
+msgstr "NFS fájlszerver."
+
+#: ../comps-el6.xml.in.h:172
+msgid "Network Infrastructure Server"
+msgstr "Hálózati infrastruktúra szerver NIS"
+
+#: ../comps-el6.xml.in.h:173
+msgid "Network Storage Server"
+msgstr "Hálózati tároló szerver NAS"
+
+#: ../comps-el6.xml.in.h:174
+msgid "Network file system client"
+msgstr "Hálózati fájlrendszer kliens NFS"
+
+#: ../comps-el6.xml.in.h:175
+msgid "Networking Tools"
+msgstr "Hálózati eszközök"
+
+#: ../comps-el6.xml.in.h:179
+msgid "Office Suite and Productivity"
+msgstr "Office szoftvercsomag és produktivitás"
+
+#: ../comps-el6.xml.in.h:181
+msgid "PHP Support"
+msgstr "PHP támogatás"
+
+#: ../comps-el6.xml.in.h:182
+msgid "PHP web application framework."
+msgstr "PHP webalkalmazási keretrendszer."
+
+#: ../comps-el6.xml.in.h:183
+msgid "Performance Tools"
+msgstr "Teljesítmény fokozó eszközök"
+
+#: ../comps-el6.xml.in.h:184
+msgid "Performance support tools for large systems"
+msgstr "Teljesítmény támogató eszközök nagy rendszerek számára"
+
+#: ../comps-el6.xml.in.h:185
+msgid "Perl Support"
+msgstr "Perl támogatás"
+
+#: ../comps-el6.xml.in.h:186
+msgid "Perl interfaces to common libraries and functionality."
+msgstr "Perl interfész a közös könyvtárakhoz és a funkcionalitáshoz."
+
+#: ../comps-el6.xml.in.h:188
+msgid "Policy packages for the Server variant."
+msgstr "Szabályzati csomagok a Szerver változathoz."
+
+#: ../comps-el6.xml.in.h:189
+msgid "Policy packages for the Workstation variant."
+msgstr "Szabályzati csomagok a munkaállomás változathoz."
+
+#: ../comps-el6.xml.in.h:192
+msgid "PostgreSQL Database client"
+msgstr "PostgreSQL adatbázis kliens"
+
+#: ../comps-el6.xml.in.h:193
+msgid "PostgreSQL Database server"
+msgstr "PostgreSQL adatbázis szerver"
+
+#: ../comps-el6.xml.in.h:194
+msgid "Print Server"
+msgstr "Nyomtatószerver"
+
+#: ../comps-el6.xml.in.h:195
+msgid "Printing client"
+msgstr "Nyomtatási kliens"
+
+#: ../comps-el6.xml.in.h:196
+msgid "Provides an environment for hosting virtualized guests."
+msgstr "Környezetet biztosít a virtualizált vendégfelhasználók tárolására."
+
+#: ../comps-el6.xml.in.h:197
+msgid ""
+"Provides an interface for accessing and controlling virtualized guests and "
+"containers."
+msgstr ""
+"Egy kezelőfelületet biztosít virtualizált vendégfolyamatok és tárolóik "
+"elérésére, vezérlésére "
+
+#: ../comps-el6.xml.in.h:199
+msgid "Remote Desktop Clients"
+msgstr "Távoli asztali kliensek"
+
+#: ../comps-el6.xml.in.h:202
+msgid "SNMP Support"
+msgstr "SNMP támogatás"
+
+#: ../comps-el6.xml.in.h:203
+msgid "SNMP management agent."
+msgstr "SNMP kezelő ügynök."
+
+#: ../comps-el6.xml.in.h:206
+msgid "Scientific support"
+msgstr "Tudományos támogatás"
+
+#: ../comps-el6.xml.in.h:207
+msgid "Security Tools"
+msgstr "Biztonsági eszközök"
+
+#: ../comps-el6.xml.in.h:208
+msgid "Security tools for integrity and trust verification."
+msgstr "Biztonsági eszközök integritás és a bizalom ellenőrzéshez."
+
+#: ../comps-el6.xml.in.h:210
+msgid "Server Platform"
+msgstr "Szerver Platform"
+
+#: ../comps-el6.xml.in.h:211
+msgid "Server Platform Development"
+msgstr "Szerver Platform fejlesztése"
+
+#: ../comps-el6.xml.in.h:212
+msgid "Server Policy"
+msgstr "Szerver szabályzat"
+
+#: ../comps-el6.xml.in.h:213
+msgid "Servers for core network protocols and services, such as DHCP or DNS."
+msgstr ""
+"Szerverek alapvető hálózati protokollokhoz és szolgáltatásokhoz, úgy mint "
+"például a DHCP vagy a DNS."
+
+#: ../comps-el6.xml.in.h:214
+msgid "Share files between Linux and Microsoft Windows systems."
+msgstr "Fájlmegosztás Linux és Microsoft Windows rendszerek között."
+
+#: ../comps-el6.xml.in.h:219
+msgid "Smallest possible installation."
+msgstr "A lehető legkisebb telepítés."
+
+#: ../comps-el6.xml.in.h:220
+msgid "Smart card support"
+msgstr "Intelligens kártyák támogatása"
+
+#: ../comps-el6.xml.in.h:221
+msgid ""
+"Software designed for supporting clustering and grid connectivity using "
+"RDMA-based InfiniBand and iWARP fabrics."
+msgstr ""
+"Olyan céllal tervezett szoftverek, amely klaszterek és mátrix kapcsolatok "
+"támogatását célozzák RDMA-alapú InfiniBand és iWARP összeállítások "
+"használatával."
+
+#: ../comps-el6.xml.in.h:222
+msgid "Software for creation and manipulation of still images."
+msgstr "Szoftver állóképek készítésére, és manipulációjára."
+
+#: ../comps-el6.xml.in.h:223
+msgid "Software for the input of international text."
+msgstr "Szoftver nemzetközi szövegek beadásához."
+
+#: ../comps-el6.xml.in.h:224
+msgid "Software to centralize your infrastructure's backups."
+msgstr "Szoftverek az infrastruktúra központosított biztonsági mentéseihez."
+
+#: ../comps-el6.xml.in.h:228
+msgid "Storage Availability Tools"
+msgstr "Tárolási elérhetőségi Eszközök"
+
+#: ../comps-el6.xml.in.h:229
+msgid "Support for the TeX document formatting system."
+msgstr "Támogatás a TeX dokumentum formázó rendszerhez."
+
+#: ../comps-el6.xml.in.h:230
+msgid "Support for using smart card authentication."
+msgstr "Támogatás a smart kártya hitelesítéséhez."
+
+#: ../comps-el6.xml.in.h:231
+msgid "Supported libraries for the Enterprise Linux Desktop Platform."
+msgstr "Támogatott könyvtárak az Enterprise Linux Desktop platformjához."
+
+#: ../comps-el6.xml.in.h:232
+msgid "Supported libraries for the Enterprise Linux Server Platform."
+msgstr "Támogatott könyvtárak az Enterprise Linux Server platformon."
+
+#: ../comps-el6.xml.in.h:236
+msgid "System Management"
+msgstr "Rendszermenedzsment"
+
+#: ../comps-el6.xml.in.h:237
+msgid "System administration tools"
+msgstr "Rendszer adminisztrációs eszközök"
+
+#: ../comps-el6.xml.in.h:241
+msgid "TeX support"
+msgstr "TeX támogatás"
+
+#: ../comps-el6.xml.in.h:242
+msgid "Technical Writing"
+msgstr "Műszaki írások"
+
+#: ../comps-el6.xml.in.h:246
+msgid "The GNU Emacs extensible, customizable, text editor."
+msgstr "A GNU Emacs, bővíthető, testreszabható, szövegszerkesztő."
+
+#: ../comps-el6.xml.in.h:247
+msgid "The MySQL SQL database client, and associated packages."
+msgstr "A MySQL SQL adatbázis kliens, és a kapcsolódó csomagok."
+
+#: ../comps-el6.xml.in.h:248
+msgid "The MySQL SQL database server, and associated packages."
+msgstr "A MySQL SQL adatbázis szerver, és a kapcsolódó csomagok."
+
+#: ../comps-el6.xml.in.h:249
+msgid "The PostgreSQL SQL database client, and associated packages."
+msgstr "A PostgreSQL SQL adatbázis kliens, és a kapcsolódó csomagok."
+
+#: ../comps-el6.xml.in.h:250
+msgid "The PostgreSQL SQL database server, and associated packages."
+msgstr "A PostgreSQL SQL adatbázis szerver, és a kapcsolódó csomagok."
+
+#: ../comps-el6.xml.in.h:251
+msgid "The basic installation of Enterprise Linux."
+msgstr "Az alap telepítő az Enterprise Linux."
+
+#: ../comps-el6.xml.in.h:254
+msgid "Tools and utilities needed by a Fedora Packager."
+msgstr "Szügséges eszközök és segédprogramok egy Fedora csomagépítő számára."
+
+#: ../comps-el6.xml.in.h:255
+msgid "Tools for accessing mainframe computing resources."
+msgstr "Eszközök nagygépes számítástechnikai erőforrások eléréséhez."
+
+#: ../comps-el6.xml.in.h:256
+msgid "Tools for configuring and analyzing computer networks."
+msgstr "Eszközök számítógépes hálózatok konfigurálásához és elemzéséhez."
+
+#: ../comps-el6.xml.in.h:257
+msgid "Tools for connecting via PPP or ISDN."
+msgstr "Eszközök PPP vagy ISDN keresztüli csatlakoztatáshoz."
+
+#: ../comps-el6.xml.in.h:258
+msgid ""
+"Tools for debugging misbehaving applications and diagnosing performance "
+"problems."
+msgstr ""
+"Eszközök hibás működésű programok hibakeresésére, és teljesítménybeli "
+"problémák diagnosztizálására."
+
+#: ../comps-el6.xml.in.h:259
+msgid ""
+"Tools for diagnosing system and application-level performance problems."
+msgstr ""
+"Eszközök rendszerdiagnosztikához és alkalmazás-szintű teljesítmény "
+"problémákhoz."
+
+#: ../comps-el6.xml.in.h:260
+msgid ""
+"Tools for mathematical and scientific computations, and parallel computing."
+msgstr ""
+"Eszközök a matematikai és tudományos számításokhoz, és a párhuzamos "
+"számításokhoz."
+
+#: ../comps-el6.xml.in.h:261
+msgid "Tools for offline virtual image management."
+msgstr "Eszközök offline virtuális image kezeléshez."
+
+#: ../comps-el6.xml.in.h:262
+msgid "Tools for printing to a local printer or a remote print server."
+msgstr ""
+"Eszközök a nyomtatáshoz helyi nyomtatóra, vagy egy távoli nyomtatónak."
+
+#: ../comps-el6.xml.in.h:263
+msgid "Tools for writing technical documentation."
+msgstr "Eszközök műszaki dokumentáció az írásához."
+
+#: ../comps-el6.xml.in.h:266
+msgid "TurboGears application framework"
+msgstr "TurboGears alkalmazás keretrendszer"
+
+#: ../comps-el6.xml.in.h:267
+msgid "TurboGears web application framework."
+msgstr "TurboGears webes alkalmazás keretrendszer."
+
+#: ../comps-el6.xml.in.h:273
+msgid "Utilities useful in system administration."
+msgstr "Hasznos segédprogramok rendszerfelügyelethez."
+
+#: ../comps-el6.xml.in.h:275
+msgid "Various low-level hardware management frameworks."
+msgstr "Különböző alacsony szintű hardver-gazdálkodási keretrendszerek."
+
+#: ../comps-el6.xml.in.h:279
+msgid "Virtualization Client"
+msgstr "Virtualizációs kliens"
+
+#: ../comps-el6.xml.in.h:280
+msgid "Virtualization Platform"
+msgstr "Virtualizációs platform"
+
+#: ../comps-el6.xml.in.h:281
+msgid "Virtualization Tools"
+msgstr "Virtualizációs eszközök"
+
+#: ../comps-el6.xml.in.h:282
+msgid "WBEM interface for Enterprise Linux."
+msgstr "WBEM felület Enterprise Linuxhoz."
+
+#: ../comps-el6.xml.in.h:285
+msgid "Web Servlet Engine"
+msgstr "Web Servlet Engine"
+
+#: ../comps-el6.xml.in.h:286
+msgid "Web-Based Enterprise Management"
+msgstr "Web-alapú vállalati menedzsment"
+
+#: ../comps-el6.xml.in.h:288
+msgid "Workstation Policy"
+msgstr "Munkaállomás szabályzat"
+
+#: ../comps-el6.xml.in.h:290
+msgid "X Window System Support."
+msgstr "X Window rendszer támogatás"
+
+#: ../comps-el6.xml.in.h:294
+msgid "iSCSI Storage Client"
+msgstr "iSCSI tárolási kliens"
+
+#: ../comps-el6.xml.in.h:295
+msgid "iSCSI client support"
+msgstr "iSCSI kliens támogatás"
+
+#: ../comps-el6.xml.in.h:296
+msgid "iSCSI, iSER, and iSNS network storage server."
+msgstr "iSCSI, Iser, és iSNS hálózati tároló szerver."
+
+
