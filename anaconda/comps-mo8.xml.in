@@ -809,7 +809,7 @@
    <uservisible>false</uservisible>
    <display_order>1024</display_order>
     <packagelist>
-      <packagereq type="mandatory">control-center</packagereq>
+      <packagereq type="mandatory">gnome-control-center</packagereq>
       <packagereq type="mandatory">desktop-backgrounds-basic</packagereq>
       <packagereq type="mandatory">dconf</packagereq>
       <packagereq type="mandatory">gdm</packagereq>
@@ -831,7 +831,6 @@
       <packagereq type="default">gdm-plugin-fingerprint</packagereq>
       <packagereq type="default">gnome-bluetooth</packagereq>
       <packagereq type="default">gnome-packagekit</packagereq>
-      <packagereq type="default">libcanberra-gtk3</packagereq>
       <packagereq type="default">nautilus</packagereq>
       <packagereq type="default">polkit-gnome</packagereq>
       <packagereq type="default">pulseaudio-module-gconf</packagereq>
@@ -2463,7 +2462,7 @@
    <uservisible>true</uservisible>
    <display_order>1024</display_order>
     <packagelist>
-      <packagereq type="mandatory">control-center</packagereq>
+      <packagereq type="mandatory">gnome-control-center</packagereq>
       <packagereq type="mandatory">dconf</packagereq>
       <packagereq type="mandatory">gnome-panel</packagereq>
       <packagereq type="mandatory">gnome-session</packagereq>
@@ -2482,7 +2481,7 @@
       <packagereq type="default">NetworkManager-pptp</packagereq>
       <packagereq type="default">NetworkManager-vpnc</packagereq>
       <packagereq type="default">PackageKit-command-not-found</packagereq>
-      <packagereq type="default">PackageKit-gtk-module</packagereq>
+      <packagereq type="default">PackageKit-gtk3-module</packagereq>
       <packagereq type="default">abrt-desktop</packagereq>
       <packagereq type="default">aisleriot</packagereq>
       <packagereq type="default">PackageKit-gtk3-module</packagereq>
@@ -2496,6 +2495,7 @@
       <packagereq type="default">caribou</packagereq>
       <packagereq type="default">cheese</packagereq>
       <packagereq type="default">compiz-gnome</packagereq>
+      <packagereq type="default">dconf-editor</packagereq>
       <packagereq type="default">deja-dup</packagereq>
       <packagereq type="default">dejavu-sans-fonts</packagereq>
       <packagereq type="default">dejavu-sans-mono-fonts</packagereq>
@@ -2506,6 +2506,7 @@
       <packagereq type="default">file-roller</packagereq>
       <packagereq type="default">file-roller-nautilus</packagereq>
       <packagereq type="default">gcalctool</packagereq>
+      <packagereq type="default">gconf-editor</packagereq>
       <packagereq type="default">gdm</packagereq>
       <packagereq type="default">gdm-plugin-fingerprint</packagereq>
       <packagereq type="default">gdm-user-switch-applet</packagereq>
@@ -2530,7 +2531,7 @@
       <packagereq type="default">gnome-screensaver</packagereq>
       <packagereq type="default">gnome-system-monitor</packagereq>
       <packagereq type="default">gnome-terminal</packagereq>
-      <packagereq type="default">gnome-themes</packagereq>
+      <packagereq type="default">gnome-themes-standard</packagereq>
       <packagereq type="default">gnome-user-docs</packagereq>
       <packagereq type="default">gnome-user-share</packagereq>
       <packagereq type="default">gnome-utils</packagereq>
@@ -2546,8 +2547,6 @@
       <packagereq type="default">ifuse</packagereq>
       <packagereq type="default">libcanberra</packagereq>
       <packagereq type="default">ibus</packagereq>
-      <packagereq type="default">libcanberra-gtk2</packagereq>
-      <packagereq type="default">libcanberra-gtk3</packagereq>
       <packagereq type="default">libproxy-mozjs</packagereq>
       <packagereq type="default">librsvg2</packagereq>
       <packagereq type="default">libsane-hpaio</packagereq>
@@ -2581,7 +2580,6 @@
       <packagereq type="optional">evince-djvu</packagereq>
       <packagereq type="optional">evince-dvi</packagereq>
       <packagereq type="optional">file-browser-applet</packagereq>
-      <packagereq type="optional">gconf-editor</packagereq>
       <packagereq type="optional">gdesklets</packagereq>
       <packagereq type="optional">gedit-plugins</packagereq>
       <packagereq type="optional">ghex</packagereq>
@@ -2698,7 +2696,7 @@
       <packagereq type="mandatory">gstreamer-devel</packagereq>
       <packagereq type="mandatory">gtk3-devel-docs</packagereq>
       <packagereq type="mandatory">pango-devel</packagereq>
-      <packagereq type="mandatory">webkitgtk3-devel</packagereq>
+      <packagereq type="mandatory">webkitgtk-devel</packagereq>
       <packagereq type="default">at-spi2-core-devel</packagereq>
       <packagereq type="default">clutter-gtk-devel</packagereq>
       <packagereq type="default">devhelp</packagereq>
@@ -2706,7 +2704,6 @@
       <packagereq type="default">glade3</packagereq>
       <packagereq type="default">gnome-common</packagereq>
       <packagereq type="default">gnome-desktop-devel</packagereq>
-      <packagereq type="default">gnome-desktop3-devel</packagereq>
       <packagereq type="default">gnome-devel-docs</packagereq>
       <packagereq type="default">gnome-panel-devel</packagereq>
       <packagereq type="default">gnome-pilot-devel</packagereq>
@@ -7898,6 +7895,7 @@
       <packagereq type="mandatory">xorg-x11-drivers</packagereq>
       <packagereq type="mandatory">xorg-x11-server-Xorg</packagereq>
       <packagereq type="mandatory">xorg-x11-server-utils</packagereq>
+      <packagereq type="mandatory">xorg-x11-twm</packagereq>
       <packagereq type="mandatory">xorg-x11-xauth</packagereq>
       <packagereq type="mandatory">xorg-x11-xinit</packagereq>
       <packagereq type="mandatory">xorg-x11-xinit-base</packagereq>
@@ -7986,7 +7984,6 @@
       <packagereq type="optional">xorg-x11-resutils</packagereq>
       <packagereq type="optional">xorg-x11-server-Xnest</packagereq>
       <packagereq type="optional">xorg-x11-server-Xvfb</packagereq>
-      <packagereq type="optional">xorg-x11-twm</packagereq>
       <packagereq type="optional">xorg-x11-xfs</packagereq>
       <packagereq type="optional">xorg-x11-xfs-utils</packagereq>
       <packagereq type="optional">xorg-x11-xsm</packagereq>
