@@ -145,9 +145,13 @@ class SpecDB
                                   spec.buildarchs, brs, mtime, lastbuild)
 
       if verbose then
-        STDERR.puts name
+#        STDERR.puts name
         STDERR.print "\rscanning specfile: #{100*i/@names.length}% "
+        STDERR.puts name
         STDERR.flush
+#tmp        STDERR.flush
+# is flush needs?
+# same as exist and non-exist??
       end
     end # @names.each_with_index do |name, i|
     STDERR.puts "\rscanning specfile: 100%" if verbose
