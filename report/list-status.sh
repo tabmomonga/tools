@@ -50,11 +50,17 @@ function unpack
 {
     suffix=${1/*./} 
     case $suffix in
+	"gz")
+	    zcat $1
+	    ;;
 	"bz2")
 	    bzcat $1
 	    ;;
 	"lzma")
 	    lzcat $1
+	    ;;
+	"xz")
+	    xzcat $1
 	    ;;
 	*)
 	    cat $1
