@@ -141,6 +141,9 @@ case "$BRANCH" in
     stable_7)
 	REPO="branches/STABLE_7/pkgs"
 	;;
+    stable_8)
+	REPO="branches/STABLE_8/pkgs"
+	;;
     *)
 	error "-B $BRANCH is not supported"
 	;;
